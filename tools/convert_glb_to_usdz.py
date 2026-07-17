@@ -19,9 +19,15 @@ bpy.ops.wm.read_factory_settings(use_empty=True)
 bpy.ops.import_scene.gltf(filepath=src)
 
 if scale != 1.0:
-    for obj in bpy.context.scene.objects:
-        if obj.parent is None:
-            obj.scale = (scale, scale, scale)
+    # Scale via a parent empty so node TRANSLATIONS scale too (Kenney GLBs
+    # carry e.g. a -1 z offset on the root node; scaling the object itself
+    # would leave that offset at full size).
+    rig = bpy.data.objects.new("scale_rig", None)
+    bpy.context.scene.collection.objects.link(rig)
+    rig.scale = (scale, scale, scale)
+    for obj in list(bpy.context.scene.objects):
+        if obj.parent is None and obj is not rig:
+            obj.parent = rig
     bpy.context.view_layer.update()
 
 mins, maxs = [1e9] * 3, [-1e9] * 3
@@ -34,5 +40,7 @@ for obj in bpy.context.scene.objects:
                 maxs[i] = max(maxs[i], world[i])
 print("DIMENSIONS", *(round(maxs[i] - mins[i], 4) for i in range(3)))
 
-bpy.ops.wm.usd_export(filepath=dst)
+# RealityKit ignores the USD upAxis metadata, so bake a Y-up orientation
+# into the geometry (Blender Z-up -> (x, z, -y) in RealityKit).
+bpy.ops.wm.usd_export(filepath=dst, convert_orientation=True)
 print("WROTE", dst)

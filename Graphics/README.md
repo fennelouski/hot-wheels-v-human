@@ -24,7 +24,9 @@ This folder holds original downloaded asset packs. Converted, app-ready USDZ fil
 
 ## Conversion pipeline (GLB/FBX → USDZ)
 
-**Scale factors (baked at conversion, measured 2026-07-17):** toy-car-kit = **0.2** (makes `track-wide-straight` exactly 0.4 m wide); car-kit = **0.07** (makes `race` match `vehicle-speedster`'s ~0.18 m length, keeps debris/wheels proportional). Run: `blender -b -P tools/convert_glb_to_usdz.py -- in.glb out.usdz <scale>`.
+**Scale factors (baked at conversion, measured 2026-07-17):** toy-car-kit = **0.2** (makes `track-wide-straight` exactly 0.4 m wide); **gates = 0.3** (`gate`/`gate-finish` posts must clear the 0.4 m wide track); car-kit = **0.07** (makes `race` match `vehicle-speedster`'s ~0.18 m length, keeps debris/wheels proportional). Run: `blender -b -P tools/convert_glb_to_usdz.py -- in.glb out.usdz <scale>`.
+
+**Orientation:** RealityKit ignores the USD `upAxis` metadata, so the converter exports with `convert_orientation=True` (bakes Blender Z-up → Y-up as a −90° X root rotation). Blender world (x, y, z) lands in RealityKit as (x, z, −y). Everything in `Resources/Models3D` was (re)converted this way 2026-07-18 — any new conversion must use the updated `tools/convert_glb_to_usdz.py` or the model will render lying on its side.
 
 1. Open in **Reality Converter** (or Blender: import → export USD).
 2. Check scale: Kenney GLBs are ~1 unit = 1 m at toy proportions; a track straight should come out ≈ **0.4 m wide** in RealityKit for our 0.4 m cars. Apply uniform scale at conversion time, not per-entity in code.
