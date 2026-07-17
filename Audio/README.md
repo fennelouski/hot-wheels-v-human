@@ -1,0 +1,19 @@
+# Audio/ — source audio (app-ready copies go to `Hot Wheels v Human/Resources/Audio/`)
+
+Nothing downloaded yet (Phase 6 task). Required files and vetted free sources:
+
+| File | Purpose | Where to get it (CC0/free) |
+|---|---|---|
+| `car_engine_loop.wav` | looping engine, pitch-shifted by speed | freesound.org (CC0 filter, search "engine loop"), or opengameart.org "car engine loop" |
+| `speed_boost_fire.wav` | boost impulse | Kenney *Sci-Fi Sounds* or *Digital Audio* — https://kenney.nl/assets?q=audio (all CC0) |
+| `track_snap_connect.wav` | builder snap click | Kenney *Interface Sounds* (CC0) |
+| `car_crash_metal.wav` | destruction + debris | Kenney *Impact Sounds* (CC0) |
+| `race_countdown.wav` | 3-2-1-GO beeps | Kenney *Interface Sounds*, or synthesize |
+| `workshop_ambience.mp3` | builder/customizer music | Kevin MacLeod incompetech.com (CC-BY, needs credit) or opengameart CC0 music |
+| `race_intensity.mp3` | race music | same as above; OGA "racing" tag |
+
+Implementation notes
+- TV: `AudioFileResource` attached to car entities → spatial audio follows the cars. Engine loop via `prepareAudio` + playback rate mapped to speed (clamp 0.8–1.6×).
+- iPad: plain `AVAudioPlayer` for UI sounds/music; duck music −8 dB during countdown & finish fanfare.
+- Keep WAV for SFX (latency), AAC/m4a for music (size). Target < 10 MB total audio.
+- Log every downloaded file's source URL + license in this README when added (same discipline as Graphics/).
