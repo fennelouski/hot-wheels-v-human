@@ -42,6 +42,8 @@ struct LaneSplines: Sendable {
     var center: [SIMD3<Float>]
     var left: [SIMD3<Float>]
     var right: [SIMD3<Float>]
+    /// Waypoint index where each piece begins — checkpoint/respawn anchors.
+    var pieceStartIndices: [Int] = []
 }
 
 struct TrackLayout: Sendable {
@@ -98,8 +100,10 @@ enum TrackLayoutSolver {
         var center: [SIMD3<Float>] = []
         var left: [SIMD3<Float>] = []
         var right: [SIMD3<Float>] = []
+        var pieceStarts: [Int] = []
 
         for piece in pieces {
+            pieceStarts.append(center.count)
             let (localCenter, localLateral) = localCenterline(piece.definition)
             for (p, lat) in zip(localCenter, localLateral) {
                 let world = piece.entryPosition + rotated(p, by: piece.entryYaw)
@@ -111,7 +115,8 @@ enum TrackLayoutSolver {
                 right.append(world - latWorld * piece.definition.laneHalfWidth)
             }
         }
-        return LaneSplines(center: center, left: left, right: right)
+        return LaneSplines(center: center, left: left, right: right,
+                           pieceStartIndices: pieceStarts)
     }
 
     /// Centerline waypoints + unit "left" lateral vector per waypoint,

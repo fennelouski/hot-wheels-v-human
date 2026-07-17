@@ -7,7 +7,7 @@
 //  destruction thresholds, etc. Tune feel by editing THIS file only.
 //
 
-enum RaceTuning {
+nonisolated enum RaceTuning {
 
     // MARK: World
 
@@ -25,13 +25,17 @@ enum RaceTuning {
     /// Lane spline waypoint spacing, metres (~0.1 per TrackKit README).
     static let waypointSpacing: Float = 0.1
 
-    /// Lane centerline offset from track centerline on wide (dual-lane) pieces.
-    static let laneOffsetWide: Float = 0.09
-    /// Same on narrow single-width pieces (the loop) — lanes funnel together.
-    static let laneOffsetNarrow: Float = 0.045
+    /// Lane centerline offset on wide (dual-lane) pieces. PRD sketched
+    /// ±0.09 but the monster truck grinds the side rails there — 0.07
+    /// clears them with the ×0.8 collision box.
+    static let laneOffsetWide: Float = 0.07
+    /// Narrow pieces (the loop) are single-file — the 0.2 m bed with side
+    /// rails can't fit two lanes of monster truck.
+    static let laneOffsetNarrow: Float = 0.0
 
-    /// v = √(g·r) for the 0.4 m loop at 0.8 g ≈ 1.77; rounded up for margin.
-    static let loopMinEntrySpeed: Float = 1.8
+    /// Full loop needs v = √(5·g·r) at the 0.4 m radius ≈ 4.4 m/s — the
+    /// chassis maxSpeed spread sits right around this on purpose.
+    static let loopMinEntrySpeed: Float = 4.4
     /// Placeholder until jumps go live in Phase 2.
     static let rampMinEntrySpeed: Float = 2.0
 
@@ -41,15 +45,18 @@ enum RaceTuning {
     /// heavier cars get more force but not proportionally — heavy = momentum
     /// through loops, light = quick but flingable.
     static let driveForce: [ChassisClass: Float] = [
-        .heavyMuscle: 6.5,
-        .balancedFormula: 4.5,
-        .superlightDrift: 3.2,
+        .heavyMuscle: 16,
+        .balancedFormula: 12,
+        .superlightDrift: 9,
     ]
     /// Top speed clamp per chassis, m/s (drive force stops above this).
+    // The loop needs ~4.4 m/s: heavy sails through, balanced just makes it
+    // (drive force keeps feeding energy inside the loop), light falls off —
+    // exactly the PRD's toy fantasy.
     static let maxSpeed: [ChassisClass: Float] = [
-        .heavyMuscle: 2.6,
-        .balancedFormula: 3.0,
-        .superlightDrift: 3.4,
+        .heavyMuscle: 5.0,
+        .balancedFormula: 4.6,
+        .superlightDrift: 4.2,
     ]
     /// Spline follow: how far ahead on the lane to aim, metres.
     static let steeringLookahead: Float = 0.3
@@ -60,6 +67,12 @@ enum RaceTuning {
     /// slot-car feel but lets big physics violations (flying off) win.
     static let laneMagnetRange: Float = 0.15
     static let laneMagnetStrength: Float = 8
+    /// Steering can never exceed this force — an unclamped PD controller
+    /// catapults any car that strays far from its spline.
+    static let steeringMaxForce: Float = 12
+    /// Further than this from the lane = off the rails: no drive, no
+    /// steering. Physics (and the destruction rules) own the car now.
+    static let offSplineCutoff: Float = 0.5
 
     // MARK: Boost
 
@@ -111,13 +124,16 @@ enum RaceTuning {
         .superlightDrift: "vehicle-speedster",   // already in Resources/Models3D
     ]
 
-    // MARK: Tires (PRD §3.1)
+    // MARK: Tires (PRD §3.1 table ÷ 8)
 
+    // Cars are sliding boxes, not rolling wheels — at the PRD's grip values
+    // static friction beats the drive force and nothing moves. Scaled down
+    // ~8× so "grip" shapes cornering/loop behavior instead of parking cars.
     static let tireStaticFriction: [TireType: Float] = [
-        .standard: 0.8, .slickRacing: 0.6, .grippyOffroad: 1.0,
+        .standard: 0.10, .slickRacing: 0.06, .grippyOffroad: 0.13,
     ]
     static let tireDynamicFriction: [TireType: Float] = [
-        .standard: 0.6, .slickRacing: 0.45, .grippyOffroad: 0.85,
+        .standard: 0.075, .slickRacing: 0.045, .grippyOffroad: 0.11,
     ]
     static let tireRestitution: [TireType: Float] = [
         .standard: 0.1, .slickRacing: 0.05, .grippyOffroad: 0.15,

@@ -77,9 +77,13 @@ struct ModelTests {
     }
 
     @Test func chassisAndTiresExposeTuningValues() {
-        #expect(ChassisClass.heavyMuscle.mass == 1.6)
+        // Exact numbers live in RaceTuning and get tuned freely; the stable
+        // invariants are the wiring and the relative ordering.
+        #expect(ChassisClass.heavyMuscle.mass > ChassisClass.balancedFormula.mass)
+        #expect(ChassisClass.balancedFormula.mass > ChassisClass.superlightDrift.mass)
         #expect(ChassisClass.superlightDrift.modelName == "vehicle-speedster")
-        #expect(TireType.grippyOffroad.staticFriction == 1.0)
-        #expect(TireType.slickRacing.restitution == 0.05)
+        #expect(TireType.slickRacing.staticFriction < TireType.standard.staticFriction)
+        #expect(TireType.standard.staticFriction < TireType.grippyOffroad.staticFriction)
+        #expect(TireType.slickRacing.restitution < TireType.grippyOffroad.restitution)
     }
 }

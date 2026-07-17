@@ -15,7 +15,9 @@ struct RootView: View {
 
     var body: some View {
         if launchIntoArena {
-            ArenaView(blueprint: .demo)
+            SoloArenaView(designs: CarDesign.demoPair)
+        } else if Platform.isTV {
+            ArenaLobbyView()
         } else {
             homeScreen
         }
@@ -28,7 +30,7 @@ struct RootView: View {
                     .font(.system(size: 72, weight: .heavy, design: .rounded))
                 SpinningCarView()
                 NavigationLink {
-                    ArenaView(blueprint: .demo)
+                    SoloArenaView(designs: CarDesign.demoPair)
                 } label: {
                     Text("🏁 Solo Arena")
                         .font(.system(size: 40, weight: .heavy, design: .rounded))
@@ -36,6 +38,26 @@ struct RootView: View {
                         .padding(.vertical, 20)
                 }
                 .buttonStyle(.borderedProminent)
+                #if !os(tvOS)
+                NavigationLink {
+                    RaceOnTVView()
+                } label: {
+                    Text("📺 Race on TV")
+                        .font(.system(size: 40, weight: .heavy, design: .rounded))
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 20)
+                }
+                .buttonStyle(.bordered)
+                NavigationLink {
+                    TestModeView()
+                } label: {
+                    Text("🧪 Test Mode")
+                        .font(.system(size: 40, weight: .heavy, design: .rounded))
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 20)
+                }
+                .buttonStyle(.bordered)
+                #endif
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.09, green: 0.10, blue: 0.16))
