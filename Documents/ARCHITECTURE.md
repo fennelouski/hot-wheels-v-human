@@ -59,14 +59,21 @@ protocol GameTransport: AnyObject {
 struct TrackPieceDefinition {           // Core/TrackKit/PieceCatalog.swift
     let type: PieceType
     let modelName: String               // USDZ in Resources/Models3D
-    let entry: ConnectionPoint          // grid pos + heading, piece-local
-    let exit: ConnectionPoint
-    let footprint: [GridCell]
+    let modelYaw/modelOffset: …         // model placement in the traversal frame
+    let exitOffset: SIMD3<Float>        // where the next piece's entry lands
+    let headingChange: Float            // yaw delta, + = left
     let elevationDelta: Int
+    let footprint: FootprintRect        // nominal ground rect (tab-free)
+    let shape: CenterlineShape          // line / arc / verticalLoop → splines
     let minEntrySpeed: Float?           // loops/jumps
 }
 ```
 Connection metadata lives in code, not in the USDZ files — models stay untouched from Kenney.
+Reality note: the Kenney pieces are **not** a uniform grid (straight = 0.8 m between
+connectors, small-corner radius = 0.4 m, loop ground run = 0.18 m), so pieces carry
+measured real-valued offsets in a "traversal frame" (entry at origin, travel +Z,
+surface y = 0) instead of the originally planned grid `ConnectionPoint`s. Headings
+stay multiples of 90°, so validator overlap checks use axis-aligned world rects.
 
 ## RealityKit specifics
 - `RealityView { content in ... } update: { ... }` on both platforms; camera = `PerspectiveCamera` entity (chase camera rig follows leader car; smooth via lerp each frame).

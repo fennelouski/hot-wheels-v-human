@@ -10,15 +10,37 @@ import SwiftUI
 import RealityKit
 
 struct RootView: View {
+    /// `simctl launch <app> --solo-arena` jumps straight to the demo track.
+    private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
+
     var body: some View {
-        VStack(spacing: 24) {
-            Text(Platform.isTV ? "TV Arena" : "iPad Workshop")
-                .font(.system(size: 72, weight: .heavy, design: .rounded))
-            SpinningCarView()
+        if launchIntoArena {
+            ArenaView(blueprint: .demo)
+        } else {
+            homeScreen
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
-        .foregroundStyle(.white)
+    }
+
+    private var homeScreen: some View {
+        NavigationStack {
+            VStack(spacing: 24) {
+                Text(Platform.isTV ? "TV Arena" : "iPad Workshop")
+                    .font(.system(size: 72, weight: .heavy, design: .rounded))
+                SpinningCarView()
+                NavigationLink {
+                    ArenaView(blueprint: .demo)
+                } label: {
+                    Text("🏁 Solo Arena")
+                        .font(.system(size: 40, weight: .heavy, design: .rounded))
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 20)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+            .foregroundStyle(.white)
+        }
     }
 }
 
