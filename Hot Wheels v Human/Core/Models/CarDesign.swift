@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ChassisClass: String, Codable, CaseIterable, Sendable {
+nonisolated enum ChassisClass: String, Codable, CaseIterable, Sendable {
     case heavyMuscle
     case balancedFormula
     case superlightDrift
@@ -18,7 +18,7 @@ enum ChassisClass: String, Codable, CaseIterable, Sendable {
     var modelName: String { RaceTuning.chassisModelName[self]! }
 }
 
-enum TireType: String, Codable, CaseIterable, Sendable {
+nonisolated enum TireType: String, Codable, CaseIterable, Sendable {
     case standard
     case slickRacing
     case grippyOffroad
@@ -28,18 +28,18 @@ enum TireType: String, Codable, CaseIterable, Sendable {
     var restitution: Float { RaceTuning.tireRestitution[self]! }
 }
 
-enum PaintFinish: String, Codable, CaseIterable, Sendable {
+nonisolated enum PaintFinish: String, Codable, CaseIterable, Sendable {
     case metallic
     case glossy
     case matte
 }
 
-struct PaintSpec: Codable, Equatable, Sendable {
+nonisolated struct PaintSpec: Codable, Equatable, Sendable {
     var colorHex: String      // "#RRGGBB"
     var finish: PaintFinish
 }
 
-struct CarDesign: Codable, Equatable, Identifiable, Sendable {
+nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var id: UUID
     var name: String
     var chassis: ChassisClass

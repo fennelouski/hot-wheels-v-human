@@ -6,7 +6,7 @@
 //  never rename a case without bumping gameProtocolVersion.
 //
 
-enum PieceType: String, Codable, CaseIterable, Sendable {
+nonisolated enum PieceType: String, Codable, CaseIterable, Sendable {
     case startGate
     case finishGate
     case straight

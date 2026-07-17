@@ -17,7 +17,8 @@ struct CheckpointComponent: Component {
 enum TrackSpawner {
 
     /// Builds the whole track under one root entity. Caller adds it to the scene.
-    static func spawn(layout: TrackLayout, assets: AssetStore = .shared) async throws -> Entity {
+    static func spawn(layout: TrackLayout, assets: AssetStore? = nil) async throws -> Entity {
+        let assets = assets ?? AssetStore.shared
         CheckpointComponent.registerComponent()
 
         let root = Entity()

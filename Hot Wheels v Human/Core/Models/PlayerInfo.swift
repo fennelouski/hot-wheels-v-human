@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum DeviceRole: String, Codable, Sendable {
+nonisolated enum DeviceRole: String, Codable, Sendable {
     case iPad
     case tv
 }
 
-struct PlayerInfo: Codable, Equatable, Identifiable, Sendable {
+nonisolated struct PlayerInfo: Codable, Equatable, Identifiable, Sendable {
     var id: UUID
     var name: String
     var deviceRole: DeviceRole

@@ -11,7 +11,7 @@ import Foundation
 /// Bump when a wire-breaking change ships. `hello` carries it for forward compat.
 let gameProtocolVersion = 1
 
-enum GameMessage: Codable, Equatable, Sendable {
+nonisolated enum GameMessage: Codable, Equatable, Sendable {
     // reliable
     case hello(PlayerInfo, protocolVersion: Int)
     case trackBlueprint(TrackBlueprint)

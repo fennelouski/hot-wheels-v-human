@@ -9,12 +9,12 @@
 
 import Foundation
 
-struct SegmentSpec: Codable, Equatable, Sendable {
+nonisolated struct SegmentSpec: Codable, Equatable, Sendable {
     var index: Int
     var type: PieceType
 }
 
-struct TrackBlueprint: Codable, Equatable, Sendable {
+nonisolated struct TrackBlueprint: Codable, Equatable, Sendable {
     var trackId: UUID
     var lanes: Int
     var segments: [SegmentSpec]

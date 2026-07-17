@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum HairStyle: String, Codable, CaseIterable, Sendable {
+nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
     case short
     case long
     case curly
     case bald
 }
 
-struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
+nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
     var id: UUID
     var name: String
     var helmetColorHex: String

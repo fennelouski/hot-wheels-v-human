@@ -5,20 +5,20 @@
 
 import Foundation
 
-enum GameMode: String, Codable, Sendable {
+nonisolated enum GameMode: String, Codable, Sendable {
     case solo
     case onePlayer
     case twoPlayer
     case test
 }
 
-enum AIDifficulty: String, Codable, Sendable {
+nonisolated enum AIDifficulty: String, Codable, Sendable {
     case easy
     case medium
     case hard
 }
 
-struct MatchConfig: Codable, Equatable, Sendable {
+nonisolated struct MatchConfig: Codable, Equatable, Sendable {
     var mode: GameMode
     var laps: Int
     var lives: Int
