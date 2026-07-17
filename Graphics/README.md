@@ -23,6 +23,9 @@ This folder holds original downloaded asset packs. Converted, app-ready USDZ fil
 - Rigged + animated (idle, run, jump, death…). Use the FBX or Blend for conversion. Custom driver poses (seated, steer-lean, brace, facepalm) get authored in Blender on top of this rig in Phase 6; face expressions are texture-decal swaps, not rig work.
 
 ## Conversion pipeline (GLB/FBX → USDZ)
+
+**Scale factors (baked at conversion, measured 2026-07-17):** toy-car-kit = **0.2** (makes `track-wide-straight` exactly 0.4 m wide); car-kit = **0.07** (makes `race` match `vehicle-speedster`'s ~0.18 m length, keeps debris/wheels proportional). Run: `blender -b -P tools/convert_glb_to_usdz.py -- in.glb out.usdz <scale>`.
+
 1. Open in **Reality Converter** (or Blender: import → export USD).
 2. Check scale: Kenney GLBs are ~1 unit = 1 m at toy proportions; a track straight should come out ≈ **0.4 m wide** in RealityKit for our 0.4 m cars. Apply uniform scale at conversion time, not per-entity in code.
 3. Name output identically to source (`track-wide-straight.usdz`) → drop in `Hot Wheels v Human/Resources/Models3D/`.
