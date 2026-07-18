@@ -73,6 +73,17 @@ Each drill starts from a connected, racing (or lobby) state.
 2. **Sleep:** let the TV screensaver kick in (or press Menu) mid-lobby,
    wake it. Lobby should still be advertising and joinable.
 
+## Test 5 — Two iPads (if you have a second one, +3 min)
+
+1. Connect iPad A first (it's the **captain** — TV card shows
+   "picks the track!"), then iPad B. Both cards appear with
+   "getting set…" status.
+2. Tap READY on A only → race must NOT start. Tap READY on B → countdown.
+3. Verify each iPad's boost drives **its own car** (A boosts, A's car
+   surges — the whole point of ownerID pairing). No robot in the race.
+4. Connect a third device (or a phone build) → TV shows
+   "Two racers max — grab the next race!" and the lobby stays at two.
+
 ## Report back
 
 For each: Test 1 ☐  Test 2 ☐ (boost latency feel: ____)  Test 3.1 ☐
