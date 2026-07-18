@@ -51,20 +51,29 @@ struct DashboardView: View {
                 }
             } else {
                 Spacer()
-                Text(waitingLabel)
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.7))
+                VStack(spacing: 12) {
+                    Text(waitingLabel.title)
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.7))
+                    Text(waitingLabel.hint)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.yellow.opacity(0.8))
+                }
                 Spacer()
             }
         }
         .background(Color(red: 0.07, green: 0.08, blue: 0.13))
     }
 
-    private var waitingLabel: String {
+    // Failure states stay funny, not punishing (CLAUDE.md kid-first rules).
+    private var waitingLabel: (title: String, hint: String) {
         switch model.transportState {
-        case .idle, .searching: "Looking for the arena…"
-        case .connected: "Getting the race ready…"
-        case .dropped: "Reconnecting…"
+        case .idle, .searching:
+            ("Looking for the arena…", "Is the TV app awake? Give it a poke!")
+        case .connected:
+            ("Getting the race ready…", "Helmets on!")
+        case .dropped:
+            ("Whoops, lost the TV!", "The robots tripped on a cable. Reconnecting…")
         }
     }
 

@@ -20,12 +20,19 @@ struct RaceOnTVView: View {
             .onAppear { model.start() }
             .onDisappear { model.stop() }
             .onChange(of: model.transportState) { _, state in
-                // First connection: hand the host everything it needs.
-                if state == .connected && !submitted {
+                // Hand the host everything it needs on every fresh connection.
+                // Resubmitting after a drop is safe (coordinator dedupes by id)
+                // and required when the TV app restarted with empty state.
+                switch state {
+                case .connected where !submitted:
                     submitted = true
                     model.submitAndReady(designs: [appModel.raceDesign],
                                          blueprint: appModel.raceBlueprint,
                                          config: MatchConfig(mode: .onePlayer))
+                case .dropped:
+                    submitted = false
+                default:
+                    break
                 }
             }
     }
