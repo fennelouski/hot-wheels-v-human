@@ -12,24 +12,36 @@ import simd
 
 struct TrackCanvasView: View {
     let layout: TrackLayout
+    /// Thumbnail mode (preset/saved-track chips): no badges, thin centerline.
+    var isThumbnail = false
 
     var body: some View {
         Canvas { context, size in
             let rects = layout.pieces.map(\.worldFootprint)
             guard !rects.isEmpty else { return }
 
-            // World bounds → fit transform (world z = screen up).
+            // World bounds → fit transform (world z = screen up; thumbnails
+            // lie sideways so a mostly-straight track fills the wide chip).
             let minX = rects.map(\.minX).min()! - 0.2
             let maxX = rects.map(\.maxX).max()! + 0.2
             let minZ = rects.map(\.minZ).min()! - 0.2
             let maxZ = rects.map(\.maxZ).max()! + 0.2
-            let scale = min(size.width / CGFloat(maxX - minX),
-                            size.height / CGFloat(maxZ - minZ))
+            let spanX = CGFloat(maxX - minX), spanZ = CGFloat(maxZ - minZ)
+            let scale = isThumbnail
+                ? min(size.width / spanZ, size.height / spanX)
+                : min(size.width / spanX, size.height / spanZ)
             func point(_ x: Float, _ z: Float) -> CGPoint {
-                CGPoint(x: size.width - (CGFloat(x - minX) * scale
-                            + (size.width - CGFloat(maxX - minX) * scale) / 2),
-                        y: size.height - (CGFloat(z - minZ) * scale
-                            + (size.height - CGFloat(maxZ - minZ) * scale) / 2))
+                if isThumbnail {
+                    // z runs left→right, x runs down (90° turn of the map).
+                    return CGPoint(x: CGFloat(z - minZ) * scale
+                                       + (size.width - spanZ * scale) / 2,
+                                   y: CGFloat(x - minX) * scale
+                                       + (size.height - spanX * scale) / 2)
+                }
+                return CGPoint(x: size.width - (CGFloat(x - minX) * scale
+                                   + (size.width - spanX * scale) / 2),
+                               y: size.height - (CGFloat(z - minZ) * scale
+                                   + (size.height - spanZ * scale) / 2))
             }
 
             for piece in layout.pieces {
@@ -51,8 +63,11 @@ struct TrackCanvasView: View {
                 }
             }
             context.stroke(path, with: .color(.white.opacity(0.85)),
-                           style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: [7, 5]))
+                           style: isThumbnail
+                               ? StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [3, 3])
+                               : StrokeStyle(lineWidth: 3, lineCap: .round, dash: [7, 5]))
 
+            guard !isThumbnail else { return }
             for piece in layout.pieces {
                 let f = piece.worldFootprint
                 let mid = point((f.minX + f.maxX) / 2, (f.minZ + f.maxZ) / 2)
@@ -63,7 +78,7 @@ struct TrackCanvasView: View {
                 }
             }
         }
-        .padding(8)
+        .padding(isThumbnail ? 2 : 8)
     }
 
     private func color(_ type: PieceType) -> Color {

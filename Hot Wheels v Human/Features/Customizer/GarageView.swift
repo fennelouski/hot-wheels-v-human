@@ -19,6 +19,11 @@ struct GarageView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 12) {
+                // Own header — the system large title renders dark-on-dark
+                // over this background regardless of toolbarColorScheme.
+                Label("Garage", systemImage: "door.garage.closed")
+                    .font(.system(size: 40, weight: .heavy, design: .rounded))
+                    .padding(.bottom, 8)
                 sectionHeader("My Cars", systemImage: "car.2.fill")
                 if records.isEmpty {
                     Text("Nothing here yet — build a car, or grab a starter below!")
@@ -28,8 +33,7 @@ struct GarageView: View {
                 } else {
                     LazyVGrid(columns: columns, spacing: 20) {
                         ForEach(records) { record in
-                            carCard(name: record.name,
-                                    colorHex: record.design?.paint.colorHex ?? "#888888",
+                            carCard(name: record.name, design: record.design,
                                     id: record.id) {
                                 if let design = record.design {
                                     select(design)
@@ -53,8 +57,7 @@ struct GarageView: View {
                     .padding(.top, 12)
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(CarDesign.presets) { design in
-                        carCard(name: design.name, colorHex: design.paint.colorHex,
-                                id: design.id) {
+                        carCard(name: design.name, design: design, id: design.id) {
                             select(design)
                         }
                     }
@@ -64,11 +67,9 @@ struct GarageView: View {
         }
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
-        .navigationTitle("Garage")
-        #if os(iOS)
-        // Dark app background under a default (light) nav bar → invisible title.
-        .toolbarColorScheme(.dark, for: .navigationBar)
-        #endif
+        // No .navigationTitle: the bar keeps only the back button; the big
+        // in-content header above is the title (system large title renders
+        // dark-on-dark over this background).
         .onAppear { SoundBank.shared.play("garage_door") }
     }
 
@@ -83,15 +84,19 @@ struct GarageView: View {
             .foregroundStyle(.yellow)
     }
 
-    private func carCard(name: String, colorHex: String, id: UUID,
+    private func carCard(name: String, design: CarDesign?, id: UUID,
                          action: @escaping () -> Void) -> some View {
         let isSelected = appModel.selectedDesign?.id == id
         return Button(action: action) {
             VStack(spacing: 10) {
-                Circle()
-                    .fill(Color(hex: colorHex))
-                    .frame(width: 54, height: 54)
-                    .overlay(Image(systemName: "car.side.fill").font(.system(size: 26)))
+                if let design {
+                    CarSwatchView(design: design, size: 54)
+                } else {
+                    Circle()
+                        .fill(Color(hex: "#888888"))
+                        .frame(width: 54, height: 54)
+                        .overlay(Image(systemName: "car.side.fill").font(.system(size: 26)))
+                }
                 Text(name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .lineLimit(1)
@@ -107,5 +112,38 @@ struct GarageView: View {
                         in: RoundedRectangle(cornerRadius: 18))
         }
         .buttonStyle(.plain)
+    }
+}
+
+/// The card's paint swatch: the design's actual look — paint color with the
+/// livery/sticker/drawing overlay composited on top — instead of a bare
+/// circle. Renders once per design id (OverlayComposer is pure CG).
+struct CarSwatchView: View {
+    let design: CarDesign
+    var size: CGFloat = 54
+
+    @State private var overlay: CGImage?
+
+    var body: some View {
+        Circle()
+            .fill(Color(hex: design.paint.colorHex))
+            .overlay {
+                if let overlay {
+                    Image(decorative: overlay, scale: 1)
+                        .resizable()
+                        .scaledToFill()
+                        .clipShape(Circle())
+                } else {
+                    Image(systemName: "car.side.fill")
+                        .font(.system(size: size * 0.46))
+                }
+            }
+            .frame(width: size, height: size)
+            .task(id: design.id) {
+                // Pure CG at 256px — milliseconds, fine on the calling task.
+                overlay = OverlayComposer.render(
+                    livery: design.livery, stickers: design.stickers,
+                    drawing: design.drawingPNG, size: 256)
+            }
     }
 }

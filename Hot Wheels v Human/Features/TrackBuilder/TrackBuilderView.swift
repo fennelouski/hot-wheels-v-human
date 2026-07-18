@@ -16,6 +16,7 @@ struct TrackBuilderView: View {
 
     @State private var model = TrackBuilderModel()
     @State private var savedName: String?
+    @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
         VStack(spacing: 12) {
@@ -77,7 +78,8 @@ struct TrackBuilderView: View {
         .onChange(of: model.types) { savedName = nil }
     }
 
-    /// Starter tracks a kid can jump off from instead of a blank canvas.
+    /// Starter tracks (and the kid's own saved ones) to jump off from
+    /// instead of a blank canvas. Saved tracks first — theirs beats ours.
     private var presetRow: some View {
         VStack(spacing: 8) {
             Text("...or start from one of these!")
@@ -85,26 +87,55 @@ struct TrackBuilderView: View {
                 .foregroundStyle(.yellow)
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 12) {
-                    ForEach(TrackBlueprint.presets, id: \.blueprint.trackId) { preset in
-                        Button {
-                            model.load(preset: preset.blueprint)
-                        } label: {
-                            VStack(spacing: 4) {
-                                Image(systemName: "map.fill")
-                                    .font(.system(size: 28, weight: .bold))
-                                Text(preset.name)
-                                    .font(.system(size: 18, weight: .heavy, design: .rounded))
-                            }
-                            .frame(width: 170, height: 76)
-                            .background(.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 14))
+                    ForEach(savedRecords) { record in
+                        if let blueprint = record.blueprint {
+                            trackChip(name: record.name, blueprint: blueprint, saved: true)
+                                .contextMenu {
+                                    Button(role: .destructive) {
+                                        modelContext.delete(record)
+                                        try? modelContext.save()
+                                        SoundBank.shared.play("piece_delete_pop")
+                                    } label: {
+                                        Label("Scrap it", systemImage: "trash")
+                                    }
+                                }
                         }
-                        .buttonStyle(.plain)
+                    }
+                    ForEach(TrackBlueprint.presets, id: \.blueprint.trackId) { preset in
+                        trackChip(name: preset.name, blueprint: preset.blueprint, saved: false)
                     }
                 }
                 .padding(.horizontal, 16)
             }
         }
         .padding(.bottom, 16)
+    }
+
+    private func trackChip(name: String, blueprint: TrackBlueprint, saved: Bool) -> some View {
+        Button {
+            model.load(preset: blueprint)
+            savedName = nil
+        } label: {
+            VStack(spacing: 4) {
+                TrackCanvasView(layout: TrackLayoutSolver.solve(blueprint), isThumbnail: true)
+                    .frame(width: 150, height: 64)
+                HStack(spacing: 5) {
+                    if saved {
+                        Image(systemName: "bookmark.fill")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundStyle(.yellow)
+                    }
+                    Text(name)
+                        .font(.system(size: 17, weight: .heavy, design: .rounded))
+                        .lineLimit(1)
+                }
+            }
+            .padding(.vertical, 8)
+            .frame(width: 176, height: 108)
+            .background(.yellow.opacity(saved ? 0.22 : 0.15),
+                        in: RoundedRectangle(cornerRadius: 14))
+        }
+        .buttonStyle(.plain)
     }
 
     private func toolButton(_ label: String, systemImage: String, action: @escaping () -> Void) -> some View {
