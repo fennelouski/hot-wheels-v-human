@@ -2,20 +2,25 @@
 //  RootView.swift
 //  Hot Wheels v Human
 //
-//  Platform router. Phase 0: placeholder role screens proving the
-//  RealityKit stack on both platforms. iPadOS → Workshop, tvOS → Arena.
+//  Platform router + iPad home. iPadOS → Workshop home, tvOS → Arena
+//  lobby. `--solo-arena` launch arg jumps straight into a demo race.
 //
 
 import SwiftUI
 import RealityKit
 
 struct RootView: View {
-    /// `simctl launch <app> --solo-arena` jumps straight to the demo track.
+    @Environment(AppModel.self) private var appModel
+
+    /// Dev deep links: `simctl launch <app> --solo-arena | --customizer`.
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
+    private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
 
     var body: some View {
         if launchIntoArena {
             SoloArenaView(designs: CarDesign.demoPair)
+        } else if launchIntoCustomizer {
+            CustomizerView()
         } else if Platform.isTV {
             ArenaLobbyView()
         } else {
@@ -23,46 +28,51 @@ struct RootView: View {
         }
     }
 
+    private var soloDesigns: [CarDesign] {
+        let mine = appModel.raceDesign
+        let rival = appModel.playerTwoDesign
+            ?? CarDesign.demoPair.first { $0.id != mine.id } ?? CarDesign.demoPair[1]
+        return [mine, rival]
+    }
+
     private var homeScreen: some View {
         NavigationStack {
-            VStack(spacing: 24) {
-                Text(Platform.isTV ? "TV Arena" : "iPad Workshop")
-                    .font(.system(size: 72, weight: .heavy, design: .rounded))
+            VStack(spacing: 20) {
+                Text("iPad Workshop")
+                    .font(.system(size: 64, weight: .heavy, design: .rounded))
                 SpinningCarView()
-                NavigationLink {
-                    SoloArenaView(designs: CarDesign.demoPair)
-                } label: {
-                    Text("🏁 Solo Arena")
-                        .font(.system(size: 40, weight: .heavy, design: .rounded))
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 20)
+                    .frame(maxHeight: 240)
+                Grid(horizontalSpacing: 20, verticalSpacing: 20) {
+                    GridRow {
+                        homeLink("🏎️ Build a Car") { CustomizerView() }
+                        homeLink("🏚️ Garage") { GarageView() }
+                    }
+                    GridRow {
+                        homeLink("🏁 Solo Race") { SoloArenaView(designs: soloDesigns) }
+                        homeLink("📺 Race on TV") { RaceOnTVView() }
+                    }
+                    GridRow {
+                        homeLink("🧪 Test My Cars") { TestModeView() }
+                        homeLink("👥 2-Player Build") { CustomizerSplitView() }
+                    }
                 }
-                .buttonStyle(.borderedProminent)
-                #if !os(tvOS)
-                NavigationLink {
-                    RaceOnTVView()
-                } label: {
-                    Text("📺 Race on TV")
-                        .font(.system(size: 40, weight: .heavy, design: .rounded))
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 20)
-                }
-                .buttonStyle(.bordered)
-                NavigationLink {
-                    TestModeView()
-                } label: {
-                    Text("🧪 Test Mode")
-                        .font(.system(size: 40, weight: .heavy, design: .rounded))
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 20)
-                }
-                .buttonStyle(.bordered)
-                #endif
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.09, green: 0.10, blue: 0.16))
             .foregroundStyle(.white)
         }
+    }
+
+    private func homeLink(_ title: String, destination: @escaping () -> some View) -> some View {
+        NavigationLink {
+            destination()
+        } label: {
+            Text(title)
+                .font(.system(size: 30, weight: .heavy, design: .rounded))
+                .frame(width: 320, height: 76)
+        }
+        .buttonStyle(.bordered)
+        .tint(.yellow)
     }
 }
 
@@ -109,4 +119,5 @@ struct SpinningCarView: View {
 
 #Preview {
     RootView()
+        .environment(AppModel())
 }

@@ -10,6 +10,7 @@
 import SwiftUI
 
 struct RaceOnTVView: View {
+    @Environment(AppModel.self) private var appModel
     @State private var model = DashboardModel(transport: MultipeerTransport(),
                                               playerName: "Racer")
     @State private var submitted = false
@@ -22,8 +23,8 @@ struct RaceOnTVView: View {
                 // First connection: hand the host everything it needs.
                 if state == .connected && !submitted {
                     submitted = true
-                    model.submitAndReady(designs: [CarDesign.demoPair[0]],
-                                         blueprint: .demo,
+                    model.submitAndReady(designs: [appModel.raceDesign],
+                                         blueprint: appModel.raceBlueprint,
                                          config: MatchConfig(mode: .onePlayer))
                 }
             }

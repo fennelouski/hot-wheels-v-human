@@ -11,9 +11,10 @@ import SwiftUI
 
 struct SoloArenaView: View {
     var designs: [CarDesign] = [CarDesign.demoPair[0]]
-    var blueprint: TrackBlueprint = .demo
+    var blueprint: TrackBlueprint?
     var config = MatchConfig(mode: .solo)
 
+    @Environment(AppModel.self) private var appModel
     @State private var rig: SoloRig?
 
     var body: some View {
@@ -34,7 +35,9 @@ struct SoloArenaView: View {
             let dashboard = DashboardModel(transport: pair.player, playerName: "Solo Racer")
             coordinator.start()
             dashboard.start()
-            dashboard.submitAndReady(designs: designs, blueprint: blueprint, config: config)
+            dashboard.submitAndReady(designs: designs,
+                                     blueprint: blueprint ?? appModel.raceBlueprint,
+                                     config: config)
             rig = SoloRig(coordinator: coordinator, dashboard: dashboard)
         }
         .onDisappear {
@@ -52,4 +55,5 @@ struct SoloRig {
 
 #Preview {
     SoloArenaView()
+        .environment(AppModel())
 }
