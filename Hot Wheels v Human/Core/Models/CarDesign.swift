@@ -98,4 +98,13 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// Freehand drawing, PNG ≤ 200 KB (downscaled until it fits), rendered
     /// as the bottom overlay layer. Optional → old designs decode.
     var drawingPNG: Data? = nil
+    /// The PencilKit strokes behind drawingPNG (`PKDrawing` data), kept so
+    /// a reopened design stays stroke-editable. Skipped when over 200 KB —
+    /// the PNG still renders. Optional → old designs decode.
+    var drawingStrokes: Data? = nil
+    /// Face paint drawn on the driver, PNG ≤ 64 KB, composited over the
+    /// reaction-cam face. Lives on CarDesign because designs are what
+    /// travel/race today — move to DriverProfile when profiles ride the
+    /// wire. Optional → old designs decode.
+    var faceDrawingPNG: Data? = nil
 }

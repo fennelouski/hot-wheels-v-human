@@ -20,8 +20,11 @@ struct CustomizerView: View {
     var isPlayerTwo = false
 
     @State private var model = CustomizerModel()
-    @State private var tab: Tab =
-        ProcessInfo.processInfo.arguments.contains("--demo-design") ? .draw : .chassis
+    @State private var tab: Tab = {
+        let args = ProcessInfo.processInfo.arguments
+        if args.contains("--demo-driver") { return .driver }
+        return args.contains("--demo-design") ? .draw : .chassis
+    }()
     @State private var saved = false
     @State private var paintSlot = CarPaintSlot.body
     @State private var armedSticker: String? = nil
@@ -32,6 +35,7 @@ struct CustomizerView: View {
     #if canImport(PencilKit) && !os(tvOS)
     /// Session-held pencil strokes (the design only stores the capped PNG).
     @State private var pencilStrokes = PKDrawing()
+    @State private var faceStrokes = PKDrawing()
     #endif
 
     enum Tab: String, CaseIterable {
@@ -125,11 +129,23 @@ struct CustomizerView: View {
                 case .draw:
                     #if canImport(PencilKit) && !os(tvOS)
                     DrawingPadView(drawingPNG: $model.design.drawingPNG,
+                                   drawingStrokes: $model.design.drawingStrokes,
                                    strokes: $pencilStrokes)
                     #else
                     Text("Drawing needs the iPad")
                     #endif
-                case .driver: DriverEditorView(driver: $model.driver)
+                case .driver:
+                    // Face pad + editor overflow portrait width — kid swipes.
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 28) {
+                            #if canImport(PencilKit) && !os(tvOS)
+                            FaceDrawPad(faceDrawingPNG: $model.design.faceDrawingPNG,
+                                        strokes: $faceStrokes)
+                            #endif
+                            DriverEditorView(driver: $model.driver)
+                        }
+                        .padding(.horizontal, 20)
+                    }
                 }
             }
             .frame(maxHeight: 240)

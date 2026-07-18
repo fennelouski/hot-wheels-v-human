@@ -24,9 +24,12 @@ Reality check (G1): the Kenney chassis models are ONE shared material but distin
 *meshes* per part — wheels (`wheel_*`) and body (`body`/`vehicle_racer`/…); there are no
 spoiler/bumper/window meshes. So slots are **body + wheels**, mapped by mesh name
 (`CarPaintSlot`). Tap a part on the turntable (gesture → entity name) → swatches paint
-that slot. Finish stays car-wide on `PaintSpec` (+ new: sparkle = metallic with
-high-frequency normal noise; rainbow hue-shift was skipped per the escape hatch below —
-ship sparkle only).
+that slot. Finish stays car-wide on `PaintSpec` (+ new: sparkle; rainbow hue-shift was
+skipped per the escape hatch below — ship sparkle only). Sparkle's noise normal renders
+on the paint shell (its computed UVs are real 2D; the atlas UVs are ~1D and only streak),
+over a low-alpha body-color film so the glitter shows on bare paint too — note the shell
+material's textureCoordinateTransform is shared with the overlay texture, so grain
+frequency is baked into the noise texture size, never tiled via the transform.
 
 ### B. Livery presets
 6–10 patterns drawn procedurally in CGContext (racing stripes, flames, polka dots,
@@ -48,10 +51,13 @@ they stay round. ≥60 pt targets.
 PencilKit canvas, car side-silhouette as stencil background, kid draws with finger/Pencil.
 `PKDrawing` → image → bottom layer of the overlay. Reality notes (G4): mirroring to both
 sides is inherent to the shared side-projection UVs (a per-side toggle would need split
-UV islands — not built). Driver face/shirt drawing was specced against the FaceDecals
-texture pipeline, which has since become procedural vector faces (no emoji rule) — driver
-drawing is deferred until a driver texture pipeline exists. Strokes stay editable for the
-session; the design persists only the capped PNG.
+UV islands — not built). Strokes persist as `drawingStrokes` (PKDrawing data, ≤200 KB)
+so reopened designs stay stroke-editable; the PNG still renders when strokes were too
+big to keep. Driver drawing: the specced FaceDecals texture pipeline became procedural
+vector faces (no emoji rule), so the kid instead draws **face paint** over the cartoon
+face (`FaceDrawPad`, `faceDrawingPNG` ≤64 KB on CarDesign) and the reaction cam
+composites it over every expression. Drawing on the 3D suit still needs a driver
+texture pipeline — deferred.
 
 ## Data model
 ```swift

@@ -9,6 +9,7 @@
 
 import SwiftUI
 import RealityKit
+import UIKit
 
 struct ReactionCamView: View {
     let director: ReactionDirector
@@ -42,9 +43,18 @@ struct ReactionCamView: View {
             }
             .background(Color(red: 0.13, green: 0.15, blue: 0.24))
 
-            DriverFaceView(state: director.state)
-                .frame(width: 48, height: 48)
-                .padding(6)
+            ZStack {
+                DriverFaceView(state: director.state)
+                // Kid's face paint rides over every expression.
+                if let paint = design.faceDrawingPNG, let image = UIImage(data: paint) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                }
+            }
+            .frame(width: 48, height: 48)
+            .clipShape(Circle())
+            .padding(6)
         }
         .frame(width: 180, height: 180)
         .clipShape(Circle())

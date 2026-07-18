@@ -15,6 +15,7 @@ import PencilKit
 
 struct DrawingPadView: View {
     @Binding var drawingPNG: Data?
+    @Binding var drawingStrokes: Data?
     /// Session-held strokes so reopening the tab keeps the drawing editable.
     @Binding var strokes: PKDrawing
 
@@ -57,6 +58,7 @@ struct DrawingPadView: View {
                 Button {
                     strokes = PKDrawing()
                     drawingPNG = nil
+                    drawingStrokes = nil
                     SoundBank.shared.play("piece_delete_pop")
                 } label: {
                     Image(systemName: "trash.fill")
@@ -88,6 +90,13 @@ struct DrawingPadView: View {
         }
         .background(.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 16))
         .aspectRatio(2.4, contentMode: .fit)
+        .onAppear {
+            // Reopened saved design: restore the editable strokes.
+            if strokes.strokes.isEmpty, let data = drawingStrokes,
+               let restored = try? PKDrawing(data: data) {
+                strokes = restored
+            }
+        }
     }
 
     /// Every stroke updates the design (kid sees the car change instantly);
@@ -103,9 +112,14 @@ struct DrawingPadView: View {
                 image.draw(in: CGRect(x: 0, y: (1024 - bounds.height) / 2,
                                       width: 1024, height: bounds.height))
             }
-        drawingPNG = strokes.strokes.isEmpty
-            ? nil
-            : OverlayComposer.encodePNGCapped(image)
+        if strokes.strokes.isEmpty {
+            drawingPNG = nil
+            drawingStrokes = nil
+        } else {
+            drawingPNG = OverlayComposer.encodePNGCapped(image)
+            let data = strokes.dataRepresentation()
+            drawingStrokes = data.count <= 200_000 ? data : nil
+        }
     }
 }
 
@@ -133,7 +147,8 @@ struct CarSilhouette: Shape {
 }
 
 /// Thin PKCanvasView wrapper: transparent, finger drawing allowed.
-private struct PencilCanvas: UIViewRepresentable {
+/// Shared by the car drawing pad and the driver face pad.
+struct PencilCanvas: UIViewRepresentable {
     @Binding var drawing: PKDrawing
     let tool: any PKTool
     let onStrokesChanged: () -> Void
