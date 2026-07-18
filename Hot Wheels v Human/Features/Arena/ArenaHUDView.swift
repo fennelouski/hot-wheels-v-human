@@ -77,6 +77,7 @@ struct ArenaHUDView: View {
                     Text("Time").bold()
                     Text("Top speed").bold()
                     Text("Crashes").bold()
+                    Text("Best segment").bold()
                 }
                 ForEach(session.racers) { racer in
                     GridRow {
@@ -84,10 +85,16 @@ struct ArenaHUDView: View {
                         Text(racer.finishTime.map { String(format: "%.1f s", $0) } ?? "OUT")
                         Text(String(format: "%.1f m/s", racer.topSpeed))
                         Text("\(racer.crashes)")
+                        Text(racer.bestSegment.map {
+                            String(format: "#%d · %.2f s", $0.piece + 1, $0.seconds)
+                        } ?? "—")
                     }
                 }
             }
             .font(.system(size: 24, design: .rounded))
+            Text("Press 🔁 REMATCH on your iPad to go again!")
+                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .foregroundStyle(.yellow)
         }
         .padding(32)
         .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 24))

@@ -56,6 +56,13 @@ final class DashboardModel {
         transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
     }
 
+    /// REMATCH = ready up again from the results screen; the host tears
+    /// down and reruns the same race once everyone re-readies.
+    func requestRematch() {
+        transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
+        SoundBank.shared.play("rematch_ding")
+    }
+
     /// Hold-to-show driver PiP on the TV (Phase 6). Reliable — a lost
     /// "off" would strand the PiP on screen.
     func setReactionCam(on: Bool) {

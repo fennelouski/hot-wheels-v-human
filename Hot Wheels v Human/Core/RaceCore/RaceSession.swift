@@ -44,6 +44,7 @@ final class RaceSession {
     }
 
     private var updateSubscription: (any Cancellable)?
+    private var trackEntity: Entity?
     private var config = MatchConfig(mode: .solo)
     /// Piece types in track order + where each starts on the spline —
     /// the AI policy and best-segment stat both read these.
@@ -65,6 +66,7 @@ final class RaceSession {
         pieceTypes = layout.pieces.map(\.definition.type)
         pieceStartIndices = layout.lanes.pieceStartIndices
         let track = try await TrackSpawner.spawn(layout: layout)
+        trackEntity = track
         track.components.set(RaceTrackComponent(lanes: layout.lanes, laps: config.laps))
         root.addChild(track)
         // ponytail: scene default gravity (-9.81) for now — a custom
@@ -176,6 +178,20 @@ final class RaceSession {
             updateSubscription?.cancel()
             updateSubscription = nil
         }
+    }
+
+    /// Tear down the finished race so start() can run again (REMATCH).
+    func reset() {
+        updateSubscription?.cancel()
+        updateSubscription = nil
+        trackEntity?.removeFromParent()
+        trackEntity = nil
+        racers = []
+        _ = RaceEventBus.shared.drain()   // stale events must not leak into the next race
+        // .buildingTrack, NOT .lobby — the TV shows ArenaView for every
+        // non-lobby phase; dropping to .lobby would tear down the
+        // RealityView whose root the next race builds into.
+        phase = .buildingTrack
     }
 
     /// Is a loop piece coming up within `seconds` at current speed?

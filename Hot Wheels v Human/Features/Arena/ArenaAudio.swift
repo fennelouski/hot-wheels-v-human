@@ -31,6 +31,7 @@ final class ArenaAudio {
         if phase != lastPhase {
             switch phase {
             case .countdown:
+                prev.removeAll()   // rematch: stale meters must not misfire boosts
                 SoundBank.shared.duckMusic(seconds: 4)
                 SoundBank.shared.play("race_countdown")
                 SoundBank.shared.play("grid_rev_anticipation")

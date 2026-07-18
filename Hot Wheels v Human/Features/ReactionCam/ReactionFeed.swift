@@ -25,9 +25,17 @@ final class ReactionFeed {
         var finished = false
     }
     private var prev: [UUID: Prev] = [:]
+    private var lastPhase: RacePhase = .lobby
 
     func tick(session: RaceSession, dt: TimeInterval) {
         guard dt > 0 else { return }
+        // Fresh race (incl. rematch) → fresh directors, or a sticky
+        // "celebrating" would survive into the countdown.
+        if session.phase == .countdown, lastPhase != .countdown {
+            directors.removeAll()
+            prev.removeAll()
+        }
+        lastPhase = session.phase
         for racer in session.racers {
             let director = directors[racer.id] ?? {
                 let d = ReactionDirector()

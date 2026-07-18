@@ -95,6 +95,7 @@ final class RaceCoordinator {
             config = cfg
         case .readyState(let playerID, let ready):
             readiness[playerID] = ready
+            rematchIfReady()
             startRaceIfReady()
         case .boost(let playerID, let token):
             if boostDedupe.firstSighting(token) {
@@ -145,11 +146,24 @@ final class RaceCoordinator {
                 self.transport.send(.raceSnapshot(self.currentSnapshot()), reliably: false)
                 try? await Task.sleep(for: .seconds(Double(1 / RaceTuning.snapshotRate)))
             }
-            // One final reliable snapshot so dashboards land on results.
+            // One final reliable snapshot so dashboards land on results,
+            // then require fresh READYs so a stale one can't auto-rematch.
             if let self {
                 self.transport.send(.raceSnapshot(self.currentSnapshot()), reliably: true)
+                self.readiness = self.readiness.mapValues { _ in false }
             }
         }
+    }
+
+    /// On the results screen, everyone pressing READY again = rematch:
+    /// tear the old race down and let startRaceIfReady rebuild (same
+    /// designs, same track).
+    private func rematchIfReady() {
+        guard raceRunning, session.phase == .results,
+              !players.isEmpty,
+              players.allSatisfy({ readiness[$0.id] == true }) else { return }
+        session.reset()
+        raceRunning = false
     }
 
     private func currentSnapshot() -> RaceSnapshot {

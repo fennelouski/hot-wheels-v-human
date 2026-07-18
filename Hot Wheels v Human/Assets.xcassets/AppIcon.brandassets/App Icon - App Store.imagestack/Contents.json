@@ -1,0 +1,7 @@
+{
+  "layers" : [
+    { "filename" : "Layer 1.imagestacklayer" },
+    { "filename" : "Layer 2.imagestacklayer" }
+  ],
+  "info" : { "author" : "xcode", "version" : 1 }
+}

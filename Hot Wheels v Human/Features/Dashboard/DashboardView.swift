@@ -28,13 +28,27 @@ struct DashboardView: View {
                 .padding(.horizontal)
 
                 Spacer()
-                BoostButtonView(meter: car.boostMeter) {
-                    model.fireBoost()
+                if model.phase == .results {
+                    Button {
+                        model.requestRematch()
+                    } label: {
+                        Text("🔁 REMATCH!")
+                            .font(.system(size: 36, weight: .black, design: .rounded))
+                            .frame(width: 280, height: 90)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.yellow)
+                    .foregroundStyle(.black)
+                    .padding(.bottom, 12)
+                } else {
+                    BoostButtonView(meter: car.boostMeter) {
+                        model.fireBoost()
+                    }
+                    ReactionCamButton { on in
+                        model.setReactionCam(on: on)
+                    }
+                    .padding(.bottom, 12)
                 }
-                ReactionCamButton { on in
-                    model.setReactionCam(on: on)
-                }
-                .padding(.bottom, 12)
             } else {
                 Spacer()
                 Text(waitingLabel)
