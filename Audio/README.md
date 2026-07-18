@@ -1,6 +1,9 @@
 # Audio/ — source audio (app-ready copies go to `Hot Wheels v Human/Resources/Audio/`)
 
-Nothing downloaded yet (Phase 6 task). Required files and vetted free sources:
+**SFX are generated, not downloaded: see `Audio/SFX-SPEC.md`** — run `tools/generate_sfx.sh`
+(needs `ELEVENLABS_API_KEY`). Only the two music tracks still come from the free sources below.
+
+Original plan (kept for the music rows and as fallback if generation quality disappoints):
 
 | File | Purpose | Where to get it (CC0/free) |
 |---|---|---|
