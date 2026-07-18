@@ -22,6 +22,9 @@ struct ArenaLobbyView: View {
         }
         .onAppear { coordinator.start() }
         .onDisappear { coordinator.stop() }
+        .onChange(of: coordinator.players.count) { old, new in
+            if new > old { SoundBank.shared.play("player_join_horn") }
+        }
     }
 
     private var lobby: some View {

@@ -15,6 +15,7 @@ struct ArenaView: View {
 
     @State private var camera: EventSubscription?
     @State private var reactionFeed = ReactionFeed()
+    @State private var arenaAudio = ArenaAudio()
 
     var body: some View {
         ZStack {
@@ -45,10 +46,12 @@ struct ArenaView: View {
 
                 let session = coordinator.session
                 let feed = reactionFeed
+                let audio = arenaAudio
                 var smoothed = SIMD3<Float>(0, 2.2, -3)
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
+                    audio.tick(session: session)
                     let positions = session.racers.compactMap {
                         $0.entity.flatMap { $0.isEnabled ? $0.position(relativeTo: nil) : nil }
                     }

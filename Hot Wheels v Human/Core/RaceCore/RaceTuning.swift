@@ -122,6 +122,21 @@ nonisolated enum RaceTuning {
     /// Brace when a loop is closer than this many seconds at current speed.
     static let loopBraceLookahead: Float = 0.5
 
+    // MARK: Audio (Phase 6)
+
+    static let musicVolume: Float = 0.6
+    /// −8 dB ≈ ×0.4 while countdown/fanfare play (Audio/README).
+    static let musicDuckFactor: Float = 0.4
+    /// Engine loop per chassis (SFX-SPEC "cars racing around").
+    static let engineLoopName: [ChassisClass: String] = [
+        .heavyMuscle: "engine_loop_heavy",
+        .balancedFormula: "car_engine_loop",
+        .superlightDrift: "engine_loop_light",
+    ]
+    /// Engine loop playback-rate range mapped over 0…max speed (Audio/README).
+    static let enginePitchRange: ClosedRange<Double> = 0.8...1.6
+    static let engineGain: Double = -12   // dB, under the music/SFX
+
     // MARK: Networking cadence
 
     /// RaceSnapshot broadcast rate, Hz (TV → iPads).

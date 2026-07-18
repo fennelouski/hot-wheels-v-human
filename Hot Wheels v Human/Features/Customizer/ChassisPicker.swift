@@ -16,6 +16,7 @@ struct ChassisPicker: View {
             ForEach(ChassisClass.allCases, id: \.self) { chassis in
                 Button {
                     selection = chassis
+                    SoundBank.shared.play("car_select_vroom")
                 } label: {
                     VStack(spacing: 8) {
                         Text(emoji(chassis)).font(.system(size: 44))

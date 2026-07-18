@@ -60,6 +60,7 @@ struct RootView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.09, green: 0.10, blue: 0.16))
             .foregroundStyle(.white)
+            .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
         }
     }
 

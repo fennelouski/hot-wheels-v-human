@@ -91,6 +91,7 @@ struct ReactionCamButton: View {
             .onLongPressGesture(minimumDuration: .infinity) {} onPressingChanged: { pressing in
                 holding = pressing
                 setOn(pressing)
+                if pressing { SoundBank.shared.play("camera_shutter") }
             }
     }
 }

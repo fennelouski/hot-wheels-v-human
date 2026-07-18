@@ -72,4 +72,14 @@ nonisolated enum AIRoster {
         case .hard: bots[2]
         }
     }
+
+    /// Catchphrase file key (`voice_<key>_<moment>.wav`, SFX-SPEC table).
+    static func voiceKey(for design: CarDesign) -> String? {
+        switch design.id {
+        case bots[0].id: "oobi"
+        case bots[1].id: "zapp"
+        case bots[2].id: "crusher"
+        default: nil
+        }
+    }
 }

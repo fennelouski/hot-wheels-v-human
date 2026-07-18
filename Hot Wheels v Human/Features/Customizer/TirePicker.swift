@@ -13,6 +13,7 @@ struct TirePicker: View {
             ForEach(TireType.allCases, id: \.self) { tire in
                 Button {
                     selection = tire
+                    SoundBank.shared.play("tire_bounce")
                 } label: {
                     VStack(spacing: 8) {
                         Text(emoji(tire)).font(.system(size: 44))

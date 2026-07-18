@@ -1,11 +1,14 @@
-# Features/ReactionCam/ — driver PiP (Phase 6)
+# Features/ReactionCam/ — driver PiP (Phase 6 — built)
 
-Concept: hold "Up" on the iPad → circular PiP appears on the TV showing that player's driver reacting to live physics.
+Concept: hold the 🎥 button on the iPad → circular PiP appears on the TV showing that player's driver reacting to live physics. Dev/sim shortcut: launch arg `--show-cams` forces every PiP on.
 
-Files
-- `ReactionCamView.swift` — circular-masked mini `RealityView`: off-stage driver bust (Quaternius avatar, player's colors) + `PerspectiveCamera` + key light. Positioned bottom-left/right per player.
-- `ReactionDirector.swift` — maps race events → reaction state machine: `idle → steering(l/r) → braced(loop) → boosted → crashed → celebrating`. Inputs: lateral accel (lean), upcoming loop within 0.5 s (brace), boost fired (push-back), destruction (facepalm), win (cheer). Min state hold 400 ms so it never flickers.
-- `FaceDecals.swift` — face expression = texture swap on a face quad (normal / wide-eye / gritted / dizzy / grin). No facial rigging.
-- `DriverPoser.swift` — skeletal poses (seated grip, lean L/R, brace, facepalm, arms-up) — authored as short USDZ animation clips in Blender on the Quaternius rig, crossfaded (0.15 s).
+Files (as built 2026-07-18)
+- `ReactionCamView.swift` — circular-masked mini `RealityView`: driver bust (Quaternius rig, tinted with the player's paint) + `PerspectiveCamera` + key light, player-colored ring, name capsule. Positioned bottom-left/right per player by ArenaView.
+- `ReactionDirector.swift` — race events → reaction state machine: `idle → steerLeft/steerRight → braced → boosted / crashed / celebrating`. Continuous inputs: yaw rate (lean) + loop-within-0.5 s (brace); discrete events override instantly. Min state hold (RaceTuning.reactionMinHold) so it never flickers; celebrating is sticky. Unit-tested.
+- `ReactionFeed.swift` — bridges live `RaceSession` state → one director per racer, every frame from ArenaView's scene subscription. Discrete events detected by diffing racer stats (crashes↑ = crashed, meter 1→0 = boosted, finishTime set = celebrating) — no extra event plumbing.
+- `DriverPoser.swift` — plays the matching Quaternius clip (idle/Punch/Death/Jump → idle/boosted/crashed/celebrating), crossfaded 0.15 s. Clips are separate USDZs (`driver-*.usdz`) from `tools/convert_driver_rig.py`; skeletons match so any clip plays on the one bust.
+- `FaceDecals.swift` — face expression per state. Built as an emoji badge over the PiP instead of the planned texture-swap quad — reads better at PiP size, zero texture authoring. Steering/braced states reuse the idle clip; the face carries them.
 
-Fallback plan (decide by profiling in Phase 6): if a second RealityView hurts tvOS frame rate, render reactions as pre-captured sprite sequences (capture the 3D poses once per driver-color combo at build of race) shown in a plain SwiftUI overlay — identical UX, near-zero cost.
+Deviations from the original plan
+- No Blender-authored seated/lean/brace poses: the rig's stock clips + face badges cover every state. In-car "seated" pose = standing rig sunk hip-deep into the chassis (legs hidden — RaceTuning.driverSinkRatio).
+- Sprite fallback not needed in Simulator; profile the second RealityView on real Apple TV hardware before shipping (fallback plan unchanged if it costs > 10% frame time).

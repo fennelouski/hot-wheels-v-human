@@ -43,12 +43,19 @@ final class TrackBuilderModel {
     }
 
     func append(_ type: PieceType) {
-        guard canAppend(type) else { return }
+        guard canAppend(type) else {
+            SoundBank.shared.play("nope_wobble")
+            return
+        }
         types.append(type)
+        SoundBank.shared.play("track_snap_connect")
     }
 
     func removeLast() {
-        if types.count > 1 { types.removeLast() }
+        if types.count > 1 {
+            types.removeLast()
+            SoundBank.shared.play("piece_delete_pop")
+        }
     }
 
     func clear() { types = [.startGate] }
@@ -56,6 +63,7 @@ final class TrackBuilderModel {
     func shuffle() {
         types = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
             .segments.map(\.type)
+        SoundBank.shared.play("shuffle_dice")
     }
 
     func save(named name: String, into context: ModelContext, appModel: AppModel) {
@@ -65,6 +73,7 @@ final class TrackBuilderModel {
             try? context.save()
         }
         appModel.selectedBlueprint = bp
+        SoundBank.shared.play("track_save_stamp")
     }
 
     private func makeBlueprint(_ types: [PieceType]) -> TrackBlueprint {

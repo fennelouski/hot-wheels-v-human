@@ -22,6 +22,7 @@ struct PaintShopView: View {
                 ForEach(Self.swatches, id: \.self) { hex in
                     Button {
                         paint.colorHex = hex
+                        SoundBank.shared.play("paint_spray")
                     } label: {
                         Circle()
                             .fill(Color(hex: hex))

@@ -36,6 +36,7 @@ struct GarageView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .navigationTitle("Garage")
+        .onAppear { SoundBank.shared.play("garage_door") }
     }
 
     private func garageCard(_ record: CarDesignRecord) -> some View {
