@@ -17,6 +17,32 @@ import CoreGraphics
 import Foundation
 import RealityKit
 
+/// Spins a decorative prop about its own Y axis. Coins only, for now —
+/// a turning coin reads as "treasure" the way a static one never does,
+/// and it's the one prop whose silhouette rewards it.
+struct SpinComponent: Component {
+    var radiansPerSecond: Float
+}
+
+/// Deliberately not an OrbitAnimation: that orbits an entity around a
+/// centre, so at radius 0 (a coin spinning where it stands) there's no
+/// path to travel and nothing turns.
+struct SpinSystem: System {
+    private static let query = EntityQuery(where: .has(SpinComponent.self))
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        for entity in context.entities(matching: Self.query,
+                                       updatingSystemWhen: .rendering) {
+            guard let spin = entity.components[SpinComponent.self] else { continue }
+            entity.orientation *= simd_quatf(angle: spin.radiansPerSecond * dt,
+                                             axis: [0, 1, 0])
+        }
+    }
+}
+
 enum ArenaEnvironment {
 
     struct Theme {
@@ -135,10 +161,14 @@ enum ArenaEnvironment {
         } ?? 0
         var dice = Dice(seed: 0xD1CE &+ UInt64(truncatingIfNeeded: trackSeed))
 
+        SpinComponent.registerComponent()
+        SpinSystem.registerSystem()
+
         // Prototype each model once; clone per placement.
         var prototypes: [Entity] = []
         for name in theme.props {
             if let entity = try? await AssetStore.shared.entity(named: name) {
+                entity.name = name      // clones inherit it — spots the coins
                 prototypes.append(entity)
             }
         }
@@ -161,6 +191,12 @@ enum ArenaEnvironment {
                 .clone(recursive: true)
             prop.position = [x, 0, z]
             prop.orientation = simd_quatf(angle: dice.next01() * 2 * .pi, axis: [0, 1, 0])
+            // Coins turn; cones and boxes stay put (a spinning traffic cone
+            // reads as a glitch). Varied rate so they don't pulse in unison.
+            if prop.name.contains("coin") {
+                prop.components.set(SpinComponent(
+                    radiansPerSecond: 1.1 + dice.next01() * 0.7))
+            }
             root.addChild(prop)
         }
     }
