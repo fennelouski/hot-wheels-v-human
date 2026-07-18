@@ -36,6 +36,9 @@ final class RaceSession {
     }
 
     private(set) var phase: RacePhase = .lobby
+    /// Which track is (about to be) built — ArenaView themes the
+    /// environment from this, so a TV series re-themes per race.
+    private(set) var trackID: UUID?
     private(set) var countdownValue = 3
     private(set) var raceClock: TimeInterval = 0
     private(set) var racers: [Racer] = []
@@ -62,6 +65,7 @@ final class RaceSession {
                config: MatchConfig, root: Entity) async throws {
         phase = .buildingTrack
         self.config = config
+        trackID = blueprint.trackId
         let layout = TrackLayoutSolver.solve(blueprint)
         pieceTypes = layout.pieces.map(\.definition.type)
         pieceStartIndices = layout.lanes.pieceStartIndices
@@ -125,7 +129,11 @@ final class RaceSession {
         for event in RaceEventBus.shared.drain() {
             switch event {
             case .carDestroyed(let id):
-                withRacer(id) { $0.crashes += 1 }
+                withRacer(id) {
+                    $0.crashes += 1
+                    // Console breadcrumb for CLI tuning drills (XCODE-SETUP §8).
+                    print("[race] \($0.design.name) crashed at piece \($0.lastPieceIndex) (crash #\($0.crashes))")
+                }
                 onEvent?(event)
             case .finished(let id, _):
                 withRacer(id) { $0.finishTime = self.raceClock }
@@ -176,6 +184,10 @@ final class RaceSession {
 
         if allDone {
             phase = .results
+            for r in racers {
+                let time = r.finishTime.map { String(format: "%.1fs", $0) } ?? "OUT"
+                print("[race] result \(r.design.name): \(time), top \(String(format: "%.1f", r.topSpeed)) m/s, crashes \(r.crashes)")
+            }
             updateSubscription?.cancel()
             updateSubscription = nil
         }

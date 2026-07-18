@@ -25,13 +25,11 @@ struct ArenaView: View {
                 let root = Entity()
                 content.add(root)
 
-                let ground = ModelEntity(
-                    mesh: .generatePlane(width: 14, depth: 14),
-                    materials: [SimpleMaterial(color: .init(red: 0.16, green: 0.32, blue: 0.18, alpha: 1), isMetallic: false)])
-                ground.position.y = -0.03
-                ground.collision = CollisionComponent(shapes: [.generateBox(width: 14, height: 0.01, depth: 14)])
-                ground.physicsBody = PhysicsBodyComponent(mode: .static)
-                root.addChild(ground)
+                // Sky + ground live under a named holder; the update
+                // closure swaps the theme when a new track spawns.
+                let environmentHolder = Entity()
+                environmentHolder.name = "environment"
+                root.addChild(environmentHolder)
 
                 let light = DirectionalLight()
                 light.light.intensity = 4000
@@ -59,12 +57,30 @@ struct ArenaView: View {
                     let mid = positions.reduce(SIMD3<Float>.zero, +) / Float(positions.count)
                     let spread = positions.map { simd_length($0 - mid) }.max() ?? 0
                     let distance = max(1.6, spread * 2.2)
-                    let goal = mid + SIMD3<Float>(0, distance * 0.65, -distance)
+                    // 0.4 keeps the horizon + sky dome in the top of the
+                    // frame (0.65 looked straight down at the play mat).
+                    let goal = mid + SIMD3<Float>(0, distance * 0.4, -distance)
                     smoothed = simd_mix(smoothed, goal, SIMD3<Float>(repeating: 0.04))
                     cameraEntity.look(at: mid, from: smoothed, relativeTo: nil)
                 }
 
                 coordinator.attach(root: root)
+            } update: { content in
+                // Re-theme when the (next) race's track changes. Reading
+                // trackID here re-runs this closure on each new race.
+                let trackID = coordinator.session.trackID
+                guard let holder = content.entities.first?
+                    .findEntity(named: "environment") else { return }
+                let wanted = ArenaEnvironment.name(for: trackID)
+                guard holder.children.first?.name != wanted,
+                      holder.name != "building-\(wanted)" else { return }
+                holder.name = "building-\(wanted)"
+                Task { @MainActor in
+                    let environment = await ArenaEnvironment.make(for: trackID)
+                    holder.children.removeAll()
+                    holder.addChild(environment)
+                    holder.name = "environment"
+                }
             }
             ArenaHUDView(session: coordinator.session,
                          seriesLabel: coordinator.raceCount > 1
