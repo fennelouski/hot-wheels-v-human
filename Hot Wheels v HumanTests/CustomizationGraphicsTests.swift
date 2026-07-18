@@ -11,6 +11,7 @@ import CoreGraphics
 import Foundation
 import simd
 import Testing
+import UIKit
 @testable import Hot_Wheels_v_Human
 
 struct ShellGeometryTests {
@@ -144,6 +145,43 @@ struct OverlayComposerTests {
                                           cameraTransform: matrix_identity_float4x4)
         // Top-left of screen → ray leans left (-x) and up (+y).
         #expect(topLeft.x < 0 && topLeft.y > 0 && topLeft.z < 0)
+    }
+
+    @Test func drawingRendersAsBottomLayer() throws {
+        // A solid red PNG as the "drawing": it must show up in the overlay.
+        let size = 32
+        let ctx = CGContext(data: nil, width: size, height: size, bitsPerComponent: 8,
+                            bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
+                            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)!
+        ctx.setFillColor(CGColor(red: 1, green: 0, blue: 0, alpha: 1))
+        ctx.fill(CGRect(x: 0, y: 0, width: size, height: size))
+        let png = try #require(UIImage(cgImage: ctx.makeImage()!).pngData())
+
+        let image = try #require(OverlayComposer.render(livery: nil, drawing: png, size: 128))
+        #expect(alpha(at: 0.5, 0.5, in: image) > 200)
+    }
+
+    @Test func pngCapDownscalesUntilItFits() throws {
+        // Random noise defeats PNG compression → forces downscaling.
+        let size = 1400
+        var bytes = [UInt8](repeating: 0, count: size * size * 4)
+        for i in bytes.indices { bytes[i] = UInt8.random(in: 0...255) }
+        let provider = CGDataProvider(data: Data(bytes) as CFData)!
+        let noisy = CGImage(width: size, height: size, bitsPerComponent: 8, bitsPerPixel: 32,
+                            bytesPerRow: size * 4, space: CGColorSpaceCreateDeviceRGB(),
+                            bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+                            provider: provider, decode: nil, shouldInterpolate: false,
+                            intent: .defaultIntent)!
+        let data = try #require(OverlayComposer.encodePNGCapped(UIImage(cgImage: noisy)))
+        #expect(data.count <= 200_000)
+    }
+
+    @Test func drawingPNGRoundTripsInCarDesign() throws {
+        var design = ModelTests.car
+        design.drawingPNG = Data([1, 2, 3, 4])
+        let decoded = try JSONDecoder().decode(
+            CarDesign.self, from: JSONEncoder().encode(design))
+        #expect(decoded == design)
     }
 
     @Test func liveryRoundTripsInCarDesign() throws {

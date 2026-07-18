@@ -95,4 +95,7 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var livery: LiverySpec? = nil
     /// Stickers stamped on the paint shell. Optional → old designs decode.
     var stickers: [StickerPlacement]? = nil
+    /// Freehand drawing, PNG ≤ 200 KB (downscaled until it fits), rendered
+    /// as the bottom overlay layer. Optional → old designs decode.
+    var drawingPNG: Data? = nil
 }

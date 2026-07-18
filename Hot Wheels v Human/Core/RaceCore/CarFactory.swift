@@ -91,6 +91,7 @@ enum CarFactory {
         await PaintShell.apply(
             overlay: OverlayComposer.render(livery: design.livery,
                                             stickers: design.stickers,
+                                            drawing: design.drawingPNG,
                                             bodyAspect: PaintShell.bodyAspect(of: visual)),
             to: visual)
     }

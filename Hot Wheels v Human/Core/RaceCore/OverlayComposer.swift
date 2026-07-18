@@ -25,9 +25,10 @@ nonisolated enum OverlayComposer {
     /// `bodyAspect` = car length / height; stickers shrink on the u axis by
     /// it so they stay round on the car instead of smearing lengthwise.
     static func render(livery: LiverySpec?, stickers: [StickerPlacement]? = nil,
-                       bodyAspect: CGFloat = 1, size: Int = textureSize) -> CGImage? {
+                       drawing: Data? = nil, bodyAspect: CGFloat = 1,
+                       size: Int = textureSize) -> CGImage? {
         let stickers = stickers ?? []
-        guard livery != nil || !stickers.isEmpty else { return nil }
+        guard livery != nil || !stickers.isEmpty || drawing != nil else { return nil }
         guard let ctx = CGContext(
             data: nil, width: size, height: size, bitsPerComponent: 8,
             bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
@@ -36,6 +37,16 @@ nonisolated enum OverlayComposer {
         // matching v = 0 at the car's bottom).
         ctx.scaleBy(x: CGFloat(size), y: CGFloat(size))
 
+        // Bottom layer: the kid's drawing (canvas y-down → flip into UV space).
+        if let drawing, let provider = CGDataProvider(data: drawing as CFData),
+           let image = CGImage(pngDataProviderSource: provider, decode: nil,
+                               shouldInterpolate: true, intent: .defaultIntent) {
+            ctx.saveGState()
+            ctx.translateBy(x: 0, y: 1)
+            ctx.scaleBy(x: 1, y: -1)
+            ctx.draw(image, in: CGRect(x: 0, y: 0, width: 1, height: 1))
+            ctx.restoreGState()
+        }
         if let livery {
             draw(livery: livery, in: ctx)
         }
@@ -237,6 +248,32 @@ nonisolated enum OverlayComposer {
         ctx.addPath(path)
         ctx.fillPath()
     }
+
+    #if canImport(UIKit)
+    /// PNG-encode at most `maxBytes`, downscaling ×0.7 until it fits
+    /// (CUSTOMIZATION-GRAPHICS.md: 200 KB cap, enforced at save time).
+    static func encodePNGCapped(_ image: UIImage, maxBytes: Int = 200_000,
+                                maxWidth: CGFloat = 1024) -> Data? {
+        var current = image
+        if current.size.width > maxWidth {
+            current = resized(current, width: maxWidth)
+        }
+        for _ in 0..<8 {
+            guard let data = current.pngData() else { return nil }
+            if data.count <= maxBytes { return data }
+            current = resized(current, width: current.size.width * 0.7)
+        }
+        return nil
+    }
+
+    private static func resized(_ image: UIImage, width: CGFloat) -> UIImage {
+        let size = CGSize(width: width,
+                          height: width * image.size.height / max(image.size.width, 1))
+        return UIGraphicsImageRenderer(size: size).image { _ in
+            image.draw(in: CGRect(origin: .zero, size: size))
+        }
+    }
+    #endif
 
     static func cgColor(hex: String, alpha: CGFloat = 1) -> CGColor {
         var value: UInt64 = 0

@@ -46,9 +46,12 @@ they stay round. ≥60 pt targets.
 
 ### D. Freehand drawing (the flagship)
 PencilKit canvas, car side-silhouette as stencil background, kid draws with finger/Pencil.
-`PKDrawing` → image → bottom layer of the overlay. Mirror to both sides by default
-("same on both sides" toggle). Driver gets the same: draw on face/shirt via the existing
-`FaceDecals` pipeline.
+`PKDrawing` → image → bottom layer of the overlay. Reality notes (G4): mirroring to both
+sides is inherent to the shared side-projection UVs (a per-side toggle would need split
+UV islands — not built). Driver face/shirt drawing was specced against the FaceDecals
+texture pipeline, which has since become procedural vector faces (no emoji rule) — driver
+drawing is deferred until a driver texture pipeline exists. Strokes stay editable for the
+session; the design persists only the capped PNG.
 
 ## Data model
 ```swift

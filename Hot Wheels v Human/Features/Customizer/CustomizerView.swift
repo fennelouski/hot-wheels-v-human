@@ -9,6 +9,9 @@
 import SwiftUI
 import SwiftData
 import RealityKit
+#if canImport(PencilKit) && !os(tvOS)
+import PencilKit
+#endif
 
 struct CustomizerView: View {
     @Environment(AppModel.self) private var appModel
@@ -18,7 +21,7 @@ struct CustomizerView: View {
 
     @State private var model = CustomizerModel()
     @State private var tab: Tab =
-        ProcessInfo.processInfo.arguments.contains("--demo-design") ? .paint : .chassis
+        ProcessInfo.processInfo.arguments.contains("--demo-design") ? .draw : .chassis
     @State private var saved = false
     @State private var paintSlot = CarPaintSlot.body
     @State private var armedSticker: String? = nil
@@ -26,6 +29,10 @@ struct CustomizerView: View {
     /// Mid-gesture sticker state shown on the turntable; committed to the
     /// design (one undo entry) when the gesture ends.
     @State private var draftStickers: [StickerPlacement]? = nil
+    #if canImport(PencilKit) && !os(tvOS)
+    /// Session-held pencil strokes (the design only stores the capped PNG).
+    @State private var pencilStrokes = PKDrawing()
+    #endif
 
     enum Tab: String, CaseIterable {
         case chassis = "Chassis"
@@ -33,6 +40,7 @@ struct CustomizerView: View {
         case paint = "Paint"
         case livery = "Livery"
         case stickers = "Stickers"
+        case draw = "Draw"
         case driver = "Driver"
 
         var symbolName: String {
@@ -42,6 +50,7 @@ struct CustomizerView: View {
             case .paint: "paintbrush.fill"
             case .livery: "flame.fill"
             case .stickers: "star.circle.fill"
+            case .draw: "pencil.tip"
             case .driver: "person.fill"
             }
         }
@@ -113,6 +122,13 @@ struct CustomizerView: View {
                 case .paint: PaintShopView(design: $model.design, slot: $paintSlot)
                 case .livery: LiveryShopView(livery: $model.design.livery)
                 case .stickers: StickerShopView(armed: $armedSticker, colorHex: $stickerColor)
+                case .draw:
+                    #if canImport(PencilKit) && !os(tvOS)
+                    DrawingPadView(drawingPNG: $model.design.drawingPNG,
+                                   strokes: $pencilStrokes)
+                    #else
+                    Text("Drawing needs the iPad")
+                    #endif
                 case .driver: DriverEditorView(driver: $model.driver)
                 }
             }
@@ -288,7 +304,7 @@ struct CarTurntableView: View {
         let stickers = (design.stickers ?? []).map {
             "\($0.symbol)@\($0.uv.x),\($0.uv.y)x\($0.scale)r\($0.rotation)#\($0.colorHex)"
         }.joined(separator: ";")
-        let signature = "\(design.chassis.rawValue)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)|\(stickers)"
+        let signature = "\(design.chassis.rawValue)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)|\(stickers)|\(design.drawingPNG?.hashValue ?? 0)"
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
 
