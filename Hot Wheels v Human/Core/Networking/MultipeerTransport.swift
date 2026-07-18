@@ -84,7 +84,11 @@ final class MultipeerTransport: NSObject, GameTransport {
         #if os(tvOS)
         return "Living Room TV"
         #else
-        return ProcessInfo.processInfo.hostName
+        // MCPeerID throws NSException for empty or >63-byte names, and
+        // hostName can be either (test-runner clones, odd network states).
+        let host = ProcessInfo.processInfo.hostName
+        guard !host.isEmpty else { return "Racer iPad" }
+        return String(decoding: host.utf8.prefix(63), as: UTF8.self)
         #endif
     }
 }
