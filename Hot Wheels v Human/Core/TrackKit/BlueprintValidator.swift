@@ -17,7 +17,9 @@ struct ValidationResult: Equatable, Sendable {
 
 enum BlueprintValidator {
 
-    static func validate(_ blueprint: TrackBlueprint) -> ValidationResult {
+    /// `requireEnding: false` = mid-build structural check (TrackBuilder):
+    /// everything except "has a finish or closes the circuit".
+    static func validate(_ blueprint: TrackBlueprint, requireEnding: Bool = true) -> ValidationResult {
         var reasons: [String] = []
 
         guard !blueprint.segments.isEmpty else {
@@ -50,7 +52,7 @@ enum BlueprintValidator {
         if finishes.count == 1 && !endsAtFinish {
             reasons.append("The finish gate has to be the last piece.")
         }
-        if finishes.isEmpty && !layout.isClosedCircuit {
+        if requireEnding && finishes.isEmpty && !layout.isClosedCircuit {
             reasons.append("The track needs a finish gate, or to loop back to the start.")
         }
 

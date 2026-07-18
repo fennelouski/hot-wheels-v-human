@@ -123,6 +123,20 @@ struct SolverTests {
         }
     }
 
+    @Test func randomTracksAlwaysValidate() {
+        // Fuzz the shuffle button (TrackKit README: ×500).
+        for i in 0..<500 {
+            let track = RandomTrackGenerator.generate(pieceCount: 3 + i % 12)
+            let result = BlueprintValidator.validate(track)
+            #expect(result.isValid, "invalid random track at iteration \(i): \(result.reasons)")
+        }
+        // 8+ piece tracks guarantee a loop.
+        for _ in 0..<20 {
+            let track = RandomTrackGenerator.generate(pieceCount: 10)
+            #expect(track.segments.contains { $0.type == .loop })
+        }
+    }
+
     @Test func everyPieceTypeHasADefinitionAndSolves() {
         for type in PieceType.allCases {
             _ = PieceCatalog.definition(for: type)  // force-unwrap traps if missing

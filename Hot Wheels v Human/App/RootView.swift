@@ -15,12 +15,15 @@ struct RootView: View {
     /// Dev deep links: `simctl launch <app> --solo-arena | --customizer`.
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
+    private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
 
     var body: some View {
         if launchIntoArena {
             SoloArenaView(designs: CarDesign.demoPair)
         } else if launchIntoCustomizer {
             CustomizerView()
+        } else if launchIntoBuilder {
+            TrackBuilderView()
         } else if Platform.isTV {
             ArenaLobbyView()
         } else {
@@ -45,14 +48,17 @@ struct RootView: View {
                 Grid(horizontalSpacing: 20, verticalSpacing: 20) {
                     GridRow {
                         homeLink("🏎️ Build a Car") { CustomizerView() }
-                        homeLink("🏚️ Garage") { GarageView() }
+                        homeLink("🛠️ Build a Track") { TrackBuilderView() }
                     }
                     GridRow {
                         homeLink("🏁 Solo Race") { SoloArenaView(designs: soloDesigns) }
                         homeLink("📺 Race on TV") { RaceOnTVView() }
                     }
                     GridRow {
+                        homeLink("🏚️ Garage") { GarageView() }
                         homeLink("🧪 Test My Cars") { TestModeView() }
+                    }
+                    GridRow {
                         homeLink("👥 2-Player Build") { CustomizerSplitView() }
                     }
                 }
