@@ -39,7 +39,10 @@ Sticker sheet: numbers 0–9, stars, eyes, mouths, lightning, flame, heart, skul
 paw, rainbow — rendered from SF Symbols or custom CGContext paths into the overlay
 (no asset downloads; never emoji — see CLAUDE.md).
 Interaction: tap sticker → tap car → raycast hit position → project to shell UV → stamp.
-Drag to move, pinch to scale, two-finger rotate. Big handles, ≥60 pt targets.
+Drag to move, pinch to scale, two-finger rotate (all act on the newest sticker; one undo
+entry per gesture). Reality note (G3): stamps clamp to v ≤ 0.55 — higher and the side
+projection smears them across the roof. Sticker rects divide u by body length/height so
+they stay round. ≥60 pt targets.
 
 ### D. Freehand drawing (the flagship)
 PencilKit canvas, car side-silhouette as stencil background, kid draws with finger/Pencil.

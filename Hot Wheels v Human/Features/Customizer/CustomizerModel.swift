@@ -34,6 +34,14 @@ final class CustomizerModel {
             design.paint = PaintSpec(colorHex: "#2266FF", finish: .sparkle)
             design.partColors = [CarPaintSlot.wheels: "#FFD500"]
             design.livery = LiverySpec(pattern: .flames, colorHex: "#FF3B30", scale: 1)
+            design.stickers = [
+                StickerPlacement(symbol: "star.fill", uv: [0.45, 0.5],
+                                 scale: 1, rotation: 0.3, colorHex: "#FFD500"),
+                StickerPlacement(symbol: "7.circle.fill", uv: [0.72, 0.42],
+                                 scale: 1.2, rotation: 0, colorHex: "#F2F2F7"),
+                StickerPlacement(symbol: "skull", uv: [0.18, 0.45],
+                                 scale: 0.8, rotation: -0.2, colorHex: "#F2F2F7"),
+            ]
         }
         return design
     }

@@ -47,6 +47,34 @@ nonisolated enum ShellGeometry {
         zip(positions, smoothedNormals(positions: positions, normals: normals))
             .map { $0 + $1 * offset }
     }
+
+    /// Stickers live on the side panels: above ~v 0.55 the side projection
+    /// smears them across the roof, so stamps clamp into this band (taps on
+    /// the roof still stick — they just land at the top of the side).
+    static func clampStickerUV(_ uv: SIMD2<Float>) -> SIMD2<Float> {
+        [min(max(uv.x, 0.04), 0.96), min(max(uv.y, 0.08), 0.55)]
+    }
+}
+
+/// Screen-point → world ray for a PerspectiveCamera (raycast stamping).
+/// Pure math — unit-tested.
+nonisolated enum CameraRay {
+    /// `point` in view coords (origin top-left), vertical `fovDegrees`.
+    static func direction(point: CGPoint, viewSize: CGSize, fovDegrees: Float,
+                          cameraTransform: simd_float4x4) -> SIMD3<Float> {
+        let tanHalf = tan(fovDegrees * .pi / 360)
+        let aspect = Float(viewSize.width / viewSize.height)
+        let ndcX = Float(point.x / viewSize.width) * 2 - 1
+        let ndcY = 1 - Float(point.y / viewSize.height) * 2
+        // Camera space: +x right, +y up, looks down -z.
+        let local = SIMD3<Float>(ndcX * tanHalf * aspect, ndcY * tanHalf, -1)
+        let rotated = simd_float3x3(
+            SIMD3(cameraTransform.columns.0.x, cameraTransform.columns.0.y, cameraTransform.columns.0.z),
+            SIMD3(cameraTransform.columns.1.x, cameraTransform.columns.1.y, cameraTransform.columns.1.z),
+            SIMD3(cameraTransform.columns.2.x, cameraTransform.columns.2.y, cameraTransform.columns.2.z)
+        ) * local
+        return simd_normalize(rotated)
+    }
 }
 
 @MainActor
@@ -87,26 +115,40 @@ enum PaintShell {
         return try? MeshResource.generate(from: contents)
     }
 
-    /// Attach (or refresh) the overlay shell on a painted car visual.
-    /// No overlay content → removes any existing shell.
-    static func apply(overlay: CGImage?, to visual: Entity) async {
-        // The body is the biggest painted mesh that isn't a wheel.
-        let body = visual.descendantsAndSelf()
+    /// The body is the biggest painted mesh that isn't a wheel.
+    static func bodyEntity(of visual: Entity) -> Entity? {
+        visual.descendantsAndSelf()
             .filter { $0.components.has(ModelComponent.self)
+                && $0.name != "paint-shell"
                 && CarPaintSlot.slot(forPartName: $0.name) == CarPaintSlot.body }
             .max { a, b in
                 let ea = a.visualBounds(relativeTo: a).extents
                 let eb = b.visualBounds(relativeTo: b).extents
                 return ea.x * ea.y * ea.z < eb.x * eb.y * eb.z
             }
-        guard let body else { return }
-        body.children.filter { $0.name == "paint-shell" }
-            .forEach { $0.removeFromParent() }
-        guard let overlay,
-              let bodyModel = body.components[ModelComponent.self],
-              let shellMesh = makeShellMesh(from: bodyModel.mesh),
-              let texture = try? await TextureResource(
-                image: overlay, options: .init(semantic: .color)) else { return }
+    }
+
+    /// Body length / height — how much the side-projection stretches u
+    /// relative to v (sticker aspect correction).
+    static func bodyAspect(of visual: Entity) -> CGFloat {
+        guard let body = bodyEntity(of: visual),
+              let mesh = body.components[ModelComponent.self]?.mesh else { return 2 }
+        let size = mesh.bounds.max - mesh.bounds.min
+        return size.y > 0.001 ? CGFloat(size.z / size.y) : 2
+    }
+
+    /// Attach (or refresh) the overlay shell on a painted car visual.
+    /// No overlay content → removes any existing shell. When the shell
+    /// already exists only the texture is swapped (fast path for live edits).
+    static func apply(overlay: CGImage?, to visual: Entity) async {
+        guard let body = bodyEntity(of: visual) else { return }
+        let existing = body.children.first { $0.name == "paint-shell" }
+        guard let overlay else {
+            existing?.removeFromParent()
+            return
+        }
+        guard let texture = try? await TextureResource(
+            image: overlay, options: .init(semantic: .color)) else { return }
 
         var material = PhysicallyBasedMaterial()
         material.baseColor = .init(texture: .init(texture))
@@ -115,6 +157,12 @@ enum PaintShell {
         material.blending = .transparent(opacity: 1.0)
         material.opacityThreshold = 0.0
 
+        if let shell = existing as? ModelEntity {
+            shell.model?.materials = [material]
+            return
+        }
+        guard let bodyModel = body.components[ModelComponent.self],
+              let shellMesh = makeShellMesh(from: bodyModel.mesh) else { return }
         let shell = ModelEntity(mesh: shellMesh, materials: [material])
         shell.name = "paint-shell"
         body.addChild(shell)

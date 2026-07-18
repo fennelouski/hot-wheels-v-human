@@ -102,6 +102,50 @@ struct OverlayComposerTests {
         #expect(alpha(at: 0.165, 0.055, in: image) < 16)
     }
 
+    @Test func stickersDrawIntoOverlay() throws {
+        // A big star at a known UV: alpha appears there, not far away.
+        let sticker = StickerPlacement(symbol: "star.fill", uv: [0.5, 0.5],
+                                       scale: 1.5, rotation: 0, colorHex: "#FFD500")
+        let image = try #require(OverlayComposer.render(livery: nil, stickers: [sticker],
+                                                        size: 256))
+        #expect(alpha(at: 0.5, 0.5, in: image) > 64)
+        #expect(alpha(at: 0.06, 0.06, in: image) < 16)
+    }
+
+    @Test func skullStickerDrawsWithoutUIKit() throws {
+        let sticker = StickerPlacement(symbol: "skull", uv: [0.5, 0.5],
+                                       scale: 2, rotation: 0, colorHex: "#F2F2F7")
+        let image = try #require(OverlayComposer.render(livery: nil, stickers: [sticker],
+                                                        size: 256))
+        // Head is solid at center-top; the punched-out eye is transparent.
+        #expect(alpha(at: 0.5, 0.62, in: image) > 128)
+    }
+
+    @Test func stickerPlacementRoundTrips() throws {
+        var design = ModelTests.car
+        design.stickers = [StickerPlacement(symbol: "pawprint.fill", uv: [0.25, 0.75],
+                                            scale: 0.5, rotation: 1.2, colorHex: "#1C1C1E")]
+        let decoded = try JSONDecoder().decode(
+            CarDesign.self, from: JSONEncoder().encode(design))
+        #expect(decoded == design)
+    }
+
+    @Test func cameraRayCenterLooksAlongForward() {
+        // Identity camera transform → center of view rays straight down -z.
+        let dir = CameraRay.direction(point: CGPoint(x: 200, y: 150),
+                                      viewSize: CGSize(width: 400, height: 300),
+                                      fovDegrees: 60, cameraTransform: matrix_identity_float4x4)
+        #expect(abs(dir.x) < 1e-5 && abs(dir.y) < 1e-5 && abs(dir.z + 1) < 1e-5)
+    }
+
+    @Test func cameraRayCornersDiverge() {
+        let size = CGSize(width: 400, height: 300)
+        let topLeft = CameraRay.direction(point: .zero, viewSize: size, fovDegrees: 60,
+                                          cameraTransform: matrix_identity_float4x4)
+        // Top-left of screen → ray leans left (-x) and up (+y).
+        #expect(topLeft.x < 0 && topLeft.y > 0 && topLeft.z < 0)
+    }
+
     @Test func liveryRoundTripsInCarDesign() throws {
         var design = ModelTests.car
         design.livery = LiverySpec(pattern: .flames, colorHex: "#FF3B30", scale: 1.5)

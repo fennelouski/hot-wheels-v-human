@@ -12,15 +12,22 @@
 
 import CoreGraphics
 import Foundation
+#if canImport(UIKit)
+import UIKit
+#endif
 
 nonisolated enum OverlayComposer {
 
     static let textureSize = 1024
 
-    /// Composite the full overlay. Nil when there is nothing to draw —
-    /// callers then remove the shell entirely.
-    static func render(livery: LiverySpec?, size: Int = textureSize) -> CGImage? {
-        guard livery != nil else { return nil }
+    /// Composite the full overlay (livery, then stickers on top). Nil when
+    /// there is nothing to draw — callers then remove the shell entirely.
+    /// `bodyAspect` = car length / height; stickers shrink on the u axis by
+    /// it so they stay round on the car instead of smearing lengthwise.
+    static func render(livery: LiverySpec?, stickers: [StickerPlacement]? = nil,
+                       bodyAspect: CGFloat = 1, size: Int = textureSize) -> CGImage? {
+        let stickers = stickers ?? []
+        guard livery != nil || !stickers.isEmpty else { return nil }
         guard let ctx = CGContext(
             data: nil, width: size, height: size, bitsPerComponent: 8,
             bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
@@ -32,7 +39,83 @@ nonisolated enum OverlayComposer {
         if let livery {
             draw(livery: livery, in: ctx)
         }
+        for sticker in stickers {
+            draw(sticker: sticker, bodyAspect: bodyAspect, in: ctx)
+        }
         return ctx.makeImage()
+    }
+
+    // MARK: Stickers
+
+    /// The sticker sheet (SF Symbols; "skull" is drawn by hand — no cute
+    /// skull in SF Symbols). No emoji (CLAUDE.md).
+    static let stickerSheet: [String] = [
+        "star.fill", "heart.fill", "bolt.fill", "flame.fill",
+        "eyes", "mouth.fill", "pawprint.fill", "rainbow", "skull",
+    ] + (0...9).map { "\($0).circle.fill" }
+
+    /// Base sticker footprint as a fraction of the car side (× placement.scale).
+    static let stickerBaseSize: CGFloat = 0.22
+
+    static func draw(sticker: StickerPlacement, bodyAspect: CGFloat = 1,
+                     in ctx: CGContext) {
+        let side = stickerBaseSize * CGFloat(max(0.3, min(sticker.scale, 4)))
+        ctx.saveGState()
+        ctx.translateBy(x: CGFloat(sticker.uv.x), y: CGFloat(sticker.uv.y))
+        // Undo the u-axis stretch first so rotation happens in square space.
+        ctx.scaleBy(x: 1 / max(bodyAspect, 0.1), y: 1)
+        ctx.rotate(by: CGFloat(sticker.rotation))
+        let rect = CGRect(x: -side / 2, y: -side / 2, width: side, height: side)
+        if sticker.symbol == "skull" {
+            drawSkull(in: rect, color: cgColor(hex: sticker.colorHex), ctx: ctx)
+        } else {
+            #if canImport(UIKit)
+            if let cgImage = symbolImage(sticker.symbol, hex: sticker.colorHex) {
+                ctx.draw(cgImage, in: rect)
+            }
+            #endif
+        }
+        ctx.restoreGState()
+    }
+
+    #if canImport(UIKit)
+    private static func symbolImage(_ name: String, hex: String) -> CGImage? {
+        let config = UIImage.SymbolConfiguration(pointSize: 200)
+        guard let image = UIImage(systemName: name, withConfiguration: config)?
+            .withTintColor(UIColor(cgColor: cgColor(hex: hex))) else { return nil }
+        // Re-render so the tint bakes into the bitmap, flipped so it lands
+        // upright in our bottom-left-origin UV space.
+        let renderer = UIGraphicsImageRenderer(size: image.size)
+        let flipped = renderer.image { rendererCtx in
+            rendererCtx.cgContext.translateBy(x: 0, y: image.size.height)
+            rendererCtx.cgContext.scaleBy(x: 1, y: -1)
+            image.draw(in: CGRect(origin: .zero, size: image.size))
+        }
+        return flipped.cgImage
+    }
+    #endif
+
+    /// Skull-but-cute: round head, big eye dots, tiny grin teeth.
+    static func drawSkull(in rect: CGRect, color: CGColor, ctx: CGContext) {
+        let w = rect.width, h = rect.height
+        ctx.setFillColor(color)
+        // Head (upper 2/3) + jaw block.
+        ctx.fillEllipse(in: CGRect(x: rect.minX, y: rect.minY + h * 0.3,
+                                   width: w, height: h * 0.7))
+        ctx.fill(CGRect(x: rect.minX + w * 0.22, y: rect.minY + h * 0.08,
+                        width: w * 0.56, height: h * 0.34))
+        // Punch out eyes + teeth gaps.
+        ctx.setBlendMode(.clear)
+        let eye = w * 0.2
+        ctx.fillEllipse(in: CGRect(x: rect.minX + w * 0.2, y: rect.minY + h * 0.5,
+                                   width: eye, height: eye * 1.15))
+        ctx.fillEllipse(in: CGRect(x: rect.maxX - w * 0.2 - eye, y: rect.minY + h * 0.5,
+                                   width: eye, height: eye * 1.15))
+        for i in 1...2 {
+            ctx.fill(CGRect(x: rect.minX + w * (0.22 + 0.19 * CGFloat(i)),
+                            y: rect.minY + h * 0.08, width: w * 0.025, height: h * 0.3))
+        }
+        ctx.setBlendMode(.normal)
     }
 
     static func draw(livery: LiverySpec, in ctx: CGContext) {

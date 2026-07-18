@@ -86,8 +86,13 @@ enum CarFactory {
         await paint(visual, spec: design.paint, partColors: design.partColors)
         // ponytail: overlay renders on the calling task — 1024² CGContext
         // is a few ms; move off-main only if the profiler ever blames it.
-        await PaintShell.apply(overlay: OverlayComposer.render(livery: design.livery),
-                               to: visual)
+        // (A Task.detached hop here never resumed inside the RealityView
+        // make closure and hung the whole rebuild.)
+        await PaintShell.apply(
+            overlay: OverlayComposer.render(livery: design.livery,
+                                            stickers: design.stickers,
+                                            bodyAspect: PaintShell.bodyAspect(of: visual)),
+            to: visual)
     }
 
     /// Tints every material in the model with the paint color/finish.
@@ -96,7 +101,8 @@ enum CarFactory {
                       partColors: [String: String]? = nil) async {
         let sparkle = spec.finish == .sparkle ? await sparkleNormalTexture() : nil
         for part in entity.descendantsAndSelf() {
-            guard var model = part.components[ModelComponent.self] else { continue }
+            guard var model = part.components[ModelComponent.self],
+                  part.name != "paint-shell" else { continue }   // overlay keeps its texture
             let slot = CarPaintSlot.slot(forPartName: part.name)
             let color = platformColor(hex: partColors?[slot] ?? spec.colorHex)
             model.materials = model.materials.map { _ in

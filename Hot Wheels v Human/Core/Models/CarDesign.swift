@@ -69,6 +69,16 @@ nonisolated struct LiverySpec: Codable, Equatable, Sendable {
     var scale: Float          // 0.5…2, pattern-relative size
 }
 
+/// One stamped sticker on the paint shell. `symbol` is an SF Symbol name,
+/// or a custom-drawn id like "skull" (OverlayComposer special-cases those).
+nonisolated struct StickerPlacement: Codable, Equatable, Sendable {
+    var symbol: String
+    var uv: SIMD2<Float>      // shell UV, (0,0) = nose bottom
+    var scale: Float          // 1 = default size
+    var rotation: Float       // radians, counterclockwise
+    var colorHex: String
+}
+
 nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var id: UUID
     var name: String
@@ -83,4 +93,6 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var partColors: [String: String]? = nil
     /// Livery pattern rendered onto the paint shell. Optional → old designs decode.
     var livery: LiverySpec? = nil
+    /// Stickers stamped on the paint shell. Optional → old designs decode.
+    var stickers: [StickerPlacement]? = nil
 }
