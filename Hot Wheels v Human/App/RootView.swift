@@ -18,9 +18,14 @@ struct RootView: View {
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
     private let launchIntoStress = ProcessInfo.processInfo.arguments.contains("--stress-track")
+    /// Dev arg: straight into a 1P race vs the medium robot (AI test loop).
+    private let launchIntoRobotRace = ProcessInfo.processInfo.arguments.contains("--robot-race")
 
     var body: some View {
-        if launchIntoStress {
+        if launchIntoRobotRace {
+            SoloArenaView(designs: [CarDesign.demoPair[0]],
+                          config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
+        } else if launchIntoStress {
             SoloArenaView(designs: CarDesign.demoPair,
                           blueprint: RandomTrackGenerator.generate(
                               pieceCount: RaceTuning.maxTrackPieces))
