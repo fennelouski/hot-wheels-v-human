@@ -18,7 +18,8 @@ struct ModelTests {
         paint: PaintSpec(colorHex: "#FF6600", finish: .metallic))
     static let allMessages: [GameMessage] = [
         .hello(player, protocolVersion: gameProtocolVersion),
-        .trackBlueprint(.demo),
+        .trackBlueprint(.demo, rank: 0, ownerID: player.id),
+        .trackBlueprint(.demo, rank: nil, ownerID: nil),
         .carDesign(car, ownerID: player.id),
         .carDesign(car, ownerID: nil),
         .matchConfig(MatchConfig(mode: .twoPlayer, laps: 3)),
@@ -57,6 +58,23 @@ struct ModelTests {
             return
         }
         #expect(design.name == "Old Timer")
+        #expect(ownerID == nil)
+    }
+
+    @Test func oldTrackBlueprintMessageWithoutRankStillDecodes() throws {
+        // Pre-track-draft peers encode trackBlueprint with the blueprint only.
+        let json = """
+        { "trackBlueprint": { "_0": {
+            "trackId": "6BE2A5D4-6A00-4C4A-8B49-586E6E355A93", "lanes": 2,
+            "segments": [ { "index": 0, "type": "startGate" } ] } } }
+        """
+        let decoded = try GameMessage.decoded(from: Data(json.utf8))
+        guard case .trackBlueprint(let bp, let rank, let ownerID) = decoded else {
+            Issue.record("decoded as \(decoded)")
+            return
+        }
+        #expect(bp.lanes == 2)
+        #expect(rank == nil)
         #expect(ownerID == nil)
     }
 

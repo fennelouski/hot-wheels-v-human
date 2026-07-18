@@ -14,7 +14,10 @@ let gameProtocolVersion = 1
 nonisolated enum GameMessage: Codable, Equatable, Sendable {
     // reliable
     case hello(PlayerInfo, protocolVersion: Int)
-    case trackBlueprint(TrackBlueprint)
+    /// `rank` = position in the sender's track draft (0 = favorite),
+    /// `ownerID` = who picked it. Both optional and absent from old peers'
+    /// JSON → single unranked track, first-valid-wins as before.
+    case trackBlueprint(TrackBlueprint, rank: Int?, ownerID: UUID?)
     /// `ownerID` = the player this design belongs to (two-iPad 2P pairing).
     /// Optional and absent from old peers' JSON → arrival-order fallback.
     case carDesign(CarDesign, ownerID: UUID?)

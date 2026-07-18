@@ -48,7 +48,7 @@ struct LoopbackTests {
 
         let info = PlayerInfo(id: UUID(), name: "Kid", deviceRole: .iPad)
         player.send(.hello(info, protocolVersion: gameProtocolVersion), reliably: true)
-        player.send(.trackBlueprint(.demo), reliably: true)
+        player.send(.trackBlueprint(.demo, rank: nil, ownerID: nil), reliably: true)
         player.send(.readyState(playerID: info.id, ready: true), reliably: true)
 
         var received: [GameMessage] = []
@@ -59,7 +59,7 @@ struct LoopbackTests {
             }
         }
         #expect(received[0] == .hello(info, protocolVersion: gameProtocolVersion))
-        #expect(received[1] == .trackBlueprint(.demo))
+        #expect(received[1] == .trackBlueprint(.demo, rank: nil, ownerID: nil))
         #expect(received[2] == .readyState(playerID: info.id, ready: true))
     }
 

@@ -27,13 +27,21 @@ nonisolated enum ReactionState: String, CaseIterable, Sendable {
 final class ReactionDirector {
 
     private(set) var state: ReactionState = .idle
+    /// Smoothed continuous readouts for the PiP. `lean` −1…1 (+ = leaning
+    /// into a left turn), `speed01` = fraction of the chassis top speed.
+    private(set) var lean: Float = 0
+    private(set) var speed01: Float = 0
     private var clock: TimeInterval = 0
     private var stateSince: TimeInterval = 0
 
     /// Continuous per-frame inputs. `yawRate` rad/s (+ = turning left),
     /// `loopAhead` = loop within RaceTuning.loopBraceLookahead seconds.
-    func update(dt: TimeInterval, yawRate: Float, loopAhead: Bool) {
+    func update(dt: TimeInterval, yawRate: Float, loopAhead: Bool, speed01: Float = 0) {
         clock += dt
+        let blend = min(1, Float(dt) * RaceTuning.reactionMotionSmoothing)
+        let leanTarget = max(-1, min(1, yawRate / (2 * RaceTuning.reactionSteerThreshold)))
+        lean += (leanTarget - lean) * blend
+        self.speed01 += (speed01 - self.speed01) * blend
         let held = Float(clock - stateSince)
 
         switch state {

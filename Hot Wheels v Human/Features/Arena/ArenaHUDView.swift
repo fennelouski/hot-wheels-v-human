@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ArenaHUDView: View {
     let session: RaceSession
+    /// "Race 2 of 5" when a drafted series is running (nil = single race).
+    var seriesLabel: String?
 
     var body: some View {
         ZStack {
@@ -79,6 +81,11 @@ struct ArenaHUDView: View {
         let ranked = ranked
         let winner = ranked.first(where: { $0.finishTime != nil })
         return VStack(spacing: 16) {
+            if let seriesLabel {
+                Text(seriesLabel)
+                    .font(.system(size: 28, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.8))
+            }
             if let winner {
                 Label("\(winner.design.name.uppercased()) WINS!", systemImage: "trophy.fill")
                     .font(.system(size: 56, weight: .black, design: .rounded))
@@ -115,7 +122,9 @@ struct ArenaHUDView: View {
                 }
             }
             .font(.system(size: 24, design: .rounded))
-            Text("Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!")
+            Text(seriesLabel == nil
+                 ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
+                 : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
         }

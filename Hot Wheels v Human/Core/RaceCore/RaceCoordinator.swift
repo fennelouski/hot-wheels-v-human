@@ -3,8 +3,9 @@
 //  Hot Wheels v Human
 //
 //  Host-side brain (TV, or the host half of Solo Arena's loopback pair).
-//  Collects players/designs/blueprint over the transport, runs RaceSession,
-//  broadcasts snapshots @10 Hz, validates boosts server-side.
+//  Collects players/designs/track drafts over the transport, interleaves
+//  the drafts into a race series, runs RaceSession, broadcasts snapshots
+//  @10 Hz, validates boosts server-side.
 //
 //  State flow (PRD §6.1): lobby → collectingDesigns → buildingTrack →
 //  countdown → racing → results (RaceSession owns the last three).
@@ -28,7 +29,11 @@ final class RaceCoordinator {
     private let transport: any GameTransport
     private var designs: [(owner: UUID?, design: CarDesign)] = []
     private var readiness: [UUID: Bool] = [:]
-    private var blueprint: TrackBlueprint?
+    /// Every valid track pick received, tagged with who ranked it where.
+    private var trackPicks: [(owner: UUID?, rank: Int, blueprint: TrackBlueprint)] = []
+    /// The drafted series (built at first race start) and how far we are in it.
+    private var playlist: [TrackBlueprint] = []
+    private var raceIndex = 0
     private var config = MatchConfig(mode: .onePlayer)
     private let boostDedupe = TokenDeduper()
     private var arenaRoot: Entity?
@@ -90,19 +95,30 @@ final class RaceCoordinator {
             if !designs.contains(where: { $0.design.id == design.id }) {
                 designs.append((owner: ownerID, design: design))
             }
-        case .trackBlueprint(let bp):
-            // Solo keeps last-track-wins (rebuild → resubmit). With two
-            // iPads the first valid track sticks — the captain (first iPad
-            // in) submits on connect, so this is "captain picks" without a
-            // wire change to attribute senders.
-            guard blueprint == nil || players.count <= 1 else { break }
+        case .trackBlueprint(let bp, let rank, let ownerID):
             let result = BlueprintValidator.validate(bp)
-            if result.isValid {
-                blueprint = bp
-            } else {
+            guard result.isValid else {
                 let reason = result.reasons.joined(separator: " ")
                 lastRejection = reason
                 transport.send(.raceEvent(.blueprintRejected(reason: reason)), reliably: true)
+                break
+            }
+            if let ownerID {
+                // Ranked draft pick. Replacing by slot and by track keeps a
+                // reconnect resubmit (same list, same owner) idempotent.
+                trackPicks.removeAll {
+                    $0.owner == ownerID
+                        && ($0.rank == rank || $0.blueprint.trackId == bp.trackId)
+                }
+                trackPicks.append((owner: ownerID, rank: rank ?? 0, blueprint: bp))
+            } else {
+                // Old peers send one unowned track: solo keeps
+                // last-track-wins (rebuild → resubmit), two old iPads keep
+                // first-valid-wins so the captain's track sticks.
+                guard players.count <= 1 || trackPicks.allSatisfy({ $0.owner != nil })
+                else { break }
+                trackPicks.removeAll { $0.owner == nil }
+                trackPicks.append((owner: nil, rank: rank ?? 0, blueprint: bp))
             }
         case .matchConfig(let cfg):
             if players.count <= 1 { config = cfg }   // captain's config; 2P is host-derived
@@ -124,8 +140,54 @@ final class RaceCoordinator {
     /// Is this player readied up? (TV lobby checkmarks.)
     func isReady(_ playerID: UUID) -> Bool { readiness[playerID] == true }
 
-    /// The track the lobby will race (captain gating tests).
-    var lobbyBlueprintID: UUID? { blueprint?.trackId }
+    /// The track racing next (draft gating tests, TV lobby).
+    var lobbyBlueprintID: UUID? { nextBlueprint()?.trackId }
+
+    /// 1-based position in the series, for "Race 2 of 5" labels.
+    var raceNumber: Int { playlist.isEmpty ? 1 : raceIndex % playlist.count + 1 }
+    var raceCount: Int { max(playlist.count, 1) }
+
+    /// How many tracks this player has drafted (TV lobby card).
+    func pickCount(_ playerID: UUID) -> Int {
+        trackPicks.count { $0.owner == playerID }
+    }
+
+    /// The playlist freezes at first race start; until then picks are
+    /// still arriving, so peek at a fresh draft without caching it.
+    private func nextBlueprint() -> TrackBlueprint? {
+        let series = playlist.isEmpty
+            ? Self.trackPlaylist(players: players, picks: trackPicks) : playlist
+        return series.isEmpty ? nil : series[raceIndex % series.count]
+    }
+
+    /// Draft order, pure and unit-tested: players alternate turns in
+    /// arrival order (captain first), each contributing their next-ranked
+    /// pick; unowned picks (old peers) draft as one extra shared player;
+    /// a track already in the series is skipped; capped at `length`.
+    nonisolated static func trackPlaylist(
+        players: [PlayerInfo],
+        picks: [(owner: UUID?, rank: Int, blueprint: TrackBlueprint)],
+        length: Int = RaceTuning.raceSeriesLength
+    ) -> [TrackBlueprint] {
+        let owners: [UUID?] = players.map { $0.id } + [nil]
+        var buckets: [[TrackBlueprint]] = owners.map { owner in
+            picks.filter { $0.owner == owner }.sorted { $0.rank < $1.rank }
+                .map(\.blueprint)
+        }
+        var series: [TrackBlueprint] = []
+        while series.count < length, buckets.contains(where: { !$0.isEmpty }) {
+            for i in buckets.indices where series.count < length {
+                while let pick = buckets[i].first {
+                    buckets[i].removeFirst()
+                    if !series.contains(where: { $0.trackId == pick.trackId }) {
+                        series.append(pick)
+                        break
+                    }
+                }
+            }
+        }
+        return series
+    }
 
     /// Pure pairing rules, unit-tested in TwoPlayerCoordinationTests:
     /// owned designs go to their player (two-iPad 2P), unowned fill in by
@@ -157,10 +219,14 @@ final class RaceCoordinator {
 
     private func startRaceIfReady() {
         guard !raceRunning,
-              let blueprint, let root = arenaRoot,
+              let root = arenaRoot,
               !players.isEmpty,
               players.allSatisfy({ readiness[$0.id] == true }),
               !designs.isEmpty else { return }
+        if playlist.isEmpty {
+            playlist = Self.trackPlaylist(players: players, picks: trackPicks)
+        }
+        guard let blueprint = nextBlueprint() else { return }
         raceRunning = true
 
         let (entries, effectiveConfig) = Self.raceEntries(
@@ -193,13 +259,14 @@ final class RaceCoordinator {
         }
     }
 
-    /// On the results screen, everyone pressing READY again = rematch:
-    /// tear the old race down and let startRaceIfReady rebuild (same
-    /// designs, same track).
+    /// On the results screen, everyone pressing READY again = next race:
+    /// tear down and let startRaceIfReady rebuild with the next track in
+    /// the drafted series (same designs; wraps to track 1 after the last).
     private func rematchIfReady() {
         guard raceRunning, session.phase == .results,
               !players.isEmpty,
               players.allSatisfy({ readiness[$0.id] == true }) else { return }
+        raceIndex += 1
         session.reset()
         raceRunning = false
     }

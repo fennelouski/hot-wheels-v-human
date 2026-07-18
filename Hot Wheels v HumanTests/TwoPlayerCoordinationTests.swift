@@ -106,8 +106,9 @@ struct TwoPlayerLobbyTests {
         hub.players[1].start(role: .player)
         hub.players[0].send(.hello(player("Captain"), protocolVersion: gameProtocolVersion), reliably: true)
         hub.players[1].send(.hello(player("Second"), protocolVersion: gameProtocolVersion), reliably: true)
-        hub.players[0].send(.trackBlueprint(captainTrack), reliably: true)
-        hub.players[1].send(.trackBlueprint(rivalTrack), reliably: true)
+        // Old-peer style: unranked, unowned tracks. First valid one wins.
+        hub.players[0].send(.trackBlueprint(captainTrack, rank: nil, ownerID: nil), reliably: true)
+        hub.players[1].send(.trackBlueprint(rivalTrack, rank: nil, ownerID: nil), reliably: true)
 
         await settle(until: coordinator.players.count == 2)
         // Both readiness messages force the lobby to have processed
@@ -116,5 +117,77 @@ struct TwoPlayerLobbyTests {
         await settle(until: coordinator.lobbyBlueprintID == captainTrack.trackId)
         #expect(coordinator.lobbyBlueprintID == captainTrack.trackId)
         coordinator.stop()
+    }
+
+    @Test func rankedDraftsFromBothPlayersLandInTheLobby() async {
+        let hub = LoopbackTransport.hub(playerCount: 2)
+        let coordinator = RaceCoordinator(transport: hub.host)
+        coordinator.start()
+        let (ava, ben) = (player("Ava"), player("Ben"))
+
+        hub.players[0].start(role: .player)
+        hub.players[1].start(role: .player)
+        hub.players[0].send(.hello(ava, protocolVersion: gameProtocolVersion), reliably: true)
+        hub.players[1].send(.hello(ben, protocolVersion: gameProtocolVersion), reliably: true)
+        let avaPick = TrackBlueprint.presets[0].blueprint
+        let benPick = TrackBlueprint.presets[1].blueprint
+        hub.players[0].send(.trackBlueprint(avaPick, rank: 0, ownerID: ava.id), reliably: true)
+        hub.players[1].send(.trackBlueprint(benPick, rank: 0, ownerID: ben.id), reliably: true)
+
+        await settle(until: coordinator.pickCount(ava.id) == 1
+                        && coordinator.pickCount(ben.id) == 1)
+        #expect(coordinator.pickCount(ava.id) == 1)
+        #expect(coordinator.pickCount(ben.id) == 1)
+        // Captain (first hello) leads the draft.
+        #expect(coordinator.lobbyBlueprintID == avaPick.trackId)
+        coordinator.stop()
+    }
+}
+
+struct TrackPlaylistTests {
+
+    private func pick(_ owner: PlayerInfo?, _ rank: Int, _ presetIndex: Int)
+        -> (owner: UUID?, rank: Int, blueprint: TrackBlueprint) {
+        (owner: owner?.id, rank: rank, blueprint: TrackBlueprint.presets[presetIndex].blueprint)
+    }
+
+    @Test func draftAlternatesCaptainFirst() {
+        let (ava, ben) = (player("Ava"), player("Ben"))
+        // Deliberately shuffled arrival order; ranks decide, not arrival.
+        let picks = [pick(ben, 1, 3), pick(ava, 0, 0), pick(ben, 0, 2),
+                     pick(ava, 1, 1), pick(ava, 2, 4)]
+        let series = RaceCoordinator.trackPlaylist(players: [ava, ben], picks: picks)
+        // A1 B1 A2 B2 A3
+        #expect(series.map(\.trackId) == [0, 2, 1, 3, 4].map {
+            TrackBlueprint.presets[$0].blueprint.trackId
+        })
+    }
+
+    @Test func duplicatePicksRaceOnce() {
+        let (ava, ben) = (player("Ava"), player("Ben"))
+        // Both kids love preset 0; Ben's next pick fills the slot instead.
+        let picks = [pick(ava, 0, 0), pick(ben, 0, 0), pick(ben, 1, 1)]
+        let series = RaceCoordinator.trackPlaylist(players: [ava, ben], picks: picks)
+        #expect(series.map(\.trackId) == [0, 1].map {
+            TrackBlueprint.presets[$0].blueprint.trackId
+        })
+    }
+
+    @Test func draftCapsAtSeriesLength() {
+        let ava = player("Ava")
+        let picks = (0..<6).map { pick(ava, $0, $0) }
+        let series = RaceCoordinator.trackPlaylist(players: [ava], picks: picks)
+        #expect(series.count == RaceTuning.raceSeriesLength)
+        #expect(series.first?.trackId == TrackBlueprint.presets[0].blueprint.trackId)
+    }
+
+    @Test func unownedOldPeerPicksStillDraft() {
+        let series = RaceCoordinator.trackPlaylist(players: [player("Old iPad")],
+                                                   picks: [pick(nil, 0, 0)])
+        #expect(series.map(\.trackId) == [TrackBlueprint.presets[0].blueprint.trackId])
+    }
+
+    @Test func noPicksMeansNoSeries() {
+        #expect(RaceCoordinator.trackPlaylist(players: [player("Kid")], picks: []).isEmpty)
     }
 }

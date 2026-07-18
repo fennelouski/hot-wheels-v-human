@@ -23,8 +23,16 @@ final class AppModel {
     /// The character racing next. Nil = first starter character.
     var selectedDriver: DriverProfile?
 
+    /// Ranked track draft for the next TV race series (first = favorite,
+    /// capped at RaceTuning.raceSeriesLength by the picker UI).
+    var rankedTrackPicks: [TrackBlueprint] = []
+
     var raceDesign: CarDesign { selectedDesign ?? CarDesign.demoPair[0] }
     var raceBlueprint: TrackBlueprint { selectedBlueprint ?? .demo }
+    /// What Race-on-TV submits: the draft, or the single selected track.
+    var raceTrackList: [TrackBlueprint] {
+        rankedTrackPicks.isEmpty ? [raceBlueprint] : rankedTrackPicks
+    }
     var raceDriver: DriverProfile { selectedDriver ?? DriverProfile.presets[0] }
 
     /// The design that actually races: the selected car with the selected

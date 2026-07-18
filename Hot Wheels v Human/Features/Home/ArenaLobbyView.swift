@@ -42,9 +42,11 @@ struct ArenaLobbyView: View {
                         Image(systemName: "car.side.fill").font(.system(size: 56))
                         Text(player.name)
                             .font(.system(size: 28, weight: .bold, design: .rounded))
-                        if index == 0 && coordinator.players.count > 1 {
-                            // First iPad in = track captain (TWO-IPAD-2P.md).
-                            Label("picks the track!", systemImage: "map.fill")
+                        let picks = coordinator.pickCount(player.id)
+                        if picks > 0 {
+                            // Everyone drafts tracks; the series alternates picks.
+                            Label(picks == 1 ? "picked a track!" : "picked \(picks) tracks!",
+                                  systemImage: "map.fill")
                                 .font(.system(size: 20, weight: .bold, design: .rounded))
                                 .foregroundStyle(.yellow)
                         }

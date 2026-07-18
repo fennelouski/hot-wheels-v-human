@@ -60,7 +60,9 @@ struct ValidatorTests {
     }
 
     @Test func rejectsOversizedTrack() {
-        let types: [PieceType] = [.startGate] + Array(repeating: .straight, count: 45) + [.finishGate]
+        let types: [PieceType] = [.startGate]
+            + Array(repeating: .straight, count: RaceTuning.maxTrackPieces)
+            + [.finishGate]
         #expect(!BlueprintValidator.validate(blueprint(types)).isValid)
     }
 

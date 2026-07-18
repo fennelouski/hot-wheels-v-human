@@ -75,13 +75,18 @@ Each drill starts from a connected, racing (or lobby) state.
 
 ## Test 5 — Two iPads (if you have a second one, +3 min)
 
-1. Connect iPad A first (it's the **captain** — TV card shows
-   "picks the track!"), then iPad B. Both cards appear with
-   "getting set…" status.
+1. On each iPad's Race-on-TV setup screen, pick a car and draft 2–3
+   tracks each (tap order = ranking), then GO. Connect iPad A first,
+   then iPad B. Both TV cards appear with "getting set…" status and a
+   "picked N tracks!" badge.
 2. Tap READY on A only → race must NOT start. Tap READY on B → countdown.
+   The first race is A's #1 pick (first iPad in leads the draft).
 3. Verify each iPad's boost drives **its own car** (A boosts, A's car
    surges — the whole point of ownerID pairing). No robot in the race.
-4. Connect a third device (or a phone build) → TV shows
+4. After the finish, the TV results show "Race 1 of N". Both tap
+   REMATCH → next race runs **B's #1 pick** (draft alternates A1, B1,
+   A2, B2, …; after the last track it wraps to the first).
+5. Connect a third device (or a phone build) → TV shows
    "Two racers max — grab the next race!" and the lobby stays at two.
 
 ## Report back

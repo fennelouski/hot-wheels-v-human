@@ -66,7 +66,10 @@ struct ArenaView: View {
 
                 coordinator.attach(root: root)
             }
-            ArenaHUDView(session: coordinator.session)
+            ArenaHUDView(session: coordinator.session,
+                         seriesLabel: coordinator.raceCount > 1
+                             ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
+                             : nil)
 
             // Reaction Cam PiPs — bottom-left for player 1, bottom-right
             // for player 2, while they hold the cam button on their iPad.

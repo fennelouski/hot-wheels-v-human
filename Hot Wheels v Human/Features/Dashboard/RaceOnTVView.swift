@@ -2,14 +2,26 @@
 //  RaceOnTVView.swift
 //  Hot Wheels v Human
 //
-//  iPad → real TV flow: browse for the arena over Multipeer, submit the
-//  design + track, then become the full-screen dashboard. Until the
-//  Customizer/TrackBuilder ship, the demo car + track ride along.
+//  iPad → real TV flow: pick your car and draft your tracks on the setup
+//  screen, then browse for the arena over Multipeer, submit everything,
+//  and become the full-screen dashboard.
 //
 
 import SwiftUI
 
 struct RaceOnTVView: View {
+    @State private var toTheTV = false
+
+    var body: some View {
+        if toTheTV {
+            RaceOnTVDashboard()
+        } else {
+            RaceSetupView { toTheTV = true }
+        }
+    }
+}
+
+private struct RaceOnTVDashboard: View {
     @Environment(AppModel.self) private var appModel
     @State private var model = DashboardModel(transport: MultipeerTransport(),
                                               playerName: "Racer")
@@ -29,7 +41,7 @@ struct RaceOnTVView: View {
                     // Submit but don't auto-ready — READY is the kid's tap,
                     // so a race can't start before player 2 finds the couch.
                     model.submit(designs: [appModel.stampedRaceDesign()],
-                                 blueprint: appModel.raceBlueprint,
+                                 tracks: appModel.raceTrackList,
                                  config: MatchConfig(mode: .onePlayer))
                 case .dropped:
                     submitted = false

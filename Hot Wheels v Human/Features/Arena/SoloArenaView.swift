@@ -36,7 +36,7 @@ struct SoloArenaView: View {
             coordinator.start()
             dashboard.start()
             dashboard.submitAndReady(designs: designs,
-                                     blueprint: blueprint ?? appModel.raceBlueprint,
+                                     tracks: [blueprint ?? appModel.raceBlueprint],
                                      config: config)
             rig = SoloRig(coordinator: coordinator, dashboard: dashboard)
         }

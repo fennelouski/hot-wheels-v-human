@@ -68,7 +68,14 @@ Consequences, not problems to fix:
 
 ## Not doing (YAGNI, listed so we don't re-litigate)
 
-- Track voting/merging — captain picks, rematch button re-runs.
+- ~~Track voting/merging — captain picks, rematch button re-runs.~~
+  **Superseded 2026-07-18 by the track draft:** each iPad ranks its own
+  track picks on the Race-on-TV setup screen (`RaceSetupView`); the host
+  interleaves picks in arrival order (captain leads) into a
+  `RaceTuning.raceSeriesLength`-race series, and REMATCH advances to the
+  next track (wrapping). Old peers' unowned single-track submits keep the
+  captain-first-wins behavior. Wire: additive `rank`/`ownerID` optionals
+  on `trackBlueprint`, no version bump.
 - Per-player split camera on TV — one chase cam frames both cars today.
 - Spectator iPads, 3+ players, lane picker — all need the 2-lane rule
   broken first, which is a v3 conversation.

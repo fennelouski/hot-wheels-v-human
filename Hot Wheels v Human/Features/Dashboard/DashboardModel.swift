@@ -46,22 +46,25 @@ final class DashboardModel {
     /// Whether this dashboard has readied up for the pending race.
     private(set) var readySent = false
 
-    /// Announce + submit the design(s) and track, without readying up
-    /// (Race-on-TV flow: READY is the kid's tap). The first design is
-    /// ours (ownerID); extras belong to no controller (Test Mode's B car,
-    /// demo opponents).
-    func submit(designs: [CarDesign], blueprint: TrackBlueprint, config: MatchConfig) {
+    /// Announce + submit the design(s) and ranked track picks, without
+    /// readying up (Race-on-TV flow: READY is the kid's tap). The first
+    /// design is ours (ownerID); extras belong to no controller (Test
+    /// Mode's B car, demo opponents). Track order = the kid's ranking;
+    /// the host drafts the race series from everyone's picks.
+    func submit(designs: [CarDesign], tracks: [TrackBlueprint], config: MatchConfig) {
         transport.send(.hello(player, protocolVersion: gameProtocolVersion), reliably: true)
         for (i, design) in designs.enumerated() {
             transport.send(.carDesign(design, ownerID: i == 0 ? player.id : nil), reliably: true)
         }
         transport.send(.matchConfig(config), reliably: true)
-        transport.send(.trackBlueprint(blueprint), reliably: true)
+        for (i, track) in tracks.enumerated() {
+            transport.send(.trackBlueprint(track, rank: i, ownerID: player.id), reliably: true)
+        }
     }
 
     /// The whole pre-race handshake for solo/1P: submit, then auto-ready.
-    func submitAndReady(designs: [CarDesign], blueprint: TrackBlueprint, config: MatchConfig) {
-        submit(designs: designs, blueprint: blueprint, config: config)
+    func submitAndReady(designs: [CarDesign], tracks: [TrackBlueprint], config: MatchConfig) {
+        submit(designs: designs, tracks: tracks, config: config)
         sendReady()
     }
 

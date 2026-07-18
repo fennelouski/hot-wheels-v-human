@@ -61,10 +61,12 @@ final class ReactionFeed {
             if yawDelta > .pi { yawDelta -= 2 * .pi }
             if yawDelta < -.pi { yawDelta += 2 * .pi }
 
+            let topSpeed = RaceTuning.maxSpeed[racer.design.chassis] ?? 1
             director.update(dt: dt,
                             yawRate: yawDelta / Float(dt),
                             loopAhead: session.loopAhead(for: racer.id,
-                                                         within: RaceTuning.loopBraceLookahead))
+                                                         within: RaceTuning.loopBraceLookahead),
+                            speed01: min(1, racer.speed / topSpeed))
 
             last.yaw = yaw
             last.crashes = racer.crashes
