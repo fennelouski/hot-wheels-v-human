@@ -7,6 +7,7 @@
 //  flat-color materials.
 //
 
+import CoreGraphics
 import Foundation
 import RealityKit
 #if canImport(UIKit)
@@ -43,7 +44,7 @@ enum CarFactory {
         LaneFollowComponent.registerComponent()
 
         let visual = try await assets.entity(named: design.modelOverride ?? design.chassis.modelName)
-        paint(visual, spec: design.paint)
+        await paint(visual, spec: design.paint, partColors: design.partColors)
 
         let car = ModelEntity()
         car.name = "car-\(design.name)"
@@ -69,7 +70,7 @@ enum CarFactory {
         // The little human, riding hip-deep so the standing rig reads as
         // seated (legs hidden inside the chassis).
         if let driver = try? await assets.entity(named: "driver-idle") {
-            paint(driver, spec: design.paint)
+            await paint(driver, spec: design.paint)
             let carHeight = bounds.extents.y
             let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
             driver.scale = .init(repeating: scale)
@@ -80,10 +81,14 @@ enum CarFactory {
     }
 
     /// Tints every material in the model with the paint color/finish.
-    static func paint(_ entity: Entity, spec: PaintSpec) {
-        let color = platformColor(hex: spec.colorHex)
+    /// `partColors` overrides the base color per `CarPaintSlot` (mesh name).
+    static func paint(_ entity: Entity, spec: PaintSpec,
+                      partColors: [String: String]? = nil) async {
+        let sparkle = spec.finish == .sparkle ? await sparkleNormalTexture() : nil
         for part in entity.descendantsAndSelf() {
             guard var model = part.components[ModelComponent.self] else { continue }
+            let slot = CarPaintSlot.slot(forPartName: part.name)
+            let color = platformColor(hex: partColors?[slot] ?? spec.colorHex)
             model.materials = model.materials.map { _ in
                 var m = PhysicallyBasedMaterial()
                 m.baseColor = .init(tint: color)
@@ -97,11 +102,53 @@ enum CarFactory {
                 case .matte:
                     m.metallic = 0.0
                     m.roughness = 0.9
+                case .sparkle:
+                    m.metallic = 1.0
+                    m.roughness = 0.35
+                    if let sparkle {
+                        m.normal = .init(texture: .init(sparkle))
+                        // Kenney palette-atlas UVs are tiny islands; a big
+                        // scale spreads the noise across them so the glitter
+                        // reads at car scale.
+                        // ponytail: those UVs are ~1D, so this reads as
+                        // metal-flake streaks, not true glitter — upgrade
+                        // path is a ShaderGraph sparkle if it wears thin.
+                        m.textureCoordinateTransform = .init(scale: [180, 180])
+                    }
                 }
                 return m
             }
             part.components.set(model)
         }
+    }
+
+    /// 64² random-normal noise, built once — the "glitter" of sparkle paint.
+    private static var cachedSparkleNormal: TextureResource?
+    private static func sparkleNormalTexture() async -> TextureResource? {
+        if let cachedSparkleNormal { return cachedSparkleNormal }
+        let size = 64
+        var bytes = [UInt8]()
+        bytes.reserveCapacity(size * size * 4)
+        for _ in 0..<(size * size) {
+            let nx = Float.random(in: -0.55...0.55)
+            let ny = Float.random(in: -0.55...0.55)
+            let nz = max(0, 1 - nx * nx - ny * ny).squareRoot()
+            for component in [nx, ny, nz] {
+                bytes.append(UInt8((component * 0.5 + 0.5) * 255))
+            }
+            bytes.append(255)
+        }
+        guard let provider = CGDataProvider(data: Data(bytes) as CFData),
+              let image = CGImage(width: size, height: size, bitsPerComponent: 8,
+                                  bitsPerPixel: 32, bytesPerRow: size * 4,
+                                  space: CGColorSpaceCreateDeviceRGB(),
+                                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue),
+                                  provider: provider, decode: nil,
+                                  shouldInterpolate: false, intent: .defaultIntent),
+              let texture = try? await TextureResource(
+                image: image, options: .init(semantic: .normal)) else { return nil }
+        cachedSparkleNormal = texture
+        return texture
     }
 
     #if canImport(UIKit)

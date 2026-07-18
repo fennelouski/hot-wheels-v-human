@@ -24,7 +24,7 @@ final class DriverPoser {
 
     static func make(paint: PaintSpec) async throws -> DriverPoser {
         let bust = try await AssetStore.shared.entity(named: "driver-idle")
-        CarFactory.paint(bust, spec: paint)
+        await CarFactory.paint(bust, spec: paint)
         let poser = DriverPoser(bust: bust)
         for (state, model) in [(ReactionState.idle, "driver-idle"),
                                (.boosted, "driver-boost"),

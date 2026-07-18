@@ -20,11 +20,12 @@ edit (cheap, off-main), cache as `TextureResource`.
 ## Feature layers (build in this order)
 
 ### A. Per-part colors (quick win, no shell needed)
-`CarFactory.tint` currently paints every material one color. Kenney models have distinct
-materials per part — map them: body / accents (spoiler, bumpers) / wheels / windows.
-Tap a part on the turntable (raycast → material index) → color wheel. Finishes per part
-(metallic/glossy/matte + new: sparkle = metallic with high-frequency normal noise,
-rainbow = hue-shift by view angle via `LowLevelTexture` gradient — if it fights back,
+Reality check (G1): the Kenney chassis models are ONE shared material but distinct
+*meshes* per part — wheels (`wheel_*`) and body (`body`/`vehicle_racer`/…); there are no
+spoiler/bumper/window meshes. So slots are **body + wheels**, mapped by mesh name
+(`CarPaintSlot`). Tap a part on the turntable (gesture → entity name) → swatches paint
+that slot. Finish stays car-wide on `PaintSpec` (+ new: sparkle = metallic with
+high-frequency normal noise; rainbow hue-shift was skipped per the escape hatch below —
 ship sparkle only).
 
 ### B. Livery presets
@@ -35,7 +36,8 @@ good with ANY body color underneath — test on dark + light.
 
 ### C. Sticker stamping
 Sticker sheet: numbers 0–9, stars, eyes, mouths, lightning, flame, heart, skull-but-cute,
-paw, rainbow — rendered from SF Symbols/emoji into the overlay (no asset downloads).
+paw, rainbow — rendered from SF Symbols or custom CGContext paths into the overlay
+(no asset downloads; never emoji — see CLAUDE.md).
 Interaction: tap sticker → tap car → raycast hit position → project to shell UV → stamp.
 Drag to move, pinch to scale, two-finger rotate. Big handles, ≥60 pt targets.
 

@@ -72,8 +72,42 @@ struct ModelTests {
                 ["heavyMuscle", "balancedFormula", "superlightDrift"])
         #expect(TireType.allCases.map(\.rawValue) ==
                 ["standard", "slickRacing", "grippyOffroad"])
-        #expect(PaintFinish.allCases.map(\.rawValue) == ["metallic", "glossy", "matte"])
+        #expect(PaintFinish.allCases.map(\.rawValue) ==
+                ["metallic", "glossy", "matte", "sparkle"])
         #expect(DeviceRole.iPad.rawValue == "iPad" && DeviceRole.tv.rawValue == "tv")
+    }
+
+    // MARK: Customization graphics (G1)
+
+    @Test func oldCarDesignJSONStillDecodes() throws {
+        // A pre-G1 saved design: no partColors key at all.
+        let json = """
+        { "id": "6BE2A5D4-6A00-4C4A-8B49-586E6E355A93", "name": "Old Timer",
+          "chassis": "heavyMuscle", "tires": "standard",
+          "paint": { "colorHex": "#FF6600", "finish": "glossy" } }
+        """
+        let design = try JSONDecoder().decode(CarDesign.self, from: Data(json.utf8))
+        #expect(design.partColors == nil)
+        #expect(design.paint.colorHex == "#FF6600")
+    }
+
+    @Test func partColorsAndSparkleRoundTrip() throws {
+        var design = Self.car
+        design.partColors = [CarPaintSlot.wheels: "#1C1C1E"]
+        design.paint.finish = .sparkle
+        let decoded = try JSONDecoder().decode(
+            CarDesign.self, from: JSONEncoder().encode(design))
+        #expect(decoded == design)
+    }
+
+    @Test func paintSlotMapsKenneyMeshNames() {
+        for wheel in ["wheel_fl", "wheel_fr", "wheel_bl", "wheel_br", "wheel_back"] {
+            #expect(CarPaintSlot.slot(forPartName: wheel) == CarPaintSlot.wheels)
+        }
+        for body in ["body", "vehicle_racer", "vehicle_speedster",
+                     "Human_CylinderMesh_003", "anything_else"] {
+            #expect(CarPaintSlot.slot(forPartName: body) == CarPaintSlot.body)
+        }
     }
 
     @Test func chassisAndTiresExposeTuningValues() {
