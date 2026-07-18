@@ -20,7 +20,7 @@ No screeching realism, nothing startling, nothing over ~3 s except loops.
 | `race_countdown.wav` | 3.5 s | Race start countdown: three short rising beeps then one long higher happy beep, arcade style, bright and clean |
 | `finish_fanfare.wav` | 3 s | Short triumphant toy trumpet fanfare with party feel, cheerful arcade victory jingle |
 | `respawn_pop.wav` | 0.8 s | Cartoon pop with a springy bounce, toy appearing back on track, light and bouncy |
-| `ui_tap.wav` | 0.3 s | Soft rounded plastic button tap, friendly UI click, single note |
+| `ui_tap.wav` | 0.5 s | Soft rounded plastic button tap, friendly UI click, single note |
 
 ## Nice-to-have (generate in same batch, wire up if Phase 6 has slots)
 
@@ -42,4 +42,6 @@ Convert to AAC: `afconvert in.mp3 -d aac -f m4af out.m4a`.
 - Rerun `tools/generate_sfx.sh <name>` to regenerate one sound; no arg = all missing ones.
 - ElevenLabs output is licensed per your ElevenLabs plan (commercial use on paid tiers) —
   log plan/date here when generated, same discipline as Graphics/.
+- **Generated 2026-07-18**: all 12 SFX via ElevenLabs sound-generation API (account key from
+  PictureGrid, saved in `~/.env.local`). 4.6 MB total, 44.1 kHz WAV.
 - Keep total audio < 10 MB (WAV SFX at 44.1 kHz mono are ~90 KB/s — fine).
