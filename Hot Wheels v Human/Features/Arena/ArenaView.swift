@@ -69,6 +69,7 @@ struct ArenaView: View {
                 // Re-theme when the (next) race's track changes. Reading
                 // trackID here re-runs this closure on each new race.
                 let trackID = coordinator.session.trackID
+                let footprint = coordinator.session.trackFootprint
                 guard let holder = content.entities.first?
                     .findEntity(named: "environment") else { return }
                 let wanted = ArenaEnvironment.name(for: trackID)
@@ -76,7 +77,8 @@ struct ArenaView: View {
                       holder.name != "building-\(wanted)" else { return }
                 holder.name = "building-\(wanted)"
                 Task { @MainActor in
-                    let environment = await ArenaEnvironment.make(for: trackID)
+                    let environment = await ArenaEnvironment.make(
+                        for: trackID, around: footprint)
                     holder.children.removeAll()
                     holder.addChild(environment)
                     holder.name = "environment"

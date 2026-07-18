@@ -1,7 +1,8 @@
 # Features/Arena/ — the 3D race scene (Phases 1–2 solo, 3 on TV)
 
 Files
-- `ArenaView.swift` — the `RealityView`: builds scene from `AppModel` blueprint via `TrackSpawner`, spawns cars via `CarFactory`, registers `DriveSystem`/`RaceRulesSystem`/`CameraSystem`, environment (gradient sky, soft ground plane, directional light + shadows). Hosts overlay HUD.
+- `ArenaView.swift` — the `RealityView`: builds scene from `AppModel` blueprint via `TrackSpawner`, spawns cars via `CarFactory`, registers `DriveSystem`/`RaceRulesSystem`/`CameraSystem`, directional light, chase camera. Hosts overlay HUD.
+- `ArenaEnvironment.swift` — the world around the track: procedural sky dome + 90 m checkered play-mat ground + scattered toy props (item-* USDZ), themed per trackId (candy/day/sunset/space — order is load-bearing, byte-sum % 4). Rebuilt per race via `RaceSession.trackID`/`trackFootprint`; props stay out of the track's footprint and carry no collision.
 - `ArenaHUDView.swift` — TV overlay: countdown numerals, per-player name+lives banners, lap counter, finish banner, results panel (times, crashes, best segment, REMATCH prompt "press READY on iPad").
 - `CameraSystem.swift` — chase rig: follows midpoint of the two cars biased toward the leader, smooth lerp, pull-back proportional to car separation; special cams: loop (hold wide while a car is in loop), finish (slow dolly), crash (0.5 s shake). Solo Arena on iPad reuses everything.
 - `SoloArenaView.swift` — iPad wrapper: Arena + embedded mini-Dashboard side panel via `LoopbackTransport` (this is Test Mode's home too — Test Mode = Solo Arena with `MatchConfig.mode == .test`, two local designs, no lives/boost).

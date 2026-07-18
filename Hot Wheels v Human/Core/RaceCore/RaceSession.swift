@@ -39,6 +39,9 @@ final class RaceSession {
     /// Which track is (about to be) built — ArenaView themes the
     /// environment from this, so a TV series re-themes per race.
     private(set) var trackID: UUID?
+    /// Ground-plane bounds of the whole track — ArenaEnvironment keeps
+    /// its scattered props out of this rect.
+    private(set) var trackFootprint: FootprintRect?
     private(set) var countdownValue = 3
     private(set) var raceClock: TimeInterval = 0
     private(set) var racers: [Racer] = []
@@ -67,6 +70,10 @@ final class RaceSession {
         self.config = config
         trackID = blueprint.trackId
         let layout = TrackLayoutSolver.solve(blueprint)
+        let rects = layout.pieces.map(\.worldFootprint)
+        trackFootprint = FootprintRect(
+            minX: rects.map(\.minX).min() ?? 0, minZ: rects.map(\.minZ).min() ?? 0,
+            maxX: rects.map(\.maxX).max() ?? 0, maxZ: rects.map(\.maxZ).max() ?? 0)
         pieceTypes = layout.pieces.map(\.definition.type)
         pieceStartIndices = layout.lanes.pieceStartIndices
         let track = try await TrackSpawner.spawn(layout: layout)
