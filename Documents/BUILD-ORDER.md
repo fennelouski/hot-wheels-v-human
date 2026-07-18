@@ -59,6 +59,8 @@ Deps: P2–P5.
 ## Phase 7 — Hardening (ongoing)
 Reconnect drills, background/foreground, memory on 40-piece tracks (entity pooling for debris), tvOS top-shelf image, TestFlight internal build. Rename check (PRD §1.1) before anything public.
 
+Sim-verified 2026-07-18 (post C-series): background→foreground mid-race survives (same process, results intact); 40-piece `--stress-track` RSS flat at ~497 MB over 65 s (up from ~192 MB pre-characters — driver textures/props — but zero growth). Still needs hardware: Multipeer reconnect drills (`MULTIPEER-HANDTEST.md`), device memory footprint.
+
 ## Suggested first Claude Code prompt
 > Read CLAUDE.md, Documents/PRD-v2-Complete.md, Documents/ARCHITECTURE.md, Documents/XCODE-SETUP.md. Execute Phase 0 of Documents/BUILD-ORDER.md. Stop after the DoD is demonstrably met and report what you did.
 
