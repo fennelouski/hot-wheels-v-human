@@ -17,7 +17,7 @@ struct TestModeView: View {
 
     var body: some View {
         VStack(spacing: 32) {
-            Text("🧪 Test Mode")
+            Label("Test Mode", systemImage: "stopwatch.fill")
                 .font(.system(size: 56, weight: .black, design: .rounded))
             HStack(spacing: 48) {
                 designPicker("Car A", design: $designA)
@@ -27,7 +27,7 @@ struct TestModeView: View {
                 runID = UUID()
                 running = true
             } label: {
-                Text("🏁 RUN")
+                Label("RUN", systemImage: "flag.checkered")
                     .font(.system(size: 44, weight: .black, design: .rounded))
                     .padding(.horizontal, 60)
                     .padding(.vertical, 16)
@@ -59,9 +59,9 @@ struct TestModeView: View {
         VStack(spacing: 16) {
             Text(title).font(.system(size: 32, weight: .heavy, design: .rounded))
             Picker("Chassis", selection: design.chassis) {
-                Text("💪 Muscle").tag(ChassisClass.heavyMuscle)
-                Text("⚖️ Formula").tag(ChassisClass.balancedFormula)
-                Text("🪶 Drift").tag(ChassisClass.superlightDrift)
+                Label("Muscle", systemImage: "truck.pickup.side.fill").tag(ChassisClass.heavyMuscle)
+                Label("Formula", systemImage: "car.side.fill").tag(ChassisClass.balancedFormula)
+                Label("Drift", systemImage: "hare.fill").tag(ChassisClass.superlightDrift)
             }
             .pickerStyle(.segmented)
             Picker("Tires", selection: design.tires) {

@@ -16,7 +16,7 @@ struct TirePicker: View {
                     SoundBank.shared.play("tire_bounce")
                 } label: {
                     VStack(spacing: 8) {
-                        Text(emoji(tire)).font(.system(size: 44))
+                        Image(systemName: symbol(tire)).font(.system(size: 38, weight: .bold))
                         Text(label(tire))
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                         StatBar(name: "Grip", value: normalized(tire.staticFriction,
@@ -36,11 +36,11 @@ struct TirePicker: View {
         }
     }
 
-    private func emoji(_ t: TireType) -> String {
+    private func symbol(_ t: TireType) -> String {
         switch t {
-        case .standard: "🛞"
-        case .slickRacing: "💨"
-        case .grippyOffroad: "🕸️"
+        case .standard: "circle.circle"
+        case .slickRacing: "wind"
+        case .grippyOffroad: "circle.hexagongrid.fill"
         }
     }
 

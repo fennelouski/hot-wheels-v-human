@@ -24,6 +24,7 @@ iPad + Apple TV toy-racing game: build tracks & cars on iPad, race with real phy
 - Build must stay green on BOTH destinations (commands in XCODE-SETUP.md §7). Run tests before declaring any phase done.
 - Commit style: small, imperative subjects, reference phase (e.g. `P2: spline follower clears loop`).
 - UI: kid-first — tap targets ≥ 60 pt, no walls of text, no strobing VFX, failures are funny not punishing.
+- **Never use emoji as iconography or art** — SF Symbols or custom-drawn assets only. Emoji reads as stock, ships differently per OS, and breaks the custom look. (This includes face decals, map glyphs, and button labels.)
 
 ## Guardrails
 - Don't rename the app/bundle IDs (trademark rename is a deliberate later decision — PRD §1.1).

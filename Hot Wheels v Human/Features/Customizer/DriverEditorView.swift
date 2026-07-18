@@ -27,7 +27,7 @@ struct DriverEditorView: View {
                     driver.name = ["Max", "Zip", "Dot", "Rex", "Sky", "Pip",
                                    "Ace", "Juno", "Bolt", "Nova"].randomElement()!
                 } label: {
-                    Text("🎲").font(.system(size: 40))
+                    Image(systemName: "dice.fill").font(.system(size: 34, weight: .bold))
                 }
                 .buttonStyle(.plain)
             }
@@ -53,10 +53,10 @@ struct DriverEditorView: View {
                 VStack(spacing: 6) {
                     Text("Hair").font(.system(size: 15, weight: .semibold, design: .rounded))
                     Picker("Hair", selection: $driver.hair) {
-                        Text("✂️").tag(HairStyle.short)
-                        Text("🎸").tag(HairStyle.long)
-                        Text("🌀").tag(HairStyle.curly)
-                        Text("🥚").tag(HairStyle.bald)
+                        Image(systemName: "scissors").tag(HairStyle.short)
+                        Image(systemName: "water.waves").tag(HairStyle.long)
+                        Image(systemName: "hurricane").tag(HairStyle.curly)
+                        Image(systemName: "circle.fill").tag(HairStyle.bald)
                     }
                     .pickerStyle(.segmented)
                     .frame(width: 220)

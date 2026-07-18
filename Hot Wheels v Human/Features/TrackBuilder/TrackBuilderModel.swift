@@ -27,7 +27,7 @@ final class TrackBuilderModel {
     var isRaceable: Bool { BlueprintValidator.validate(blueprint).isValid }
     var hasFinish: Bool { types.last == .finishGate }
 
-    /// 🌶️ count — loops/bumps/ramps make a track spicy.
+    /// Spice count — loops/bumps/ramps make a track harder.
     var difficulty: Int {
         types.filter { [.loop, .bump, .rampJump].contains($0) }.count
     }

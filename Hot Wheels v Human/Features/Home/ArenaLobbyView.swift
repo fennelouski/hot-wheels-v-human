@@ -29,7 +29,7 @@ struct ArenaLobbyView: View {
 
     private var lobby: some View {
         VStack(spacing: 32) {
-            Text("🏁 Hot Wheels vs. Human")
+            Label("Hot Wheels vs. Human", systemImage: "flag.checkered")
                 .font(.system(size: 64, weight: .black, design: .rounded))
             Text(coordinator.transportState == .searching
                  ? "Open the app on your iPad to join!"
@@ -39,7 +39,7 @@ struct ArenaLobbyView: View {
             HStack(spacing: 24) {
                 ForEach(coordinator.players) { player in
                     VStack {
-                        Text("🏎️").font(.system(size: 64))
+                        Image(systemName: "car.side.fill").font(.system(size: 56))
                         Text(player.name)
                             .font(.system(size: 28, weight: .bold, design: .rounded))
                     }

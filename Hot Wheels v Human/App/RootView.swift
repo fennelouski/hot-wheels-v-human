@@ -52,19 +52,19 @@ struct RootView: View {
                     .frame(maxHeight: 240)
                 Grid(horizontalSpacing: 20, verticalSpacing: 20) {
                     GridRow {
-                        homeLink("🏎️ Build a Car") { CustomizerView() }
-                        homeLink("🛠️ Build a Track") { TrackBuilderView() }
+                        homeLink("Build a Car", systemImage: "car.fill") { CustomizerView() }
+                        homeLink("Build a Track", systemImage: "road.lanes.curved.right") { TrackBuilderView() }
                     }
                     GridRow {
-                        homeLink("🏁 Race a Robot") { RobotRacePickerView() }
-                        homeLink("📺 Race on TV") { RaceOnTVView() }
+                        homeLink("Race a Robot", systemImage: "flag.checkered") { RobotRacePickerView() }
+                        homeLink("Race on TV", systemImage: "tv.fill") { RaceOnTVView() }
                     }
                     GridRow {
-                        homeLink("🏚️ Garage") { GarageView() }
-                        homeLink("🧪 Test My Cars") { TestModeView() }
+                        homeLink("Garage", systemImage: "door.garage.closed") { GarageView() }
+                        homeLink("Test My Cars", systemImage: "stopwatch.fill") { TestModeView() }
                     }
                     GridRow {
-                        homeLink("👥 2-Player Build") { CustomizerSplitView() }
+                        homeLink("2-Player Build", systemImage: "person.2.fill") { CustomizerSplitView() }
                     }
                 }
             }
@@ -75,11 +75,12 @@ struct RootView: View {
         }
     }
 
-    private func homeLink(_ title: String, destination: @escaping () -> some View) -> some View {
+    private func homeLink(_ title: String, systemImage: String,
+                          destination: @escaping () -> some View) -> some View {
         NavigationLink {
             destination()
         } label: {
-            Text(title)
+            Label(title, systemImage: systemImage)
                 .font(.system(size: 30, weight: .heavy, design: .rounded))
                 .frame(width: 320, height: 76)
         }
@@ -96,15 +97,15 @@ struct RobotRacePickerView: View {
         VStack(spacing: 24) {
             Text("Pick your rival!")
                 .font(.system(size: 44, weight: .heavy, design: .rounded))
-            ForEach([(AIDifficulty.easy, "🐢 Easy"),
-                     (.medium, "🐰 Medium"),
-                     (.hard, "🤖 Hard")], id: \.0) { difficulty, label in
+            ForEach([(AIDifficulty.easy, "Easy", "tortoise.fill"),
+                     (.medium, "Medium", "hare.fill"),
+                     (.hard, "Hard", "bolt.fill")], id: \.0) { difficulty, name, symbol in
                 NavigationLink {
                     SoloArenaView(designs: [appModel.raceDesign],
                                   config: MatchConfig(mode: .onePlayer,
                                                       aiDifficulty: difficulty))
                 } label: {
-                    Text(label)
+                    Label(name, systemImage: symbol)
                         .font(.system(size: 34, weight: .heavy, design: .rounded))
                         .frame(width: 320, height: 80)
                 }

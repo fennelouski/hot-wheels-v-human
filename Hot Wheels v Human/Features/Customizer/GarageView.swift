@@ -17,7 +17,7 @@ struct GarageView: View {
         Group {
             if records.isEmpty {
                 VStack(spacing: 16) {
-                    Text("🏚️").font(.system(size: 80))
+                    Image(systemName: "door.garage.closed").font(.system(size: 72))
                     Text("Garage is empty — build a car first!")
                         .font(.system(size: 28, weight: .bold, design: .rounded))
                 }
@@ -51,7 +51,7 @@ struct GarageView: View {
                 Circle()
                     .fill(Color(hex: design?.paint.colorHex ?? "#888888"))
                     .frame(width: 54, height: 54)
-                    .overlay(Text("🏎️").font(.system(size: 30)))
+                    .overlay(Image(systemName: "car.side.fill").font(.system(size: 26)))
                 Text(record.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .lineLimit(1)

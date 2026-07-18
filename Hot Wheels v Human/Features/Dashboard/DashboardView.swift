@@ -32,7 +32,7 @@ struct DashboardView: View {
                     Button {
                         model.requestRematch()
                     } label: {
-                        Text("🔁 REMATCH!")
+                        Label("REMATCH!", systemImage: "arrow.clockwise")
                             .font(.system(size: 36, weight: .black, design: .rounded))
                             .frame(width: 280, height: 90)
                     }
@@ -62,17 +62,18 @@ struct DashboardView: View {
 
     private var waitingLabel: String {
         switch model.transportState {
-        case .idle, .searching: "🔍 Looking for the arena…"
-        case .connected: "🛠️ Getting the race ready…"
-        case .dropped: "📡 Reconnecting…"
+        case .idle, .searching: "Looking for the arena…"
+        case .connected: "Getting the race ready…"
+        case .dropped: "Reconnecting…"
         }
     }
 
     private func garageStrip(livesLeft: Int) -> some View {
         HStack(spacing: 6) {
             ForEach(0..<5, id: \.self) { i in
-                Text(i < livesLeft ? "🚗" : "💥")
-                    .font(.system(size: 30))
+                Image(systemName: i < livesLeft ? "car.fill" : "burst.fill")
+                    .font(.system(size: 26))
+                    .foregroundStyle(i < livesLeft ? .white : .orange)
                     .opacity(i < livesLeft ? 1 : 0.5)
             }
         }
@@ -96,7 +97,7 @@ struct ReactionCamButton: View {
     @State private var holding = false
 
     var body: some View {
-        Text("🎥 HOLD FOR CAM")
+        Label("HOLD FOR CAM", systemImage: "video.fill")
             .font(.system(size: 20, weight: .heavy, design: .rounded))
             .frame(width: 240, height: 64)
             .background(holding ? .yellow.opacity(0.4) : .white.opacity(0.1),
@@ -127,8 +128,9 @@ struct BoostButtonView: View {
                     .stroke(full ? .yellow : .orange,
                             style: StrokeStyle(lineWidth: 14, lineCap: .round))
                     .rotationEffect(.degrees(-90))
-                Text(full ? "🔥" : "⚡️")
-                    .font(.system(size: 64))
+                Image(systemName: full ? "flame.fill" : "bolt.fill")
+                    .font(.system(size: 56))
+                    .foregroundStyle(full ? .orange : .yellow)
                     .scaleEffect(full ? 1.15 : 1)
                     .animation(full ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true)
                                     : .default,

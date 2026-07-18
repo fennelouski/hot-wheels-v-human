@@ -56,8 +56,10 @@ struct TrackCanvasView: View {
             for piece in layout.pieces {
                 let f = piece.worldFootprint
                 let mid = point((f.minX + f.maxX) / 2, (f.minZ + f.maxZ) / 2)
-                if let badge = badge(piece.definition.type) {
-                    context.draw(Text(badge).font(.system(size: 22)), at: mid)
+                if let badge = piece.definition.type.symbolName {
+                    context.draw(Text("\(Image(systemName: badge))")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundStyle(.white), at: mid)
                 }
             }
         }
@@ -75,15 +77,23 @@ struct TrackCanvasView: View {
         }
     }
 
-    private func badge(_ type: PieceType) -> String? {
-        switch type {
-        case .startGate: "🚦"
-        case .finishGate: "🏁"
-        case .loop: "➰"
-        case .bump: "🐫"
-        case .rampJump: "🛫"
-        case .hillUp: "⛰️"
-        case .hillDown: "🏔️"
+}
+
+/// SF Symbols for palette cards + canvas badges (CLAUDE.md: no emoji iconography).
+extension PieceType {
+    var symbolName: String? {
+        switch self {
+        case .straight: "arrow.up"
+        case .curve90L: "arrow.turn.up.left"
+        case .curve90R: "arrow.turn.up.right"
+        case .curveLarge: "arrow.up.right"
+        case .startGate: "flag.fill"
+        case .finishGate: "flag.checkered"
+        case .loop: "arrow.clockwise.circle"
+        case .bump: "arrow.up.arrow.down"
+        case .rampJump: "airplane.departure"
+        case .hillUp: "chevron.up"
+        case .hillDown: "chevron.down"
         default: nil
         }
     }

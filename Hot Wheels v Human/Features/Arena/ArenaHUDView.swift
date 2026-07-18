@@ -52,7 +52,7 @@ struct ArenaHUDView: View {
                     Text("∞").font(.title2)      // test mode
                 } else {
                     ForEach(0..<max(racer.livesLeft, 0), id: \.self) { _ in
-                        Text("🚗").font(.system(size: 16))
+                        Image(systemName: "car.fill").font(.system(size: 14))
                     }
                 }
             }
@@ -69,7 +69,7 @@ struct ArenaHUDView: View {
 
     private var resultsPanel: some View {
         VStack(spacing: 16) {
-            Text("🏁 RESULTS")
+            Label("RESULTS", systemImage: "flag.checkered")
                 .font(.system(size: 48, weight: .black, design: .rounded))
             Grid(horizontalSpacing: 24, verticalSpacing: 8) {
                 GridRow {
@@ -92,7 +92,7 @@ struct ArenaHUDView: View {
                 }
             }
             .font(.system(size: 24, design: .rounded))
-            Text("Press 🔁 REMATCH on your iPad to go again!")
+            Text("Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!")
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
         }

@@ -48,9 +48,11 @@ struct ReactionDirectorTests {
         #expect(director.state == .celebrating)
     }
 
-    @Test func everyStateHasAFace() {
+    @Test @MainActor func everyStateHasAFace() {
+        // DriverFaceView's switch is exhaustive (compile-checked); this
+        // guards that every state constructs a renderable face view.
         for state in ReactionState.allCases {
-            #expect(!FaceDecals.emoji(for: state).isEmpty)
+            _ = DriverFaceView(state: state).body
         }
     }
 }

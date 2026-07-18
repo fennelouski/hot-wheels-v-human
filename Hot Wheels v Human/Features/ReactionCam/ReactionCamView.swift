@@ -42,8 +42,8 @@ struct ReactionCamView: View {
             }
             .background(Color(red: 0.13, green: 0.15, blue: 0.24))
 
-            Text(FaceDecals.emoji(for: director.state))
-                .font(.system(size: 44))
+            DriverFaceView(state: director.state)
+                .frame(width: 48, height: 48)
                 .padding(6)
         }
         .frame(width: 180, height: 180)

@@ -20,12 +20,17 @@ struct TrackBuilderView: View {
     var body: some View {
         VStack(spacing: 12) {
             HStack(spacing: 16) {
-                Text("🛠️ Track Builder")
+                Label("Track Builder", systemImage: "wrench.and.screwdriver.fill")
                     .font(.system(size: 36, weight: .heavy, design: .rounded))
                 Spacer()
                 Text("\(model.types.count) \(model.types.count == 1 ? "piece" : "pieces")")
                     .font(.system(size: 22, weight: .semibold, design: .rounded))
-                Text(String(repeating: "🌶️", count: min(model.difficulty, 5)))
+                HStack(spacing: 2) {
+                    ForEach(0..<min(model.difficulty, 5), id: \.self) { _ in
+                        Image(systemName: "flame.fill").foregroundStyle(.orange)
+                    }
+                }
+                .font(.system(size: 20))
             }
             .padding(.horizontal, 20)
 
@@ -37,9 +42,9 @@ struct TrackBuilderView: View {
             PiecePaletteView(model: model)
 
             HStack(spacing: 14) {
-                toolButton("↩️ Undo") { model.removeLast() }
-                toolButton("🗑️ Clear") { model.clear() }
-                toolButton("🎲 Shuffle") {
+                toolButton("Undo", systemImage: "arrow.uturn.backward") { model.removeLast() }
+                toolButton("Clear", systemImage: "trash") { model.clear() }
+                toolButton("Shuffle", systemImage: "dice.fill") {
                     model.shuffle()
                     savedName = nil
                 }
@@ -49,7 +54,8 @@ struct TrackBuilderView: View {
                     model.save(named: name, into: modelContext, appModel: appModel)
                     savedName = name
                 } label: {
-                    Text(savedName.map { "✅ \($0) races next!" } ?? "💾 Save & Race This Track")
+                    Label(savedName.map { "\($0) races next!" } ?? "Save & Race This Track",
+                          systemImage: savedName == nil ? "square.and.arrow.down.fill" : "checkmark.circle.fill")
                         .font(.system(size: 26, weight: .heavy, design: .rounded))
                         .padding(.horizontal, 24)
                         .padding(.vertical, 12)
@@ -65,9 +71,9 @@ struct TrackBuilderView: View {
         .onChange(of: model.types) { savedName = nil }
     }
 
-    private func toolButton(_ label: String, action: @escaping () -> Void) -> some View {
+    private func toolButton(_ label: String, systemImage: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            Text(label)
+            Label(label, systemImage: systemImage)
                 .font(.system(size: 24, weight: .bold, design: .rounded))
                 .padding(.horizontal, 18)
                 .padding(.vertical, 12)
@@ -80,29 +86,31 @@ struct TrackBuilderView: View {
 struct PiecePaletteView: View {
     let model: TrackBuilderModel
 
-    private static let cards: [(PieceType, String, String)] = [
-        (.straight, "⬆️", "Straight"),
-        (.curve90L, "↰", "Left"),
-        (.curve90R, "↱", "Right"),
-        (.curveLarge, "⤴️", "Sweeper"),
-        (.loop, "➰", "Loop"),
-        (.bump, "🐫", "Bump"),
-        (.hillUp, "⛰️", "Hill Up"),
-        (.hillDown, "🏔️", "Hill Down"),
-        (.rampJump, "🛫", "Jump"),
-        (.finishGate, "🏁", "Finish"),
+    private static let cards: [(PieceType, String)] = [
+        (.straight, "Straight"),
+        (.curve90L, "Left"),
+        (.curve90R, "Right"),
+        (.curveLarge, "Sweeper"),
+        (.loop, "Loop"),
+        (.bump, "Bump"),
+        (.hillUp, "Hill Up"),
+        (.hillDown, "Hill Down"),
+        (.rampJump, "Jump"),
+        (.finishGate, "Finish"),
     ]
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
-                ForEach(Self.cards, id: \.0) { type, icon, name in
+                ForEach(Self.cards, id: \.0) { type, name in
                     let allowed = model.canAppend(type)
                     Button {
                         model.append(type)
                     } label: {
                         VStack(spacing: 4) {
-                            Text(icon).font(.system(size: 40))
+                            Image(systemName: type.symbolName ?? "questionmark")
+                                .font(.system(size: 34, weight: .bold))
+                                .frame(height: 40)
                             Text(name)
                                 .font(.system(size: 17, weight: .bold, design: .rounded))
                         }

@@ -19,7 +19,7 @@ struct ChassisPicker: View {
                     SoundBank.shared.play("car_select_vroom")
                 } label: {
                     VStack(spacing: 8) {
-                        Text(emoji(chassis)).font(.system(size: 44))
+                        Image(systemName: symbol(chassis)).font(.system(size: 38, weight: .bold))
                         Text(label(chassis))
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                         StatBar(name: "Speed", value: normalized(RaceTuning.maxSpeed[chassis]!,
@@ -39,11 +39,11 @@ struct ChassisPicker: View {
         }
     }
 
-    private func emoji(_ c: ChassisClass) -> String {
+    private func symbol(_ c: ChassisClass) -> String {
         switch c {
-        case .heavyMuscle: "🚙"
-        case .balancedFormula: "🏎️"
-        case .superlightDrift: "🏁"
+        case .heavyMuscle: "truck.pickup.side.fill"
+        case .balancedFormula: "car.side.fill"
+        case .superlightDrift: "hare.fill"
         }
     }
 
