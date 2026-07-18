@@ -45,4 +45,7 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var chassis: ChassisClass
     var tires: TireType
     var paint: PaintSpec
+    /// AI roster cars use a specific model (kart-*) instead of the chassis
+    /// default. Optional so old saved designs keep decoding.
+    var modelOverride: String? = nil
 }

@@ -28,6 +28,11 @@ final class RaceSession {
         var crashes = 0
         var finishTime: TimeInterval?
         var isOut = false
+        /// Fastest single-piece traversal (piece index, seconds).
+        var bestSegment: (piece: Int, seconds: Float)?
+        var segmentStartClock: TimeInterval = 0
+        var lastPieceIndex = 0
+        var isAI: Bool { id == AIRoster.playerID }
     }
 
     private(set) var phase: RacePhase = .lobby
@@ -39,6 +44,12 @@ final class RaceSession {
     }
 
     private var updateSubscription: (any Cancellable)?
+    private var config = MatchConfig(mode: .solo)
+    /// Piece types in track order + where each starts on the spline —
+    /// the AI policy and best-segment stat both read these.
+    private var pieceTypes: [PieceType] = []
+    private var pieceStartIndices: [Int] = []
+    private var aiRNG = SystemRandomNumberGenerator()
 
     /// Forwarded discrete events (countdown, crash, respawn, finish) —
     /// RaceCoordinator relays these onto the transport.
@@ -49,7 +60,10 @@ final class RaceSession {
     func start(blueprint: TrackBlueprint, entries: [(playerID: UUID, design: CarDesign)],
                config: MatchConfig, root: Entity) async throws {
         phase = .buildingTrack
+        self.config = config
         let layout = TrackLayoutSolver.solve(blueprint)
+        pieceTypes = layout.pieces.map(\.definition.type)
+        pieceStartIndices = layout.lanes.pieceStartIndices
         let track = try await TrackSpawner.spawn(layout: layout)
         track.components.set(RaceTrackComponent(lanes: layout.lanes, laps: config.laps))
         root.addChild(track)
@@ -130,6 +144,31 @@ final class RaceSession {
             racers[i].isOut = state.livesLeft <= 0
             racers[i].progress = follow.waypoints.isEmpty ? 0
                 : Float(follow.nextIndex) / Float(follow.waypoints.count - 1)
+
+            // Best-segment stat: time each piece-to-piece traversal.
+            let piece = pieceStartIndices.lastIndex { $0 <= follow.nextIndex } ?? 0
+            if piece != racers[i].lastPieceIndex {
+                let seconds = Float(raceClock - racers[i].segmentStartClock)
+                if piece == racers[i].lastPieceIndex + 1,   // skip respawn jumps
+                   seconds < (racers[i].bestSegment?.seconds ?? .infinity) {
+                    racers[i].bestSegment = (racers[i].lastPieceIndex, seconds)
+                }
+                racers[i].lastPieceIndex = piece
+                racers[i].segmentStartClock = raceClock
+            }
+
+            // AI boost decision — same meter rules as humans, fair by design.
+            if racers[i].isAI, racers[i].boostMeter >= 1,
+               let difficulty = config.aiDifficulty {
+                let upcoming = Array(pieceTypes[min(piece + 1, pieceTypes.count)...])
+                if AIBoostPolicy.shouldBoost(
+                    difficulty: difficulty,
+                    previous: piece > 0 ? pieceTypes[piece - 1] : nil,
+                    current: piece < pieceTypes.count ? pieceTypes[piece] : nil,
+                    upcoming: upcoming, dt: Float(dt), rng: &aiRNG) {
+                    requestBoost(playerID: racers[i].id)
+                }
+            }
         }
 
         if allDone {

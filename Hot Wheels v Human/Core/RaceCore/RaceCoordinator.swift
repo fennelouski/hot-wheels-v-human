@@ -117,8 +117,13 @@ final class RaceCoordinator {
 
         // Designs pair to players by arrival order; extras (Test Mode's B
         // car, demo opponents) get the design's own id — no controller.
-        let entries = designs.enumerated().map { i, design in
+        var entries = designs.enumerated().map { i, design in
             (i < players.count ? players[i].id : design.id, design)
+        }
+        // 1P mode: the Hot Wheels robot joins with a roster car. Same
+        // physics as humans — difficulty is boost-decision quality only.
+        if config.mode == .onePlayer, let difficulty = config.aiDifficulty {
+            entries.append((AIRoster.playerID, AIRoster.bot(for: difficulty)))
         }
         Task { @MainActor in
             do {

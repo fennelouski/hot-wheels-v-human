@@ -97,6 +97,13 @@ nonisolated enum RaceTuning {
     /// Random impulse magnitude range for debris chunks, N·s.
     static let debrisImpulse: ClosedRange<Float> = 0.05...0.25
 
+    // MARK: AI opponent (PRD §6.4 — decision quality only, never stat bonuses)
+
+    /// Easy AI: probability per second of firing a full boost meter.
+    static let aiEasyBoostChancePerSecond: Float = 0.25
+    /// Hard AI refuses to boost if a loop appears within this many pieces ahead.
+    static let aiLoopLookaheadPieces = 2
+
     // MARK: Networking cadence
 
     /// RaceSnapshot broadcast rate, Hz (TV → iPads).

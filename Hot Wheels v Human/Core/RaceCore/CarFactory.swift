@@ -42,7 +42,7 @@ enum CarFactory {
         CarComponent.registerComponent()
         LaneFollowComponent.registerComponent()
 
-        let visual = try await assets.entity(named: design.chassis.modelName)
+        let visual = try await assets.entity(named: design.modelOverride ?? design.chassis.modelName)
         paint(visual, spec: design.paint)
 
         let car = ModelEntity()

@@ -31,12 +31,6 @@ struct RootView: View {
         }
     }
 
-    private var soloDesigns: [CarDesign] {
-        let mine = appModel.raceDesign
-        let rival = appModel.playerTwoDesign
-            ?? CarDesign.demoPair.first { $0.id != mine.id } ?? CarDesign.demoPair[1]
-        return [mine, rival]
-    }
 
     private var homeScreen: some View {
         NavigationStack {
@@ -51,7 +45,7 @@ struct RootView: View {
                         homeLink("🛠️ Build a Track") { TrackBuilderView() }
                     }
                     GridRow {
-                        homeLink("🏁 Solo Race") { SoloArenaView(designs: soloDesigns) }
+                        homeLink("🏁 Race a Robot") { RobotRacePickerView() }
                         homeLink("📺 Race on TV") { RaceOnTVView() }
                     }
                     GridRow {
@@ -79,6 +73,36 @@ struct RootView: View {
         }
         .buttonStyle(.bordered)
         .tint(.yellow)
+    }
+}
+
+/// Pick how clever the Hot Wheels robot is, then race it (1P mode, PRD §6.4).
+struct RobotRacePickerView: View {
+    @Environment(AppModel.self) private var appModel
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Text("Pick your rival!")
+                .font(.system(size: 44, weight: .heavy, design: .rounded))
+            ForEach([(AIDifficulty.easy, "🐢 Easy"),
+                     (.medium, "🐰 Medium"),
+                     (.hard, "🤖 Hard")], id: \.0) { difficulty, label in
+                NavigationLink {
+                    SoloArenaView(designs: [appModel.raceDesign],
+                                  config: MatchConfig(mode: .onePlayer,
+                                                      aiDifficulty: difficulty))
+                } label: {
+                    Text(label)
+                        .font(.system(size: 34, weight: .heavy, design: .rounded))
+                        .frame(width: 320, height: 80)
+                }
+                .buttonStyle(.bordered)
+                .tint(.yellow)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        .foregroundStyle(.white)
     }
 }
 
