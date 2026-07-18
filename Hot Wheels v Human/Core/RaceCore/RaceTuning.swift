@@ -94,6 +94,9 @@ nonisolated enum RaceTuning {
     /// Debris entities despawn after this many seconds.
     static let debrisLifetime: Float = 3
     static let debrisCount = 6
+    /// Pre-warmed pool cap (P7): 3 simultaneous crashes' worth; a crash
+    /// while the pool is empty just spawns fewer chunks.
+    static let debrisPoolSize = 18
     /// Random impulse magnitude range for debris chunks, N·s.
     static let debrisImpulse: ClosedRange<Float> = 0.05...0.25
 

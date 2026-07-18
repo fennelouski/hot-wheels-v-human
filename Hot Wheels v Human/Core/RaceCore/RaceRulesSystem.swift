@@ -27,6 +27,41 @@ struct DebrisComponent: Component {
     var secondsLeft: Float
 }
 
+/// Fixed pool of physics-wrapped debris chunks (P7 hardening): crashes on a
+/// 40-piece track must not allocate entities forever. Warmed once per app
+/// run; explosions borrow, expiry returns. Pool empty = crash renders fewer
+/// chunks — bounded memory beats bonus confetti.
+@MainActor
+final class DebrisPool {
+    static let shared = DebrisPool()
+
+    private var free: [ModelEntity] = []
+    private var warmed = false
+
+    func warmUp() async {
+        guard !warmed else { return }
+        warmed = true
+        let names = ["debris-tire", "debris-bumper", "debris-door", "debris-nut",
+                     "debris-bolt", "debris-plate-small-a"]
+        for i in 0..<RaceTuning.debrisPoolSize {
+            guard let chunk = try? await AssetStore.shared.entity(named: names[i % names.count]),
+                  let model = ModelEntity.wrappingForPhysics(chunk) else { continue }
+            model.isEnabled = false
+            free.append(model)
+        }
+    }
+
+    func take() -> ModelEntity? { free.popLast() }
+
+    func give(_ chunk: ModelEntity) {
+        chunk.removeFromParent()
+        chunk.isEnabled = false
+        chunk.physicsMotion?.linearVelocity = .zero
+        chunk.physicsMotion?.angularVelocity = .zero
+        free.append(chunk)
+    }
+}
+
 /// Set on the track root by the spawner/session so rules can find spline data.
 struct RaceTrackComponent: Component {
     var lanes: LaneSplines
@@ -49,7 +84,11 @@ struct RaceRulesSystem: System {
             guard var debris = entity.components[DebrisComponent.self] else { continue }
             debris.secondsLeft -= dt
             if debris.secondsLeft <= 0 {
-                entity.removeFromParent()
+                if let model = entity as? ModelEntity {
+                    DebrisPool.shared.give(model)
+                } else {
+                    entity.removeFromParent()
+                }
             } else {
                 entity.components.set(debris)
             }
@@ -131,19 +170,18 @@ struct RaceRulesSystem: System {
         // with RaceCoordinator polish once the loop is proven fun.
     }
 
-    /// Kenney debris chunks flung outward; RaceRulesSystem reaps them.
+    /// Pooled Kenney debris chunks flung outward; expiry returns them.
     private func explodeDebris(at position: SIMD3<Float>, in parent: Entity?) {
         guard let parent else { return }
-        let names = ["debris-tire", "debris-bumper", "debris-door", "debris-nut",
-                     "debris-bolt", "debris-plate-small-a"]
         Task { @MainActor in
-            for name in names.shuffled().prefix(RaceTuning.debrisCount) {
-                guard let chunk = try? await AssetStore.shared.entity(named: name),
-                      let model = ModelEntity.wrappingForPhysics(chunk) else { continue }
-                model.position = position + [Float.random(in: -0.05...0.05), 0.05,
-                                             Float.random(in: -0.05...0.05)]
+            for _ in 0..<RaceTuning.debrisCount {
+                guard let model = DebrisPool.shared.take() else { break }
+                model.setPosition(position + [Float.random(in: -0.05...0.05), 0.05,
+                                              Float.random(in: -0.05...0.05)],
+                                  relativeTo: nil)
                 model.components.set(DebrisComponent(secondsLeft: RaceTuning.debrisLifetime))
                 parent.addChild(model)
+                model.isEnabled = true
                 let impulse = SIMD3<Float>(Float.random(in: -1...1),
                                            Float.random(in: 0.5...1.5),
                                            Float.random(in: -1...1))

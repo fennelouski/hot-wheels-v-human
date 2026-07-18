@@ -67,6 +67,7 @@ final class RaceSession {
         pieceStartIndices = layout.lanes.pieceStartIndices
         let track = try await TrackSpawner.spawn(layout: layout)
         trackEntity = track
+        await DebrisPool.shared.warmUp()
         track.components.set(RaceTrackComponent(lanes: layout.lanes, laps: config.laps))
         root.addChild(track)
         // ponytail: scene default gravity (-9.81) for now — a custom

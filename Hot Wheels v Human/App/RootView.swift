@@ -16,9 +16,15 @@ struct RootView: View {
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
+    /// P7 memory drill: max-size random track, crash-prone demo pair.
+    private let launchIntoStress = ProcessInfo.processInfo.arguments.contains("--stress-track")
 
     var body: some View {
-        if launchIntoArena {
+        if launchIntoStress {
+            SoloArenaView(designs: CarDesign.demoPair,
+                          blueprint: RandomTrackGenerator.generate(
+                              pieceCount: RaceTuning.maxTrackPieces))
+        } else if launchIntoArena {
             SoloArenaView(designs: CarDesign.demoPair)
         } else if launchIntoCustomizer {
             CustomizerView()
