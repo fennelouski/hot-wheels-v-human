@@ -55,9 +55,12 @@ UV islands — not built). Strokes persist as `drawingStrokes` (PKDrawing data, 
 so reopened designs stay stroke-editable; the PNG still renders when strokes were too
 big to keep. Driver drawing: the specced FaceDecals texture pipeline became procedural
 vector faces (no emoji rule), so the kid instead draws **face paint** over the cartoon
-face (`FaceDrawPad`, `faceDrawingPNG` ≤64 KB on CarDesign) and the reaction cam
-composites it over every expression. Drawing on the 3D suit still needs a driver
-texture pipeline — deferred.
+face (`FaceDrawPad`, `faceDrawingPNG` ≤64 KB — moved to DriverProfile in C3, with
+the CarDesign field kept as a read fallback) and the reaction cam composites it
+over every expression. The driver texture pipeline that was deferred here shipped
+in the C-series: the rig turned out to be colored by a 32×32 stripe-palette
+texture, so `DriverPainter` paints the whole character from 5 generated stripes —
+see `Documents/CHARACTER-SPEC.md`.
 
 ## Data model
 ```swift

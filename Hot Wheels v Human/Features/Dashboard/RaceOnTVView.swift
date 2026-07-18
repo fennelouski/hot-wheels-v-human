@@ -26,7 +26,7 @@ struct RaceOnTVView: View {
                 switch state {
                 case .connected where !submitted:
                     submitted = true
-                    model.submitAndReady(designs: [appModel.raceDesign],
+                    model.submitAndReady(designs: [appModel.stampedRaceDesign()],
                                          blueprint: appModel.raceBlueprint,
                                          config: MatchConfig(mode: .onePlayer))
                 case .dropped:

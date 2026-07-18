@@ -70,7 +70,7 @@ enum CarFactory {
         // The little human, riding hip-deep so the standing rig reads as
         // seated (legs hidden inside the chassis).
         if let driver = try? await assets.entity(named: "driver-idle") {
-            await paint(driver, spec: design.paint)
+            await DriverPainter.apply(design.driver ?? DriverProfile.presets[0], to: driver)
             let carHeight = bounds.extents.y
             let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
             driver.scale = .init(repeating: scale)

@@ -4,6 +4,8 @@
 <dict>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>Hot Wheels vs. Human connects your iPad to your Apple TV to race.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Takes one picture to color your racer like you. The picture is never saved.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_hwvh-race._tcp</string>

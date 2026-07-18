@@ -35,7 +35,6 @@ struct CustomizerView: View {
     #if canImport(PencilKit) && !os(tvOS)
     /// Session-held pencil strokes (the design only stores the capped PNG).
     @State private var pencilStrokes = PKDrawing()
-    @State private var faceStrokes = PKDrawing()
     #endif
 
     enum Tab: String, CaseIterable {
@@ -135,16 +134,26 @@ struct CustomizerView: View {
                     Text("Drawing needs the iPad")
                     #endif
                 case .driver:
-                    // Face pad + editor overflow portrait width — kid swipes.
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 28) {
-                            #if canImport(PencilKit) && !os(tvOS)
-                            FaceDrawPad(faceDrawingPNG: $model.design.faceDrawingPNG,
-                                        strokes: $faceStrokes)
-                            #endif
-                            DriverEditorView(driver: $model.driver)
+                    // Character creation moved to its own experience
+                    // (Features/Profiles) — this tab shows who's riding.
+                    VStack(spacing: 14) {
+                        HStack(spacing: 16) {
+                            DriverFaceView(state: .idle,
+                                           skinToneHex: appModel.raceDriver.skinToneHex)
+                                .frame(width: 90, height: 90)
+                            Text(appModel.raceDriver.name)
+                                .font(.system(size: 32, weight: .heavy, design: .rounded))
                         }
-                        .padding(.horizontal, 20)
+                        NavigationLink {
+                            CharacterEditorView(driver: appModel.raceDriver)
+                        } label: {
+                            Label("Edit My Racer", systemImage: "pencil")
+                                .font(.system(size: 26, weight: .heavy, design: .rounded))
+                                .padding(.horizontal, 24)
+                                .frame(height: 64)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.yellow)
                     }
                 }
             }

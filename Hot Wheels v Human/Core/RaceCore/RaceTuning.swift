@@ -116,6 +116,13 @@ nonisolated enum RaceTuning {
     static let driverHeightRatio: Float = 0.9
     /// How far below the car's roofline the driver sinks (fraction of car height).
     static let driverSinkRatio: Float = 0.5
+    /// Head JOINT (neck top) height as a fraction of the rig's source
+    /// height — the dress-up wardrobe's bind-pose fallback anchor when
+    /// HeadPinSystem can't find the skinned joint. Matches the reaction
+    /// cam's bust framing.
+    static let driverHeadHeightRatio: Float = 0.82
+    /// Head radius as a fraction of the rig's source height.
+    static let driverHeadRadiusRatio: Float = 0.068
     /// Reaction states hold at least this long so the PiP never flickers.
     static let reactionMinHold: Float = 0.4
     /// Event reactions (boost push-back, crash facepalm) play this long.

@@ -103,8 +103,11 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// the PNG still renders. Optional → old designs decode.
     var drawingStrokes: Data? = nil
     /// Face paint drawn on the driver, PNG ≤ 64 KB, composited over the
-    /// reaction-cam face. Lives on CarDesign because designs are what
-    /// travel/race today — move to DriverProfile when profiles ride the
-    /// wire. Optional → old designs decode.
+    /// reaction-cam face. Superseded by DriverProfile.faceDrawingPNG — kept
+    /// as a read fallback so old designs keep their face paint.
     var faceDrawingPNG: Data? = nil
+    /// The character riding in this car. Stamped in by AppModel at race time
+    /// so the driver travels the wire inside the design — no new message
+    /// cases. Optional → old designs/peers decode.
+    var driver: DriverProfile? = nil
 }

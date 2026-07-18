@@ -30,14 +30,35 @@ final class DriverProfileRecord {
     @Attribute(.unique) var id: UUID
     var name: String
     var profileData: Data
+    /// The KidProfile this character belongs to. Optional so pre-profile
+    /// records lightweight-migrate; nil = orphaned, never shown.
+    var ownerProfileID: UUID? = nil
 
-    init(profile: DriverProfile) throws {
+    init(profile: DriverProfile, ownerProfileID: UUID? = nil) throws {
+        self.id = profile.id
+        self.name = profile.name
+        self.profileData = try JSONEncoder().encode(profile)
+        self.ownerProfileID = ownerProfileID
+    }
+
+    var profile: DriverProfile? { try? JSONDecoder().decode(DriverProfile.self, from: profileData) }
+}
+
+@Model
+final class KidProfileRecord {
+    @Attribute(.unique) var id: UUID
+    var name: String
+    var profileData: Data
+    /// Character auto-selected when this profile logs in.
+    var lastUsedDriverID: UUID? = nil
+
+    init(profile: KidProfile) throws {
         self.id = profile.id
         self.name = profile.name
         self.profileData = try JSONEncoder().encode(profile)
     }
 
-    var profile: DriverProfile? { try? JSONDecoder().decode(DriverProfile.self, from: profileData) }
+    var profile: KidProfile? { try? JSONDecoder().decode(KidProfile.self, from: profileData) }
 }
 
 @Model

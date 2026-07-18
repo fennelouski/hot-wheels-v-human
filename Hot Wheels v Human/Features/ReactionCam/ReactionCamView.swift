@@ -22,7 +22,8 @@ struct ReactionCamView: View {
             RealityView { content in
                 content.camera = .virtual
 
-                guard let poser = try? await DriverPoser.make(paint: design.paint) else { return }
+                guard let poser = try? await DriverPoser.make(
+                    profile: design.driver ?? DriverProfile.presets[0]) else { return }
                 content.add(poser.bust)
 
                 // Bust framing: the rig is 5.54 m tall — park the camera at
@@ -44,9 +45,12 @@ struct ReactionCamView: View {
             .background(Color(red: 0.13, green: 0.15, blue: 0.24))
 
             ZStack {
-                DriverFaceView(state: director.state)
-                // Kid's face paint rides over every expression.
-                if let paint = design.faceDrawingPNG, let image = UIImage(data: paint) {
+                DriverFaceView(state: director.state,
+                               skinToneHex: design.driver?.skinToneHex)
+                // Kid's face paint rides over every expression. The driver's
+                // own paint wins; CarDesign's is the pre-C3 fallback.
+                if let paint = design.driver?.faceDrawingPNG ?? design.faceDrawingPNG,
+                   let image = UIImage(data: paint) {
                     Image(uiImage: image)
                         .resizable()
                         .scaledToFill()

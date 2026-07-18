@@ -15,6 +15,7 @@ struct RootView: View {
     /// Dev deep links: `simctl launch <app> --solo-arena | --customizer`.
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
+    private let launchIntoCharacterEditor = ProcessInfo.processInfo.arguments.contains("--character-editor")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
@@ -38,12 +39,18 @@ struct RootView: View {
             SoloArenaView(designs: CarDesign.demoPair)
         } else if launchIntoCustomizer {
             CustomizerView()
+        } else if launchIntoCharacterEditor {
+            NavigationStack { CharacterEditorView() }
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {
             NavigationStack { GarageView() }
         } else if Platform.isTV {
             ArenaLobbyView()
+        } else if appModel.selectedProfile == nil {
+            // "Who's playing?" gate — one tap, then home. Dev deep links
+            // above skip it on purpose.
+            ProfilePickerView()
         } else {
             homeScreen
         }
@@ -82,6 +89,7 @@ struct RootView: View {
                     }
                     GridRow {
                         homeLink("2-Player Build", systemImage: "person.2.fill") { CustomizerSplitView() }
+                        homeLink("My Racers", systemImage: "person.crop.circle.fill") { CharacterSelectView() }
                     }
                 }
             }
@@ -89,7 +97,30 @@ struct RootView: View {
             .background(Color(red: 0.09, green: 0.10, blue: 0.16))
             .foregroundStyle(.white)
             .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
+            #if os(iOS)
+            .toolbar { ToolbarItem(placement: .topBarLeading) { profileChip } }
+            #endif
         }
+    }
+
+    /// Tap to go back to "Who's playing?" — switching kids mid-session.
+    private var profileChip: some View {
+        Button {
+            appModel.selectedProfile = nil
+            appModel.selectedDriver = nil
+        } label: {
+            HStack(spacing: 10) {
+                Circle()
+                    .fill(Color(hex: appModel.selectedProfile?.colorHex ?? "#FFD500"))
+                    .frame(width: 34, height: 34)
+                Text(appModel.selectedProfile?.name ?? "")
+                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+            }
+            .padding(.horizontal, 14)
+            .frame(height: 60)
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.white)
     }
 
     private func homeLink(_ title: String, systemImage: String,
@@ -109,13 +140,16 @@ struct RootView: View {
 /// Quick Play: zero decisions — random starter car, random starter track,
 /// medium robot, straight into Solo Arena. `--quick-play` launches here.
 struct QuickPlayView: View {
+    @Environment(AppModel.self) private var appModel
     // @State so the dice roll once per visit, not on every body re-eval.
     @State private var car = CarDesign.presets.randomElement()!
     @State private var track = TrackBlueprint.presets.randomElement()!.blueprint
 
     var body: some View {
-        SoloArenaView(designs: [car], blueprint: track,
-                      config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
+        var design = car
+        design.driver = appModel.raceDriver
+        return SoloArenaView(designs: [design], blueprint: track,
+                             config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
             .onAppear { SoundBank.shared.play("grid_rev_anticipation") }
     }
 }
@@ -132,7 +166,7 @@ struct RobotRacePickerView: View {
                      (.medium, "Medium", "hare.fill"),
                      (.hard, "Hard", "bolt.fill")], id: \.0) { difficulty, name, symbol in
                 NavigationLink {
-                    SoloArenaView(designs: [appModel.raceDesign],
+                    SoloArenaView(designs: [appModel.stampedRaceDesign()],
                                   config: MatchConfig(mode: .onePlayer,
                                                       aiDifficulty: difficulty))
                 } label: {

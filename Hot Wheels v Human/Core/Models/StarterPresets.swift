@@ -87,3 +87,38 @@ extension CarDesign {
                   partColors: partColors, livery: livery, stickers: stickers)
     }
 }
+
+extension DriverProfile {
+
+    /// Starter characters — every color comes from DriverPalette (unit-tested)
+    /// and together they show off hair styles, hats, and glasses so the
+    /// character-select screen doubles as a "look what you can make" gallery.
+    static let presets: [DriverProfile] = [
+        preset(1, "Ace", skin: "#E0AC69", hair: .short, hairColor: "#1C1C1E",
+               eyes: "#3B2716", shirt: "#FFD500", pants: "#2266FF",
+               helmet: "#FF3B30", hat: HatStyle.none, hatColor: "#FF3B30", glasses: GlassesStyle.none),
+        preset(2, "Nova", skin: "#FFDBB4", hair: .long, hairColor: "#E7C87B",
+               eyes: "#2266FF", shirt: "#8E44AD", pants: "#1C1C1E",
+               helmet: "#FFD500", hat: HatStyle.none, hatColor: "#FFD500", glasses: .star),
+        preset(3, "Juno", skin: "#8D5524", hair: .curly, hairColor: "#1C1C1E",
+               eyes: "#3B2716", shirt: "#34C759", pants: "#FFD500",
+               helmet: "#2266FF", hat: .cap, hatColor: "#2266FF", glasses: GlassesStyle.none),
+        preset(4, "Bolt", skin: "#C68642", hair: .bald, hairColor: "#1C1C1E",
+               eyes: "#34C759", shirt: "#FF3B30", pants: "#F2F2F7",
+               helmet: "#F2F2F7", hat: .crown, hatColor: "#FFD500", glasses: GlassesStyle.none),
+        preset(5, "Pip", skin: "#F1C27D", hair: .short, hairColor: "#D62718",
+               eyes: "#5AC8FA", shirt: "#FF9500", pants: "#34C759",
+               helmet: "#34C759", hat: .headphones, hatColor: "#1C1C1E", glasses: .round),
+    ]
+
+    private static func preset(_ n: Int, _ name: String, skin: String, hair: HairStyle,
+                               hairColor: String, eyes: String, shirt: String, pants: String,
+                               helmet: String, hat: HatStyle, hatColor: String,
+                               glasses: GlassesStyle) -> DriverProfile {
+        DriverProfile(id: UUID(uuidString: String(format: "DA900000-0000-0000-0000-%012d", n))!,
+                      name: name, helmetColorHex: helmet, suitColorHex: shirt,
+                      skinToneHex: skin, hair: hair, hairColorHex: hairColor,
+                      eyeColorHex: eyes, pantsColorHex: pants, hat: hat,
+                      hatColorHex: hatColor, glasses: glasses)
+    }
+}

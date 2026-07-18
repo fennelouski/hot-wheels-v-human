@@ -17,13 +17,9 @@ import UIKit
 @Observable
 final class CustomizerModel {
     var design: CarDesign
-    var driver: DriverProfile
 
     init(design: CarDesign? = nil) {
         self.design = design ?? Self.startingDesign()
-        self.driver = DriverProfile(
-            id: UUID(), name: "Racer", helmetColorHex: "#FFD500",
-            suitColorHex: "#2266FF", skinToneHex: "#E0AC69", hair: .short)
     }
 
     /// Dev deep link `--demo-design` opens the customizer showing every
@@ -116,9 +112,6 @@ final class CustomizerModel {
         // kids iterate by cloning.
         design.id = UUID()
         if let record = try? CarDesignRecord(design: design) {
-            context.insert(record)
-        }
-        if let record = try? DriverProfileRecord(profile: driver) {
             context.insert(record)
         }
         try? context.save()

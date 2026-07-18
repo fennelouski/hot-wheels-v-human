@@ -15,6 +15,9 @@ iPad + Apple TV toy-racing game: build tracks & cars on iPad, race with real phy
 - Platform behavior: iPad = workshop/controller; TV = physics-authoritative arena; iPad Solo Arena (LoopbackTransport) = primary dev/test loop. Multipeer needs a real device; don't fight Simulator-to-Simulator.
 - 3D assets: CC0 packs already downloaded in `Graphics/3DModels/Source/` (Kenney Toy Car Kit = track system incl. loop; Kenney Car Kit = cars/wheels/debris; Quaternius rigged human; OGA racetrack extras). Convert GLB→USDZ into `Hot Wheels v Human/Resources/Models3D/` per `Graphics/README.md`.
 - Multipeer service `hwvh-race`; Info.plist needs `NSLocalNetworkUsageDescription` + `NSBonjourServices` or discovery silently fails.
+- The Quaternius driver rig is ONE mesh + ONE material colored by a 32×32 stripe-palette texture (rows top-down: 0–5 skin, 6–10 eyes+eyebrows, 11–16 hair, 17–22 shirt, 23–31 pants — constants in `DriverPalette.StripeRows`). Painting the whole character = generating 5 stripes (`DriverPainter`); no UV work needed. Bones are Mixamo-named (`Hips…Neck/Head`) — `HeadPinSystem` pins dress-up props to the posed Head joint.
+- The character rides the wire inside the design: `CarDesign.driver: DriverProfile?`, stamped by `AppModel.stampedRaceDesign()` at race time. Additive optional → old peers decode; never add a new message case for driver data.
+- iPad-only code (camera, PencilKit flows) must gate with `#if os(iOS)` — `#if canImport(UIKit)` is TRUE on tvOS and will break the TV build.
 
 ## Conventions
 - Swift 6 strict concurrency; `@Observable` view models; no third-party dependencies (zero SPM packages in v1).

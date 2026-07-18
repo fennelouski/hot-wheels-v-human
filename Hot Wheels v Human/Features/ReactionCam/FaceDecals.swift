@@ -11,6 +11,8 @@ import SwiftUI
 /// Round cartoon face whose eyes/mouth change with the driver's reaction.
 struct DriverFaceView: View {
     let state: ReactionState
+    /// Character skin tone for the head; nil keeps the classic toy yellow.
+    var skinToneHex: String? = nil
 
     var body: some View {
         Canvas { ctx, size in
@@ -20,7 +22,8 @@ struct DriverFaceView: View {
             // Head
             let head = Path(ellipseIn: CGRect(x: stroke, y: stroke,
                                               width: w - 2 * stroke, height: h - 2 * stroke))
-            ctx.fill(head, with: .color(Color(red: 1.0, green: 0.85, blue: 0.4)))
+            ctx.fill(head, with: .color(skinToneHex.map { Color(hex: $0) }
+                                        ?? Color(red: 1.0, green: 0.85, blue: 0.4)))
             ctx.stroke(head, with: .color(.black.opacity(0.7)), lineWidth: stroke)
 
             let eyeY = h * 0.4

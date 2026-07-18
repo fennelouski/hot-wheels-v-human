@@ -18,7 +18,20 @@ final class AppModel {
     var playerTwoDesign: CarDesign?
     /// Track for the next race. Nil = demo track.
     var selectedBlueprint: TrackBlueprint?
+    /// Who's playing (profile picker). Nil = not picked yet.
+    var selectedProfile: KidProfile?
+    /// The character racing next. Nil = first starter character.
+    var selectedDriver: DriverProfile?
 
     var raceDesign: CarDesign { selectedDesign ?? CarDesign.demoPair[0] }
     var raceBlueprint: TrackBlueprint { selectedBlueprint ?? .demo }
+    var raceDriver: DriverProfile { selectedDriver ?? DriverProfile.presets[0] }
+
+    /// The design that actually races: the selected car with the selected
+    /// character stamped in, so the driver rides the wire inside the design.
+    func stampedRaceDesign() -> CarDesign {
+        var design = raceDesign
+        design.driver = raceDriver
+        return design
+    }
 }

@@ -61,3 +61,9 @@ Reconnect drills, background/foreground, memory on 40-piece tracks (entity pooli
 
 ## Suggested first Claude Code prompt
 > Read CLAUDE.md, Documents/PRD-v2-Complete.md, Documents/ARCHITECTURE.md, Documents/XCODE-SETUP.md. Execute Phase 0 of Documents/BUILD-ORDER.md. Stop after the DoD is demonstrably met and report what you did.
+
+## C-series — profiles & character creation (built after P7)
+Local "Who's playing?" profiles, multiple named characters per profile, the
+full-screen character editor, the stripe-palette driver paint pipeline, and
+the on-device camera lookalike. Spec + phase table:
+`Documents/CHARACTER-SPEC.md`.
