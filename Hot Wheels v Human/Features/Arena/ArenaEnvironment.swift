@@ -3,7 +3,7 @@
 //  Hot Wheels v Human
 //
 //  The world around the track: a sky dome + a big play-mat ground,
-//  themed per track (sunny day / sunset / outer space) so each starter
+//  themed per track (candy / sunny day / sunset / outer space) so each starter
 //  track feels like its own place. Theme is picked from the trackId —
 //  stable across launches, no data added to the wire format.
 //
@@ -26,6 +26,7 @@ enum ArenaEnvironment {
         let groundLight: CGColor
         let groundDark: CGColor
         let stars: Bool
+        let clouds: Bool
         /// Trackside decoration models (Resources/Models3D), scattered
         /// around the track. Repeats weight the draw.
         let props: [String]
@@ -37,22 +38,22 @@ enum ArenaEnvironment {
         Theme(name: "candy",
               skyTop: rgb(0.95, 0.35, 0.62), skyHorizon: rgb(1.0, 0.82, 0.88),
               groundLight: rgb(0.55, 0.80, 0.72), groundDark: rgb(0.45, 0.71, 0.62),
-              stars: false,
+              stars: false, clouds: true,
               props: ["item-banana", "item-box", "item-coin-gold", "item-cone"]),
         Theme(name: "day",
               skyTop: rgb(0.25, 0.55, 0.95), skyHorizon: rgb(0.80, 0.93, 1.0),
               groundLight: rgb(0.35, 0.62, 0.32), groundDark: rgb(0.27, 0.52, 0.26),
-              stars: false,
+              stars: false, clouds: true,
               props: ["item-cone", "item-cone", "item-box", "item-banana"]),
         Theme(name: "sunset",
               skyTop: rgb(0.35, 0.16, 0.45), skyHorizon: rgb(1.0, 0.62, 0.30),
               groundLight: rgb(0.72, 0.58, 0.38), groundDark: rgb(0.62, 0.48, 0.30),
-              stars: false,
+              stars: false, clouds: true,
               props: ["item-cone", "item-cone", "item-box"]),
         Theme(name: "space",
               skyTop: rgb(0.02, 0.02, 0.10), skyHorizon: rgb(0.16, 0.07, 0.32),
               groundLight: rgb(0.42, 0.38, 0.50), groundDark: rgb(0.34, 0.30, 0.42),
-              stars: true,
+              stars: true, clouds: false,
               props: ["item-coin-gold", "item-coin-gold", "item-box"]),
     ]
 
@@ -200,6 +201,7 @@ enum ArenaEnvironment {
                                    start: CGPoint(x: 0, y: 0),
                                    end: CGPoint(x: 0, y: CGFloat(h)),
                                    options: [])
+            if theme.clouds { drawClouds(ctx, w: w, h: h) }
             guard theme.stars else { return }
             var dice = Dice(seed: 0x5EED)
             ctx.setFillColor(rgb(1, 1, 0.92))
@@ -213,6 +215,50 @@ enum ArenaEnvironment {
                 ctx.fillEllipse(in: CGRect(x: x, y: y, width: r, height: r))
             }
         }
+    }
+
+    /// Puffy clouds, drawn as clusters of overlapping circles in the band
+    /// above the horizon. Two lessons carried over from the stars: shapes
+    /// must be TENS of pixels across (the chase cam samples a thin v-band
+    /// of a texture that wraps the full 360°, so small = never seen), and
+    /// u wraps — a cloud near the edge is redrawn a full texture-width to
+    /// each side so the seam doesn't slice it in half.
+    private static func drawClouds(_ ctx: CGContext, w: Int, h: Int) {
+        var dice = Dice(seed: 0xC10D)
+        ctx.setFillColor(rgb(1, 1, 1))
+        for _ in 0..<22 {
+            let cx = CGFloat(dice.next01()) * CGFloat(w)
+            // Just above the horizon (0.5 = the dome's equator). The chase
+            // cam is pitched DOWN at the cars and only ever samples roughly
+            // 0.50–0.62 of the dome, so clouds parked high simply never
+            // appear; squaring biases the draw into that band while still
+            // dealing a few higher ones for when the camera tilts up.
+            let lift = CGFloat(dice.next01())
+            let cy = CGFloat(h) * (0.50 + lift * lift * 0.20)
+            // Sized to fit INSIDE that band — the first pass used 26–56 and
+            // whole clouds overflowed it, reading as a white wash.
+            let scale = 16 + CGFloat(dice.next01()) * 14
+            // Puffs are precomputed so every wrapped copy is identical.
+            let puffs = (0..<6).map { _ in
+                (dx: CGFloat(dice.next01()) * 2.6 - 1.3,
+                 dy: CGFloat(dice.next01()) * 0.5 - 0.25,
+                 r: 0.55 + CGFloat(dice.next01()) * 0.55)
+            }
+            // One transparency layer per cloud: at plain alpha the puffs
+            // would double-darken where they overlap and read as bubbles.
+            ctx.setAlpha(0.55 + CGFloat(dice.next01()) * 0.30)
+            ctx.beginTransparencyLayer(auxiliaryInfo: nil)
+            for wrap in [-CGFloat(w), 0, CGFloat(w)] {
+                for puff in puffs {
+                    let d = puff.r * scale * 2
+                    ctx.fillEllipse(in: CGRect(x: cx + wrap + puff.dx * scale - d / 2,
+                                               y: cy + puff.dy * scale - d / 2,
+                                               width: d, height: d))
+                }
+            }
+            ctx.endTransparencyLayer()
+        }
+        ctx.setAlpha(1)
     }
 
     /// 2×2 low-contrast checker — reads as a giant play mat when tiled.
