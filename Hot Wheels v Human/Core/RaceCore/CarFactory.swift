@@ -44,7 +44,7 @@ enum CarFactory {
         LaneFollowComponent.registerComponent()
 
         let visual = try await assets.entity(named: design.modelOverride ?? design.chassis.modelName)
-        await paint(visual, spec: design.paint, partColors: design.partColors)
+        await applyCustomization(to: visual, design: design)
 
         let car = ModelEntity()
         car.name = "car-\(design.name)"
@@ -78,6 +78,16 @@ enum CarFactory {
             car.addChild(driver)
         }
         return car
+    }
+
+    /// Full visual treatment: per-part paint + the paint-shell overlay
+    /// (livery/stickers/drawing). Used by racing and the turntable preview.
+    static func applyCustomization(to visual: Entity, design: CarDesign) async {
+        await paint(visual, spec: design.paint, partColors: design.partColors)
+        // ponytail: overlay renders on the calling task — 1024² CGContext
+        // is a few ms; move off-main only if the profiler ever blames it.
+        await PaintShell.apply(overlay: OverlayComposer.render(livery: design.livery),
+                               to: visual)
     }
 
     /// Tints every material in the model with the paint color/finish.

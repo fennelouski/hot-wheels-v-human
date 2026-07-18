@@ -53,6 +53,22 @@ nonisolated struct PaintSpec: Codable, Equatable, Sendable {
     var finish: PaintFinish
 }
 
+nonisolated enum LiveryPattern: String, Codable, CaseIterable, Sendable {
+    case racingStripes
+    case flames
+    case polkaDots
+    case lightningBolt
+    case checkerboard
+    case starField
+    case zigzag
+}
+
+nonisolated struct LiverySpec: Codable, Equatable, Sendable {
+    var pattern: LiveryPattern
+    var colorHex: String      // "#RRGGBB"
+    var scale: Float          // 0.5…2, pattern-relative size
+}
+
 nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     var id: UUID
     var name: String
@@ -65,4 +81,6 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// Per-part color overrides, `CarPaintSlot` name → "#RRGGBB". Missing
     /// slot falls back to `paint.colorHex`. Optional → old designs decode.
     var partColors: [String: String]? = nil
+    /// Livery pattern rendered onto the paint shell. Optional → old designs decode.
+    var livery: LiverySpec? = nil
 }

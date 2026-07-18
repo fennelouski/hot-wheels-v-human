@@ -26,6 +26,7 @@ struct CustomizerView: View {
         case chassis = "Chassis"
         case tires = "Tires"
         case paint = "Paint"
+        case livery = "Livery"
         case driver = "Driver"
 
         var symbolName: String {
@@ -33,6 +34,7 @@ struct CustomizerView: View {
             case .chassis: "car.side.fill"
             case .tires: "circle.circle"
             case .paint: "paintbrush.fill"
+            case .livery: "flame.fill"
             case .driver: "person.fill"
             }
         }
@@ -76,6 +78,7 @@ struct CustomizerView: View {
                 case .chassis: ChassisPicker(selection: $model.design.chassis)
                 case .tires: TirePicker(selection: $model.design.tires)
                 case .paint: PaintShopView(design: $model.design, slot: $paintSlot)
+                case .livery: LiveryShopView(livery: $model.design.livery)
                 case .driver: DriverEditorView(driver: $model.driver)
                 }
             }
@@ -163,12 +166,15 @@ struct CarTurntableView: View {
     private static func rebuild(_ turntable: Entity, design: CarDesign) async {
         let parts = (design.partColors ?? [:]).sorted { $0.key < $1.key }
             .map { "\($0.key)=\($0.value)" }.joined(separator: ",")
-        let signature = "\(design.chassis.rawValue)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)"
+        let livery = design.livery.map {
+            "\($0.pattern.rawValue)/\($0.colorHex)/\($0.scale)"
+        } ?? "none"
+        let signature = "\(design.chassis.rawValue)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)"
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
         turntable.children.forEach { $0.removeFromParent() }
         guard let car = try? await AssetStore.shared.entity(named: design.chassis.modelName) else { return }
-        await CarFactory.paint(car, spec: design.paint, partColors: design.partColors)
+        await CarFactory.applyCustomization(to: car, design: design)
         // Make each painted part tappable for paint-slot selection.
         car.generateCollisionShapes(recursive: true)
         for part in car.descendantsAndSelf() where part.components.has(ModelComponent.self) {

@@ -33,6 +33,7 @@ final class CustomizerModel {
             design.name = "Demo Dazzler"
             design.paint = PaintSpec(colorHex: "#2266FF", finish: .sparkle)
             design.partColors = [CarPaintSlot.wheels: "#FFD500"]
+            design.livery = LiverySpec(pattern: .flames, colorHex: "#FF3B30", scale: 1)
         }
         return design
     }
