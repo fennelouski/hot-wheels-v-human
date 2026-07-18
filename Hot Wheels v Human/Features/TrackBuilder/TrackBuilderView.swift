@@ -38,6 +38,12 @@ struct TrackBuilderView: View {
                 .frame(maxHeight: .infinity)
                 .background(.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 20))
                 .padding(.horizontal, 16)
+                .overlay(alignment: .bottom) {
+                    // Fresh canvas → offer the starter tracks.
+                    if model.types == [.startGate] {
+                        presetRow
+                    }
+                }
 
             PiecePaletteView(model: model)
 
@@ -69,6 +75,36 @@ struct TrackBuilderView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .onChange(of: model.types) { savedName = nil }
+    }
+
+    /// Starter tracks a kid can jump off from instead of a blank canvas.
+    private var presetRow: some View {
+        VStack(spacing: 8) {
+            Text("...or start from one of these!")
+                .font(.system(size: 22, weight: .bold, design: .rounded))
+                .foregroundStyle(.yellow)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 12) {
+                    ForEach(TrackBlueprint.presets, id: \.blueprint.trackId) { preset in
+                        Button {
+                            model.load(preset: preset.blueprint)
+                        } label: {
+                            VStack(spacing: 4) {
+                                Image(systemName: "map.fill")
+                                    .font(.system(size: 28, weight: .bold))
+                                Text(preset.name)
+                                    .font(.system(size: 18, weight: .heavy, design: .rounded))
+                            }
+                            .frame(width: 170, height: 76)
+                            .background(.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 14))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 16)
+            }
+        }
+        .padding(.bottom, 16)
     }
 
     private func toolButton(_ label: String, systemImage: String, action: @escaping () -> Void) -> some View {

@@ -60,6 +60,12 @@ final class TrackBuilderModel {
 
     func clear() { types = [.startGate] }
 
+    /// "Start from one of these" — replace the build with a preset track.
+    func load(preset: TrackBlueprint) {
+        types = preset.segments.map(\.type)
+        SoundBank.shared.play("confirm_sparkle")
+    }
+
     func shuffle() {
         types = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
             .segments.map(\.type)
