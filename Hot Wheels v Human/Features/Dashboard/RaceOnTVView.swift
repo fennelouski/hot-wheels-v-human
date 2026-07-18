@@ -26,9 +26,11 @@ struct RaceOnTVView: View {
                 switch state {
                 case .connected where !submitted:
                     submitted = true
-                    model.submitAndReady(designs: [appModel.stampedRaceDesign()],
-                                         blueprint: appModel.raceBlueprint,
-                                         config: MatchConfig(mode: .onePlayer))
+                    // Submit but don't auto-ready — READY is the kid's tap,
+                    // so a race can't start before player 2 finds the couch.
+                    model.submit(designs: [appModel.stampedRaceDesign()],
+                                 blueprint: appModel.raceBlueprint,
+                                 config: MatchConfig(mode: .onePlayer))
                 case .dropped:
                     submitted = false
                 default:

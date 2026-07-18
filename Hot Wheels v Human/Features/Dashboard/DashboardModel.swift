@@ -43,17 +43,32 @@ final class DashboardModel {
 
     func stop() { transport.stop() }
 
-    /// The whole pre-race handshake for solo/1P: announce, submit the
-    /// design(s) + track, ready up. Extra designs beyond the first belong
-    /// to no controller (Test Mode's B car, demo opponents).
-    func submitAndReady(designs: [CarDesign], blueprint: TrackBlueprint, config: MatchConfig) {
+    /// Whether this dashboard has readied up for the pending race.
+    private(set) var readySent = false
+
+    /// Announce + submit the design(s) and track, without readying up
+    /// (Race-on-TV flow: READY is the kid's tap). The first design is
+    /// ours (ownerID); extras belong to no controller (Test Mode's B car,
+    /// demo opponents).
+    func submit(designs: [CarDesign], blueprint: TrackBlueprint, config: MatchConfig) {
         transport.send(.hello(player, protocolVersion: gameProtocolVersion), reliably: true)
-        for design in designs {
-            transport.send(.carDesign(design), reliably: true)
+        for (i, design) in designs.enumerated() {
+            transport.send(.carDesign(design, ownerID: i == 0 ? player.id : nil), reliably: true)
         }
         transport.send(.matchConfig(config), reliably: true)
         transport.send(.trackBlueprint(blueprint), reliably: true)
+    }
+
+    /// The whole pre-race handshake for solo/1P: submit, then auto-ready.
+    func submitAndReady(designs: [CarDesign], blueprint: TrackBlueprint, config: MatchConfig) {
+        submit(designs: designs, blueprint: blueprint, config: config)
+        sendReady()
+    }
+
+    func sendReady() {
+        readySent = true
         transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
+        SoundBank.shared.play("ready_bell")
     }
 
     /// REMATCH = ready up again from the results screen; the host tears

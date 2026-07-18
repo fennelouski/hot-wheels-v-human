@@ -49,6 +49,20 @@ struct DashboardView: View {
                     }
                     .padding(.bottom, 12)
                 }
+            } else if model.transportState == .connected && !model.readySent {
+                // Connected, submitted, waiting on the kid: THE ready tap.
+                Spacer()
+                Button {
+                    model.sendReady()
+                } label: {
+                    Label("TAP WHEN READY!", systemImage: "flag.fill")
+                        .font(.system(size: 34, weight: .black, design: .rounded))
+                        .frame(width: 420, height: 110)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
+                Spacer()
             } else {
                 Spacer()
                 VStack(spacing: 12) {

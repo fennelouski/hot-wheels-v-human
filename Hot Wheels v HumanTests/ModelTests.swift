@@ -19,7 +19,8 @@ struct ModelTests {
     static let allMessages: [GameMessage] = [
         .hello(player, protocolVersion: gameProtocolVersion),
         .trackBlueprint(.demo),
-        .carDesign(car),
+        .carDesign(car, ownerID: player.id),
+        .carDesign(car, ownerID: nil),
         .matchConfig(MatchConfig(mode: .twoPlayer, laps: 3)),
         .readyState(playerID: player.id, ready: true),
         .raceEvent(.countdownTick(3)),
@@ -40,6 +41,23 @@ struct ModelTests {
             let decoded = try GameMessage.decoded(from: message.encoded())
             #expect(decoded == message)
         }
+    }
+
+    @Test func oldCarDesignMessageWithoutOwnerIDStillDecodes() throws {
+        // Pre-2P peers encode carDesign without the ownerID key.
+        let json = """
+        { "carDesign": { "_0": {
+            "id": "6BE2A5D4-6A00-4C4A-8B49-586E6E355A93", "name": "Old Timer",
+            "chassis": "heavyMuscle", "tires": "standard",
+            "paint": { "colorHex": "#FF6600", "finish": "glossy" } } } }
+        """
+        let decoded = try GameMessage.decoded(from: Data(json.utf8))
+        guard case .carDesign(let design, let ownerID) = decoded else {
+            Issue.record("decoded as \(decoded)")
+            return
+        }
+        #expect(design.name == "Old Timer")
+        #expect(ownerID == nil)
     }
 
     @Test func blueprintDecodesPRDSampleJSON() throws {

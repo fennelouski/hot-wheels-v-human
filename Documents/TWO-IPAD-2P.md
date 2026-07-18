@@ -1,6 +1,15 @@
 # Two-iPad 2P — design doc (v2 stretch, PRD §"v2 stretch goal")
 
-Status: **PROPOSAL — do not build without sign-off.**
+Status: **BUILT 2026-07-18** (signed off in-session). Implementation notes:
+- Captain gating shipped as *first-valid-track-wins* — blueprint/config
+  messages carry no sender, so attributing them to the captain would have
+  meant more wire churn. The captain submits on connect, so first-wins is
+  captain-wins in practice; solo keeps last-track-wins (rebuild → resubmit).
+- The READY tap applies to the whole Race-on-TV flow (1P included) — an
+  iPad can't know whether a second one is coming. Solo Arena still
+  auto-readies. Everything else landed as designed; rules unit-tested in
+  `TwoPlayerCoordinationTests`. Real two-iPad verification: piggyback on
+  `MULTIPEER-HANDTEST.md` with a second iPad.
 Scope: two iPads, one Apple TV, one race, one lane each. Split-screen 2P
 on a single iPad stays the default 2P mode; this adds the two-device
 variant on top of the same protocol.

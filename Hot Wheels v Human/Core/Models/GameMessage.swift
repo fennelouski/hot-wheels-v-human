@@ -15,7 +15,9 @@ nonisolated enum GameMessage: Codable, Equatable, Sendable {
     // reliable
     case hello(PlayerInfo, protocolVersion: Int)
     case trackBlueprint(TrackBlueprint)
-    case carDesign(CarDesign)
+    /// `ownerID` = the player this design belongs to (two-iPad 2P pairing).
+    /// Optional and absent from old peers' JSON → arrival-order fallback.
+    case carDesign(CarDesign, ownerID: UUID?)
     case matchConfig(MatchConfig)
     case readyState(playerID: UUID, ready: Bool)
     case raceEvent(RaceEvent)
