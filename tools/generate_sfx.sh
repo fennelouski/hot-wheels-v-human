@@ -34,7 +34,7 @@ grep -E '^\| `[a-z_]+\.wav`' Audio/SFX-SPEC.md | while IFS='|' read -r _ file le
         echo "FAIL $name (HTTP $code): $(head -c 300 "$TMP/$name.mp3")"
         continue
     fi
-    afconvert "$TMP/$name.mp3" -d LEI16 -f WAVE "$OUT/$name.wav"
+    afconvert "$TMP/$name.mp3" -d LEI16 -f WAVE -c 1 "$OUT/$name.wav"
     echo "wrote $OUT/$name.wav"
 done
 echo "done."
