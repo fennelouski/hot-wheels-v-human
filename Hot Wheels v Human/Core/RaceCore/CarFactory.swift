@@ -81,18 +81,25 @@ enum CarFactory {
     }
 
     /// Full visual treatment: per-part paint + the paint-shell overlay
-    /// (livery/stickers/drawing). Used by racing and the turntable preview.
+    /// (livery/stickers/drawing, plus the glitter layer for sparkle paint).
+    /// Used by racing and the turntable preview.
     static func applyCustomization(to visual: Entity, design: CarDesign) async {
         await paint(visual, spec: design.paint, partColors: design.partColors)
         // ponytail: overlay renders on the calling task — 1024² CGContext
         // is a few ms; move off-main only if the profiler ever blames it.
         // (A Task.detached hop here never resumed inside the RealityView
         // make closure and hung the whole rebuild.)
+        let sparkle = design.paint.finish == .sparkle
         await PaintShell.apply(
-            overlay: OverlayComposer.render(livery: design.livery,
-                                            stickers: design.stickers,
-                                            drawing: design.drawingPNG,
-                                            bodyAspect: PaintShell.bodyAspect(of: visual)),
+            overlay: OverlayComposer.render(
+                livery: design.livery,
+                stickers: design.stickers,
+                drawing: design.drawingPNG,
+                bodyAspect: PaintShell.bodyAspect(of: visual),
+                sparkleFillHex: sparkle
+                    ? design.partColors?[CarPaintSlot.body] ?? design.paint.colorHex
+                    : nil),
+            sparkle: sparkle,
             to: visual)
     }
 
@@ -100,7 +107,6 @@ enum CarFactory {
     /// `partColors` overrides the base color per `CarPaintSlot` (mesh name).
     static func paint(_ entity: Entity, spec: PaintSpec,
                       partColors: [String: String]? = nil) async {
-        let sparkle = spec.finish == .sparkle ? await sparkleNormalTexture() : nil
         for part in entity.descendantsAndSelf() {
             guard var model = part.components[ModelComponent.self],
                   part.name != "paint-shell" else { continue }   // overlay keeps its texture
@@ -120,18 +126,11 @@ enum CarFactory {
                     m.metallic = 0.0
                     m.roughness = 0.9
                 case .sparkle:
+                    // Base coat only — the glitter grain renders on the
+                    // paint shell, whose computed UVs are actually 2D
+                    // (the Kenney atlas UVs are ~1D and only make streaks).
                     m.metallic = 1.0
-                    m.roughness = 0.35
-                    if let sparkle {
-                        m.normal = .init(texture: .init(sparkle))
-                        // Kenney palette-atlas UVs are tiny islands; a big
-                        // scale spreads the noise across them so the glitter
-                        // reads at car scale.
-                        // ponytail: those UVs are ~1D, so this reads as
-                        // metal-flake streaks, not true glitter — upgrade
-                        // path is a ShaderGraph sparkle if it wears thin.
-                        m.textureCoordinateTransform = .init(scale: [180, 180])
-                    }
+                    m.roughness = 0.3
                 }
                 return m
             }
@@ -139,34 +138,6 @@ enum CarFactory {
         }
     }
 
-    /// 64² random-normal noise, built once — the "glitter" of sparkle paint.
-    private static var cachedSparkleNormal: TextureResource?
-    private static func sparkleNormalTexture() async -> TextureResource? {
-        if let cachedSparkleNormal { return cachedSparkleNormal }
-        let size = 64
-        var bytes = [UInt8]()
-        bytes.reserveCapacity(size * size * 4)
-        for _ in 0..<(size * size) {
-            let nx = Float.random(in: -0.55...0.55)
-            let ny = Float.random(in: -0.55...0.55)
-            let nz = max(0, 1 - nx * nx - ny * ny).squareRoot()
-            for component in [nx, ny, nz] {
-                bytes.append(UInt8((component * 0.5 + 0.5) * 255))
-            }
-            bytes.append(255)
-        }
-        guard let provider = CGDataProvider(data: Data(bytes) as CFData),
-              let image = CGImage(width: size, height: size, bitsPerComponent: 8,
-                                  bitsPerPixel: 32, bytesPerRow: size * 4,
-                                  space: CGColorSpaceCreateDeviceRGB(),
-                                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue),
-                                  provider: provider, decode: nil,
-                                  shouldInterpolate: false, intent: .defaultIntent),
-              let texture = try? await TextureResource(
-                image: image, options: .init(semantic: .normal)) else { return nil }
-        cachedSparkleNormal = texture
-        return texture
-    }
 
     #if canImport(UIKit)
     private static func platformColor(hex: String) -> UIColor {

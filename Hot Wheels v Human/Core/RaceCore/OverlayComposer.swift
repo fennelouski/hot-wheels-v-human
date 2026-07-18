@@ -24,11 +24,17 @@ nonisolated enum OverlayComposer {
     /// there is nothing to draw — callers then remove the shell entirely.
     /// `bodyAspect` = car length / height; stickers shrink on the u axis by
     /// it so they stay round on the car instead of smearing lengthwise.
+    /// `sparkleFillHex`: sparkle paint fills the whole overlay with this
+    /// color at low alpha first — an alpha-blended shell contributes no
+    /// specular where it's fully transparent, so without the film the
+    /// glitter would only appear on livery/sticker pixels.
     static func render(livery: LiverySpec?, stickers: [StickerPlacement]? = nil,
                        drawing: Data? = nil, bodyAspect: CGFloat = 1,
+                       sparkleFillHex: String? = nil,
                        size: Int = textureSize) -> CGImage? {
         let stickers = stickers ?? []
-        guard livery != nil || !stickers.isEmpty || drawing != nil else { return nil }
+        guard livery != nil || !stickers.isEmpty || drawing != nil
+                || sparkleFillHex != nil else { return nil }
         guard let ctx = CGContext(
             data: nil, width: size, height: size, bitsPerComponent: 8,
             bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
@@ -37,6 +43,10 @@ nonisolated enum OverlayComposer {
         // matching v = 0 at the car's bottom).
         ctx.scaleBy(x: CGFloat(size), y: CGFloat(size))
 
+        if let sparkleFillHex {
+            ctx.setFillColor(cgColor(hex: sparkleFillHex, alpha: 0.32))
+            ctx.fill(CGRect(x: 0, y: 0, width: 1, height: 1))
+        }
         // Bottom layer: the kid's drawing (canvas y-down → flip into UV space).
         if let drawing, let provider = CGDataProvider(data: drawing as CFData),
            let image = CGImage(pngDataProviderSource: provider, decode: nil,

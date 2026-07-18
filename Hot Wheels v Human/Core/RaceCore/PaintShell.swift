@@ -10,8 +10,12 @@
 //
 
 import CoreGraphics
+import Foundation
 import RealityKit
 import simd
+#if canImport(UIKit)
+import UIKit
+#endif
 
 /// Pure geometry helpers — unit-tested.
 nonisolated enum ShellGeometry {
@@ -138,24 +142,37 @@ enum PaintShell {
     }
 
     /// Attach (or refresh) the overlay shell on a painted car visual.
-    /// No overlay content → removes any existing shell. When the shell
-    /// already exists only the texture is swapped (fast path for live edits).
-    static func apply(overlay: CGImage?, to visual: Entity) async {
+    /// `sparkle` adds a fine noise normal map — the shell's computed UVs
+    /// are real 2D, so the glitter has grain in both directions (the Kenney
+    /// atlas UVs are ~1D and can only streak). Nothing to show → removes
+    /// any existing shell. When the shell already exists only the material
+    /// is swapped (fast path for live edits).
+    static func apply(overlay: CGImage?, sparkle: Bool = false, to visual: Entity) async {
         guard let body = bodyEntity(of: visual) else { return }
         let existing = body.children.first { $0.name == "paint-shell" }
-        guard let overlay else {
+        guard overlay != nil || sparkle else {
             existing?.removeFromParent()
             return
         }
-        guard let texture = try? await TextureResource(
-            image: overlay, options: .init(semantic: .color)) else { return }
 
         var material = PhysicallyBasedMaterial()
-        material.baseColor = .init(texture: .init(texture))
-        material.roughness = 0.5
-        material.metallic = 0.0
+        if let overlay {
+            guard let texture = try? await TextureResource(
+                image: overlay, options: .init(semantic: .color)) else { return }
+            material.baseColor = .init(texture: .init(texture))
+        } else {
+            material.baseColor = .init(tint: .clear)
+        }
+        material.roughness = sparkle ? 0.32 : 0.5
+        material.metallic = sparkle ? 1.0 : 0.0
         material.blending = .transparent(opacity: 1.0)
         material.opacityThreshold = 0.0
+        if sparkle, let noise = await sparkleNormalTexture() {
+            // No textureCoordinateTransform: it is shared with the overlay
+            // texture (tiling it turns the livery into wrapping paper), so
+            // the grain frequency is baked into the noise texture's size.
+            material.normal = .init(texture: .init(noise))
+        }
 
         if let shell = existing as? ModelEntity {
             shell.model?.materials = [material]
@@ -166,5 +183,35 @@ enum PaintShell {
         let shell = ModelEntity(mesh: shellMesh, materials: [material])
         shell.name = "paint-shell"
         body.addChild(shell)
+    }
+
+    /// Random-normal noise sampled at UV 1:1, built once — the "glitter" of
+    /// sparkle paint. 512² ⇒ each glitter fleck is ~1/500 of the car side.
+    private static var cachedSparkleNormal: TextureResource?
+    static func sparkleNormalTexture() async -> TextureResource? {
+        if let cachedSparkleNormal { return cachedSparkleNormal }
+        let size = 512
+        var bytes = [UInt8]()
+        bytes.reserveCapacity(size * size * 4)
+        for _ in 0..<(size * size) {
+            let nx = Float.random(in: -0.55...0.55)
+            let ny = Float.random(in: -0.55...0.55)
+            let nz = max(0, 1 - nx * nx - ny * ny).squareRoot()
+            for component in [nx, ny, nz] {
+                bytes.append(UInt8((component * 0.5 + 0.5) * 255))
+            }
+            bytes.append(255)
+        }
+        guard let provider = CGDataProvider(data: Data(bytes) as CFData),
+              let image = CGImage(width: size, height: size, bitsPerComponent: 8,
+                                  bitsPerPixel: 32, bytesPerRow: size * 4,
+                                  space: CGColorSpaceCreateDeviceRGB(),
+                                  bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue),
+                                  provider: provider, decode: nil,
+                                  shouldInterpolate: false, intent: .defaultIntent),
+              let texture = try? await TextureResource(
+                image: image, options: .init(semantic: .normal)) else { return nil }
+        cachedSparkleNormal = texture
+        return texture
     }
 }
