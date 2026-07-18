@@ -39,7 +39,7 @@ enum TrackSpawner {
             try await addStaticCollision(to: model)
             root.addChild(model)
 
-            if false, let overlayName = piece.definition.overlayModelName {  // TEMP: catapult experiment
+            if let overlayName = piece.definition.overlayModelName {
                 let overlay = try await assets.entity(named: overlayName)
                 overlay.name = "overlay-\(piece.index)-\(overlayName)"
                 overlay.position = piece.overlayPosition

@@ -179,11 +179,28 @@ struct SolverTests {
 /// shapes.) Regression for the hillUp/hillDown model mix-up: hill-BEGINNING
 /// is a slope-transition piece with an angled connector; flat→flat is
 /// hill-COMPLETE.
-/// Cosmetic support legs under elevated track. The chase camera can't see
-/// undersides, so the "do they float / do they pierce the bed" question is
-/// settled here rather than by eye.
+/// What TrackSpawner actually puts in the entity tree. The chase camera
+/// can't see undersides, so "do the legs float / pierce the bed" is settled
+/// here rather than by eye — and gate overlays are pinned because nothing
+/// else covers them: a `if false,` debug experiment once disabled every
+/// overlay (and with it every CheckpointComponent) and the whole suite
+/// still went green.
 @MainActor
-struct SupportLegTests {
+struct TrackSpawnerTests {
+
+    /// Gate arches carry the CheckpointComponent that RaceRulesSystem
+    /// counts laps and finishes with — no overlay, no finish line.
+    @Test func gatesSpawnOverlaysCarryingCheckpoints() async throws {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .straight, .curve90L, .finishGate]))
+        let root = try await TrackSpawner.spawn(layout: layout)
+        let checkpoints = root.children.compactMap {
+            $0.components[CheckpointComponent.self]
+        }
+        #expect(checkpoints.count == 2)                       // start + finish
+        #expect(checkpoints.filter(\.isFinish).count == 1)
+        #expect(root.children.contains { $0.name.hasPrefix("overlay-") })
+    }
 
     /// Climbs to level 2 and back down, so the top flats need two legs each.
     private static let climb: [PieceType] =
