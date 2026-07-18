@@ -21,7 +21,12 @@ nonisolated enum RaceTuning {
 
     // MARK: Track
 
-    static let maxTrackPieces = 40
+    /// Sized to fit the biggest starter track (The Mega Mega Track, 75).
+    static let maxTrackPieces = 75
+
+    /// Races in a TV series: players draft ranked tracks, the host
+    /// interleaves picks to fill this many, READY advances through them.
+    static let raceSeriesLength = 5
 
     /// Lane spline waypoint spacing, metres (~0.1 per TrackKit README).
     static let waypointSpacing: Float = 0.1
@@ -74,6 +79,21 @@ nonisolated enum RaceTuning {
     /// Further than this from the lane = off the rails: no drive, no
     /// steering. Physics (and the destruction rules) own the car now.
     static let offSplineCutoff: Float = 0.5
+
+    /// Cornering "slot grip": the track feeds the car the centripetal force
+    /// a curve demands (m·v²·κ, DriveSystem feedforward) but never more than
+    /// this. Sized `gripMargin` above what the small curve (r 0.4) needs at
+    /// cruise maxSpeed — so plain driving corners clean, while a BOOSTED car
+    /// exceeds grip and flies off the curve. Flying off is the game; flying
+    /// off without touching the boost button was a bug (long straights let
+    /// cars reach cruise, and the 12 N steering clamp can't corner above
+    /// ~1.7 m/s).
+    static let smallCurveRadius: Float = 0.4
+    static let gripMargin: Float = 1.1
+    static func corneringGrip(_ chassis: ChassisClass) -> Float {
+        chassisMass[chassis]! * maxSpeed[chassis]! * maxSpeed[chassis]!
+            / smallCurveRadius * gripMargin
+    }
 
     // MARK: Boost
 

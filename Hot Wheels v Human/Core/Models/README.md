@@ -14,6 +14,6 @@ C-series additions (character creation — `Documents/CHARACTER-SPEC.md`)
 - `DriverProfile` grew hair/eye/pants colors, hat, glasses, and faceDrawingPNG — all optional so old JSON decodes. `CarDesign.driver: DriverProfile?` carries the character over the wire inside the design (stamped by `AppModel.stampedRaceDesign()`).
 - `DriverPalette.swift` — every editor swatch, the rig's 32×32 stripe-row ranges, and `nearest(hex:in:)` snapping (shared by the editor and the camera lookalike).
 - `KidProfile.swift` — the local "Who's playing?" profile {id, name, colorHex}.
-- `StarterPresets.swift` — also holds `DriverProfile.presets` (fixed `DA900000-…` UUIDs).
+- `StarterPresets.swift` — the ready-on-first-launch lineup: 7 preset tracks (serpentine sprints, 20/27/35/42/50/60/75 pieces, loop or jump in every track from #3 on), 10 preset cars, 5 preset characters. Fixed UUIDs (`90000000-…` tracks, `CA90…` cars, `DA90…` characters) keep selection identity stable. Lengths + thrill rule asserted in `StarterPresetTests`.
 
 Tests (`Hot Wheels v HumanTests/ModelTests.swift`): Codable round-trips for every message case; blueprint JSON matches PRD §4 sample; enum raw-value stability (wire compat).

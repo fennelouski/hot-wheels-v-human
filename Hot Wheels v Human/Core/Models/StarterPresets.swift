@@ -13,17 +13,109 @@ import Foundation
 
 extension TrackBlueprint {
 
-    /// Starter tracks, easiest first. Names are kid-picked-sounding on
-    /// purpose. All sprints except Dizzy Doughnut (closed circuit).
+    /// The launch lineup: 7 ready-to-race tracks, shortest first
+    /// (20 → 75 pieces), every track from #3 on has a loop or a jump.
+    /// All serpentine sprints — rows of straights joined by U-turns, so
+    /// rows sit 0.8 m apart and can never overlap (validator-proof by
+    /// construction, still unit-tested). Names are kid-picked-sounding
+    /// on purpose. Piece counts are asserted in StarterPresetTests.
     static let presets: [(name: String, blueprint: TrackBlueprint)] = [
-        ("Rocket Ribbon", preset(1, [.startGate, .straight, .straight, .loop, .straight, .finishGate])),
-        ("Wiggle Worm", preset(2, [.startGate, .curve90L, .curve90R, .curve90R, .curve90L, .straight, .finishGate])),
-        ("Mount Kaboom", preset(3, [.startGate, .hillUp, .straight, .bump, .hillDown, .straight, .finishGate])),
-        ("Dizzy Doughnut", preset(4, [.startGate, .straight, .curve90R, .straight, .curve90R,
-                                      .straight, .straight, .curve90R, .straight, .curve90R])),
-        ("Loopy Louie", preset(5, [.startGate, .straight, .loop, .straight, .loop, .straight, .finishGate])),
-        ("Jumpy Junction", preset(6, [.startGate, .straight, .rampJump, .straight, .curve90L, .straight, .finishGate])),
+        ("Wiggle Worm", preset(1, wiggleWorm)),          // 20 — flat & friendly
+        ("Mount Kaboom", preset(2, mountKaboom)),        // 27 — first hills
+        ("Loopy Louie", preset(3, loopyLouie)),          // 35 — first loop
+        ("Jumpy Junction", preset(4, jumpyJunction)),    // 42 — ramp jumps
+        ("Loop-de-Leap", preset(5, loopDeLeap)),         // 50 — loops AND jumps
+        ("Thunder Mountain", preset(6, thunderMountain)),// 60 — two-level climb
+        ("The Mega Mega Track", preset(7, megaMega)),    // 75 — everything
     ]
+
+    // MARK: Track recipes
+
+    private static func straights(_ n: Int) -> [PieceType] {
+        Array(repeating: .straight, count: n)
+    }
+    /// U-turns: two same-way 90° corners flip the heading and step the
+    /// serpentine sideways one row (0.8 m). Alternate R, L, R, … so the
+    /// track always snakes into fresh ground.
+    private static let uTurnR: [PieceType] = [.curve90R, .curve90R]
+    private static let uTurnL: [PieceType] = [.curve90L, .curve90L]
+    /// rampJump shares curve90R's footprint, so a U-turn doubles as a jump.
+    private static let jumpTurnR: [PieceType] = [.rampJump, .curve90R]
+
+    private static let wiggleWorm: [PieceType] = [.startGate]           // 20
+        + straights(2) + [.bump] + straights(3)
+        + uTurnR
+        + straights(3) + [.bump] + straights(2)
+        + uTurnL
+        + straights(2)
+        + [.finishGate]
+
+    private static let mountKaboom: [PieceType] = [.startGate]          // 27
+        + [.straight, .hillUp, .straight, .hillDown, .straight, .bump, .straight]
+        + uTurnR
+        + straights(2) + [.hillUp, .straight, .hillDown] + straights(2)
+        + uTurnL
+        + [.straight, .bump, .straight, .bump, .straight, .bump, .straight]
+        + [.finishGate]
+
+    private static let loopyLouie: [PieceType] = [.startGate]           // 35
+        + straights(2) + [.hillUp, .bump, .hillDown] + straights(3)
+        + uTurnR
+        + straights(3) + [.loop] + straights(4)
+        + uTurnL
+        + straights(2) + [.bump] + straights(2) + [.bump] + straights(2)
+        + uTurnR
+        + straights(3)
+        + [.finishGate]
+
+    private static let jumpyJunction: [PieceType] = [.startGate]        // 42
+        + straights(3) + [.bump] + straights(5)
+        + jumpTurnR
+        + straights(2) + [.hillUp] + straights(3) + [.hillDown] + straights(2)
+        + uTurnL
+        + straights(4) + [.bump] + straights(4)
+        + jumpTurnR
+        + straights(3) + [.bump] + straights(3)
+        + [.finishGate]
+
+    private static let loopDeLeap: [PieceType] = [.startGate]           // 50
+        + straights(4) + [.loop] + straights(6)
+        + jumpTurnR
+        + straights(2) + [.hillUp] + straights(4) + [.hillDown] + straights(2)
+        + uTurnL
+        + straights(3) + [.loop] + straights(6)
+        + uTurnR
+        + straights(2) + [.bump] + straights(5) + [.bump] + straights(2)
+        + [.finishGate]
+
+    private static let thunderMountain: [PieceType] = [.startGate]      // 60
+        + straights(2) + [.hillUp] + straights(2) + [.hillUp] + straights(2)
+        + [.hillDown, .straight, .hillDown, .straight]
+        + jumpTurnR
+        + straights(4) + [.loop] + straights(7)
+        + uTurnL
+        + straights(2) + [.bump] + straights(2) + [.bump] + straights(2)
+        + [.bump] + straights(3)
+        + uTurnR
+        + straights(3) + [.hillUp] + straights(4) + [.hillDown] + straights(3)
+        + uTurnL
+        + straights(2)
+        + [.finishGate]
+
+    private static let megaMega: [PieceType] = [.startGate]             // 75
+        + straights(3) + [.hillUp] + straights(2) + [.bump] + straights(2)
+        + [.hillDown] + straights(3)
+        + jumpTurnR
+        + straights(5) + [.loop] + straights(7)
+        + uTurnL
+        + straights(2) + [.hillUp, .straight, .hillUp] + straights(2)
+        + [.hillDown, .straight, .hillDown] + straights(3)
+        + jumpTurnR
+        + straights(4) + [.loop] + straights(8)
+        + uTurnL
+        + straights(3) + [.bump] + straights(2) + [.bump] + straights(2)
+        + [.bump] + straights(3)
+        + [.finishGate]
 
     private static func preset(_ n: Int, _ types: [PieceType]) -> TrackBlueprint {
         TrackBlueprint(
@@ -77,6 +169,30 @@ extension CarDesign {
                livery: LiverySpec(pattern: .starField, colorHex: "#FFD500", scale: 1),
                stickers: [StickerPlacement(symbol: "moon.stars.fill", uv: [0.62, 0.4],
                                            scale: 1.1, rotation: 0.15, colorHex: "#F2F2F7")]),
+        preset(7, "Zebra Zoom", chassis: .balancedFormula, tires: .slickRacing,
+               paint: PaintSpec(colorHex: "#1C1C1E", finish: .glossy),
+               partColors: [CarPaintSlot.wheels: "#F2F2F7"],
+               livery: LiverySpec(pattern: .racingStripes, colorHex: "#F2F2F7", scale: 1),
+               stickers: [StickerPlacement(symbol: "pawprint.fill", uv: [0.6, 0.45],
+                                           scale: 1, rotation: 0.2, colorHex: "#F2F2F7")]),
+        preset(8, "Tiger Turbo", chassis: .heavyMuscle, tires: .grippyOffroad,
+               paint: PaintSpec(colorHex: "#FF9500", finish: .glossy),
+               partColors: [CarPaintSlot.wheels: "#1C1C1E"],
+               livery: LiverySpec(pattern: .zigzag, colorHex: "#1C1C1E", scale: 1.2),
+               stickers: [StickerPlacement(symbol: "hare.fill", uv: [0.55, 0.42],
+                                           scale: 1.1, rotation: 0, colorHex: "#FFD500")]),
+        preset(9, "Bubblegum Blast", chassis: .superlightDrift, tires: .slickRacing,
+               paint: PaintSpec(colorHex: "#FF2D95", finish: .glossy),
+               partColors: [CarPaintSlot.wheels: "#F2F2F7"],
+               livery: LiverySpec(pattern: .polkaDots, colorHex: "#F2F2F7", scale: 1.1),
+               stickers: [StickerPlacement(symbol: "heart.fill", uv: [0.45, 0.5],
+                                           scale: 1.2, rotation: -0.2, colorHex: "#D62718")]),
+        preset(10, "Robo Racer", chassis: .balancedFormula, tires: .standard,
+               paint: PaintSpec(colorHex: "#8E8E93", finish: .metallic),
+               partColors: [CarPaintSlot.wheels: "#1C1C1E"],
+               livery: LiverySpec(pattern: .lightningBolt, colorHex: "#5AC8FA", scale: 1),
+               stickers: [StickerPlacement(symbol: "gearshape.fill", uv: [0.6, 0.4],
+                                           scale: 1.1, rotation: 0.3, colorHex: "#1C1C1E")]),
     ]
 
     private static func preset(_ n: Int, _ name: String, chassis: ChassisClass, tires: TireType,

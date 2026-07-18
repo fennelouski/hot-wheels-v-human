@@ -22,10 +22,21 @@ struct RootView: View {
     private let launchIntoStress = ProcessInfo.processInfo.arguments.contains("--stress-track")
     /// Dev arg: straight into a 1P race vs the medium robot (AI test loop).
     private let launchIntoRobotRace = ProcessInfo.processInfo.arguments.contains("--robot-race")
-    /// Dev arg: Mount Kaboom (hillUp + bump + hillDown) — hill-seam check.
+    /// Dev arg: Loopy Louie (opens hillUp + bump + hillDown) — hill-seam check.
     private let launchIntoHillTrack = ProcessInfo.processInfo.arguments.contains("--hill-track")
     /// Dev arg mirroring the home-screen Quick Play button.
     private let launchIntoQuickPlay = ProcessInfo.processInfo.arguments.contains("--quick-play")
+    /// Dev arg: `--preset-track <n>` races the demo pair on starter track n
+    /// (0-based) — lets CLI drills hit any of the 7 launch tracks directly.
+    private let launchIntoPresetTrack: Int? = {
+        let args = ProcessInfo.processInfo.arguments
+        guard let flag = args.firstIndex(of: "--preset-track"),
+              args.indices.contains(flag + 1), let n = Int(args[flag + 1])
+        else { return nil }
+        return min(max(n, 0), TrackBlueprint.presets.count - 1)
+    }()
+    /// Dev arg: straight to the Race-on-TV setup screen (track draft UI).
+    private let launchIntoRaceOnTV = ProcessInfo.processInfo.arguments.contains("--race-on-tv")
 
     var body: some View {
         if launchIntoQuickPlay {
@@ -40,6 +51,9 @@ struct RootView: View {
         } else if launchIntoHillTrack {
             SoloArenaView(designs: CarDesign.demoPair,
                           blueprint: TrackBlueprint.presets[2].blueprint)
+        } else if let n = launchIntoPresetTrack {
+            SoloArenaView(designs: CarDesign.demoPair,
+                          blueprint: TrackBlueprint.presets[n].blueprint)
         } else if launchIntoArena {
             SoloArenaView(designs: CarDesign.demoPair)
         } else if launchIntoCustomizer {
@@ -50,6 +64,8 @@ struct RootView: View {
             TrackBuilderView()
         } else if launchIntoGarage {
             NavigationStack { GarageView() }
+        } else if launchIntoRaceOnTV {
+            NavigationStack { RaceOnTVView() }
         } else if Platform.isTV {
             ArenaLobbyView()
         } else if appModel.selectedProfile == nil {

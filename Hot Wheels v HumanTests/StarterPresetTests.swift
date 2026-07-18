@@ -27,6 +27,23 @@ struct StarterPresetTests {
         #expect(Set(names).count == names.count)
     }
 
+    /// The launch lineup contract: 7 tracks at the agreed lengths, and
+    /// every track from #3 on has a loop or a jump (the first two stay
+    /// beginner-flat). Ready-to-play garage: 10+ cars, 5+ characters.
+    @Test func launchLineupIsComplete() {
+        #expect(TrackBlueprint.presets.map(\.blueprint.segments.count)
+                == [20, 27, 35, 42, 50, 60, 75])
+        for (i, preset) in TrackBlueprint.presets.enumerated() {
+            let thrill = preset.blueprint.segments.contains {
+                $0.type == .loop || $0.type == .rampJump
+            }
+            #expect(thrill == (i >= 2),
+                    "\(preset.name): expected thrill=\(i >= 2)")
+        }
+        #expect(CarDesign.presets.count >= 10)
+        #expect(DriverProfile.presets.count >= 5)
+    }
+
     @Test func presetTracksSpanEasyToSpicy() {
         // At least one no-loop starter track and at least one with a loop.
         let loopCounts = TrackBlueprint.presets.map {

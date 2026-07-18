@@ -64,6 +64,33 @@ struct DriveSystem: System {
                     steer *= RaceTuning.steeringMaxForce / magnitude
                 }
                 force += steer
+
+                // Centripetal feedforward — the slot pushes the car around
+                // the curve (PD alone can't: it needs metres of error to
+                // reach cornering force). (t₂−t₁)/ds = κ·n̂ toward the curve
+                // center. Vertical stays with track contact (loops work
+                // today); capped at corneringGrip so boosted cars still fly.
+                if follow.nextIndex + 1 < follow.waypoints.count {
+                    var ahead = follow.waypoints[follow.nextIndex + 1] - target
+                    let aheadLength = simd_length(ahead)
+                    if aheadLength > 1e-5 {
+                        ahead /= aheadLength
+                        // Keep only the normal component: raw (t₂−t₁) has a
+                        // small backward-tangential part that reads as brakes
+                        // (~12 N at the loop entry — enough to stall the climb).
+                        var turn = ahead - tangent
+                        turn -= tangent * simd_dot(turn, tangent)
+                        turn.y = 0
+                        let ds = (tangentLength + aheadLength) / 2
+                        var centripetal = turn * (chassis.mass * speed * speed / ds)
+                        let need = simd_length(centripetal)
+                        let grip = RaceTuning.corneringGrip(chassis)
+                        if need > grip {
+                            centripetal *= grip / need
+                        }
+                        force += centripetal
+                    }
+                }
             }
             force -= velocity * (chassis.dragCoefficient * speed)
 
