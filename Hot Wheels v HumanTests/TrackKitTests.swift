@@ -152,6 +152,22 @@ struct SolverTests {
             $0.x.isFinite && $0.y.isFinite && $0.z.isFinite
         })
     }
+
+    /// TrackSpawner stacks `entryLevel` cosmetic legs of one
+    /// `elevationLevelHeight` each under an elevated piece, so the solver's
+    /// world Y must stay exactly that product — drift and the legs either
+    /// float under the bed or pierce it.
+    @Test func entryHeightMatchesElevationLevel() {
+        // Climb two levels, cruise, come back down.
+        let pieces = TrackLayoutSolver.solve(
+            blueprint([.startGate, .hillUp, .straight, .hillUp,
+                       .straight, .hillDown, .straight, .hillDown])).pieces
+        #expect(pieces.contains { $0.entryLevel == 2 })   // not vacuous
+        for piece in pieces {
+            let expected = Float(piece.entryLevel) * RaceTuning.elevationLevelHeight
+            #expect(abs(piece.entryPosition.y - expected) < 1e-5)
+        }
+    }
 }
 
 /// The catalog's hand-measured geometry vs the REAL bundled models — the
@@ -163,6 +179,53 @@ struct SolverTests {
 /// shapes.) Regression for the hillUp/hillDown model mix-up: hill-BEGINNING
 /// is a slope-transition piece with an angled connector; flat→flat is
 /// hill-COMPLETE.
+/// Cosmetic support legs under elevated track. The chase camera can't see
+/// undersides, so the "do they float / do they pierce the bed" question is
+/// settled here rather than by eye.
+@MainActor
+struct SupportLegTests {
+
+    /// Climbs to level 2 and back down, so the top flats need two legs each.
+    private static let climb: [PieceType] =
+        [.startGate, .straight, .hillUp, .straight, .hillUp,
+         .straight, .hillDown, .straight, .hillDown]
+
+    @Test func elevatedFlatsGetStackedCollisionFreeLegs() async throws {
+        let layout = TrackLayoutSolver.solve(blueprint(Self.climb))
+        let root = try await TrackSpawner.spawn(layout: layout)
+        let legs = root.children.filter { $0.name.hasPrefix("support-") }
+
+        // One leg per level under flat elevated pieces; hills carry none.
+        let expected = layout.pieces
+            .filter { $0.definition.elevationDelta == 0 }
+            .reduce(0) { $0 + $1.entryLevel }
+        #expect(expected > 0)                       // not vacuous
+        #expect(legs.count == expected)
+        // A car that flies off has to fall PAST them.
+        #expect(legs.allSatisfy { $0.components[CollisionComponent.self] == nil })
+    }
+
+    @Test func legStackReachesTheBedItHoldsUp() async throws {
+        let layout = TrackLayoutSolver.solve(blueprint(Self.climb))
+        let root = try await TrackSpawner.spawn(layout: layout)
+        let highest = layout.pieces
+            .filter { $0.entryLevel > 0 && $0.definition.elevationDelta == 0 }
+            .max { $0.entryLevel < $1.entryLevel }!
+        let stack = root.children.filter { $0.name.hasPrefix("support-\(highest.index)-") }
+
+        // Top of the stack tucks inside the 0.06 m bed: no daylight gap
+        // under the track, no post poking up through the driving surface.
+        let reach = stack.max { $0.position.y < $1.position.y }!
+            .visualBounds(relativeTo: nil).max.y
+        #expect(reach <= highest.entryPosition.y + 0.005)
+        #expect(reach >= highest.entryPosition.y - 0.06)
+        // Foot of the stack plants in the mat (−0.03), not hovering over it.
+        let foot = stack.min { $0.position.y < $1.position.y }!
+            .visualBounds(relativeTo: nil).min.y
+        #expect(foot <= -0.025)
+    }
+}
+
 @MainActor
 struct PieceModelGeometryTests {
 
