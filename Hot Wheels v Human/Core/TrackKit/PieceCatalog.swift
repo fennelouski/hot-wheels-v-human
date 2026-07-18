@@ -143,21 +143,27 @@ enum PieceCatalog {
             footprint: FootprintRect(minX: -0.8, minZ: 0, maxX: 0.2, maxZ: 1.0),
             shape: .arc(radius: 0.8, leftTurn: false)),
 
-        // Hill pieces: Kenney hill-beginning rises 0.225 m over a 0.79 m run.
-        // hillDown reuses the same model traversed in reverse (yaw 180°) —
-        // identical ramp geometry, no extra asset. Spline rise is linear for
-        // now; Phase 2 refines to the real S-profile if cars stutter.
+        // Hill pieces: Kenney hill-COMPLETE is the flat→flat rise, 0.2 m
+        // over the standard 0.8 m run with a level exit connector (measured
+        // in Blender: surface −0.14 → +0.06). hill-beginning/-end are
+        // slope-transition pieces with ANGLED connectors the yaw-only
+        // solver can't mate — using -beginning here was why hills left a
+        // 4 cm step at every seam. hillDown reuses the model traversed in
+        // reverse (yaw 180°). Spline rise is linear; refine to the real
+        // S-profile if cars stutter.
         TrackPieceDefinition(
-            type: .hillUp, modelName: "track-wide-straight-hill-beginning",
+            type: .hillUp, modelName: "track-wide-straight-hill-complete",
             modelOffset: bedLift,
-            exitOffset: [0, 0.225, 0.79], elevationDelta: 1,
-            footprint: straightRect, shape: .line(length: 0.79, rise: 0.225)),
+            exitOffset: [0, RaceTuning.elevationLevelHeight, 0.8], elevationDelta: 1,
+            footprint: straightRect,
+            shape: .line(length: 0.8, rise: RaceTuning.elevationLevelHeight)),
 
         TrackPieceDefinition(
-            type: .hillDown, modelName: "track-wide-straight-hill-beginning",
-            modelYaw: .pi, modelOffset: [0, 0.19 - 0.225, 0.79],
-            exitOffset: [0, -0.225, 0.79], elevationDelta: -1,
-            footprint: straightRect, shape: .line(length: 0.79, rise: -0.225)),
+            type: .hillDown, modelName: "track-wide-straight-hill-complete",
+            modelYaw: .pi, modelOffset: [0, 0.19 - RaceTuning.elevationLevelHeight, 0.8],
+            exitOffset: [0, -RaceTuning.elevationLevelHeight, 0.8], elevationDelta: -1,
+            footprint: straightRect,
+            shape: .line(length: 0.8, rise: -RaceTuning.elevationLevelHeight)),
 
         TrackPieceDefinition(
             type: .bump, modelName: "track-wide-straight-bump-up",

@@ -8,6 +8,7 @@
 
 import Foundation
 import Testing
+import RealityKit
 import simd
 @testable import Hot_Wheels_v_Human
 
@@ -148,5 +149,54 @@ struct SolverTests {
         #expect(layout.lanes.center.allSatisfy {
             $0.x.isFinite && $0.y.isFinite && $0.z.isFinite
         })
+    }
+}
+
+/// The catalog's hand-measured geometry vs the REAL bundled models — the
+/// seam where "pieces don't line up" bugs live. Kenney straights/hills have
+/// 0.04 m connector tabs past each end and a 0.06 m thick bed, so:
+///   run  = bounds z-span − 2 × tab
+///   rise = bounds y-span − bed thickness
+/// (Only meaningful for straight-family pieces; corners/loop have their own
+/// shapes.) Regression for the hillUp/hillDown model mix-up: hill-BEGINNING
+/// is a slope-transition piece with an angled connector; flat→flat is
+/// hill-COMPLETE.
+@MainActor
+struct PieceModelGeometryTests {
+
+    private static let tab: Float = 0.04
+    private static let bedThickness: Float = 0.06
+
+    private func measured(_ modelName: String) async throws -> (run: Float, rise: Float) {
+        let entity = try await Entity(named: modelName)
+        let bounds = entity.visualBounds(relativeTo: nil)
+        return (run: (bounds.max.z - bounds.min.z) - 2 * Self.tab,
+                rise: (bounds.max.y - bounds.min.y) - Self.bedThickness)
+    }
+
+    @Test func straightModelMatchesCatalog() async throws {
+        let def = PieceCatalog.definition(for: .straight)
+        let m = try await measured(def.modelName)
+        #expect(abs(m.run - def.exitOffset.z) < 0.005)
+        #expect(abs(m.rise - def.exitOffset.y) < 0.005)
+    }
+
+    @Test func hillModelMatchesCatalog() async throws {
+        let def = PieceCatalog.definition(for: .hillUp)
+        let m = try await measured(def.modelName)
+        #expect(abs(m.run - def.exitOffset.z) < 0.005)
+        #expect(abs(m.rise - def.exitOffset.y) < 0.005)
+    }
+
+    @Test func hillDownMirrorsHillUp() {
+        let up = PieceCatalog.definition(for: .hillUp)
+        let down = PieceCatalog.definition(for: .hillDown)
+        #expect(up.modelName == down.modelName)
+        #expect(down.exitOffset.y == -up.exitOffset.y)
+        #expect(down.exitOffset.z == up.exitOffset.z)
+        // Reversed model: origin shifted so the high-end connector sits at
+        // the traversal entry — bedLift minus the full rise.
+        #expect(abs(down.modelOffset.y - (0.19 - up.exitOffset.y)) < 0.001)
+        #expect(abs(down.modelOffset.z - up.exitOffset.z) < 0.001)
     }
 }

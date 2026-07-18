@@ -22,6 +22,8 @@ struct RootView: View {
     private let launchIntoStress = ProcessInfo.processInfo.arguments.contains("--stress-track")
     /// Dev arg: straight into a 1P race vs the medium robot (AI test loop).
     private let launchIntoRobotRace = ProcessInfo.processInfo.arguments.contains("--robot-race")
+    /// Dev arg: Mount Kaboom (hillUp + bump + hillDown) — hill-seam check.
+    private let launchIntoHillTrack = ProcessInfo.processInfo.arguments.contains("--hill-track")
     /// Dev arg mirroring the home-screen Quick Play button.
     private let launchIntoQuickPlay = ProcessInfo.processInfo.arguments.contains("--quick-play")
 
@@ -35,6 +37,9 @@ struct RootView: View {
             SoloArenaView(designs: CarDesign.demoPair,
                           blueprint: RandomTrackGenerator.generate(
                               pieceCount: RaceTuning.maxTrackPieces))
+        } else if launchIntoHillTrack {
+            SoloArenaView(designs: CarDesign.demoPair,
+                          blueprint: TrackBlueprint.presets[2].blueprint)
         } else if launchIntoArena {
             SoloArenaView(designs: CarDesign.demoPair)
         } else if launchIntoCustomizer {

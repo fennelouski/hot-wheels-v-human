@@ -15,8 +15,9 @@ nonisolated enum RaceTuning {
     static let gravityScale: Float = 0.8
 
     /// Vertical height of one elevation level, metres. Measured from the
-    /// Kenney hill piece at 0.2 conversion scale.
-    static let elevationLevelHeight: Float = 0.225
+    /// Kenney hill-COMPLETE piece at 0.2 conversion scale (Blender: bed
+    /// surface −0.14 at entry → +0.06 at exit).
+    static let elevationLevelHeight: Float = 0.2
 
     // MARK: Track
 
@@ -131,6 +132,10 @@ nonisolated enum RaceTuning {
     static let reactionSteerThreshold: Float = 0.8
     /// Brace when a loop is closer than this many seconds at current speed.
     static let loopBraceLookahead: Float = 0.5
+    /// PiP bust rolls up to this many radians into a full-rate turn.
+    static let reactionLeanAngle: Float = 0.3
+    /// Per-second blend rate for the PiP's smoothed lean/speed readouts.
+    static let reactionMotionSmoothing: Float = 8
 
     // MARK: Audio (Phase 6)
 
