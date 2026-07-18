@@ -67,10 +67,27 @@ struct ArenaHUDView: View {
         .foregroundStyle(.white)
     }
 
+    /// Finishers by time, then the wrecked (a kid's first question is
+    /// "who won?!" — answer it in headline type, keep failure funny).
+    private var ranked: [RaceSession.Racer] {
+        session.racers.sorted {
+            ($0.finishTime ?? .infinity, $0.crashes) < ($1.finishTime ?? .infinity, $1.crashes)
+        }
+    }
+
     private var resultsPanel: some View {
-        VStack(spacing: 16) {
-            Label("RESULTS", systemImage: "flag.checkered")
-                .font(.system(size: 48, weight: .black, design: .rounded))
+        let ranked = ranked
+        let winner = ranked.first(where: { $0.finishTime != nil })
+        return VStack(spacing: 16) {
+            if let winner {
+                Label("\(winner.design.name.uppercased()) WINS!", systemImage: "trophy.fill")
+                    .font(.system(size: 56, weight: .black, design: .rounded))
+                    .foregroundStyle(.yellow)
+            } else {
+                Label("EVERYBODY CRASHED!", systemImage: "burst.fill")
+                    .font(.system(size: 48, weight: .black, design: .rounded))
+                    .foregroundStyle(.orange)
+            }
             Grid(horizontalSpacing: 24, verticalSpacing: 8) {
                 GridRow {
                     Text("Car").bold()
@@ -79,9 +96,15 @@ struct ArenaHUDView: View {
                     Text("Crashes").bold()
                     Text("Best segment").bold()
                 }
-                ForEach(session.racers) { racer in
+                ForEach(ranked) { racer in
                     GridRow {
-                        Text(racer.design.name)
+                        HStack(spacing: 6) {
+                            if racer.id == winner?.id {
+                                Image(systemName: "trophy.fill").foregroundStyle(.yellow)
+                            }
+                            Text(racer.design.name).lineLimit(1)
+                        }
+                        .fixedSize()
                         Text(racer.finishTime.map { String(format: "%.1f s", $0) } ?? "OUT")
                         Text(String(format: "%.1f m/s", racer.topSpeed))
                         Text("\(racer.crashes)")
