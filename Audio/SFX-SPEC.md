@@ -31,6 +31,55 @@ No screeching realism, nothing startling, nothing over ~3 s except loops.
 | `crowd_kids_cheer.wav` | 2.5 s | Small group of kids cheering and laughing happily, short burst, warm and close |
 | `boost_ready_chime.wav` | 1 s | Gentle two-note power-up chime, boost recharged, inviting |
 
+## Full library — the "feel alive" pass (one sound per app moment)
+
+### Customizer & Garage
+
+| File | Len | ElevenLabs prompt |
+|---|---|---|
+| `paint_spray.wav` | 1 s | Spray paint can short burst with a little rattle shake first, playful, clean |
+| `wrench_ratchet.wav` | 0.8 s | Quick toy socket wrench ratchet, three fast clicks, changing a part on a toy car |
+| `tire_bounce.wav` | 0.8 s | Small rubber tire dropped and bouncing once on a table, rubbery boing |
+| `garage_door.wav` | 1.5 s | Small toy garage door rolling up quickly with a light rattle and soft clunk stop |
+| `car_select_vroom.wav` | 1 s | Short excited toy car engine rev, vroom-vroom, eager and cute |
+
+### TrackBuilder
+
+| File | Len | ElevenLabs prompt |
+|---|---|---|
+| `piece_delete_pop.wav` | 0.6 s | Reverse suction pop, toy piece plucked away, quick and comical |
+| `shuffle_dice.wav` | 1 s | Handful of plastic dice shaken in cupped hands and rolled on a table, playful rummage |
+| `track_save_stamp.wav` | 0.8 s | Big satisfying rubber stamp thump on paper with a little squeak, official and fun |
+| `nope_wobble.wav` | 0.6 s | Friendly springy boing wobble, gentle cartoon nope, soft and silly not harsh |
+
+### Lobby & navigation
+
+| File | Len | ElevenLabs prompt |
+|---|---|---|
+| `player_join_horn.wav` | 1 s | Cheerful little party horn toot with a tiny confetti shake, someone arrived |
+| `ready_bell.wav` | 0.7 s | Bright bicycle bell double ring, playful and eager |
+| `screen_whoosh.wav` | 0.6 s | Soft quick air whoosh, page sliding, light and smooth |
+
+### Race moments
+
+| File | Len | ElevenLabs prompt |
+|---|---|---|
+| `lap_bell.wav` | 1 s | Boxing ring style bell single clear ding, final lap announcement, bright |
+| `off_track_alarm.wav` | 1 s | Descending slide whistle, comical falling feeling, silly not scary |
+| `stuck_wobble.wav` | 1.2 s | Toy car rocking back and forth stuck, rhythmic plastic creak wobble, comical struggle |
+| `results_tally.wav` | 2 s | Quick ascending xylophone run with a final happy ding, scores adding up |
+| `rematch_ding.wav` | 0.7 s | Game show bell ding with a sparkle, lets go again feeling |
+| `camera_shutter.wav` | 0.5 s | Toy camera click with a small motorized winding, single snapshot |
+
+### Driver reactions (ReactionCam)
+
+| File | Len | ElevenLabs prompt |
+|---|---|---|
+| `driver_woohoo.wav` | 1.2 s | Cartoon character joyful woo-hoo exclamation, high pitched and gleeful, single voice |
+| `driver_uh_oh.wav` | 1 s | Cartoon character worried uh-oh, cute and comical, single voice |
+| `driver_giggle.wav` | 1.5 s | Cartoon character infectious little giggle fit, bubbly and warm, single voice |
+| `driver_dizzy.wav` | 1.5 s | Cartoon dizzy warbling wah-wah-wah with little stars feeling, after a tumble, comical |
+
 ## Music (NOT ElevenLabs SFX — 22 s API limit)
 
 `workshop_ambience.m4a` and `race_intensity.m4a` still come from the sources in
@@ -42,6 +91,7 @@ Convert to AAC: `afconvert in.mp3 -d aac -f m4af out.m4a`.
 - Rerun `tools/generate_sfx.sh <name>` to regenerate one sound; no arg = all missing ones.
 - ElevenLabs output is licensed per your ElevenLabs plan (commercial use on paid tiers) —
   log plan/date here when generated, same discipline as Graphics/.
-- **Generated 2026-07-18**: all 12 SFX via ElevenLabs sound-generation API (account key from
-  PictureGrid, saved in `~/.env.local`). 4.6 MB total, 44.1 kHz WAV.
+- **Generated 2026-07-18**: all 34 SFX via ElevenLabs sound-generation API (account key from
+  PictureGrid, saved in `~/.env.local`). 4.3 MB total, 44.1 kHz **mono** WAV — mono is
+  deliberate: RealityKit spatial audio wants mono sources it can place in 3D.
 - Keep total audio < 10 MB (WAV SFX at 44.1 kHz mono are ~90 KB/s — fine).
