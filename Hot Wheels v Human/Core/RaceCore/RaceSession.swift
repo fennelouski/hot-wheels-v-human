@@ -178,6 +178,21 @@ final class RaceSession {
         }
     }
 
+    /// Is a loop piece coming up within `seconds` at current speed?
+    /// (ReactionDirector's "brace" input.)
+    func loopAhead(for racerID: UUID, within seconds: Float) -> Bool {
+        guard let racer = racers.first(where: { $0.id == racerID }),
+              let follow = racer.entity?.components[LaneFollowComponent.self],
+              racer.speed > 0.1 else { return false }
+        for (piece, type) in pieceTypes.enumerated() where type == .loop {
+            let start = pieceStartIndices[piece]
+            guard start >= follow.nextIndex else { continue }
+            let distance = Float(start - follow.nextIndex) * RaceTuning.waypointSpacing
+            return distance / racer.speed < seconds
+        }
+        return false
+    }
+
     /// Fires the boost if the meter is full (server-side validation lives
     /// here so the networked path can reuse it).
     func requestBoost(playerID: UUID) {

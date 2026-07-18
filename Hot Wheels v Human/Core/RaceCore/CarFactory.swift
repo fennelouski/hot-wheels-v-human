@@ -65,6 +65,17 @@ enum CarFactory {
         car.components.set(PhysicsMotionComponent())
         car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives))
         car.components.set(LaneFollowComponent(waypoints: lane))
+
+        // The little human, riding hip-deep so the standing rig reads as
+        // seated (legs hidden inside the chassis).
+        if let driver = try? await assets.entity(named: "driver-idle") {
+            paint(driver, spec: design.paint)
+            let carHeight = bounds.extents.y
+            let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
+            driver.scale = .init(repeating: scale)
+            driver.position = [0, carHeight * (0.5 - RaceTuning.driverSinkRatio), 0]
+            car.addChild(driver)
+        }
         return car
     }
 

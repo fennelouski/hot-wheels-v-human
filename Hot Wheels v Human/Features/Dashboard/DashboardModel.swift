@@ -56,6 +56,12 @@ final class DashboardModel {
         transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
     }
 
+    /// Hold-to-show driver PiP on the TV (Phase 6). Reliable — a lost
+    /// "off" would strand the PiP on screen.
+    func setReactionCam(on: Bool) {
+        transport.send(.reactionCam(playerID: player.id, on: on), reliably: true)
+    }
+
     /// Boost taps ride the unreliable channel ×3 with a dedupe token.
     func fireBoost() {
         guard (myCar?.boostMeter ?? 0) >= 1 else { return }

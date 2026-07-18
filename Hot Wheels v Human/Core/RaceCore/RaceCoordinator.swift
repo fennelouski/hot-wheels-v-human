@@ -22,6 +22,8 @@ final class RaceCoordinator {
     private(set) var players: [PlayerInfo] = []
     private(set) var transportState: TransportState = .idle
     private(set) var lastRejection: String?
+    /// Players currently holding their Reaction Cam button (ArenaView PiPs).
+    private(set) var reactionCamsOn: Set<UUID> = []
 
     private let transport: any GameTransport
     private var designs: [CarDesign] = []
@@ -98,8 +100,8 @@ final class RaceCoordinator {
             if boostDedupe.firstSighting(token) {
                 session.requestBoost(playerID: playerID)
             }
-        case .reactionCam:
-            break   // Phase 6
+        case .reactionCam(let playerID, let on):
+            if on { reactionCamsOn.insert(playerID) } else { reactionCamsOn.remove(playerID) }
         case .raceEvent, .raceSnapshot:
             break   // host-authored, never inbound
         }

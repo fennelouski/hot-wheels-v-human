@@ -104,6 +104,24 @@ nonisolated enum RaceTuning {
     /// Hard AI refuses to boost if a loop appears within this many pieces ahead.
     static let aiLoopLookaheadPieces = 2
 
+    // MARK: Drivers & reactions (Phase 6)
+
+    /// Quaternius rig exports at 5.54 m tall; drivers ride hip-deep in the
+    /// chassis (legs hidden inside the body — no seated pose needed).
+    static let driverSourceHeight: Float = 5.54
+    /// Driver height as a fraction of the car's visual height.
+    static let driverHeightRatio: Float = 0.9
+    /// How far below the car's roofline the driver sinks (fraction of car height).
+    static let driverSinkRatio: Float = 0.5
+    /// Reaction states hold at least this long so the PiP never flickers.
+    static let reactionMinHold: Float = 0.4
+    /// Event reactions (boost push-back, crash facepalm) play this long.
+    static let reactionOverrideHold: Float = 1.5
+    /// Yaw rate (rad/s) that reads as "leaning into a turn".
+    static let reactionSteerThreshold: Float = 0.8
+    /// Brace when a loop is closer than this many seconds at current speed.
+    static let loopBraceLookahead: Float = 0.5
+
     // MARK: Networking cadence
 
     /// RaceSnapshot broadcast rate, Hz (TV → iPads).

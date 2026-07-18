@@ -31,6 +31,9 @@ struct DashboardView: View {
                 BoostButtonView(meter: car.boostMeter) {
                     model.fireBoost()
                 }
+                ReactionCamButton { on in
+                    model.setReactionCam(on: on)
+                }
                 .padding(.bottom, 12)
             } else {
                 Spacer()
@@ -70,6 +73,25 @@ struct DashboardView: View {
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.6))
         }
+    }
+}
+
+/// Hold to put your driver's reaction cam up on the TV (README: "hold Up").
+struct ReactionCamButton: View {
+    let setOn: (Bool) -> Void
+    @State private var holding = false
+
+    var body: some View {
+        Text("🎥 HOLD FOR CAM")
+            .font(.system(size: 20, weight: .heavy, design: .rounded))
+            .frame(width: 240, height: 64)
+            .background(holding ? .yellow.opacity(0.4) : .white.opacity(0.1),
+                        in: Capsule())
+            .foregroundStyle(.white)
+            .onLongPressGesture(minimumDuration: .infinity) {} onPressingChanged: { pressing in
+                holding = pressing
+                setOn(pressing)
+            }
     }
 }
 
