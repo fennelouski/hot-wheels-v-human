@@ -65,6 +65,10 @@ struct GarageView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .navigationTitle("Garage")
+        #if os(iOS)
+        // Dark app background under a default (light) nav bar → invisible title.
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        #endif
         .onAppear { SoundBank.shared.play("garage_door") }
     }
 

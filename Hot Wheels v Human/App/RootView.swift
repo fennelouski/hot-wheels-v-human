@@ -16,13 +16,18 @@ struct RootView: View {
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
+    private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
     private let launchIntoStress = ProcessInfo.processInfo.arguments.contains("--stress-track")
     /// Dev arg: straight into a 1P race vs the medium robot (AI test loop).
     private let launchIntoRobotRace = ProcessInfo.processInfo.arguments.contains("--robot-race")
+    /// Dev arg mirroring the home-screen Quick Play button.
+    private let launchIntoQuickPlay = ProcessInfo.processInfo.arguments.contains("--quick-play")
 
     var body: some View {
-        if launchIntoRobotRace {
+        if launchIntoQuickPlay {
+            QuickPlayView()
+        } else if launchIntoRobotRace {
             SoloArenaView(designs: [CarDesign.demoPair[0]],
                           config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
         } else if launchIntoStress {
@@ -35,6 +40,8 @@ struct RootView: View {
             CustomizerView()
         } else if launchIntoBuilder {
             TrackBuilderView()
+        } else if launchIntoGarage {
+            NavigationStack { GarageView() }
         } else if Platform.isTV {
             ArenaLobbyView()
         } else {
@@ -48,6 +55,16 @@ struct RootView: View {
             VStack(spacing: 20) {
                 Text("iPad Workshop")
                     .font(.system(size: 64, weight: .heavy, design: .rounded))
+                NavigationLink {
+                    QuickPlayView()
+                } label: {
+                    Label("QUICK PLAY!", systemImage: "play.fill")
+                        .font(.system(size: 44, weight: .black, design: .rounded))
+                        .frame(width: 660, height: 96)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
                 SpinningCarView()
                     .frame(maxHeight: 240)
                 Grid(horizontalSpacing: 20, verticalSpacing: 20) {
@@ -86,6 +103,20 @@ struct RootView: View {
         }
         .buttonStyle(.bordered)
         .tint(.yellow)
+    }
+}
+
+/// Quick Play: zero decisions — random starter car, random starter track,
+/// medium robot, straight into Solo Arena. `--quick-play` launches here.
+struct QuickPlayView: View {
+    // @State so the dice roll once per visit, not on every body re-eval.
+    @State private var car = CarDesign.presets.randomElement()!
+    @State private var track = TrackBlueprint.presets.randomElement()!.blueprint
+
+    var body: some View {
+        SoloArenaView(designs: [car], blueprint: track,
+                      config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
+            .onAppear { SoundBank.shared.play("grid_rev_anticipation") }
     }
 }
 
