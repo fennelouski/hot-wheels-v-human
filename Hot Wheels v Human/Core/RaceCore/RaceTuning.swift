@@ -208,6 +208,11 @@ nonisolated enum RaceTuning {
     /// 0.4 missed a 5 m/s car between frames at low frame rates.
     static let finishCatchRadius: Float = 0.7
 
+    /// Waypoints of lead-in before a loop where the chase camera starts
+    /// swinging to its 3/4 side angle, so the loop reads as a circle rather
+    /// than the edge-on wall it is from straight behind. ~2 m at 0.1 spacing.
+    static let loopCamLead: Int = 20
+
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 
     /// Car is destroyed when it falls this far below the track plane, metres.

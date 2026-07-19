@@ -46,6 +46,7 @@ struct ArenaView: View {
                 let feed = reactionFeed
                 let audio = arenaAudio
                 var smoothed = SIMD3<Float>(0, 2.2, -3)
+                var loopBias: Float = 0   // 0 = chase from behind, 1 = 3/4 side (loops)
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
@@ -59,7 +60,24 @@ struct ArenaView: View {
                     let distance = max(1.6, spread * 2.2)
                     // 0.4 keeps the horizon + sky dome in the top of the
                     // frame (0.65 looked straight down at the play mat).
-                    let goal = mid + SIMD3<Float>(0, distance * 0.4, -distance)
+                    // A loop's circle lies in the plane of travel, so from
+                    // straight behind it's edge-on — it reads as a wall, not
+                    // a loop ("facing the wrong way"). Swing to a 3/4 side
+                    // angle while a car is on or nearing a loop so the ring
+                    // reads as the circle it is. loopBias eases the swing;
+                    // detection is via the loopRanges the follower carries.
+                    let nearLoop = session.racers.contains { racer in
+                        guard let e = racer.entity, e.isEnabled,
+                              let f = e.components[LaneFollowComponent.self] else { return false }
+                        return f.loopRanges.contains { r in
+                            f.nextIndex >= r.lowerBound - RaceTuning.loopCamLead
+                                && f.nextIndex <= r.upperBound
+                        }
+                    }
+                    loopBias = simd_mix(loopBias, nearLoop ? 1 : 0, 0.08)
+                    let behind = SIMD3<Float>(0, distance * 0.4, -distance)
+                    let side = SIMD3<Float>(distance * 0.9, distance * 0.4, -distance * 0.35)
+                    let goal = mid + simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
                     smoothed = simd_mix(smoothed, goal, SIMD3<Float>(repeating: 0.04))
                     cameraEntity.look(at: mid, from: smoothed, relativeTo: nil)
                 }
