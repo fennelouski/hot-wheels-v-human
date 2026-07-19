@@ -3,8 +3,10 @@
 //  Hot Wheels v Human
 //
 //  Slot-car propulsion: constant drive force along the lane spline,
-//  PD steering toward it, soft magnet while near it. Cars can't leave
-//  their lane except by physics accident — flying off IS the game.
+//  PD steering toward it, soft magnet while near it. Straying far enough
+//  to leave the lane is recovered from, not surrendered to — a car only
+//  gets real air deliberately (ramp, boost), and the track reels back
+//  anything still out there after the grace window.
 //  All gains live in RaceTuning.
 //
 
@@ -17,6 +19,10 @@ struct DriveSystem: System {
 
     func update(context: SceneUpdateContext) {
         guard RaceEventBus.shared.raceActive else { return }
+        // Clamped like RaceRulesSystem's: an asset-load hitch delivers a
+        // multi-second frame, and raw dt would burn the whole recovery
+        // grace window in one step.
+        let dt = min(Float(context.deltaTime), 0.1)
         for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
             guard let car = entity as? ModelEntity,
                   var follow = car.components[LaneFollowComponent.self],
@@ -67,25 +73,36 @@ struct DriveSystem: System {
             guard tangentLength > 1e-5 else { continue }
             tangent /= tangentLength
 
-            let velocity = car.physicsMotion?.linearVelocity ?? .zero
-            let speed = simd_length(velocity)
+            var velocity = car.physicsMotion?.linearVelocity ?? .zero
+            var speed = simd_length(velocity)
             let chassis = state.design.chassis
             let tires = state.design.tires
+
+            // Clamp the velocity itself, not just the forces: depenetration
+            // hands back speeds no force-side guard can undo afterwards, and
+            // that single frame is what launches a car off the map.
+            let ceiling = RaceTuning.maxSpeed[chassis]! * RaceTuning.speedCeilingFactor
+            if speed > ceiling, var motion = car.physicsMotion {
+                velocity *= ceiling / speed
+                speed = ceiling
+                motion.linearVelocity = velocity
+                car.components.set(motion)
+            }
 
             let toCar = position - previous
             let along = simd_dot(toCar, tangent)
             let lateral = toCar - tangent * along
             let offset = simd_length(lateral)
 
-            // Off the rails → physics owns the car (destruction rules will
-            // catch it). Drive/steer only while near the lane — and never
-            // past its END: lateral offset is measured against an infinite
-            // line, so a car that overshot the finish would be driven
-            // dead-straight to the edge of the world (sim drills).
+            // Drive/steer only while near the lane — and never past its
+            // END: lateral offset is measured against an infinite line, so
+            // a car that overshot the finish would be driven dead-straight
+            // to the edge of the world (sim drills).
             let pastEnd = follow.nextIndex >= follow.waypoints.count - 1
                 && along > tangentLength + 0.1
             var force = SIMD3<Float>.zero
             if offset < RaceTuning.offSplineCutoff, !pastEnd {
+                state.offLaneSeconds = 0
                 if speed < RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]! {
                     force += tangent * RaceTuning.driveForce[chassis]!
                 }
@@ -139,6 +156,27 @@ struct DriveSystem: System {
                         }
                         force += centripetal
                     }
+                }
+            } else if !pastEnd {
+                // Off the rails. The track reels the car back rather than
+                // surrendering it — losing a car to a physics accident is a
+                // kid watching it disappear for no reason, not a skill
+                // check. Same bargain as the loop motor.
+                //
+                // The grace window is what keeps jumps: deliberate air (a
+                // ramp, a boosted lip) is over long before it elapses, so
+                // this never fights a jump — only a flight that has clearly
+                // stopped being one.
+                state.offLaneSeconds += dt
+                if state.offLaneSeconds > RaceTuning.laneRecoveryGrace {
+                    let lateralSpeed = velocity - tangent * simd_dot(velocity, tangent)
+                    var recover = -(lateral * RaceTuning.laneRecoveryKp
+                                    + lateralSpeed * RaceTuning.laneRecoveryKd) * chassis.mass
+                    let magnitude = simd_length(recover)
+                    if magnitude > RaceTuning.laneRecoveryMaxForce {
+                        recover *= RaceTuning.laneRecoveryMaxForce / magnitude
+                    }
+                    force += recover
                 }
             }
             force -= velocity * (chassis.dragCoefficient * speed)

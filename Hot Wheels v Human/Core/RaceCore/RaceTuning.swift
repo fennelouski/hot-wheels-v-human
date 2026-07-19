@@ -73,16 +73,46 @@ nonisolated enum RaceTuning {
     /// PD steering gains (proportional on lateral error, damping on lateral velocity).
     static let steeringKp: Float = 18
     static let steeringKd: Float = 4
-    /// Soft "magnet" toward the lane while within this offset — keeps the
-    /// slot-car feel but lets big physics violations (flying off) win.
+    /// Soft "magnet" toward the lane while within this offset — the
+    /// slot-car feel close in. Big violations are handled further out by
+    /// the recovery gains below, not by surrendering the car.
     static let laneMagnetRange: Float = 0.15
     static let laneMagnetStrength: Float = 8
     /// Steering can never exceed this force — an unclamped PD controller
     /// catapults any car that strays far from its spline.
     static let steeringMaxForce: Float = 12
     /// Further than this from the lane = off the rails: no drive, no
-    /// steering. Physics (and the destruction rules) own the car now.
+    /// steering — the recovery gains below take over instead.
     static let offSplineCutoff: Float = 0.5
+
+    // MARK: Staying on the track
+
+    // Kid-first, same bargain as the loop motor: the track cheats in the
+    // player's favour. Losing a car to a physics accident isn't a skill
+    // check, it's a kid watching their car disappear for no reason.
+
+    /// Hard ceiling on car speed, × the chassis top speed. Depenetration
+    /// and similar solver artifacts hand back velocities an order of
+    /// magnitude past anything the drive force can produce (25–38 m/s
+    /// against a 4–5 m/s car, in sim drills) — no force-side guard can
+    /// undo that after the fact, so the velocity itself is clamped. This
+    /// is what turns "the car vanished off the map" into a wobble. 2.5×
+    /// leaves boost (worth ~2.5 m/s on the light chassis) well clear.
+    static let speedCeilingFactor: Float = 2.5
+
+    /// How long a car may stay past `offSplineCutoff` before the track
+    /// reels it in. Deliberate air — a ramp jump, a boost off a lip — is
+    /// over well inside this, so jumps still fly; anything still out there
+    /// afterwards was an accident.
+    static let laneRecoveryGrace: Float = 0.7
+    /// Reel-in spring/damper toward the lane, applied only after the grace
+    /// window. Deliberately far stronger than the in-lane PD gains: this
+    /// isn't steering feel, it's the "you don't get to leave" rule.
+    static let laneRecoveryKp: Float = 40
+    static let laneRecoveryKd: Float = 12
+    /// …still clamped, or a car far out gets slingshotted back through the
+    /// track and out the other side.
+    static let laneRecoveryMaxForce: Float = 60
 
     /// Cornering "slot grip": the track feeds the car the centripetal force
     /// a curve demands (m·v²·κ, DriveSystem feedforward) but never more than

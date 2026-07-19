@@ -84,4 +84,30 @@ struct RaceTuningTests {
             }
         }
     }
+
+    /// The anti-fling speed clamp exists to kill depenetration spikes, and
+    /// it must never touch a legitimate boost — clip that and boosting just
+    /// silently stops working, which reads as a dead button.
+    @Test func speedClampNeverClipsABoost() {
+        for chassis in ChassisClass.allCases {
+            let ceiling = RaceTuning.maxSpeed[chassis]! * RaceTuning.speedCeilingFactor
+            for tires in TireType.allCases {
+                let top = RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]!
+                let boosted = top + RaceTuning.boostImpulse / RaceTuning.chassisMass[chassis]!
+                #expect(ceiling > boosted)
+            }
+        }
+    }
+
+    /// Recovery is a rule, not steering feel: it has to outmuscle the
+    /// in-lane gains, and it has to leave a grace window or ramp jumps and
+    /// boosted lips get yanked out of the air.
+    @Test func laneRecoveryOutmusclesSteeringButLeavesRoomToJump() {
+        #expect(RaceTuning.laneRecoveryKp > RaceTuning.steeringKp)
+        #expect(RaceTuning.laneRecoveryKd > RaceTuning.steeringKd)
+        #expect(RaceTuning.laneRecoveryMaxForce > RaceTuning.steeringMaxForce)
+        #expect(RaceTuning.laneRecoveryGrace > 0.25)
+        // Recovery starts outside the band the normal magnet already covers.
+        #expect(RaceTuning.offSplineCutoff > RaceTuning.laneMagnetRange)
+    }
 }

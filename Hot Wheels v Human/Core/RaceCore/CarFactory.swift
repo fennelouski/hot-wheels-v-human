@@ -33,6 +33,10 @@ struct CarComponent: Component {
     /// whole spiked dt — 16 N × 2 s ≈ a 20 m/s catapult off the start line
     /// (sim drills traced it). Sitting out a few frames burns the spike.
     var warmupFrames: Int = 3
+    /// Seconds spent beyond `RaceTuning.offSplineCutoff`. Tells a jump
+    /// (brief) apart from a fling (sustained) — the track only reels a car
+    /// back once this passes `RaceTuning.laneRecoveryGrace`.
+    var offLaneSeconds: Float = 0
 }
 
 /// Which lane spline the car follows and how far along it is.
