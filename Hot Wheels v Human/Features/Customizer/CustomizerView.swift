@@ -26,6 +26,7 @@ struct CustomizerView: View {
         return args.contains("--demo-design") ? .draw : .chassis
     }()
     @State private var saved = false
+    @State private var testing = false
     @State private var paintSlot = CarPaintSlot.body
     @State private var armedSticker: String? = nil
     @State private var stickerColor = "#F2F2F7"
@@ -112,10 +113,9 @@ struct CustomizerView: View {
                 .padding(.leading, 16)
             }
 
-            Picker("Part", selection: $tab) {
-                ForEach(Tab.allCases, id: \.self) { Label($0.rawValue, systemImage: $0.symbolName) }
-            }
-            .pickerStyle(.segmented)
+            ChipRow(chips: Tab.allCases.map {
+                .init(value: $0, title: $0.rawValue, symbol: $0.symbolName)
+            }, selection: $tab)
             .padding(.horizontal)
 
             Group {
@@ -138,8 +138,7 @@ struct CustomizerView: View {
                     // (Features/Profiles) — this tab shows who's riding.
                     VStack(spacing: 14) {
                         HStack(spacing: 16) {
-                            DriverFaceView(state: .idle,
-                                           skinToneHex: appModel.raceDriver.skinToneHex)
+                            DriverFaceBadge(driver: appModel.raceDriver)
                                 .frame(width: 90, height: 90)
                             Text(appModel.raceDriver.name)
                                 .font(.system(size: 32, weight: .heavy, design: .rounded))
@@ -159,23 +158,23 @@ struct CustomizerView: View {
             }
             .frame(maxHeight: 240)
 
-            Button {
-                model.save(into: modelContext)
-                if isPlayerTwo {
-                    appModel.playerTwoDesign = model.design
-                } else {
-                    appModel.selectedDesign = model.design
+            HStack(spacing: 16) {
+                // Race the car on the turntable — unsaved paint and all —
+                // around whichever track is queued up next.
+                TryItButton(title: "Test Drive!") {
+                    testing = true
                 }
-                saved = true
-                SoundBank.shared.play("confirm_sparkle")
-            } label: {
-                Label(saved ? "Saved!" : "Save & Race This",
-                      systemImage: saved ? "checkmark.circle.fill" : "square.and.arrow.down.fill")
-                    .font(.system(size: 30, weight: .heavy, design: .rounded))
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 14)
+                SaveItButton(saved: saved) {
+                    model.save(into: modelContext)
+                    if isPlayerTwo {
+                        appModel.playerTwoDesign = model.design
+                    } else {
+                        appModel.selectedDesign = model.design
+                    }
+                    saved = true
+                    SoundBank.shared.play("confirm_sparkle")
+                }
             }
-            .buttonStyle(.borderedProminent)
             .onChange(of: model.design) { old, _ in
                 saved = false
                 model.designChanged(from: old)
@@ -184,6 +183,8 @@ struct CustomizerView: View {
         .padding(.vertical)
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
+        .racePreview(isPresented: $testing,
+                     designs: [appModel.stampedRaceDesign(car: model.design)])
     }
 
     /// The design the turntable shows: mid-gesture sticker drafts override

@@ -16,6 +16,7 @@ struct TrackBuilderView: View {
 
     @State private var model = TrackBuilderModel()
     @State private var savedName: String?
+    @State private var previewing = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
@@ -56,18 +57,18 @@ struct TrackBuilderView: View {
                     savedName = nil
                 }
                 Spacer()
-                Button {
+                // Drive the track you're looking at — no save, no backing
+                // out. Peeking mid-build is the whole point, so this races
+                // `model.blueprint`, not whatever was last saved.
+                TryItButton(title: "See it in 3D!") {
+                    previewing = true
+                }
+                .disabled(!model.isRaceable)
+                SaveItButton(saved: savedName != nil) {
                     let name = "Track \(Int.random(in: 100...999))"
                     model.save(named: name, into: modelContext, appModel: appModel)
                     savedName = name
-                } label: {
-                    Label(savedName.map { "\($0) races next!" } ?? "Save & Race This Track",
-                          systemImage: savedName == nil ? "square.and.arrow.down.fill" : "checkmark.circle.fill")
-                        .font(.system(size: 26, weight: .heavy, design: .rounded))
-                        .padding(.horizontal, 24)
-                        .padding(.vertical, 12)
                 }
-                .buttonStyle(.borderedProminent)
                 .disabled(!model.isRaceable)
             }
             .padding(.horizontal, 20)
@@ -76,6 +77,9 @@ struct TrackBuilderView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .onChange(of: model.types) { savedName = nil }
+        .racePreview(isPresented: $previewing,
+                     designs: [appModel.stampedRaceDesign()],
+                     blueprint: model.blueprint)
     }
 
     /// Starter tracks (and the kid's own saved ones) to jump off from
@@ -140,10 +144,14 @@ struct TrackBuilderView: View {
 
     private func toolButton(_ label: String, systemImage: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
+            // Icon-only: spelled out, these three plus the two race buttons
+            // overflow an iPad in portrait and every label wraps into an
+            // unreadable stack. Undo/trash/dice are the icons kids already
+            // know, and Label still hands the words to VoiceOver.
             Label(label, systemImage: systemImage)
-                .font(.system(size: 24, weight: .bold, design: .rounded))
-                .padding(.horizontal, 18)
-                .padding(.vertical, 12)
+                .labelStyle(.iconOnly)
+                .font(.system(size: 28, weight: .bold))
+                .frame(width: 64, height: 60)
         }
         .buttonStyle(.bordered)
     }

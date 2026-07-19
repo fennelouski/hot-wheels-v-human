@@ -57,8 +57,7 @@ struct ProfilePickerView: View {
                 ZStack {
                     Circle()
                         .fill(Color(hex: record.profile?.colorHex ?? "#FFD500"))
-                    DriverFaceView(state: .idle,
-                                   skinToneHex: lastUsedCharacter(of: record)?.skinToneHex)
+                    DriverFaceBadge(driver: lastUsedCharacter(of: record))
                         .padding(14)
                 }
                 .frame(width: 160, height: 160)

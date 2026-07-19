@@ -13,7 +13,7 @@ struct TestModeView: View {
     @State private var designA = CarDesign.demoPair[0]
     @State private var designB = CarDesign.demoPair[1]
     @State private var running = false
-    @State private var runID = UUID()
+    @State private var onRails = RaceTuning.railPinned
 
     var body: some View {
         VStack(spacing: 32) {
@@ -23,8 +23,16 @@ struct TestModeView: View {
                 designPicker("Car A", design: $designA)
                 designPicker("Car B", design: $designB)
             }
+            // The physics A/B bench's other A/B: rails (cars pinned to the
+            // track, drift + ballistic jumps) vs the chaotic free physics.
+            Toggle(isOn: $onRails) {
+                Label("Glued to the Track", systemImage: "pin.fill")
+                    .font(.system(size: 28, weight: .heavy, design: .rounded))
+            }
+            .frame(width: 480)
+            .padding(.vertical, 8)
+            .onChange(of: onRails) { RaceTuning.railPinned = $1 }
             Button {
-                runID = UUID()
                 running = true
             } label: {
                 Label("RUN", systemImage: "flag.checkered")
@@ -37,22 +45,8 @@ struct TestModeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
-        .fullScreenCover(isPresented: $running) {
-            ZStack(alignment: .topLeading) {
-                SoloArenaView(designs: [designA, designB],
-                              config: MatchConfig(mode: .test))
-                    // Fresh session per run.
-                    .id(runID)
-                Button {
-                    running = false
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 44))
-                        .padding(20)
-                }
-                .tint(.white.opacity(0.7))
-            }
-        }
+        .racePreview(isPresented: $running, designs: [designA, designB],
+                     config: MatchConfig(mode: .test))
     }
 
     private func designPicker(_ title: String, design: Binding<CarDesign>) -> some View {

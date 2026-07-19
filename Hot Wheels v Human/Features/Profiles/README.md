@@ -18,8 +18,18 @@ characters per profile, the full-screen character editor, and the camera
   `lastUsedDriverID`); pencil = edit (a starter edits as a personal copy);
   hold = scrap. Mirrors GarageView on purpose.
 - `CharacterEditorView.swift` + `CharacterEditorModel.swift` — the
-  full-screen editor: 3D turntable preview, face bubble (face paint),
-  always-visible Undo, tabs Face / Hair / Clothes / Extras / Me!.
+  full-screen editor: 3D turntable preview, the live reaction-cam PiP,
+  always-visible Undo, tabs Face / Hair / Clothes / Extras / Me!, and a
+  paired "Test Drive!" / "Save it!" footer. The PiP is the real
+  `ReactionCamView`, not a stand-in badge — it's the round window a kid
+  actually stares at mid-race, so every hat and hair change gets judged in
+  it while they're still editing, and "Test Drive!" (`.racePreview`) puts
+  the *unsaved* racer in the queued-up car and drives off. `demoDrive()`
+  fakes a cruise so the speed lines flow and cycles a showreel of
+  reactions; it steers dead straight on purpose, because the arena's
+  lean-into-turns swings the face clean out of a 180 pt circle. Face tab
+  also picks the body type (Man/Woman/Boy/Girl — one rig, scaled per
+  `BodyType.scale`); pickers are `ChipRow` chips, never segmented controls.
   `save(into:)` **upserts by id** (unlike cars' clone-on-save) and stamps
   the character as selected + last-used. Dev deep link: `--character-editor`.
 - `DriverPreviewView.swift` — live turntable painted by the same

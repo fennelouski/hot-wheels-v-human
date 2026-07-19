@@ -110,7 +110,7 @@ struct CharacterSelectView: View {
             select(driver)
         } label: {
             VStack(spacing: 10) {
-                DriverFaceView(state: .idle, skinToneHex: driver.skinToneHex)
+                DriverFaceBadge(driver: driver)
                     .frame(width: 84, height: 84)
                 Text(driver.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))

@@ -21,7 +21,10 @@ struct CharacterEditorView: View {
     @State private var model: CharacterEditorModel
     @State private var tab: Tab = .face
     @State private var saved = false
+    @State private var testing = false
     @State private var showingLookalike = false
+    /// Drives the live PiP preview (see `demoDrive`).
+    @State private var director = ReactionDirector()
     #if canImport(PencilKit) && !os(tvOS)
     /// Session-held face-paint strokes (the profile stores only the PNG).
     @State private var faceStrokes = PKDrawing()
@@ -69,21 +72,15 @@ struct CharacterEditorView: View {
             DriverPreviewView(driver: model.driver)
                 .frame(maxHeight: .infinity)
                 .overlay(alignment: .bottomTrailing) {
-                    // Face bubble: the reaction-cam face + the kid's face
-                    // paint (2D — it rides the reaction cam, not the mesh).
-                    ZStack {
-                        DriverFaceView(state: .idle, skinToneHex: model.driver.skinToneHex)
-                        if let paint = model.driver.faceDrawingPNG,
-                           let image = UIImage(data: paint) {
-                            Image(uiImage: image)
-                                .resizable()
-                                .scaledToFill()
-                        }
-                    }
-                    .frame(width: 96, height: 96)
-                    .clipShape(Circle())
-                    .padding(.trailing, 16)
+                    // The real reaction-cam PiP, not a stand-in badge: this
+                    // is the round window the kid actually stares at during a
+                    // race, so every hat, hair and face-paint change should
+                    // be judged in it while they're still editing.
+                    ReactionCamView(director: director, design: previewDesign)
+                        .padding(.trailing, 16)
+                        .padding(.bottom, 18)
                 }
+                .task { await demoDrive() }
                 .overlay(alignment: .topLeading) {
                     Button {
                         model.undo()
@@ -98,10 +95,9 @@ struct CharacterEditorView: View {
                     .padding(.leading, 16)
                 }
 
-            Picker("Part", selection: $tab) {
-                ForEach(Tab.allCases, id: \.self) { Label($0.rawValue, systemImage: $0.symbolName) }
-            }
-            .pickerStyle(.segmented)
+            ChipRow(chips: Tab.allCases.map {
+                .init(value: $0, title: $0.rawValue, symbol: $0.symbolName)
+            }, selection: $tab)
             .padding(.horizontal)
 
             Group {
@@ -115,16 +111,14 @@ struct CharacterEditorView: View {
             }
             .frame(maxHeight: 250)
 
-            Button {
-                save()
-            } label: {
-                Label(saved ? "Saved!" : "Save My Racer",
-                      systemImage: saved ? "checkmark.circle.fill" : "square.and.arrow.down.fill")
-                    .font(.system(size: 30, weight: .heavy, design: .rounded))
-                    .padding(.horizontal, 32)
-                    .padding(.vertical, 14)
+            HStack(spacing: 16) {
+                // Put this racer in the car and drive off — the fastest way
+                // to see whether the hat still reads at racing speed.
+                TryItButton(title: "Test Drive!") {
+                    testing = true
+                }
+                SaveItButton(saved: saved) { save() }
             }
-            .buttonStyle(.borderedProminent)
             .onChange(of: model.driver) { old, _ in
                 saved = false
                 model.driverChanged(from: old)
@@ -134,6 +128,40 @@ struct CharacterEditorView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
+        .racePreview(isPresented: $testing, designs: [previewDesign])
+    }
+
+    /// This racer in the car that's queued to race — what both the PiP and
+    /// the test drive show, so the two never disagree.
+    private var previewDesign: CarDesign {
+        appModel.stampedRaceDesign(driver: model.driver)
+    }
+
+    /// Fake a drive the whole time the editor is open. Parked at a standstill
+    /// the reaction cam is a flat gradient with a blank face — it only reads as
+    /// the thing from the race once the speed lines are flowing and the racer
+    /// is pulling faces.
+    ///
+    /// Dead straight, though: the arena rolls the bust hard into turns, and in
+    /// a 180 pt circle that swings the face clean out of frame — wrong on the
+    /// one screen whose entire job is judging that face. The showreel of
+    /// reactions does the showing off instead.
+    private func demoDrive() async {
+        let step = 0.05
+        let showreel: [ReactionState] = [.boosted, .crashed, .braced, .idle]
+        var elapsed = 0.0
+        var fired = 0
+        while !Task.isCancelled {
+            try? await Task.sleep(for: .milliseconds(50))
+            elapsed += step
+            director.update(dt: step, yawRate: 0, loopAhead: false, speed01: 0.7)
+            // A new face every few seconds; update() walks each one back to
+            // idle on its own once the override hold expires.
+            if elapsed >= Double(fired + 1) * 3 {
+                fired += 1
+                director.fire(showreel[fired % showreel.count])
+            }
+        }
     }
 
     /// Save = this racer is now "me": persisted, selected, and remembered
@@ -156,6 +184,16 @@ struct CharacterEditorView: View {
     private var faceTab: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .top, spacing: 28) {
+                VStack(spacing: 10) {
+                    label("Body")
+                    ChipRow(chips: [
+                        .init(value: BodyType.man, title: "Man"),
+                        .init(value: .woman, title: "Woman"),
+                        .init(value: .boy, title: "Boy"),
+                        .init(value: .girl, title: "Girl"),
+                    ], selection: optionalStyle(\.bodyType, default: BodyType.man),
+                    scrolls: false)
+                }
                 #if canImport(PencilKit) && !os(tvOS)
                 VStack(spacing: 6) {
                     label("Face paint")
@@ -174,21 +212,24 @@ struct CharacterEditorView: View {
     }
 
     private var hairTab: some View {
-        HStack(alignment: .top, spacing: 36) {
-            VStack(spacing: 10) {
-                label("Style")
-                Picker("Hair", selection: $model.driver.hair) {
-                    Image(systemName: "scissors").tag(HairStyle.short)
-                    Image(systemName: "water.waves").tag(HairStyle.long)
-                    Image(systemName: "hurricane").tag(HairStyle.curly)
-                    Image(systemName: "circle.fill").tag(HairStyle.bald)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top, spacing: 36) {
+                VStack(spacing: 10) {
+                    label("Style")
+                    ChipRow(chips: [
+                        .init(value: HairStyle.short, title: "Short"),
+                        .init(value: .long, title: "Long"),
+                        .init(value: .extraLong, title: "Extra Long"),
+                        .init(value: .pigtails, title: "Pigtails"),
+                        .init(value: .curly, title: "Curly"),
+                        .init(value: .bald, title: "Bald"),
+                    ], selection: $model.driver.hair, scrolls: false)
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 280)
+                swatchColumn("Color", options: DriverPalette.hairColors,
+                             selection: optionalColor(\.hairColorHex,
+                                                      default: DriverPalette.defaultHairColor))
             }
-            swatchColumn("Color", options: DriverPalette.hairColors,
-                         selection: optionalColor(\.hairColorHex,
-                                                  default: DriverPalette.defaultHairColor))
+            .padding(.horizontal, 20)
         }
     }
 
@@ -208,29 +249,26 @@ struct CharacterEditorView: View {
     }
 
     private var extrasTab: some View {
-        HStack(alignment: .top, spacing: 36) {
-            VStack(spacing: 10) {
-                label("Hat")
-                Picker("Hat", selection: optionalStyle(\.hat, default: HatStyle.none)) {
-                    ForEach(HatStyle.allCases, id: \.self) { style in
-                        Text(hatName(style)).tag(style)
-                    }
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top, spacing: 36) {
+                VStack(spacing: 10) {
+                    label("Hat")
+                    ChipRow(chips: HatStyle.allCases.map {
+                        .init(value: $0, title: hatName($0))
+                    }, selection: optionalStyle(\.hat, default: HatStyle.none),
+                    scrolls: false)
+                    swatchColumn("Hat color", options: DriverPalette.outfitColors,
+                                 selection: optionalColor(\.hatColorHex, default: "#FFD500"))
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 380)
-                swatchColumn("Hat color", options: DriverPalette.outfitColors,
-                             selection: optionalColor(\.hatColorHex, default: "#FFD500"))
-            }
-            VStack(spacing: 10) {
-                label("Glasses")
-                Picker("Glasses", selection: optionalStyle(\.glasses, default: GlassesStyle.none)) {
-                    ForEach(GlassesStyle.allCases, id: \.self) { style in
-                        Text(glassesName(style)).tag(style)
-                    }
+                VStack(spacing: 10) {
+                    label("Glasses")
+                    ChipRow(chips: GlassesStyle.allCases.map {
+                        .init(value: $0, title: glassesName($0))
+                    }, selection: optionalStyle(\.glasses, default: GlassesStyle.none),
+                    scrolls: false)
                 }
-                .pickerStyle(.segmented)
-                .frame(width: 320)
             }
+            .padding(.horizontal, 20)
         }
     }
 
@@ -286,9 +324,11 @@ struct CharacterEditorView: View {
     private func glassesName(_ style: GlassesStyle) -> String {
         switch style {
         case .none: "None"
-        case .sunglasses: "Cool"
         case .round: "Round"
-        case .star: "Star"
+        case .square: "Square"
+        case .sunglasses: "Sporty Shades"
+        case .roundShades: "Round Shades"
+        case .squareShades: "Square Shades"
         }
     }
 

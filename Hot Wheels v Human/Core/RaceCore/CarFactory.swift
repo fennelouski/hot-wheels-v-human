@@ -35,8 +35,12 @@ struct CarComponent: Component {
     var warmupFrames: Int = 3
     /// Seconds spent beyond `RaceTuning.offSplineCutoff`. Tells a jump
     /// (brief) apart from a fling (sustained) — the track only reels a car
-    /// back once this passes `RaceTuning.laneRecoveryGrace`.
+    /// back once this passes `RaceTuning.laneRecoveryGrace`. (Chaos mode only.)
     var offLaneSeconds: Float = 0
+    /// Ground-contact-to-origin height, set by CarFactory from the visual
+    /// bounds — the rail follower floats the car this far above the bed
+    /// along the track's up vector.
+    var rideHeight: Float = 0
 }
 
 /// Which lane spline the car follows and how far along it is.
@@ -47,6 +51,22 @@ struct LaneFollowComponent: Component {
     /// Waypoint index ranges covering loop pieces — the loop motor
     /// (RaceTuning.loopCarrySpeed) engages inside these.
     var loopRanges: [ClosedRange<Int>] = []
+    /// Unit "left" vector per waypoint (LaneSplines.laterals) — with the
+    /// tangent this frames the track so loops roll the car correctly.
+    var laterals: [SIMD3<Float>] = []
+
+    // Rail-mode state (RaceTuning.railPinned) — ignored by chaos physics.
+    /// Progress within the current segment [waypoint nextIndex−1, nextIndex], 0…1.
+    var fraction: Float = 0
+    /// Scalar along-track speed, m/s. THE authoritative speed in rail mode.
+    var speed: Float = 0
+    /// World-space y of the ground contact point; tracks the bed while
+    /// grounded, integrates gravity while airborne.
+    var height: Float = 0
+    var verticalVelocity: Float = 0
+    var airborne: Bool = false
+    /// Smoothed lateral drift offset, metres (− = sliding right).
+    var drift: Float = 0
 }
 
 @MainActor
@@ -54,6 +74,7 @@ enum CarFactory {
 
     static func makeCar(design: CarDesign, playerID: UUID, lane: [SIMD3<Float>],
                         lives: Int, loopRanges: [ClosedRange<Int>] = [],
+                        laterals: [SIMD3<Float>] = [],
                         assets: AssetStore? = nil) async throws -> ModelEntity {
         let assets = assets ?? AssetStore.shared
         CarComponent.registerComponent()
@@ -78,24 +99,35 @@ enum CarFactory {
         let shape = ShapeResource.generateBox(size: size)
             .offsetBy(translation: [0, -bounds.extents.y * (0.8 - 0.4) / 2, 0])
         car.collision = CollisionComponent(shapes: [shape])
+        // Rail mode: kinematic — DriveSystem places the car on the spline
+        // directly, so the solver can never fling it; the body still shoves
+        // debris around. Chaos mode: the original force-driven dynamic body.
         car.physicsBody = PhysicsBodyComponent(
             massProperties: .init(shape: shape, mass: design.chassis.mass),
             material: .generate(staticFriction: design.tires.staticFriction,
                                 dynamicFriction: design.tires.dynamicFriction,
                                 restitution: design.tires.restitution),
-            mode: .dynamic)
+            mode: RaceTuning.railPinned ? .kinematic : .dynamic)
 
-        car.components.set(PhysicsMotionComponent())
-        car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives))
-        car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges))
+        if !RaceTuning.railPinned {
+            // Velocity-integrated motion is chaos-mode only: on a kinematic
+            // body PhysicsMotionComponent would fight the direct placement.
+            car.components.set(PhysicsMotionComponent())
+        }
+        // Contact plane = collision box bottom (−0.4 × visual height, above).
+        car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives,
+                                        rideHeight: bounds.extents.y * 0.4))
+        car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
+                                               laterals: laterals))
 
         // The little human, riding hip-deep so the standing rig reads as
         // seated (legs hidden inside the chassis).
         if let driver = try? await assets.entity(named: "driver-idle") {
-            await DriverPainter.apply(design.driver ?? DriverProfile.presets[0], to: driver)
+            let profile = design.driver ?? DriverProfile.presets[0]
+            await DriverPainter.apply(profile, to: driver)
             let carHeight = bounds.extents.y
             let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
-            driver.scale = .init(repeating: scale)
+            driver.scale = SIMD3(repeating: scale) * (profile.bodyType ?? .man).scale
             driver.position = [0, carHeight * (0.5 - RaceTuning.driverSinkRatio), 0]
             car.addChild(driver)
         }
@@ -137,6 +169,12 @@ enum CarFactory {
             model.materials = model.materials.map { _ in
                 var m = PhysicallyBasedMaterial()
                 m.baseColor = .init(tint: color)
+                if slot == CarPaintSlot.wheels {
+                    // Rubber never shines: wheels stay matte in every finish.
+                    m.metallic = 0.0
+                    m.roughness = 0.9
+                    return m
+                }
                 switch spec.finish {
                 case .metallic:
                     m.metallic = 0.9

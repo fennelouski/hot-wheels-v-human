@@ -59,24 +59,16 @@ struct ReactionCamView: View {
                 poser?.bust.orientation =
                     simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle, axis: [0, 0, 1])
                     * simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle * 0.5, axis: [0, 1, 0])
+                rebuildIfDriverChanged()
             }
 
-            ZStack {
-                DriverFaceView(state: director.state,
-                               skinToneHex: design.driver?.skinToneHex)
-                // Kid's face paint rides over every expression. The driver's
-                // own paint wins; CarDesign's is the pre-C3 fallback.
-                if let paint = design.driver?.faceDrawingPNG ?? design.faceDrawingPNG,
-                   let image = UIImage(data: paint) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                }
-            }
-            .frame(width: 48, height: 48)
-            .clipShape(Circle())
-            .overlay(Circle().stroke(.white.opacity(0.8), lineWidth: 2))
-            .padding(6)
+            // Kid's face paint rides over every expression. The driver's
+            // own paint wins; CarDesign's is the pre-C3 fallback.
+            DriverFaceBadge(driver: design.driver, state: director.state,
+                            fallbackPaintPNG: design.faceDrawingPNG)
+                .frame(width: 48, height: 48)
+                .overlay(Circle().stroke(.white.opacity(0.8), lineWidth: 2))
+                .padding(6)
         }
         .frame(width: 180, height: 180)
         .clipShape(Circle())
@@ -95,6 +87,35 @@ struct ReactionCamView: View {
         .rotationEffect(.degrees(director.state == .crashed ? -7 : 0))
         .animation(.spring(duration: 0.35, bounce: 0.5), value: director.state)
         .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
+    }
+
+    /// Swap the bust when the character it's wearing changes. A race never
+    /// changes driver mid-lap, but the character editor shows this PiP live
+    /// while a kid picks hair and hats — without this the bust stays frozen on
+    /// whoever it happened to load with.
+    ///
+    /// Rebuilds rather than repaints: `DriverPainter.apply` on a bust that's
+    /// mid-animation swaps the wardrobe geometry but leaves the stripe texture
+    /// stale, so a kid going bald kept their hair colour. A fresh poser is
+    /// cheap anyway — AssetStore caches the rig, DriverPainter caches the
+    /// texture. Signature-guarded because `update` fires on director ticks too.
+    @MainActor
+    private func rebuildIfDriverChanged() {
+        guard let current = poser, let driver = design.driver else { return }
+        let signature = DriverPainter.appearanceSignature(for: driver)
+        guard current.bust.components[PreviewSignature.self]?.value != signature else { return }
+        current.bust.components.set(PreviewSignature(value: signature))
+        Task {
+            guard let fresh = try? await DriverPoser.make(profile: driver),
+                  let parent = current.bust.parent,
+                  // A newer edit landed while this one loaded — let that win.
+                  current.bust.components[PreviewSignature.self]?.value == signature
+            else { return }
+            fresh.bust.components.set(PreviewSignature(value: signature))
+            parent.addChild(fresh.bust)
+            current.bust.removeFromParent()
+            poser = fresh
+        }
     }
 }
 

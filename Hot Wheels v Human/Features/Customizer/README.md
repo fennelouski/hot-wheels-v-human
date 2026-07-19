@@ -1,10 +1,10 @@
 # Features/Customizer/ — car design (Phase 4; driver editing moved to Features/Profiles in C3)
 
 Files
-- `CustomizerView.swift` — tabbed: Chassis / Tires / Paint / Livery / Stickers / Draw / Driver. Center = live 3D turntable preview (`RealityView`, slow auto-rotate, drag to spin). The Driver tab is now a read-only summary of the selected character (`AppModel.raceDriver`) + an "Edit My Racer" link into `CharacterEditorView`.
+- `CustomizerView.swift` — tabbed: Chassis / Tires / Paint / Livery / Stickers / Draw / Driver. Center = live 3D turntable preview (`RealityView`, slow auto-rotate, drag to spin). The Driver tab is now a read-only summary of the selected character (`AppModel.raceDriver`) + an "Edit My Racer" link into `CharacterEditorView`. Footer pairs "Test Drive!" with "Save it!": Test Drive (`.racePreview`) races the car on the turntable — unsaved paint, stickers and all — around whichever track is queued next, so building a track and then testing a car on it is one loop instead of two round trips through home.
 - `CustomizerModel.swift` — working `CarDesign`; `save()` → SwiftData (new UUID per save — kids iterate by cloning); rebuilds via `CarFactory` (reuse race code — what you see is what races).
 - `ChassisPicker.swift` / `TirePicker.swift` — horizontal card pickers; each card shows model thumbnail + stat bars (Speed/Weight/Grip, derived from RaceTuning so bars never lie).
-- `PaintShopView.swift` — kid-proof 12-swatch grid + part chips (Body/Wheels, `CarPaintSlot`) + finish segmented control (incl. sparkle); applies live to preview materials. Tapping the car on the turntable also selects the part (G1).
+- `PaintShopView.swift` — kid-proof 12-swatch grid + part chips (Body/Wheels, `CarPaintSlot`) + finish `ChipRow` (incl. sparkle; wheels render matte in every finish — rubber never shines); applies live to preview materials. Tapping the car on the turntable also selects the part (G1). No segmented controls anywhere — `App/ChipRow.swift` replaced them (contrast + 60 pt targets).
 - `LiveryShopView.swift` — livery pattern chips (rendered by `OverlayComposer` — previews never lie) + color + size slider (G2).
 - `StickerShopView.swift` — sticker sheet (SF Symbols + custom skull) + color; tap car to stamp via camera-ray raycast, drag/pinch/rotate edits the newest sticker (G3).
 - `DrawingPadView.swift` — PencilKit canvas over a car silhouette; every stroke re-renders the overlay's bottom layer, PNG capped at 200 KB, strokes persisted so saved designs stay editable (G4). iPad only.

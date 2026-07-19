@@ -58,9 +58,26 @@ enum DriverPainter {
           profile.pantsColorHex ?? DriverPalette.defaultPantsColor)]
     }
 
+    /// Everything `apply` actually paints or pins, as one comparable string.
+    /// Live previews hold this against the last value so a rebuild only costs
+    /// something when the character really changed.
+    nonisolated static func appearanceSignature(for profile: DriverProfile) -> String {
+        (stripes(for: profile).map(\.1) + [
+            profile.hair.rawValue,
+            profile.hat?.rawValue ?? "-",
+            profile.hatColorHex ?? "-",
+            profile.glasses?.rawValue ?? "-",
+            profile.bodyType?.rawValue ?? "-",
+        ]).joined(separator: "|")
+    }
+
     /// Replaces every material on the driver entity with the profile's
     /// stripe texture, then attaches the wardrobe (hats/glasses/hair).
     /// Same wholesale-replacement path CarFactory.paint already exercises.
+    ///
+    /// Note: on a bust that's already mid-animation the wardrobe swap lands
+    /// but the texture swap does not — live previews of a *changing* driver
+    /// should rebuild the entity instead (see ReactionCamView).
     static func apply(_ profile: DriverProfile, to driver: Entity) async {
         // Wardrobe off first so the paint pass can't repaint the props.
         driver.findEntity(named: DriverDressUp.entityName)?.removeFromParent()

@@ -85,6 +85,74 @@ nonisolated enum RaceTuning {
     /// steering — the recovery gains below take over instead.
     static let offSplineCutoff: Float = 0.5
 
+    // MARK: Rail mode (cars pinned to the track)
+
+    /// ON (default): cars ride the lane spline kinematically — they can
+    /// NEVER leave the track. Corners read as stat-driven drift, jumps as a
+    /// ballistic arc above the lane line. OFF: the original chaotic
+    /// force-based physics (everything under "Staying on the track" below).
+    /// Flipped from Test Mode's A/B bench before a run; races started while
+    /// it's set use it for their whole duration (body mode is fixed at spawn).
+    nonisolated(unsafe) static var railPinned = true
+
+    /// Kid-first floor: a pinned car always crawls forward at least this
+    /// fast (m/s), so no seam, hill, or tuning mistake can ever strand it.
+    /// Replaces the whole unstick/rescue apparatus in rail mode.
+    static let minCrawlSpeed: Float = 0.6
+
+    /// Global rail-mode pace: scales cruise speed, drive accel, the loop
+    /// band, and the speed ceiling. The chassis tables below stay at chaos
+    /// mode's values; races read best on TV at toy speeds (~0.4 ≈ the
+    /// "half to a third" of the original pace).
+    static let railSpeedScale: Float = 0.4
+    /// Terrain shapes the cruise target: effective cruise = top × (1 −
+    /// slopeFactor·tangent.y − cornerFactor·|drift|/driftMax), floored at
+    /// 0.3×. Uphill and ramps slow the car, downhill raises the target
+    /// (cars visibly pick up speed), corners ease off a little.
+    static let railSlopeSpeedFactor: Float = 1.2
+    static let railCornerSlowFactor: Float = 0.25
+    /// Above-target bleed rate, 1/s of the overshoot: downhill or
+    /// post-jump overspeed eases back to the average on the next straight
+    /// instead of coasting forever.
+    static let railReturnRate: Float = 1.5
+
+    /// Ballistic launch margin, m/s of VERTICAL VELOCITY: the car goes
+    /// airborne when gravity lets it fall slower than following the bed
+    /// would demand, by more than this (the track dropping away faster
+    /// than gravity — a crest or ramp lip). A velocity margin is
+    /// frame-phase independent — the earlier height-difference check only
+    /// sampled the one frame that crossed the lip, and at rail-scale
+    /// speeds the per-frame bed drop often missed the bar, gluing cars
+    /// down cliffs. Big enough that waypoint kinks at crawl speeds don't
+    /// jitter micro-hops.
+    static let launchThreshold: Float = 0.15
+
+    /// Max lateral drift offset from lane center, metres. Lane edges sit at
+    /// ±0.05 (laneOffsetWide) with rail faces near ±0.12 — 0.04 slides wide
+    /// without visually clipping the rails.
+    static let driftMax: Float = 0.04
+    /// Lateral acceleration (v²·κ, m/s²) at which a factor-1.0 chassis on
+    /// factor-1.0 tires reaches full drift. Sized to railSpeedScale pace:
+    /// the small curve (r 0.4) at balanced rail cruise (~1.8 m/s) demands
+    /// ~8 — so everyone visibly drifts the tight corners at speed, scaled
+    /// by the stats below.
+    static let driftSaturationAccel: Float = 8
+    /// Chassis drift personality: the superlight drift car earns its name,
+    /// the heavy muscle car stays planted.
+    static let driftFactor: [ChassisClass: Float] = [
+        .heavyMuscle: 0.5,
+        .balancedFormula: 1.0,
+        .superlightDrift: 1.8,
+    ]
+    /// Nose-into-the-turn slip angle at full drift, radians (~17°) — the
+    /// oversteer look that sells the slide.
+    static let driftSlipAngle: Float = 0.3
+    /// Per-second blend rate for drift building up / relaxing.
+    static let driftResponse: Float = 6
+    /// Per-frame slerp factor keeping the visual chasing the rail frame —
+    /// high enough to track the loop's fast tangent rotation.
+    static let railOrientationBlend: Float = 0.35
+
     // MARK: Staying on the track
 
     // Kid-first, same bargain as the loop motor: the track cheats in the

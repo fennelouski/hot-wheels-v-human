@@ -26,17 +26,31 @@ final class DriverPoser {
         let bust = try await AssetStore.shared.entity(named: "driver-idle")
         await DriverPainter.apply(profile, to: bust)
         let poser = DriverPoser(bust: bust)
-        for (state, model) in [(ReactionState.idle, "driver-idle"),
-                               (.boosted, "driver-boost"),
+        poser.clips[.idle] = bust.availableAnimations.last
+        poser.apply(.idle)
+        // Hand the bust back on the idle rig alone and stream the event clips
+        // in behind it. Awaiting all four rigged USDZs first (they load
+        // serially on the main actor) left the PiP an empty circle for ~14s on
+        // a cold launch — long enough that the character editor looked broken.
+        // `apply` already falls back to idle for a clip that isn't in yet, so
+        // arriving early only costs a plain-faced boost for a moment.
+        Task { await poser.loadEventClips() }
+        return poser
+    }
+
+    private func loadEventClips() async {
+        for (state, model) in [(ReactionState.boosted, "driver-boost"),
                                (.crashed, "driver-crash"),
                                (.celebrating, "driver-cheer")] {
-            let source = state == .idle ? bust : try await AssetStore.shared.entity(named: model)
-            if let clip = source.availableAnimations.last {
-                poser.clips[state] = clip
+            guard let source = try? await AssetStore.shared.entity(named: model),
+                  let clip = source.availableAnimations.last else { continue }
+            clips[state] = clip
+            // Already stuck on this state's idle stand-in? Upgrade in place.
+            if current == state {
+                current = nil
+                apply(state)
             }
         }
-        poser.apply(.idle)
-        return poser
     }
 
     /// Steering/braced reuse the idle clip — the face decal carries those.

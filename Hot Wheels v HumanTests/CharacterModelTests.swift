@@ -30,6 +30,21 @@ struct CharacterModelTests {
         #expect(profile.eyeColorHex == nil)
         #expect(profile.hat == nil)
         #expect(profile.glasses == nil)
+        #expect(profile.bodyType == nil)
+    }
+
+    @Test func retiredEnumValuesStillDecode() throws {
+        // "star" glasses shipped in C-series then got retired; profiles
+        // wearing them (and any future unknown style) must keep decoding.
+        let saved = """
+        {"id":"11111111-2222-3333-4444-555555555555","name":"Racer",
+         "helmetColorHex":"#FFD500","suitColorHex":"#2266FF",
+         "skinToneHex":"#E0AC69","hair":"mohawk","glasses":"star"}
+        """
+        let profile = try JSONDecoder().decode(DriverProfile.self,
+                                               from: Data(saved.utf8))
+        #expect(profile.glasses == .roundShades)
+        #expect(profile.hair == .short)
     }
 
     @Test func legacyCarDesignJSONDecodesWithoutDriver() throws {
@@ -80,11 +95,15 @@ struct CharacterModelTests {
     }
 
     @Test func starterCharactersShowOffTheWardrobe() {
-        // At least one hat wearer, one glasses wearer, one bald, one long hair.
+        // At least one hat wearer, one glasses wearer, one bald, one with a
+        // hair volume — and every body type in the gallery.
         #expect(DriverProfile.presets.contains { ($0.hat ?? .none) != HatStyle.none })
         #expect(DriverProfile.presets.contains { ($0.glasses ?? .none) != GlassesStyle.none })
         #expect(DriverProfile.presets.contains { $0.hair == .bald })
-        #expect(DriverProfile.presets.contains { $0.hair == .long })
+        #expect(DriverProfile.presets.contains {
+            [.long, .extraLong, .pigtails].contains($0.hair)
+        })
+        #expect(Set(DriverProfile.presets.compactMap(\.bodyType)) == Set(BodyType.allCases))
     }
 
     // MARK: Palette snapping
@@ -229,13 +248,16 @@ struct CharacterModelTests {
         driver.hair = .short
         #expect(DriverDressUp.props(for: driver).isEmpty)
         driver.hat = .crown
-        driver.glasses = .star
+        driver.glasses = .squareShades
         driver.hair = .curly
-        #expect(DriverDressUp.props(for: driver) == ["crown", "star-glasses", "curly-hair"])
+        #expect(DriverDressUp.props(for: driver) == ["crown", "square-shades", "curly-hair"])
+        driver.glasses = .round
+        driver.hair = .pigtails
+        #expect(DriverDressUp.props(for: driver) == ["crown", "round-glasses", "pigtails"])
         driver.hat = nil          // pre-C1 profile: no wardrobe fields at all
         driver.glasses = nil
-        driver.hair = .long
-        #expect(DriverDressUp.props(for: driver) == ["long-hair"])
+        driver.hair = .extraLong
+        #expect(DriverDressUp.props(for: driver) == ["extra-long-hair"])
     }
 
     // MARK: Editor save = upsert (characters edit in place, unlike cars)
@@ -267,5 +289,27 @@ struct CharacterModelTests {
         let stamped = appModel.stampedRaceDesign()
         #expect(stamped.id == CarDesign.presets[1].id)
         #expect(stamped.driver == DriverProfile.presets[2])
+    }
+
+    /// The workshops' "try it" buttons race the piece being edited, which is
+    /// exactly what hasn't been saved into AppModel yet. If an override ever
+    /// silently loses to the saved selection, every test drive quietly shows
+    /// the kid someone else's car.
+    @MainActor @Test func stampedRaceDesignPrefersWorkshopOverrides() {
+        let appModel = AppModel()
+        appModel.selectedDesign = CarDesign.presets[1]
+        appModel.selectedDriver = DriverProfile.presets[2]
+
+        let unsavedCar = CarDesign.presets[3]
+        let unsavedDriver = DriverProfile.presets[1]
+
+        // Car override alone keeps the saved driver, and vice versa.
+        let carOnly = appModel.stampedRaceDesign(car: unsavedCar)
+        #expect(carOnly.id == unsavedCar.id)
+        #expect(carOnly.driver == DriverProfile.presets[2])
+
+        let driverOnly = appModel.stampedRaceDesign(driver: unsavedDriver)
+        #expect(driverOnly.id == CarDesign.presets[1].id)
+        #expect(driverOnly.driver == unsavedDriver)
     }
 }

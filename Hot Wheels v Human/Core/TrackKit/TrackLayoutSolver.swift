@@ -44,6 +44,10 @@ struct LaneSplines: Sendable {
     var right: [SIMD3<Float>]
     /// Waypoint index where each piece begins — checkpoint/respawn anchors.
     var pieceStartIndices: [Int] = []
+    /// Unit "left" vector per waypoint (world). With the tangent this gives
+    /// the full track frame — the rail follower derives its up vector from
+    /// `cross(tangent, lateral)` so cars roll correctly through the loop.
+    var laterals: [SIMD3<Float>] = []
 }
 
 struct TrackLayout: Sendable {
@@ -137,7 +141,7 @@ enum TrackLayoutSolver {
             right.append(center[i] - laterals[i] * smoothed[i])
         }
         return LaneSplines(center: center, left: left, right: right,
-                           pieceStartIndices: pieceStarts)
+                           pieceStartIndices: pieceStarts, laterals: laterals)
     }
 
     /// Centerline waypoints + unit "left" lateral vector per waypoint,
@@ -164,8 +168,13 @@ enum TrackLayoutSolver {
                 let a = Float(i) / Float(n) * .pi / 2
                 // Right turn: center at (−r, 0, 0); mirrored in x for left.
                 points.append([sign * (radius - radius * cos(a)), 0, radius * sin(a)])
-                // Lateral rotates with the heading.
-                lateral.append([cos(a), 0, sign * sin(a)])
+                // Lateral rotates with the heading: left = up × tangent.
+                // (The z sign was mirrored here for a long time, which swept
+                // the "left" lane across to the right through every curve and
+                // jogged it 0.1 m back at the exit seam — the rail follower's
+                // up vector, cross(tangent, lateral), exposed it by planting
+                // cars under the bed mid-curve.)
+                lateral.append([cos(a), 0, -sign * sin(a)])
             }
 
         case .verticalLoop(let radius, let advance, let lateralShift):

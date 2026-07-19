@@ -7,6 +7,30 @@
 //
 
 import SwiftUI
+import UIKit
+
+/// The player's face icon everywhere one is needed: their character's
+/// skin tone with their face paint composited on top — the same look as
+/// the reaction-cam PiP badge, never a generic smiley.
+struct DriverFaceBadge: View {
+    var driver: DriverProfile?
+    var state: ReactionState = .idle
+    /// Pre-C3 designs stored face paint on the car; shown if the driver has none.
+    var fallbackPaintPNG: Data? = nil
+
+    var body: some View {
+        ZStack {
+            DriverFaceView(state: state, skinToneHex: driver?.skinToneHex)
+            if let data = driver?.faceDrawingPNG ?? fallbackPaintPNG,
+               let image = UIImage(data: data) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+            }
+        }
+        .clipShape(Circle())
+    }
+}
 
 /// Round cartoon face whose eyes/mouth change with the driver's reaction.
 struct DriverFaceView: View {

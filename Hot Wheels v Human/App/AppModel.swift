@@ -37,9 +37,14 @@ final class AppModel {
 
     /// The design that actually races: the selected car with the selected
     /// character stamped in, so the driver rides the wire inside the design.
-    func stampedRaceDesign() -> CarDesign {
-        var design = raceDesign
-        design.driver = raceDriver
+    ///
+    /// Both overrides default to the saved selection. Workshops pass the
+    /// piece they're editing so "try it" races what's on screen right now,
+    /// saved or not — that's the whole point of not having to back out.
+    func stampedRaceDesign(car: CarDesign? = nil,
+                           driver: DriverProfile? = nil) -> CarDesign {
+        var design = car ?? raceDesign
+        design.driver = driver ?? raceDriver
         return design
     }
 }

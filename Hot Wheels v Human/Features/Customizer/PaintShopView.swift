@@ -57,17 +57,12 @@ struct PaintShopView: View {
                     .buttonStyle(.plain)
                 }
             }
-            Picker("Finish", selection: $design.paint.finish) {
-                Label("Metallic", systemImage: "sparkles").tag(PaintFinish.metallic)
-                Label("Glossy", systemImage: "sun.max.fill").tag(PaintFinish.glossy)
-                Label("Matte", systemImage: "square.fill").tag(PaintFinish.matte)
-                Label("Sparkle", systemImage: "sparkle").tag(PaintFinish.sparkle)
-            }
-            .pickerStyle(.segmented)
-            .frame(maxWidth: 560)
-            .onChange(of: design.paint.finish) {
-                SoundBank.shared.play("customize_confirm_pop")
-            }
+            ChipRow(chips: [
+                .init(value: PaintFinish.metallic, title: "Metallic", symbol: "sparkles"),
+                .init(value: .glossy, title: "Glossy", symbol: "sun.max.fill"),
+                .init(value: .matte, title: "Matte", symbol: "square.fill"),
+                .init(value: .sparkle, title: "Sparkle", symbol: "sparkle"),
+            ], selection: $design.paint.finish)
         }
     }
 

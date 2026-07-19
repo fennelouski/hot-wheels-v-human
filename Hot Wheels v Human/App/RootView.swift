@@ -16,6 +16,10 @@ struct RootView: View {
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
     private let launchIntoCharacterEditor = ProcessInfo.processInfo.arguments.contains("--character-editor")
+    /// Dev arg: the wardrobe bench — every hat/glasses style at fixed
+    /// profiles, so dress-up geometry can be screenshotted repeatably (the
+    /// character editor randomises its driver every launch).
+    private let launchIntoWardrobe = ProcessInfo.processInfo.arguments.contains("--wardrobe")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
@@ -87,6 +91,8 @@ struct RootView: View {
             CustomizerView()
         } else if launchIntoCharacterEditor {
             NavigationStack { CharacterEditorView() }
+        } else if launchIntoWardrobe {
+            WardrobePreviewGrid()
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {
@@ -194,10 +200,8 @@ struct QuickPlayView: View {
     @State private var track = TrackBlueprint.presets.randomElement()!.blueprint
 
     var body: some View {
-        var design = car
-        design.driver = appModel.raceDriver
-        return SoloArenaView(designs: [design], blueprint: track,
-                             config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
+        SoloArenaView(designs: [appModel.stampedRaceDesign(car: car)], blueprint: track,
+                      config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
             .onAppear { SoundBank.shared.play("grid_rev_anticipation") }
     }
 }

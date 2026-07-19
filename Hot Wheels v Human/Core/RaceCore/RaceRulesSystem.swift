@@ -108,12 +108,12 @@ struct RaceRulesSystem: System {
                   var state = car.components[CarComponent.self],
                   var follow = car.components[LaneFollowComponent.self],
                   !state.finished, state.livesLeft > 0, car.isEnabled,
-                  // Static = parked at the grid pre-GO (or at the finish) —
-                  // no destruction checks, or the countdown counts as stuck.
-                  car.physicsBody?.mode == .dynamic else { continue }
+                  // Static = parked at the finish — nothing left to check.
+                  car.physicsBody?.mode != .static else { continue }
 
             let position = car.position(relativeTo: nil)
-            let speed = simd_length(car.physicsMotion?.linearVelocity ?? .zero)
+            let speed = car.physicsMotion.map { simd_length($0.linearVelocity) }
+                ?? follow.speed
 
             // Boost meter charges over time (validated/consumed elsewhere).
             state.boostMeter = min(1, state.boostMeter + dt / RaceTuning.boostChargeTime)
@@ -132,6 +132,14 @@ struct RaceRulesSystem: System {
                 car.physicsMotion?.angularVelocity = .zero
                 car.physicsBody?.mode = .static
                 RaceEventBus.shared.emit(.finished(playerID: state.playerID, time: 0))
+                continue
+            }
+
+            // Rail-pinned (kinematic) cars can't fall, wedge, or flip — the
+            // follower owns their pose. Meter charge + finish are all they need.
+            if car.physicsBody?.mode == .kinematic {
+                car.components.set(state)
+                car.components.set(follow)
                 continue
             }
 

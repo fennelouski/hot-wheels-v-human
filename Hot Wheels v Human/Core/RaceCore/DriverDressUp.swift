@@ -31,14 +31,21 @@ enum DriverDressUp {
         }
         switch profile.glasses ?? .none {
         case .none: break
-        case .sunglasses: names.append("sunglasses")
+        case .sunglasses: names.append("sport-shades")
         case .round: names.append("round-glasses")
-        case .star: names.append("star-glasses")
+        case .square: names.append("square-glasses")
+        case .roundShades: names.append("round-shades")
+        case .squareShades: names.append("square-shades")
         }
-        // Long/curly get extra hair volume; short is painted mesh, bald is
-        // a skin-toned hair stripe (DriverPainter).
-        if profile.hair == .long { names.append("long-hair") }
-        if profile.hair == .curly { names.append("curly-hair") }
+        // Everything but short/bald gets extra hair volume; short is painted
+        // mesh, bald is a skin-toned hair stripe (DriverPainter).
+        switch profile.hair {
+        case .long: names.append("long-hair")
+        case .extraLong: names.append("extra-long-hair")
+        case .pigtails: names.append("pigtails")
+        case .curly: names.append("curly-hair")
+        case .short, .bald: break
+        }
         return names
     }
 
@@ -66,6 +73,17 @@ enum DriverDressUp {
         center.position = [0, head * 1.7, 0]
         wardrobe.addChild(center)
 
+        // Hats ride their own mount: scaled up and floated ABOVE the head so
+        // they sit ON the hair like a real hat, not jammed down over the
+        // face, and even the biggest hair volumes never poke through them.
+        // Sits high enough to read as headwear PERCHED on the hair. Lower
+        // (0.3–0.45) the dome/crown swallow the skull and just recolour the
+        // top of the head — a green helmet reads as green hair.
+        let hat = Entity()
+        hat.position = [0, head * 0.68, 0]
+        hat.scale = .init(repeating: 1.18)
+        center.addChild(hat)
+
         for prop in props(for: profile) {
             switch prop {
             case "helmet":
@@ -73,60 +91,92 @@ enum DriverDressUp {
                 let dome = model(.generateSphere(radius: head * 1.25), hatColor)
                 dome.position = [0, head * 0.15, 0]
                 dome.scale = [1, 0.95, 1]
-                center.addChild(dome)
+                hat.addChild(dome)
             case "cap":
                 let crownPart = model(.generateSphere(radius: head * 1.1), hatColor)
                 crownPart.position = [0, head * 0.45, 0]
                 crownPart.scale = [1, 0.6, 1]
-                center.addChild(crownPart)
+                hat.addChild(crownPart)
                 let brim = model(.generateBox(size: [head * 1.3, head * 0.12, head * 0.9]), hatColor)
                 brim.position = [0, head * 0.5, head * 1.1]
-                center.addChild(brim)
+                hat.addChild(brim)
             case "crown":
                 let band = model(.generateCylinder(height: head * 0.6, radius: head * 0.95), hatColor)
                 band.position = [0, head * 1.0, 0]
-                center.addChild(band)
+                hat.addChild(band)
                 for i in -1...1 {   // three chunky points
                     let point = model(.generateCone(height: head * 0.5, radius: head * 0.22), hatColor)
                     point.position = [Float(i) * head * 0.55, head * 1.55, head * 0.75]
-                    center.addChild(point)
+                    hat.addChild(point)
                 }
             case "headphones":
+                // Band hugs the crown — it was pitched high enough to read as
+                // a bar hovering over the head rather than headphones worn on it.
                 let band = model(.generateBox(size: [head * 2.3, head * 0.22, head * 0.35]), hatColor)
-                band.position = [0, head * 1.05, 0]
-                center.addChild(band)
+                band.position = [0, head * 0.72, 0]
+                hat.addChild(band)
                 for side: Float in [-1, 1] {
                     let cup = model(.generateSphere(radius: head * 0.42), hatColor)
                     cup.position = [side * head * 1.05, 0, 0]
                     cup.scale = [0.6, 1, 1]
-                    center.addChild(cup)
+                    hat.addChild(cup)
                 }
-            case "sunglasses":
-                // One chunky visor across both eyes.
-                let visor = model(.generateBox(size: [head * 1.5, head * 0.4, head * 0.18],
-                                               cornerRadius: head * 0.08), dark)
-                visor.position = [0, head * 0.18, head * 0.95]
+            case "sport-shades":
+                // One big wraparound visor covering both eyes brow-to-cheek.
+                let visor = model(.generateBox(size: [head * 1.85, head * 0.66, head * 0.16],
+                                               cornerRadius: head * 0.1), dark)
+                visor.position = [0, head * 0.16, head * 0.95]
                 center.addChild(visor)
-            case "round-glasses":
+            case "round-glasses", "round-shades", "square-glasses", "square-shades":
+                // Solid dark frames; clear styles get pale solid lenses,
+                // shades get dark ones. Big lenses — kids want goggles that
+                // cover the face, not dainty specs, so these run eye-socket
+                // to cheekbone. Spacing widened to match so they still read
+                // as two lenses joined by a bridge, not one band.
+                let lensColor = prop.hasSuffix("shades") ? dark : color("#DFF3FF")
                 for side: Float in [-1, 1] {
-                    let lens = model(.generateSphere(radius: head * 0.3), dark)
-                    lens.position = [side * head * 0.42, head * 0.18, head * 0.95]
-                    lens.scale = [1, 1, 0.25]
+                    let frame: ModelEntity
+                    let lens: ModelEntity
+                    if prop.hasPrefix("round") {
+                        frame = model(.generateCylinder(height: head * 0.1, radius: head * 0.52), dark)
+                        lens = model(.generateCylinder(height: head * 0.12, radius: head * 0.44), lensColor)
+                        // Cylinders extrude along Y; spin them to face front.
+                        frame.orientation = simd_quatf(angle: .pi / 2, axis: [1, 0, 0])
+                        lens.orientation = frame.orientation
+                    } else {
+                        frame = model(.generateBox(size: [head * 0.9, head * 0.72, head * 0.1],
+                                                   cornerRadius: head * 0.08), dark)
+                        lens = model(.generateBox(size: [head * 0.76, head * 0.58, head * 0.12],
+                                                  cornerRadius: head * 0.07), lensColor)
+                    }
+                    frame.position = [side * head * 0.5, head * 0.16, head * 0.9]
+                    lens.position = [side * head * 0.5, head * 0.16, head * 0.95]
+                    center.addChild(frame)
                     center.addChild(lens)
                 }
-            case "star-glasses":
-                for side: Float in [-1, 1] {
-                    // Diamond sparkle lenses: boxes spun 45°.
-                    let lens = model(.generateBox(size: [head * 0.5, head * 0.5, head * 0.12]), dark)
-                    lens.position = [side * head * 0.45, head * 0.18, head * 0.95]
-                    lens.orientation = simd_quatf(angle: .pi / 4, axis: [0, 0, 1])
-                    center.addChild(lens)
-                }
+                let bridge = model(.generateBox(size: [head * 0.28, head * 0.12, head * 0.1]), dark)
+                bridge.position = [0, head * 0.22, head * 0.92]
+                center.addChild(bridge)
             case "long-hair":
-                let mane = model(.generateBox(size: [head * 1.6, head * 2.2, head * 0.5],
+                let mane = model(.generateBox(size: [head * 1.6, head * 2.8, head * 0.5],
                                               cornerRadius: head * 0.15), hairColor)
-                mane.position = [0, -head * 0.5, -head * 0.85]
+                mane.position = [0, -head * 0.8, -head * 0.85]
                 center.addChild(mane)
+            case "extra-long-hair":
+                let mane = model(.generateBox(size: [head * 1.6, head * 4.2, head * 0.5],
+                                              cornerRadius: head * 0.15), hairColor)
+                mane.position = [0, -head * 1.5, -head * 0.85]
+                center.addChild(mane)
+            case "pigtails":
+                for side: Float in [-1, 1] {
+                    let tail = model(.generateBox(size: [head * 0.5, head * 2.2, head * 0.5],
+                                                  cornerRadius: head * 0.2), hairColor)
+                    tail.position = [side * head * 1.0, -head * 0.5, -head * 0.3]
+                    center.addChild(tail)
+                    let bobble = model(.generateSphere(radius: head * 0.32), hairColor)
+                    bobble.position = [side * head * 1.0, head * 0.65, -head * 0.3]
+                    center.addChild(bobble)
+                }
             case "curly-hair":
                 for (x, y, z): (Float, Float, Float) in
                     [(0, 1.0, 0), (-0.7, 0.8, 0.2), (0.7, 0.8, 0.2),
@@ -139,7 +189,7 @@ enum DriverDressUp {
                 break
             }
         }
-        if !center.children.isEmpty {
+        if !props(for: profile).isEmpty {
             driver.addChild(wardrobe)
         }
     }

@@ -125,13 +125,19 @@ final class RaceSession {
             let lane = i % 2 == 0 ? layout.lanes.left : layout.lanes.right
             let car = try await CarFactory.makeCar(
                 design: design, playerID: playerID, lane: lane,
-                lives: lives, loopRanges: loopRanges)
+                lives: lives, loopRanges: loopRanges,
+                laterals: layout.lanes.laterals)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so
             // keep every slot on flat gate bed (sim drills).
             let gridSlot = min(i * 4 + 1, max(lane.count - 1, 0))
-            car.position = lane[gridSlot] + [0, car.spawnLift, 0]
+            // Pinned (kinematic) cars sit exactly at ride height — they
+            // never settle under gravity, so a drop allowance would hover.
+            let lift = car.physicsBody?.mode == .kinematic
+                ? (car.components[CarComponent.self]?.rideHeight ?? 0)
+                : car.spawnLift
+            car.position = lane[gridSlot] + [0, lift, 0]
             // Visible AND dynamic through the countdown: rendering compiles
             // the shaders and the physics world builds NOW — both stall for
             // seconds in the Simulator, and any stall after cars start
@@ -182,9 +188,12 @@ final class RaceSession {
         RaceEventBus.shared.raceActive = true
         for racer in racers {
             guard let car = racer.entity else { continue }
-            // A body resting since the countdown may be ASLEEP and
+            // A dynamic body resting since the countdown may be ASLEEP and
             // DriveSystem's addForce never wakes it. An impulse does.
-            car.applyLinearImpulse([0, 0.001, 0], relativeTo: nil)
+            // (Kinematic rail cars have no physicsMotion — nothing to wake.)
+            if car.physicsMotion != nil {
+                car.applyLinearImpulse([0, 0.001, 0], relativeTo: nil)
+            }
             // Seed the hitch-rollback cache so even an immediate spike
             // frame has a pose to restore.
             lastPoses[racer.id] = (car.position(relativeTo: nil), .zero)
@@ -253,7 +262,9 @@ final class RaceSession {
             guard let car = racers[i].entity,
                   let state = car.components[CarComponent.self],
                   let follow = car.components[LaneFollowComponent.self] else { continue }
-            let speed = simd_length(car.physicsMotion?.linearVelocity ?? .zero)
+            // Rail cars carry their speed on the follower; chaos cars on the body.
+            let speed = car.physicsMotion.map { simd_length($0.linearVelocity) }
+                ?? follow.speed
             racers[i].speed = speed
             racers[i].topSpeed = max(racers[i].topSpeed, speed)
             racers[i].livesLeft = state.livesLeft
