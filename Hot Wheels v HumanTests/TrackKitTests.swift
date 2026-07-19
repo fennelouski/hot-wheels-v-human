@@ -153,6 +153,21 @@ struct SolverTests {
         })
     }
 
+    /// A jump launches you STRAIGHT — it used to be a banked corner, which is
+    /// exactly the bug ("no straight-line jump"). Pin it kinematically to a
+    /// straight (drops into any straightaway, no re-layout) that still gates
+    /// on entry speed so it stays a launch, not a lump.
+    @Test func rampJumpIsAStraightLaunch() {
+        let jump = PieceCatalog.definition(for: .rampJump)
+        let straight = PieceCatalog.definition(for: .straight)
+        #expect(jump.headingChange == 0)                       // not a turn
+        #expect(jump.exitOffset == straight.exitOffset)        // straight kinematics
+        #expect(jump.minEntrySpeed != nil)                     // still a launch
+        // Swappable with .bump/.straight in presets without moving anything:
+        // that's what kept the locked layouts valid.
+        #expect(jump.exitOffset == PieceCatalog.definition(for: .bump).exitOffset)
+    }
+
     /// TrackSpawner stacks `entryLevel` cosmetic legs of one
     /// `elevationLevelHeight` each under an elevated piece, so the solver's
     /// world Y must stay exactly that product — drift and the legs either

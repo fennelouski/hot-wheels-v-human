@@ -39,8 +39,6 @@ extension TrackBlueprint {
     /// track always snakes into fresh ground.
     private static let uTurnR: [PieceType] = [.curve90R, .curve90R]
     private static let uTurnL: [PieceType] = [.curve90L, .curve90L]
-    /// rampJump shares curve90R's footprint, so a U-turn doubles as a jump.
-    private static let jumpTurnR: [PieceType] = [.rampJump, .curve90R]
 
     private static let wiggleWorm: [PieceType] = [.startGate]           // 20
         + straights(2) + [.bump] + straights(3)
@@ -69,32 +67,32 @@ extension TrackBlueprint {
         + [.finishGate]
 
     private static let jumpyJunction: [PieceType] = [.startGate]        // 42
-        + straights(3) + [.bump] + straights(5)
-        + jumpTurnR
+        + straights(3) + [.rampJump] + straights(5)
+        + uTurnR
         + straights(2) + [.hillUp] + straights(3) + [.hillDown] + straights(2)
         + uTurnL
-        + straights(4) + [.bump] + straights(4)
-        + jumpTurnR
+        + straights(4) + [.rampJump] + straights(4)
+        + uTurnR
         + straights(3) + [.bump] + straights(3)
         + [.finishGate]
 
     private static let loopDeLeap: [PieceType] = [.startGate]           // 50
         + straights(4) + [.loop] + straights(6)
-        + jumpTurnR
+        + uTurnR
         + straights(2) + [.hillUp] + straights(4) + [.hillDown] + straights(2)
         + uTurnL
         + straights(3) + [.loop] + straights(6)
         + uTurnR
-        + straights(2) + [.bump] + straights(5) + [.bump] + straights(2)
+        + straights(2) + [.rampJump] + straights(5) + [.bump] + straights(2)
         + [.finishGate]
 
     private static let thunderMountain: [PieceType] = [.startGate]      // 60
         + straights(2) + [.hillUp] + straights(2) + [.hillUp] + straights(2)
         + [.hillDown, .straight, .hillDown, .straight]
-        + jumpTurnR
+        + uTurnR
         + straights(4) + [.loop] + straights(7)
         + uTurnL
-        + straights(2) + [.bump] + straights(2) + [.bump] + straights(2)
+        + straights(2) + [.rampJump] + straights(2) + [.bump] + straights(2)
         + [.bump] + straights(3)
         + uTurnR
         + straights(3) + [.hillUp] + straights(4) + [.hillDown] + straights(3)
@@ -105,15 +103,15 @@ extension TrackBlueprint {
     private static let megaMega: [PieceType] = [.startGate]             // 75
         + straights(3) + [.hillUp] + straights(2) + [.bump] + straights(2)
         + [.hillDown] + straights(3)
-        + jumpTurnR
+        + uTurnR
         + straights(5) + [.loop] + straights(7)
         + uTurnL
         + straights(2) + [.hillUp, .straight, .hillUp] + straights(2)
         + [.hillDown, .straight, .hillDown] + straights(3)
-        + jumpTurnR
+        + uTurnR
         + straights(4) + [.loop] + straights(8)
         + uTurnL
-        + straights(3) + [.bump] + straights(2) + [.bump] + straights(2)
+        + straights(3) + [.rampJump] + straights(2) + [.bump] + straights(2)
         + [.bump] + straights(3)
         + [.finishGate]
 

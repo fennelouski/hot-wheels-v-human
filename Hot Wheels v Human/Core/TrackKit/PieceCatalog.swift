@@ -182,14 +182,22 @@ enum PieceCatalog {
             laneHalfWidth: RaceTuning.laneOffsetNarrow,
             minEntrySpeed: RaceTuning.loopMinEntrySpeed),
 
-        // Corner ramp doubles as the v1 jump; real gap-jump geometry is a
-        // Phase 2 concern (PRD lists OGA jump models as the alternative).
+        // Straight-line jump. Was a corner-ramp — so the only "jump" was a
+        // banked turn; a jump should launch you STRAIGHT. Kinematically a
+        // plain straight (0.8 forward, no turn, level exit) so it drops into
+        // any straightaway with no seam and no preset re-layout. The launch
+        // is physical: rampJump keeps its exact mesh collision (TrackSpawner)
+        // instead of the flat bed slab, so at minEntrySpeed the car rides the
+        // bump crest and takes air, then DriveSystem's lane recovery reels it
+        // gently back down onto the lane (deliberate air, inside the grace
+        // window). bump-up is the launch lip: symmetric, so it exits level
+        // and never opens a gap in the track. A taller dedicated ramp (OGA
+        // jump geometry) is the upgrade if kids want bigger air.
         TrackPieceDefinition(
-            type: .rampJump, modelName: "track-wide-corner-small-ramp",
+            type: .rampJump, modelName: "track-wide-straight-bump-up",
             modelOffset: bedLift,
-            exitOffset: [-0.4, 0, 0.4], headingChange: -halfPi,
-            footprint: FootprintRect(minX: -0.4, minZ: 0, maxX: 0.2, maxZ: 0.6),
-            shape: .arc(radius: 0.4, leftTurn: false),
+            exitOffset: [0, 0, 0.8],
+            footprint: straightRect, shape: .line(length: 0.8, rise: 0),
             minEntrySpeed: RaceTuning.rampMinEntrySpeed),
     ]
 }
