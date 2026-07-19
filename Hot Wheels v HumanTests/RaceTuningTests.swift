@@ -110,4 +110,18 @@ struct RaceTuningTests {
         // Recovery starts outside the band the normal magnet already covers.
         #expect(RaceTuning.offSplineCutoff > RaceTuning.laneMagnetRange)
     }
+
+    /// The unstick shove has to get a real run at a wedged car before the
+    /// rescue fires, or it never gets the chance to free it gently — and
+    /// it has to comfortably beat gravity to be worth applying at all.
+    @Test func unstickShovesWellBeforeTheRescue() {
+        #expect(RaceTuning.unstickDelay < RaceTuning.stuckTime)
+        // Enough runway left to reach full strength before the rescue.
+        let rampSeconds = (RaceTuning.stuckTime - RaceTuning.unstickDelay)
+        #expect(rampSeconds * RaceTuning.unstickRamp >= RaceTuning.unstickMaxAccel)
+        #expect(RaceTuning.unstickMaxAccel > 9.81 * 4)
+        // Some of the shove goes upward: a dead-stopped car is usually
+        // interpenetrating, and pure tangent force just presses it in.
+        #expect(RaceTuning.unstickLift > 0)
+    }
 }

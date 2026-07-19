@@ -147,11 +147,39 @@ struct RaceRulesSystem: System {
                 state.stuckAnchor = position
                 state.stuckSeconds = 0
             }
-            if state.stuckSeconds > RaceTuning.stuckTime { reason = "stuck" }
-
             let up = car.convert(direction: [0, 1, 0], to: nil)
             state.flippedSeconds = up.y < 0 ? state.flippedSeconds + dt : 0
             if state.flippedSeconds > RaceTuning.flippedTime { reason = "flipped" }
+
+            // Being stuck is a RESCUE, not a crash. Two reasons it can't be
+            // a destruction: a car wedged in track geometry can't be freed
+            // by force (traced still pinned under DriveSystem's full 80 m/s²
+            // unstick shove), and the old path — charge a life, respawn TWO
+            // PIECES BACK — drove it into the very same wedge again. The
+            // heavy chassis burned all five lives on one hill seam and DNF'd
+            // every race that way.
+            //
+            // Lifting the car to the START OF THE NEXT PIECE puts it past
+            // the snag, so every rescue makes forward progress and the car
+            // reaches the finish in finite steps however bad the geometry
+            // is. No life charged: catching on a seam isn't a mistake the
+            // kid made, and every car is meant to finish.
+            if reason == nil, state.stuckSeconds > RaceTuning.stuckTime {
+                let anchors = car.parent?.components[RaceTrackComponent.self]?.lanes.pieceStartIndices
+                    ?? [0]
+                let wedged = anchors.lastIndex(where: { $0 <= follow.nextIndex }) ?? 0
+                let ahead = min(anchors[min(wedged + 1, anchors.count - 1)],
+                                follow.waypoints.count - 1)
+                RaceSession.drillLog("[race] \(state.design.name) rescued: stuck at "
+                    + String(format: "(%.2f, %.2f, %.2f)", position.x, position.y, position.z)
+                    + " → piece \(min(wedged + 1, anchors.count - 1))")
+                state.stuckSeconds = 0
+                state.stuckAnchor = nil
+                follow.nextIndex = ahead
+                respawn(car, at: follow.waypoints[ahead],
+                        toward: follow.waypoints[min(ahead + 1, follow.waypoints.count - 1)])
+                RaceEventBus.shared.emit(.respawned(playerID: state.playerID))
+            }
 
             if let reason {
                 // Drill breadcrumb — pairs with the [race] lines RaceSession logs.

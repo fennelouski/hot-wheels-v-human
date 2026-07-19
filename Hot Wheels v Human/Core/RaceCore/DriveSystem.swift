@@ -179,6 +179,25 @@ struct DriveSystem: System {
                     force += recover
                 }
             }
+
+            // Unstick. Escalating shove along the lane for a car that has
+            // stopped making progress, wherever it is — the loop motor's
+            // bargain applied to every seam. Without it the heavy chassis
+            // burned all five lives on one spot and DNF'd every race (sim
+            // drills: every death "stuck", near-identical coordinate).
+            //
+            // Reads the rules system's anchor-based counter rather than raw
+            // speed, so a car jittering or spinning in place still counts as
+            // stuck; it runs one frame behind (DriveSystem registers first),
+            // which is nothing at these timescales.
+            if state.stuckSeconds > RaceTuning.unstickDelay {
+                let over = state.stuckSeconds - RaceTuning.unstickDelay
+                let accel = min(over * RaceTuning.unstickRamp,
+                                RaceTuning.unstickMaxAccel)
+                force += tangent * (chassis.mass * accel)
+                force.y += chassis.mass * accel * RaceTuning.unstickLift
+            }
+
             force -= velocity * (chassis.dragCoefficient * speed)
 
             car.addForce(force, relativeTo: nil)

@@ -114,6 +114,23 @@ nonisolated enum RaceTuning {
     /// track and out the other side.
     static let laneRecoveryMaxForce: Float = 60
 
+    /// A car making no progress gets an escalating shove along its lane,
+    /// starting this long after the stuck counter begins. Short enough to
+    /// resolve wedges well inside `stuckTime`, long enough not to fight a
+    /// car that's merely crawling out of a loop.
+    static let unstickDelay: Float = 0.4
+    /// Shove acceleration gained per further second stuck, m/s²·s, and its
+    /// ceiling. Escalating rather than fixed because the gentlest nudge
+    /// that works is the one that doesn't fling the car; the ceiling is
+    /// deliberately enormous (~10 g) because by then nothing else has
+    /// worked and a wedged car is a dead race.
+    static let unstickRamp: Float = 40
+    static let unstickMaxAccel: Float = 80
+    /// Fraction of the shove applied upward. A car at a dead 0.0 m/s is
+    /// usually interpenetrating geometry rather than merely blocked, and
+    /// pure tangent force just presses it further in.
+    static let unstickLift: Float = 0.35
+
     /// Cornering "slot grip": the track feeds the car the centripetal force
     /// a curve demands (m·v²·κ, DriveSystem feedforward) but never more than
     /// this. Sized `gripMargin` above what the small curve (r 0.4) needs at
