@@ -23,8 +23,16 @@ struct CarComponent: Component {
     /// Queued boost impulses (set by RaceCoordinator, consumed by DriveSystem).
     var pendingBoost: Bool = false
     var stuckSeconds: Float = 0
+    /// Anchor for no-net-progress stuck detection (RaceTuning.stuckRadius).
+    var stuckAnchor: SIMD3<Float>? = nil
     var flippedSeconds: Float = 0
     var finished: Bool = false
+    /// DriveSystem applies no forces while this counts down. The first
+    /// frame after GO stalls for seconds in the Simulator (physics world
+    /// build + shader warmup) and RealityKit integrates forces over that
+    /// whole spiked dt — 16 N × 2 s ≈ a 20 m/s catapult off the start line
+    /// (sim drills traced it). Sitting out a few frames burns the spike.
+    var warmupFrames: Int = 3
 }
 
 /// Which lane spline the car follows and how far along it is.
@@ -32,13 +40,17 @@ struct LaneFollowComponent: Component {
     var waypoints: [SIMD3<Float>]
     var nextIndex: Int = 0
     var lapsDone: Int = 0
+    /// Waypoint index ranges covering loop pieces — the loop motor
+    /// (RaceTuning.loopCarrySpeed) engages inside these.
+    var loopRanges: [ClosedRange<Int>] = []
 }
 
 @MainActor
 enum CarFactory {
 
     static func makeCar(design: CarDesign, playerID: UUID, lane: [SIMD3<Float>],
-                        lives: Int, assets: AssetStore? = nil) async throws -> ModelEntity {
+                        lives: Int, loopRanges: [ClosedRange<Int>] = [],
+                        assets: AssetStore? = nil) async throws -> ModelEntity {
         let assets = assets ?? AssetStore.shared
         CarComponent.registerComponent()
         LaneFollowComponent.registerComponent()
@@ -53,8 +65,14 @@ enum CarFactory {
         // Center the visual on the physics origin; box from visual bounds ×0.9.
         let bounds = visual.visualBounds(relativeTo: car)
         visual.position -= bounds.center
-        let size = bounds.extents * 0.8   // slim box: rail clearance > fidelity
+        var size = bounds.extents * 0.8   // slim box: rail clearance > fidelity
+        // Low-profile box: cars only touch the track with their underside,
+        // and full visual height jams the monster truck against the loop
+        // mouth (stopped dead at the same spot every sim drill). Half
+        // height, bottom kept in place so ride height is unchanged.
+        size.y = bounds.extents.y * 0.4
         let shape = ShapeResource.generateBox(size: size)
+            .offsetBy(translation: [0, -bounds.extents.y * (0.8 - 0.4) / 2, 0])
         car.collision = CollisionComponent(shapes: [shape])
         car.physicsBody = PhysicsBodyComponent(
             massProperties: .init(shape: shape, mass: design.chassis.mass),
@@ -65,7 +83,7 @@ enum CarFactory {
 
         car.components.set(PhysicsMotionComponent())
         car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives))
-        car.components.set(LaneFollowComponent(waypoints: lane))
+        car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges))
 
         // The little human, riding hip-deep so the standing rig reads as
         // seated (legs hidden inside the chassis).
@@ -153,5 +171,20 @@ enum CarFactory {
 extension Entity {
     func descendantsAndSelf() -> [Entity] {
         children.flatMap { $0.descendantsAndSelf() } + [self]
+    }
+}
+
+extension ModelEntity {
+    /// Height to add above a lane waypoint when placing a car so its
+    /// collision box bottom (at −0.4 × visual height, see makeCar) clears
+    /// the bed. A fixed +0.05 put the tall monster truck's box 1 cm INSIDE
+    /// the bed mesh and the depenetration impulse catapulted it off the
+    /// start line at ~25 m/s (sim drills, collision-event trace).
+    var spawnLift: Float {
+        // Small drop clearance: spawning intersecting ANY collision gets
+        // the car depenetration-catapulted, so cars always land from
+        // above. 2 cm is plenty now that beds are clean slabs — a 10 cm
+        // drop tipped the top-heavy monster truck onto its side.
+        visualBounds(relativeTo: self).extents.y * 0.4 + 0.02
     }
 }

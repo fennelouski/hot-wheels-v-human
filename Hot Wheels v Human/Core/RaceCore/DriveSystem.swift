@@ -16,13 +16,44 @@ struct DriveSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard RaceEventBus.shared.raceActive else { return }
         for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
             guard let car = entity as? ModelEntity,
                   var follow = car.components[LaneFollowComponent.self],
                   var state = car.components[CarComponent.self],
                   !state.finished, !follow.waypoints.isEmpty else { continue }
 
+            // Burn the post-GO dt spike with zero force (see CarComponent).
+            if state.warmupFrames > 0 {
+                state.warmupFrames -= 1
+                car.components.set(state)
+                continue
+            }
+
             let position = car.position(relativeTo: nil)
+
+            // Never target waypoint 0: previous == target there, the tangent
+            // degenerates to zero, and the guard below skips the car — a car
+            // spawned ≥ lookahead from waypoint 0 parked forever (sim drills).
+            if follow.nextIndex == 0, follow.waypoints.count > 1 {
+                follow.nextIndex = 1
+            }
+
+            // Re-acquire the lane: jump to the nearest UPCOMING waypoint
+            // within a short window. A physics hitch can integrate ~0.1 s
+            // in one frame and move the car past its target; a follower
+            // that only advances within the lookahead then strands and
+            // drives the car dead-straight forever (sim drills). The
+            // window stays SMALL (1 m of lane) so a car at the loop's
+            // base can never re-acquire the ground-level lane that passes
+            // beside the ring and skip the climb.
+            var nearest = follow.nextIndex
+            var nearestDistance = simd_length(follow.waypoints[nearest] - position)
+            for j in follow.nextIndex..<min(follow.nextIndex + 10, follow.waypoints.count) {
+                let d = simd_length(follow.waypoints[j] - position)
+                if d < nearestDistance { nearest = j; nearestDistance = d }
+            }
+            follow.nextIndex = nearest
 
             // Advance the target waypoint until it's ahead by the lookahead.
             while follow.nextIndex < follow.waypoints.count - 1,
@@ -39,6 +70,7 @@ struct DriveSystem: System {
             let velocity = car.physicsMotion?.linearVelocity ?? .zero
             let speed = simd_length(velocity)
             let chassis = state.design.chassis
+            let tires = state.design.tires
 
             let toCar = position - previous
             let along = simd_dot(toCar, tangent)
@@ -46,11 +78,28 @@ struct DriveSystem: System {
             let offset = simd_length(lateral)
 
             // Off the rails → physics owns the car (destruction rules will
-            // catch it). Drive/steer only while near the lane.
+            // catch it). Drive/steer only while near the lane — and never
+            // past its END: lateral offset is measured against an infinite
+            // line, so a car that overshot the finish would be driven
+            // dead-straight to the edge of the world (sim drills).
+            let pastEnd = follow.nextIndex >= follow.waypoints.count - 1
+                && along > tangentLength + 0.1
             var force = SIMD3<Float>.zero
-            if offset < RaceTuning.offSplineCutoff {
-                if speed < RaceTuning.maxSpeed[chassis]! {
+            if offset < RaceTuning.offSplineCutoff, !pastEnd {
+                if speed < RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]! {
                     force += tangent * RaceTuning.driveForce[chassis]!
+                }
+                // Loop motor: on a loop piece the slot grips the car like
+                // the booster wheels in a real Hot Wheels set — slow cars
+                // get pushed (every car makes the loop), hot cars get
+                // braked (cruise entry flung them off the ring top).
+                if follow.loopRanges.contains(where: { $0.contains(follow.nextIndex) }) {
+                    let alongSpeed = simd_dot(velocity, tangent)
+                    if alongSpeed < RaceTuning.loopCarrySpeed {
+                        force += tangent * (chassis.mass * RaceTuning.loopMotorAccel)
+                    } else if alongSpeed > RaceTuning.loopSpeedCap {
+                        force -= tangent * (chassis.mass * RaceTuning.loopMotorAccel)
+                    }
                 }
                 // PD steering, clamped — unclamped PD catapults stray cars.
                 let lateralSpeed = velocity - tangent * simd_dot(velocity, tangent)
@@ -84,7 +133,7 @@ struct DriveSystem: System {
                         let ds = (tangentLength + aheadLength) / 2
                         var centripetal = turn * (chassis.mass * speed * speed / ds)
                         let need = simd_length(centripetal)
-                        let grip = RaceTuning.corneringGrip(chassis)
+                        let grip = RaceTuning.corneringGrip(chassis, tires)
                         if need > grip {
                             centripetal *= grip / need
                         }

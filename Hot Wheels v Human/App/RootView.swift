@@ -37,6 +37,28 @@ struct RootView: View {
     }()
     /// Dev arg: straight to the Race-on-TV setup screen (track draft UI).
     private let launchIntoRaceOnTV = ProcessInfo.processInfo.arguments.contains("--race-on-tv")
+    /// Dev arg: `--car <n>` narrows `--solo-arena` to demoPair[n] alone —
+    /// single-car tuning drills without start-line traffic.
+    private let soloCarIndex: Int? = {
+        let args = ProcessInfo.processInfo.arguments
+        guard let flag = args.firstIndex(of: "--car"),
+              args.indices.contains(flag + 1), let n = Int(args[flag + 1])
+        else { return nil }
+        return min(max(n, 0), CarDesign.demoPair.count - 1)
+    }()
+    /// Dev arg: `--tires standard|slick|grippy` overrides every drill car's
+    /// tires — isolates tire physics from chassis geometry in CLI drills.
+    private let tireOverride: TireType? = {
+        let args = ProcessInfo.processInfo.arguments
+        guard let flag = args.firstIndex(of: "--tires"),
+              args.indices.contains(flag + 1) else { return nil }
+        switch args[flag + 1] {
+        case "slick": return .slickRacing
+        case "grippy": return .grippyOffroad
+        case "standard": return .standard
+        default: return nil
+        }
+    }()
 
     var body: some View {
         if launchIntoQuickPlay {
@@ -55,7 +77,12 @@ struct RootView: View {
             SoloArenaView(designs: CarDesign.demoPair,
                           blueprint: TrackBlueprint.presets[n].blueprint)
         } else if launchIntoArena {
-            SoloArenaView(designs: CarDesign.demoPair)
+            let picked = soloCarIndex.map { [CarDesign.demoPair[$0]] } ?? CarDesign.demoPair
+            SoloArenaView(designs: picked.map { design in
+                var d = design
+                if let tireOverride { d.tires = tireOverride }
+                return d
+            })
         } else if launchIntoCustomizer {
             CustomizerView()
         } else if launchIntoCharacterEditor {

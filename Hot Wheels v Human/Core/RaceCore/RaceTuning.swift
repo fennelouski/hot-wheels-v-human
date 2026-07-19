@@ -32,9 +32,11 @@ nonisolated enum RaceTuning {
     static let waypointSpacing: Float = 0.1
 
     /// Lane centerline offset on wide (dual-lane) pieces. PRD sketched
-    /// ±0.09 but the monster truck grinds the side rails there — 0.07
-    /// clears them with the ×0.8 collision box.
-    static let laneOffsetWide: Float = 0.07
+    /// ±0.09 but the monster truck grinds the side rails there. 0.07
+    /// cleared an older box; the C-series models grew it (0.10 wide → edge
+    /// at 0.12, inside the rail face) and spawning there catapulted the
+    /// truck off the map — sim drills. 0.05 keeps the edge at 0.10.
+    static let laneOffsetWide: Float = 0.05
     /// Narrow pieces (the loop) are single-file — the 0.2 m bed with side
     /// rails can't fit two lanes of monster truck.
     static let laneOffsetNarrow: Float = 0.0
@@ -51,16 +53,18 @@ nonisolated enum RaceTuning {
     /// heavier cars get more force but not proportionally — heavy = momentum
     /// through loops, light = quick but flingable.
     static let driveForce: [ChassisClass: Float] = [
-        .heavyMuscle: 16,
+        .heavyMuscle: 20,
         .balancedFormula: 12,
         .superlightDrift: 9,
     ]
     /// Top speed clamp per chassis, m/s (drive force stops above this).
-    // The loop needs ~4.4 m/s: heavy sails through, balanced just makes it
-    // (drive force keeps feeding energy inside the loop), light falls off —
-    // exactly the PRD's toy fantasy.
+    // The loop needs ~4.4 m/s THEORETICAL — but the loop MODEL's lead-in
+    // ramp starts 0.3 m early and bleeds ~0.5 m/s (sim drills), so the
+    // practical bar is ~4.9. Heavy carries real margin over it (momentum
+    // through loops — the PRD fantasy), balanced just makes it, light
+    // falls off without slicks.
     static let maxSpeed: [ChassisClass: Float] = [
-        .heavyMuscle: 5.0,
+        .heavyMuscle: 5.5,
         .balancedFormula: 4.6,
         .superlightDrift: 4.2,
     ]
@@ -90,10 +94,54 @@ nonisolated enum RaceTuning {
     /// ~1.7 m/s).
     static let smallCurveRadius: Float = 0.4
     static let gripMargin: Float = 1.1
-    static func corneringGrip(_ chassis: ChassisClass) -> Float {
-        chassisMass[chassis]! * maxSpeed[chassis]! * maxSpeed[chassis]!
-            / smallCurveRadius * gripMargin
+    static func corneringGrip(_ chassis: ChassisClass, _ tires: TireType) -> Float {
+        let top = maxSpeed[chassis]! * tireSpeedFactor[tires]!
+        return chassisMass[chassis]! * top * top
+            / smallCurveRadius * gripMargin * tireGripFactor[tires]!
     }
+
+    // MARK: Tire performance
+
+    /// Tires are the track-choice tradeoff: slicks trade grip for top speed,
+    /// grippy trades top speed for grip, standard is the 1.0 baseline (so
+    /// "Balanced + Standard clears the loop" — RaceCore README — still holds).
+    /// Slicks let the light chassis clear the loop (4.2 → 4.54 vs the 4.4
+    /// bar). Grippy stays at 1.0: its high tire friction ALREADY bleeds the
+    /// most speed in contact-heavy pieces (loop normal force), and sim
+    /// drills showed even a 0.97 factor sends heavy+grippy under the
+    /// practical loop entry speed — 4 straight loop deaths, all lives lost.
+    /// Grippy's cost is physical; don't stack a numeric one on top.
+    static let tireSpeedFactor: [TireType: Float] = [
+        .standard: 1.0, .slickRacing: 1.08, .grippyOffroad: 1.0,
+    ]
+    /// Multiplies corneringGrip (already scaled to the tire's own top speed).
+    /// Slicks stay at 1.0: their cornering risk comes from boost overspeed
+    /// at a higher absolute speed, and anything below 1 flirts with the
+    /// "flies off without boosting" bug. Grippy holds most boosted corners.
+    static let tireGripFactor: [TireType: Float] = [
+        .standard: 1.0, .slickRacing: 1.0, .grippyOffroad: 1.35,
+    ]
+
+    // MARK: Loop motor
+
+    /// Kid-first guarantee: every car makes it through every loop. Real
+    /// Hot Wheels sets cheat the same way — powered booster wheels grab
+    /// the car and fling it around. While a car is on a loop piece and
+    /// slower along the lane than this, the motor pushes. Deliberately
+    /// LOW: the ring rides best as a slow crawl (traced clean at
+    /// 1.2–2.9 m/s), and a motor that held 4.6 through the climb sent the
+    /// car off the ring top at 5.9 m/s — backwards over the start gate.
+    /// Faster cars keep their own physics; the motor only rescues.
+    static let loopCarrySpeed: Float = 3.0
+    /// A car FASTER along the lane than this inside a loop gets braked by
+    /// the same motor — entering the ring at cruise (5.5) flung the heavy
+    /// chassis off the top without any boost. The slot grips both ways:
+    /// loops normalise everyone into the 3–4 m/s band that rides clean.
+    static let loopSpeedCap: Float = 4.0
+    /// Motor/brake strength as an acceleration (× car mass → force).
+    /// ~2.5 g: comfortably beats gravity + tire friction on the climb for
+    /// every chassis, gentle enough that the ride still reads as physics.
+    static let loopMotorAccel: Float = 25
 
     // MARK: Boost
 
@@ -102,12 +150,26 @@ nonisolated enum RaceTuning {
     /// Seconds for the meter to charge 0 → 1.
     static let boostChargeTime: Float = 8
 
+    // MARK: Race robustness
+
+    /// A frame longer than this is a stall (asset/shader warmup); the race
+    /// rolls cars back to their pre-stall poses because one stalled frame
+    /// integrates seconds of physics and teleports moving cars off the
+    /// lane. Above the Simulator's chuggy-but-normal ~0.1 s frames.
+    static let hitchRollbackThreshold: Double = 0.2
+    /// Crossing radius around the last waypoint that counts as finishing.
+    /// 0.4 missed a 5 m/s car between frames at low frame rates.
+    static let finishCatchRadius: Float = 0.7
+
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 
     /// Car is destroyed when it falls this far below the track plane, metres.
     static let destructionFallDepth: Float = 1.0
-    /// …or is slower than this for `stuckTime` seconds.
-    static let stuckSpeed: Float = 0.05
+    /// …or makes no net progress: a car that hasn't moved `stuckRadius`
+    /// from its anchor within `stuckTime` is stuck no matter its
+    /// instantaneous speed — speed thresholds kept being dodged by cars
+    /// wobbling in place at ~0.2 m/s forever (sim drills).
+    static let stuckRadius: Float = 0.5
     static let stuckTime: Float = 3
     /// …or upside-down for this long.
     static let flippedTime: Float = 3
@@ -199,16 +261,20 @@ nonisolated enum RaceTuning {
         .superlightDrift: "vehicle-speedster",   // already in Resources/Models3D
     ]
 
-    // MARK: Tires (PRD §3.1 table ÷ 8)
+    // MARK: Tires (PRD §3.1 table ÷ 24)
 
     // Cars are sliding boxes, not rolling wheels — at the PRD's grip values
-    // static friction beats the drive force and nothing moves. Scaled down
-    // ~8× so "grip" shapes cornering/loop behavior instead of parking cars.
+    // static friction beats the drive force and nothing moves. First scaled
+    // ÷8; sim drills then showed loop normal force (m·v²/r ≈ 100 N for the
+    // monster truck) made grippy's 0.13 burn ~13 N against a 16 N drive —
+    // heavy+grippy STALLED mid-loop every run and stuck-destructed. ÷3 more
+    // keeps the slick<standard<grippy spread while loop friction stays a
+    // fraction of drive force.
     static let tireStaticFriction: [TireType: Float] = [
-        .standard: 0.10, .slickRacing: 0.06, .grippyOffroad: 0.13,
+        .standard: 0.035, .slickRacing: 0.02, .grippyOffroad: 0.045,
     ]
     static let tireDynamicFriction: [TireType: Float] = [
-        .standard: 0.075, .slickRacing: 0.045, .grippyOffroad: 0.11,
+        .standard: 0.025, .slickRacing: 0.015, .grippyOffroad: 0.04,
     ]
     static let tireRestitution: [TireType: Float] = [
         .standard: 0.1, .slickRacing: 0.05, .grippyOffroad: 0.15,

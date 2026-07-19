@@ -19,10 +19,13 @@ struct TirePicker: View {
                         Image(systemName: symbol(tire)).font(.system(size: 38, weight: .bold))
                         Text(label(tire))
                             .font(.system(size: 20, weight: .bold, design: .rounded))
+                        // Friction is the honest spread (slick < standard <
+                        // grippy): speed factor + loop friction bleed both
+                        // follow it, so one table drives both bars.
+                        StatBar(name: "Speed", value: 1.25 - normalized(tire.staticFriction,
+                                                                        among: RaceTuning.tireStaticFriction))
                         StatBar(name: "Grip", value: normalized(tire.staticFriction,
                                                                 among: RaceTuning.tireStaticFriction))
-                        StatBar(name: "Slide", value: 1.25 - normalized(tire.staticFriction,
-                                                                        among: RaceTuning.tireStaticFriction))
                     }
                     .padding(16)
                     .frame(width: 190)

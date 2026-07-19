@@ -62,11 +62,36 @@ final class RaceSession {
     /// RaceCoordinator relays these onto the transport.
     var onEvent: ((RaceEvent) -> Void)?
 
+    /// CLI drill breadcrumbs: print AND append to Documents/drill-log.txt —
+    /// `simctl launch --console-pty` drops output often enough that sim
+    /// drills need the file (read via `simctl get_app_container … data`).
+    nonisolated static func drillLog(_ line: String, reset: Bool = false) {
+        print(line)
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("drill-log.txt")
+        let data = Data((line + "\n").utf8)
+        if !reset, let handle = try? FileHandle(forWritingTo: url) {
+            defer { try? handle.close() }
+            _ = try? handle.seekToEnd()
+            try? handle.write(contentsOf: data)
+        } else {
+            try? data.write(to: url)
+        }
+    }
+    private var lastTraceSecond = -1
+    @MainActor private static var drillLogStarted = false
+    /// Last known good pose per racer — restored after a hitch frame.
+    private var lastPoses: [UUID: (position: SIMD3<Float>, velocity: SIMD3<Float>)] = [:]
+
     /// Builds the whole arena scene into `root` and starts the countdown.
     /// `entries` pair each design with the owning player's stable ID.
     func start(blueprint: TrackBlueprint, entries: [(playerID: UUID, design: CarDesign)],
                config: MatchConfig, root: Entity) async throws {
         phase = .buildingTrack
+        // Append across a TV series' races; fresh file per app launch.
+        Self.drillLog("[race] building \(blueprint.trackId)",
+                      reset: !Self.drillLogStarted)
+        Self.drillLogStarted = true
         self.config = config
         trackID = blueprint.trackId
         let layout = TrackLayoutSolver.solve(blueprint)
@@ -87,17 +112,32 @@ final class RaceSession {
 
         let lives = config.mode == .test ? Int.max : config.lives
         racers = []
+        lastPoses = [:]   // stale poses must not survive into a new track
+        // Waypoint ranges covering loop pieces, for the loop motor.
+        let starts = layout.lanes.pieceStartIndices
+        let loopRanges: [ClosedRange<Int>] = layout.pieces.enumerated().compactMap { pi, piece in
+            guard case .verticalLoop = piece.definition.shape else { return nil }
+            let end = pi + 1 < starts.count ? starts[pi + 1] : layout.lanes.center.count - 1
+            return starts[pi]...end
+        }
         for (i, entry) in entries.enumerated() {
             let (playerID, design) = entry
             let lane = i % 2 == 0 ? layout.lanes.left : layout.lanes.right
             let car = try await CarFactory.makeCar(
                 design: design, playerID: playerID, lane: lane,
-                lives: lives)
-            // Staggered grid: lane 1 starts a nose behind lane 0 so the
-            // pair doesn't wedge at single-file merges (the loop).
-            let gridSlot = min(i * 4, max(lane.count - 1, 0))
-            car.position = lane[gridSlot] + [0, 0.05, 0]
-            car.isEnabled = false     // frozen until GO
+                lives: lives, loopRanges: loopRanges)
+            // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
+            // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
+            // and the piece seam (z 0.8) both wedge drop-spawned cars, so
+            // keep every slot on flat gate bed (sim drills).
+            let gridSlot = min(i * 4 + 1, max(lane.count - 1, 0))
+            car.position = lane[gridSlot] + [0, car.spawnLift, 0]
+            // Visible AND dynamic through the countdown: rendering compiles
+            // the shaders and the physics world builds NOW — both stall for
+            // seconds in the Simulator, and any stall after cars start
+            // moving integrates one giant step that teleports them off the
+            // lane. During the countdown DriveSystem/rules are inert
+            // (RaceEventBus.raceActive) so the stalls land on parked cars.
             track.addChild(car)
             racers.append(Racer(id: playerID, design: design, entity: car, livesLeft: lives))
         }
@@ -122,15 +162,64 @@ final class RaceSession {
     private func go(root: Entity) {
         phase = .racing
         raceClock = 0
-        for racer in racers { racer.entity?.isEnabled = true }
+        // Cars stay STATIC until the tick loop sees a normal-length frame:
+        // the frames around GO stall for seconds in the Simulator (asset /
+        // shader / audio warmup), one stalled frame integrates seconds of
+        // physics in a single step, and a moving car teleports metres off
+        // its lane. Static cars shrug stalls off; the green flag drops on
+        // the first proven-fast frame.
+        awaitingGreenFlag = true
         guard let scene = root.scene else { return }
         updateSubscription = scene.subscribe(to: SceneEvents.Update.self) { [weak self] event in
             self?.tick(dt: event.deltaTime)
         }
     }
 
+    private var awaitingGreenFlag = false
+
+    private func dropGreenFlag() {
+        awaitingGreenFlag = false
+        RaceEventBus.shared.raceActive = true
+        for racer in racers {
+            guard let car = racer.entity else { continue }
+            // A body resting since the countdown may be ASLEEP and
+            // DriveSystem's addForce never wakes it. An impulse does.
+            car.applyLinearImpulse([0, 0.001, 0], relativeTo: nil)
+            // Seed the hitch-rollback cache so even an immediate spike
+            // frame has a pose to restore.
+            lastPoses[racer.id] = (car.position(relativeTo: nil), .zero)
+        }
+    }
+
     private func tick(dt: TimeInterval) {
         guard phase == .racing else { return }
+
+        if awaitingGreenFlag {
+            if dt < 0.1 { dropGreenFlag() }
+            return
+        }
+
+        // Hitch rollback: a stalled frame (asset/shader/audio warmup in the
+        // Simulator) integrates seconds of physics in ONE step — a moving
+        // car teleports metres off its lane, and no force-side guard can
+        // prevent that. The screen was frozen through the stall anyway, so
+        // restoring last frame's poses reads as nothing at all.
+        if dt > RaceTuning.hitchRollbackThreshold, !lastPoses.isEmpty {
+            for r in racers {
+                guard let car = r.entity, let pose = lastPoses[r.id] else { continue }
+                car.setPosition(pose.position, relativeTo: nil)
+                car.physicsMotion?.linearVelocity = pose.velocity
+                car.physicsMotion?.angularVelocity = .zero
+            }
+            return   // the spike contributes no race clock either
+        }
+        for r in racers {
+            if let car = r.entity {
+                lastPoses[r.id] = (car.position(relativeTo: nil),
+                                   car.physicsMotion?.linearVelocity ?? .zero)
+            }
+        }
+
         raceClock += dt
 
         for event in RaceEventBus.shared.drain() {
@@ -138,8 +227,7 @@ final class RaceSession {
             case .carDestroyed(let id):
                 withRacer(id) {
                     $0.crashes += 1
-                    // Console breadcrumb for CLI tuning drills (XCODE-SETUP §8).
-                    print("[race] \($0.design.name) crashed at piece \($0.lastPieceIndex) (crash #\($0.crashes))")
+                    Self.drillLog("[race] \($0.design.name) crashed at piece \($0.lastPieceIndex) (crash #\($0.crashes))")
                 }
                 onEvent?(event)
             case .finished(let id, _):
@@ -150,6 +238,17 @@ final class RaceSession {
             }
         }
 
+        // 1 Hz drill trace: where every car is, each second of the race.
+        if Int(raceClock * 4) != lastTraceSecond {
+            lastTraceSecond = Int(raceClock * 4)
+            for r in racers {
+                if let p = r.entity?.position(relativeTo: nil) {
+                    Self.drillLog(String(format: "[race] t%.2f %@ (%.2f, %.2f, %.2f) %.1f m/s wp %d",
+                                         Float(lastTraceSecond) / 4, r.design.name, p.x, p.y, p.z, r.speed,
+                                         r.entity?.components[LaneFollowComponent.self]?.nextIndex ?? -1))
+                }
+            }
+        }
         for i in racers.indices {
             guard let car = racers[i].entity,
                   let state = car.components[CarComponent.self],
@@ -191,9 +290,10 @@ final class RaceSession {
 
         if allDone {
             phase = .results
+            RaceEventBus.shared.raceActive = false
             for r in racers {
                 let time = r.finishTime.map { String(format: "%.1fs", $0) } ?? "OUT"
-                print("[race] result \(r.design.name): \(time), top \(String(format: "%.1f", r.topSpeed)) m/s, crashes \(r.crashes)")
+                Self.drillLog("[race] result \(r.design.name): \(time), top \(String(format: "%.1f", r.topSpeed)) m/s, crashes \(r.crashes)")
             }
             updateSubscription?.cancel()
             updateSubscription = nil
@@ -207,6 +307,7 @@ final class RaceSession {
         trackEntity?.removeFromParent()
         trackEntity = nil
         racers = []
+        RaceEventBus.shared.raceActive = false
         _ = RaceEventBus.shared.drain()   // stale events must not leak into the next race
         // .buildingTrack, NOT .lobby — the TV shows ArenaView for every
         // non-lobby phase; dropping to .lobby would tear down the

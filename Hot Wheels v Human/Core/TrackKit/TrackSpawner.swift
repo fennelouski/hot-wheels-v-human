@@ -5,6 +5,7 @@
 //  Solved layout → RealityKit entity hierarchy with static collision.
 //
 
+import Foundation
 import RealityKit
 
 /// Tags gate pieces (and later, piece boundaries) for RaceRulesSystem.
@@ -31,12 +32,28 @@ enum TrackSpawner {
         let root = Entity()
         root.name = "track"
 
-        for piece in layout.pieces {
+        for (pi, piece) in layout.pieces.enumerated() {
             let model = try await assets.entity(named: piece.definition.modelName)
             model.name = "piece-\(piece.index)-\(piece.definition.type.rawValue)"
             model.position = piece.modelPosition
             model.orientation = simd_quatf(angle: piece.modelYaw, axis: [0, 1, 0])
-            try await addStaticCollision(to: model)
+            // Cars collide with SOLVED geometry, not the visual meshes —
+            // the models carry raised ramps/tabs/lead-ins beyond their
+            // logical footprints, and cars hitting those exact meshes got
+            // depenetration-launched at ~38 m/s (sim drills; the gate
+            // ramps and the loop's lead-in lip were the worst). Flat
+            // pieces get one bed slab; the loop gets a chain of boxes
+            // riding its own centerline (the same spline DriveSystem
+            // follows). Only the jump ramp keeps its exact mesh — the
+            // ramp lip IS its gameplay.
+            switch piece.definition.type {
+            case .rampJump:
+                try await addStaticCollision(to: model)
+            case .loop:
+                root.addChild(splineCollision(for: piece, index: pi, lanes: layout.lanes))
+            default:
+                root.addChild(bedCollision(for: piece))
+            }
             root.addChild(model)
 
             if let overlayName = piece.definition.overlayModelName {
@@ -76,6 +93,85 @@ enum TrackSpawner {
             }
         }
         return root
+    }
+
+    /// Invisible drivable slab matching the piece's logical footprint,
+    /// top at the bed surface. Hills pitch the slab along their rise.
+    /// No side rails: the lane magnet holds cars on the bed, and flying
+    /// off IS the game.
+    private static func bedCollision(for piece: PlacedPiece) -> Entity {
+        let rect = piece.definition.footprint
+        let bedTop: Float = 0.013   // measured bed surface height
+        let thickness: Float = 0.1
+        var size = SIMD3<Float>(rect.maxX - rect.minX, thickness, rect.maxZ - rect.minZ)
+        var pitch: Float = 0
+        var centerY = bedTop - thickness / 2
+        if case .line(let length, let rise) = piece.definition.shape, rise != 0 {
+            pitch = atan(rise / length)
+            size.z = (length * length + rise * rise).squareRoot()
+            centerY += rise / 2
+        }
+        let slab = Entity()
+        slab.name = "bed-\(piece.index)"
+        let local = SIMD3<Float>((rect.minX + rect.maxX) / 2, centerY,
+                                 (rect.minZ + rect.maxZ) / 2)
+        slab.position = piece.entryPosition + rotated(local, by: piece.entryYaw)
+        slab.orientation = simd_quatf(angle: piece.entryYaw, axis: [0, 1, 0])
+            * simd_quatf(angle: pitch, axis: [1, 0, 0])
+        slab.components.set(CollisionComponent(
+            shapes: [.generateBox(size: size)], isStatic: true))
+        slab.components.set(PhysicsBodyComponent(
+            massProperties: .default, material: nil, mode: .static))
+        return slab
+    }
+
+    /// Bed collision that follows the piece's own centerline: a chain of
+    /// short boxes, each oriented along the spline with its top face on
+    /// the waypoints and its "up" pointing at the loop's circle centre —
+    /// so the bed surface tracks the ring all the way around, ramps and
+    /// all, with none of the model mesh's stray lips.
+    private static func splineCollision(for piece: PlacedPiece, index: Int,
+                                        lanes: LaneSplines) -> Entity {
+        let start = lanes.pieceStartIndices[index]
+        let end = index + 1 < lanes.pieceStartIndices.count
+            ? lanes.pieceStartIndices[index + 1] : lanes.center.count - 1
+        guard case .verticalLoop(let radius, let advance, _) = piece.definition.shape
+        else { return Entity() }
+
+        let holder = Entity()
+        holder.name = "bed-\(piece.index)"
+        let width: Float = 0.2          // narrow bed
+        let thickness: Float = 0.05
+        for j in start..<end {
+            let p0 = lanes.center[j], p1 = lanes.center[j + 1]
+            let seg = p1 - p0
+            let length = simd_length(seg)
+            guard length > 1e-5 else { continue }
+            let forward = seg / length
+            // "Up" points from the waypoint toward the circle centre so the
+            // bed face follows the inside of the ring; degenerates to +Y on
+            // the flat entry/exit stubs.
+            let local = rotated(p0 - piece.entryPosition, by: -piece.entryYaw)
+            let toCenter = SIMD3<Float>(0, radius, advance / 2) - SIMD3<Float>(0, local.y, local.z)
+            var up = simd_length(toCenter) > 1e-4
+                ? rotated(simd_normalize(toCenter), by: piece.entryYaw) : [0, 1, 0]
+            // Orthogonalize against the tangent.
+            up -= forward * simd_dot(up, forward)
+            guard simd_length(up) > 1e-4 else { continue }
+            up = simd_normalize(up)
+            let right = simd_normalize(simd_cross(up, forward))
+            let box = Entity()
+            box.position = (p0 + p1) / 2 - up * (thickness / 2)
+            box.orientation = simd_quatf(simd_float3x3(columns: (right, up, forward)))
+            // 20% overlap hides the tiny angular steps between segments.
+            box.components.set(CollisionComponent(
+                shapes: [.generateBox(size: [width, thickness, length * 1.2])],
+                isStatic: true))
+            box.components.set(PhysicsBodyComponent(
+                massProperties: .default, material: nil, mode: .static))
+            holder.addChild(box)
+        }
+        return holder
     }
 
     /// Exact-mesh static collision on every model part (convex hulls would

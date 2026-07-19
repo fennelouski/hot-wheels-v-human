@@ -98,8 +98,8 @@ enum TrackLayoutSolver {
 
     private static func splines(for pieces: [PlacedPiece]) -> LaneSplines {
         var center: [SIMD3<Float>] = []
-        var left: [SIMD3<Float>] = []
-        var right: [SIMD3<Float>] = []
+        var laterals: [SIMD3<Float>] = []
+        var widths: [Float] = []
         var pieceStarts: [Int] = []
 
         for piece in pieces {
@@ -109,11 +109,32 @@ enum TrackLayoutSolver {
                 let world = piece.entryPosition + rotated(p, by: piece.entryYaw)
                 // Skip duplicate joint points between consecutive pieces.
                 if let last = center.last, simd_length(last - world) < 0.01 { continue }
-                let latWorld = rotated(lat, by: piece.entryYaw)
                 center.append(world)
-                left.append(world + latWorld * piece.definition.laneHalfWidth)
-                right.append(world - latWorld * piece.definition.laneHalfWidth)
+                laterals.append(rotated(lat, by: piece.entryYaw))
+                widths.append(piece.definition.laneHalfWidth)
             }
+        }
+
+        // Taper lane width across wide↔narrow piece transitions (the loop,
+        // the gates). A hard step jogs the lane sideways between adjacent
+        // waypoints; DriveSystem's centripetal feedforward reads that jog as
+        // an impossibly tight curve and catapults the car off the track
+        // (sim drills: 30 m/s ejections at the seams). Real Hot Wheels
+        // merge guides taper too.
+        // ±0.8 m at 0.1 m spacing: the loop MODEL's narrow lead-in rails
+        // reach ~0.5 m back over the neighbouring piece (sim drills: the
+        // wide monster truck clipped them at the wide-lane offset), so the
+        // lanes must be near centre well before the loop piece itself.
+        let window = 8
+        let smoothed = widths.indices.map { i -> Float in
+            let lo = max(0, i - window), hi = min(widths.count - 1, i + window)
+            return widths[lo...hi].reduce(0, +) / Float(hi - lo + 1)
+        }
+        var left: [SIMD3<Float>] = []
+        var right: [SIMD3<Float>] = []
+        for i in center.indices {
+            left.append(center[i] + laterals[i] * smoothed[i])
+            right.append(center[i] - laterals[i] * smoothed[i])
         }
         return LaneSplines(center: center, left: left, right: right,
                            pieceStartIndices: pieceStarts)

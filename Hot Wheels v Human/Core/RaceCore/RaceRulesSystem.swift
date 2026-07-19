@@ -15,6 +15,11 @@ import RealityKit
 final class RaceEventBus {
     static let shared = RaceEventBus()
     private(set) var pending: [RaceEvent] = []
+    /// The green flag: DriveSystem and the destruction rules are inert
+    /// until RaceSession raises this. Cars sit dynamic-but-undriven at the
+    /// grid through the countdown, so the physics world (and its multi-
+    /// second Simulator warmup stall) builds while nothing can be hurt.
+    var raceActive = false
     func emit(_ event: RaceEvent) { pending.append(event) }
     func drain() -> [RaceEvent] {
         defer { pending.removeAll() }
@@ -78,7 +83,10 @@ struct RaceRulesSystem: System {
     }
 
     func update(context: SceneUpdateContext) {
-        let dt = Float(context.deltaTime)
+        // Clamped: an asset-load hitch can deliver a multi-second frame, and
+        // raw dt would count it all as "stuck" time — destroying a healthy
+        // car at the start gate (seen in CLI drills as a piece-0 crash).
+        let dt = min(Float(context.deltaTime), 0.1)
 
         for entity in context.entities(matching: Self.debrisQuery, updatingSystemWhen: .rendering) {
             guard var debris = entity.components[DebrisComponent.self] else { continue }
@@ -94,11 +102,15 @@ struct RaceRulesSystem: System {
             }
         }
 
+        guard RaceEventBus.shared.raceActive else { return }
         for entity in context.entities(matching: Self.carQuery, updatingSystemWhen: .rendering) {
             guard let car = entity as? ModelEntity,
                   var state = car.components[CarComponent.self],
                   var follow = car.components[LaneFollowComponent.self],
-                  !state.finished, state.livesLeft > 0, car.isEnabled else { continue }
+                  !state.finished, state.livesLeft > 0, car.isEnabled,
+                  // Static = parked at the grid pre-GO (or at the finish) —
+                  // no destruction checks, or the countdown counts as stuck.
+                  car.physicsBody?.mode == .dynamic else { continue }
 
             let position = car.position(relativeTo: nil)
             let speed = simd_length(car.physicsMotion?.linearVelocity ?? .zero)
@@ -108,7 +120,10 @@ struct RaceRulesSystem: System {
 
             // ── Finish: last waypoint reached.
             if follow.nextIndex >= follow.waypoints.count - 1,
-               simd_length(follow.waypoints.last! - position) < 0.4 {
+               simd_length(follow.waypoints.last! - position) < RaceTuning.finishCatchRadius {
+                RaceSession.drillLog(String(format: "[race] %@ finished at (%.2f, %.2f, %.2f) wp %d",
+                                            state.design.name, position.x, position.y, position.z,
+                                            follow.nextIndex))
                 state.finished = true
                 car.components.set(state)
                 // Park it — an unfrozen finisher coasts off the edge of the
@@ -121,31 +136,45 @@ struct RaceRulesSystem: System {
             }
 
             // ── Destruction checks.
-            var destroyed = false
+            var reason: String?
             if position.y < -RaceTuning.destructionFallDepth {
-                destroyed = true
+                reason = "fell"
             }
-            state.stuckSeconds = speed < RaceTuning.stuckSpeed ? state.stuckSeconds + dt : 0
-            if state.stuckSeconds > RaceTuning.stuckTime { destroyed = true }
+            if let anchor = state.stuckAnchor,
+               simd_length(position - anchor) < RaceTuning.stuckRadius {
+                state.stuckSeconds += dt
+            } else {
+                state.stuckAnchor = position
+                state.stuckSeconds = 0
+            }
+            if state.stuckSeconds > RaceTuning.stuckTime { reason = "stuck" }
 
             let up = car.convert(direction: [0, 1, 0], to: nil)
             state.flippedSeconds = up.y < 0 ? state.flippedSeconds + dt : 0
-            if state.flippedSeconds > RaceTuning.flippedTime { destroyed = true }
+            if state.flippedSeconds > RaceTuning.flippedTime { reason = "flipped" }
 
-            if destroyed {
+            if let reason {
+                // Drill breadcrumb — pairs with the [race] lines RaceSession logs.
+                RaceSession.drillLog("[race] \(state.design.name) destroyed: \(reason) at "
+                      + String(format: "(%.2f, %.2f, %.2f), %.1f m/s",
+                               position.x, position.y, position.z, speed))
                 state.livesLeft -= 1
                 state.stuckSeconds = 0
+                state.stuckAnchor = nil
                 state.flippedSeconds = 0
                 RaceEventBus.shared.emit(.carDestroyed(playerID: state.playerID))
                 explodeDebris(at: position, in: car.parent)
 
                 if state.livesLeft > 0 {
-                    // Respawn one piece BEFORE the one the car died on —
-                    // a loop with no run-up would just eat the car again.
+                    // Respawn two pieces BEFORE the one the car died on — a
+                    // loop with no run-up would just eat the car again, and
+                    // one piece (0.8 m) isn't enough for the heavy chassis
+                    // to reach loop entry speed (sim drills: a loop death
+                    // became an unwinnable respawn-fail loop).
                     let anchors = car.parent?.components[RaceTrackComponent.self]?.lanes.pieceStartIndices
                         ?? [0]
                     let died = anchors.lastIndex(where: { $0 <= follow.nextIndex }) ?? 0
-                    let checkpoint = anchors[max(died - 1, 0)]
+                    let checkpoint = anchors[max(died - 2, 0)]
                     follow.nextIndex = checkpoint
                     respawn(car, at: follow.waypoints[min(checkpoint + 1, follow.waypoints.count - 1)],
                             toward: follow.waypoints[min(checkpoint + 2, follow.waypoints.count - 1)])
@@ -161,7 +190,7 @@ struct RaceRulesSystem: System {
     }
 
     private func respawn(_ car: ModelEntity, at point: SIMD3<Float>, toward next: SIMD3<Float>) {
-        car.setPosition(point + [0, 0.05, 0], relativeTo: nil)
+        car.setPosition(point + [0, car.spawnLift, 0], relativeTo: nil)
         let dir = next - point
         car.orientation = simd_quatf(angle: atan2(dir.x, dir.z), axis: [0, 1, 0])
         car.physicsMotion?.linearVelocity = .zero
