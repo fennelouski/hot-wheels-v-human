@@ -24,7 +24,9 @@ final class DriverPoser {
 
     static func make(profile: DriverProfile) async throws -> DriverPoser {
         let bust = try await AssetStore.shared.entity(named: "driver-idle")
-        await DriverPainter.apply(profile, to: bust)
+        // Legacy Quaternius bust: a blank mesh, so it needs the stripe
+        // palette. Roster characters come pre-painted.
+        await DriverPainter.apply(profile, to: bust, bakedAppearance: false)
         let poser = DriverPoser(bust: bust)
         poser.clips[.idle] = bust.availableAnimations.last
         poser.apply(.idle)

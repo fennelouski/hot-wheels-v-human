@@ -78,10 +78,19 @@ enum DriverPainter {
     /// Note: on a bust that's already mid-animation the wardrobe swap lands
     /// but the texture swap does not — live previews of a *changing* driver
     /// should rebuild the entity instead (see ReactionCamView).
-    static func apply(_ profile: DriverProfile, to driver: Entity) async {
+    /// `bakedAppearance` (the default, for Kenney roster characters): their
+    /// outfit, hair and face are already painted into a colormap, and this
+    /// function paints by REPLACING every material — which on them erases
+    /// precisely what makes each one a different person. So only the
+    /// wardrobe gets fitted. Pass `false` for the legacy Quaternius rig,
+    /// which is a blank mesh that NEEDS the stripe palette (the reaction-cam
+    /// bust still rides it; skipping there rendered it plain white).
+    static func apply(_ profile: DriverProfile, to driver: Entity,
+                      bakedAppearance: Bool = true) async {
         // Wardrobe off first so the paint pass can't repaint the props.
         driver.findEntity(named: DriverDressUp.entityName)?.removeFromParent()
         defer { DriverDressUp.attach(profile, to: driver) }
+        guard !bakedAppearance else { return }
         guard let texture = await texture(for: profile) else { return }
         var material = PhysicallyBasedMaterial()
         // Nearest sampling: 32 px of stripes must not blur into each other.

@@ -244,10 +244,15 @@ final class HeadPinSystem: System {
 
     /// Model-space transform of the joint whose path ends in `jointLeaf`,
     /// composed from the posed local joint transforms along its path.
+    /// Case-insensitive: the Quaternius rig names it `…/Head` (Mixamo
+    /// style) while the Kenney roster uses a flat lowercase `head`, and a
+    /// case-sensitive match silently dropped every hat onto the fallback
+    /// bind-pose anchor instead of the animated skull.
     private static func jointMatrix(of model: ModelEntity, jointLeaf: String) -> float4x4? {
         let names = model.jointNames
         guard let index = names.firstIndex(where: {
-            $0.split(separator: "/").last.map(String.init) == jointLeaf
+            $0.split(separator: "/").last
+                .map { $0.caseInsensitiveCompare(jointLeaf) == .orderedSame } ?? false
         }) else { return nil }
         let transforms = model.jointTransforms
         guard transforms.count == names.count else { return nil }

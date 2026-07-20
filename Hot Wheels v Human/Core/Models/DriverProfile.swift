@@ -69,6 +69,25 @@ nonisolated enum BodyType: String, Codable, CaseIterable, Sendable {
         case .girl: SIMD3(0.74, 0.7, 0.74)   // smallest, slight
         }
     }
+
+    var isFemale: Bool { self == .woman || self == .girl }
+
+    /// Which of the six same-sex roster models this body wears by default.
+    /// Kids get a DIFFERENT mesh from the adults, not just a smaller one —
+    /// that was the whole complaint.
+    var defaultVariant: String {
+        switch self {
+        case .man, .woman: "a"
+        case .boy, .girl: "d"
+        }
+    }
+}
+
+/// Poses baked at conversion — one USDZ each (Blender's USD exporter can't
+/// carry glTF's named clips, see Graphics/README).
+nonisolated enum DriverPose: String, Sendable {
+    case idle       // editors, previews, the reaction bust
+    case drive      // sat in the car, hands out on the wheel
 }
 
 nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
@@ -88,6 +107,10 @@ nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
     var glasses: GlassesStyle? = nil
     /// nil = man (profiles predate body types).
     var bodyType: BodyType? = nil
+    /// Which of the six roster models of this body's sex ("a"…"f").
+    /// nil = the body type's default. Additive optional, so old records and
+    /// older peers still decode.
+    var characterVariant: String? = nil
     /// Face paint drawn in the editor, PNG ≤ 64 KB, composited over the
     /// reaction-cam face. Replaces CarDesign.faceDrawingPNG (kept there as a
     /// read fallback for old designs).
@@ -95,6 +118,17 @@ nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
 }
 
 extension DriverProfile {
+    /// The roster model this profile wears, for a given pose — e.g.
+    /// `character-female-d-drive`. Twelve distinct meshes (Kenney Mini
+    /// Characters) replace the single Quaternius rig that every body type
+    /// used to share at different scales.
+    func modelName(pose: DriverPose) -> String {
+        let body = bodyType ?? .man
+        let sex = body.isFemale ? "female" : "male"
+        let variant = characterVariant ?? body.defaultVariant
+        return "character-\(sex)-\(variant)-\(pose.rawValue)"
+    }
+
     /// Kid-sized racer names for the dice button (profile picker + editors).
     static func randomName() -> String {
         ["Max", "Zip", "Dot", "Rex", "Sky", "Pip",

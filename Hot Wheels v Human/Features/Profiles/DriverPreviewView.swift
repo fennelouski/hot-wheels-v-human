@@ -28,11 +28,14 @@ struct DriverPreviewView: View {
             turntable.name = "turntable"
             content.add(turntable)
 
-            // Frame the whole rig, facing its front (+Z).
+            // Frame the whole rig, facing its front (+Z). Pulled back from
+            // 1.05: the roster characters stand taller and chunkier than the
+            // Quaternius rig this framing was set for, and overflowed the
+            // preview — head and feet cropped off.
             let height = RaceTuning.driverSourceHeight
             let camera = PerspectiveCamera()
-            camera.look(at: [0, height * 0.55, 0],
-                        from: [0, height * 0.6, height * 1.05], relativeTo: nil)
+            camera.look(at: [0, height * 0.5, 0],
+                        from: [0, height * 0.62, height * 1.55], relativeTo: nil)
             content.add(camera)
             let light = DirectionalLight()
             light.light.intensity = 5000
@@ -67,12 +70,21 @@ struct DriverPreviewView: View {
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
 
+        // Reuse the loaded rig ONLY while it's still the right person. Body
+        // type now picks a different mesh, not just a rescale, so tapping
+        // Woman after Man has to swap the model — the reuse path repainted
+        // and rescaled the old one and the character never changed.
+        let wanted = driver.modelName(pose: .idle)
         if let human = turntable.children.first {
-            await DriverPainter.apply(driver, to: human)
-            human.scale = (driver.bodyType ?? .man).scale
-            return
+            if human.name == wanted {
+                await DriverPainter.apply(driver, to: human)
+                human.scale = (driver.bodyType ?? .man).scale
+                return
+            }
+            human.removeFromParent()
         }
-        guard let human = try? await AssetStore.shared.entity(named: "driver-idle") else { return }
+        guard let human = try? await AssetStore.shared.entity(named: wanted) else { return }
+        human.name = wanted
         await DriverPainter.apply(driver, to: human)
         human.scale = (driver.bodyType ?? .man).scale
         // Prefer the IDLE clip by name. `.last` picked whatever happened to

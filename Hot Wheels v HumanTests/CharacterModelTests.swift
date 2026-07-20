@@ -312,4 +312,55 @@ struct CharacterModelTests {
         #expect(driverOnly.id == CarDesign.presets[1].id)
         #expect(driverOnly.driver == unsavedDriver)
     }
+
+    // MARK: Roster — four body types, four actual people
+
+    /// The whole point of the Kenney Mini roster: man/woman/boy/girl used to
+    /// be ONE Quaternius mesh at four scales, which read as the same person
+    /// resized. Each must now resolve to a genuinely different model.
+    @Test func bodyTypesResolveToDifferentModels() {
+        var profile = DriverProfile.presets[0]
+        var names: Set<String> = []
+        for body in BodyType.allCases {
+            profile.bodyType = body
+            profile.characterVariant = nil     // body's own default
+            names.insert(profile.modelName(pose: .idle))
+        }
+        #expect(names.count == BodyType.allCases.count)
+    }
+
+    /// Both poses exist per character, and the car uses the sitting one.
+    @Test func everyRosterModelHasBothPoses() {
+        var profile = DriverProfile.presets[0]
+        for body in BodyType.allCases {
+            for variant in ["a", "b", "c", "d", "e", "f"] {
+                profile.bodyType = body
+                profile.characterVariant = variant
+                let idle = profile.modelName(pose: .idle)
+                let drive = profile.modelName(pose: .drive)
+                #expect(idle.hasSuffix("-idle"))
+                #expect(drive.hasSuffix("-drive"))
+                #expect(idle.replacingOccurrences(of: "-idle", with: "")
+                        == drive.replacingOccurrences(of: "-drive", with: ""))
+                #expect(idle.contains(body.isFemale ? "female" : "male"))
+            }
+        }
+    }
+
+    /// Every roster model the profiles can resolve to must actually be a
+    /// bundled asset — a typo'd variant would silently give a driverless car.
+    @Test func everyRosterModelIsBundled() throws {
+        var profile = DriverProfile.presets[0]
+        for body in BodyType.allCases {
+            for variant in ["a", "b", "c", "d", "e", "f"] {
+                profile.bodyType = body
+                profile.characterVariant = variant
+                for pose in [DriverPose.idle, .drive] {
+                    let name = profile.modelName(pose: pose)
+                    #expect(Bundle.main.url(forResource: name, withExtension: "usdz") != nil,
+                            "missing asset \(name).usdz")
+                }
+            }
+        }
+    }
 }

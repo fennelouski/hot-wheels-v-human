@@ -120,10 +120,12 @@ enum CarFactory {
         car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
                                                laterals: laterals))
 
-        // The little human, riding hip-deep so the standing rig reads as
-        // seated (legs hidden inside the chassis).
-        if let driver = try? await assets.entity(named: "driver-idle") {
-            let profile = design.driver ?? DriverProfile.presets[0]
+        // The little human, in the roster's DRIVE pose — hands out on the
+        // wheel. The old standing rig had to be sunk hip-deep with its legs
+        // hidden inside the chassis to read as seated; a real sitting pose
+        // retires that trick.
+        let profile = design.driver ?? DriverProfile.presets[0]
+        if let driver = try? await assets.entity(named: profile.modelName(pose: .drive)) {
             await DriverPainter.apply(profile, to: driver)
             let carHeight = bounds.extents.y
             let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
