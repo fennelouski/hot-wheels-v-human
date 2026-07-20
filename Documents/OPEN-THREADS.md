@@ -123,35 +123,59 @@ cars on the descent in `RaceSession`.
 ## Prompt
 
 > Work on Hot Wheels vs. Human (repo is the cwd). Read `CLAUDE.md` and
-> `Documents/OPEN-THREADS.md` first — the latter lists verified open gaps
-> with file paths and repro steps.
+> `Documents/OPEN-THREADS.md` first. In that doc the **"Closed" section at
+> the bottom is the most useful part** — it records where the previous
+> session's diagnoses were *wrong*, which saves more time than what they got
+> right.
 >
-> Please tackle, in this order:
+> Open, roughly in the order a player would notice:
 >
-> 1. **Make the jump actually jump.** `rampJump` has a flat spline, and rail
->    mode only launches off a spline crest, so it's currently a flat
->    straight in the mode we ship. Add a cresting centreline shape. Keep
->    entry/exit at y = 0 so the piece stays swappable with `.straight` —
->    that's what keeps all 7 locked preset layouts valid.
-> 2. **Fix the hillUp seam** that wedges cars. The stuck-rescue currently
->    hides it; find it via `Documents/drill-log.txt` (`--preset-track 1`,
->    grep `rescued`) and fix the bed-slab junction in `TrackSpawner`. Then
->    confirm the rescue count drops to 0 across all 7 tracks.
-> 3. **Add a character-variant picker** so all 12 roster characters are
->    reachable, not 4.
-> 4. **Build the downhill start** — cars launch down a slope instead of
->    from a flat line. Needs the solver to allow an above-ground start.
+> 1. **`.bump` drives through its own mesh.** It uses the same
+>    `track-wide-straight-bump-up` model as `rampJump` but kept a flat
+>    `.line` spline, so cars pass through a 10 cm hump on every track that
+>    has one. `CenterlineShape.crest` already exists and fixes it in one
+>    line — but that turns every bump into a jump, which is a feel decision,
+>    not a bug fix. Decide first. Related: `.bump` and `.rampJump` now render
+>    as the same piece and behave differently; a taller dedicated ramp mesh
+>    would settle both.
+> 2. **Dev tooling ships in the app** (item 7). `RaceSession.drillLog` writes
+>    `Documents/drill-log.txt` on every call, in release too. Gate it behind
+>    `#if DEBUG` or a launch argument.
+> 3. **The loop still reads wrong** (item 8) — never isolated. Needs eyes on
+>    it before code.
+> 4. **`crashes` may be dead space** on the results panel (item 6).
+> 5. Leftovers from the hair work: `character-male-c`'s extracted island is a
+>    **police cap**, already converted and offered nowhere — it belongs in
+>    `HatStyle`. And `.character` hair ignores `hairColorHex` while every
+>    picked style honours it, so a kid dragging the hair-colour swatches on
+>    a default character sees nothing happen.
 >
-> Then tell me what you'd do about hair (item 5) — I want to decide that
-> one, not have it decided for me.
+> Things that will cost you an hour if nobody tells you:
+>
+> - **Another session has been editing this working tree.** Check
+>   `git status` before starting. If files you didn't touch are dirty, don't
+>   sweep them into your own commits, and don't `git checkout`/`stash` —
+>   use a worktree if you need a clean tree. Item 3 (reaction cam) is
+>   in-flight from that session and uncommitted as of 7e98197.
+> - **`RaceTuning.maxTrackPieces` went 75 → 2048** in someone else's commit
+>   with no stated reason. Worth confirming that was deliberate.
+> - **The rescue and crash counters cannot see track geometry.** Rail-mode
+>   cars are kinematic and `RaceRulesSystem` skips every stuck/flip/fall
+>   check for them (`RaceRulesSystem.swift`), so a clean drill log proves
+>   nothing about collision. Assert geometry in tests instead.
+> - **Reinstall the app before trusting any sim run.** A stale binary cost
+>   the last session an hour chasing a "regression" on Loop-de-Leap that was
+>   really an old build silently falling back to `.demo` — the race even
+>   reported a plausible-looking 3.5 s finish.
+> - **CoreSimulator dies constantly on this machine.** `killall -9
+>   com.apple.CoreSimulator.CoreSimulatorService`, re-boot, rerun. It is not
+>   your code.
 >
 > Verify the way this project does: build BOTH destinations, run the unit
 > tests, and actually race in the simulator with screenshots — feel is
 > human-tested, and several bugs this project has hit were invisible to a
 > green test suite. Commit in small pieces with the reasoning in the
 > message, and push.
-
----
 
 ## Closed 2026-07-20
 
