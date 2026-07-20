@@ -2,9 +2,10 @@
 //  TrackBuilderView.swift
 //  Hot Wheels v Human
 //
-//  2D top-down builder: canvas up top, piece palette below, toolbar of
-//  big friendly buttons. No free placement — pieces attach to the open
-//  exit with derived orientation, so a kid can't build a broken track.
+//  3D builder: live orbit/zoom scene up top with an overhead mini-map
+//  (tap to grow it), piece palette below, toolbar of big friendly
+//  buttons. No free placement — pieces attach to the open exit with
+//  derived orientation, so a kid can't build a broken track.
 //
 
 import SwiftUI
@@ -17,6 +18,7 @@ struct TrackBuilderView: View {
     @State private var model = TrackBuilderModel()
     @State private var savedName: String?
     @State private var previewing = false
+    @State private var mapExpanded = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
@@ -36,16 +38,17 @@ struct TrackBuilderView: View {
             }
             .padding(.horizontal, 20)
 
-            TrackCanvasView(layout: model.layout)
+            TrackBuilder3DView(model: model)
                 .frame(maxHeight: .infinity)
-                .background(.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 20))
-                .padding(.horizontal, 16)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .overlay(alignment: .topTrailing) { miniMap }
                 .overlay(alignment: .bottom) {
                     // Fresh canvas → offer the starter tracks.
                     if model.types == [.startGate] {
                         presetRow
                     }
                 }
+                .padding(.horizontal, 16)
 
             PiecePaletteView(model: model)
 
@@ -60,7 +63,7 @@ struct TrackBuilderView: View {
                 // Drive the track you're looking at — no save, no backing
                 // out. Peeking mid-build is the whole point, so this races
                 // `model.blueprint`, not whatever was last saved.
-                TryItButton(title: "See it in 3D!") {
+                TryItButton(title: "Race it!") {
                     previewing = true
                 }
                 .disabled(!model.isRaceable)
@@ -80,6 +83,23 @@ struct TrackBuilderView: View {
         .racePreview(isPresented: $previewing,
                      designs: [appModel.stampedRaceDesign()],
                      blueprint: model.blueprint)
+    }
+
+    /// Overhead schematic in the corner of the 3D scene. A Button, not a
+    /// tap gesture, so it also works when the TV compiles this file: tap
+    /// zooms the map between corner-size and reading-size.
+    private var miniMap: some View {
+        Button {
+            withAnimation(.snappy) { mapExpanded.toggle() }
+        } label: {
+            TrackCanvasView(layout: model.layout, isThumbnail: !mapExpanded)
+                .frame(width: mapExpanded ? 420 : 180, height: mapExpanded ? 260 : 96)
+                .background(.black.opacity(0.45), in: RoundedRectangle(cornerRadius: 14))
+        }
+        .buttonStyle(.plain)
+        .padding(10)
+        .accessibilityLabel("Track map")
+        .accessibilityIdentifier("miniMap")
     }
 
     /// Starter tracks (and the kid's own saved ones) to jump off from

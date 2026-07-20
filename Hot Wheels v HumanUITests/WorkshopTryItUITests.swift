@@ -15,7 +15,7 @@ final class WorkshopTryItUITests: XCTestCase {
 
     /// Track builder: load a starter track, drive it, come back still holding it.
     @MainActor
-    func testTrackBuilderSeeItIn3D() throws {
+    func testTrackBuilderRaceIt() throws {
         let app = launch("--trackbuilder")
 
         // Fresh canvas offers the starter tracks — take one so the build is
@@ -26,15 +26,15 @@ final class WorkshopTryItUITests: XCTestCase {
         starter.tap()
         snap(app, "track-1-loaded")
 
-        let seeIn3D = button(app, "See it in 3D")
-        XCTAssertTrue(seeIn3D.isEnabled, "A loaded starter track must be raceable")
-        seeIn3D.tap()
+        let raceIt = button(app, "Race it")
+        XCTAssertTrue(raceIt.isEnabled, "A loaded starter track must be raceable")
+        raceIt.tap()
 
         assertRaceIsRunning(app, named: "track-2-racing")
         closeCover(app)
 
         // Back on the workbench with the track intact — not a fresh canvas.
-        XCTAssertTrue(button(app, "See it in 3D").waitForExistence(timeout: 10))
+        XCTAssertTrue(button(app, "Race it").waitForExistence(timeout: 10))
         XCTAssertFalse(app.staticTexts["1 piece"].exists, "The build should survive the race")
         snap(app, "track-3-back-on-workbench")
     }
