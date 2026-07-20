@@ -18,16 +18,18 @@ struct SoloArenaView: View {
     @State private var rig: SoloRig?
 
     var body: some View {
-        HStack(spacing: 0) {
+        // Arena edge to edge, controls floating on top. The sidebar's
+        // readouts (progress, lives, speed) already live in the arena
+        // HUD's per-racer banner, so only the buttons come along.
+        ZStack(alignment: .bottomTrailing) {
             if let rig {
                 ArenaView(coordinator: rig.coordinator)
-                DashboardView(model: rig.dashboard)
-                    .frame(width: 300)
+                RaceControlsView(model: rig.dashboard)
             } else {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .background(Color(red: 0.07, green: 0.08, blue: 0.13))
+        .background(Color(red: 0.07, green: 0.08, blue: 0.13).ignoresSafeArea())
         .task {
             guard rig == nil else { return }
             let pair = LoopbackTransport.pair()
@@ -51,6 +53,35 @@ struct SoloArenaView: View {
 struct SoloRig {
     let coordinator: RaceCoordinator
     let dashboard: DashboardModel
+}
+
+/// The buttons that float over the arena when the iPad is both screen and
+/// controller. Bottom-trailing on purpose: the reaction-cam PiP sits
+/// bottom-leading and the race clock bottom-center. Same 24 pt inset as
+/// the PiPs so everything along the bottom edge lines up.
+private struct RaceControlsView: View {
+    let model: DashboardModel
+
+    var body: some View {
+        VStack(alignment: .trailing, spacing: 12) {
+            if model.phase == .results {
+                Button {
+                    model.requestRematch()
+                } label: {
+                    Label("REMATCH!", systemImage: "arrow.clockwise")
+                        .font(.system(size: 30, weight: .black, design: .rounded))
+                        .frame(width: 260, height: 84)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
+            } else if let car = model.myCar {
+                ReactionCamButton { model.setReactionCam(on: $0) }
+                BoostButtonView(meter: car.boostMeter) { model.fireBoost() }
+            }
+        }
+        .padding(24)
+    }
 }
 
 extension View {

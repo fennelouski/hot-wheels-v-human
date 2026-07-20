@@ -128,7 +128,10 @@ struct ReactionCamButton: View {
             Label(on ? "CAM ON" : "CAM OFF", systemImage: "video.fill")
                 .font(.system(size: 20, weight: .heavy, design: .rounded))
                 .frame(width: 240, height: 64)
-                .background(on ? .yellow.opacity(0.4) : .white.opacity(0.1),
+                // Same black-45 as the HUD banners: this also floats over
+                // the live 3D scene on iPad, where a bright sky would
+                // swallow a white-tinted pill.
+                .background(on ? .yellow.opacity(0.5) : .black.opacity(0.45),
                             in: Capsule())
                 .foregroundStyle(.white)
         }
@@ -162,6 +165,10 @@ struct BoostButtonView: View {
                                value: full)
             }
             .frame(width: 170, height: 170)
+            // Padded so the 14 pt stroke lands inside the disc, which is
+            // what keeps the empty meter visible over a bright sky.
+            .padding(10)
+            .background(.black.opacity(0.45), in: Circle())
         }
         .buttonStyle(.plain)
         .disabled(!full)

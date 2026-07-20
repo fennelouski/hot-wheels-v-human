@@ -102,6 +102,9 @@ struct ArenaView: View {
                     holder.name = "environment"
                 }
             }
+            // The scene runs edge to edge (under the status bar, out to the
+            // TV's overscan); everything below stays inside the safe area.
+            .ignoresSafeArea()
             ArenaHUDView(session: coordinator.session,
                          seriesLabel: coordinator.raceCount > 1
                              ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
@@ -131,7 +134,7 @@ struct ArenaView: View {
                     .foregroundStyle(.white)
             }
         }
-        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
     }
 }
 

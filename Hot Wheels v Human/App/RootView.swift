@@ -20,6 +20,11 @@ struct RootView: View {
     /// profiles, so dress-up geometry can be screenshotted repeatably (the
     /// character editor randomises its driver every launch).
     private let launchIntoWardrobe = ProcessInfo.processInfo.arguments.contains("--wardrobe")
+    /// Dev arg: the reaction-cam bench — every ReactionState at once. A race
+    /// can't show them all (rail-mode races finish with 0 crashes, so the
+    /// crash clip never plays), and the PiP is where "the driver isn't the
+    /// driver" bugs hide.
+    private let launchIntoReactionCam = ProcessInfo.processInfo.arguments.contains("--reaction-cam")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
@@ -92,6 +97,8 @@ struct RootView: View {
             NavigationStack { CharacterEditorView() }
         } else if launchIntoWardrobe {
             WardrobePreviewGrid()
+        } else if launchIntoReactionCam {
+            ReactionBenchGrid()
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {
