@@ -46,6 +46,14 @@ nonisolated enum RaceTuning {
     /// Lane spline waypoint spacing, metres (~0.1 per TrackKit README).
     static let waypointSpacing: Float = 0.1
 
+    /// How far the DRAWN bed surface sits above a lane waypoint, metres.
+    /// PieceCatalog.bedLift raises every model so its bed lands near the
+    /// piece origin, but the residual is 0.013 — so lane y = 0 is 13 mm
+    /// UNDER the surface a kid sees. Cars add this to their ride height,
+    /// TrackSpawner puts the flat slabs' top face here; without it wheels
+    /// sink into the bed. One number, both users.
+    static let bedSurfaceHeight: Float = 0.013
+
     /// Lane centerline offset on wide (dual-lane) pieces. PRD sketched
     /// ±0.09 but the monster truck grinds the side rails there. 0.07
     /// cleared an older box; the C-series models grew it (0.10 wide → edge

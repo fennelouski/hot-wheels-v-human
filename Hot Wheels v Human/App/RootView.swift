@@ -158,6 +158,23 @@ struct RootView: View {
                         homeLink("2-Player Build", systemImage: "person.2.fill") { CustomizerSplitView() }
                         homeLink("My Racers", systemImage: "person.crop.circle.fill") { CharacterSelectView() }
                     }
+                    // TEMPORARY dev tile — delete this GridRow (and nothing
+                    // else) once the PiP framing numbers are settled. Tinted
+                    // grey rather than yellow so it never reads as one of the
+                    // kid-facing buttons. Also reachable as `--pip-tuner`.
+                    #if os(iOS)
+                    GridRow {
+                        NavigationLink {
+                            PiPTunerView()
+                        } label: {
+                            Label("PiP Tuner (dev)", systemImage: "slider.horizontal.3")
+                                .font(.system(size: 30, weight: .heavy, design: .rounded))
+                                .frame(width: 320, height: 76)
+                        }
+                        .buttonStyle(.bordered)
+                        .tint(.gray)
+                    }
+                    #endif
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

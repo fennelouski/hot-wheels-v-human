@@ -136,7 +136,12 @@ struct DriveSystem: System {
         // thing the kid controls, so it always does something.
         accel += Self.stepBoost(&state, dt: dt)
         follow.speed += accel * dt
-        if !follow.airborne {
+        if follow.airborne {
+            // Never negative: a steep climb's drag can out-pull the drive
+            // mid-jump, and a negative speed would walk the car back down
+            // its own lane. Rail progress only ever goes forward.
+            follow.speed = max(0, follow.speed)
+        } else {
             // Kid-first floor: no seam or slope ever strands a pinned car.
             follow.speed = max(follow.speed, RaceTuning.minCrawlSpeed)
         }

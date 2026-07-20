@@ -83,9 +83,13 @@ final class WorkshopTryItUITests: XCTestCase {
         settle(seconds: 3)
         snap(app, "racer-2-pip-after-bald")
 
-        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Curly'")).firstMatch.tap()
+        // "Top Bun", not "Curly": 4406c57 lifted the hairstyles off the
+        // roster's own heads and renamed them, and this tap has been failing
+        // ever since. Any style with an actual mesh works — the point is that
+        // the PiP changes again, from bald to something.
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Top Bun'")).firstMatch.tap()
         settle(seconds: 3)
-        snap(app, "racer-3-pip-after-curly")
+        snap(app, "racer-3-pip-after-bun")
 
         testDrive.tap()
         assertRaceIsRunning(app, named: "racer-4-racing")

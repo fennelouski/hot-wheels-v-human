@@ -225,6 +225,15 @@ final class RaceSession {
         if dt > RaceTuning.hitchRollbackThreshold, !lastPoses.isEmpty {
             for r in racers {
                 guard let car = r.entity, let pose = lastPoses[r.id] else { continue }
+                // Rail (kinematic) cars are EXEMPT. They can't be teleported
+                // by a stall — DriveSystem clamps dt to 0.1 s and caps speed,
+                // so one spike frame advances them a few cm at most. Rolling
+                // one back moved the entity while its follower kept the
+                // arc-length it had already integrated, so the next frame
+                // snapped it forward again: the car visibly jittered backward
+                // on every stalled frame, which in the Simulator is often.
+                // Rail progress is monotonic; nothing may push it back.
+                if car.physicsBody?.mode == .kinematic { continue }
                 car.setPosition(pose.position, relativeTo: nil)
                 car.physicsMotion?.linearVelocity = pose.velocity
                 car.physicsMotion?.angularVelocity = .zero

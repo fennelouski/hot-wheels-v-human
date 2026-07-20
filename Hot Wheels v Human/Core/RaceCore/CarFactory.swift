@@ -44,9 +44,10 @@ struct CarComponent: Component {
     /// (brief) apart from a fling (sustained) — the track only reels a car
     /// back once this passes `RaceTuning.laneRecoveryGrace`. (Chaos mode only.)
     var offLaneSeconds: Float = 0
-    /// Ground-contact-to-origin height, set by CarFactory from the visual
-    /// bounds — the rail follower floats the car this far above the bed
-    /// along the track's up vector.
+    /// Wheel-bottom-to-origin height (plus the bed's own offset from the
+    /// lane line), set by CarFactory from the visual bounds — the rail
+    /// follower floats the car this far above the lane along the track's up
+    /// vector, so the tyres sit ON the drawn surface.
     var rideHeight: Float = 0
 }
 
@@ -121,9 +122,8 @@ enum CarFactory {
             // body PhysicsMotionComponent would fight the direct placement.
             car.components.set(PhysicsMotionComponent())
         }
-        // Contact plane = collision box bottom (−0.4 × visual height, above).
         car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives,
-                                        rideHeight: bounds.extents.y * 0.4))
+                                        rideHeight: rideHeight(visualHeight: bounds.extents.y)))
         car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
                                                laterals: laterals))
 
@@ -141,6 +141,20 @@ enum CarFactory {
             car.addChild(driver)
         }
         return car
+    }
+
+    /// How far above a lane waypoint a car's origin belongs, so its WHEELS
+    /// rest on the drawn bed. The visual is centred on the origin (above),
+    /// so its lowest point — the tyres — is half its height down; the bed
+    /// itself sits `bedSurfaceHeight` over the lane line.
+    ///
+    /// This used to be 0.4 × height measured against the raw lane: the
+    /// COLLISION box's bottom, which is deliberately slim and stops well
+    /// short of the tyres. Every car therefore rode 0.1 × its height + 13 mm
+    /// low — wheels buried on the flat, and poking clean through the ring on
+    /// the loop, where "under the bed" points at the camera.
+    nonisolated static func rideHeight(visualHeight: Float) -> Float {
+        visualHeight * 0.5 + RaceTuning.bedSurfaceHeight
     }
 
     /// Full visual treatment: per-part paint + the paint-shell overlay

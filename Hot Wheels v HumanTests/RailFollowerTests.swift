@@ -92,6 +92,49 @@ struct RailFollowerTests {
         #expect(follow.nextIndex == follow.waypoints.count - 1)
     }
 
+    /// The wheels ride ON the bed, all the way round the loop. The follower
+    /// floats a car `rideHeight` off the lane along the track's up vector,
+    /// and `CarFactory.rideHeight` is what makes that land on the drawn
+    /// surface rather than inside it — 0.4 × car height (the slim collision
+    /// box's bottom, well above the tyres) measured against a lane line that
+    /// itself sits 13 mm under the bed put every wheel through the track,
+    /// most visibly on the ring where "down" faces the camera.
+    @Test func wheelsRideOnTheBedThroughTheLoop() {
+        /// Distance from `p` to the segment ab — the lane is a polyline, and
+        /// nearest-waypoint would be off by up to half the 0.1 m spacing.
+        func distance(_ p: SIMD3<Float>, _ a: SIMD3<Float>, _ b: SIMD3<Float>) -> Float {
+            let ab = b - a
+            let l2 = simd_length_squared(ab)
+            guard l2 > 1e-12 else { return simd_length(p - a) }
+            let t = max(0, min(1, simd_dot(p - a, ab) / l2))
+            return simd_length(p - (a + ab * t))
+        }
+
+        let lanes = TrackLayoutSolver.solve(.demo).lanes   // .demo carries a loop
+        let ride = CarFactory.rideHeight(visualHeight: 0.09)   // a chunky toy car
+        #expect(ride > RaceTuning.bedSurfaceHeight)         // never inside the bed
+        var follow = LaneFollowComponent(waypoints: lanes.left, laterals: lanes.laterals)
+        var state = CarComponent(playerID: UUID(), design: .demoPair[0],
+                                 livesLeft: 5, rideHeight: ride)
+
+        var checked = 0
+        for _ in 0..<3000 {
+            let pose = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+            guard !follow.airborne else { continue }   // air is allowed to leave the bed
+            let clearance = follow.waypoints.indices.dropLast().map {
+                distance(pose.position, follow.waypoints[$0], follow.waypoints[$0 + 1])
+            }.min()!
+            // Held exactly one ride height off the lane — plus at most a
+            // drift's worth of sideways slide, which stays in the bed plane.
+            #expect(clearance >= ride - 0.002)
+            #expect(clearance <= (ride * ride + RaceTuning.driftMax * RaceTuning.driftMax)
+                        .squareRoot() + 0.002)
+            checked += 1
+        }
+        #expect(checked > 1000)
+        #expect(follow.nextIndex == follow.waypoints.count - 1)   // it got round
+    }
+
     @Test func boostExtendsAJump() {
         func jumpDistance(boost: Bool) -> Float {
             var wp = (0...29).map { SIMD3<Float>(0, 1, Float($0) * 0.1) }

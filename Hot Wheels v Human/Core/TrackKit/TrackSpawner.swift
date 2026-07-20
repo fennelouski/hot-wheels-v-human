@@ -114,7 +114,7 @@ enum TrackSpawner {
     /// off IS the game.
     private static func bedCollision(for piece: PlacedPiece) -> Entity {
         let rect = piece.definition.footprint
-        let bedTop: Float = 0.013   // measured bed surface height
+        let bedTop = RaceTuning.bedSurfaceHeight
         let thickness: Float = 0.1
         var size = SIMD3<Float>(rect.maxX - rect.minX, thickness, rect.maxZ - rect.minZ)
         var pitch: Float = 0
