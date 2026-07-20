@@ -114,23 +114,25 @@ struct DashboardView: View {
     }
 }
 
-/// Hold to put your driver's reaction cam up on the TV (README: "hold Up").
+/// Tap to put your driver's reaction cam up on the TV; tap again to drop it.
 struct ReactionCamButton: View {
     let setOn: (Bool) -> Void
-    @State private var holding = false
+    @State private var on = false
 
     var body: some View {
-        Label("HOLD FOR CAM", systemImage: "video.fill")
-            .font(.system(size: 20, weight: .heavy, design: .rounded))
-            .frame(width: 240, height: 64)
-            .background(holding ? .yellow.opacity(0.4) : .white.opacity(0.1),
-                        in: Capsule())
-            .foregroundStyle(.white)
-            .onLongPressGesture(minimumDuration: .infinity) {} onPressingChanged: { pressing in
-                holding = pressing
-                setOn(pressing)
-                if pressing { SoundBank.shared.play("camera_shutter") }
-            }
+        Button {
+            on.toggle()
+            setOn(on)
+            if on { SoundBank.shared.play("camera_shutter") }
+        } label: {
+            Label(on ? "CAM ON" : "CAM OFF", systemImage: "video.fill")
+                .font(.system(size: 20, weight: .heavy, design: .rounded))
+                .frame(width: 240, height: 64)
+                .background(on ? .yellow.opacity(0.4) : .white.opacity(0.1),
+                            in: Capsule())
+                .foregroundStyle(.white)
+        }
+        .buttonStyle(.plain)
     }
 }
 

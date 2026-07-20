@@ -42,6 +42,23 @@ nonisolated enum DriverPalette {
         static let pants = 23..<32
     }
 
+    // MARK: Shading
+
+    /// How much the pants stripe is darkened relative to the swatch picked.
+    /// Enough that a shirt and pants of the same color read as an outfit
+    /// instead of pajamas; little enough that the swatch still looks right.
+    static let pantsDarkening: Float = 0.15
+
+    /// `hex` with every channel scaled down by `amount`. Malformed hex is
+    /// returned untouched — same garbage-in rule as `nearest(hex:in:)`.
+    static func darkened(_ hex: String, by amount: Float) -> String {
+        guard let rgb = rgb(hex: hex) else { return hex }
+        let scaled = rgb * (1 - amount) * 255
+        return String(format: "#%02X%02X%02X",
+                      Int(scaled.x.rounded()), Int(scaled.y.rounded()),
+                      Int(scaled.z.rounded()))
+    }
+
     // MARK: Snapping
 
     /// The swatch in `palette` closest to `hex` by RGB distance. Returns

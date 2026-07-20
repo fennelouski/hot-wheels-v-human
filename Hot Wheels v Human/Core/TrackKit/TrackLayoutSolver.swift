@@ -53,12 +53,18 @@ struct LaneSplines: Sendable {
 struct TrackLayout: Sendable {
     let pieces: [PlacedPiece]
     let lanes: LaneSplines
+    /// Where the first piece's entry sits. No longer always the origin: a
+    /// track that descends from its start gate is lifted so its LOWEST
+    /// point rests on the ground (see `solve`), which puts the start above
+    /// it. Everything else is measured against this, not against zero.
+    let startPosition: SIMD3<Float>
     let exitPosition: SIMD3<Float>
     let exitYaw: Float
     let exitLevel: Int
     /// Exit meets the start again (position + heading) → circuit.
     var isClosedCircuit: Bool {
-        simd_length(exitPosition) < 0.05 && abs(remainderYaw(exitYaw)) < 0.01
+        simd_length(exitPosition - startPosition) < 0.05
+            && abs(remainderYaw(exitYaw)) < 0.01
     }
 }
 

@@ -146,7 +146,8 @@ struct CharacterModelTests {
             (8, driver.eyeColorHex!),
             (13, driver.hairColorHex!),
             (19, driver.suitColorHex),
-            (27, driver.pantsColorHex!),
+            (27, DriverPalette.darkened(driver.pantsColorHex!,
+                                        by: DriverPalette.pantsDarkening)),
         ]
         for (row, hex) in expectations {
             let pixel = try #require(Self.pixel(of: image, x: 16, y: row))
@@ -156,6 +157,18 @@ struct CharacterModelTests {
                     && abs(pixel.z - expected.z) < 0.02,
                     "row \(row) should be \(hex)")
         }
+    }
+
+    @Test func matchingShirtAndPantsDoNotReadAsPajamas() throws {
+        var driver = DriverProfile.presets[0]
+        driver.suitColorHex = "#FF3B30"
+        driver.pantsColorHex = "#FF3B30"
+        let image = try #require(DriverPainter.paletteImage(for: driver))
+        let shirt = try #require(Self.pixel(of: image, x: 16, y: 19))
+        let pants = try #require(Self.pixel(of: image, x: 16, y: 27))
+        // Darker, and by enough to see — but still the same color family.
+        #expect(pants.x < shirt.x - 0.05)
+        #expect(pants.x > shirt.x - 0.3)
     }
 
     @Test func baldPaintsTheHairStripeSkinTone() throws {
@@ -329,11 +342,39 @@ struct CharacterModelTests {
         #expect(names.count == BodyType.allCases.count)
     }
 
+    /// The variant picker's whole job: every one of the twelve roster
+    /// characters is reachable from the editor. Before the picker existed
+    /// only `bodyType` was settable, so four of the twelve were — the other
+    /// eight shipped in the bundle, passed their tests, and could not be
+    /// chosen. The four body types × six variants collapse to twelve
+    /// because man/boy share the male meshes and woman/girl the female.
+    @Test func thePickerReachesAllTwelveRosterCharacters() {
+        var profile = DriverProfile.presets[0]
+        var reachable: Set<String> = []
+        for body in BodyType.allCases {
+            for variant in DriverProfile.characterVariants {
+                profile.bodyType = body
+                profile.characterVariant = variant
+                reachable.insert(profile.modelName(pose: .drive))
+            }
+        }
+        #expect(reachable.count == 12)
+
+        // ...and body type alone really does only reach four of them.
+        var byBodyOnly: Set<String> = []
+        for body in BodyType.allCases {
+            profile.bodyType = body
+            profile.characterVariant = nil
+            byBodyOnly.insert(profile.modelName(pose: .drive))
+        }
+        #expect(byBodyOnly.count == 4)
+    }
+
     /// Both poses exist per character, and the car uses the sitting one.
     @Test func everyRosterModelHasBothPoses() {
         var profile = DriverProfile.presets[0]
         for body in BodyType.allCases {
-            for variant in ["a", "b", "c", "d", "e", "f"] {
+            for variant in DriverProfile.characterVariants {
                 profile.bodyType = body
                 profile.characterVariant = variant
                 let idle = profile.modelName(pose: .idle)
@@ -352,7 +393,7 @@ struct CharacterModelTests {
     @Test func everyRosterModelIsBundled() throws {
         var profile = DriverProfile.presets[0]
         for body in BodyType.allCases {
-            for variant in ["a", "b", "c", "d", "e", "f"] {
+            for variant in DriverProfile.characterVariants {
                 profile.bodyType = body
                 profile.characterVariant = variant
                 for pose in [DriverPose.idle, .drive] {

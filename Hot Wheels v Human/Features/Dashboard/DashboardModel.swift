@@ -81,7 +81,7 @@ final class DashboardModel {
         SoundBank.shared.play("rematch_ding")
     }
 
-    /// Hold-to-show driver PiP on the TV (Phase 6). Reliable — a lost
+    /// Toggle the driver PiP on the TV (Phase 6). Reliable — a lost
     /// "off" would strand the PiP on screen.
     func setReactionCam(on: Bool) {
         transport.send(.reactionCam(playerID: player.id, on: on), reliably: true)

@@ -54,8 +54,13 @@ enum DriverPainter {
           profile.hair == .bald ? profile.skinToneHex
               : profile.hairColorHex ?? DriverPalette.defaultHairColor),
          (DriverPalette.StripeRows.shirt, profile.suitColorHex),
+         // ponytail: pants are always a notch darker than the swatch, so a
+         // matching shirt and pants read as an outfit, not pajamas. Flat
+         // scale, not relative to the shirt — make it relative if kids start
+         // pairing dark shirts with light pants and it looks wrong.
          (DriverPalette.StripeRows.pants,
-          profile.pantsColorHex ?? DriverPalette.defaultPantsColor)]
+          DriverPalette.darkened(profile.pantsColorHex ?? DriverPalette.defaultPantsColor,
+                                 by: DriverPalette.pantsDarkening))]
     }
 
     /// Everything `apply` actually paints or pins, as one comparable string.

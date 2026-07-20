@@ -109,7 +109,9 @@ struct CharacterEditorView: View {
                 case .camera: cameraTab
                 }
             }
-            .frame(maxHeight: 250)
+            // Uncapped on purpose — see CustomizerView. The Face bench is
+            // twice the height of the Hair one, and a maxHeight cap doesn't
+            // clip, it just overlaps the buttons below.
 
             HStack(spacing: 16) {
                 // Put this racer in the car and drive off — the fastest way
@@ -193,6 +195,17 @@ struct CharacterEditorView: View {
                         .init(value: .girl, title: "Girl"),
                     ], selection: optionalStyle(\.bodyType, default: BodyType.man),
                     scrolls: false)
+
+                    // Which of the six roster people of that body's sex.
+                    // Without this row eight of the twelve characters were
+                    // bundled, tested, and unreachable — each body type
+                    // showed one fixed variant forever. Numbered rather than
+                    // named because the roster has no names; the live
+                    // preview above answers "who is 4?" on tap.
+                    label("Person")
+                    ChipRow(chips: DriverProfile.characterVariants.indices.map {
+                        .init(value: DriverProfile.characterVariants[$0], title: "\($0 + 1)")
+                    }, selection: variantBinding, scrolls: false)
                 }
                 #if canImport(PencilKit) && !os(tvOS)
                 VStack(spacing: 6) {
@@ -343,6 +356,14 @@ struct CharacterEditorView: View {
                                default fallback: String) -> Binding<String> {
         Binding(get: { model.driver[keyPath: keyPath] ?? fallback },
                 set: { model.driver[keyPath: keyPath] = $0 })
+    }
+
+    /// Roster variant, defaulting to whatever the current body type wears —
+    /// so the chips show who you're actually looking at before you've picked.
+    private var variantBinding: Binding<String> {
+        Binding(get: { model.driver.characterVariant
+                        ?? (model.driver.bodyType ?? .man).defaultVariant },
+                set: { model.driver.characterVariant = $0 })
     }
 
     private func optionalStyle<Style>(_ keyPath: WritableKeyPath<DriverProfile, Style?>,

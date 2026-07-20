@@ -50,7 +50,7 @@ Deps: P1 (validator/solver already exist — UI is thin).
 ## Phase 6 — Drivers, Reaction Cam, AI, audio & polish (3–5 days)
 Deps: P2–P5.
 1. Driver avatar conversion (Quaternius FBX → USDZ w/ skeleton), seated pose in cars, reaction states (face decal swap + lean/brace poses driven by physics events).
-2. Reaction Cam PiP (hold Up button → PiP on TV). Fallback to sprite reactions if 2nd RealityView is slow on device.
+2. Reaction Cam PiP (tap CAM button → PiP toggles on TV). Fallback to sprite reactions if 2nd RealityView is slow on device.
 3. AI opponent boost policies (easy/med/hard) + robotic car roster for 1P mode.
 4. Audio per `Audio/README.md`; engine pitch = f(speed); music ducking on countdown/finish.
 5. Results screen (times, crashes, best segment), rematch button, app icon (kid should draw it — scan → `Assets.xcassets`!).

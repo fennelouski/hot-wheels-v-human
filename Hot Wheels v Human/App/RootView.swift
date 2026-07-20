@@ -72,8 +72,7 @@ struct RootView: View {
                           config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium))
         } else if launchIntoStress {
             SoloArenaView(designs: CarDesign.demoPair,
-                          blueprint: RandomTrackGenerator.generate(
-                              pieceCount: RaceTuning.maxTrackPieces))
+                          blueprint: RandomTrackGenerator.generate(pieceCount: 75))
         } else if launchIntoHillTrack {
             SoloArenaView(designs: CarDesign.demoPair,
                           blueprint: TrackBlueprint.presets[2].blueprint)

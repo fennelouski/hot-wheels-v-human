@@ -21,8 +21,9 @@ nonisolated enum RaceTuning {
 
     // MARK: Track
 
-    /// Sized to fit the biggest starter track (The Mega Mega Track, 75).
-    static let maxTrackPieces = 75
+    /// Not a design limit — just a sanity ceiling so a runaway loop can't
+    /// hand the solver an unbounded blueprint. Build as big as you want.
+    static let maxTrackPieces = 2048
 
     /// Races in a TV series: players draft ranked tracks, the host
     /// interleaves picks to fill this many, READY advances through them.

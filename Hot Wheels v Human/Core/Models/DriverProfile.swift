@@ -118,6 +118,12 @@ nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
 }
 
 extension DriverProfile {
+    /// The six roster meshes Kenney Mini Characters ship per sex. With the
+    /// sex coming from `bodyType`, these are the twelve people in the game.
+    /// One list: the editor's picker, the bundle check, and the pose check
+    /// all read it, so a seventh character can never be half-added.
+    static let characterVariants = ["a", "b", "c", "d", "e", "f"]
+
     /// The roster model this profile wears, for a given pose — e.g.
     /// `character-female-d-drive`. Twelve distinct meshes (Kenney Mini
     /// Characters) replace the single Quaternius rig that every body type

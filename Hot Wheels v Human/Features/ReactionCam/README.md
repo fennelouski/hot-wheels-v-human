@@ -1,6 +1,6 @@
 # Features/ReactionCam/ — driver PiP (Phase 6 — built)
 
-Concept: hold the "HOLD FOR CAM" button on the iPad → circular PiP appears on the TV showing that player's driver reacting to live physics. Dev/sim shortcut: launch arg `--show-cams` forces every PiP on.
+Concept: tap the CAM button on the iPad (toggle — tap again to drop it) → circular PiP appears on the TV showing that player's driver reacting to live physics. Dev/sim shortcut: launch arg `--show-cams` forces every PiP on.
 
 Files (as built 2026-07-18)
 - `ReactionCamView.swift` — circular-masked mini `RealityView`: driver bust (Quaternius rig, painted by `DriverPainter` from `design.driver` — the kid's character colors, hats and all, since C4/C5) + `PerspectiveCamera`, key + cool rim light, player-colored ring, name capsule. The bust rolls/glances into turns with the live car (`director.lean` × RaceTuning.reactionLeanAngle). Behind it, `ReactionBackdrop` (same file) draws radial anime speed lines whose density/length/drift track the car's real speed, tipped by the lean, over a vignette that tints warm on boost and red on crash. Boost/celebrate spring-pops the whole PiP; crash knocks it askew. Positioned bottom-left/right per player by ArenaView. Face bubble uses the character's skin tone + face paint (`driver.faceDrawingPNG`, falling back to the legacy `CarDesign.faceDrawingPNG`).

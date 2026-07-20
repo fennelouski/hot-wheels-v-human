@@ -156,7 +156,12 @@ struct CustomizerView: View {
                     }
                 }
             }
-            .frame(maxHeight: 240)
+            // No height cap on the tab shelf: tabs aren't the same height
+            // (Paint's swatch grid is twice Chassis'), and .frame(maxHeight:)
+            // does NOT clip — it just made the taller ones draw straight
+            // through the buttons below. Uncapped, the shelf takes what it
+            // needs and the turntable above (flexible down to 220) gives up
+            // the difference.
 
             HStack(spacing: 16) {
                 // Race the car on the turntable — unsaved paint and all —
