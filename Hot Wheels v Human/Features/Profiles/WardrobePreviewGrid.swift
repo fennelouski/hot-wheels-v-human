@@ -47,18 +47,15 @@ struct WardrobePreviewGrid: View {
     /// Glasses/hair/body vary alongside so those get eyes on them too.
     private static let combos: [(hat: HatStyle, glasses: GlassesStyle,
                                  hair: HairStyle, body: BodyType)] = [
-        (.helmet, .roundShades, .short, .man),
-        (.cap, .squareShades, .long, .woman),
-        (.crown, .round, .curly, .boy),
-        (.headphones, .sunglasses, .pigtails, .girl),
+        (.helmet, .roundShades, .character, .man),
+        (.cap, .squareShades, .longHair, .woman),
+        (.crown, .round, .bun, .boy),
+        (.headphones, .sunglasses, .buns, .girl),
     ]
 
-    /// Newly converted Kenney Mini Characters, shown raw so a bad conversion
-    /// (sideways, untextured, T-posed) is obvious at a glance.
-    private static let newModels = [
-        "character-male-a-drive", "character-female-a-drive",
-        "character-male-c-idle", "character-female-d-idle",
-    ]
+    /// Every hairstyle, six to a row.
+    private static let hairRows: [[HairStyle]] = HairStyle.allCases
+        .chunked(into: 6)
 
     var body: some View {
         VStack(spacing: 6) {
@@ -74,11 +71,20 @@ struct WardrobePreviewGrid: View {
                 }
             }
             Divider()
-            HStack(spacing: 4) {
-                ForEach(Self.newModels, id: \.self) { name in
-                    VStack(spacing: 4) {
-                        RawModelPreview(modelName: name)
-                        Text(name).font(.caption2).foregroundStyle(.secondary)
+            // The whole hair library on one screen, bare-headed so nothing
+            // hides it. Hair is real extracted geometry now, so "does it sit
+            // on the skull or float behind it" is the question this bench
+            // was built to answer — and it can only be answered by looking.
+            ForEach(Array(Self.hairRows.enumerated()), id: \.offset) { _, row in
+                HStack(spacing: 4) {
+                    ForEach(row, id: \.self) { style in
+                        VStack(spacing: 2) {
+                            DriverPreviewView(driver: Self.profile(
+                                (hat: HatStyle.none, glasses: GlassesStyle.none,
+                                 hair: style, body: .woman)))
+                            Text(style.rawValue).font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
                     }
                 }
             }
@@ -100,5 +106,14 @@ struct WardrobePreviewGrid: View {
                       hatColorHex: "#2E7D32",
                       glasses: c.glasses,
                       bodyType: c.body)
+    }
+}
+
+private extension Array {
+    /// ponytail: bench-only row splitter; there's no other caller.
+    func chunked(into size: Int) -> [[Element]] {
+        stride(from: 0, to: count, by: size).map {
+            Array(self[$0..<Swift.min($0 + size, count)])
+        }
     }
 }

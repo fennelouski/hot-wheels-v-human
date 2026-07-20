@@ -7,19 +7,68 @@
 
 import Foundation
 
+/// Hair is real geometry now, lifted off the roster's own heads
+/// (`tools/extract_character_hair.py`). Every character is modelled on the
+/// SAME 76-poly skull, so a hairstyle taken off one head drops onto any
+/// other — which is what makes this a customization axis instead of a
+/// property of which character you picked.
+///
+/// It used to be four procedural box-and-sphere volumes stacked on top of
+/// hair that was already baked into the mesh; two of them didn't visibly
+/// render at all.
 nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
-    case short
-    case long
-    case extraLong
-    case pigtails
-    case curly
+    /// Whatever hair this character was modelled with — the default, and
+    /// the reason picking a character still means something.
+    case character
     case bald
+    case bob
+    case bun
+    case buns
+    case ponytail
+    case swoop
+    case longHair
+    case crop
+    case spike
+    case bowl
+    case mop
+
+    /// The extracted mesh in `Resources/Models3D`, or nil when nothing gets
+    /// attached (the character wears its own, or nothing at all).
+    var modelName: String? {
+        switch self {
+        case .character, .bald: nil
+        case .bob: "hair-female-e"
+        case .bun: "hair-female-a"
+        case .buns: "hair-female-b"
+        case .ponytail: "hair-female-c"
+        case .swoop: "hair-female-d"
+        case .longHair: "hair-female-f"
+        case .crop: "hair-male-a"
+        case .spike: "hair-male-d"
+        case .bowl: "hair-male-e"
+        case .mop: "hair-male-f"
+        }
+    }
+
+    /// Does this style replace the character's baked hair? (Everything but
+    /// `.character` does — including `.bald`, which is how you get a head
+    /// with nothing on it.)
+    var needsBaldHead: Bool { self != .character }
 
     /// Unknown raw values (older or newer peers) fall back instead of
-    /// failing the whole profile decode.
+    /// failing the whole profile decode. The C-series styles are mapped to
+    /// their closest real mesh rather than dropped, so a kid who saved
+    /// "pigtails" still opens their racer wearing something like pigtails.
     init(from decoder: Decoder) throws {
         let raw = try decoder.singleValueContainer().decode(String.self)
-        self = Self(rawValue: raw) ?? .short
+        switch raw {
+        case "short": self = .character
+        case "long": self = .longHair
+        case "extraLong": self = .longHair
+        case "pigtails": self = .buns
+        case "curly": self = .bun
+        default: self = Self(rawValue: raw) ?? .character
+        }
     }
 }
 
@@ -132,7 +181,11 @@ extension DriverProfile {
         let body = bodyType ?? .man
         let sex = body.isFemale ? "female" : "male"
         let variant = characterVariant ?? body.defaultVariant
-        return "character-\(sex)-\(variant)-\(pose.rawValue)"
+        // Picking a hairstyle swaps in the bald cut of the same character,
+        // so the chosen hair replaces the baked hair instead of stacking on
+        // top of it. Same skeleton, same poses, 144-ish fewer polys.
+        let scalp = hair.needsBaldHead ? "-bald" : ""
+        return "character-\(sex)-\(variant)\(scalp)-\(pose.rawValue)"
     }
 
     /// Kid-sized racer names for the dice button (profile picker + editors).

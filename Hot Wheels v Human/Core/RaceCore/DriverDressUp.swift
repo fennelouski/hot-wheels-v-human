@@ -37,14 +37,11 @@ enum DriverDressUp {
         case .roundShades: names.append("round-shades")
         case .squareShades: names.append("square-shades")
         }
-        // Everything but short/bald gets extra hair volume; short is painted
-        // mesh, bald is a skin-toned hair stripe (DriverPainter).
-        switch profile.hair {
-        case .long: names.append("long-hair")
-        case .extraLong: names.append("extra-long-hair")
-        case .pigtails: names.append("pigtails")
-        case .curly: names.append("curly-hair")
-        case .short, .bald: break
+        // Hair is a real mesh lifted off the roster's own heads, attached to
+        // the bald cut of whichever character you picked (see HairStyle).
+        // `.character` wears its own; `.bald` wears nothing.
+        if let hair = profile.hair.modelName {
+            names.append(hair)
         }
         return names
     }
@@ -53,7 +50,9 @@ enum DriverDressUp {
     /// The rig faces +Z; brims and lenses go on that side. HeadPinSystem
     /// re-pins the wardrobe to the posed Head joint every frame; the fixed
     /// bind-pose position set here is the fallback if the joint vanishes.
-    static func attach(_ profile: DriverProfile, to driver: Entity) {
+    static func attach(_ profile: DriverProfile, to driver: Entity,
+                       assets: AssetStore? = nil) async {
+        let assets = assets ?? AssetStore.shared
         registerOnce
         driver.findEntity(named: entityName)?.removeFromParent()
         let wardrobe = Entity()
@@ -157,34 +156,22 @@ enum DriverDressUp {
                 let bridge = model(.generateBox(size: [head * 0.28, head * 0.12, head * 0.1]), dark)
                 bridge.position = [0, head * 0.22, head * 0.92]
                 center.addChild(bridge)
-            case "long-hair":
-                let mane = model(.generateBox(size: [head * 1.6, head * 2.8, head * 0.5],
-                                              cornerRadius: head * 0.15), hairColor)
-                mane.position = [0, -head * 0.8, -head * 0.85]
-                center.addChild(mane)
-            case "extra-long-hair":
-                let mane = model(.generateBox(size: [head * 1.6, head * 4.2, head * 0.5],
-                                              cornerRadius: head * 0.15), hairColor)
-                mane.position = [0, -head * 1.5, -head * 0.85]
-                center.addChild(mane)
-            case "pigtails":
-                for side: Float in [-1, 1] {
-                    let tail = model(.generateBox(size: [head * 0.5, head * 2.2, head * 0.5],
-                                                  cornerRadius: head * 0.2), hairColor)
-                    tail.position = [side * head * 1.0, -head * 0.5, -head * 0.3]
-                    center.addChild(tail)
-                    let bobble = model(.generateSphere(radius: head * 0.32), hairColor)
-                    bobble.position = [side * head * 1.0, head * 0.65, -head * 0.3]
-                    center.addChild(bobble)
+            case let name where name.hasPrefix("hair-"):
+                // Real geometry, not a box approximation: the mesh was cut
+                // off a roster head that shares its skull with every other,
+                // so it lands where it was modelled. Its origin is already
+                // the head joint (tools/extract_character_hair.py), which is
+                // what `wardrobe` is pinned to — no offset, no guesswork.
+                guard let mesh = try? await assets.entity(named: name) else { break }
+                mesh.name = name
+                // The roster's colormap comes along baked in; retint it so
+                // hair colour stays a customization axis.
+                for part in mesh.descendantsAndSelf() {
+                    guard var model = part.components[ModelComponent.self] else { continue }
+                    model.materials = model.materials.map { _ in hairColor }
+                    part.components.set(model)
                 }
-            case "curly-hair":
-                for (x, y, z): (Float, Float, Float) in
-                    [(0, 1.0, 0), (-0.7, 0.8, 0.2), (0.7, 0.8, 0.2),
-                     (-0.5, 0.9, -0.6), (0.5, 0.9, -0.6), (0, 0.8, 0.7)] {
-                    let curl = model(.generateSphere(radius: head * 0.45), hairColor)
-                    curl.position = [x * head, y * head, z * head]
-                    center.addChild(curl)
-                }
+                wardrobe.addChild(mesh)
             default:
                 break
             }
@@ -239,6 +226,19 @@ final class HeadPinSystem: System {
             // the head — a crown hovering over the car instead of on a head.
             wardrobe.scale = .one
         }
+    }
+
+    /// Where the posed Head joint actually is, in `reference`'s space (nil =
+    /// world). Same joint the hats ride, exposed because the reaction cam
+    /// aims its camera here: the boost/crash/cheer clips walk the rig's root,
+    /// and a camera pinned to a constant height watched the driver stroll out
+    /// of frame — you got their belly, then their hips. Returns nil for a rig
+    /// with no skinned mesh or no head, so callers keep a bind-pose fallback.
+    static func headPosition(of driver: Entity, relativeTo reference: Entity?) -> SIMD3<Float>? {
+        guard let skinned = skinnedModel(in: driver),
+              let matrix = jointMatrix(of: skinned, jointLeaf: "Head") else { return nil }
+        let local = matrix.columns.3
+        return skinned.convert(position: SIMD3(local.x, local.y, local.z), to: reference)
     }
 
     private static func skinnedModel(in entity: Entity) -> ModelEntity? {

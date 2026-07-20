@@ -224,22 +224,22 @@ extension DriverProfile {
     /// and together they show off hair styles, hats, and glasses so the
     /// character-select screen doubles as a "look what you can make" gallery.
     static let presets: [DriverProfile] = [
-        preset(1, "Ace", body: .man, skin: "#E0AC69", hair: .short, hairColor: "#1C1C1E",
+        preset(1, "Ace", body: .man, skin: "#E0AC69", hair: .character, hairColor: "#1C1C1E",
                eyes: "#3B2716", shirt: "#FFD500", pants: "#2266FF",
                helmet: "#FF3B30", hat: HatStyle.none, hatColor: "#FF3B30", glasses: GlassesStyle.none),
-        preset(2, "Nova", body: .woman, skin: "#FFDBB4", hair: .extraLong, hairColor: "#E7C87B",
+        preset(2, "Nova", body: .woman, skin: "#FFDBB4", hair: .longHair, hairColor: "#E7C87B",
                eyes: "#2266FF", shirt: "#8E44AD", pants: "#1C1C1E",
                helmet: "#FFD500", hat: HatStyle.none, hatColor: "#FFD500", glasses: .roundShades),
-        preset(3, "Juno", body: .woman, skin: "#8D5524", hair: .curly, hairColor: "#1C1C1E",
+        preset(3, "Juno", body: .woman, skin: "#8D5524", hair: .bun, hairColor: "#1C1C1E",
                eyes: "#3B2716", shirt: "#34C759", pants: "#FFD500",
                helmet: "#2266FF", hat: .cap, hatColor: "#2266FF", glasses: GlassesStyle.none),
         preset(4, "Bolt", body: .man, skin: "#C68642", hair: .bald, hairColor: "#1C1C1E",
                eyes: "#34C759", shirt: "#FF3B30", pants: "#F2F2F7",
                helmet: "#F2F2F7", hat: .crown, hatColor: "#FFD500", glasses: GlassesStyle.none),
-        preset(5, "Pip", body: .boy, skin: "#F1C27D", hair: .short, hairColor: "#D62718",
+        preset(5, "Pip", body: .boy, skin: "#F1C27D", hair: .spike, hairColor: "#D62718",
                eyes: "#5AC8FA", shirt: "#FF9500", pants: "#34C759",
                helmet: "#34C759", hat: .headphones, hatColor: "#1C1C1E", glasses: .round),
-        preset(6, "Dot", body: .girl, skin: "#FFDBB4", hair: .pigtails, hairColor: "#B0793C",
+        preset(6, "Dot", body: .girl, skin: "#FFDBB4", hair: .buns, hairColor: "#B0793C",
                eyes: "#34C759", shirt: "#2266FF", pants: "#FF3B30",
                helmet: "#8E44AD", hat: HatStyle.none, hatColor: "#FFD500", glasses: GlassesStyle.none),
     ]

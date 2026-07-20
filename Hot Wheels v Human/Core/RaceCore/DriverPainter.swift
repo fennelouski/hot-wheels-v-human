@@ -66,6 +66,12 @@ enum DriverPainter {
     /// Everything `apply` actually paints or pins, as one comparable string.
     /// Live previews hold this against the last value so a rebuild only costs
     /// something when the character really changed.
+    ///
+    /// `characterVariant` is in here even though `apply` never reads it,
+    /// because both callers gate a MESH swap on this signature: the variant
+    /// picks which of the six roster models you are. Without it, tapping
+    /// Person 1…6 changed the saved profile and nothing on screen — the
+    /// signature came out identical and both previews returned early.
     nonisolated static func appearanceSignature(for profile: DriverProfile) -> String {
         (stripes(for: profile).map(\.1) + [
             profile.hair.rawValue,
@@ -73,6 +79,7 @@ enum DriverPainter {
             profile.hatColorHex ?? "-",
             profile.glasses?.rawValue ?? "-",
             profile.bodyType?.rawValue ?? "-",
+            profile.characterVariant ?? "-",
         ]).joined(separator: "|")
     }
 
@@ -93,24 +100,26 @@ enum DriverPainter {
     static func apply(_ profile: DriverProfile, to driver: Entity,
                       bakedAppearance: Bool = true) async {
         // Wardrobe off first so the paint pass can't repaint the props.
+        // (Was a `defer`; the wardrobe now loads real hair meshes off disk,
+        // which needs an await, and `defer` can't.)
         driver.findEntity(named: DriverDressUp.entityName)?.removeFromParent()
-        defer { DriverDressUp.attach(profile, to: driver) }
-        guard !bakedAppearance else { return }
-        guard let texture = await texture(for: profile) else { return }
-        var material = PhysicallyBasedMaterial()
-        // Nearest sampling: 32 px of stripes must not blur into each other.
-        let sampler = MTLSamplerDescriptor()
-        sampler.minFilter = .nearest
-        sampler.magFilter = .nearest
-        material.baseColor = .init(texture: .init(texture,
-            sampler: .init(sampler)))
-        material.metallic = 0.0
-        material.roughness = 0.8
-        for part in driver.descendantsAndSelf() {
-            guard var model = part.components[ModelComponent.self] else { continue }
-            model.materials = model.materials.map { _ in material }
-            part.components.set(model)
+        if !bakedAppearance, let texture = await texture(for: profile) {
+            var material = PhysicallyBasedMaterial()
+            // Nearest sampling: 32 px of stripes must not blur into each other.
+            let sampler = MTLSamplerDescriptor()
+            sampler.minFilter = .nearest
+            sampler.magFilter = .nearest
+            material.baseColor = .init(texture: .init(texture,
+                sampler: .init(sampler)))
+            material.metallic = 0.0
+            material.roughness = 0.8
+            for part in driver.descendantsAndSelf() {
+                guard var model = part.components[ModelComponent.self] else { continue }
+                model.materials = model.materials.map { _ in material }
+                part.components.set(model)
+            }
         }
+        await DriverDressUp.attach(profile, to: driver)
     }
 
     private static func texture(for profile: DriverProfile) async -> TextureResource? {

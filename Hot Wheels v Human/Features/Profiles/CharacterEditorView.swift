@@ -229,14 +229,9 @@ struct CharacterEditorView: View {
             HStack(alignment: .top, spacing: 36) {
                 VStack(spacing: 10) {
                     label("Style")
-                    ChipRow(chips: [
-                        .init(value: HairStyle.short, title: "Short"),
-                        .init(value: .long, title: "Long"),
-                        .init(value: .extraLong, title: "Extra Long"),
-                        .init(value: .pigtails, title: "Pigtails"),
-                        .init(value: .curly, title: "Curly"),
-                        .init(value: .bald, title: "Bald"),
-                    ], selection: $model.driver.hair, scrolls: false)
+                    ChipRow(chips: HairStyle.allCases.map {
+                        .init(value: $0, title: hairName($0))
+                    }, selection: $model.driver.hair, scrolls: false)
                 }
                 swatchColumn("Color", options: DriverPalette.hairColors,
                              selection: optionalColor(\.hairColorHex,
@@ -316,12 +311,31 @@ struct CharacterEditorView: View {
                     driver.hair = .bald
                 } else {
                     driver.hairColorHex = result.hairColorHex
-                    if driver.hair == .bald { driver.hair = .short }
+                    if driver.hair == .bald { driver.hair = .character }
                 }
                 model.driver = driver
             }
         }
         #endif
+    }
+
+    /// Kid-readable names for the extracted roster hair. "Their Own" is the
+    /// default: the hair the character you picked was modelled with.
+    private func hairName(_ style: HairStyle) -> String {
+        switch style {
+        case .character: "Their Own"
+        case .bald: "Bald"
+        case .bob: "Bob"
+        case .bun: "Top Bun"
+        case .buns: "Space Buns"
+        case .ponytail: "Ponytail"
+        case .swoop: "Swoop"
+        case .longHair: "Long"
+        case .crop: "Crop"
+        case .spike: "Spikes"
+        case .bowl: "Bowl"
+        case .mop: "Mop"
+        }
     }
 
     private func hatName(_ style: HatStyle) -> String {

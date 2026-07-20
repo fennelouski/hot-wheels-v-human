@@ -44,7 +44,7 @@ struct CharacterModelTests {
         let profile = try JSONDecoder().decode(DriverProfile.self,
                                                from: Data(saved.utf8))
         #expect(profile.glasses == .roundShades)
-        #expect(profile.hair == .short)
+        #expect(profile.hair == .character)
     }
 
     @Test func legacyCarDesignJSONDecodesWithoutDriver() throws {
@@ -100,9 +100,9 @@ struct CharacterModelTests {
         #expect(DriverProfile.presets.contains { ($0.hat ?? .none) != HatStyle.none })
         #expect(DriverProfile.presets.contains { ($0.glasses ?? .none) != GlassesStyle.none })
         #expect(DriverProfile.presets.contains { $0.hair == .bald })
-        #expect(DriverProfile.presets.contains {
-            [.long, .extraLong, .pigtails].contains($0.hair)
-        })
+        #expect(DriverProfile.presets.contains { $0.hair == .character })
+        // ...and at least one wearing hair lifted off a different character.
+        #expect(DriverProfile.presets.contains { $0.hair.modelName != nil })
         #expect(Set(DriverProfile.presets.compactMap(\.bodyType)) == Set(BodyType.allCases))
     }
 
@@ -137,7 +137,7 @@ struct CharacterModelTests {
 
     @Test func paletteImageRowsMatchTheStripeTable() throws {
         var driver = DriverProfile.presets[0]
-        driver.hair = .short
+        driver.hair = .character
         let image = try #require(DriverPainter.paletteImage(for: driver))
         #expect(image.width == 32 && image.height == 32)
         // Sample one row per stripe (top-down) and compare to the profile.
@@ -244,7 +244,7 @@ struct CharacterModelTests {
         driver.pantsColorHex = "#FF0000"
         driver.eyeColorHex = "#FF0000"
         driver.hairColorHex = "#FF0000"
-        driver.hair = .short
+        driver.hair = .character
         let image = try #require(DriverPainter.paletteImage(for: driver))
         let pixels = LookalikeAnalyzer.pixels(
             of: image, visionRect: CGRect(x: 4, y: 4, width: 16, height: 16))
@@ -258,19 +258,21 @@ struct CharacterModelTests {
         var driver = DriverProfile.presets[0]
         driver.hat = HatStyle.none
         driver.glasses = GlassesStyle.none
-        driver.hair = .short
+        driver.hair = .character  // wears the hair it was modelled with
+        #expect(DriverDressUp.props(for: driver).isEmpty)
+        driver.hair = .bald       // ...and bald attaches nothing either
         #expect(DriverDressUp.props(for: driver).isEmpty)
         driver.hat = .crown
         driver.glasses = .squareShades
-        driver.hair = .curly
-        #expect(DriverDressUp.props(for: driver) == ["crown", "square-shades", "curly-hair"])
+        driver.hair = .bun
+        #expect(DriverDressUp.props(for: driver) == ["crown", "square-shades", "hair-female-a"])
         driver.glasses = .round
-        driver.hair = .pigtails
-        #expect(DriverDressUp.props(for: driver) == ["crown", "round-glasses", "pigtails"])
+        driver.hair = .buns
+        #expect(DriverDressUp.props(for: driver) == ["crown", "round-glasses", "hair-female-b"])
         driver.hat = nil          // pre-C1 profile: no wardrobe fields at all
         driver.glasses = nil
-        driver.hair = .extraLong
-        #expect(DriverDressUp.props(for: driver) == ["extra-long-hair"])
+        driver.hair = .longHair
+        #expect(DriverDressUp.props(for: driver) == ["hair-female-f"])
     }
 
     // MARK: Editor save = upsert (characters edit in place, unlike cars)
@@ -370,6 +372,47 @@ struct CharacterModelTests {
         #expect(byBodyOnly.count == 4)
     }
 
+    /// Hair is a customization axis now, so every style must resolve to a
+    /// bundled mesh AND every character must have a bald cut to wear it on —
+    /// 35 files that a bad extraction run would silently drop, leaving a kid
+    /// with an invisible hairstyle or a driverless car.
+    @Test func everyHairstyleAndBaldHeadIsBundled() {
+        for style in HairStyle.allCases {
+            guard let mesh = style.modelName else { continue }
+            #expect(Bundle.main.url(forResource: mesh, withExtension: "usdz") != nil,
+                    Comment(rawValue: "missing \(mesh).usdz for \(style)"))
+        }
+        var profile = DriverProfile.presets[0]
+        profile.hair = .bob                       // any style needing a bald head
+        for body in BodyType.allCases {
+            for variant in DriverProfile.characterVariants {
+                profile.bodyType = body
+                profile.characterVariant = variant
+                for pose in [DriverPose.idle, .drive] {
+                    let name = profile.modelName(pose: pose)
+                    #expect(name.contains("-bald-"))
+                    #expect(Bundle.main.url(forResource: name, withExtension: "usdz") != nil,
+                            Comment(rawValue: "missing \(name).usdz"))
+                }
+            }
+        }
+    }
+
+    /// Picking a hairstyle swaps the character for its bald cut; picking
+    /// "their own" leaves the character exactly as it was. This is the whole
+    /// override rule, and it is one line in modelName(pose:).
+    @Test func hairOverridesTheCharactersOwn() {
+        var profile = DriverProfile.presets[0]
+        profile.hair = .character
+        let own = profile.modelName(pose: .drive)
+        #expect(!own.contains("bald"))
+        for style in HairStyle.allCases where style != .character {
+            profile.hair = style
+            #expect(profile.modelName(pose: .drive) == own.replacingOccurrences(
+                of: "-drive", with: "-bald-drive"))
+        }
+    }
+
     /// Both poses exist per character, and the car uses the sitting one.
     @Test func everyRosterModelHasBothPoses() {
         var profile = DriverProfile.presets[0]
@@ -386,6 +429,29 @@ struct CharacterModelTests {
                 #expect(idle.contains(body.isFemale ? "female" : "male"))
             }
         }
+    }
+
+    /// The reaction cam animates the roster character who is actually
+    /// driving, using three clips converted once and retargeted (all twelve
+    /// Kenney Mini characters share one skeleton). A missing or typo'd clip
+    /// asset doesn't crash — the reaction just silently keeps the drive
+    /// pose — so the bundle has to be checked, not trusted.
+    @MainActor @Test func everyReactionClipIsBundled() {
+        for (state, name) in DriverPoser.clipAssets {
+            #expect(Bundle.main.url(forResource: name, withExtension: "usdz") != nil,
+                    "missing clip \(name).usdz for \(state.rawValue)")
+        }
+    }
+
+    /// The states the director can reach either have their own clip or
+    /// deliberately fall back to the drive pose. This pins the deliberate
+    /// list: adding an eighth ReactionState without a clip is fine, but it
+    /// should be a decision, not an oversight.
+    @MainActor @Test func reactionStatesWithoutAClipReuseTheDrivePose() {
+        let posed = Set(DriverPoser.clipAssets.keys)
+        #expect(posed == [.boosted, .crashed, .celebrating])
+        #expect(Set(ReactionState.allCases).subtracting(posed)
+                == [.idle, .steerLeft, .steerRight, .braced])
     }
 
     /// Every roster model the profiles can resolve to must actually be a
