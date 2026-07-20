@@ -103,7 +103,9 @@ struct RootView: View {
         } else if launchIntoReactionCam {
             ReactionBenchGrid()
         } else if launchIntoPiPTuner {
+            #if os(iOS)
             PiPTunerView()
+            #endif
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {

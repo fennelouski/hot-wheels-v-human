@@ -25,7 +25,7 @@ import simd
 
 /// Axis-aligned ground rectangle in the piece's traversal frame.
 /// Nominal (connector tabs excluded) — tabs slide under the next piece.
-struct FootprintRect: Sendable, Equatable {
+nonisolated struct FootprintRect: Sendable, Equatable {
     var minX: Float
     var minZ: Float
     var maxX: Float
@@ -42,7 +42,7 @@ struct FootprintRect: Sendable, Equatable {
 /// The role is a property of the piece's NEIGHBOURS, so it can't live in
 /// the catalog dictionary; `TrackLayoutSolver` reads the run off the
 /// blueprint and asks for `definition(for:role:)`.
-enum HillRole: Sendable, Equatable {
+nonisolated enum HillRole: Sendable, Equatable {
     /// A hill on its own: S-curve, level at both ends, one level gained.
     case solo
     /// First of a run — level in, sloped out.
@@ -54,7 +54,7 @@ enum HillRole: Sendable, Equatable {
 }
 
 /// How the centerline runs through the piece, for spline generation.
-enum CenterlineShape: Sendable, Equatable {
+nonisolated enum CenterlineShape: Sendable, Equatable {
     case line(length: Float, rise: Float)
     case arc(radius: Float, leftTurn: Bool)
     /// Bed profile measured off a Kenney hill mesh and normalised to
@@ -80,7 +80,7 @@ enum CenterlineShape: Sendable, Equatable {
     case verticalLoop(radius: Float, advance: Float, lateralShift: Float)
 }
 
-struct TrackPieceDefinition: Sendable {
+nonisolated struct TrackPieceDefinition: Sendable {
     let type: PieceType
     let modelName: String
     /// Second model spawned on top (gate arch over the start/finish straight).
@@ -125,7 +125,7 @@ struct TrackPieceDefinition: Sendable {
     }
 }
 
-enum PieceCatalog {
+nonisolated enum PieceCatalog {
 
     static func definition(for type: PieceType) -> TrackPieceDefinition {
         definitions[type]!

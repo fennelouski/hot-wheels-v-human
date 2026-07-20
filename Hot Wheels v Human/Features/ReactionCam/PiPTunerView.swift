@@ -16,6 +16,13 @@
 //  settled values into one list you can screenshot in a single shot.
 //
 
+//  iPad-only: this is a slider bench reached solely by `--pip-tuner`, and
+//  Slider/textSelection don't exist on tvOS. Same whole-file gate as
+//  LookalikeView. `#if canImport(UIKit)` would be TRUE on tvOS — don't.
+//
+
+#if os(iOS)
+
 import Combine
 import SwiftUI
 
@@ -233,3 +240,5 @@ private struct PinnedSetting: Identifiable {
                tuning.horizonRatio, tuning.vanishShift, tuning.keyLightWash)
     }
 }
+
+#endif

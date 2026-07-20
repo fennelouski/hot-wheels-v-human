@@ -109,7 +109,6 @@ extension PieceType {
         case .rampJump: "airplane.departure"
         case .hillUp: "chevron.up"
         case .hillDown: "chevron.down"
-        default: nil
         }
     }
 }

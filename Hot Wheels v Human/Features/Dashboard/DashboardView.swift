@@ -177,6 +177,10 @@ struct BoostButtonView: View {
         .contentShape(Circle())
         // Touch DOWN starts the boost — a race button that waits for
         // touch-up feels broken, and holding is now the whole mechanic.
+        // ponytail: DragGesture is unavailable on tvOS, and the TV routes to
+        // ArenaLobbyView so this dial is never presented there — it only has
+        // to compile. An inert dial on TV is the correct outcome.
+        #if !os(tvOS)
         .gesture(
             DragGesture(minimumDistance: 0)
                 .onChanged { _ in
@@ -190,6 +194,7 @@ struct BoostButtonView: View {
                     end()
                 }
         )
+        #endif
         // A cancelled gesture (view swapped out mid-hold, phase change) never
         // delivers onEnded — without this the heartbeat runs forever.
         .onDisappear {

@@ -10,12 +10,15 @@
 import Foundation
 import simd
 
-struct ValidationResult: Equatable, Sendable {
+nonisolated struct ValidationResult: Equatable, Sendable {
     var isValid: Bool { reasons.isEmpty }
     var reasons: [String]
 }
 
-enum BlueprintValidator {
+// Pure value-in/value-out, and RandomTrackGenerator is `nonisolated` — without
+// this it inherits MainActor from SWIFT_DEFAULT_ACTOR_ISOLATION and the
+// generator can't call it. Same reason RaceTuning is nonisolated.
+nonisolated enum BlueprintValidator {
 
     /// `requireEnding: false` = mid-build structural check (TrackBuilder):
     /// everything except "has a finish or closes the circuit".

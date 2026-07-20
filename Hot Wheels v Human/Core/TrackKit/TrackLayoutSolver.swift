@@ -10,7 +10,7 @@
 import Foundation
 import simd
 
-struct PlacedPiece: Sendable {
+nonisolated struct PlacedPiece: Sendable {
     let index: Int
     let definition: TrackPieceDefinition
     /// Entry connect point, world.
@@ -38,7 +38,7 @@ struct PlacedPiece: Sendable {
     }
 }
 
-struct LaneSplines: Sendable {
+nonisolated struct LaneSplines: Sendable {
     var center: [SIMD3<Float>]
     var left: [SIMD3<Float>]
     var right: [SIMD3<Float>]
@@ -50,7 +50,7 @@ struct LaneSplines: Sendable {
     var laterals: [SIMD3<Float>] = []
 }
 
-struct TrackLayout: Sendable {
+nonisolated struct TrackLayout: Sendable {
     let pieces: [PlacedPiece]
     let lanes: LaneSplines
     /// Where the first piece's entry sits. No longer always the origin: a
@@ -68,17 +68,17 @@ struct TrackLayout: Sendable {
     }
 }
 
-func rotated(_ v: SIMD3<Float>, by yaw: Float) -> SIMD3<Float> {
+nonisolated func rotated(_ v: SIMD3<Float>, by yaw: Float) -> SIMD3<Float> {
     let c = cos(yaw), s = sin(yaw)
     return [v.x * c + v.z * s, v.y, -v.x * s + v.z * c]
 }
 
 /// Yaw wrapped to (−π, π] so full turns compare equal.
-func remainderYaw(_ yaw: Float) -> Float {
+nonisolated func remainderYaw(_ yaw: Float) -> Float {
     remainder(yaw, 2 * .pi)
 }
 
-enum TrackLayoutSolver {
+nonisolated enum TrackLayoutSolver {
 
     /// Places every segment. Does NOT validate — BlueprintValidator uses this
     /// same placement to check overlaps/closure, so they can never disagree.
