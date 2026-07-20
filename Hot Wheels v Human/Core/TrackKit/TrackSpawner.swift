@@ -47,7 +47,10 @@ enum TrackSpawner {
             // follows). Only the jump ramp keeps its exact mesh — the
             // ramp lip IS its gameplay.
             switch piece.definition.type {
-            case .rampJump:
+            case .rampJump, .bump:
+                // Both are the bump-up mesh and both crest — the lip IS the
+                // gameplay, so chaos mode collides with the real hump rather
+                // than a flat slab it would sink through.
                 try await addStaticCollision(to: model)
             case .loop:
                 root.addChild(splineCollision(for: piece, index: pi, lanes: layout.lanes))

@@ -175,17 +175,20 @@ struct SolverTests {
         #expect(jump.exitOffset == PieceCatalog.definition(for: .bump).exitOffset)
     }
 
-    /// The ramp's centreline has to CREST — a flat spline is a flat
-    /// straight in rail mode, which is the mode we ship. Entry and exit
+    /// Both bump-up pieces' centrelines have to CREST — a flat spline is a
+    /// flat straight in rail mode, which is the mode we ship, and the car
+    /// then drives through the 0.10 m hump the mesh draws. Entry and exit
     /// stay at y = 0 so all 7 locked presets keep their layouts.
-    @Test func rampJumpCrestsAndStillEndsLevel() {
-        guard case .crest(let length, let height) =
-            PieceCatalog.definition(for: .rampJump).shape else {
-            Issue.record("rampJump must crest, not run flat"); return
+    @Test(arguments: [PieceType.rampJump, .bump])
+    func bumpMeshPiecesCrestAndStillEndLevel(type: PieceType) {
+        let definition = PieceCatalog.definition(for: type)
+        #expect(definition.modelName == "track-wide-straight-bump-up")
+        guard case .crest(let length, let height) = definition.shape else {
+            Issue.record("\(type) must crest, not run flat"); return
         }
         #expect(height > 0)
 
-        let lanes = TrackLayoutSolver.solve(blueprint([.startGate, .rampJump, .finishGate])).lanes
+        let lanes = TrackLayoutSolver.solve(blueprint([.startGate, type, .finishGate])).lanes
         let ys = lanes.center.map(\.y)
         #expect(ys.max()! >= height - 0.001)     // it really rises
         #expect(ys.first! == 0)                  // ...and both seams are level

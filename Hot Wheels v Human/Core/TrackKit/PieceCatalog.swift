@@ -172,11 +172,21 @@ enum PieceCatalog {
             footprint: straightRect,
             shape: .line(length: 0.8, rise: -RaceTuning.elevationLevelHeight)),
 
+        // Same hump the ramp launches off, and now the same centreline. It
+        // kept a flat `.line` while the mesh rose 0.10 m, so rail-mode cars
+        // drove THROUGH the hump on every preset that has one. There is no
+        // "ride it without air" middle ground: the bed out-falls gravity
+        // above roughly a 2 cm crest at race speed, so any spline that sits
+        // on this mesh launches. A bump that bumps is the intent anyway.
+        // Now kinematically identical to .rampJump apart from its entry-speed
+        // gate — kept as its own type because 7 locked presets and every
+        // saved blueprint name it.
         TrackPieceDefinition(
             type: .bump, modelName: "track-wide-straight-bump-up",
             modelOffset: bedLift,
             exitOffset: [0, 0, 0.8],
-            footprint: straightRect, shape: .line(length: 0.8, rise: 0)),
+            footprint: straightRect,
+            shape: .crest(length: 0.8, height: RaceTuning.rampCrestHeight)),
 
         // Narrow loop: ground run only 0.18 m, exit shifted 0.2 m left,
         // vertical circle radius 0.4. Model's native travel is −Z → yaw 180°.
