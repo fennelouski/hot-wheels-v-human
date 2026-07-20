@@ -110,9 +110,16 @@ struct CharacterSelectView: View {
             select(driver)
         } label: {
             VStack(spacing: 10) {
-                DriverPreviewView(driver: driver)
+                // 2D badge, not a live DriverPreviewView: this is a GRID, and
+                // every tile as its own RealityView means N simultaneous
+                // scenes. That survives the simulator but exhausts a real
+                // device's Metal drawable pools — nextDrawable returns nil and
+                // RealityKit aborts binding a fallback texture into the
+                // tonemap LUT slot. Live 3D is fine for the single-instance
+                // previews (editor turntable, customizer); a grid needs a
+                // cheap thumbnail. See OPEN-THREADS "3D grid avatars".
+                DriverFaceBadge(driver: driver)
                     .frame(width: 84, height: 84)
-                    .clipShape(Circle())
                 Text(driver.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .lineLimit(1)

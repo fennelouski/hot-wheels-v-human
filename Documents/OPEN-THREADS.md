@@ -274,6 +274,25 @@ bench (`--wardrobe`) and the character editor — most visible on `bald`,
 colormap work (it read as a dark sliver then and simply repaints lighter
 now); nobody has yet identified which mesh it belongs to.
 
+## 3D grid avatars (crash — fixed by reverting)
+
+A concurrent session swapped the profile picker and character-select GRID
+tiles from the 2D `DriverFaceBadge` to a live `DriverPreviewView` (a full
+RealityView) each. One RealityView per tile = N simultaneous RealityKit
+scenes. That renders fine on the Simulator (the `--wardrobe` bench runs 16 at
+once), but on a real device each scene needs its own Metal drawable pool and N
+of them exhausts the GPU: `[CAMetalLayer nextDrawable] returning nil because
+allocation failed`, then RealityKit binds a fallback 2D texture into the 1D
+`tonemapLUT` slot and the render thread aborts under Metal validation. Crashed
+on launch for anyone with a few profiles set up.
+
+Reverted both grids to `DriverFaceBadge`. Single-instance previews are fine
+and stay live 3D (character-editor turntable, customizer "who's riding" tab).
+If the 3D avatar in grids is wanted back, render each character to a STATIC
+snapshot image once and show that — never N live scenes. There's no clean
+SwiftUI `RealityView`→`UIImage` snapshot API; the ARView `snapshot(...)` path
+or a shared offscreen scene rendered per-character is the route.
+
 ## Closed 2026-07-20 (later session)
 
 **Handoff 1 — `.bump` (38bb2ba).** Decided as "bumps should bump", and the

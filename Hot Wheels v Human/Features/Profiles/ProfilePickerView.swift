@@ -60,9 +60,14 @@ struct ProfilePickerView: View {
                     // No character picked yet on this profile — a symbol,
                     // not a stand-in racer, so the tile never implies a
                     // character the kid didn't choose.
+                    // 2D badge, not a live DriverPreviewView: this grid draws
+                    // one tile per profile, and a live RealityView per tile is
+                    // N simultaneous scenes — fine on the simulator, but on a
+                    // real device it drains the Metal drawable pools until
+                    // nextDrawable fails and RealityKit aborts (tonemap-LUT
+                    // fallback). See OPEN-THREADS "3D grid avatars".
                     if let driver = lastUsedCharacter(of: record) {
-                        DriverPreviewView(driver: driver)
-                            .clipShape(Circle())
+                        DriverFaceBadge(driver: driver)
                             .padding(14)
                     } else {
                         Image(systemName: "person.fill")
