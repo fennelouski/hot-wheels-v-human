@@ -1,13 +1,15 @@
 # Open threads — known gaps and unfinished work
 
-Written 2026-07-20. Every item below was **verified against `main` at commit
-`1f2b6a1`**, not remembered. Ordered by how much a player would notice.
+Written 2026-07-20 against `1f2b6a1`. **Updated the same day**: items 1, 2, 4
+and 9 are done — see "Closed" at the bottom for what actually turned out to
+be true, which was not always what this file predicted. Ordered by how much
+a player would notice.
 
 Paste the prompt at the bottom into a fresh session to pick this up.
 
 ---
 
-## 1. The jump doesn't actually jump (rail mode)
+## ~~1. The jump doesn't actually jump (rail mode)~~ — DONE
 
 `rampJump` is a straight launch piece now, but its spline is flat:
 `shape: .line(length: 0.8, rise: 0)` (`PieceCatalog.swift`). Rail mode —
@@ -24,7 +26,7 @@ exit at y = 0 so the piece stays swappable with `.straight`/`.bump` — that
 swappability is what let the jump drop into all 7 locked presets without
 re-laying a single track.
 
-## 2. A hill seam still traps cars — the rescue only hides it
+## ~~2. A hill seam still traps cars~~ — DONE (and the diagnosis was off)
 
 Cars wedge at the `hillUp` bed-slab seam. `RaceRulesSystem` rescues them
 (lifts to the start of the next piece, no life charged), so races complete
@@ -52,7 +54,7 @@ character. Convert them per-pose with the existing tool
 `ReactionState`. Then drop `bakedAppearance: false` at `DriverPoser.swift:29`
 — it exists solely to keep painting the blank Quaternius mesh.
 
-## 4. Eight of the twelve characters are unreachable
+## ~~4. Eight of the twelve characters are unreachable~~ — DONE
 
 `DriverProfile.characterVariant` ("a".."f") is wired through
 `modelName(pose:)` and covered by tests, but **no view sets it** — the
@@ -62,7 +64,17 @@ editor only exposes the four body types, so each shows one fixed variant.
 natural home). All 24 USDZs are bundled and `everyRosterModelIsBundled`
 already guards them.
 
-## 5. Hair fights the roster
+## 5. Hair fights the roster — DECISION PENDING
+
+Findings added 2026-07-20, from the assets rather than from the code:
+each Kenney Mini character is exactly two meshes (`body-mesh`, `head-mesh`)
+sharing one `colormap` material — hair is baked geometry on the head, and
+the pack ships **no hair meshes and no bald base**. So "hair as a
+customization axis" cannot be built honestly from what's on disk. Hair
+*colour* does work (it's a stripe in DriverPainter's generated palette and
+renders correctly on roster meshes); only hair *shape* is broken.
+See the session's recommendation before building either way.
+
 
 `DriverDressUp` still builds hair from procedural boxes and spheres
 (`long-hair`, `extra-long-hair`, `pigtails`, `curly-hair`), but roster
@@ -100,7 +112,7 @@ sideways (`lateralShift`, so entry and exit tracks don't collide), and the
 ring overhangs its neighbours (occupies z −0.31…+0.49 while advancing only
 0.18). Needs eyes on it before code.
 
-## 9. Downhill start — never built
+## ~~9. Downhill start~~ — DONE
 
 Requested and never done: cars should launch **down a slope** instead of
 from a flat line. Blocked at the time by a parallel session; nothing stands
@@ -157,3 +169,59 @@ cars on the descent in `RaceSession`.
 > human-tested, and several bugs this project has hit were invisible to a
 > green test suite. Commit in small pieces with the reasoning in the
 > message, and push.
+
+---
+
+## Closed 2026-07-20
+
+**1 — the jump (6416a48).** As predicted. `CenterlineShape.crest` is a raised
+cosine at 0.10 m, measured off the bump-up mesh so the spline sits on the
+model rather than under it. Verified airborne on the solved lane (>0.3 m of
+air) with a plain-straight control, and raced on Jumpy Junction.
+
+**2 — the hill seam (0e7df53). The diagnosis in this file was wrong in an
+instructive way.** There was no "lip at the junction between a flat slab and
+a pitched slab". `TrackSpawner.bedCollision` used
+`pitch = atan(rise / length)`, and a right-handed rotation about +X carries
++Z toward −Y — so every hill's collision slab was pitched *opposite* to its
+own spline. On hillUp that stands the slab's high end up as a ~20 cm wall
+at the entry seam. One character (`-atan`).
+
+More importantly: **the rescue count this file said to drive to zero was
+already zero, and had been for some time.** Rail-mode cars are kinematic and
+`RaceRulesSystem` skips every stuck/rescue check for them
+(`RaceRulesSystem.swift:140`) — they float straight through the lip. The
+defect only ever bit chaos mode. The "Mount Kaboom needed 4 rescues" figure
+predates rail mode being the default. Re-verified today across all 7 preset
+tracks: 0 rescued, 0 destroyed, every car finishes. **The rescue counter is
+not a usable signal for track geometry in the mode we ship** — geometry
+needs tests (`hillBedSlabsPitchAlongTheirOwnRise`), not drill greps.
+
+**4 — the twelve characters (fc91894).** A numbered "Person" row (1…6) under
+Body in the Face tab. The variant list moved onto `DriverProfile` so the
+picker, the bundle check and the pose check share one list.
+
+**9 — the downhill start (3c61274, 26dc6ce).** `TrackLayoutSolver.solve`
+normalises elevation so the track's lowest point rests on the ground, which
+lifts the start instead of burying the first descent. That made
+BlueprintValidator's "can't go underground" rule unreachable, so it's gone —
+underground is now impossible by construction. `TrackLayout` gained
+`startPosition`, and circuit closure is measured against it rather than the
+origin (an elevated circuit no longer returns to zero).
+
+All 7 starter tracks now open downhill: `StarterPresets.downhillStart`
+*replaces* the first straight after the start gate with a `hillDown` rather
+than inserting a piece, so piece counts, footprints and headings — and
+therefore all 7 locked layouts — are untouched. The start gate ends up one
+level up on its existing legs. Cars measurably gain speed on the descent
+(2.2 → 2.5 m/s before the flat).
+
+### Noticed while in there, not fixed
+
+- **`.bump` drives through its own mesh.** `.bump` uses the same
+  `track-wide-straight-bump-up` model as `rampJump` but keeps a flat
+  `.line` spline, so cars pass through a 0.10 m hump on every track that has
+  one. Giving it the crest shape would fix the visual — and would also turn
+  every bump into a jump, which is a feel decision, not a bug fix.
+  `.bump` and `.rampJump` are also now visually identical pieces that behave
+  differently; a taller dedicated ramp mesh would settle both.
