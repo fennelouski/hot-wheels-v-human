@@ -382,6 +382,17 @@ struct CharacterModelTests {
             #expect(Bundle.main.url(forResource: mesh, withExtension: "usdz") != nil,
                     Comment(rawValue: "missing \(mesh).usdz for \(style)"))
         }
+        // The police cap is the one hat that's real geometry, off the same
+        // extractor — and it reaches a head only if DriverDressUp offers it.
+        for style in HatStyle.allCases {
+            guard let mesh = style.modelName else { continue }
+            #expect(Bundle.main.url(forResource: mesh, withExtension: "usdz") != nil,
+                    Comment(rawValue: "missing \(mesh).usdz for \(style)"))
+            var wearer = DriverProfile.presets[0]
+            wearer.hat = style
+            wearer.hair = .bald            // isolate the hat from hair props
+            #expect(DriverDressUp.props(for: wearer) == [mesh])
+        }
         var profile = DriverProfile.presets[0]
         profile.hair = .bob                       // any style needing a bald head
         for body in BodyType.allCases {

@@ -78,6 +78,21 @@ nonisolated enum HatStyle: String, Codable, CaseIterable, Sendable {
     case cap
     case crown
     case headphones
+    /// Real geometry, not a generated shape: the island the hair extractor
+    /// cut off `character-male-c` is a police cap, not hair, so it never
+    /// made the HairStyle list. Same free art, worn by anybody.
+    case policeCap
+
+    /// The extracted mesh in `Resources/Models3D`, or nil for the styles
+    /// DriverDressUp builds out of generated boxes and spheres.
+    var modelName: String? { self == .policeCap ? "hair-male-c" : nil }
+
+    /// Unknown raw values (older or newer peers) decode as bare-headed
+    /// rather than failing the whole profile.
+    init(from decoder: Decoder) throws {
+        let raw = try decoder.singleValueContainer().decode(String.self)
+        self = Self(rawValue: raw) ?? .none
+    }
 }
 
 /// Frames (round / square / sporty) × lenses (clear / dark), all solid color.

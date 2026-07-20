@@ -233,9 +233,15 @@ struct CharacterEditorView: View {
                         .init(value: $0, title: hairName($0))
                     }, selection: $model.driver.hair, scrolls: false)
                 }
-                swatchColumn("Color", options: DriverPalette.hairColors,
-                             selection: optionalColor(\.hairColorHex,
-                                                      default: DriverPalette.defaultHairColor))
+                // Their own hair keeps its baked colour — that's the point of
+                // "their own" — so the swatches genuinely do nothing there.
+                // Hiding them beats a row of taps that change nothing.
+                // `.bald` paints the scalp from the skin swatch, same deal.
+                if model.driver.hair != .character && model.driver.hair != .bald {
+                    swatchColumn("Color", options: DriverPalette.hairColors,
+                                 selection: optionalColor(\.hairColorHex,
+                                                          default: DriverPalette.defaultHairColor))
+                }
             }
             .padding(.horizontal, 20)
         }
@@ -345,6 +351,7 @@ struct CharacterEditorView: View {
         case .cap: "Cap"
         case .crown: "Crown"
         case .headphones: "Music"
+        case .policeCap: "Police"
         }
     }
 

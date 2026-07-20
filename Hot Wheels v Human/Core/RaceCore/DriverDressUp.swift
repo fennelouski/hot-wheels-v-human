@@ -28,6 +28,7 @@ enum DriverDressUp {
         case .cap: names.append("cap")
         case .crown: names.append("crown")
         case .headphones: names.append("headphones")
+        case .policeCap: names.append(HatStyle.policeCap.modelName!)
         }
         switch profile.glasses ?? .none {
         case .none: break
@@ -162,13 +163,20 @@ enum DriverDressUp {
                 // so it lands where it was modelled. Its origin is already
                 // the head joint (tools/extract_character_hair.py), which is
                 // what `wardrobe` is pinned to — no offset, no guesswork.
+                // The police cap came off the same extractor and rides the
+                // same origin, so it loads here too — it just takes the hat
+                // swatch instead of the hair one.
                 guard let mesh = try? await assets.entity(named: name) else { break }
                 mesh.name = name
                 // The roster's colormap comes along baked in; retint it so
                 // hair colour stays a customization axis.
+                // ponytail: the cap sits where it was modelled — on a bare
+                // skull — so it clips through the tallest hair volumes. Give
+                // it the floated `hat` mount if kids pair the two and complain.
+                let tint = name == HatStyle.policeCap.modelName ? hatColor : hairColor
                 for part in mesh.descendantsAndSelf() {
                     guard var model = part.components[ModelComponent.self] else { continue }
-                    model.materials = model.materials.map { _ in hairColor }
+                    model.materials = model.materials.map { _ in tint }
                     part.components.set(model)
                 }
                 wardrobe.addChild(mesh)
