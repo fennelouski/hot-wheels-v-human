@@ -75,11 +75,10 @@ reads `crashes 0` almost every race (7-track drill: 14/14 finished, 0
 crashes). It's honest — it now counts only falls and flips — but it may be
 dead space on the results screen.
 
-## 7. Dev tooling shipping in the app
+## ~~7. Dev tooling shipping in the app~~ — DONE (6fe1481)
 
-`RaceSession.drillLog` writes `Documents/drill-log.txt` on **every call**,
-in release too. Great for CLI drills, wrong for a kid's iPad. Gate it
-behind `#if DEBUG` or a launch argument.
+Gated behind `#if DEBUG`, print included. One guard at the sink, not
+eight at the call sites.
 
 ## 8. Loop: "camera helps but something's still off"
 
@@ -260,6 +259,63 @@ it belongs in `HatStyle`. That's a free hat if someone wants it.
 Also: `.character` hair keeps its baked colour and ignores `hairColorHex`,
 while every picked style honours it. Correct as designed (their own hair is
 part of who they are), but it's a real asymmetry someone will notice.
+
+## Closed 2026-07-20 (later session)
+
+**Handoff 1 — `.bump` (38bb2ba).** Decided as "bumps should bump", and the
+decision turned out to be forced rather than free. Rail mode launches where
+the bed falls away faster than gravity; that threshold is crossed above
+roughly a **2 cm** crest at race speed, and the mesh humps **10 cm**. So
+there is no "match the mesh but stay planted" setting — any spline sitting
+on this model launches off it. The choice was only ever *bumps jump* vs
+*flatten the mesh*. `.bump` also joined `.rampJump` on exact-mesh collision
+for chaos mode, and is now identical to it apart from the entry-speed gate.
+
+**Handoff 2 / item 7 — drill logging (6fe1481).** `#if DEBUG` at the sink.
+
+**Handoff 5 — hair leftovers (7c90a46).** `character-male-c`'s island is
+`HatStyle.policeCap` now, loaded through the same mesh path as hair (same
+extractor, same head-joint origin) but tinted from the hat swatch. The
+hair-colour column hides for `.character` and `.bald` — the two styles it
+cannot affect — because a control that does nothing is worse than no
+control. Test now asserts every `HatStyle` with a mesh is both bundled
+*and* offered by `DriverDressUp.props`, which is the gap that let a
+converted USDZ sit in Resources reaching no head.
+
+**NOT verified: the unit suite never ran.** Both destinations build green
+with these changes plus the parallel session's loop work. The test suite
+was attempted five times and died five times on environment, never on an
+assertion — see the hazard below. Someone should run it before trusting
+any of this, and nothing here has been pushed.
+
+### Environment hazard that cost this session an hour
+
+**Concurrent Claude sessions fight over one machine's simulators, and the
+symptoms look like your code.** This session lost five test runs to it:
+
+- A session working on an **unrelated repo** ran `pkill -f xcodebuild` and
+  `killall -9 com.apple.CoreSimulator.CoreSimulatorService` before each of
+  its own builds. That kills *every* simulator and *every* build on the
+  machine. Symptoms: exit 144 (signal death), `Mach error -308 (ipc/mig)
+  server died`, `Invalid device state`.
+- A second session on **this** repo was testing on the same simulator UDID
+  and the same DerivedData. Symptoms: `unable to attach DB: database is
+  locked. Possibly there are two concurrent builds running in the same
+  filesystem location.`
+
+`-derivedDataPath` in a scratch dir fixes the lock. A dedicated
+`simctl create` device does **not** save you — `killall CoreSimulatorService`
+takes down devices you created too. Check `pgrep -fl xcodebuild` before
+concluding anything about your own code, and note that the existing
+"CoreSimulator dies constantly on this machine" advice below is at least
+partly *this*, not hardware.
+
+**Also: a shared working tree means shared test runs.** Both Hot Wheels
+sessions were editing the same checkout, so either one's "tests green"
+covers the *combination* of both sessions' uncommitted work, not their own
+change in isolation. Commit your own hunks (`git hash-object -w` +
+`git update-index --cacheinfo` stages a hand-built blob without touching
+the working tree) before trusting attribution.
 
 ### Noticed while in there, not fixed
 
