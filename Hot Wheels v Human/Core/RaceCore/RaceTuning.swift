@@ -431,15 +431,28 @@ nonisolated enum RaceTuning {
     ]
     /// Chassis whose wheel is cut flat across the bottom.
     static let cockpitWheelFlatBottom: Set<ChassisClass> = [.balancedFormula]
-    /// Horizon height as a fraction of the PiP — low enough that the road
-    /// fills the glass under the driver's chin.
-    static let cockpitHorizonRatio: Float = 0.44
-    /// How far the vanishing point slides opposite a full-lean turn,
+    /// Bottom edge of the rear window, as a fraction of the PiP's height.
+    /// We're looking BACK at the driver from the hood, so what's behind them
+    /// is their own seat, the rear bench, then glass — never the road.
+    static let cockpitHorizonRatio: Float = 0.52
+    /// How far the view through the rear glass slides on a full-lean turn,
     /// fraction of width. This is the whole sense of "we're cornering".
     static let cockpitVanishShift: Float = 0.26
-    /// Road dashes drawn per frame, and their scroll rate at top speed.
-    static let cockpitDashCount = 7
-    static let cockpitDashSpeed: Float = 1.6
+    /// Scenery slabs drawn behind the glass, and how fast they slide at top
+    /// speed. They travel with the car's motion — i.e. the opposite way a
+    /// forward view would scroll, because we're facing the wrong way.
+    static let cockpitSceneryCount = 6
+    static let cockpitSceneryDrift: Float = 1.4
+    /// The driver's seatback width as a fraction of the PiP — the interior
+    /// is part of the car's character, so a muscle bench and a drift bucket
+    /// read differently from inside.
+    static let cockpitSeatWidth: [ChassisClass: Float] = [
+        .heavyMuscle: 0.66,       // wide vinyl bench
+        .balancedFormula: 0.42,   // narrow formula tub
+        .superlightDrift: 0.36,   // skinny bucket
+    ]
+    /// Chassis with a roll cage barring the rear glass.
+    static let cockpitRollCage: Set<ChassisClass> = [.balancedFormula, .superlightDrift]
     /// PiP camera distance and drop below the head, as fractions of the
     /// rig's own measured height — NOT of driverSourceHeight. The reaction
     /// bust is a different rig from the roster characters in the car, and
@@ -451,11 +464,14 @@ nonisolated enum RaceTuning {
     /// the scene, so moving a camera changes nothing and scaling the rig is
     /// the only lever. Erring small is fine — too big is a face filling the
     /// glass with no room for the reaction to land.
-    static let cockpitBustScale: Float = 1.0
-    /// World-Y the shrunk driver is lifted to. Scaling is about the rig's
-    /// FEET, so without this the head drops out of frame. Absolute, not
-    /// derived — dial it in with the `--pip-tuner` bench.
-    static let cockpitBustLift: Float = 0
+    static let cockpitBustScale: Float = 5.25
+    /// How far the scaled driver is moved down, in BODY HEIGHTS of the
+    /// scaled rig (see DriverPoser.applyFraming) — scale is about the rig's
+    /// FEET, so growing them pushes the head out of the top of the circle
+    /// and this puts it back. Body heights rather than metres so one number
+    /// means the same thing on every roster character. Dial it in with the
+    /// `--pip-tuner` bench.
+    static let cockpitBustLift: Float = -0.8
     /// Camera distance as a fraction of the rig's MEASURED world height (see
     /// DriverPoser.frameOnHead). Tuned by eye against the `--reaction-cam`
     /// bench rather than derived: the measured bounds don't map to body

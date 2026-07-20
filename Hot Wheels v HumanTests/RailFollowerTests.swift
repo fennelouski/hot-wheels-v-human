@@ -111,11 +111,14 @@ struct RailFollowerTests {
         }
 
         let lanes = TrackLayoutSolver.solve(.demo).lanes   // .demo carries a loop
-        let ride = CarFactory.rideHeight(visualHeight: 0.09)   // a chunky toy car
-        #expect(ride > RaceTuning.bedSurfaceHeight)         // never inside the bed
+        let carHeight: Float = 0.09                        // a chunky toy car
+        // Independent of the helper on purpose: the origin has to clear the
+        // lane by the car's own half-height (visual centred → that IS the
+        // tyres) plus the bed's own offset, or the wheels are in the track.
+        let needed = carHeight / 2 + RaceTuning.bedSurfaceHeight
         var follow = LaneFollowComponent(waypoints: lanes.left, laterals: lanes.laterals)
-        var state = CarComponent(playerID: UUID(), design: .demoPair[0],
-                                 livesLeft: 5, rideHeight: ride)
+        var state = CarComponent(playerID: UUID(), design: .demoPair[0], livesLeft: 5,
+                                 rideHeight: CarFactory.rideHeight(visualHeight: carHeight))
 
         var checked = 0
         for _ in 0..<3000 {
@@ -124,10 +127,10 @@ struct RailFollowerTests {
             let clearance = follow.waypoints.indices.dropLast().map {
                 distance(pose.position, follow.waypoints[$0], follow.waypoints[$0 + 1])
             }.min()!
-            // Held exactly one ride height off the lane — plus at most a
-            // drift's worth of sideways slide, which stays in the bed plane.
-            #expect(clearance >= ride - 0.002)
-            #expect(clearance <= (ride * ride + RaceTuning.driftMax * RaceTuning.driftMax)
+            #expect(clearance >= needed - 0.002)
+            // ...and no hovering: at most a drift's worth of sideways slide
+            // on top, which stays in the bed plane.
+            #expect(clearance <= (needed * needed + RaceTuning.driftMax * RaceTuning.driftMax)
                         .squareRoot() + 0.002)
             checked += 1
         }

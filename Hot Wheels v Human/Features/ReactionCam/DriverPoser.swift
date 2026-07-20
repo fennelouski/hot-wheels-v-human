@@ -64,6 +64,9 @@ final class DriverPoser {
     /// the driver by that factor and emptied the cockpit.
     private let restingY: Float
     private let restingScale: SIMD3<Float>
+    /// The rig's own height at scale 1, measured once on a render frame.
+    /// `lift` is denominated in these, not metres — see `applyFraming`.
+    private var unitHeight: Float?
 
     private init(bust: Entity) {
         self.bust = bust
@@ -89,9 +92,23 @@ final class DriverPoser {
     /// absolute Y — the roster USDZs don't all place their root at zero, and
     /// forcing one emptied the cockpit outright. So lift 0 always means
     /// "untouched", which is what makes it safe to drag a slider from.
+    ///
+    /// It is measured in BODY HEIGHTS of the scaled rig, not in metres:
+    /// −1 drops the driver by exactly their own height on screen, whoever
+    /// they are and whatever `scale` is. A world-unit lift is unusable here
+    /// because the roster USDZs carry a ×10.73 `scale_rig` node and the
+    /// driver is drawn several times over that again — the same slider
+    /// travel is a no-op on one character and off-screen on the next.
     func applyFraming(scale: Float, lift: Float) {
         bust.scale = restingScale * scale
-        bust.position.y = restingY + lift
+        // Measured on a render frame, never at build time: called that early
+        // it races the rig's load and reads zero. Divided back out by the
+        // scale that was just applied, so the latch is scale-independent.
+        if unitHeight == nil {
+            let measured = bust.visualBounds(relativeTo: bust.parent).extents.y
+            if measured > 0 { unitHeight = measured / max(scale, 0.001) }
+        }
+        bust.position.y = restingY + lift * (unitHeight ?? 1) * scale
     }
 
     /// KNOWN DEAD as of 2026-07-20 — do not tune against it, and do not

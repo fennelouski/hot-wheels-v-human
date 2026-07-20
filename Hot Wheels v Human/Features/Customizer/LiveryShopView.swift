@@ -22,6 +22,7 @@ struct LiveryShopView: View {
                 }
                 .padding(.horizontal, 16)
             }
+            .defaultScrollAnchor(.center)
             if livery != nil {
                 HStack(spacing: 10) {
                     ForEach(PaintShopView.swatches, id: \.self) { hex in

@@ -48,11 +48,14 @@ struct DriverPreviewView: View {
             // Frame the whole rig, facing its front (+Z). Pulled back from
             // 1.05: the roster characters stand taller and chunkier than the
             // Quaternius rig this framing was set for, and overflowed the
-            // preview — head and feet cropped off.
+            // preview — head and feet cropped off. Then pulled back again by
+            // 1/0.7 for a character ~30% smaller in frame: the whole offset
+            // from the target is scaled, not just the distance, so the camera
+            // keeps its angle and the figure only shrinks.
             let height = RaceTuning.driverSourceHeight
             let camera = PerspectiveCamera()
             refs.frame(camera, target: [0, height * 0.5, 0],
-                       from: [0, height * 0.62, height * 1.55])
+                       from: [0, height * 0.67, height * 2.21])
             content.add(camera)
             let light = DirectionalLight()
             light.light.intensity = 5000

@@ -10,9 +10,6 @@
 import SwiftUI
 import SwiftData
 import UIKit
-#if canImport(PencilKit) && !os(tvOS)
-import PencilKit
-#endif
 
 struct CharacterEditorView: View {
     @Environment(AppModel.self) private var appModel
@@ -25,10 +22,6 @@ struct CharacterEditorView: View {
     @State private var showingLookalike = false
     /// Drives the live PiP preview (see `demoDrive`).
     @State private var director = ReactionDirector()
-    #if canImport(PencilKit) && !os(tvOS)
-    /// Session-held face-paint strokes (the profile stores only the PNG).
-    @State private var faceStrokes = PKDrawing()
-    #endif
 
     init(driver: DriverProfile? = nil) {
         _model = State(initialValue: CharacterEditorModel(driver: driver))
@@ -193,8 +186,7 @@ struct CharacterEditorView: View {
                         .init(value: .woman, title: "Woman"),
                         .init(value: .boy, title: "Boy"),
                         .init(value: .girl, title: "Girl"),
-                    ], selection: optionalStyle(\.bodyType, default: BodyType.man),
-                    scrolls: false)
+                    ], selection: bodyBinding, scrolls: false)
 
                     // Which of the six roster people of that body's sex.
                     // Without this row eight of the twelve characters were
@@ -203,17 +195,10 @@ struct CharacterEditorView: View {
                     // named because the roster has no names; the live
                     // preview above answers "who is 4?" on tap.
                     label("Person")
-                    ChipRow(chips: DriverProfile.characterVariants.indices.map {
-                        .init(value: DriverProfile.characterVariants[$0], title: "\($0 + 1)")
+                    ChipRow(chips: bodyType.variants.indices.map {
+                        .init(value: bodyType.variants[$0], title: "\($0 + 1)")
                     }, selection: variantBinding, scrolls: false)
                 }
-                #if canImport(PencilKit) && !os(tvOS)
-                VStack(spacing: 6) {
-                    label("Face paint")
-                    FaceDrawPad(faceDrawingPNG: $model.driver.faceDrawingPNG,
-                                strokes: $faceStrokes)
-                }
-                #endif
                 swatchColumn("Skin", options: DriverPalette.skinTones,
                              selection: $model.driver.skinToneHex)
                 swatchColumn("Eyes", options: DriverPalette.eyeColors,
@@ -222,29 +207,37 @@ struct CharacterEditorView: View {
             }
             .padding(.horizontal, 20)
         }
+        // Centered, not left-jammed: most benches are narrower than an iPad,
+        // and a short row pinned to the left edge reads as broken. Same
+        // modifier ChipRow already uses for its scrolling variant.
+        .defaultScrollAnchor(.center)
     }
 
     private var hairTab: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .top, spacing: 36) {
+                // Color reads first, so picking a color never means hunting
+                // for the Style row first. Still hidden for the two styles
+                // that have no hair mesh to paint: `.character` wears its
+                // baked colormap (roster models are painted, not striped —
+                // see DriverPainter.apply's bakedAppearance) and `.bald`
+                // takes the scalp from the skin swatch. Swatches there would
+                // be dead taps.
+                if model.driver.hair != .character && model.driver.hair != .bald {
+                    swatchColumn("Color", options: DriverPalette.hairColors,
+                                 selection: optionalColor(\.hairColorHex,
+                                                          default: DriverPalette.defaultHairColor))
+                }
                 VStack(spacing: 10) {
                     label("Style")
                     ChipRow(chips: HairStyle.allCases.map {
                         .init(value: $0, title: hairName($0))
                     }, selection: $model.driver.hair, scrolls: false)
                 }
-                // Their own hair keeps its baked colour — that's the point of
-                // "their own" — so the swatches genuinely do nothing there.
-                // Hiding them beats a row of taps that change nothing.
-                // `.bald` paints the scalp from the skin swatch, same deal.
-                if model.driver.hair != .character && model.driver.hair != .bald {
-                    swatchColumn("Color", options: DriverPalette.hairColors,
-                                 selection: optionalColor(\.hairColorHex,
-                                                          default: DriverPalette.defaultHairColor))
-                }
             }
             .padding(.horizontal, 20)
         }
+        .defaultScrollAnchor(.center)
     }
 
     private var clothesTab: some View {
@@ -255,11 +248,14 @@ struct CharacterEditorView: View {
                 swatchColumn("Pants", options: DriverPalette.outfitColors,
                              selection: optionalColor(\.pantsColorHex,
                                                       default: DriverPalette.defaultPantsColor))
-                swatchColumn("Helmet", options: DriverPalette.outfitColors,
-                             selection: $model.driver.helmetColorHex)
+                // ponytail: no Helmet swatch here. The helmet is a hat, and
+                // DriverDressUp paints it from hatColorHex — helmetColorHex
+                // renders nowhere. Colouring it lives with the Hat picker in
+                // Extras so you never jump tabs to change one hat.
             }
             .padding(.horizontal, 20)
         }
+        .defaultScrollAnchor(.center)
     }
 
     private var extrasTab: some View {
@@ -271,8 +267,12 @@ struct CharacterEditorView: View {
                         .init(value: $0, title: hatName($0))
                     }, selection: optionalStyle(\.hat, default: HatStyle.none),
                     scrolls: false)
-                    swatchColumn("Hat color", options: DriverPalette.outfitColors,
-                                 selection: optionalColor(\.hatColorHex, default: "#FFD500"))
+                    // Bare head has nothing to paint — same reasoning as the
+                    // hair swatches under "Their Own".
+                    if model.driver.hat ?? .none != HatStyle.none {
+                        swatchColumn("Color", options: DriverPalette.outfitColors,
+                                     selection: optionalColor(\.hatColorHex, default: "#FFD500"))
+                    }
                 }
                 VStack(spacing: 10) {
                     label("Glasses")
@@ -284,6 +284,7 @@ struct CharacterEditorView: View {
             }
             .padding(.horizontal, 20)
         }
+        .defaultScrollAnchor(.center)
     }
 
     private var cameraTab: some View {
@@ -379,12 +380,32 @@ struct CharacterEditorView: View {
                 set: { model.driver[keyPath: keyPath] = $0 })
     }
 
+    private var bodyType: BodyType { model.driver.bodyType ?? .man }
+
     /// Roster variant, defaulting to whatever the current body type wears —
     /// so the chips show who you're actually looking at before you've picked.
+    /// Falls back the same way `modelName` clamps, so a variant this body
+    /// can't wear highlights the chip it actually renders.
     private var variantBinding: Binding<String> {
-        Binding(get: { model.driver.characterVariant
-                        ?? (model.driver.bodyType ?? .man).defaultVariant },
+        Binding(get: {
+                    let wanted = model.driver.characterVariant ?? bodyType.defaultVariant
+                    return bodyType.variants.contains(wanted) ? wanted : bodyType.defaultVariant
+                },
                 set: { model.driver.characterVariant = $0 })
+    }
+
+    /// Switching body type re-picks the hair when the old one came off the
+    /// other sex's head — a girl kept the man's crop, which is the "that's
+    /// not a girl" moment. `.character` is the safe landing: the roster
+    /// model's OWN hair, so it always suits whoever you just became.
+    private var bodyBinding: Binding<BodyType> {
+        Binding(get: { bodyType },
+                set: { body in
+                    var driver = model.driver
+                    driver.bodyType = body
+                    if driver.hair.isFeminine == !body.isFemale { driver.hair = .character }
+                    model.driver = driver   // one assignment = one undo entry
+                })
     }
 
     private func optionalStyle<Style>(_ keyPath: WritableKeyPath<DriverProfile, Style?>,

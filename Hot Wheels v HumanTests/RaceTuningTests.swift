@@ -94,6 +94,10 @@ struct RaceTuningTests {
             #expect(RaceTuning.cockpitWheelSpokes[chassis]! >= 2)
             let rim = RaceTuning.cockpitWheelRimWidth[chassis]!
             #expect(rim > 0 && rim < 0.5)
+            // The interior draws this one force-unwrapped every frame; a
+            // chassis added without a seat would crash the PiP, not fall back.
+            let seat = RaceTuning.cockpitSeatWidth[chassis]!
+            #expect(seat > 0 && seat < 1)
         }
     }
 

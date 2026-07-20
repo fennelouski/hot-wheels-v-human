@@ -57,8 +57,18 @@ struct ProfilePickerView: View {
                 ZStack {
                     Circle()
                         .fill(Color(hex: record.profile?.colorHex ?? "#FFD500"))
-                    DriverFaceBadge(driver: lastUsedCharacter(of: record))
-                        .padding(14)
+                    // No character picked yet on this profile — a symbol,
+                    // not a stand-in racer, so the tile never implies a
+                    // character the kid didn't choose.
+                    if let driver = lastUsedCharacter(of: record) {
+                        DriverPreviewView(driver: driver)
+                            .clipShape(Circle())
+                            .padding(14)
+                    } else {
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 60, weight: .semibold))
+                            .foregroundStyle(.white.opacity(0.7))
+                    }
                 }
                 .frame(width: 160, height: 160)
                 .overlay(Circle().stroke(

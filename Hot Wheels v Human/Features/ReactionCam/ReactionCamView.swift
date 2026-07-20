@@ -2,10 +2,11 @@
 //  ReactionCamView.swift
 //  Hot Wheels v Human
 //
-//  Circular driver PiP: a look into the car's cockpit. Mini RealityView
-//  bust leans into turns between a windshield (road rushing at the
-//  camera, vanishing point sliding into the corner) and the car's own
-//  steering wheel, which counter-turns with the live yaw rate. One
+//  Circular driver PiP: a look into the car's cockpit, from over the hood
+//  looking BACK at the driver. Mini RealityView bust leans into turns
+//  between the car's interior behind them (seat, rear bench, rear glass
+//  with the world sliding past) and the car's own steering wheel in
+//  front, which counter-turns with the live yaw rate. One
 //  `daylight` colour drives the sky, the cabin bounce AND the 3D key
 //  light, so a boost warms the driver's face the same frame it warms
 //  the glass. Face-decal badge, player-colored ring. Shown on the TV
@@ -21,11 +22,11 @@ import UIKit
 /// reads the shipped constants, so normal callers pass nothing and get
 /// exactly what RaceTuning says.
 struct CockpitTuning: Equatable {
-    /// How far the driver is shrunk, and the world-Y they're lifted to
-    /// afterwards (scaling is about the rig's FEET, so shrinking alone
-    /// drops the head out of frame). Lift is absolute, not derived, because
-    /// the roster rigs are not all the same height — which is exactly why
-    /// this may need to differ per character.
+    /// How far the driver is scaled, and how far they're moved up or down
+    /// afterwards (scale is about the rig's FEET, so growing them alone
+    /// pushes the head out of the top of the circle). Lift is in BODY
+    /// HEIGHTS of the scaled rig, so it means the same thing on every
+    /// character and at every scale — see `DriverPoser.applyFraming`.
     var bustScale: Float
     var bustLift: Float
     var wheelCenterY: Float
@@ -70,10 +71,12 @@ struct ReactionCamView: View {
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            WindshieldView(daylight: daylight,
-                           speed01: director.speed01,
-                           lean: director.lean,
-                           tuning: tuning)
+            CarInteriorView(chassis: design.chassis,
+                            trim: Color(hex: design.paint.colorHex),
+                            daylight: daylight,
+                            speed01: director.speed01,
+                            lean: director.lean,
+                            tuning: tuning)
 
             RealityView { content in
                 content.camera = .virtual
@@ -128,14 +131,12 @@ struct ReactionCamView: View {
                 keyLight?.light.intensity =
                     director.state == .boosted ? 9000 : 6000
                 // Size and lift the driver here, every update, so the tuner's
-                // sliders move a live rig instead of needing a rebuild. Only
-                // when something actually asks: at the shipped defaults this
-                // is arithmetically a no-op, but skipping it outright means
-                // the normal PiP cannot be affected by this path at all —
-                // worth the branch while the framing numbers are unsettled.
-                if tuning != .standard {
-                    poser?.applyFraming(scale: tuning.bustScale, lift: tuning.bustLift)
-                }
+                // sliders move a live rig instead of needing a rebuild — and
+                // unconditionally, so the shipped PiP is the same code path
+                // the tuner shows. (This used to skip at `.standard` while
+                // the numbers were unsettled, which quietly meant the
+                // shipped constants did nothing at all.)
+                poser?.applyFraming(scale: tuning.bustScale, lift: tuning.bustLift)
                 rebuildIfDriverChanged()
             }
 
@@ -149,13 +150,6 @@ struct ReactionCamView: View {
                               tuning: tuning)
                 .allowsHitTesting(false)
 
-            // Kid's face paint rides over every expression. The driver's
-            // own paint wins; CarDesign's is the pre-C3 fallback.
-            DriverFaceBadge(driver: design.driver, state: director.state,
-                            fallbackPaintPNG: design.faceDrawingPNG)
-                .frame(width: 48, height: 48)
-                .overlay(Circle().stroke(.white.opacity(0.8), lineWidth: 2))
-                .padding(6)
         }
         .frame(width: 180, height: 180)
         .clipShape(Circle())
@@ -236,100 +230,150 @@ private extension ReactionState {
     }
 }
 
-/// The view out the windshield: sky, a road rushing at the camera, and the
-/// cabin framing it. The vanishing point slides opposite the turn (that's
-/// what makes a corner *feel* like a corner) and the dashes scroll with the
-/// car's real speed. `daylight` washes the glass and bounces off the trim.
-private struct WindshieldView: View {
+/// What's actually behind the driver. The PiP camera looks BACK at them from
+/// over the hood, so a road rushing at us was the one thing that could never
+/// be there — it's behind the lens. Drawn far-to-near: sky and scenery
+/// sliding across the rear glass (with the car's motion, i.e. the opposite
+/// way a forward view scrolls), the rear bench, then the driver's own
+/// seatback, which the RealityView bust sits in front of.
+///
+/// No vignette, no letterbox, no pillars hugging the edges: the PiP is
+/// already cropped to a circle, and anything dark around the rim reads as a
+/// second, broken crop rather than as a car.
+private struct CarInteriorView: View {
+    let chassis: ChassisClass
+    let trim: Color
     let daylight: Color
     let speed01: Float
     let lean: Float
     let tuning: CockpitTuning
 
-    private static let asphalt = Color(red: 0.16, green: 0.16, blue: 0.20)
-    private static let cabin = Color(red: 0.09, green: 0.09, blue: 0.12)
-
     var body: some View {
         TimelineView(.animation) { timeline in
             Canvas { ctx, size in
                 let w = size.width, h = size.height
-                let speed = CGFloat(speed01)
-                let horizon = h * CGFloat(tuning.horizonRatio)
-                // Corner into the turn: the road's far end swings the other way.
-                let vanishX = w * 0.5
-                    - CGFloat(lean) * w * CGFloat(tuning.vanishShift)
+                let sill = h * CGFloat(tuning.horizonRatio)
+                // Lean swings what's framed in the glass the other way.
+                let slide = -CGFloat(lean) * w * CGFloat(tuning.vanishShift)
 
-                // Sky, then ground, then the road laid over both.
-                ctx.fill(Path(CGRect(x: 0, y: 0, width: w, height: horizon)),
-                         with: .linearGradient(
-                            Gradient(colors: [daylight.opacity(0.85), daylight.opacity(0.35)]),
-                            startPoint: .zero, endPoint: CGPoint(x: 0, y: horizon)))
-                ctx.fill(Path(CGRect(x: 0, y: horizon, width: w, height: h - horizon)),
-                         with: .color(Color(red: 0.20, green: 0.26, blue: 0.20)))
+                // Cabin fills the whole tile — mid-toned and daylight-tinted,
+                // never near-black, so the circle's edge is the only edge.
+                ctx.fill(Path(CGRect(origin: .zero, size: size)),
+                         with: .color(Color(red: 0.30, green: 0.29, blue: 0.34)
+                            .mix(with: daylight, by: 0.22)))
 
-                var road = Path()
-                road.move(to: CGPoint(x: vanishX - w * 0.04, y: horizon))
-                road.addLine(to: CGPoint(x: vanishX + w * 0.04, y: horizon))
-                road.addLine(to: CGPoint(x: w * 1.6, y: h))
-                road.addLine(to: CGPoint(x: -w * 0.6, y: h))
-                road.closeSubpath()
-                ctx.fill(road, with: .color(Self.asphalt))
+                // Rear glass: generous, so daylight is what's behind them.
+                let glass = CGRect(x: w * 0.06, y: h * 0.04,
+                                   width: w * 0.88, height: sill - h * 0.04)
+                let glassPath = Path(roundedRect: glass, cornerRadius: w * 0.09)
+                ctx.fill(glassPath, with: .linearGradient(
+                    Gradient(colors: [daylight.opacity(0.95), daylight.opacity(0.45)]),
+                    startPoint: CGPoint(x: 0, y: glass.minY),
+                    endPoint: CGPoint(x: 0, y: glass.maxY)))
 
-                // Centre dashes and roadside posts share one depth sweep.
-                // `u` is 0 at the horizon, 1 at the bumper — squared so they
-                // bunch up in the distance and snap past up close.
-                let t = timeline.date.timeIntervalSinceReferenceDate
-                let scroll = t * Double(0.3 + speed01 * RaceTuning.cockpitDashSpeed)
-                for i in 0..<RaceTuning.cockpitDashCount {
-                    let phase = (scroll + Double(i) / Double(RaceTuning.cockpitDashCount))
-                        .truncatingRemainder(dividingBy: 1)
-                    let u = CGFloat(phase * phase)
-                    let y = horizon + (h - horizon) * u
-                    let cx = vanishX + (w * 0.5 - vanishX) * u
-                    let scale = 0.04 + 0.9 * u
-                    ctx.fill(Path(CGRect(x: cx - w * 0.035 * scale, y: y,
-                                         width: w * 0.07 * scale,
-                                         height: (h - horizon) * 0.18 * scale)),
-                             with: .color(.white.opacity(0.75)))
-                    // Posts whipping past the shoulders sell speed at the edges.
-                    for side in [CGFloat(-1), 1] {
-                        let px = cx + side * (w * 0.09 + w * 1.1 * u)
-                        ctx.fill(Path(CGRect(x: px, y: y - (h - horizon) * 0.34 * scale,
-                                             width: max(1, w * 0.02 * scale),
-                                             height: (h - horizon) * 0.34 * scale)),
-                                 with: .color(.white.opacity(0.5)))
+                ctx.drawLayer { sky in
+                    sky.clip(to: glassPath)
+                    let horizonY = glass.maxY - glass.height * 0.28
+                    // Everything behind us converges here — the road we've
+                    // already driven, running away into the distance.
+                    let vanishX = glass.midX + slide
+
+                    sky.fill(Path(CGRect(x: glass.minX, y: horizonY,
+                                         width: glass.width, height: glass.height * 0.28)),
+                             with: .color(Color(red: 0.24, green: 0.30, blue: 0.24)))
+
+                    // Scenery RECEDES rather than sliding sideways: we're
+                    // facing backwards, so a post we pass rushes away from
+                    // the glass and shrinks into the vanishing point. `n` is
+                    // 1 at the bumper and 0 at the horizon, squared so
+                    // things pile up in the distance and snap away up close
+                    // — the same depth curve the old forward road used, run
+                    // the other direction.
+                    let t = timeline.date.timeIntervalSinceReferenceDate
+                    let scroll = t * Double(0.15 + speed01 * RaceTuning.cockpitSceneryDrift)
+                    let count = RaceTuning.cockpitSceneryCount
+                    for i in 0..<count {
+                        let phase = (scroll + Double(i) / Double(count))
+                            .truncatingRemainder(dividingBy: 1)
+                        let n = CGFloat((1 - phase) * (1 - phase))
+                        let side: CGFloat = i.isMultiple(of: 2) ? -1 : 1
+                        // Out from the vanishing point as it comes at us,
+                        // and down the glass with it.
+                        let cx = vanishX + side * glass.width * 0.62 * n
+                        let baseY = horizonY + glass.height * 0.30 * n
+                        let tall = glass.height * 0.52 * n
+                        sky.fill(Path(CGRect(x: cx - glass.width * 0.06 * n, y: baseY - tall,
+                                             width: glass.width * 0.12 * n, height: tall)),
+                                 with: .color(.white.opacity(0.22)))
+                    }
+
+                    // Road running away from the bumper to the horizon —
+                    // wide at the bottom of the glass, a point in the
+                    // distance. This is what makes the recession read as
+                    // depth rather than as things just getting smaller.
+                    var road = Path()
+                    road.move(to: CGPoint(x: vanishX - glass.width * 0.03, y: horizonY))
+                    road.addLine(to: CGPoint(x: vanishX + glass.width * 0.03, y: horizonY))
+                    road.addLine(to: CGPoint(x: glass.midX + glass.width * 0.75, y: glass.maxY))
+                    road.addLine(to: CGPoint(x: glass.midX - glass.width * 0.75, y: glass.maxY))
+                    road.closeSubpath()
+                    sky.fill(road, with: .color(Color(red: 0.17, green: 0.17, blue: 0.21)))
+
+                    // Centre dashes shrinking away down it, same depth curve.
+                    for i in 0..<RaceTuning.cockpitSceneryCount {
+                        let phase = (scroll + Double(i) / Double(RaceTuning.cockpitSceneryCount)
+                                     + 0.5).truncatingRemainder(dividingBy: 1)
+                        let n = CGFloat((1 - phase) * (1 - phase))
+                        let y = horizonY + (glass.maxY - horizonY) * n
+                        let cx = vanishX + (glass.midX - vanishX) * n
+                        sky.fill(Path(CGRect(x: cx - glass.width * 0.02 * n, y: y,
+                                             width: glass.width * 0.04 * n,
+                                             height: (glass.maxY - horizonY) * 0.22 * n)),
+                                 with: .color(.white.opacity(0.7)))
                     }
                 }
 
-                // Overhead lights strobing across the glass — the faster we
-                // go, the harder they sweep.
-                if speed > 0.05 {
-                    let sweep = CGFloat((t * Double(0.5 + speed01))
-                        .truncatingRemainder(dividingBy: 1))
-                    ctx.fill(Path(CGRect(x: (sweep * 2 - 0.5) * w, y: 0,
-                                         width: w * 0.35, height: h)),
-                             with: .linearGradient(
-                                Gradient(colors: [.clear, .white.opacity(0.22 * speed), .clear]),
-                                startPoint: CGPoint(x: (sweep * 2 - 0.5) * w, y: 0),
-                                endPoint: CGPoint(x: (sweep * 2 - 0.15) * w, y: 0)))
+                // Roll cage bars over the glass, on the cars that have one.
+                if RaceTuning.cockpitRollCage.contains(chassis) {
+                    for side in [CGFloat(-1), 1] {
+                        var bar = Path()
+                        bar.move(to: CGPoint(x: glass.midX + side * glass.width * 0.34,
+                                             y: glass.minY))
+                        bar.addLine(to: CGPoint(x: glass.midX - side * glass.width * 0.22,
+                                                y: glass.maxY))
+                        ctx.stroke(bar, with: .color(trim.opacity(0.85)),
+                                   style: StrokeStyle(lineWidth: w * 0.035, lineCap: .round))
+                    }
                 }
 
-                // Cabin: roof lining above, A-pillars down the sides, and the
-                // daylight bouncing off the trim so the interior shares the mood.
-                ctx.fill(Path(CGRect(x: 0, y: 0, width: w, height: h * 0.13)),
-                         with: .color(Self.cabin))
-                for side in [CGFloat(0), 1] {
-                    var pillar = Path()
-                    let outer = side * w
-                    let inner = side == 0 ? w * 0.16 : w * 0.84
-                    pillar.move(to: CGPoint(x: outer, y: 0))
-                    pillar.addLine(to: CGPoint(x: inner, y: 0))
-                    pillar.addLine(to: CGPoint(x: outer, y: h))
-                    pillar.closeSubpath()
-                    ctx.fill(pillar, with: .color(Self.cabin))
+                // Rear bench, two humps peeking over the parcel shelf.
+                for side in [CGFloat(-1), 1] {
+                    let cx = w * 0.5 + side * w * 0.26
+                    ctx.fill(Path(roundedRect: CGRect(x: cx - w * 0.16, y: sill - h * 0.02,
+                                                      width: w * 0.32, height: h * 0.22),
+                                  cornerRadius: w * 0.07),
+                             with: .color(Color(red: 0.22, green: 0.21, blue: 0.26)))
                 }
-                ctx.fill(Path(CGRect(x: 0, y: h * 0.13, width: w, height: h * 0.05)),
-                         with: .color(daylight.opacity(0.35)))
+
+                // The driver's own seat, closest to us and widest on a muscle
+                // car — this is the interior's per-car tell.
+                let seatW = w * CGFloat(RaceTuning.cockpitSeatWidth[chassis]!)
+                let seatTop = sill + h * 0.10
+                ctx.fill(Path(roundedRect: CGRect(x: (w - seatW) / 2, y: seatTop,
+                                                  width: seatW, height: h - seatTop),
+                              cornerRadius: w * 0.10),
+                         with: .color(Color(red: 0.17, green: 0.16, blue: 0.20)))
+                // Headrest above it, and a paint-coloured stripe so the seat
+                // belongs to this car and not a generic one.
+                ctx.fill(Path(roundedRect: CGRect(x: w * 0.5 - seatW * 0.26,
+                                                  y: seatTop - h * 0.09,
+                                                  width: seatW * 0.52, height: h * 0.13),
+                              cornerRadius: w * 0.05),
+                         with: .color(Color(red: 0.20, green: 0.19, blue: 0.24)))
+                ctx.fill(Path(roundedRect: CGRect(x: w * 0.5 - seatW * 0.06, y: seatTop,
+                                                  width: seatW * 0.12, height: h - seatTop),
+                              cornerRadius: w * 0.02),
+                         with: .color(trim.opacity(0.55)))
             }
         }
     }

@@ -48,11 +48,13 @@ struct ReactionDirectorTests {
         #expect(director.state == .celebrating)
     }
 
-    @Test @MainActor func everyStateHasAFace() {
-        // DriverFaceView's switch is exhaustive (compile-checked); this
-        // guards that every state constructs a renderable face view.
+    /// The cartoon face is gone — reactions read off the 3D rig now, so this
+    /// guards the clip table instead: every state either names a reaction
+    /// USDZ or deliberately falls back to the base pose.
+    @Test @MainActor func everyStateResolvesToAClip() {
         for state in ReactionState.allCases {
-            _ = DriverFaceView(state: state).body
+            let asset = DriverPoser.clipAssets[state]
+            #expect(asset == nil || asset?.isEmpty == false)
         }
     }
 }

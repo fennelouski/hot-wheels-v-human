@@ -50,6 +50,12 @@ nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
         }
     }
 
+    /// Whose head this cut came off, or nil when no mesh is attached
+    /// (`.character` wears the roster model's own hair, `.bald` none) — in
+    /// both of those cases the hair already matches whoever you picked.
+    /// Prefix, not `contains`: "female" contains "male".
+    var isFeminine: Bool? { modelName.map { $0.hasPrefix("hair-female") } }
+
     /// Does this style replace the character's baked hair? (Everything but
     /// `.character` does — including `.bald`, which is how you get a head
     /// with nothing on it.)
@@ -136,6 +142,15 @@ nonisolated enum BodyType: String, Codable, CaseIterable, Sendable {
 
     var isFemale: Bool { self == .woman || self == .girl }
 
+    /// Which same-sex roster models this body may wear. `male-b` has a full
+    /// beard modelled into his face (see tools/extract_character_hair.py),
+    /// so he is an adult and nothing else — a bearded boy read as a mistake,
+    /// not a joke. Everyone else gets all six.
+    var variants: [String] {
+        self == .boy ? DriverProfile.characterVariants.filter { $0 != "b" }
+                     : DriverProfile.characterVariants
+    }
+
     /// Which of the six same-sex roster models this body wears by default.
     /// Kids get a DIFFERENT mesh from the adults, not just a smaller one —
     /// that was the whole complaint.
@@ -175,10 +190,6 @@ nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
     /// nil = the body type's default. Additive optional, so old records and
     /// older peers still decode.
     var characterVariant: String? = nil
-    /// Face paint drawn in the editor, PNG ≤ 64 KB, composited over the
-    /// reaction-cam face. Replaces CarDesign.faceDrawingPNG (kept there as a
-    /// read fallback for old designs).
-    var faceDrawingPNG: Data? = nil
 }
 
 extension DriverProfile {
@@ -186,7 +197,9 @@ extension DriverProfile {
     /// sex coming from `bodyType`, these are the twelve people in the game.
     /// One list: the editor's picker, the bundle check, and the pose check
     /// all read it, so a seventh character can never be half-added.
-    static let characterVariants = ["a", "b", "c", "d", "e", "f"]
+    // nonisolated: read from BodyType.variants, which is nonisolated like
+    // every other wire-format Core type (default-MainActor isolation).
+    nonisolated static let characterVariants = ["a", "b", "c", "d", "e", "f"]
 
     /// The roster model this profile wears, for a given pose — e.g.
     /// `character-female-d-drive`. Twelve distinct meshes (Kenney Mini
@@ -195,7 +208,11 @@ extension DriverProfile {
     func modelName(pose: DriverPose) -> String {
         let body = bodyType ?? .man
         let sex = body.isFemale ? "female" : "male"
-        let variant = characterVariant ?? body.defaultVariant
+        // Clamped here rather than at the picker so a saved profile, an old
+        // peer's message, or a body-type switch can't put a body in a
+        // variant it isn't allowed (today: the bearded man as a boy).
+        var variant = characterVariant ?? body.defaultVariant
+        if !body.variants.contains(variant) { variant = body.defaultVariant }
         // Picking a hairstyle swaps in the bald cut of the same character,
         // so the chosen hair replaces the baked hair instead of stacking on
         // top of it. Same skeleton, same poses, 144-ish fewer polys.

@@ -86,6 +86,46 @@ struct CharacterModelTests {
         }
     }
 
+    /// The bearded roster man is adults-only, and the clamp lives in
+    /// `modelName` so a saved profile or a peer's message can't route around
+    /// the picker.
+    @Test func boysNeverWearTheBeardedMan() {
+        #expect(!BodyType.boy.variants.contains("b"))
+        var driver = DriverProfile.presets[0]
+        driver.bodyType = .boy
+        driver.characterVariant = "b"
+        for pose in [DriverPose.idle, .drive] {
+            #expect(!driver.modelName(pose: pose).contains("-b-"))
+        }
+        // Every other body keeps the full six.
+        for body in BodyType.allCases where body != .boy {
+            #expect(body.variants == DriverProfile.characterVariants)
+        }
+    }
+
+    /// Every allowed body/variant/pose combination has to name a real file.
+    @Test func everyAllowedVariantIsABundledModel() {
+        for body in BodyType.allCases {
+            for variant in body.variants {
+                var driver = DriverProfile.presets[0]
+                driver.bodyType = body
+                driver.characterVariant = variant
+                let sex = body.isFemale ? "female" : "male"
+                #expect(driver.modelName(pose: .idle) == "character-\(sex)-\(variant)-idle")
+            }
+        }
+    }
+
+    @Test func hairStyleSexMatchesItsMesh() {
+        #expect(HairStyle.crop.isFeminine == false)
+        #expect(HairStyle.ponytail.isFeminine == true)
+        // "female" contains "male" — the prefix check is the whole point.
+        #expect(HairStyle.longHair.isFeminine == true)
+        // Nothing attached: already whoever you picked.
+        #expect(HairStyle.character.isFeminine == nil)
+        #expect(HairStyle.bald.isFeminine == nil)
+    }
+
     @Test func starterCharactersRoundTrip() throws {
         for driver in DriverProfile.presets {
             let decoded = try JSONDecoder().decode(

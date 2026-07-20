@@ -38,8 +38,10 @@ characters per profile, the full-screen character editor, and the camera
   gentle sway around the front, but drag orbits it and pinch zooms
   (`App/TurntableOrbit.swift`), and the sway stops for good on first grab —
   so the back of the hair is reachable without waiting for it to turn.
-- `FaceDrawPad.swift` — face paint over the cartoon reaction face; PNG
-  ≤64 KB on `DriverProfile.faceDrawingPNG`, composited in the reaction cam.
+- Face paint (`FaceDrawPad`, `DriverProfile.faceDrawingPNG`) is **gone**,
+  and so is the cartoon face it painted onto. Wherever a character used to
+  be shown as a flat drawn face, they're now the actual 3D rig
+  (`DriverPreviewView`) — one character, one look, everywhere.
 - `LookalikeView.swift` — the camera flow (`#if os(iOS)` — NOT
   `canImport(UIKit)`, which is true on tvOS): front-camera
   `UIImagePickerController`, one picture, on-device analysis, colors

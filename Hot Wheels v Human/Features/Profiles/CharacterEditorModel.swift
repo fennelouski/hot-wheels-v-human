@@ -37,7 +37,8 @@ final class CharacterEditorModel {
     func driverChanged(from old: DriverProfile) {
         if restoring { restoring = false; return }
         undoStack.append(old)
-        // faceDrawingPNG makes snapshots up to 64 KB — cap the stack.
+        // Snapshots are small (a profile is colors and enums), but unlimited
+        // undo on a screen kids hammer still wants a ceiling.
         if undoStack.count > 100 { undoStack.removeFirst() }
     }
 

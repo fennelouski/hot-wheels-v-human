@@ -32,6 +32,7 @@ struct RaceSetupView: View {
                     }
                     .padding(.vertical, 4)
                 }
+                .defaultScrollAnchor(.center)
                 sectionHeader("Pick your tracks — in your favorite order!",
                               systemImage: "map.fill")
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 240), spacing: 16)],

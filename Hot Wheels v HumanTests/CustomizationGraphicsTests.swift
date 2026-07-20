@@ -180,7 +180,6 @@ struct OverlayComposerTests {
         var design = ModelTests.car
         design.drawingPNG = Data([1, 2, 3, 4])
         design.drawingStrokes = Data([5, 6, 7])
-        design.faceDrawingPNG = Data([8, 9])
         let decoded = try JSONDecoder().decode(
             CarDesign.self, from: JSONEncoder().encode(design))
         #expect(decoded == design)

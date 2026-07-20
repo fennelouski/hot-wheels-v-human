@@ -167,10 +167,10 @@ struct PiPTunerView: View {
 
                 Divider()
                 Text("Driver in frame").font(.headline)
-                slider("bustScale", $tuning.bustScale, 0.05...2.0,
-                       help: "Shrinks the driver. THE size knob — the camera does nothing.")
-                slider("bustLift", $tuning.bustLift, -6...6,
-                       help: "Raises the driver. Scale is about their feet, so shrinking drops the head.")
+                slider("bustScale", $tuning.bustScale, 0.05...8.0,
+                       help: "Sizes the driver. THE size knob — the camera does nothing.")
+                slider("bustLift", $tuning.bustLift, -2...1,
+                       help: "Moves the driver up/down, in body heights. −1 drops them exactly their own height.")
 
                 Divider()
                 Text("Steering wheel").font(.headline)
@@ -181,9 +181,11 @@ struct PiPTunerView: View {
                        help: "How far the wheel swings at full lean.")
 
                 Divider()
-                Text("Windshield").font(.headline)
-                slider("horizonRatio", $tuning.horizonRatio, 0.1...0.9)
-                slider("vanishShift", $tuning.vanishShift, 0...0.8)
+                Text("Interior behind the driver").font(.headline)
+                slider("horizonRatio", $tuning.horizonRatio, 0.1...0.9,
+                       help: "Bottom edge of the rear glass. Higher = more sky, less seat.")
+                slider("vanishShift", $tuning.vanishShift, 0...0.8,
+                       help: "How far the view through the glass swings on a full-lean turn.")
                 slider("keyLightWash", $tuning.keyLightWash, 0...1)
 
                 Divider()

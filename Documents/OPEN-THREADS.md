@@ -258,7 +258,21 @@ it belongs in `HatStyle`. That's a free hat if someone wants it.
 
 Also: `.character` hair keeps its baked colour and ignores `hairColorHex`,
 while every picked style honours it. Correct as designed (their own hair is
-part of who they are), but it's a real asymmetry someone will notice.
+part of who they are), but it's a real asymmetry someone will notice. The
+editor now hides the Colour swatches on `.character` and `.bald` rather than
+offering taps that do nothing — the hair patch is the obvious next thing to
+add to `RosterColormap` if someone wants "their own hair, my colour".
+
+**Eyes are still baked.** Skin, Shirt and Pants are live on the roster now
+(`RosterColormap`), but eyes and eyebrows are a few texels inside the skin
+patch, not a patch of their own, so `eyeColorHex` only moves the
+reaction-cam bust. Either extract an eye mask offline or accept it.
+
+**Thin pale slivers** float beside some roster characters in the wardrobe
+bench (`--wardrobe`) and the character editor — most visible on `bald`,
+`longHair` and `spike`. Pre-existing geometry, confirmed present before the
+colormap work (it read as a dark sliver then and simply repaints lighter
+now); nobody has yet identified which mesh it belongs to.
 
 ## Closed 2026-07-20 (later session)
 

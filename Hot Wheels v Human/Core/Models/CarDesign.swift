@@ -102,10 +102,11 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// a reopened design stays stroke-editable. Skipped when over 200 KB —
     /// the PNG still renders. Optional → old designs decode.
     var drawingStrokes: Data? = nil
-    /// Face paint drawn on the driver, PNG ≤ 64 KB, composited over the
-    /// reaction-cam face. Superseded by DriverProfile.faceDrawingPNG — kept
-    /// as a read fallback so old designs keep their face paint.
-    var faceDrawingPNG: Data? = nil
+    // Face paint (`faceDrawingPNG`, here and on DriverProfile) was removed:
+    // the pad lived in the editor's Face tab but the drawing only ever
+    // surfaced in a 48 pt PiP badge, so it read as a dead control. Dropping
+    // the property is wire-safe both ways — old JSON carrying the key still
+    // decodes (unknown keys are ignored) and old peers decode its absence.
     /// The character riding in this car. Stamped in by AppModel at race time
     /// so the driver travels the wire inside the design — no new message
     /// cases. Optional → old designs/peers decode.

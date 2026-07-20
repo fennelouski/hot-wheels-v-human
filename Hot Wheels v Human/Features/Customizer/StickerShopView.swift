@@ -26,6 +26,9 @@ struct StickerShopView: View {
                 }
                 .padding(.horizontal, 16)
             }
+            // Centered like every other bench — a short sheet pinned left
+            // under centered prompt text reads as broken.
+            .defaultScrollAnchor(.center)
             HStack(spacing: 10) {
                 ForEach(PaintShopView.swatches, id: \.self) { hex in
                     Button {

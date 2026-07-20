@@ -149,8 +149,9 @@ struct CustomizerView: View {
                     // (Features/Profiles) — this tab shows who's riding.
                     VStack(spacing: 14) {
                         HStack(spacing: 16) {
-                            DriverFaceBadge(driver: appModel.raceDriver)
+                            DriverPreviewView(driver: appModel.raceDriver)
                                 .frame(width: 90, height: 90)
+                                .clipShape(Circle())
                             Text(appModel.raceDriver.name)
                                 .font(.system(size: 32, weight: .heavy, design: .rounded))
                         }

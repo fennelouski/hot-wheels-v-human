@@ -10,6 +10,9 @@
 
 import CoreGraphics
 import Foundation
+// CGImageSource* live here, not in CoreGraphics — `loadColormap` decodes
+// the roster PNG through them.
+import ImageIO
 import Metal
 import RealityKit
 
@@ -91,21 +94,35 @@ enum DriverPainter {
     /// but the texture swap does not — live previews of a *changing* driver
     /// should rebuild the entity instead (see ReactionCamView).
     /// `bakedAppearance` (the default, for Kenney roster characters): their
-    /// outfit, hair and face are already painted into a colormap, and this
-    /// function paints by REPLACING every material — which on them erases
-    /// precisely what makes each one a different person. So only the
-    /// wardrobe gets fitted. Pass `false` for the legacy Quaternius rig,
-    /// which is a blank mesh that NEEDS the stripe palette (the reaction-cam
-    /// bust still rides it; skipping there rendered it plain white).
+    /// outfit, hair and face are painted into a shared colormap, so they get
+    /// a REPAINTED copy of that sheet rather than the stripe palette — see
+    /// RosterColormap. (This used to fit the wardrobe and nothing else, on
+    /// the grounds that painting them erased what made each one a different
+    /// person. True of a flat repaint; not true of repainting the three
+    /// patches they wear. Until this changed, Skin/Shirt/Pants were dead
+    /// controls on every character a kid can actually race.)
+    ///
+    /// Pass `false` for the legacy Quaternius rig, which is a blank mesh
+    /// that NEEDS the stripe palette (the reaction-cam bust still rides it;
+    /// skipping there rendered it plain white).
     static func apply(_ profile: DriverProfile, to driver: Entity,
                       bakedAppearance: Bool = true) async {
         // Wardrobe off first so the paint pass can't repaint the props.
         // (Was a `defer`; the wardrobe now loads real hair meshes off disk,
         // which needs an await, and `defer` can't.)
         driver.findEntity(named: DriverDressUp.entityName)?.removeFromParent()
-        if !bakedAppearance, let texture = await texture(for: profile) {
+        // Two rigs, two textures, one job. The Quaternius rig is a blank mesh
+        // that needs the 32 px stripe palette; the roster characters are
+        // pre-painted, so they get their OWN colormap with the handful of
+        // patches they wear repainted (RosterColormap). Both end up as a
+        // baseColor texture swap, which is why the wholesale material
+        // replacement below is shared.
+        let texture = bakedAppearance ? await rosterTexture(for: profile)
+                                      : await texture(for: profile)
+        if let texture {
             var material = PhysicallyBasedMaterial()
-            // Nearest sampling: 32 px of stripes must not blur into each other.
+            // Nearest sampling: neighbouring palette cells must not blur into
+            // each other — 32 px of stripes, or a 64 px patch edge.
             let sampler = MTLSamplerDescriptor()
             sampler.minFilter = .nearest
             sampler.magFilter = .nearest
@@ -120,6 +137,66 @@ enum DriverPainter {
             }
         }
         await DriverDressUp.attach(profile, to: driver)
+    }
+
+    /// The bundled roster colormap with this profile's patches repainted.
+    /// Decoded once and kept as raw bytes — every swatch tap re-derives a
+    /// 512×512 image, and re-decoding the PNG each time is the part that
+    /// would actually be felt.
+    private static var colormapSource: (pixels: [UInt8], width: Int, height: Int)?
+
+    private static func rosterTexture(for profile: DriverProfile) async -> TextureResource? {
+        let repaints = RosterColormap.repaints(for: profile)
+        guard !repaints.isEmpty else { return nil }
+        let key = RosterColormap.key(for: profile) + "|"
+            + repaints.map(\.hex).joined(separator: "|")
+        if let cached = cache[key] { return cached }
+
+        if colormapSource == nil { colormapSource = loadColormap() }
+        guard let source = colormapSource else { return nil }
+        var pixels = source.pixels
+        let (width, height) = (source.width, source.height)
+        for (patch, hex) in repaints {
+            RosterColormap.repaint(&pixels, width: width, height: height,
+                                   patch: patch, hex: hex)
+        }
+        guard let image = cgImage(pixels, width: width, height: height),
+              let texture = try? await TextureResource(
+                  image: image, options: .init(semantic: .color, mipmapsMode: .none))
+        else { return nil }
+        cache[key] = texture
+        return texture
+    }
+
+    private static func loadColormap() -> ([UInt8], Int, Int)? {
+        guard let url = Bundle.main.url(forResource: RosterColormap.resourceName,
+                                        withExtension: "png"),
+              let data = try? Data(contentsOf: url),
+              let source = CGImageSourceCreateWithData(data as CFData, nil),
+              let image = CGImageSourceCreateImageAtIndex(source, 0, nil)
+        else { return nil }
+        let width = image.width, height = image.height
+        var pixels = [UInt8](repeating: 0, count: width * height * 4)
+        // Redrawn into a known layout rather than read raw: the PNG's own
+        // byte order and alpha handling are not guaranteed to be the
+        // premultiplied-last RGBA the repaint math and CGImage below assume.
+        guard let context = CGContext(
+            data: &pixels, width: width, height: height, bitsPerComponent: 8,
+            bytesPerRow: width * 4, space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+        else { return nil }
+        context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+        return (pixels, width, height)
+    }
+
+    private static func cgImage(_ pixels: [UInt8], width: Int, height: Int) -> CGImage? {
+        guard let provider = CGDataProvider(data: Data(pixels) as CFData) else { return nil }
+        return CGImage(width: width, height: height, bitsPerComponent: 8,
+                       bitsPerPixel: 32, bytesPerRow: width * 4,
+                       space: CGColorSpaceCreateDeviceRGB(),
+                       bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
+                       provider: provider, decode: nil,
+                       shouldInterpolate: false, intent: .defaultIntent)
     }
 
     private static func texture(for profile: DriverProfile) async -> TextureResource? {
