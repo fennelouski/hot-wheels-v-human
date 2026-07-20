@@ -232,6 +232,12 @@ final class HeadPinSystem: System {
                   let skinned = Self.skinnedModel(in: driver),
                   let matrix = Self.jointMatrix(of: skinned, jointLeaf: "Head") else { continue }
             wardrobe.setTransformMatrix(matrix, relativeTo: skinned)
+            // …but NOT the joint's scale. The roster USDZs wrap the mesh in a
+            // `scale_rig` node (×10.73, normalising Kenney's 0.5 m figures to
+            // the rig height the props are sized against), so the joint's
+            // matrix carries that factor and inflated every hat to ten times
+            // the head — a crown hovering over the car instead of on a head.
+            wardrobe.scale = .one
         }
     }
 

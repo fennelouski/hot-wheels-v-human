@@ -141,7 +141,8 @@ extension CarDesign {
     static let demoPair = [
         CarDesign(id: UUID(uuidString: "CA200000-0000-0000-0000-000000000001")!,
                   name: "Tank", chassis: .heavyMuscle, tires: .grippyOffroad,
-                  paint: PaintSpec(colorHex: "#2266FF", finish: .glossy)),
+                  paint: PaintSpec(colorHex: "#2266FF", finish: .glossy),
+                  driver: DriverProfile.presets[3]),
         CarDesign(id: UUID(uuidString: "CA200000-0000-0000-0000-000000000002")!,
                   name: "Zoomie", chassis: .superlightDrift, tires: .slickRacing,
                   paint: PaintSpec(colorHex: "#FF6600", finish: .metallic)),
