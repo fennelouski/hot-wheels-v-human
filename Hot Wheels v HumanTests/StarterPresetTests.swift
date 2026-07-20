@@ -20,6 +20,28 @@ struct StarterPresetTests {
         }
     }
 
+    /// Every preset's lane must actually be as long as the track it claims
+    /// to be. A short lane is how "the race ended in 3.5 seconds" happens:
+    /// the finish check is `nextIndex >= waypoints.count - 1`, so a lane
+    /// truncated by a solver bug reads as a legitimate, very fast win —
+    /// green tests, plausible-looking results panel, nonsense race.
+    /// Floor is deliberately loose (half of piece-count × 0.8 m at 0.1 m
+    /// spacing); it only has to catch a lane that collapsed, not police
+    /// exact geometry.
+    @Test func everyPresetLaneIsAsLongAsItsTrack() {
+        for (name, blueprint) in TrackBlueprint.presets {
+            let lanes = TrackLayoutSolver.solve(blueprint).lanes
+            let floor = blueprint.segments.count * 4
+            #expect(lanes.center.count > floor,
+                    Comment(rawValue: "\(name): lane collapsed to "
+                        + "\(lanes.center.count) waypoints for "
+                        + "\(blueprint.segments.count) pieces"))
+            #expect(lanes.left.count == lanes.center.count)
+            #expect(lanes.right.count == lanes.center.count)
+            #expect(lanes.pieceStartIndices.count == blueprint.segments.count)
+        }
+    }
+
     @Test func presetTracksHaveUniqueIdsAndNames() {
         let ids = TrackBlueprint.presets.map(\.blueprint.trackId)
         let names = TrackBlueprint.presets.map(\.name)
