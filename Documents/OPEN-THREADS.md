@@ -64,28 +64,9 @@ editor only exposes the four body types, so each shows one fixed variant.
 natural home). All 24 USDZs are bundled and `everyRosterModelIsBundled`
 already guards them.
 
-## 5. Hair fights the roster — DECISION PENDING
+## ~~5. Hair fights the roster~~ — DONE
 
-Findings added 2026-07-20, from the assets rather than from the code:
-each Kenney Mini character is exactly two meshes (`body-mesh`, `head-mesh`)
-sharing one `colormap` material — hair is baked geometry on the head, and
-the pack ships **no hair meshes and no bald base**. So "hair as a
-customization axis" cannot be built honestly from what's on disk. Hair
-*colour* does work (it's a stripe in DriverPainter's generated palette and
-renders correctly on roster meshes); only hair *shape* is broken.
-See the session's recommendation before building either way.
-
-
-`DriverDressUp` still builds hair from procedural boxes and spheres
-(`long-hair`, `extra-long-hair`, `pigtails`, `curly-hair`), but roster
-characters have hair **baked into their mesh and colormap**. So `HairStyle`
-now layers geometry on top of hair that's already there. In the
-`--wardrobe` bench, `long-hair` and `pigtails` don't visibly render at all.
-
-**Decide first, then build:** is hair a customization axis, or part of
-picking your character? If it stays an axis, the honest version is real
-hair meshes and a bald base — which the roster doesn't provide. If it goes,
-retire `HairStyle` from the editor and let the character carry it.
+Hair is real geometry now, cut out of the roster itself. See "Closed" below.
 
 ## 6. `crashes` no longer earns its place
 
@@ -215,6 +196,46 @@ than inserting a piece, so piece counts, footprints and headings — and
 therefore all 7 locked layouts — are untouched. The start gate ends up one
 level up on its existing legs. Cars measurably gain speed on the descent
 (2.2 → 2.5 m/s before the flat).
+
+**5 — hair (4406c57).** The decision was "picking hair overrides the
+character's own", and the art came from an unexpected place: not a
+downloadable pack, but the roster we already ship.
+
+Searched first. Kenney has no pack with detachable hair — Blocky is six
+cubes with hair painted on (no silhouette), and the Animated Characters
+series is one mesh with swappable PNGs. KayKit is fantasy adventurers in
+helmets. The only CC0 pack with genuine mix-and-match hair meshes is
+Quaternius Universal Base Characters (20 styles) — anatomically-detailed
+adults in underwear, clothed by a *fantasy armour* pack. Not for this game.
+
+Then measured what we had: every Kenney Mini character is built on the SAME
+76-poly skull (z 0.343…0.661, x ±0.16 — identical across all twelve) with
+hair as disconnected islands on top. `tools/extract_character_hair.py`
+separates them; `tools/preview_character_hair.py` renders the result.
+11 hair meshes + 12 bald cuts × 2 poses = 35 new USDZs, perfectly
+style-matched because they ARE the shipping art.
+
+Gotchas worth keeping:
+- Blender's "separate by loose parts" does NOT work on these: the glTF
+  import splits vertices at every UV seam, so no two faces share a vertex
+  and every face becomes its own part. Islands have to be found by welding
+  positions first.
+- Selecting faces for `mesh.separate` requires clearing vertex AND edge
+  flags too — entering edit mode rebuilds face selection from vertices, so
+  stale flags hand it the whole mesh. That silently took the entire head off
+  every character and still exported fine. Caught by comparing poly counts,
+  not by looking.
+- Height alone can't classify hair (long hair hangs below the crown, and
+  beards sit above nothing). Skull-match + colormap colour + a cranium
+  height floor gets all twelve right.
+
+Still open on hair: **male-c's island is a police cap**, not hair. It
+extracts correctly so his bald cut is hatless, but it's offered nowhere —
+it belongs in `HatStyle`. That's a free hat if someone wants it.
+
+Also: `.character` hair keeps its baked colour and ignores `hairColorHex`,
+while every picked style honours it. Correct as designed (their own hair is
+part of who they are), but it's a real asymmetry someone will notice.
 
 ### Noticed while in there, not fixed
 
