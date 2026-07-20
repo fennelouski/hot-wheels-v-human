@@ -220,6 +220,46 @@ struct SolverTests {
         #expect(airDistance([.startGate] + runway + [.straight] + runway + [.finishGate]) == 0)
     }
 
+    /// The downhill start: a track may now BEGIN on a descent. The solver
+    /// normalises levels so the lowest point rests on the ground, which
+    /// lifts the start above it instead of digging the first hillDown
+    /// underground (which is what `solve` hardcoding level 0 used to do,
+    /// and what BlueprintValidator then rejected).
+    @Test func aTrackThatDescendsFromTheStartIsLiftedNotBuried() {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .hillDown, .straight, .finishGate]))
+
+        // Nothing underground, ever — the lowest point sits exactly on it.
+        #expect(layout.pieces.allSatisfy { $0.entryLevel >= 0 })
+        #expect(layout.pieces.map(\.entryPosition.y).min()! == 0)
+        // ...and the start really is up in the air, on a descent.
+        #expect(layout.startPosition.y == RaceTuning.elevationLevelHeight)
+        #expect(layout.pieces[1].entryPosition.y > layout.pieces[2].entryPosition.y)
+        // Which the validator now accepts rather than calling it digging.
+        #expect(BlueprintValidator.validate(
+            blueprint([.startGate, .hillDown, .straight, .finishGate])).isValid)
+    }
+
+    /// A flat track must be exactly where it always was — normalising levels
+    /// is a no-op unless something actually descends below the start.
+    @Test func levelNormalisationLeavesFlatTracksAtTheOrigin() {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .straight, .hillUp, .straight, .finishGate]))
+        #expect(layout.startPosition == .zero)
+        #expect(layout.pieces[0].entryLevel == 0)
+    }
+
+    /// Circuit closure is measured against the START, not the origin — an
+    /// elevated circuit returns to where it began, which is no longer zero.
+    @Test func closedCircuitStillClosesWhenTheStartIsLifted() {
+        let ring: [PieceType] = [.startGate, .hillDown, .straight]
+            + [.curve90R, .curve90R] + [.straight, .hillUp, .straight]
+            + [.curve90R, .curve90R]
+        let layout = TrackLayoutSolver.solve(blueprint(ring))
+        #expect(layout.startPosition.y > 0)          // not vacuous
+        #expect(layout.isClosedCircuit)
+    }
+
     /// TrackSpawner stacks `entryLevel` cosmetic legs of one
     /// `elevationLevelHeight` each under an elevated piece, so the solver's
     /// world Y must stay exactly that product — drift and the legs either

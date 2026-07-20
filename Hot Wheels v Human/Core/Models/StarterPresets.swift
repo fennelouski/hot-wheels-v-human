@@ -115,11 +115,27 @@ extension TrackBlueprint {
         + [.bump] + straights(3)
         + [.finishGate]
 
+    /// Every starter track launches DOWNHILL — the flag drops and the cars
+    /// plunge, instead of pulling away from a flat line.
+    ///
+    /// Done by REPLACING the first straight after the start gate rather than
+    /// inserting a piece: piece counts, footprints and headings are untouched,
+    /// so all seven locked layouts stay valid to the centimetre. The solver
+    /// then lifts the whole track so its lowest point rests on the ground,
+    /// which leaves the start gate standing one level up on its legs.
+    private static func downhillStart(_ types: [PieceType]) -> [PieceType] {
+        guard types.count > 1, types[1] == .straight else { return types }
+        var types = types
+        types[1] = .hillDown
+        return types
+    }
+
     private static func preset(_ n: Int, _ types: [PieceType]) -> TrackBlueprint {
         TrackBlueprint(
             trackId: UUID(uuidString: String(format: "90000000-0000-0000-0000-%012d", n))!,
             lanes: 2,
-            segments: types.enumerated().map { SegmentSpec(index: $0.offset, type: $0.element) })
+            segments: downhillStart(types).enumerated()
+                .map { SegmentSpec(index: $0.offset, type: $0.element) })
     }
 }
 

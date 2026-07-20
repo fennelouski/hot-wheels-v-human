@@ -56,10 +56,11 @@ enum BlueprintValidator {
             reasons.append("The track needs a finish gate, or to loop back to the start.")
         }
 
-        // No digging: elevation can never drop below ground.
-        if layout.pieces.contains(where: { $0.entryLevel < 0 }) || layout.exitLevel < 0 {
-            reasons.append("The track can't go underground — add a hill up first.")
-        }
+        // No "can't go underground" rule any more: the solver normalises
+        // levels so the track's lowest point sits ON the ground, which makes
+        // digging impossible by construction — and unblocks the downhill
+        // start, which this rule used to reject as a track beginning below
+        // the world (TrackLayoutSolver.solve).
 
         // Footprint overlap at the same elevation level. Rects are shrunk a
         // hair so touching edges (which is the whole point) don't count.

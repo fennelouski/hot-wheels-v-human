@@ -84,9 +84,18 @@ enum TrackLayoutSolver {
     /// same placement to check overlaps/closure, so they can never disagree.
     static func solve(_ blueprint: TrackBlueprint) -> TrackLayout {
         var pieces: [PlacedPiece] = []
-        var position = SIMD3<Float>.zero
+        // Levels are RELATIVE until we know how far the track digs, then the
+        // whole thing is lifted so its lowest point rests on the ground.
+        // That is what lets a track start on a descent: the start gate ends
+        // up above ground and the finish at level 0, instead of the first
+        // hillDown reading as "underground" and being rejected. It also
+        // makes underground impossible by construction — the validator used
+        // to carry a rule for it and no longer needs one.
+        let startLevel = -min(0, runningLevels(blueprint).min() ?? 0)
+        var position = SIMD3<Float>(0, Float(startLevel) * RaceTuning.elevationLevelHeight, 0)
+        let startPosition = position
         var yaw: Float = 0
-        var level = 0
+        var level = startLevel
 
         for segment in blueprint.segments {
             let def = PieceCatalog.definition(for: segment.type)
@@ -101,7 +110,19 @@ enum TrackLayoutSolver {
         return TrackLayout(
             pieces: pieces,
             lanes: splines(for: pieces),
+            startPosition: startPosition,
             exitPosition: position, exitYaw: yaw, exitLevel: level)
+    }
+
+    /// Elevation level at every piece's ENTRY plus the final exit, measured
+    /// from a level-0 start. Only the minimum is interesting — it says how
+    /// far the track would dig below ground if it started there.
+    private static func runningLevels(_ blueprint: TrackBlueprint) -> [Int] {
+        var level = 0
+        return [0] + blueprint.segments.map {
+            level += PieceCatalog.definition(for: $0.type).elevationDelta
+            return level
+        }
     }
 
     // MARK: Splines
