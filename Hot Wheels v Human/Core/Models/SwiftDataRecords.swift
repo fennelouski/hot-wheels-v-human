@@ -25,6 +25,27 @@ final class CarDesignRecord {
     var design: CarDesign? { try? JSONDecoder().decode(CarDesign.self, from: designData) }
 }
 
+extension ModelContext {
+    /// The stored record behind a design id, if this car was ever saved.
+    func carRecord(_ id: UUID) -> CarDesignRecord? {
+        try? fetch(FetchDescriptor<CarDesignRecord>(predicate: #Predicate { $0.id == id })).first
+    }
+
+    /// Save a car, keyed by design id: editing a saved car overwrites it,
+    /// a new car inserts. "Save" means save everywhere — the garage's
+    /// "Make a Copy" is how you deliberately get a sibling now (it used to
+    /// be a side effect of tapping Save twice, which nobody could guess).
+    func saveDesign(_ design: CarDesign) {
+        if let existing = carRecord(design.id), let data = try? JSONEncoder().encode(design) {
+            existing.name = design.name
+            existing.designData = data
+        } else if let record = try? CarDesignRecord(design: design) {
+            insert(record)
+        }
+        try? save()
+    }
+}
+
 @Model
 final class DriverProfileRecord {
     @Attribute(.unique) var id: UUID

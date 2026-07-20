@@ -92,11 +92,12 @@ struct SolverTests {
     @Test func demoPlacementsAccumulateCorrectly() {
         let layout = TrackLayoutSolver.solve(.demo)
         #expect(layout.pieces.count == 5)
-        // startGate 0→0.8, straight 0.8→1.6, loop advances 0.18 & shifts left 0.2.
+        // startGate 0→0.8, straight 0.8→1.6, loop corkscrews one bed width
+        // right without advancing (see loopCorkscrewsSidewaysWithoutAdvancing).
         #expect(layout.pieces[1].entryPosition == SIMD3<Float>(0, 0, 0.8))
         #expect(layout.pieces[2].entryPosition == SIMD3<Float>(0, 0, 1.6))
         let curveEntry = layout.pieces[3].entryPosition
-        #expect(abs(curveEntry.x - 0.2) < 1e-5 && abs(curveEntry.z - 1.78) < 1e-5)
+        #expect(abs(curveEntry.x + 0.2) < 1e-5 && abs(curveEntry.z - 1.6) < 1e-5)
         // curve90R turns the heading −90°: finish gate runs toward −X.
         #expect(abs(layout.pieces[4].entryYaw + .pi / 2) < 1e-5)
         #expect(!layout.isClosedCircuit)
@@ -123,6 +124,38 @@ struct SolverTests {
         // Vertical circle radius 0.4 → top of loop ≈ 0.8 m up.
         #expect(center.map(\.y).max()! > 0.7)
         #expect(center.map(\.y).min()! > -0.01)
+    }
+
+    /// The loop is a CORKSCREW and its numbers have to match the mesh, or
+    /// the seams tear. Measured off `track-narrow-looping.glb` (POSITION
+    /// accessor bounds + connector-tab vertices, × the 0.2 kit scale):
+    /// both connect points at z = 0, one at x = 0 and one at x = −0.2, arc
+    /// spanning z ±0.398 and 0.8 m tall.
+    ///
+    /// It used to claim a 0.18 m advance with the step to the LEFT and the
+    /// mesh offset +0.2 in x — which drove cars in through the loop's exit
+    /// tab and left the spline 0.09 m off the mesh at both seams.
+    @Test func loopCorkscrewsSidewaysWithoutAdvancing() {
+        let loop = PieceCatalog.definition(for: .loop)
+        #expect(loop.exitOffset.z == 0)      // climbs and crosses over; goes nowhere
+        #expect(loop.exitOffset.x == -0.2)   // one bed width to the RIGHT (+X is left)
+        #expect(loop.exitOffset.y == 0)
+        #expect(loop.modelOffset.x == 0)     // mesh entry on the layout entry, not reversed
+        #expect(loop.modelOffset.z == 0)
+        // Two bed widths across, so the map shows the lane it lands in.
+        #expect(abs((loop.footprint.maxX - loop.footprint.minX) - 0.4) < 1e-5)
+
+        // Arc centred on the connect plane, matching the mesh's 0.8 m depth.
+        let layout = TrackLayoutSolver.solve(.demo)
+        let index = layout.pieces.firstIndex { $0.definition.type == .loop }!
+        let lanes = layout.lanes
+        let start = lanes.pieceStartIndices[index]
+        let end = index + 1 < lanes.pieceStartIndices.count
+            ? lanes.pieceStartIndices[index + 1] : lanes.center.count
+        let arc = lanes.center[start..<end]
+        let entryZ = layout.pieces[index].entryPosition.z
+        #expect(abs(arc.map(\.z).min()! - (entryZ - 0.4)) < 0.02)
+        #expect(abs(arc.map(\.z).max()! - (entryZ + 0.4)) < 0.02)
     }
 
     @Test func lanesStayOffsetFromCenter() {
@@ -419,8 +452,115 @@ struct PieceModelGeometryTests {
         #expect(down.exitOffset.y == -up.exitOffset.y)
         #expect(down.exitOffset.z == up.exitOffset.z)
         // Reversed model: origin shifted so the high-end connector sits at
-        // the traversal entry — bedLift minus the full rise.
-        #expect(abs(down.modelOffset.y - (0.19 - up.exitOffset.y)) < 0.001)
+        // the traversal entry — the HILL bed lift (0.18, not the flat
+        // pieces' 0.19: hill meshes carry a recessed connector tongue)
+        // minus the full rise.
+        #expect(abs(down.modelOffset.y - (0.18 - up.exitOffset.y)) < 0.001)
         #expect(abs(down.modelOffset.z - up.exitOffset.z) < 0.001)
+    }
+}
+
+/// Hills as real Hot Wheels track: one piece bends into the slope, straight
+/// track rides down the middle, one piece flattens out at the bottom.
+struct HillRunTests {
+
+    /// Centreline y of every waypoint, in order.
+    private func heights(_ types: [PieceType]) -> [Float] {
+        TrackLayoutSolver.solve(blueprint(types)).lanes.center.map(\.y)
+    }
+
+    /// THE bug. A lone hill's bed is an S-curve — level at both ends,
+    /// steepest in the middle — but its spline was a straight chord across
+    /// it, so a car floated ~26 mm over the bed through the first third and
+    /// sank ~29 mm through the last. Pin the spline to the mesh's shape:
+    /// a quarter of the way along, an S is far below its own chord.
+    @Test func soloHillFollowsItsSCurvedBedNotTheChord() {
+        let layout = TrackLayoutSolver.solve(blueprint([.startGate, .hillUp, .straight]))
+        // The solver drops the duplicate joint between pieces, so a piece's
+        // OWN entry waypoint is the last one the previous piece contributed.
+        let hill = Array(layout.lanes.center[
+            (layout.lanes.pieceStartIndices[1] - 1)..<layout.lanes.pieceStartIndices[2]])
+        let base = hill[0].y
+        let last = Float(hill.count - 1)
+
+        for (i, point) in hill.enumerated() {
+            let t = Float(i) / last
+            let chord = base + t * RaceTuning.elevationLevelHeight
+            // Never ABOVE the chord — an S-curve's first half is below it
+            // and its second half above, but this is a rise, so...
+            if t < 0.5 { #expect(point.y <= chord + 1e-4) }
+            else { #expect(point.y >= chord - 1e-4) }
+        }
+        // Not vacuous: a quarter of the way along, the S sits ~29 mm below
+        // its own chord — which is exactly how far cars used to float.
+        let quarter = hill[hill.count / 4]
+        #expect(base + 0.25 * RaceTuning.elevationLevelHeight - quarter.y > 0.02)
+        // Ends still land exactly on the connectors.
+        #expect(abs(hill[0].y - base) < 1e-5)
+        #expect(abs(hill.last!.y - (base + RaceTuning.elevationLevelHeight)) < 1e-4)
+    }
+
+    /// The reported symptom: chained hills each read as "a tiny bump"
+    /// because hill-complete returns to LEVEL at both seams, so four of
+    /// them climbed in a staircase of humps instead of one slope. A run
+    /// must descend monotonically — no waypoint ever higher than the one
+    /// before it.
+    @Test func aRunOfHillsDescendsWithoutASingleBump() {
+        let ys = heights([.startGate, .straight] + Array(repeating: .hillDown, count: 4)
+                         + [.straight, .finishGate])
+        let run = zip(ys, ys.dropFirst())
+        #expect(run.allSatisfy { $0.1 <= $0.0 + 1e-4 })
+        // Not vacuous: it really does drop, and by more than one level.
+        #expect(ys.max()! - ys.min()! > 2 * RaceTuning.elevationLevelHeight)
+    }
+
+    /// A run of one is still the one-piece hill — nothing about the 7
+    /// locked presets (which never chain hills) may re-lay-out.
+    @Test func aLoneHillKeepsTheOnePieceGeometry() {
+        let solo = PieceCatalog.definition(for: .hillUp, role: .solo)
+        #expect(solo.modelName == "track-wide-straight-hill-complete")
+        #expect(solo.exitOffset == PieceCatalog.definition(for: .hillUp).exitOffset)
+        // hillUp straight into hillDown is a PEAK, not a run of two.
+        let peak = TrackLayoutSolver.solve(blueprint([.startGate, .hillUp, .hillDown]))
+        #expect(peak.pieces[1].definition.modelName.hasSuffix("hill-complete"))
+        #expect(peak.pieces[2].definition.modelName.hasSuffix("hill-complete"))
+    }
+
+    /// Run roles: transition in, pitched straights, transition out — and
+    /// the middles are the plain straight mesh, tilted, which is the piece
+    /// that makes the slope continuous instead of stepped.
+    @Test func aRunIsTransitionStraightsTransition() {
+        let pieces = TrackLayoutSolver.solve(
+            blueprint([.startGate] + Array(repeating: .hillUp, count: 4))).pieces
+        let hills = pieces.dropFirst().map(\.definition)
+
+        #expect(hills[0].modelName.hasSuffix("hill-beginning"))
+        #expect(hills[1].modelName == "track-wide-straight")
+        #expect(hills[2].modelName == "track-wide-straight")
+        #expect(hills[3].modelName.hasSuffix("hill-end"))
+        // The middles are pitched, and pitched the way they climb.
+        #expect(hills[1].modelPitch < 0)
+        #expect(abs(hills[1].modelPitch) == RaceTuning.hillRunSlope)
+        // sin 30° = ½ ⇒ two whole elevation levels per middle piece, so
+        // every height in the track stays a whole number of support legs.
+        #expect(hills[1].elevationDelta == 2)
+        #expect(abs(hills[1].exitOffset.y - 2 * RaceTuning.elevationLevelHeight) < 1e-5)
+        #expect(abs(hills[1].exitOffset.z - 0.8 * cos(RaceTuning.hillRunSlope)) < 1e-5)
+    }
+
+    /// Every piece's exit has to land on the next piece's entry, whatever
+    /// mix of roles the run resolved to — a transition rising one level and
+    /// a middle rising two must still chain seamlessly.
+    @Test func runPiecesMeetAtTheirSeams() {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .straight] + Array(repeating: .hillDown, count: 5)
+                      + [.straight] + Array(repeating: .hillUp, count: 3) + [.straight]))
+        for (a, b) in zip(layout.pieces, layout.pieces.dropFirst()) {
+            let exit = a.entryPosition + rotated(a.definition.exitOffset, by: a.entryYaw)
+            #expect(simd_length(exit - b.entryPosition) < 1e-4)
+        }
+        // And the spline has no gap at the seams either.
+        let ys = layout.lanes.center
+        #expect(zip(ys, ys.dropFirst()).allSatisfy { simd_length($1 - $0) < 0.2 })
     }
 }

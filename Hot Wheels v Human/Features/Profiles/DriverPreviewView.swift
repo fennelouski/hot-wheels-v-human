@@ -13,6 +13,7 @@ struct DriverPreviewView: View {
     let driver: DriverProfile
 
     @State private var spin: EventSubscription?
+    @State private var refs = OrbitRefs()
 
     /// Sway limit either side of front, radians (~34°) — enough to read the
     /// profile and the side of a hat, never enough to hide the face.
@@ -22,6 +23,22 @@ struct DriverPreviewView: View {
     private static let swayRate: Float = 0.7
 
     var body: some View {
+        // Same deal as CarTurntableView: no drag or pinch on tvOS, which
+        // only ever compiles this file.
+        #if os(tvOS)
+        realityView
+        #else
+        realityView
+            .simultaneousGesture(DragGesture(minimumDistance: 8)
+                .onChanged { refs.orbit.drag($0.translation, ended: false) }
+                .onEnded { refs.orbit.drag($0.translation, ended: true) })
+            .simultaneousGesture(MagnifyGesture()
+                .onChanged { refs.orbit.pinch($0.magnification, ended: false) }
+                .onEnded { refs.orbit.pinch($0.magnification, ended: true) })
+        #endif
+    }
+
+    private var realityView: some View {
         RealityView { content in
             content.camera = .virtual
             let turntable = Entity()
@@ -34,8 +51,8 @@ struct DriverPreviewView: View {
             // preview — head and feet cropped off.
             let height = RaceTuning.driverSourceHeight
             let camera = PerspectiveCamera()
-            camera.look(at: [0, height * 0.5, 0],
-                        from: [0, height * 0.62, height * 1.55], relativeTo: nil)
+            refs.frame(camera, target: [0, height * 0.5, 0],
+                       from: [0, height * 0.62, height * 1.55])
             content.add(camera)
             let light = DirectionalLight()
             light.light.intensity = 5000
@@ -50,8 +67,13 @@ struct DriverPreviewView: View {
             // can't judge the change you just made. A gentle sway around the
             // front keeps the face toward the camera at all times while still
             // giving the figure volume and showing off the profile.
+            //
+            // Until a kid grabs them, that is — then they hold still where
+            // they were caught and the camera does the moving, so the back
+            // of the hair is finally something you can go and look at.
             var elapsed: Float = 0
             spin = content.subscribe(to: SceneEvents.Update.self) { event in
+                guard !refs.orbit.grabbed else { return refs.apply() }
                 elapsed += Float(event.deltaTime)
                 let angle = sin(elapsed * Self.swayRate) * Self.swayAngle
                 turntable.transform.rotation = simd_quatf(angle: angle, axis: [0, 1, 0])

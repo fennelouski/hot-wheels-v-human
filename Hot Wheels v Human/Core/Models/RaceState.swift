@@ -23,7 +23,7 @@ nonisolated struct CarSnapshot: Codable, Equatable, Sendable {
     var playerID: UUID
     var progress: Float        // 0…1 along the whole race distance
     var speed: Float           // m/s
-    var boostMeter: Float      // 0…1
+    var boostMeter: Float      // 0…2 (1 = armed, above = overcharged)
     var livesLeft: Int
     var lane: Int              // 0 = left, 1 = right
 }

@@ -22,6 +22,7 @@ final class ReactionFeed {
         var yaw: Float = 0
         var crashes = 0
         var boostMeter: Float = 0
+        var boosting = false
         var finished = false
     }
     private var prev: [UUID: Prev] = [:]
@@ -48,7 +49,7 @@ final class ReactionFeed {
                 director.fire(.crashed)
             } else if racer.finishTime != nil && !last.finished {
                 director.fire(.celebrating)
-            } else if last.boostMeter >= 0.9 && racer.boostMeter <= 0.1 {
+            } else if racer.boosting && !last.boosting {
                 director.fire(.boosted)
             }
 
@@ -71,6 +72,7 @@ final class ReactionFeed {
             last.yaw = yaw
             last.crashes = racer.crashes
             last.boostMeter = racer.boostMeter
+            last.boosting = racer.boosting
             last.finished = racer.finishTime != nil
             prev[racer.id] = last
         }

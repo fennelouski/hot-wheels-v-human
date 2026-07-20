@@ -103,7 +103,8 @@ struct RailFollowerTests {
             for _ in 0..<600 {
                 if boost, follow.nextIndex > 20, !follow.airborne, launch == nil {
                     state.boostMeter = 1
-                    state.pendingBoost = true
+                    state.boosting = true
+                    state.boostHoldGrace = RaceTuning.boostHoldGrace
                 }
                 let pose = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
                 if follow.airborne, launch == nil { launch = pose.position.z }
@@ -115,5 +116,92 @@ struct RailFollowerTests {
         let boosted = jumpDistance(boost: true)
         #expect(plain > 0)
         #expect(boosted > plain + 0.1)   // boost status shapes the arc
+    }
+
+    // MARK: Boost state machine (DriveSystem.stepBoost)
+
+    private let step: Float = 1 / 60
+
+    /// Runs the boost machine for up to `seconds`, holding the button (or
+    /// not), and STOPS the moment a running burn ends — otherwise the meter
+    /// starts recharging and hides what the burn actually cost.
+    /// Returns total thrust·seconds, so "was that boost bigger?" has a number.
+    @discardableResult
+    private func burn(_ state: inout CarComponent, seconds: Float,
+                      holding: Bool) -> Float {
+        var impulse: Float = 0
+        for _ in 0..<Int(seconds / step) {
+            if holding { state.boostHoldGrace = RaceTuning.boostHoldGrace }
+            let wasBoosting = state.boosting
+            impulse += DriveSystem.stepBoost(&state, dt: step) * step
+            if wasBoosting && !state.boosting { break }
+        }
+        return impulse
+    }
+
+    @Test func meterArmsAtOneThenOverchargesToTwoAtHalfSpeed() {
+        var state = makeState()
+        burn(&state, seconds: RaceTuning.boostChargeTime, holding: false)
+        #expect(abs(state.boostMeter - 1) < 0.02)          // armed on schedule
+
+        // Overcharge costs double the track: another full charge time only
+        // buys half a bottle.
+        burn(&state, seconds: RaceTuning.boostChargeTime, holding: false)
+        #expect(abs(state.boostMeter - 1.5) < 0.02)
+
+        burn(&state, seconds: RaceTuning.boostChargeTime * 2, holding: false)
+        #expect(state.boostMeter == RaceTuning.boostMaxCharge)   // and it caps
+    }
+
+    /// A stab of the button is still a real boost, and holding pulls harder
+    /// for longer — the whole point of the hold mechanic.
+    @Test func tapBurnsTheMinimumAndHoldingBurnsBiggerAndLonger() {
+        var tapped = makeState()
+        tapped.boostMeter = 1
+        tapped.boosting = true
+        let tapImpulse = burn(&tapped, seconds: 2, holding: false)
+
+        // Released instantly, but the minimum duration still ran.
+        #expect(!tapped.boosting)
+        let spent = 1 - tapped.boostMeter
+        #expect(abs(spent - RaceTuning.boostMinDuration / RaceTuning.boostDrainTime) < 0.02)
+
+        var held = makeState()
+        held.boostMeter = 1
+        held.boosting = true
+        let holdImpulse = burn(&held, seconds: 5, holding: true)
+
+        #expect(!held.boosting)              // ran the bottle dry and stopped
+        #expect(held.boostMeter == 0)
+        #expect(holdImpulse > tapImpulse * 3)   // longer hold, far more push
+    }
+
+    /// A full overcharged hold must never reach the anti-fling velocity
+    /// clamp: clip that and boost silently stops working, which reads as a
+    /// dead button.
+    @Test func boostStaysUnderTheSpeedClamp() {
+        for chassis in ChassisClass.allCases {
+            for tires in TireType.allCases {
+                var design = CarDesign.demoPair[0]
+                design.chassis = chassis
+                design.tires = tires
+                var follow = LaneFollowComponent(
+                    waypoints: (0...4000).map { SIMD3<Float>(0, 0, Float($0) * 0.1) })
+                var state = makeState(design: design)
+                state.boostMeter = RaceTuning.boostMaxCharge
+                state.boosting = true
+                var top: Float = 0
+                for _ in 0..<Int(20 / step) {
+                    state.boostHoldGrace = RaceTuning.boostHoldGrace
+                    _ = DriveSystem.railStep(follow: &follow, state: &state, dt: step)
+                    top = max(top, follow.speed)
+                }
+                let ceiling = RaceTuning.maxSpeed[chassis]! * RaceTuning.speedCeilingFactor
+                    * RaceTuning.railSpeedScale
+                #expect(top < ceiling)
+                // …and it was a real boost, not a rounding error.
+                #expect(top > RaceTuning.maxSpeed[chassis]! * RaceTuning.railSpeedScale * 1.2)
+            }
+        }
     }
 }

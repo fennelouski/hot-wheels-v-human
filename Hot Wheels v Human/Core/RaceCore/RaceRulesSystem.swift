@@ -115,8 +115,8 @@ struct RaceRulesSystem: System {
             let speed = car.physicsMotion.map { simd_length($0.linearVelocity) }
                 ?? follow.speed
 
-            // Boost meter charges over time (validated/consumed elsewhere).
-            state.boostMeter = min(1, state.boostMeter + dt / RaceTuning.boostChargeTime)
+            // (Boost charge/burn lives in DriveSystem.stepBoost — one place,
+            // so the meter can't charge and drain in the same frame.)
 
             // ── Finish: last waypoint reached.
             if follow.nextIndex >= follow.waypoints.count - 1,

@@ -25,6 +25,9 @@ struct RootView: View {
     /// crash clip never plays), and the PiP is where "the driver isn't the
     /// driver" bugs hide.
     private let launchIntoReactionCam = ProcessInfo.processInfo.arguments.contains("--reaction-cam")
+    /// Dev arg: the PiP tuner — a live reaction cam with a slider per
+    /// cockpit number, for dialling the driver's framing in by eye.
+    private let launchIntoPiPTuner = ProcessInfo.processInfo.arguments.contains("--pip-tuner")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
@@ -99,6 +102,8 @@ struct RootView: View {
             WardrobePreviewGrid()
         } else if launchIntoReactionCam {
             ReactionBenchGrid()
+        } else if launchIntoPiPTuner {
+            PiPTunerView()
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {

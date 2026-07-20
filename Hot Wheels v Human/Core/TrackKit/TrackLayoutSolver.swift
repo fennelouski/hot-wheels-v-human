@@ -91,14 +91,14 @@ enum TrackLayoutSolver {
         // hillDown reading as "underground" and being rejected. It also
         // makes underground impossible by construction — the validator used
         // to carry a rule for it and no longer needs one.
-        let startLevel = -min(0, runningLevels(blueprint).min() ?? 0)
+        let defs = definitions(for: blueprint)
+        let startLevel = -min(0, runningLevels(defs).min() ?? 0)
         var position = SIMD3<Float>(0, Float(startLevel) * RaceTuning.elevationLevelHeight, 0)
         let startPosition = position
         var yaw: Float = 0
         var level = startLevel
 
-        for segment in blueprint.segments {
-            let def = PieceCatalog.definition(for: segment.type)
+        for (segment, def) in zip(blueprint.segments, defs) {
             pieces.append(PlacedPiece(
                 index: segment.index, definition: def,
                 entryPosition: position, entryYaw: yaw, entryLevel: level))
@@ -117,11 +117,40 @@ enum TrackLayoutSolver {
     /// Elevation level at every piece's ENTRY plus the final exit, measured
     /// from a level-0 start. Only the minimum is interesting — it says how
     /// far the track would dig below ground if it started there.
-    private static func runningLevels(_ blueprint: TrackBlueprint) -> [Int] {
+    private static func runningLevels(_ defs: [TrackPieceDefinition]) -> [Int] {
         var level = 0
-        return [0] + blueprint.segments.map {
-            level += PieceCatalog.definition(for: $0.type).elevationDelta
+        return [0] + defs.map {
+            level += $0.elevationDelta
             return level
+        }
+    }
+
+    /// One definition per segment, with each hill resolved against its
+    /// neighbours (see `HillRole`).
+    ///
+    /// A "run" is consecutive segments of the SAME hill type, so `hillUp`
+    /// straight into `hillDown` is a peak — two solo pieces — not a run of
+    /// two. Runs of one keep the one-piece `hill-complete`; longer runs get
+    /// a transition at each end with pitched straight track between, which
+    /// is how the toy is actually assembled. Before this, every hill was
+    /// the level-in/level-out piece, so a chain of them climbed in a
+    /// staircase of humps instead of one continuous slope.
+    private static func definitions(for blueprint: TrackBlueprint) -> [TrackPieceDefinition] {
+        let types = blueprint.segments.map(\.type)
+        return types.indices.map { i in
+            let type = types[i]
+            guard type == .hillUp || type == .hillDown else {
+                return PieceCatalog.definition(for: type)
+            }
+            let opensRun = i == 0 || types[i - 1] != type
+            let closesRun = i == types.count - 1 || types[i + 1] != type
+            let role: HillRole = switch (opensRun, closesRun) {
+            case (true, true):   .solo
+            case (true, false):  .entry
+            case (false, true):  .exit
+            case (false, false): .middle
+            }
+            return PieceCatalog.definition(for: type, role: role)
         }
     }
 
@@ -171,6 +200,19 @@ enum TrackLayoutSolver {
                            pieceStartIndices: pieceStarts, laterals: laterals)
     }
 
+    /// Fraction of the rise reached at `t` along a measured bed profile.
+    /// Samples are sorted on t and always span 0…1, so a linear walk is
+    /// enough — there are eleven of them.
+    private static func height(of samples: [SIMD2<Float>], at t: Float) -> Float {
+        guard let after = samples.firstIndex(where: { $0.x >= t }) else {
+            return samples.last?.y ?? 0
+        }
+        guard after > 0 else { return samples[0].y }
+        let a = samples[after - 1], b = samples[after]
+        let span = b.x - a.x
+        return span > 1e-6 ? a.y + (b.y - a.y) * (t - a.x) / span : a.y
+    }
+
     /// Centerline waypoints + unit "left" lateral vector per waypoint,
     /// both in the piece's traversal frame.
     private static func localCenterline(_ def: TrackPieceDefinition)
@@ -186,6 +228,17 @@ enum TrackLayoutSolver {
                 let t = Float(i) / Float(n)
                 points.append([0, rise * t, length * t])
                 lateral.append([1, 0, 0])  // +X = left when heading +Z
+            }
+
+        case .profiled(let length, let rise, let samples):
+            // Walk the measured bed: the piece advances evenly along the
+            // run and takes its height from the profile, so the spline IS
+            // the drawn surface rather than a chord across it.
+            let n = max(2, Int((length / spacing).rounded(.up)))
+            for i in 0...n {
+                let t = Float(i) / Float(n)
+                points.append([0, rise * height(of: samples, at: t), length * t])
+                lateral.append([1, 0, 0])
             }
 
         case .crest(let length, let height):

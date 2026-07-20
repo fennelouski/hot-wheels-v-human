@@ -15,8 +15,10 @@
 //  below are already in RealityKit metres at conversion scale.
 //
 //  Kenney pieces are NOT a uniform grid (straight = 0.8 m, small corner
-//  radius = 0.4 m, loop ground run = 0.18 m), so footprints are real-valued
-//  ground rects, not grid cells. ARCHITECTURE.md updated to match.
+//  radius = 0.4 m, and the loop advances 0 m — it corkscrews sideways), so
+//  footprints are real-valued ground rects, not grid cells. Some pieces
+//  reach outside their footprint: the loop's arc passes OVER its neighbours.
+//  ARCHITECTURE.md updated to match.
 //
 
 import simd
@@ -30,10 +32,42 @@ struct FootprintRect: Sendable, Equatable {
     var maxZ: Float
 }
 
+/// Where a hill piece sits inside a RUN of consecutive hills of the same
+/// direction. Real Hot Wheels track doesn't climb in steps: one piece bends
+/// into the slope, plain straights ride down the middle of it, and one
+/// piece flattens out at the far end. Kenney ships exactly those parts —
+/// hill-beginning and hill-end have ANGLED connectors for it — and a
+/// one-piece hill-complete that is both transitions at once.
+///
+/// The role is a property of the piece's NEIGHBOURS, so it can't live in
+/// the catalog dictionary; `TrackLayoutSolver` reads the run off the
+/// blueprint and asks for `definition(for:role:)`.
+enum HillRole: Sendable, Equatable {
+    /// A hill on its own: S-curve, level at both ends, one level gained.
+    case solo
+    /// First of a run — level in, sloped out.
+    case entry
+    /// Straight track pitched down the run's steady slope.
+    case middle
+    /// Last of a run — sloped in, level out.
+    case exit
+}
+
 /// How the centerline runs through the piece, for spline generation.
 enum CenterlineShape: Sendable, Equatable {
     case line(length: Float, rise: Float)
     case arc(radius: Float, leftTurn: Bool)
+    /// Bed profile measured off a Kenney hill mesh and normalised to
+    /// (t, u) ∈ [0,1]², t along the run and u up the rise, linearly
+    /// interpolated between samples. `rise` carries the sign, so the same
+    /// table drives a climb and a descent.
+    ///
+    /// Sampled rather than fitted: the two transition beds are asymmetric
+    /// curves with no tidy closed form, and the nearest cheap fit (t³) sat
+    /// 8 mm off the mesh at mid-piece — the same class of defect this
+    /// replaces, just smaller. A straight chord, which is what hills used
+    /// to get, is 70 mm off.
+    case profiled(length: Float, rise: Float, samples: [SIMD2<Float>])
     /// Symmetric hump — entry AND exit at y = 0, cresting `height` at the
     /// middle, so a crest piece stays swappable with `.straight`. The
     /// profile is a raised cosine, which is what the bump-up mesh actually
@@ -54,6 +88,10 @@ struct TrackPieceDefinition: Sendable {
     let overlayOffset: SIMD3<Float>
     /// Model placement inside the traversal frame.
     let modelYaw: Float               // radians about +Y
+    /// Radians about +X, applied AFTER the yaw. Only the pitched straights
+    /// in the middle of a hill run use it — a right-handed rotation about
+    /// +X carries +Z toward −Y, so a climb wants a NEGATIVE pitch.
+    let modelPitch: Float
     let modelOffset: SIMD3<Float>
     let exitOffset: SIMD3<Float>
     let headingChange: Float          // radians about +Y, + = left
@@ -66,7 +104,7 @@ struct TrackPieceDefinition: Sendable {
 
     init(type: PieceType, modelName: String,
          overlayModelName: String? = nil, overlayOffset: SIMD3<Float> = .zero,
-         modelYaw: Float = 0, modelOffset: SIMD3<Float> = .zero,
+         modelYaw: Float = 0, modelPitch: Float = 0, modelOffset: SIMD3<Float> = .zero,
          exitOffset: SIMD3<Float>, headingChange: Float = 0, elevationDelta: Int = 0,
          footprint: FootprintRect, shape: CenterlineShape,
          laneHalfWidth: Float = RaceTuning.laneOffsetWide, minEntrySpeed: Float? = nil) {
@@ -75,6 +113,7 @@ struct TrackPieceDefinition: Sendable {
         self.overlayModelName = overlayModelName
         self.overlayOffset = overlayOffset
         self.modelYaw = modelYaw
+        self.modelPitch = modelPitch
         self.modelOffset = modelOffset
         self.exitOffset = exitOffset
         self.headingChange = headingChange
@@ -95,6 +134,172 @@ enum PieceCatalog {
     private static let halfPi = Float.pi / 2
     /// Track pieces have their bed surface 0.19 m below the model origin.
     private static let bedLift: SIMD3<Float> = [0, 0.19, 0]
+
+    // MARK: Hill bed geometry (measured)
+
+    /// The HILL meshes carry a 0.01 m recessed tongue at each connector, so
+    /// their drivable bed sits 0.18 m below the origin, not the flat
+    /// pieces' 0.19 m — the tongue is the part that slides under the
+    /// neighbour, and it is not what you drive on. Lifting hills by the
+    /// flat 0.19 stood every hill 1 cm proud of the straights it joined
+    /// and put the spline 1 cm under its own bed at the entry seam.
+    /// (Blender: hill-complete's bed runs −0.18 → +0.02, midpoint −0.08.)
+    private static let hillBedLift: Float = 0.18
+    /// hill-end's bed starts 0.1755 m below the origin — it is the one
+    /// transition whose entry is an ANGLED connector, so it doesn't share
+    /// the others' flat-tongue depth.
+    private static let hillEndBedLift: Float = 0.1755
+
+    /// What each hill mesh's bed ACTUALLY rises, measured. Only
+    /// hill-complete lands on a round elevation level; the two transitions
+    /// miss it by a few millimetres, and the layout uses the round number
+    /// so that heights stay whole support legs.
+    ///
+    /// ponytail: the models are placed to be exact at the piece's ENTRY —
+    /// where the spline starts and where the car arrives — which leaves the
+    /// difference (≤ 6 mm) as a step at the far seam. Scaling each mesh's Y
+    /// by level/meshRise would zero it out; not worth a transform and a
+    /// re-derived bed offset for a third of a wheel's height.
+    private static let completeMeshRise: Float = 0.2000
+    private static let beginningMeshRise: Float = 0.2056
+    private static let endMeshRise: Float = 0.1955
+
+    private static let level = RaceTuning.elevationLevelHeight
+
+    /// Normalised bed profiles, (t, u) with t along the run and u up the
+    /// rise. Sampled off the Kenney meshes in Blender at 0.2 scale, from
+    /// the up-facing bed faces in the drivable channel, then linearly
+    /// resampled onto a t = 0, 0.1, … 1.0 grid — finer than the 0.1 m
+    /// waypoint spacing that reads them, so interpolation never invents a
+    /// bump the mesh doesn't have.
+
+    /// hill-complete: a symmetric S, level at BOTH ends. Fits smootherstep
+    /// (6t⁵ − 15t⁴ + 10t³) to within 2.5 mm, so it's generated rather than
+    /// tabulated — the two transitions below have no such luck.
+    private static let completeProfile: [SIMD2<Float>] = (0...10).map {
+        let t = Float($0) / 10
+        return SIMD2(t, t * t * t * (t * (t * 6 - 15) + 10))
+    }
+
+    /// hill-beginning: level in, ~37° out. Holds flat a long time, then
+    /// bends hard — nothing like a chord, which is why this piece could
+    /// never be swapped in under the old straight-line spline.
+    private static let beginningProfile: [SIMD2<Float>] = [
+        [0.0, 0.0000], [0.1, 0.0056], [0.2, 0.0191], [0.3, 0.0436],
+        [0.4, 0.0819], [0.5, 0.1376], [0.6, 0.2157], [0.7, 0.3236],
+        [0.8, 0.4761], [0.9, 0.6953], [1.0, 1.0000],
+    ]
+
+    /// hill-end: ~34° in, level out. NOT the mirror of hill-beginning —
+    /// its tail flattens much more gently (checked; the mirror is off by
+    /// 7% of the rise at mid-piece), so it gets its own table.
+    private static let endProfile: [SIMD2<Float>] = [
+        [0.0, 0.0000], [0.1, 0.2697], [0.2, 0.4508], [0.3, 0.5862],
+        [0.4, 0.6940], [0.5, 0.7819], [0.6, 0.8534], [0.7, 0.9107],
+        [0.8, 0.9548], [0.9, 0.9842], [1.0, 1.0000],
+    ]
+
+    /// The same bed driven the other way: reverse the samples and flip
+    /// them, so a descent reads its transition off the ascent's table.
+    private static func reversed(_ profile: [SIMD2<Float>]) -> [SIMD2<Float>] {
+        profile.reversed().map { SIMD2(1 - $0.x, 1 - $0.y) }
+    }
+
+    // MARK: Role-aware lookup
+
+    /// A hill's geometry depends on its neighbours (see `HillRole`), so the
+    /// solver resolves the run first and asks for the piece it actually
+    /// needs. Everything else ignores the role and gets its one definition.
+    static func definition(for type: PieceType, role: HillRole) -> TrackPieceDefinition {
+        switch type {
+        case .hillUp:   hill(climbing: true, role: role)
+        case .hillDown: hill(climbing: false, role: role)
+        default:        definition(for: type)
+        }
+    }
+
+    /// Both hill directions off one builder: a descent is the same meshes
+    /// driven backwards, so every sign flips together and the two can't
+    /// drift apart the way two hand-written entries did.
+    private static func hill(climbing up: Bool, role: HillRole) -> TrackPieceDefinition {
+        let type: PieceType = up ? .hillUp : .hillDown
+        let sign: Float = up ? 1 : -1
+        // A descent runs the meshes in reverse: yaw 180° and shift the
+        // model so its HIGH connector lands on the traversal entry.
+        let yaw: Float = up ? 0 : .pi
+        /// Places a hill mesh so its bed meets the traversal entry at y = 0.
+        /// Climbing, that's the mesh's low end and the lift is all it takes;
+        /// descending, the entry is the mesh's high end, one true rise up.
+        func offset(_ lift: Float, _ meshRise: Float) -> SIMD3<Float> {
+            up ? [0, lift, 0] : [0, lift - meshRise, 0.8]
+        }
+
+        switch role {
+        case .solo:
+            // hill-complete: both transitions in one piece, level at each
+            // end, one level gained. What every hill used to be — only the
+            // spline was a straight chord across an S-curved bed, so cars
+            // floated 26 mm over the first third and sank 29 mm through
+            // the last third.
+            return TrackPieceDefinition(
+                type: type, modelName: "track-wide-straight-hill-complete",
+                modelYaw: yaw, modelOffset: offset(hillBedLift, completeMeshRise),
+                exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
+                footprint: straightRect,
+                shape: .profiled(length: 0.8, rise: sign * level,
+                                 samples: completeProfile))
+
+        case .entry:
+            // Level in, sloped out. Climbing that's hill-beginning;
+            // descending it's hill-end run backwards.
+            return TrackPieceDefinition(
+                type: type,
+                modelName: up ? "track-wide-straight-hill-beginning"
+                              : "track-wide-straight-hill-end",
+                modelYaw: yaw,
+                modelOffset: up ? offset(hillBedLift, beginningMeshRise)
+                               : offset(hillEndBedLift, endMeshRise),
+                exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
+                footprint: straightRect,
+                shape: .profiled(length: 0.8, rise: sign * level,
+                                 samples: up ? beginningProfile
+                                             : reversed(endProfile)))
+
+        case .middle:
+            // A plain straight, pitched. sin 30° = ½ ⇒ two levels gained
+            // over the 0.8 m of track, advancing 0.8·cos 30°. Rotating a
+            // flat piece about its own origin swings the bed off the
+            // entry, so the offset walks it back: the bed sits `bedDepth`
+            // under the origin and the rotation carries that offset into
+            // both axes.
+            let slope = RaceTuning.hillRunSlope
+            let bedDepth = bedLift.y     // a FLAT straight's bed, not a hill's
+            let advance = 0.8 * cos(slope)
+            return TrackPieceDefinition(
+                type: type, modelName: "track-wide-straight",
+                modelPitch: -sign * slope,
+                modelOffset: [0, bedDepth * cos(slope), -sign * bedDepth * sin(slope)],
+                exitOffset: [0, sign * 2 * level, advance],
+                elevationDelta: up ? 2 : -2,
+                footprint: FootprintRect(minX: -0.2, minZ: 0, maxX: 0.2, maxZ: advance),
+                shape: .line(length: advance, rise: sign * 2 * level))
+
+        case .exit:
+            // Sloped in, level out — the mirror of `.entry`.
+            return TrackPieceDefinition(
+                type: type,
+                modelName: up ? "track-wide-straight-hill-end"
+                              : "track-wide-straight-hill-beginning",
+                modelYaw: yaw,
+                modelOffset: up ? offset(hillEndBedLift, endMeshRise)
+                               : offset(hillBedLift, beginningMeshRise),
+                exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
+                footprint: straightRect,
+                shape: .profiled(length: 0.8, rise: sign * level,
+                                 samples: up ? endProfile
+                                             : reversed(beginningProfile)))
+        }
+    }
 
     /// Wide straight: 0.4 m wide, 0.8 m connect-to-connect.
     private static let straightRect = FootprintRect(minX: -0.2, minZ: 0, maxX: 0.2, maxZ: 0.8)
@@ -150,27 +355,12 @@ enum PieceCatalog {
             footprint: FootprintRect(minX: -0.8, minZ: 0, maxX: 0.2, maxZ: 1.0),
             shape: .arc(radius: 0.8, leftTurn: false)),
 
-        // Hill pieces: Kenney hill-COMPLETE is the flat→flat rise, 0.2 m
-        // over the standard 0.8 m run with a level exit connector (measured
-        // in Blender: surface −0.14 → +0.06). hill-beginning/-end are
-        // slope-transition pieces with ANGLED connectors the yaw-only
-        // solver can't mate — using -beginning here was why hills left a
-        // 4 cm step at every seam. hillDown reuses the model traversed in
-        // reverse (yaw 180°). Spline rise is linear; refine to the real
-        // S-profile if cars stutter.
-        TrackPieceDefinition(
-            type: .hillUp, modelName: "track-wide-straight-hill-complete",
-            modelOffset: bedLift,
-            exitOffset: [0, RaceTuning.elevationLevelHeight, 0.8], elevationDelta: 1,
-            footprint: straightRect,
-            shape: .line(length: 0.8, rise: RaceTuning.elevationLevelHeight)),
-
-        TrackPieceDefinition(
-            type: .hillDown, modelName: "track-wide-straight-hill-complete",
-            modelYaw: .pi, modelOffset: [0, 0.19 - RaceTuning.elevationLevelHeight, 0.8],
-            exitOffset: [0, -RaceTuning.elevationLevelHeight, 0.8], elevationDelta: -1,
-            footprint: straightRect,
-            shape: .line(length: 0.8, rise: -RaceTuning.elevationLevelHeight)),
+        // Hills are role-dependent — see `hill(climbing:role:)`. The
+        // catalog dictionary carries their SOLO form, which is what a lone
+        // hill is and what everything outside the solver (builder UI,
+        // wire, tests) means by "a hill".
+        hill(climbing: true, role: .solo),
+        hill(climbing: false, role: .solo),
 
         // Same hump the ramp launches off, and now the same centreline. It
         // kept a flat `.line` while the mesh rose 0.10 m, so rail-mode cars
@@ -188,14 +378,27 @@ enum PieceCatalog {
             footprint: straightRect,
             shape: .crest(length: 0.8, height: RaceTuning.rampCrestHeight)),
 
-        // Narrow loop: ground run only 0.18 m, exit shifted 0.2 m left,
-        // vertical circle radius 0.4. Model's native travel is −Z → yaw 180°.
+        // Narrow loop — a CORKSCREW, not a straight with a circle on it.
+        // Measured off the GLB (POSITION accessor bounds + connector-tab
+        // vertices, ×0.2): both connect points sit at z = 0, one at x = 0
+        // and one at x = −0.2. It climbs, crosses over, and sets you down
+        // one bed width to the RIGHT having advanced nothing — the toy.
+        //
+        // It used to claim `advance: 0.18` (that's the ground PLATE's depth,
+        // not a run) shifting LEFT, with modelOffset.x = 0.2 — which put the
+        // mesh's exit tab on the layout's entry, so cars drove the loop
+        // backwards through its own lead-in ramps, corkscrewing against the
+        // drawn bed with the spline 0.09 m off the mesh at both seams.
+        //
+        // Footprint is the ground plate: 0.4 m across, i.e. the entry lane
+        // plus the exit lane. The arc bulges ±0.4 m in z over the straights
+        // either side, so BlueprintValidator skips this rect — overpass.
         TrackPieceDefinition(
             type: .loop, modelName: "track-narrow-looping",
-            modelYaw: 0, modelOffset: [0.2, 0.19, 0.09],
-            exitOffset: [0.2, 0, 0.18],
-            footprint: FootprintRect(minX: -0.11, minZ: 0, maxX: 0.3, maxZ: 0.18),
-            shape: .verticalLoop(radius: 0.4, advance: 0.18, lateralShift: 0.2),
+            modelYaw: 0, modelOffset: bedLift,
+            exitOffset: [-0.2, 0, 0],
+            footprint: FootprintRect(minX: -0.3, minZ: -0.09, maxX: 0.1, maxZ: 0.09),
+            shape: .verticalLoop(radius: 0.4, advance: 0, lateralShift: -0.2),
             laneHalfWidth: RaceTuning.laneOffsetNarrow,
             minEntrySpeed: RaceTuning.loopMinEntrySpeed),
 

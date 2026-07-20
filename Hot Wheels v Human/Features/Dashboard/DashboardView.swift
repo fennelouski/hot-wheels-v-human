@@ -41,9 +41,9 @@ struct DashboardView: View {
                     .foregroundStyle(.black)
                     .padding(.bottom, 12)
                 } else {
-                    BoostButtonView(meter: car.boostMeter) {
-                        model.fireBoost()
-                    }
+                    BoostButtonView(meter: car.boostMeter,
+                                    begin: model.beginBoost,
+                                    end: model.endBoost)
                     ReactionCamButton { on in
                         model.setReactionCam(on: on)
                     }
@@ -139,41 +139,143 @@ struct ReactionCamButton: View {
     }
 }
 
-/// Circular charge meter; full = pulsing, tap = fire. THE button.
+/// The NOS bottle gauge: a 270° dial reading 0–200%, armed at 100%, red
+/// overcharge zone above it. THE button — press and HOLD to burn, the
+/// needle drops while you hold, the dial shakes and thumps as it fires.
 struct BoostButtonView: View {
     let meter: Float
-    let fire: () -> Void
+    let begin: () -> Void
+    let end: () -> Void
 
-    private var full: Bool { meter >= 1 }
+    /// Press state, not snapshot state: the finger is local, the meter
+    /// arrives 10 Hz behind over the wire.
+    @State private var pressed = false
+    @State private var armedAtPress = false
+    /// Ticks while firing — each tick is one haptic thump.
+    @State private var bump = 0
+
+    private static let size: CGFloat = 170
+    private static let sweep: CGFloat = 0.75          // 270° of dial
+    private static let ring: CGFloat = 14
+
+    private var armed: Bool { meter >= 1 }
+    private var firing: Bool { pressed && armedAtPress && meter > 0 }
+    /// 0…1 across the whole 0–200% dial.
+    private var dial: CGFloat { CGFloat(min(max(meter, 0), 2) / 2) }
 
     var body: some View {
-        Button(action: fire) {
-            ZStack {
-                Circle()
-                    .stroke(.white.opacity(0.15), lineWidth: 14)
-                Circle()
-                    .trim(from: 0, to: CGFloat(min(meter, 1)))
-                    .stroke(full ? .yellow : .orange,
-                            style: StrokeStyle(lineWidth: 14, lineCap: .round))
-                    .rotationEffect(.degrees(-90))
-                Image(systemName: full ? "flame.fill" : "bolt.fill")
-                    .font(.system(size: 56))
-                    .foregroundStyle(full ? .orange : .yellow)
-                    .scaleEffect(full ? 1.15 : 1)
-                    .animation(full ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true)
-                                    : .default,
-                               value: full)
-            }
-            .frame(width: 170, height: 170)
-            // Padded so the 14 pt stroke lands inside the disc, which is
-            // what keeps the empty meter visible over a bright sky.
-            .padding(10)
-            .background(.black.opacity(0.45), in: Circle())
+        TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing)) { timeline in
+            let jitter = firing
+                ? sin(timeline.date.timeIntervalSinceReferenceDate * 47) * 2
+                : 0
+            dialFace
+                .offset(x: jitter, y: -jitter)
         }
-        .buttonStyle(.plain)
-        .disabled(!full)
+        .frame(width: Self.size, height: Self.size)
+        .padding(10)
+        .background(.black.opacity(0.45), in: Circle())
+        .contentShape(Circle())
+        // Touch DOWN starts the boost — a race button that waits for
+        // touch-up feels broken, and holding is now the whole mechanic.
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in
+                    guard !pressed else { return }
+                    pressed = true
+                    armedAtPress = armed
+                    begin()
+                }
+                .onEnded { _ in
+                    pressed = false
+                    end()
+                }
+        )
+        // A cancelled gesture (view swapped out mid-hold, phase change) never
+        // delivers onEnded — without this the heartbeat runs forever.
+        .onDisappear {
+            pressed = false
+            end()
+        }
+        .task(id: firing) {
+            guard firing else { return }
+            while !Task.isCancelled {
+                bump += 1
+                try? await Task.sleep(for: .milliseconds(110))
+            }
+        }
         #if !os(tvOS)
-        .sensoryFeedback(.impact(weight: .heavy), trigger: full)
+        // A thump per tick while it burns, plus one clunk the moment it arms
+        // (rising edge only — the meter crosses 1 downward on every burn).
+        .sensoryFeedback(.impact(weight: .medium, intensity: 0.8), trigger: bump)
+        .sensoryFeedback(trigger: armed) { was, now in
+            was == false && now ? .impact(weight: .heavy) : nil
+        }
         #endif
+    }
+
+    private var dialFace: some View {
+        ZStack {
+            // Dial track + the red overcharge half of it.
+            arc(to: 1).stroke(.white.opacity(0.15), lineWidth: Self.ring)
+            arc(from: 0.5, to: 1).stroke(.red.opacity(0.3), lineWidth: Self.ring)
+
+            arc(to: dial)
+                .stroke(chargeGradient,
+                        style: StrokeStyle(lineWidth: Self.ring, lineCap: .round))
+                .shadow(color: armed ? .orange.opacity(0.9) : .clear, radius: firing ? 14 : 8)
+
+            ticks
+            needle
+
+            VStack(spacing: 0) {
+                Image(systemName: firing ? "flame.fill" : (armed ? "bolt.fill" : "bolt.slash.fill"))
+                    .font(.system(size: 40))
+                    .foregroundStyle(armed ? .orange : .white.opacity(0.35))
+                    .scaleEffect(armed && !firing ? 1.12 : 1)
+                    .animation(armed && !firing
+                               ? .easeInOut(duration: 0.45).repeatForever(autoreverses: true)
+                               : .default,
+                               value: armed)
+                Text("\(Int(min(max(meter, 0), 2) * 100))%")
+                    .font(.system(size: 22, weight: .black, design: .monospaced))
+                    .foregroundStyle(meter > 1 ? .red : .white.opacity(0.85))
+                    .contentTransition(.numericText())
+            }
+            .offset(y: 6)
+        }
+        .animation(.easeOut(duration: 0.12), value: meter)
+    }
+
+    /// Orange → yellow while charging, red once overcharged.
+    private var chargeGradient: AngularGradient {
+        AngularGradient(colors: meter > 1 ? [.orange, .yellow, .red] : [.orange, .yellow],
+                        center: .center,
+                        startAngle: .degrees(135), endAngle: .degrees(405))
+    }
+
+    /// The dial reads clockwise from bottom-left (135°) to bottom-right.
+    private func arc(from: CGFloat = 0, to: CGFloat) -> some Shape {
+        Circle()
+            .trim(from: from * Self.sweep, to: to * Self.sweep)
+            .rotation(.degrees(135))
+    }
+
+    private var ticks: some View {
+        ForEach(0..<11, id: \.self) { i in
+            let unit = CGFloat(i) / 10
+            Capsule()
+                .fill(unit > 0.5 ? .red.opacity(0.7) : .white.opacity(0.45))
+                .frame(width: 2, height: i % 5 == 0 ? 12 : 7)
+                .offset(y: -Self.size / 2 + Self.ring + 10)
+                .rotationEffect(.degrees(-135 + Double(unit) * 270))
+        }
+    }
+
+    private var needle: some View {
+        Capsule()
+            .fill(armed ? .white : .white.opacity(0.5))
+            .frame(width: 3, height: Self.size / 2 - Self.ring - 14)
+            .offset(y: -(Self.size / 2 - Self.ring - 14) / 2)
+            .rotationEffect(.degrees(-135 + Double(dial) * 270))
     }
 }

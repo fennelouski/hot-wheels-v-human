@@ -97,18 +97,19 @@ struct RaceTuningTests {
         }
     }
 
-    /// The anti-fling speed clamp exists to kill depenetration spikes, and
-    /// it must never touch a legitimate boost — clip that and boosting just
-    /// silently stops working, which reads as a dead button.
-    @Test func speedClampNeverClipsABoost() {
-        for chassis in ChassisClass.allCases {
-            let ceiling = RaceTuning.maxSpeed[chassis]! * RaceTuning.speedCeilingFactor
-            for tires in TireType.allCases {
-                let top = RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]!
-                let boosted = top + RaceTuning.boostImpulse / RaceTuning.chassisMass[chassis]!
-                #expect(ceiling > boosted)
-            }
-        }
+    /// Boost is a garage stat: every chassis pushes, and they push by
+    /// visibly different amounts, or the choice means nothing. (The
+    /// speed-clamp headroom is checked by integrating the real thing —
+    /// RailFollowerTests.boostStaysUnderTheSpeedClamp.)
+    @Test func everyChassisBoostsAndTheyDiffer() {
+        let accels = ChassisClass.allCases.map { RaceTuning.boostAccel[$0]! }
+        #expect(accels.allSatisfy { $0 > 0 })
+        #expect(Set(accels).count == accels.count)
+        #expect(RaceTuning.boostAccel[.heavyMuscle]! > RaceTuning.boostAccel[.superlightDrift]!)
+        // Overcharge has to be a real trade: slower to fill, more to burn.
+        #expect(RaceTuning.boostOverchargeRate < 1)
+        #expect(RaceTuning.boostMaxCharge > 1)
+        #expect(RaceTuning.boostMinDuration < RaceTuning.boostDrainTime)
     }
 
     /// Recovery is a rule, not steering feel: it has to outmuscle the

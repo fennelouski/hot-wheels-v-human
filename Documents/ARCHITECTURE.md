@@ -70,10 +70,18 @@ struct TrackPieceDefinition {           // Core/TrackKit/PieceCatalog.swift
 ```
 Connection metadata lives in code, not in the USDZ files — models stay untouched from Kenney.
 Reality note: the Kenney pieces are **not** a uniform grid (straight = 0.8 m between
-connectors, small-corner radius = 0.4 m, loop ground run = 0.18 m), so pieces carry
-measured real-valued offsets in a "traversal frame" (entry at origin, travel +Z,
-surface y = 0) instead of the originally planned grid `ConnectionPoint`s. Headings
-stay multiples of 90°, so validator overlap checks use axis-aligned world rects.
+connectors, small-corner radius = 0.4 m), so pieces carry measured real-valued
+offsets in a "traversal frame" (entry at origin, travel +Z, surface y = 0) instead
+of the originally planned grid `ConnectionPoint`s. Headings stay multiples of 90°,
+so validator overlap checks use axis-aligned world rects.
+
+The **loop** is the piece that breaks the "footprint = what the piece occupies"
+assumption, and it is worth knowing before touching layout code. Its two connect
+points sit at the *same* spot (`exitOffset = [-0.2, 0, 0]`): it climbs, crosses
+over, and sets the car down one bed width to the RIGHT, advancing nothing. Its arc
+then bulges ±0.4 m fore and aft, so the straights it joins run **under** it. That
+makes it an overpass, and `BlueprintValidator` skips its rect in the overlap check
+for exactly that reason — everything else is still checked normally.
 
 ## RealityKit specifics
 - `RealityView { content in ... } update: { ... }` on both platforms; camera = `PerspectiveCamera` entity (chase camera rig follows leader car; smooth via lerp each frame).
@@ -82,10 +90,13 @@ stay multiples of 90°, so validator overlap checks use axis-aligned world rects
 - Subscribe to `CollisionEvents.Began` for crash detection/SFX.
 - Load USDZ with `Entity(named:in:)` async at arena build time; cache in an `AssetStore` actor. Show progress on TV during `buildingTrack` state.
 
-## Data flow example: the boost
-1. iPad Dashboard: meter full → user taps → `transport.send(.boost(playerID:token:), reliably: false)` + 2 retries (100 ms apart).
-2. TV `RaceCoordinator`: dedupes token, validates meter server-side (TV also tracks meters — anti-double-fire), then `DriveSystem` applies `applyLinearImpulse(heading * boostImpulse)`, spawns VFX + audio, includes `boostFired` in next snapshot.
-3. iPad receives snapshot → meter resets, button plays fired animation.
+## Data flow example: the boost (HELD, not tapped)
+1. iPad Dashboard: **touch DOWN** on the dial → `DashboardModel.beginBoost()` heartbeats `.boost(playerID:token:)` unreliably every 66 ms until touch up. The packet is a "finger is down" signal, not an event — the token is ignored.
+2. TV `RaceCoordinator`: no dedupe (repeats are the hold signal). Each packet calls `RaceSession.requestBoost`, which refreshes `boostHoldGrace` and — the first time, if `boostMeter >= 1` — starts the burn.
+3. `DriveSystem.stepBoost` runs the whole meter each frame: charges to 1 (armed) then to 2 at half rate (overcharge), or burns it down at `1 / boostDrainTime` while boosting, returning a thrust that ramps up the longer the button is held (`boostAccel[chassis]` — the garage stat). The burn ends when the grace lapses (finger up) or the bottle empties, but never before `boostMinDuration`, so a tap is still a real boost.
+4. iPad receives snapshots → the dial needle falls as it burns, thumping haptically.
+
+Packet loss is a non-event in both directions: a dropped heartbeat costs milliseconds of thrust, and a dropped *release* just times the burn out after `boostHoldGrace`.
 
 ## Testing strategy
 - `Core/*` = plain XCTest (blueprint validation, snapping math, message codec round-trips, meter/lives logic) — runs headless, perfect for Claude Code.

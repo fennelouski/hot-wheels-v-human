@@ -64,14 +64,22 @@ enum BlueprintValidator {
 
         // Footprint overlap at the same elevation level. Rects are shrunk a
         // hair so touching edges (which is the whole point) don't count.
-        let rects = layout.pieces.map { (level: $0.entryLevel, rect: $0.worldFootprint) }
+        //
+        // The loop is skipped: it's an OVERPASS. Both its connect points sit
+        // at the same spot (it corkscrews sideways without advancing), so the
+        // straights it joins always sit under its ground plate, and its arc
+        // bulges 0.4 m fore and aft over them. Real pieces still get checked
+        // against each other — only the loop's own rect is exempt.
+        let rects = layout.pieces
+            .filter { $0.definition.type != .loop }
+            .map { (level: $0.entryLevel, rect: $0.worldFootprint, number: $0.index + 1) }
         let epsilon: Float = 0.02
         outer: for i in 0..<rects.count {
             for j in (i + 1)..<rects.count where rects[i].level == rects[j].level {
                 let a = rects[i].rect, b = rects[j].rect
                 if a.minX + epsilon < b.maxX && b.minX + epsilon < a.maxX
                     && a.minZ + epsilon < b.maxZ && b.minZ + epsilon < a.maxZ {
-                    reasons.append("Pieces \(i + 1) and \(j + 1) are on top of each other.")
+                    reasons.append("Pieces \(rects[i].number) and \(rects[j].number) are on top of each other.")
                     break outer
                 }
             }

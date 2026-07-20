@@ -19,7 +19,14 @@ struct CustomizerView: View {
     /// 2P split: the top half saves into playerTwoDesign.
     var isPlayerTwo = false
 
-    @State private var model = CustomizerModel()
+    /// nil = a fresh build. Pass a saved design (the garage's "Edit It") to
+    /// edit in place — Save writes back over that car, not to a sibling.
+    init(design: CarDesign? = nil, isPlayerTwo: Bool = false) {
+        self.isPlayerTwo = isPlayerTwo
+        _model = State(initialValue: CustomizerModel(design: design))
+    }
+
+    @State private var model: CustomizerModel
     @State private var tab: Tab = {
         let args = ProcessInfo.processInfo.arguments
         if args.contains("--demo-driver") { return .driver }
@@ -74,7 +81,11 @@ struct CustomizerView: View {
                     tab = .paint
                     SoundBank.shared.play("ui_tap")
                 },
-                onSurfaceTapped: armedSticker.map { symbol in
+                // Sticker editing only claims the gestures on its own tab.
+                // Leaving them claimed everywhere meant a drag on the Paint
+                // tab silently dragged your last sticker, and left no gesture
+                // free for looking around the car.
+                onSurfaceTapped: stickerMode ? armedSticker.map { symbol in
                     { uv in
                         var stickers = model.design.stickers ?? []
                         stickers.append(StickerPlacement(
@@ -83,20 +94,20 @@ struct CustomizerView: View {
                         model.design.stickers = stickers
                         SoundBank.shared.play("customize_confirm_pop")
                     }
-                },
-                onSurfaceDragged: { uv, ended in
+                } : nil,
+                onSurfaceDragged: stickerMode ? { uv, ended in
                     editNewestSticker(ended: ended) { $0.uv = ShellGeometry.clampStickerUV(uv) }
-                },
-                onPinch: { magnification, ended in
+                } : nil,
+                onPinch: stickerMode ? { magnification, ended in
                     editNewestSticker(ended: ended) {
                         $0.scale = max(0.3, min(committedNewestSticker?.scale ?? 1, 4) * magnification)
                     }
-                },
-                onRotate: { radians, ended in
+                } : nil,
+                onRotate: stickerMode ? { radians, ended in
                     editNewestSticker(ended: ended) {
                         $0.rotation = (committedNewestSticker?.rotation ?? 0) + radians
                     }
-                }
+                } : nil
             )
             .frame(minHeight: 220)
             .overlay(alignment: .topLeading) {
@@ -192,6 +203,10 @@ struct CustomizerView: View {
                      designs: [appModel.stampedRaceDesign(car: model.design)])
     }
 
+    /// Whose gestures these are: the sticker tools' on the Stickers tab,
+    /// the camera's everywhere else.
+    private var stickerMode: Bool { tab == .stickers }
+
     /// The design the turntable shows: mid-gesture sticker drafts override
     /// the saved list so previews track the finger without flooding undo.
     private var displayDesign: CarDesign {
@@ -237,7 +252,7 @@ struct CarTurntableView: View {
     var onRotate: ((Float, _ ended: Bool) -> Void)? = nil
 
     @State private var spin: EventSubscription?
-    @State private var refs = TurntableRefs()
+    @State private var refs = OrbitRefs()
 
     var body: some View {
         // These gestures don't exist on tvOS; the customizer only runs
@@ -256,19 +271,11 @@ struct CarTurntableView: View {
                     }
                 })
                 .simultaneousGesture(DragGesture(minimumDistance: 8)
-                    .onChanged { value in
-                        guard let onSurfaceDragged,
-                              let uv = raycastUV(at: value.location, viewSize: geo.size) else { return }
-                        onSurfaceDragged(uv.0, false)
-                    }
-                    .onEnded { value in
-                        guard let onSurfaceDragged,
-                              let uv = raycastUV(at: value.location, viewSize: geo.size) else { return }
-                        onSurfaceDragged(uv.0, true)
-                    })
+                    .onChanged { dragged($0, in: geo.size, ended: false) }
+                    .onEnded { dragged($0, in: geo.size, ended: true) })
                 .simultaneousGesture(MagnifyGesture()
-                    .onChanged { onPinch?(Float($0.magnification), false) }
-                    .onEnded { onPinch?(Float($0.magnification), true) })
+                    .onChanged { pinched($0.magnification, ended: false) }
+                    .onEnded { pinched($0.magnification, ended: true) })
                 .simultaneousGesture(RotateGesture()
                     .onChanged { onRotate?(Float($0.rotation.radians), false) }
                     .onEnded { onRotate?(Float($0.rotation.radians), true) })
@@ -276,9 +283,31 @@ struct CarTurntableView: View {
         #endif
     }
 
+    #if !os(tvOS)
+    /// The sticker tools own drag and pinch while they're out (the Stickers
+    /// tab). Everywhere else the same two gestures steer the camera, so
+    /// "look at the other side of my car" works on every tab but that one.
+    private func dragged(_ value: DragGesture.Value, in size: CGSize, ended: Bool) {
+        if let onSurfaceDragged {
+            guard let uv = raycastUV(at: value.location, viewSize: size) else { return }
+            onSurfaceDragged(uv.0, ended)
+        } else {
+            refs.orbit.drag(value.translation, ended: ended)
+        }
+    }
+
+    private func pinched(_ magnification: CGFloat, ended: Bool) {
+        if let onPinch {
+            onPinch(Float(magnification), ended)
+        } else {
+            refs.orbit.pinch(magnification, ended: ended)
+        }
+    }
+    #endif
+
     /// Screen point → (shell UV, hit part name) via camera ray + scene raycast.
     private func raycastUV(at point: CGPoint, viewSize: CGSize) -> (SIMD2<Float>, String)? {
-        guard let camera = refs.camera, let car = refs.car, let scene = car.scene,
+        guard let camera = refs.camera, let car = refs.model, let scene = car.scene,
               viewSize.width > 0, viewSize.height > 0 else { return nil }
         let direction = CameraRay.direction(
             point: point, viewSize: viewSize,
@@ -303,9 +332,8 @@ struct CarTurntableView: View {
             content.add(turntable)
 
             let camera = PerspectiveCamera()
-            camera.look(at: .zero, from: [0, 0.14, -0.32], relativeTo: nil)
+            refs.frame(camera, target: .zero, from: [0, 0.14, -0.32])
             content.add(camera)
-            refs.camera = camera
             let light = DirectionalLight()
             light.light.intensity = 5000
             light.look(at: .zero, from: [1, 2, -2], relativeTo: nil)
@@ -313,6 +341,9 @@ struct CarTurntableView: View {
 
             await Self.rebuild(turntable, design: design, refs: refs)
             spin = content.subscribe(to: SceneEvents.Update.self) { event in
+                // Once it's been grabbed the kid is driving: the car freezes
+                // where they caught it and the camera does the moving.
+                guard !refs.orbit.grabbed else { return refs.apply() }
                 turntable.transform.rotation *= simd_quatf(
                     angle: Float(event.deltaTime) * 1.0, axis: [0, 1, 0])
             }
@@ -326,7 +357,7 @@ struct CarTurntableView: View {
 
     @MainActor
     private static func rebuild(_ turntable: Entity, design: CarDesign,
-                                refs: TurntableRefs) async {
+                                refs: OrbitRefs) async {
         let parts = (design.partColors ?? [:]).sorted { $0.key < $1.key }
             .map { "\($0.key)=\($0.value)" }.joined(separator: ",")
         let livery = design.livery.map {
@@ -335,36 +366,29 @@ struct CarTurntableView: View {
         let stickers = (design.stickers ?? []).map {
             "\($0.symbol)@\($0.uv.x),\($0.uv.y)x\($0.scale)r\($0.rotation)#\($0.colorHex)"
         }.joined(separator: ";")
-        let signature = "\(design.chassis.rawValue)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)|\(stickers)|\(design.drawingPNG?.hashValue ?? 0)"
+        let signature = "\(design.modelName)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)|\(stickers)|\(design.drawingPNG?.hashValue ?? 0)"
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
 
         // Same chassis already on the turntable → refresh in place (the
         // overlay swap is cheap; a full reload flickers).
-        if let car = refs.car, car.parent === turntable,
-           car.name == design.chassis.modelName {
+        if let car = refs.model, car.parent === turntable,
+           car.name == design.modelName {
             await CarFactory.applyCustomization(to: car, design: design)
             return
         }
 
         turntable.children.forEach { $0.removeFromParent() }
-        guard let car = try? await AssetStore.shared.entity(named: design.chassis.modelName) else { return }
-        car.name = design.chassis.modelName
+        guard let car = try? await AssetStore.shared.entity(named: design.modelName) else { return }
+        car.name = design.modelName
         await CarFactory.applyCustomization(to: car, design: design)
         // Raycast targets for stamping + paint-slot selection.
         car.generateCollisionShapes(recursive: true)
         let bounds = car.visualBounds(relativeTo: nil)
         car.position = -bounds.center
         turntable.addChild(car)
-        refs.car = car
+        refs.model = car
     }
-}
-
-/// Entity refs the gesture handlers need (set during scene build).
-@MainActor
-final class TurntableRefs {
-    weak var camera: PerspectiveCamera?
-    weak var car: Entity?
 }
 
 /// Skips redundant preview rebuilds (update: fires on every SwiftUI tick).

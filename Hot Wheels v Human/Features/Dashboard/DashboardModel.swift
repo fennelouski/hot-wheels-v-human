@@ -87,16 +87,27 @@ final class DashboardModel {
         transport.send(.reactionCam(playerID: player.id, on: on), reliably: true)
     }
 
-    /// Boost taps ride the unreliable channel ×3 with a dedupe token.
-    func fireBoost() {
-        guard (myCar?.boostMeter ?? 0) >= 1 else { return }
-        let token = UUID()
-        Task { @MainActor in
-            for _ in 0..<3 {
-                transport.send(.boost(playerID: player.id, token: token), reliably: false)
-                try? await Task.sleep(for: .milliseconds(100))
+    private var boostHold: Task<Void, Never>?
+
+    /// Boost is held, not tapped: from touch-down until release we heartbeat
+    /// "still holding" over the unreliable channel. The host burns the meter
+    /// for `RaceTuning.boostHoldGrace` past the last packet, so drops cost a
+    /// few milliseconds of thrust and a lost release can't strand the burn.
+    /// The host also owns the "is the meter armed?" call — we just report the
+    /// finger.
+    func beginBoost() {
+        guard boostHold == nil else { return }
+        boostHold = Task { @MainActor [weak self] in
+            while !Task.isCancelled, let self {
+                transport.send(.boost(playerID: player.id, token: UUID()), reliably: false)
+                try? await Task.sleep(for: .milliseconds(66))
             }
         }
+    }
+
+    func endBoost() {
+        boostHold?.cancel()
+        boostHold = nil
     }
 
     private func handle(_ event: TransportEvent) {

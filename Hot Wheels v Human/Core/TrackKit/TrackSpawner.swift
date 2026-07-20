@@ -37,6 +37,7 @@ enum TrackSpawner {
             model.name = "piece-\(piece.index)-\(piece.definition.type.rawValue)"
             model.position = piece.modelPosition
             model.orientation = simd_quatf(angle: piece.modelYaw, axis: [0, 1, 0])
+                * simd_quatf(angle: piece.definition.modelPitch, axis: [1, 0, 0])
             // Cars collide with SOLVED geometry, not the visual meshes —
             // the models carry raised ramps/tabs/lead-ins beyond their
             // logical footprints, and cars hitting those exact meshes got
@@ -53,7 +54,16 @@ enum TrackSpawner {
                 // than a flat slab it would sink through.
                 try await addStaticCollision(to: model)
             case .loop:
-                root.addChild(splineCollision(for: piece, index: pi, lanes: layout.lanes))
+                root.addChild(splineCollision(for: piece, index: pi,
+                                              lanes: layout.lanes, width: 0.2))
+            case _ where isProfiled(piece.definition.shape):
+                // A hill's bed is a measured curve that bows up to 7 cm
+                // away from its own chord, so one pitched slab can't
+                // describe it — it follows the spline like the loop does.
+                // The pitched straights mid-run are `.line`, so they still
+                // get the cheap slab.
+                root.addChild(splineCollision(for: piece, index: pi,
+                                              lanes: layout.lanes, width: 0.4))
             default:
                 root.addChild(bedCollision(for: piece))
             }
@@ -136,22 +146,27 @@ enum TrackSpawner {
         return slab
     }
 
+    /// True where a flat slab can't stand in for the bed.
+    private static func isProfiled(_ shape: CenterlineShape) -> Bool {
+        if case .profiled = shape { true } else { false }
+    }
+
     /// Bed collision that follows the piece's own centerline: a chain of
-    /// short boxes, each oriented along the spline with its top face on
-    /// the waypoints and its "up" pointing at the loop's circle centre —
-    /// so the bed surface tracks the ring all the way around, ramps and
-    /// all, with none of the model mesh's stray lips.
+    /// short boxes, each oriented along the spline with its top face on the
+    /// waypoints and its "up" taken from the track frame — the same
+    /// `cross(tangent, lateral)` the rail follower rolls cars with. That
+    /// makes the bed track the loop's ring all the way around (up points
+    /// at the circle's centre, so it correctly flips to face the car at the
+    /// top) and follow a hill's measured S, with none of the model mesh's
+    /// stray lips either way.
     private static func splineCollision(for piece: PlacedPiece, index: Int,
-                                        lanes: LaneSplines) -> Entity {
+                                        lanes: LaneSplines, width: Float) -> Entity {
         let start = lanes.pieceStartIndices[index]
         let end = index + 1 < lanes.pieceStartIndices.count
             ? lanes.pieceStartIndices[index + 1] : lanes.center.count - 1
-        guard case .verticalLoop(let radius, let advance, _) = piece.definition.shape
-        else { return Entity() }
 
         let holder = Entity()
         holder.name = "bed-\(piece.index)"
-        let width: Float = 0.2          // narrow bed
         let thickness: Float = 0.05
         for j in start..<end {
             let p0 = lanes.center[j], p1 = lanes.center[j + 1]
@@ -159,13 +174,7 @@ enum TrackSpawner {
             let length = simd_length(seg)
             guard length > 1e-5 else { continue }
             let forward = seg / length
-            // "Up" points from the waypoint toward the circle centre so the
-            // bed face follows the inside of the ring; degenerates to +Y on
-            // the flat entry/exit stubs.
-            let local = rotated(p0 - piece.entryPosition, by: -piece.entryYaw)
-            let toCenter = SIMD3<Float>(0, radius, advance / 2) - SIMD3<Float>(0, local.y, local.z)
-            var up = simd_length(toCenter) > 1e-4
-                ? rotated(simd_normalize(toCenter), by: piece.entryYaw) : [0, 1, 0]
+            var up = simd_cross(forward, lanes.laterals[j])
             // Orthogonalize against the tangent.
             up -= forward * simd_dot(up, forward)
             guard simd_length(up) > 1e-4 else { continue }

@@ -194,3 +194,77 @@ struct OverlayComposerTests {
         #expect(decoded == design)
     }
 }
+
+/// Drag-to-orbit / pinch-to-zoom on the car turntable and the character
+/// preview. Pure math, so the invariants that make it feel right — the
+/// untouched shot is unchanged, the model never flips, distance is only
+/// ever scaled — are checked here rather than by spinning cars by hand.
+struct TurntableOrbitTests {
+
+    let target = SIMD3<Float>(0, 0.5, 0)
+    let home = SIMD3<Float>(0, 0.62, 1.55)
+
+    @Test func untouchedOrbitReproducesTheViewsOwnFraming() {
+        let orbit = TurntableOrbit()
+        #expect(!orbit.grabbed)
+        let position = orbit.cameraPosition(target: target, home: home)
+        #expect(distance(position, home) < 1e-4)
+    }
+
+    @Test func draggingOrbitsAtAConstantDistance() {
+        var orbit = TurntableOrbit()
+        orbit.drag(CGSize(width: 120, height: 40), ended: true)
+        #expect(orbit.grabbed)
+        let moved = orbit.cameraPosition(target: target, home: home)
+        #expect(abs(distance(moved, target) - distance(home, target)) < 1e-4)
+        #expect(distance(moved, home) > 0.05)
+    }
+
+    /// Cumulative translation, so re-sending the same drag must not
+    /// compound — that was the drift that makes a turntable feel greasy.
+    @Test func aDragIsAnchoredToWhereTheFingerLanded() {
+        var once = TurntableOrbit()
+        once.drag(CGSize(width: 80, height: 0), ended: false)
+        var twice = TurntableOrbit()
+        twice.drag(CGSize(width: 40, height: 0), ended: false)
+        twice.drag(CGSize(width: 80, height: 0), ended: false)
+        #expect(distance(once.cameraPosition(target: target, home: home),
+                         twice.cameraPosition(target: target, home: home)) < 1e-4)
+    }
+
+    /// Past the pole `look(at:from:)` loses its up vector and the model
+    /// flips upside down, so no amount of dragging may get there.
+    @Test func pitchNeverReachesThePole() {
+        for drag in [CGSize(width: 0, height: 5000), CGSize(width: 0, height: -5000)] {
+            var orbit = TurntableOrbit()
+            orbit.drag(drag, ended: true)
+            let position = orbit.cameraPosition(target: target, home: home)
+            let d = distance(position, target)
+            let elevation = asin((position.y - target.y) / d)
+            #expect(abs(elevation) <= TurntableOrbit.pitchLimit + 1e-4)
+            // Still off-axis, so the up vector is still well defined.
+            #expect(hypot(position.x - target.x, position.z - target.z) > 0.01)
+        }
+    }
+
+    @Test func pinchingOutMovesTheCameraCloserAndStaysInRange() {
+        var orbit = TurntableOrbit()
+        orbit.pinch(2, ended: true)
+        let close = orbit.cameraPosition(target: target, home: home)
+        #expect(distance(close, target) < distance(home, target))
+
+        var far = TurntableOrbit()
+        far.pinch(0.5, ended: true)
+        #expect(distance(far.cameraPosition(target: target, home: home), target)
+                > distance(home, target))
+
+        for magnification in [CGFloat(0.001), 0.1, 10, 1000] {
+            var orbit = TurntableOrbit()
+            orbit.pinch(magnification, ended: true)
+            let ratio = distance(orbit.cameraPosition(target: target, home: home), target)
+                / distance(home, target)
+            #expect(ratio >= TurntableOrbit.zoomRange.lowerBound - 1e-3)
+            #expect(ratio <= TurntableOrbit.zoomRange.upperBound + 1e-3)
+        }
+    }
+}

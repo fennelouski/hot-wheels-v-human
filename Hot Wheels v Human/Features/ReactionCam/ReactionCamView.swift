@@ -16,9 +16,41 @@ import SwiftUI
 import RealityKit
 import UIKit
 
+/// Every cockpit number the PiP tuner can move, in one value so the tuner
+/// can drive a REAL `ReactionCamView` rather than a mock-up. `.standard`
+/// reads the shipped constants, so normal callers pass nothing and get
+/// exactly what RaceTuning says.
+struct CockpitTuning: Equatable {
+    /// How far the driver is shrunk, and the world-Y they're lifted to
+    /// afterwards (scaling is about the rig's FEET, so shrinking alone
+    /// drops the head out of frame). Lift is absolute, not derived, because
+    /// the roster rigs are not all the same height — which is exactly why
+    /// this may need to differ per character.
+    var bustScale: Float
+    var bustLift: Float
+    var wheelCenterY: Float
+    var wheelRadius: Float
+    var wheelAngle: Float
+    var horizonRatio: Float
+    var vanishShift: Float
+    var keyLightWash: Float
+
+    static let standard = CockpitTuning(
+        bustScale: RaceTuning.cockpitBustScale,
+        bustLift: RaceTuning.cockpitBustLift,
+        wheelCenterY: RaceTuning.cockpitWheelCenterY,
+        wheelRadius: RaceTuning.cockpitWheelRadiusRatio,
+        wheelAngle: RaceTuning.cockpitWheelAngle,
+        horizonRatio: RaceTuning.cockpitHorizonRatio,
+        vanishShift: RaceTuning.cockpitVanishShift,
+        keyLightWash: RaceTuning.cockpitKeyLightWash)
+}
+
 struct ReactionCamView: View {
     let director: ReactionDirector
     let design: CarDesign
+    /// Defaults to the shipped constants; the PiP tuner passes live values.
+    var tuning: CockpitTuning = .standard
 
     /// The live poser, in a reference box rather than plain `@State`: the
     /// per-frame tick below is a long-lived closure, and the character editor
@@ -40,7 +72,8 @@ struct ReactionCamView: View {
         ZStack(alignment: .bottomTrailing) {
             WindshieldView(daylight: daylight,
                            speed01: director.speed01,
-                           lean: director.lean)
+                           lean: director.lean,
+                           tuning: tuning)
 
             RealityView { content in
                 content.camera = .virtual
@@ -74,7 +107,7 @@ struct ReactionCamView: View {
                 // of the now-frozen framing, leaving the PiP on their knees.
                 frameTick = content.subscribe(to: SceneEvents.Update.self) { [busts] _ in
                     MainActor.assumeIsolated {
-                        busts.poser?.frameOnHead(isIdle: director.state == .idle)
+                        busts.poser?.frameOnHead()
                     }
                 }
 
@@ -91,19 +124,29 @@ struct ReactionCamView: View {
                 // washed toward white so it tints the driver instead of
                 // painting them one flat colour.
                 keyLight?.light.color = UIColor(
-                    daylight.mix(with: .white, by: Double(RaceTuning.cockpitKeyLightWash)))
+                    daylight.mix(with: .white, by: Double(tuning.keyLightWash)))
                 keyLight?.light.intensity =
                     director.state == .boosted ? 9000 : 6000
+                // Size and lift the driver here, every update, so the tuner's
+                // sliders move a live rig instead of needing a rebuild. Only
+                // when something actually asks: at the shipped defaults this
+                // is arithmetically a no-op, but skipping it outright means
+                // the normal PiP cannot be affected by this path at all —
+                // worth the branch while the framing numbers are unsettled.
+                if tuning != .standard {
+                    poser?.applyFraming(scale: tuning.bustScale, lift: tuning.bustLift)
+                }
                 rebuildIfDriverChanged()
             }
 
             // The car's own wheel, in front of the driver. Counter-turns:
             // lean is + for a left turn, screen-left is a negative rotation.
             SteeringWheelView(chassis: design.chassis,
-                              angle: -CGFloat(director.lean * RaceTuning.cockpitWheelAngle),
+                              angle: -CGFloat(director.lean * tuning.wheelAngle),
                               rim: Color(hex: design.partColors?[CarPaintSlot.wheels]
                                          ?? design.paint.colorHex),
-                              hub: Color(hex: design.paint.colorHex))
+                              hub: Color(hex: design.paint.colorHex),
+                              tuning: tuning)
                 .allowsHitTesting(false)
 
             // Kid's face paint rides over every expression. The driver's
@@ -201,6 +244,7 @@ private struct WindshieldView: View {
     let daylight: Color
     let speed01: Float
     let lean: Float
+    let tuning: CockpitTuning
 
     private static let asphalt = Color(red: 0.16, green: 0.16, blue: 0.20)
     private static let cabin = Color(red: 0.09, green: 0.09, blue: 0.12)
@@ -210,10 +254,10 @@ private struct WindshieldView: View {
             Canvas { ctx, size in
                 let w = size.width, h = size.height
                 let speed = CGFloat(speed01)
-                let horizon = h * CGFloat(RaceTuning.cockpitHorizonRatio)
+                let horizon = h * CGFloat(tuning.horizonRatio)
                 // Corner into the turn: the road's far end swings the other way.
                 let vanishX = w * 0.5
-                    - CGFloat(lean) * w * CGFloat(RaceTuning.cockpitVanishShift)
+                    - CGFloat(lean) * w * CGFloat(tuning.vanishShift)
 
                 // Sky, then ground, then the road laid over both.
                 ctx.fill(Path(CGRect(x: 0, y: 0, width: w, height: horizon)),
@@ -300,6 +344,7 @@ private struct SteeringWheelView: View {
     let angle: CGFloat
     let rim: Color
     let hub: Color
+    let tuning: CockpitTuning
 
     // The roster rig's DRIVE pose already holds its arms out at wheel
     // height, so the rim wants to land under those hands — that's what
@@ -307,12 +352,12 @@ private struct SteeringWheelView: View {
     var body: some View {
         Canvas { ctx, size in
             let w = size.width
-            let radius = w * CGFloat(RaceTuning.cockpitWheelRadiusRatio)
+            let radius = w * CGFloat(tuning.wheelRadius)
             let rimWidth = radius * CGFloat(RaceTuning.cockpitWheelRimWidth[chassis]!)
             let spokes = RaceTuning.cockpitWheelSpokes[chassis]!
 
             ctx.translateBy(x: w / 2,
-                            y: size.height * CGFloat(RaceTuning.cockpitWheelCenterY))
+                            y: size.height * CGFloat(tuning.wheelCenterY))
             ctx.rotate(by: .radians(Double(angle)))
 
             var ring = Path()

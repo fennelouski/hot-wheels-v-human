@@ -16,6 +16,7 @@
 //  would have been 36 rigged USDZs for identical animation data.
 //
 
+import Foundation
 import RealityKit
 
 @MainActor
@@ -55,9 +56,19 @@ final class DriverPoser {
     private var current: ReactionState?
     private var rigHeight: Float?
     private var framedHead: SIMD3<Float>?
+    /// How the loaded rig sits before any framing nudge. `applyFraming`
+    /// offsets/multiplies from these, so scale 1 + lift 0 leaves the rig
+    /// exactly as authored — which matters because the roster USDZs carry
+    /// their own transform (the `scale_rig` node, ×10.73, see HeadPinSystem).
+    /// Assigning an absolute scale instead of multiplying this one shrank
+    /// the driver by that factor and emptied the cockpit.
+    private let restingY: Float
+    private let restingScale: SIMD3<Float>
 
     private init(bust: Entity) {
         self.bust = bust
+        self.restingY = bust.position.y
+        self.restingScale = bust.scale
         // Bind-pose framing; `frameOnHead` corrects it on the first update.
         let head = RaceTuning.driverSourceHeight * RaceTuning.driverHeadHeightRatio
         camera.look(at: [0, head, 0],
@@ -66,6 +77,40 @@ final class DriverPoser {
                     relativeTo: nil)
     }
 
+    /// Size and place the driver in the circle. This — not the camera — is
+    /// what actually changes how big the driver reads, because the PiP's
+    /// RealityView ignores the scene camera (see `frameOnHead`).
+    ///
+    /// Scale is about the entity origin, which sits at the rig's FEET, so
+    /// shrinking alone drops the head by the same fraction and the PiP ends
+    /// up staring at an empty cockpit. `lift` puts it back.
+    ///
+    /// Lift is a NUDGE from wherever the loaded rig naturally sits, not an
+    /// absolute Y — the roster USDZs don't all place their root at zero, and
+    /// forcing one emptied the cockpit outright. So lift 0 always means
+    /// "untouched", which is what makes it safe to drag a slider from.
+    func applyFraming(scale: Float, lift: Float) {
+        bust.scale = restingScale * scale
+        bust.position.y = restingY + lift
+    }
+
+    /// KNOWN DEAD as of 2026-07-20 — do not tune against it, and do not
+    /// trust its constants. The PiP's `RealityView` renders with its own
+    /// automatic camera and ignores the `PerspectiveCamera` this class adds
+    /// to the scene, so nothing below reaches the screen. Two independent
+    /// proofs: `cockpitCameraDistanceRatio` was taken from 1.5 to 6.0 (a 4×
+    /// change in camera distance) with byte-identical framing in the
+    /// `--reaction-cam` bench; and a one-shot file dump from this function
+    /// never wrote, i.e. it is never called at all — the `SceneEvents.Update`
+    /// subscription in ReactionCamView does not survive being stored in
+    /// SwiftUI `@State` from inside the RealityView build closure.
+    ///
+    /// The lever that DOES work is scaling the bust — see `make`. Either fix
+    /// the subscription and find out why the camera is ignored, or delete
+    /// this function, the `camera`, `PoserBox`, and the four cockpitCamera*
+    /// constants outright. Left in place rather than half-removed because
+    /// deleting it is a bigger change than this session could verify.
+    ///
     /// Keep the driver's head in the same spot in the circle, whoever they
     /// are and whatever they're doing.
     ///
@@ -77,15 +122,19 @@ final class DriverPoser {
     /// the posed Head joint (the one the hats already ride) fixes both at
     /// the source, and keeps working if the bust ever moves to the roster
     /// meshes.
-    func frameOnHead(isIdle: Bool) {
+    func frameOnHead() {
         let posed = HeadPinSystem.headPosition(of: bust, relativeTo: nil)
-        // How big this rig is, read off where its head sits — never measured
-        // from visual bounds, which include flung limbs and props AND race
-        // the rig's load. Latched once, and only while idle: read mid-cheer,
-        // a raised skull would scale the rig up and park the camera in the
-        // driver's lap.
-        if rigHeight == nil, isIdle, let posed, posed.y > 0 {
-            rigHeight = posed.y / RaceTuning.driverHeadHeightRatio
+        // How big this rig is, in WORLD units — the only measure that means
+        // anything here. The roster USDZs wrap their mesh in a `scale_rig`
+        // node (×10.73, see HeadPinSystem), so rig-local numbers and the
+        // Quaternius-era `driverSourceHeight` are both off by an order of
+        // magnitude, and a camera distance derived from either parks the
+        // lens in the driver's face. Measured on a render frame, never at
+        // build time: called that early it races the rig's load and comes
+        // back zero.
+        if rigHeight == nil {
+            let measured = bust.visualBounds(relativeTo: nil).extents.y
+            if measured > 0 { rigHeight = measured }
         }
         let height = rigHeight ?? RaceTuning.driverSourceHeight
         // The joint lookup fails for a frame or two whenever a clip
@@ -112,15 +161,17 @@ final class DriverPoser {
     ///    `attack-melee-right` — the pack has no seated reactions), so a
     ///    seated base snapped the driver bolt upright on every boost and
     ///    back down again after.
-    /// 2. `frameOnHead` sizes the rig as `head.y / driverHeadHeightRatio`,
-    ///    and that ratio measures a STANDING rig. Fed a seated head it
-    ///    under-read the rig by roughly a third and parked the camera inside
-    ///    the driver's chest — the PiP filled with a flat slab of shirt.
+    /// 2. `frameOnHead` used to size the rig as `head.y /
+    ///    driverHeadHeightRatio`, and that ratio measures a STANDING rig.
+    ///    Fed a seated head it under-read the rig by roughly a third and
+    ///    parked the camera inside the driver's chest. It now measures the
+    ///    bust's world-space visual bounds instead, so this reason no longer
+    ///    binds — but reason 1 still does, so the base pose stays `idle`.
     ///
-    /// Nothing is lost: the PiP crops to head-and-shoulders, so the drive
-    /// pose's one advantage (arms out on a wheel) sits below frame anyway,
-    /// and `SteeringWheelView` draws the wheel in front regardless. `idle`
-    /// also actually breathes — `drive` is a single static keyframe.
+    /// Nothing is lost: the drive pose's one advantage (arms out on a wheel)
+    /// sits below frame anyway, and `SteeringWheelView` draws the wheel in
+    /// front regardless. `idle` also actually breathes — `drive` is a single
+    /// static keyframe.
     static func make(profile: DriverProfile) async throws -> DriverPoser {
         let bust = try await AssetStore.shared.entity(named: profile.modelName(pose: .idle))
         // Roster characters are pre-painted colormaps — the stripe palette
@@ -131,6 +182,10 @@ final class DriverPoser {
         let poser = DriverPoser(bust: bust)
         poser.clips[.idle] = bust.availableAnimations.last
         poser.apply(.idle)
+        // Deliberately NOT framed here: at the shipped defaults framing is a
+        // no-op, and leaving the loaded rig untouched keeps the normal PiP
+        // exactly as it renders without this feature. The tuner drives
+        // `applyFraming` from the view once a slider moves.
         // Hand the bust back on the drive pose alone and stream the event
         // clips in behind it. Awaiting all the rigged USDZs first (they load
         // serially on the main actor) left the PiP an empty circle for ~14s on

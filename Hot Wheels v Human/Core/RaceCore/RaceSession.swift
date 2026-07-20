@@ -22,6 +22,8 @@ final class RaceSession {
         var entity: ModelEntity?
         var livesLeft: Int
         var boostMeter: Float = 0
+        /// Burning right now (audio + reaction cam read this).
+        var boosting = false
         var speed: Float = 0
         var topSpeed: Float = 0
         var progress: Float = 0
@@ -276,6 +278,7 @@ final class RaceSession {
             racers[i].topSpeed = max(racers[i].topSpeed, speed)
             racers[i].livesLeft = state.livesLeft
             racers[i].boostMeter = state.boostMeter
+            racers[i].boosting = state.boosting
             racers[i].isOut = state.livesLeft <= 0
             racers[i].progress = follow.waypoints.isEmpty ? 0
                 : Float(follow.nextIndex) / Float(follow.waypoints.count - 1)
@@ -293,7 +296,11 @@ final class RaceSession {
             }
 
             // AI boost decision — same meter rules as humans, fair by design.
-            if racers[i].isAI, racers[i].boostMeter >= 1,
+            // Once it commits, it holds the button down until the bottle
+            // runs dry, exactly like a kid who found the fun part.
+            if racers[i].isAI, racers[i].boosting {
+                requestBoost(playerID: racers[i].id)
+            } else if racers[i].isAI, racers[i].boostMeter >= 1,
                let difficulty = config.aiDifficulty {
                 let upcoming = Array(pieceTypes[min(piece + 1, pieceTypes.count)...])
                 if AIBoostPolicy.shouldBoost(
@@ -348,14 +355,19 @@ final class RaceSession {
         return false
     }
 
-    /// Fires the boost if the meter is full (server-side validation lives
-    /// here so the networked path can reuse it).
+    /// "The boost button is down." The controller repeats this ~15 Hz while
+    /// held; each call refreshes the hold window, and the first one with an
+    /// armed meter starts the burn (server-side validation lives here so the
+    /// networked path can reuse it). Idempotent on purpose — repeats are the
+    /// hold signal, and a lost release packet just times the burn out.
     func requestBoost(playerID: UUID) {
         guard let car = racers.first(where: { $0.id == playerID })?.entity,
-              var state = car.components[CarComponent.self],
-              state.boostMeter >= 1 else { return }
-        state.boostMeter = 0
-        state.pendingBoost = true
+              var state = car.components[CarComponent.self] else { return }
+        state.boostHoldGrace = RaceTuning.boostHoldGrace
+        if !state.boosting, state.boostMeter >= 1 {
+            state.boosting = true
+            state.boostSeconds = 0
+        }
         car.components.set(state)
     }
 

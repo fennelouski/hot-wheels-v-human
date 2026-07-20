@@ -216,6 +216,42 @@ extension CarDesign {
                   name: name, chassis: chassis, tires: tires, paint: paint,
                   partColors: partColors, livery: livery, stickers: stickers)
     }
+
+    /// The body shop: every car body in the bundle that ISN'T already a
+    /// chassis default, so the garage has new rides to go find. The pick
+    /// rides in `modelOverride` (physics still comes from the chassis
+    /// class), which `CarFactory` and the turntable have always honoured —
+    /// the models were bundled and unreachable.
+    ///
+    /// ponytail: the symbol is a stand-in for a real thumbnail — rendering
+    /// 15 USDZs offscreen needs RealityRenderer. Swap it in if kids can't
+    /// tell the bodies apart from the name alone.
+    static let bodyShop: [(name: String, model: String, symbol: String)] = [
+        ("Drag Racer", "vehicle-drag-racer", "flame.fill"),
+        ("Low Rider", "vehicle-racer-low", "car.side.fill"),
+        ("Vintage Racer", "vehicle-vintage-racer", "steeringwheel"),
+        ("Beach Buggy", "vehicle-suv", "sun.max.fill"),
+        ("Pickup Truck", "vehicle-truck", "truck.pickup.side.fill"),
+        ("Sports Sedan", "sedan-sports", "bolt.car.fill"),
+        ("Track Star", "race", "flag.checkered"),
+        ("Future Racer", "race-future", "sparkles"),
+        ("Family Wagon", "suv", "car.2.fill"),
+        ("Big Rig", "truck", "truck.box.fill"),
+        ("Kart Oobi", "kart-oobi", "circle.hexagongrid.fill"),
+        ("Kart Oodi", "kart-oodi", "circle.hexagongrid.fill"),
+        ("Kart Ooli", "kart-ooli", "circle.hexagongrid.fill"),
+        ("Kart Oopi", "kart-oopi", "circle.hexagongrid.fill"),
+        ("Kart Oozi", "kart-oozi", "circle.hexagongrid.fill"),
+    ]
+
+    /// A blank car wearing one of the body-shop bodies, ready for the
+    /// customizer. Random name so it lands in the garage already named.
+    static func newCar(body: (name: String, model: String, symbol: String)) -> CarDesign {
+        CarDesign(id: UUID(), name: body.name, chassis: .balancedFormula,
+                  tires: .standard,
+                  paint: PaintSpec(colorHex: "#FF6600", finish: .glossy),
+                  modelOverride: body.model)
+    }
 }
 
 extension DriverProfile {

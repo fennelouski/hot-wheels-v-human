@@ -275,7 +275,7 @@ struct CharacterModelTests {
         #expect(DriverDressUp.props(for: driver) == ["hair-female-f"])
     }
 
-    // MARK: Editor save = upsert (characters edit in place, unlike cars)
+    // MARK: Editor save = upsert (characters and cars both edit in place)
 
     @MainActor @Test func editorSaveUpsertsById() throws {
         let container = try ModelContainer(
@@ -292,6 +292,36 @@ struct CharacterModelTests {
         #expect(records.count == 1)
         #expect(records.first?.profile?.name == "Second")
         #expect(records.first?.ownerProfileID == owner)
+    }
+
+    /// Cars save the same way now. They used to stamp a fresh UUID on every
+    /// save, which made editing a saved car impossible — you only ever got
+    /// another copy — and left the garage full of near-identical duplicates.
+    /// Deliberate cloning is the garage's "Make a Copy", which changes the id.
+    @MainActor @Test func carSaveUpsertsByIdAndCopyMakesASibling() throws {
+        let container = try ModelContainer(
+            for: CarDesignRecord.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        let context = container.mainContext
+        let model = CustomizerModel(design: CarDesign.presets[0])
+
+        model.design.name = "First"
+        model.save(into: context)
+        model.design.name = "Second"
+        model.design.paint.colorHex = "#00FF00"
+        model.save(into: context)
+
+        var records = try context.fetch(FetchDescriptor<CarDesignRecord>())
+        #expect(records.count == 1)
+        #expect(records.first?.design?.name == "Second")
+        #expect(records.first?.design?.paint.colorHex == "#00FF00")
+
+        var copy = model.design
+        copy.id = UUID()
+        copy.name = "Second 2"
+        context.saveDesign(copy)
+        records = try context.fetch(FetchDescriptor<CarDesignRecord>())
+        #expect(records.count == 2)
     }
 
     // MARK: AppModel stamping

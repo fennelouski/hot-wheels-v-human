@@ -77,7 +77,8 @@ private struct RaceControlsView: View {
                 .foregroundStyle(.black)
             } else if let car = model.myCar {
                 ReactionCamButton { model.setReactionCam(on: $0) }
-                BoostButtonView(meter: car.boostMeter) { model.fireBoost() }
+                BoostButtonView(meter: car.boostMeter,
+                                begin: model.beginBoost, end: model.endBoost)
             }
         }
         .padding(24)

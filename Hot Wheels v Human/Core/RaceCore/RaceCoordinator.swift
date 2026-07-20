@@ -35,7 +35,6 @@ final class RaceCoordinator {
     private var playlist: [TrackBlueprint] = []
     private var raceIndex = 0
     private var config = MatchConfig(mode: .onePlayer)
-    private let boostDedupe = TokenDeduper()
     private var arenaRoot: Entity?
     private var raceRunning = false
 
@@ -126,10 +125,10 @@ final class RaceCoordinator {
             readiness[playerID] = ready
             rematchIfReady()
             startRaceIfReady()
-        case .boost(let playerID, let token):
-            if boostDedupe.firstSighting(token) {
-                session.requestBoost(playerID: playerID)
-            }
+        case .boost(let playerID, _):
+            // No dedupe: boost packets are a hold heartbeat now, and
+            // requestBoost is idempotent — every repeat is meant to land.
+            session.requestBoost(playerID: playerID)
         case .reactionCam(let playerID, let on):
             if on { reactionCamsOn.insert(playerID) } else { reactionCamsOn.remove(playerID) }
         case .raceEvent, .raceSnapshot:

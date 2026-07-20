@@ -53,6 +53,36 @@ struct DriveSystem: System {
         }
     }
 
+    // MARK: Boost
+
+    /// Charge / burn / release, one frame. Returns the boost acceleration
+    /// to add this frame, m/s² (0 when not boosting). Pure — both drive
+    /// modes call it, so the meter behaves identically on rails and in chaos.
+    static func stepBoost(_ state: inout CarComponent, dt: Float) -> Float {
+        state.boostHoldGrace = max(0, state.boostHoldGrace - dt)
+
+        guard state.boosting else {
+            // Overcharge past 1 at half rate — waiting is the trade.
+            let rate = state.boostMeter < 1 ? 1 : RaceTuning.boostOverchargeRate
+            state.boostMeter = min(RaceTuning.boostMaxCharge,
+                                   state.boostMeter + rate * dt / RaceTuning.boostChargeTime)
+            return 0
+        }
+
+        state.boostMeter = max(0, state.boostMeter - dt / RaceTuning.boostDrainTime)
+        state.boostSeconds += dt
+        // Thrust builds over the hold: a stab kicks, a long hold pulls.
+        let ramp = 0.5 + 0.5 * min(1, state.boostSeconds / RaceTuning.boostRampTime)
+        let accel = (RaceTuning.boostAccel[state.design.chassis] ?? 0) * ramp
+
+        let owed = state.boostSeconds < RaceTuning.boostMinDuration
+        if state.boostMeter <= 0 || (state.boostHoldGrace <= 0 && !owed) {
+            state.boosting = false
+            state.boostSeconds = 0
+        }
+        return accel
+    }
+
     // MARK: Rail mode
 
     /// Pure spline-pinned integration step — no scene access, unit-testable.
@@ -102,11 +132,10 @@ struct DriveSystem: System {
             }
         }
         accel -= chassis.dragCoefficient * follow.speed * follow.speed / chassis.mass
+        // Boost pushes even in the air and inside a loop — it's the one
+        // thing the kid controls, so it always does something.
+        accel += Self.stepBoost(&state, dt: dt)
         follow.speed += accel * dt
-        if state.pendingBoost {
-            follow.speed += RaceTuning.boostImpulse / chassis.mass
-            state.pendingBoost = false
-        }
         if !follow.airborne {
             // Kid-first floor: no seam or slope ever strands a pinned car.
             follow.speed = max(follow.speed, RaceTuning.minCrawlSpeed)
@@ -415,9 +444,9 @@ struct DriveSystem: System {
 
         car.addForce(force, relativeTo: nil)
 
-        if state.pendingBoost {
-            car.applyLinearImpulse(tangent * RaceTuning.boostImpulse, relativeTo: nil)
-            state.pendingBoost = false
+        let boostAccel = Self.stepBoost(&state, dt: dt)
+        if boostAccel > 0 {
+            car.addForce(tangent * (chassis.mass * boostAccel), relativeTo: nil)
         }
 
         // Keep the visual pointed along the travel direction (wheels are

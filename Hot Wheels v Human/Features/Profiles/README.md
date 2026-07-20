@@ -30,10 +30,14 @@ characters per profile, the full-screen character editor, and the camera
   lean-into-turns swings the face clean out of a 180 pt circle. Face tab
   also picks the body type (Man/Woman/Boy/Girl — one rig, scaled per
   `BodyType.scale`); pickers are `ChipRow` chips, never segmented controls.
-  `save(into:)` **upserts by id** (unlike cars' clone-on-save) and stamps
-  the character as selected + last-used. Dev deep link: `--character-editor`.
+  `save(into:)` **upserts by id** (as cars now do too — see
+  `ModelContext.saveDesign`) and stamps the character as selected +
+  last-used. Dev deep link: `--character-editor`.
 - `DriverPreviewView.swift` — live turntable painted by the same
-  `DriverPainter` that races ("what you see is what races").
+  `DriverPainter` that races ("what you see is what races"). Idles with a
+  gentle sway around the front, but drag orbits it and pinch zooms
+  (`App/TurntableOrbit.swift`), and the sway stops for good on first grab —
+  so the back of the hair is reachable without waiting for it to turn.
 - `FaceDrawPad.swift` — face paint over the cartoon reaction face; PNG
   ≤64 KB on `DriverProfile.faceDrawingPNG`, composited in the reaction cam.
 - `LookalikeView.swift` — the camera flow (`#if os(iOS)` — NOT

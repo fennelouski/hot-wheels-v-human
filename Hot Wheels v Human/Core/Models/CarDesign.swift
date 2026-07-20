@@ -110,4 +110,10 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// so the driver travels the wire inside the design — no new message
     /// cases. Optional → old designs/peers decode.
     var driver: DriverProfile? = nil
+
+    /// The USDZ this car renders as: the picked body, else the chassis
+    /// class's default. Preview and race both read THIS — reading
+    /// `chassis.modelName` directly is how the turntable used to show a
+    /// different car than the one that raced.
+    var modelName: String { modelOverride ?? chassis.modelName }
 }

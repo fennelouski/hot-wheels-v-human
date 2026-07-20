@@ -19,9 +19,16 @@ struct CarComponent: Component {
     let playerID: UUID
     let design: CarDesign
     var livesLeft: Int
+    /// 0…`RaceTuning.boostMaxCharge`; 1 = armed, above 1 = overcharged.
     var boostMeter: Float = 0
-    /// Queued boost impulses (set by RaceCoordinator, consumed by DriveSystem).
-    var pendingBoost: Bool = false
+    /// Is the boost currently burning? (Started by `RaceSession.requestBoost`,
+    /// run down by `DriveSystem.stepBoost`.)
+    var boosting: Bool = false
+    /// How long the current burn has run — drives the thrust ramp.
+    var boostSeconds: Float = 0
+    /// Counts down from `RaceTuning.boostHoldGrace` on every boost packet;
+    /// hits zero shortly after the kid lifts their finger.
+    var boostHoldGrace: Float = 0
     var stuckSeconds: Float = 0
     /// Anchor for no-net-progress stuck detection (RaceTuning.stuckRadius).
     var stuckAnchor: SIMD3<Float>? = nil
@@ -80,7 +87,7 @@ enum CarFactory {
         CarComponent.registerComponent()
         LaneFollowComponent.registerComponent()
 
-        let visual = try await assets.entity(named: design.modelOverride ?? design.chassis.modelName)
+        let visual = try await assets.entity(named: design.modelName)
         await applyCustomization(to: visual, design: design)
 
         let car = ModelEntity()

@@ -18,6 +18,7 @@ final class ArenaAudio {
     private struct Prev {
         var crashes = 0
         var boostMeter: Float = 0
+        var boosting = false
         var finished = false
         var out = false
     }
@@ -62,7 +63,7 @@ final class ArenaAudio {
                 SoundBank.shared.play("off_track_alarm")
                 engines[racer.id]?.stop()
             }
-            if last.boostMeter >= 0.9 && racer.boostMeter <= 0.1 {
+            if racer.boosting && !last.boosting {
                 SoundBank.shared.play("speed_boost_fire")
                 if let key = AIRoster.voiceKey(for: racer.design) {
                     SoundBank.shared.play("voice_\(key)_boost")
@@ -90,6 +91,7 @@ final class ArenaAudio {
 
             last.crashes = racer.crashes
             last.boostMeter = racer.boostMeter
+            last.boosting = racer.boosting
             last.finished = racer.finishTime != nil
             last.out = racer.isOut
             prev[racer.id] = last

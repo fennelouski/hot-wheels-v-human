@@ -90,4 +90,35 @@ struct StarterPresetTests {
         #expect(Set(CarDesign.presets.map(\.id)).count == CarDesign.presets.count)
         #expect(Set(CarDesign.presets.map(\.name)).count == CarDesign.presets.count)
     }
+
+    /// A typo'd body-shop model is invisible in code review and silent at
+    /// runtime — `AssetStore` throws, the turntable's `try?` swallows it,
+    /// and the kid gets an empty spinning nothing where their car should be.
+    @Test func everyBodyShopModelIsBundled() {
+        for body in CarDesign.bodyShop {
+            #expect(Bundle.main.url(forResource: body.model, withExtension: "usdz") != nil,
+                    "missing asset \(body.model).usdz")
+        }
+    }
+
+    /// The body shop's whole job is showing rides you can't already build,
+    /// so no chassis default and no repeats.
+    @Test func bodyShopOffersOnlyNewRides() {
+        let bodies = CarDesign.bodyShop.map(\.model)
+        #expect(Set(bodies).count == bodies.count)
+        #expect(Set(bodies).isDisjoint(with: RaceTuning.chassisModelName.values))
+        #expect(Set(CarDesign.bodyShop.map(\.name)).count == bodies.count)
+    }
+
+    /// The preview/race split that used to make the turntable lie: whatever
+    /// loads a car model must read `modelName`, not `chassis.modelName`.
+    @Test func modelNamePrefersThePickedBodyOverTheChassisDefault() {
+        let plain = CarDesign.presets[0]
+        #expect(plain.modelName == plain.chassis.modelName)
+
+        let body = CarDesign.bodyShop[0]
+        let rebodied = CarDesign.newCar(body: body)
+        #expect(rebodied.modelName == body.model)
+        #expect(rebodied.modelName != rebodied.chassis.modelName)
+    }
 }

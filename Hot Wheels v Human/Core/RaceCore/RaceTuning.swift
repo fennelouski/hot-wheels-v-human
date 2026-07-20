@@ -16,8 +16,22 @@ nonisolated enum RaceTuning {
 
     /// Vertical height of one elevation level, metres. Measured from the
     /// Kenney hill-COMPLETE piece at 0.2 conversion scale (Blender: bed
-    /// surface −0.14 at entry → +0.06 at exit).
+    /// surface −0.18 at entry → +0.02 at exit).
     static let elevationLevelHeight: Float = 0.2
+
+    /// Steady slope of a RUN of hills — two or more of the same hill piece
+    /// in a row, which lay out like real Hot Wheels track: a transition
+    /// piece that bends into the slope, straight track pitched down the
+    /// middle of it, and a transition piece that flattens out at the
+    /// bottom. Only the middles use this; a lone hill is one S-shaped
+    /// piece and never reaches a steady slope at all.
+    ///
+    /// 30° is picked, not measured: sin 30° = ½ makes a 0.8 m straight
+    /// gain exactly two elevation levels, which keeps every height in the
+    /// track a whole number of support legs. The Kenney transition meshes
+    /// happen to bend to ~37°, so a middle meets them with a ~7° crease —
+    /// invisible next to the beds' own 6–10° faceting.
+    static let hillRunSlope: Float = .pi / 6
 
     // MARK: Track
 
@@ -267,10 +281,42 @@ nonisolated enum RaceTuning {
 
     // MARK: Boost
 
-    /// Impulse along current heading, N·s.
-    static let boostImpulse: Float = 1.5
-    /// Seconds for the meter to charge 0 → 1.
+    /// Boost is HELD, not tapped: the meter charges to 1 (armed), keeps
+    /// charging to 2 at half rate (overcharge — waiting pays), and burns
+    /// down while the button is down. Sustained thrust, not an impulse, so
+    /// the length of the hold is the skill.
+
+    /// Sustained boost acceleration, m/s², at full ramp. The chassis knob
+    /// the kid tunes in the garage: the muscle car is built around the
+    /// bottle (biggest shove), the drift car trades it for handling.
+    /// Sized so terminal boosted speed lands well under
+    /// `maxSpeed × speedCeilingFactor` — clip that clamp and boost reads
+    /// as a dead button (RailFollowerTests.boostStaysUnderTheSpeedClamp).
+    static let boostAccel: [ChassisClass: Float] = [
+        .heavyMuscle: 8,
+        .balancedFormula: 5.5,
+        .superlightDrift: 3.5,
+    ]
+    /// Seconds for the meter to charge 0 → 1 (armed).
     static let boostChargeTime: Float = 8
+    /// Overcharge ceiling — 2 = two full bottles' worth of burn time.
+    static let boostMaxCharge: Float = 2
+    /// Charge rate above 1, as a fraction of the normal rate. Half speed:
+    /// overcharging costs more track than it gives back, so it's a choice.
+    static let boostOverchargeRate: Float = 0.5
+    /// Seconds of burn one full meter buys — the depletion rate.
+    static let boostDrainTime: Float = 2.5
+    /// A tap always burns at least this long, so a stab of the button is
+    /// still a real (small) boost rather than a single-frame nothing.
+    static let boostMinDuration: Float = 0.5
+    /// Thrust ramps from half to full over this long: hold longer,
+    /// accelerate harder.
+    static let boostRampTime: Float = 1.0
+    /// The controller heartbeats "still holding" over the unreliable
+    /// channel; the boost keeps burning this long after the last packet.
+    /// Wide enough to ride out a few dropped packets, short enough that
+    /// letting go stops the burn on the same breath.
+    static let boostHoldGrace: Float = 0.35
 
     // MARK: Race robustness
 
@@ -391,7 +437,25 @@ nonisolated enum RaceTuning {
     /// bust is a different rig from the roster characters in the car, and
     /// body types rescale it further, so anything anchored to a constant
     /// frames a different part of a different person on each of them.
-    static let cockpitCameraDistanceRatio: Float = 0.56
+    /// How far the PiP driver is shrunk so head AND torso fit the circle.
+    /// This is the knob that actually works: the PiP's RealityView renders
+    /// with its own automatic camera and ignores the PerspectiveCamera in
+    /// the scene, so moving a camera changes nothing and scaling the rig is
+    /// the only lever. Erring small is fine — too big is a face filling the
+    /// glass with no room for the reaction to land.
+    static let cockpitBustScale: Float = 1.0
+    /// World-Y the shrunk driver is lifted to. Scaling is about the rig's
+    /// FEET, so without this the head drops out of frame. Absolute, not
+    /// derived — dial it in with the `--pip-tuner` bench.
+    static let cockpitBustLift: Float = 0
+    /// Camera distance as a fraction of the rig's MEASURED world height (see
+    /// DriverPoser.frameOnHead). Tuned by eye against the `--reaction-cam`
+    /// bench rather than derived: the measured bounds don't map to body
+    /// height as cleanly as the FOV maths would suggest, so the number that
+    /// matters is the one that puts head-and-torso in the circle. Erring
+    /// small is fine — too close is a face filling the glass with no room
+    /// for the reaction to land.
+    static let cockpitCameraDistanceRatio: Float = 6.0
     static let cockpitCameraDropRatio: Float = 0.036
     /// Per-update blend for the camera chasing the posed head. Low enough
     /// that a snappy crash clip doesn't whip the framing around.

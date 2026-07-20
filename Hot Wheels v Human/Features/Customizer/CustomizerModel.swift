@@ -108,13 +108,7 @@ final class CustomizerModel {
     }
 
     func save(into context: ModelContext) {
-        // New id per save so "save again" makes a sibling, not an overwrite —
-        // kids iterate by cloning.
-        design.id = UUID()
-        if let record = try? CarDesignRecord(design: design) {
-            context.insert(record)
-        }
-        try? context.save()
+        context.saveDesign(design)
     }
 
     static func randomCarName() -> String {
