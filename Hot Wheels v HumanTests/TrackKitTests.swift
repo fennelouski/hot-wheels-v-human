@@ -55,8 +55,15 @@ struct ValidatorTests {
         #expect(result.reasons.contains { $0.contains("on top of each other") })
     }
 
-    @Test func rejectsUndergroundTrack() {
-        #expect(!BlueprintValidator.validate(blueprint([.startGate, .hillDown, .finishGate])).isValid)
+    /// Was `rejectsUndergroundTrack`. A track that opens with a hillDown is
+    /// no longer digging — it's a downhill start, which is a feature now.
+    /// The solver lifts the whole layout so the lowest point rests on the
+    /// ground, so there is nothing left to reject: underground is
+    /// unreachable by construction rather than by rule.
+    /// (Geometry side: aTrackThatDescendsFromTheStartIsLiftedNotBuried.)
+    @Test func acceptsATrackThatStartsDownhill() {
+        #expect(BlueprintValidator.validate(
+            blueprint([.startGate, .hillDown, .finishGate])).isValid)
     }
 
     @Test func rejectsOversizedTrack() {
