@@ -107,7 +107,15 @@ enum TrackSpawner {
         var pitch: Float = 0
         var centerY = bedTop - thickness / 2
         if case .line(let length, let rise) = piece.definition.shape, rise != 0 {
-            pitch = atan(rise / length)
+            // NEGATIVE: a right-handed rotation about +X carries +Z toward
+            // −Y, so `atan(rise/length)` tipped every hill's slab the
+            // opposite way to its own spline. On a hillUp that stood the
+            // slab's high end up at the ENTRY seam — a ~20 cm lip across
+            // the track, exactly where cars arrive. That lip is the hill
+            // wedge the stuck-rescue has been papering over; rail cars are
+            // kinematic and float through it, so it went quiet rather than
+            // away. Pinned by hillBedSlabsPitchAlongTheirOwnRise.
+            pitch = -atan(rise / length)
             size.z = (length * length + rise * rise).squareRoot()
             centerY += rise / 2
         }

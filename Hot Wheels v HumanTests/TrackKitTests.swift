@@ -269,6 +269,31 @@ struct TrackSpawnerTests {
         #expect(root.children.contains { $0.name.hasPrefix("overlay-") })
     }
 
+    /// A hill's collision slab has to be pitched the SAME way its spline
+    /// runs. It was pitched the opposite way — `simd_quatf(angle:axis:[1,0,0])`
+    /// rotates +Z toward −Y, so a positive rise tipped the slab downhill —
+    /// which stood the slab's high end up as a 20 cm lip right at the
+    /// entry seam. That lip is what wedged cars on hills (chaos mode; rail
+    /// cars are kinematic and float straight through it, which is why the
+    /// rescue counter went quiet without the defect ever being fixed).
+    @Test func hillBedSlabsPitchAlongTheirOwnRise() async throws {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .hillUp, .straight, .hillDown, .finishGate]))
+        let root = try await TrackSpawner.spawn(layout: layout)
+
+        for piece in layout.pieces {
+            guard case .line(let length, let rise) = piece.definition.shape else { continue }
+            let bed = try #require(root.children.first { $0.name == "bed-\(piece.index)" })
+            // Slab's own forward axis in world space = the surface it presents.
+            let forward = bed.convert(direction: SIMD3<Float>(0, 0, 1), to: nil)
+            let slope = forward.y / simd_length(SIMD3(forward.x, 0, forward.z))
+            #expect(abs(slope - rise / length) < 0.01)
+        }
+        // Not vacuous: the track really does contain a rise and a drop.
+        #expect(layout.pieces.contains { $0.definition.elevationDelta > 0 })
+        #expect(layout.pieces.contains { $0.definition.elevationDelta < 0 })
+    }
+
     /// Climbs to level 2 and back down, so the top flats need two legs each.
     private static let climb: [PieceType] =
         [.startGate, .straight, .hillUp, .straight, .hillUp,
