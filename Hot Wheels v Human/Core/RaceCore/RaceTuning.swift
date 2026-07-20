@@ -46,6 +46,12 @@ nonisolated enum RaceTuning {
     static let loopMinEntrySpeed: Float = 4.4
     /// Placeholder until jumps go live in Phase 2.
     static let rampMinEntrySpeed: Float = 2.0
+    /// How high the ramp's centreline crests above its level entry/exit,
+    /// metres. Measured off the bump-up mesh (OBJ at 0.2 scale: bed top
+    /// 0.06 at both ends, 0.16 at mid-piece) so the spline sits ON the
+    /// model. Raising it makes bigger air — but the car then floats over
+    /// the mesh on the way up, so a taller ramp needs taller geometry.
+    static let rampCrestHeight: Float = 0.10
 
     // MARK: Drive (Phase 2 — the feel lives here)
 

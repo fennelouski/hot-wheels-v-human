@@ -168,6 +168,58 @@ struct SolverTests {
         #expect(jump.exitOffset == PieceCatalog.definition(for: .bump).exitOffset)
     }
 
+    /// The ramp's centreline has to CREST — a flat spline is a flat
+    /// straight in rail mode, which is the mode we ship. Entry and exit
+    /// stay at y = 0 so all 7 locked presets keep their layouts.
+    @Test func rampJumpCrestsAndStillEndsLevel() {
+        guard case .crest(let length, let height) =
+            PieceCatalog.definition(for: .rampJump).shape else {
+            Issue.record("rampJump must crest, not run flat"); return
+        }
+        #expect(height > 0)
+
+        let lanes = TrackLayoutSolver.solve(blueprint([.startGate, .rampJump, .finishGate])).lanes
+        let ys = lanes.center.map(\.y)
+        #expect(ys.max()! >= height - 0.001)     // it really rises
+        #expect(ys.first! == 0)                  // ...and both seams are level
+        #expect(abs(ys.last!) < 1e-5)
+        #expect(abs(length - PieceCatalog.definition(for: .straight).exitOffset.z) < 1e-5)
+    }
+
+    /// End to end on the geometry the game actually builds: a car driven
+    /// down a solved lane must leave the ground over the ramp and land
+    /// back on the lane. This is the check that a flat rampJump failed.
+    @Test func rampJumpThrowsACarOffTheSolvedLane() {
+        /// Ground distance covered while off the bed, metres (0 = never flew).
+        func airDistance(_ types: [PieceType]) -> Float {
+            let lanes = TrackLayoutSolver.solve(blueprint(types)).lanes
+            var follow = LaneFollowComponent(waypoints: lanes.left, laterals: lanes.laterals)
+            var state = CarComponent(playerID: UUID(), design: .demoPair[0],
+                                     livesLeft: 5, rideHeight: 0.05)
+            var takeOff: SIMD3<Float>?
+            var distance: Float = 0
+            for _ in 0..<1200 {
+                let wasFlying = follow.airborne
+                let pose = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+                if follow.airborne, !wasFlying { takeOff = pose.position }
+                if !follow.airborne, let up = takeOff {
+                    distance = max(distance, simd_length(SIMD3(pose.position.x - up.x, 0,
+                                                               pose.position.z - up.z)))
+                    takeOff = nil
+                }
+            }
+            #expect(!follow.airborne)   // whatever went up came back down
+            return distance
+        }
+        let runway: [PieceType] = Array(repeating: .straight, count: 5)
+        // Real air, not a one-frame jitter: at rail pace the arc carries
+        // the car most of a piece length.
+        #expect(airDistance([.startGate] + runway + [.rampJump] + runway + [.finishGate]) > 0.3)
+        // Control: the same track with a plain straight in the ramp's slot
+        // must NOT launch, or the test is passing on something else.
+        #expect(airDistance([.startGate] + runway + [.straight] + runway + [.finishGate]) == 0)
+    }
+
     /// TrackSpawner stacks `entryLevel` cosmetic legs of one
     /// `elevationLevelHeight` each under an elevated piece, so the solver's
     /// world Y must stay exactly that product — drift and the legs either

@@ -34,6 +34,13 @@ struct FootprintRect: Sendable, Equatable {
 enum CenterlineShape: Sendable, Equatable {
     case line(length: Float, rise: Float)
     case arc(radius: Float, leftTurn: Bool)
+    /// Symmetric hump — entry AND exit at y = 0, cresting `height` at the
+    /// middle, so a crest piece stays swappable with `.straight`. The
+    /// profile is a raised cosine, which is what the bump-up mesh actually
+    /// is (measured off the OBJ: bed top 0.06 → 0.16 → 0.06 across the
+    /// 0.8 m run). Convex crest = the launch: rail mode goes ballistic
+    /// where the bed falls away faster than gravity.
+    case crest(length: Float, height: Float)
     /// Vertical circle: short entry/exit stubs, full loop between,
     /// exit shifted `lateralShift` to the left (corkscrew offset).
     case verticalLoop(radius: Float, advance: Float, lateralShift: Float)
@@ -175,7 +182,7 @@ enum PieceCatalog {
         // vertical circle radius 0.4. Model's native travel is −Z → yaw 180°.
         TrackPieceDefinition(
             type: .loop, modelName: "track-narrow-looping",
-            modelYaw: .pi, modelOffset: [0, 0.19, 0.09],
+            modelYaw: 0, modelOffset: [0.2, 0.19, 0.09],
             exitOffset: [0.2, 0, 0.18],
             footprint: FootprintRect(minX: -0.11, minZ: 0, maxX: 0.3, maxZ: 0.18),
             shape: .verticalLoop(radius: 0.4, advance: 0.18, lateralShift: 0.2),
@@ -185,19 +192,26 @@ enum PieceCatalog {
         // Straight-line jump. Was a corner-ramp — so the only "jump" was a
         // banked turn; a jump should launch you STRAIGHT. Kinematically a
         // plain straight (0.8 forward, no turn, level exit) so it drops into
-        // any straightaway with no seam and no preset re-layout. The launch
-        // is physical: rampJump keeps its exact mesh collision (TrackSpawner)
-        // instead of the flat bed slab, so at minEntrySpeed the car rides the
-        // bump crest and takes air, then DriveSystem's lane recovery reels it
-        // gently back down onto the lane (deliberate air, inside the grace
-        // window). bump-up is the launch lip: symmetric, so it exits level
-        // and never opens a gap in the track. A taller dedicated ramp (OGA
-        // jump geometry) is the upgrade if kids want bigger air.
+        // any straightaway with no seam and no preset re-layout.
+        //
+        // The centreline CRESTS (see .crest) instead of running flat. That
+        // is what makes it a jump in the mode we ship: rail mode launches a
+        // car only where the bed falls away faster than gravity, and a flat
+        // spline never does — the piece was a straight with a hump drawn on
+        // it, and the car drove through the hump. The crest matches the
+        // mesh, so the car now rides the model up and gets thrown off the
+        // convex face. Chaos mode is unaffected: it keeps the exact mesh
+        // collision (TrackSpawner) and was always launched by the real lip.
+        //
+        // bump-up is the launch lip: symmetric, so it exits level and never
+        // opens a gap in the track. A taller dedicated ramp (OGA jump
+        // geometry) is the upgrade if kids want bigger air.
         TrackPieceDefinition(
             type: .rampJump, modelName: "track-wide-straight-bump-up",
             modelOffset: bedLift,
             exitOffset: [0, 0, 0.8],
-            footprint: straightRect, shape: .line(length: 0.8, rise: 0),
+            footprint: straightRect,
+            shape: .crest(length: 0.8, height: RaceTuning.rampCrestHeight),
             minEntrySpeed: RaceTuning.rampMinEntrySpeed),
     ]
 }

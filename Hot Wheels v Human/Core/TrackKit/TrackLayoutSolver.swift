@@ -161,6 +161,19 @@ enum TrackLayoutSolver {
                 lateral.append([1, 0, 0])  // +X = left when heading +Z
             }
 
+        case .crest(let length, let height):
+            // Raised cosine: y = h/2·(1 − cos 2πt). Zero at both ends (so
+            // the piece swaps with a straight), zero SLOPE at both ends
+            // (so neither seam kinks), convex over the top — which is the
+            // whole point, since the rail follower launches exactly where
+            // the bed's downward slope beats gravity.
+            let n = max(2, Int((length / spacing).rounded(.up)))
+            for i in 0...n {
+                let t = Float(i) / Float(n)
+                points.append([0, height / 2 * (1 - cos(2 * .pi * t)), length * t])
+                lateral.append([1, 0, 0])
+            }
+
         case .arc(let radius, let leftTurn):
             let n = max(2, Int((radius * .pi / 2 / spacing).rounded(.up)))
             let sign: Float = leftTurn ? 1 : -1
