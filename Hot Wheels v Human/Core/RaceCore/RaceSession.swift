@@ -65,7 +65,13 @@ final class RaceSession {
     /// CLI drill breadcrumbs: print AND append to Documents/drill-log.txt —
     /// `simctl launch --console-pty` drops output often enough that sim
     /// drills need the file (read via `simctl get_app_container … data`).
+    ///
+    /// Debug builds only. This is dev tooling: a shipped app has no business
+    /// writing a race trace into a kid's Documents folder on every frame.
+    /// Drills run debug builds, so nothing is lost. Callers stay unguarded —
+    /// one `#if` here beats one at each of the eight call sites.
     nonisolated static func drillLog(_ line: String, reset: Bool = false) {
+        #if DEBUG
         print(line)
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             .appendingPathComponent("drill-log.txt")
@@ -77,6 +83,7 @@ final class RaceSession {
         } else {
             try? data.write(to: url)
         }
+        #endif
     }
     private var lastTraceSecond = -1
     @MainActor private static var drillLogStarted = false
