@@ -85,6 +85,18 @@ struct RaceTuningTests {
         }
     }
 
+    /// SteeringWheelView force-unwraps these, so a new chassis must not be
+    /// able to reach the reaction cam without a wheel to hold. Spoke counts
+    /// stay ≥ 2 (one spoke is a lollipop, not a steering wheel) and the rim
+    /// has to fit inside the radius it's drawn in.
+    @Test func cockpitWheelTablesCoverEveryChassis() {
+        for chassis in ChassisClass.allCases {
+            #expect(RaceTuning.cockpitWheelSpokes[chassis]! >= 2)
+            let rim = RaceTuning.cockpitWheelRimWidth[chassis]!
+            #expect(rim > 0 && rim < 0.5)
+        }
+    }
+
     /// The anti-fling speed clamp exists to kill depenetration spikes, and
     /// it must never touch a legitimate boost — clip that and boosting just
     /// silently stops working, which reads as a dead button.

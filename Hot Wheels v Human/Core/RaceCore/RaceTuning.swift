@@ -346,6 +346,57 @@ nonisolated enum RaceTuning {
     /// Per-second blend rate for the PiP's smoothed lean/speed readouts.
     static let reactionMotionSmoothing: Float = 8
 
+    // MARK: Reaction-cam cockpit
+
+    /// The PiP steering wheel swings this many radians at full lean. Well
+    /// past the car's own roll (reactionLeanAngle) — a real wheel turns far
+    /// more than the car does, and the exaggeration is what reads at 180 pt.
+    static let cockpitWheelAngle: Float = 0.9
+    /// Wheel radius as a fraction of the PiP's width. Bigger than the PiP so
+    /// only the top arc shows — the rest sits below the driver's chest.
+    static let cockpitWheelRadiusRatio: Float = 0.62
+    /// Wheel centre below the PiP's bottom edge, fraction of height. Deep
+    /// enough that only the top arc shows across the driver's chest — any
+    /// higher and the rim cuts across their face.
+    static let cockpitWheelCenterY: Float = 1.20
+    /// How far the key light on the driver's face is washed toward white
+    /// before it hits them. Straight `daylight` is fully saturated, and a
+    /// saturated key flattens the low-poly rig into single-colour slabs.
+    static let cockpitKeyLightWash: Float = 0.6
+    /// Spoke count per chassis — the wheel is the car's face from inside.
+    static let cockpitWheelSpokes: [ChassisClass: Int] = [
+        .heavyMuscle: 2,          // fat two-spoke muscle bar
+        .balancedFormula: 3,      // flat-bottom formula tiller
+        .superlightDrift: 4,      // skinny four-spoke drift wheel
+    ]
+    /// Rim thickness as a fraction of the wheel radius.
+    static let cockpitWheelRimWidth: [ChassisClass: Float] = [
+        .heavyMuscle: 0.30,
+        .balancedFormula: 0.20,
+        .superlightDrift: 0.13,
+    ]
+    /// Chassis whose wheel is cut flat across the bottom.
+    static let cockpitWheelFlatBottom: Set<ChassisClass> = [.balancedFormula]
+    /// Horizon height as a fraction of the PiP — low enough that the road
+    /// fills the glass under the driver's chin.
+    static let cockpitHorizonRatio: Float = 0.44
+    /// How far the vanishing point slides opposite a full-lean turn,
+    /// fraction of width. This is the whole sense of "we're cornering".
+    static let cockpitVanishShift: Float = 0.26
+    /// Road dashes drawn per frame, and their scroll rate at top speed.
+    static let cockpitDashCount = 7
+    static let cockpitDashSpeed: Float = 1.6
+    /// PiP camera distance and drop below the head, as fractions of the
+    /// rig's own measured height — NOT of driverSourceHeight. The reaction
+    /// bust is a different rig from the roster characters in the car, and
+    /// body types rescale it further, so anything anchored to a constant
+    /// frames a different part of a different person on each of them.
+    static let cockpitCameraDistanceRatio: Float = 0.56
+    static let cockpitCameraDropRatio: Float = 0.036
+    /// Per-update blend for the camera chasing the posed head. Low enough
+    /// that a snappy crash clip doesn't whip the framing around.
+    static let cockpitHeadTrackBlend: Float = 0.22
+
     // MARK: Audio (Phase 6)
 
     static let musicVolume: Float = 0.6
