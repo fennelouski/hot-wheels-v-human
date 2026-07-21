@@ -9,7 +9,6 @@
 
 import SwiftUI
 import SwiftData
-import UIKit
 
 struct CharacterEditorView: View {
     @Environment(AppModel.self) private var appModel

@@ -9,7 +9,7 @@
 import SwiftUI
 import SwiftData
 import RealityKit
-#if canImport(PencilKit) && !os(tvOS)
+#if canImport(PencilKit) && !os(tvOS) && !os(macOS)
 import PencilKit
 #endif
 
@@ -40,7 +40,7 @@ struct CustomizerView: View {
     /// Mid-gesture sticker state shown on the turntable; committed to the
     /// design (one undo entry) when the gesture ends.
     @State private var draftStickers: [StickerPlacement]? = nil
-    #if canImport(PencilKit) && !os(tvOS)
+    #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
     /// Session-held pencil strokes (the design only stores the capped PNG).
     @State private var pencilStrokes = PKDrawing()
     #endif
@@ -140,7 +140,7 @@ struct CustomizerView: View {
                 case .livery: LiveryShopView(livery: $model.design.livery)
                 case .stickers: StickerShopView(armed: $armedSticker, colorHex: $stickerColor)
                 case .draw:
-                    #if canImport(PencilKit) && !os(tvOS)
+                    #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
                     DrawingPadView(drawingPNG: $model.design.drawingPNG,
                                    drawingStrokes: $model.design.drawingStrokes,
                                    strokes: $pencilStrokes)
@@ -370,7 +370,7 @@ struct CarTurntableView: View {
         let stickers = (design.stickers ?? []).map {
             "\($0.symbol)@\($0.uv.x),\($0.uv.y)x\($0.scale)r\($0.rotation)#\($0.colorHex)"
         }.joined(separator: ";")
-        let signature = "\(design.modelName)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(parts)|\(livery)|\(stickers)|\(design.drawingPNG?.hashValue ?? 0)"
+        let signature = "\(design.modelName)|\(design.paint.colorHex)|\(design.paint.finish.rawValue)|\(design.wheelFinish?.rawValue ?? "matte")|\(parts)|\(livery)|\(stickers)|\(design.drawingPNG?.hashValue ?? 0)"
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
 

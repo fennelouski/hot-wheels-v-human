@@ -9,9 +9,6 @@ import CoreGraphics
 import Foundation
 import Observation
 import SwiftData
-#if canImport(UIKit)
-import UIKit
-#endif
 
 @MainActor
 @Observable
@@ -33,6 +30,7 @@ final class CustomizerModel {
             design.name = "Demo Dazzler"
             design.paint = PaintSpec(colorHex: "#2266FF", finish: .sparkle)
             design.partColors = [CarPaintSlot.wheels: "#FFD500"]
+            design.wheelFinish = .metallic
             design.livery = LiverySpec(pattern: .flames, colorHex: "#FF3B30", scale: 1)
             design.stickers = [
                 StickerPlacement(symbol: "star.fill", uv: [0.45, 0.5],
@@ -77,11 +75,7 @@ final class CustomizerModel {
                    startAngle: .pi * 1.15, endAngle: .pi * 1.85, clockwise: false)
         ctx.strokePath()
         guard let image = ctx.makeImage() else { return nil }
-        #if canImport(UIKit)
-        return OverlayComposer.encodePNGCapped(UIImage(cgImage: image))
-        #else
-        return nil
-        #endif
+        return OverlayComposer.encodePNGCapped(image)
     }
 
     // MARK: Undo (kid-first rule: always visible, unlimited, no confirmations)

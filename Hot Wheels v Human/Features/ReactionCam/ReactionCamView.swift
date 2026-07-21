@@ -15,7 +15,11 @@
 
 import SwiftUI
 import RealityKit
+#if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 /// Every cockpit number the PiP tuner can move, in one value so the tuner
 /// can drive a REAL `ReactionCamView` rather than a mock-up. `.standard`
@@ -111,7 +115,7 @@ struct ReactionCamView: View {
                 // Cool rim from behind-left so the bust pops off the backdrop.
                 let rim = DirectionalLight()
                 rim.light.intensity = 3500
-                rim.light.color = UIColor(red: 0.6, green: 0.75, blue: 1.0, alpha: 1)
+                rim.light.color = PlatformColor(red: 0.6, green: 0.75, blue: 1.0, alpha: 1)
                 rim.look(at: [0, head, 0], from: [-1.5, head + 0.8, -2], relativeTo: nil)
                 content.add(rim)
 
@@ -141,7 +145,7 @@ struct ReactionCamView: View {
                 // boost flare, crash red, the car's own colour on the podium —
                 // washed toward white so it tints the driver instead of
                 // painting them one flat colour.
-                keyLight?.light.color = UIColor(
+                keyLight?.light.color = PlatformColor(
                     daylight.mix(with: .white, by: Double(effectiveTuning.keyLightWash)))
                 keyLight?.light.intensity =
                     director.state == .boosted ? 9000 : 6000

@@ -12,6 +12,8 @@ import Foundation
 import RealityKit
 #if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
 
 @MainActor

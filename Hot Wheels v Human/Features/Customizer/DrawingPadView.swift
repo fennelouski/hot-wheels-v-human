@@ -10,7 +10,11 @@
 //
 
 import SwiftUI
-#if canImport(PencilKit) && !os(tvOS)
+// PKCanvasView (the interactive canvas) is a UIView — it exists on iOS,
+// Catalyst and visionOS, but NOT on tvOS or a native macOS (AppKit) build.
+// A drawing MADE on iPad still races and shows on every platform (it's stored
+// as a PNG the paint shell decodes); only creating one needs this pad.
+#if canImport(PencilKit) && !os(tvOS) && !os(macOS)
 import PencilKit
 
 struct DrawingPadView: View {
@@ -84,7 +88,7 @@ struct DrawingPadView: View {
                          tool: erasing
                             ? PKEraserTool(.bitmap)
                             : PKInkingTool(.marker,
-                                           color: UIColor(Color(hex: inkColor)),
+                                           color: PlatformColor(Color(hex: inkColor)),
                                            width: inkWidth),
                          onStrokesChanged: commit)
         }
@@ -100,26 +104,31 @@ struct DrawingPadView: View {
     }
 
     /// Every stroke updates the design (kid sees the car change instantly);
-    /// the 200 KB cap downsizes as needed.
+    /// the 200 KB cap downsizes as needed. Output: a 1024² PNG with the drawing
+    /// in the vertical middle band, so UV [0,1]² lines up on the car side.
     private func commit() {
         SoundBank.shared.play("paint_spray")
-        let bounds = CGRect(x: 0, y: 0, width: 1024, height: 1024 / 2.4)
-        var image = strokes.image(from: bounds, scale: 1)
-        // Pad onto a square so UV [0,1]² lines up: drawing occupies the
-        // vertical middle band of the car side.
-        image = UIGraphicsImageRenderer(size: CGSize(width: 1024, height: 1024))
-            .image { _ in
-                image.draw(in: CGRect(x: 0, y: (1024 - bounds.height) / 2,
-                                      width: 1024, height: bounds.height))
-            }
-        if strokes.strokes.isEmpty {
+        guard !strokes.strokes.isEmpty else {
             drawingPNG = nil
             drawingStrokes = nil
-        } else {
-            drawingPNG = OverlayComposer.encodePNGCapped(image)
-            let data = strokes.dataRepresentation()
-            drawingStrokes = data.count <= 200_000 ? data : nil
+            return
         }
+        let bandHeight: CGFloat = 1024 / 2.4
+        let bounds = CGRect(x: 0, y: 0, width: 1024, height: bandHeight)
+        // Pad onto a 1024² square so UV [0,1]² lines up: drawing occupies the
+        // vertical middle band of the car side. Through a CGImage so the PNG
+        // cap is the one shared cross-platform path in OverlayComposer.
+        let drawn = strokes.image(from: bounds, scale: 1)
+        let padded = UIGraphicsImageRenderer(size: CGSize(width: 1024, height: 1024))
+            .image { _ in
+                drawn.draw(in: CGRect(x: 0, y: (1024 - bandHeight) / 2,
+                                      width: 1024, height: bandHeight))
+            }
+        if let cg = padded.cgImage {
+            drawingPNG = OverlayComposer.encodePNGCapped(cg)
+        }
+        let data = strokes.dataRepresentation()
+        drawingStrokes = data.count <= 200_000 ? data : nil
     }
 }
 
@@ -146,8 +155,9 @@ struct CarSilhouette: Shape {
     }
 }
 
-/// Thin PKCanvasView wrapper: transparent, finger drawing allowed.
-/// Shared by the car drawing pad and the driver face pad.
+/// Thin PKCanvasView wrapper: transparent, finger/pointer drawing allowed.
+/// Shared by the car drawing pad and the driver face pad. PKCanvasView is a
+/// UIView, so this whole file is UIKit-only (see the top-of-file guard).
 struct PencilCanvas: UIViewRepresentable {
     @Binding var drawing: PKDrawing
     let tool: any PKTool

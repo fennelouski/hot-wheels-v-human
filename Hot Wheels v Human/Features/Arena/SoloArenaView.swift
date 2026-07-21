@@ -112,21 +112,28 @@ private struct RacePreviewModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .onChange(of: isPresented) { if $1 { runID = UUID() } }
-            .fullScreenCover(isPresented: $isPresented) {
-                ZStack(alignment: .topLeading) {
-                    SoloArenaView(designs: designs, blueprint: blueprint, config: config)
-                        .id(runID)
-                    Button {
-                        isPresented = false
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 44))
-                            .padding(20)
-                    }
-                    .tint(.white.opacity(0.7))
-                    .accessibilityLabel("Close")
-                }
+        // macOS has no fullScreenCover — a sheet is its full-window modal.
+        #if os(macOS)
+            .sheet(isPresented: $isPresented) { cover }
+        #else
+            .fullScreenCover(isPresented: $isPresented) { cover }
+        #endif
+    }
+
+    @ViewBuilder private var cover: some View {
+        ZStack(alignment: .topLeading) {
+            SoloArenaView(designs: designs, blueprint: blueprint, config: config)
+                .id(runID)
+            Button {
+                isPresented = false
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 44))
+                    .padding(20)
             }
+            .tint(.white.opacity(0.7))
+            .accessibilityLabel("Close")
+        }
     }
 }
 

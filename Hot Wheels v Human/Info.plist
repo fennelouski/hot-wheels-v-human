@@ -11,5 +11,9 @@
 		<string>_hwvh-race._tcp</string>
 		<string>_hwvh-race._udp</string>
 	</array>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

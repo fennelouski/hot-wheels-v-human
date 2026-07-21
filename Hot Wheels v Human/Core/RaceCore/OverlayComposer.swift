@@ -14,6 +14,8 @@ import CoreGraphics
 import Foundation
 #if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
 
 nonisolated enum OverlayComposer {
@@ -89,12 +91,8 @@ nonisolated enum OverlayComposer {
         let rect = CGRect(x: -side / 2, y: -side / 2, width: side, height: side)
         if sticker.symbol == "skull" {
             drawSkull(in: rect, color: cgColor(hex: sticker.colorHex), ctx: ctx)
-        } else {
-            #if canImport(UIKit)
-            if let cgImage = symbolImage(sticker.symbol, hex: sticker.colorHex) {
-                ctx.draw(cgImage, in: rect)
-            }
-            #endif
+        } else if let cgImage = symbolImage(sticker.symbol, hex: sticker.colorHex) {
+            ctx.draw(cgImage, in: rect)
         }
         ctx.restoreGState()
     }
@@ -113,6 +111,27 @@ nonisolated enum OverlayComposer {
             image.draw(in: CGRect(origin: .zero, size: image.size))
         }
         return flipped.cgImage
+    }
+    #elseif canImport(AppKit)
+    private static func symbolImage(_ name: String, hex: String) -> CGImage? {
+        let config = NSImage.SymbolConfiguration(pointSize: 200, weight: .regular)
+        guard let symbol = NSImage(systemSymbolName: name, accessibilityDescription: nil)?
+            .withSymbolConfiguration(config) else { return nil }
+        var rect = CGRect(origin: .zero, size: symbol.size)
+        guard let mask = symbol.cgImage(forProposedRect: &rect, context: nil, hints: nil),
+              mask.width > 0, mask.height > 0,
+              let ctx = CGContext(
+                data: nil, width: mask.width, height: mask.height, bitsPerComponent: 8,
+                bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
+                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
+        // SF Symbols are template (alpha) images: clip to the glyph and flood
+        // it with the sticker colour. Same bottom-left-origin space the UIKit
+        // path lands in.
+        let full = CGRect(x: 0, y: 0, width: mask.width, height: mask.height)
+        ctx.clip(to: full, mask: mask)
+        ctx.setFillColor(cgColor(hex: hex))
+        ctx.fill(full)
+        return ctx.makeImage()
     }
     #endif
 
@@ -259,31 +278,24 @@ nonisolated enum OverlayComposer {
         ctx.fillPath()
     }
 
-    #if canImport(UIKit)
     /// PNG-encode at most `maxBytes`, downscaling ×0.7 until it fits
     /// (CUSTOMIZATION-GRAPHICS.md: 200 KB cap, enforced at save time).
-    static func encodePNGCapped(_ image: UIImage, maxBytes: Int = 200_000,
-                                maxWidth: CGFloat = 1024) -> Data? {
+    /// Pure CGImage + ImageIO, so it's the same path on every platform.
+    static func encodePNGCapped(_ image: CGImage, maxBytes: Int = 200_000,
+                                maxWidth: Int = 1024) -> Data? {
         var current = image
-        if current.size.width > maxWidth {
-            current = resized(current, width: maxWidth)
+        if current.width > maxWidth, let scaled = scaledCGImage(current, width: maxWidth) {
+            current = scaled
         }
         for _ in 0..<8 {
-            guard let data = current.pngData() else { return nil }
+            guard let data = encodePNG(current) else { return nil }
             if data.count <= maxBytes { return data }
-            current = resized(current, width: current.size.width * 0.7)
+            guard let scaled = scaledCGImage(current, width: Int(Double(current.width) * 0.7))
+            else { return nil }
+            current = scaled
         }
         return nil
     }
-
-    private static func resized(_ image: UIImage, width: CGFloat) -> UIImage {
-        let size = CGSize(width: width,
-                          height: width * image.size.height / max(image.size.width, 1))
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            image.draw(in: CGRect(origin: .zero, size: size))
-        }
-    }
-    #endif
 
     static func cgColor(hex: String, alpha: CGFloat = 1) -> CGColor {
         var value: UInt64 = 0

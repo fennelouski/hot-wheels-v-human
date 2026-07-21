@@ -172,7 +172,7 @@ struct OverlayComposerTests {
                             bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue),
                             provider: provider, decode: nil, shouldInterpolate: false,
                             intent: .defaultIntent)!
-        let data = try #require(OverlayComposer.encodePNGCapped(UIImage(cgImage: noisy)))
+        let data = try #require(OverlayComposer.encodePNGCapped(noisy))
         #expect(data.count <= 200_000)
     }
 

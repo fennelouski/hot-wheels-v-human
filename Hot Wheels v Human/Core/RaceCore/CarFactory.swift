@@ -12,6 +12,8 @@ import Foundation
 import RealityKit
 #if canImport(UIKit)
 import UIKit
+#elseif canImport(AppKit)
+import AppKit
 #endif
 
 /// Identity + race state carried by every car entity.
@@ -227,15 +229,13 @@ enum CarFactory {
     }
 
 
-    #if canImport(UIKit)
-    private static func platformColor(hex: String) -> UIColor {
+    private static func platformColor(hex: String) -> PlatformColor {
         var value: UInt64 = 0
         Scanner(string: hex.replacingOccurrences(of: "#", with: "")).scanHexInt64(&value)
-        return UIColor(red: CGFloat((value >> 16) & 0xFF) / 255,
-                       green: CGFloat((value >> 8) & 0xFF) / 255,
-                       blue: CGFloat(value & 0xFF) / 255, alpha: 1)
+        return PlatformColor(red: CGFloat((value >> 16) & 0xFF) / 255,
+                             green: CGFloat((value >> 8) & 0xFF) / 255,
+                             blue: CGFloat(value & 0xFF) / 255, alpha: 1)
     }
-    #endif
 }
 
 extension Entity {
