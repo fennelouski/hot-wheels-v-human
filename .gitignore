@@ -2,3 +2,6 @@
 xcuserdata/
 DerivedData/
 *.xcresult
+
+# Local xcodebuild DerivedData (device/sim builds)
+build/

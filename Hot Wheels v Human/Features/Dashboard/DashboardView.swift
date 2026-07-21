@@ -49,46 +49,18 @@ struct DashboardView: View {
                     }
                     .padding(.bottom, 12)
                 }
-            } else if model.transportState == .connected && !model.readySent {
-                // Connected, submitted, waiting on the kid: THE ready tap.
-                Spacer()
-                Button {
-                    model.sendReady()
-                } label: {
-                    Label("TAP WHEN READY!", systemImage: "flag.fill")
-                        .font(.system(size: 34, weight: .black, design: .rounded))
-                        .frame(width: 420, height: 110)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.yellow)
-                .foregroundStyle(.black)
-                Spacer()
             } else {
+                // Everything before the race: a live checklist of the steps
+                // from "find the TV" to "tap READY", so it's always clear what
+                // to do next (kid-first: one highlighted step at a time).
                 Spacer()
-                VStack(spacing: 12) {
-                    Text(waitingLabel.title)
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.7))
-                    Text(waitingLabel.hint)
-                        .font(.system(size: 20, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.yellow.opacity(0.8))
-                }
+                ConnectionLadder(state: model.transportState,
+                                 ready: model.readySent,
+                                 onReady: model.sendReady)
                 Spacer()
             }
         }
         .background(Color(red: 0.07, green: 0.08, blue: 0.13))
-    }
-
-    // Failure states stay funny, not punishing (CLAUDE.md kid-first rules).
-    private var waitingLabel: (title: String, hint: String) {
-        switch model.transportState {
-        case .idle, .searching:
-            ("Looking for the arena…", "Is the TV app awake? Give it a poke!")
-        case .connected:
-            ("Getting the race ready…", "Helmets on!")
-        case .dropped:
-            ("Whoops, lost the TV!", "The robots tripped on a cable. Reconnecting…")
-        }
     }
 
     private func garageStrip(livesLeft: Int) -> some View {
@@ -110,6 +82,87 @@ struct DashboardView: View {
             Text("m/s")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.6))
+        }
+    }
+}
+
+/// The pre-race "what do I do now?" checklist on the iPad. Reads straight off
+/// the transport state so exactly one step is highlighted: find the TV →
+/// connect → tap READY. Failure text stays funny, not punishing (CLAUDE.md).
+private struct ConnectionLadder: View {
+    let state: TransportState
+    let ready: Bool
+    let onReady: () -> Void
+
+    private var connected: Bool { state == .connected }
+    private var searching: Bool { state == .idle || state == .searching }
+
+    var body: some View {
+        VStack(spacing: 22) {
+            Text(headline)
+                .font(.system(size: 30, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .multilineTextAlignment(.center)
+
+            VStack(alignment: .leading, spacing: 16) {
+                step(1, "Open Hot Wheels on your Apple TV",
+                     icon: "tv.fill", done: connected, current: !connected)
+                step(2, "This iPad connects to the TV",
+                     icon: "wifi", done: connected, current: !connected)
+                step(3, "Tap READY to race",
+                     icon: "flag.fill", done: ready, current: connected && !ready)
+            }
+            .frame(maxWidth: 480, alignment: .leading)
+
+            if connected && !ready {
+                Button(action: onReady) {
+                    Label("TAP WHEN READY!", systemImage: "flag.fill")
+                        .font(.system(size: 32, weight: .black, design: .rounded))
+                        .frame(width: 420, height: 104)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
+            }
+
+            if state == .dropped {
+                Text("The robots tripped on a cable — reconnecting…")
+                    .font(.system(size: 18, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.orange)
+            }
+            if !connected {
+                Text("Stuck here? Make sure both are on the same Wi‑Fi, and tap **Allow** on the “Local Network” pop‑up (or turn it on in Settings ▸ Privacy & Security ▸ Local Network).")
+                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.yellow.opacity(0.85))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: 480)
+            }
+        }
+        .padding(28)
+    }
+
+    private var headline: String {
+        switch state {
+        case .idle, .searching: "Let’s find your TV!"
+        case .connected: ready ? "You’re in — waiting for the race…" : "Connected! One more tap:"
+        case .dropped: "Whoops, lost the TV!"
+        }
+    }
+
+    private func step(_ number: Int, _ title: String, icon: String,
+                      done: Bool, current: Bool) -> some View {
+        HStack(spacing: 14) {
+            Image(systemName: done ? "checkmark.circle.fill" : icon)
+                .font(.system(size: 28, weight: .bold))
+                .foregroundStyle(done ? .green : current ? .yellow : .white.opacity(0.3))
+                .frame(width: 36)
+            Text(title)
+                .font(.system(size: 22, weight: current ? .heavy : .semibold, design: .rounded))
+                .foregroundStyle(done || current ? .white : .white.opacity(0.45))
+            if current && searching {
+                ProgressView().tint(.yellow).padding(.leading, 4)
+            }
+            Spacer(minLength: 0)
         }
     }
 }

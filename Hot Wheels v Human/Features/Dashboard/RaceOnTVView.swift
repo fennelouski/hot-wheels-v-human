@@ -21,6 +21,27 @@ struct RaceOnTVView: View {
     }
 }
 
+/// Always-available way back to the workshop home from anywhere in the
+/// Race-on-TV flow. `dismiss` pops the pushed RaceOnTVView off the home stack.
+struct HomeButton: View {
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        Button {
+            SoundBank.shared.play("ui_back")
+            dismiss()
+        } label: {
+            Label("Home", systemImage: "chevron.left")
+                .font(.system(size: 22, weight: .heavy, design: .rounded))
+                .padding(.horizontal, 18)
+                .frame(height: 60)   // ≥ 60 pt tap target (CLAUDE.md)
+                .background(.white.opacity(0.12), in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.white)
+    }
+}
+
 private struct RaceOnTVDashboard: View {
     @Environment(AppModel.self) private var appModel
     @State private var model = DashboardModel(transport: MultipeerTransport(),
@@ -29,6 +50,15 @@ private struct RaceOnTVDashboard: View {
 
     var body: some View {
         DashboardView(model: model)
+            // Always a way home while setting up / connecting / after results;
+            // hidden mid-race so no one quits by accident.
+            .overlay(alignment: .topLeading) {
+                if model.phase == .lobby || model.phase == .results {
+                    HomeButton()
+                        .padding(.leading, 20)
+                        .padding(.top, 20)
+                }
+            }
             .onAppear { model.start() }
             .onDisappear { model.stop() }
             .onChange(of: model.transportState) { _, state in
