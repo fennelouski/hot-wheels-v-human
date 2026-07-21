@@ -79,6 +79,22 @@ nonisolated enum RosterColormap {
         "character-male-f": .init(skin: [3, 5], shirt: [2, 1], pants: [3, 7], shoes: [3, 1]),   // skin #E38B62 shirt #319A74 pants #D99A72 shoes #61677E
     ]
 
+    /// The eyes always sample this one cell — see the table: every separable
+    /// character reads `eyes: [3, 0]`.
+    static let eyeCell = Patch(3, 0)
+
+    /// True when the eyes can't be recoloured (`eyes` is nil) AND that cell is
+    /// a garment we repaint, so the eyes would take the shirt/pants colour.
+    /// Nothing can paint them apart — the eye texels ARE that garment's texels
+    /// in Kenney's flat-cell art — so the fix is to cover them: these
+    /// characters wear glasses whether the profile asked for them or not (the
+    /// boy default, male-d, is one of them). Characters whose eye cell is
+    /// unpainted hair keep plain dark eyes and are false here.
+    static func eyesTakeGarmentColor(for profile: DriverProfile) -> Bool {
+        guard let p = patches[key(for: profile)] else { return false }
+        return p.eyes == nil && (p.shirt == eyeCell || p.pants == eyeCell)
+    }
+
     /// The table key for a profile — the roster person, without the pose or
     /// bald-cut suffix `DriverProfile.modelName` adds.
     static func key(for profile: DriverProfile) -> String {

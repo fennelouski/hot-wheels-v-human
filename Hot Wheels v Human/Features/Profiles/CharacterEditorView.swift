@@ -276,9 +276,16 @@ struct CharacterEditorView: View {
                 }
                 VStack(spacing: 10) {
                     label("Glasses")
-                    ChipRow(chips: GlassesStyle.allCases.map {
-                        .init(value: $0, title: glassesName($0))
-                    }, selection: optionalStyle(\.glasses, default: GlassesStyle.none),
+                    // A few characters must wear glasses to hide eyes that
+                    // can't be recoloured apart from a garment — drop "None"
+                    // and default them to round frames, so the picker can't
+                    // set a state the racer won't honour.
+                    let mustWear = RosterColormap.eyesTakeGarmentColor(for: model.driver)
+                    ChipRow(chips: GlassesStyle.allCases
+                        .filter { !mustWear || $0 != .none }
+                        .map { .init(value: $0, title: glassesName($0)) },
+                    selection: optionalStyle(\.glasses,
+                                             default: mustWear ? .round : .none),
                     scrolls: false)
                 }
             }

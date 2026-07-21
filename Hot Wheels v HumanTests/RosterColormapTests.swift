@@ -82,6 +82,27 @@ struct RosterColormapTests {
         #expect(!RosterColormap.repaints(for: collision).contains { $0.hex == "#00FF00" })
     }
 
+    /// The garment-collision characters (eyes == a repainted shirt/pants) must
+    /// wear glasses to hide those eyes; a separable one and a plain-dark-eyes
+    /// (hair-cell) one must not be forced.
+    @Test func garmentEyedCharactersForceGlasses() {
+        func profile(_ body: BodyType, _ variant: String) -> DriverProfile {
+            var p = DriverProfile.presets[0]
+            p.bodyType = body; p.characterVariant = variant
+            p.glasses = GlassesStyle.none
+            return p
+        }
+        // male-d (the boy default) — eyes are the shirt cell.
+        let collision = profile(.man, "d")
+        #expect(RosterColormap.eyesTakeGarmentColor(for: collision))
+        #expect(DriverDressUp.props(for: collision)
+            .contains { $0.contains("glasses") || $0.contains("shades") })
+        // female-b — eyes are separable, so no forcing.
+        #expect(!RosterColormap.eyesTakeGarmentColor(for: profile(.woman, "b")))
+        // male-a — eyes share the (unpainted) hair cell, stay dark, not forced.
+        #expect(!RosterColormap.eyesTakeGarmentColor(for: profile(.man, "a")))
+    }
+
     /// The boy can't wear the bearded man, so his key must never name him —
     /// the same clamp `modelName` applies, or the mesh and the texture would
     /// disagree about who this is.

@@ -30,7 +30,14 @@ enum DriverDressUp {
         case .headphones: names.append("headphones")
         case .policeCap: names.append(HatStyle.policeCap.modelName!)
         }
-        switch profile.glasses ?? .none {
+        // A few roster characters can't have their eyes recoloured apart from
+        // a garment (RosterColormap.eyesTakeGarmentColor) — so they always wear
+        // glasses to cover them, even when the profile picked "none".
+        var glasses = profile.glasses ?? .none
+        if glasses == .none, RosterColormap.eyesTakeGarmentColor(for: profile) {
+            glasses = .round
+        }
+        switch glasses {
         case .none: break
         case .sunglasses: names.append("sport-shades")
         case .round: names.append("round-glasses")
