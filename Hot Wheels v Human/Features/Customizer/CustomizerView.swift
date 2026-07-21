@@ -30,7 +30,7 @@ struct CustomizerView: View {
     @State private var tab: Tab = {
         let args = ProcessInfo.processInfo.arguments
         if args.contains("--demo-driver") { return .driver }
-        return args.contains("--demo-design") ? .draw : .chassis
+        return args.contains("--demo-design") ? .draw : .body
     }()
     @State private var saved = false
     @State private var testing = false
@@ -46,6 +46,7 @@ struct CustomizerView: View {
     #endif
 
     enum Tab: String, CaseIterable {
+        case body = "Body"
         case chassis = "Chassis"
         case tires = "Tires"
         case paint = "Paint"
@@ -56,6 +57,7 @@ struct CustomizerView: View {
 
         var symbolName: String {
             switch self {
+            case .body: "car.2.fill"
             case .chassis: "car.side.fill"
             case .tires: "circle.circle"
             case .paint: "paintbrush.fill"
@@ -131,6 +133,7 @@ struct CustomizerView: View {
 
             Group {
                 switch tab {
+                case .body: BodyPicker(selection: $model.design.modelOverride)
                 case .chassis: ChassisPicker(selection: $model.design.chassis)
                 case .tires: TirePicker(selection: $model.design.tires)
                 case .paint: PaintShopView(design: $model.design, slot: $paintSlot)

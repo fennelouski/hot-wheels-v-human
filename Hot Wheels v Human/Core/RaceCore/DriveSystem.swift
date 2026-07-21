@@ -130,6 +130,10 @@ struct DriveSystem: System {
             } else {
                 accel -= (follow.speed - cruise) * RaceTuning.railReturnRate
             }
+            // Real gravity along the slope: downhill (t.y < 0) speeds up,
+            // uphill slows down. The target model above only shifts the cruise
+            // cap — this is the actual plunge, so drops feel like drops.
+            accel += -g * t.y * RaceTuning.railGravityAccelFactor
         }
         accel -= chassis.dragCoefficient * follow.speed * follow.speed / chassis.mass
         // Boost pushes even in the air and inside a loop — it's the one
@@ -213,7 +217,7 @@ struct DriveSystem: System {
                 // phase independent; a height check only sampled the one
                 // frame that crossed the lip and missed at slow speeds.
                 follow.airborne = true
-                follow.verticalVelocity = ballisticVY
+                follow.verticalVelocity = ballisticVY * RaceTuning.railLaunchBoost
                 follow.height += ballisticVY * dt
                 if follow.height <= bedY {   // micro-hop resolved in-frame
                     follow.airborne = false

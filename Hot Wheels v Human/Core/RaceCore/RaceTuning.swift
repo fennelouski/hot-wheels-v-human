@@ -144,6 +144,16 @@ nonisolated enum RaceTuning {
     /// post-jump overspeed eases back to the average on the next straight
     /// instead of coasting forever.
     static let railReturnRate: Float = 1.5
+    /// Real gravity along the lane slope, added on top of the terrain-target
+    /// model: downhill genuinely accelerates the car (g·sinθ) instead of only
+    /// raising a cruise cap the car crept up to. Uphill it bites back. A knob
+    /// because rail pace is scaled and the feel is human-tuned. 1 = full g.
+    static let railGravityAccelFactor: Float = 1.0
+
+    /// Launch-velocity multiplier at a ramp lip. Air already scales with speed
+    /// (launch VV = speed·slope), this exaggerates it so a fast downhill
+    /// run-up visibly throws the car higher. A knob — feel is human-tuned.
+    static let railLaunchBoost: Float = 1.5
 
     /// Ballistic launch margin, m/s of VERTICAL VELOCITY: the car goes
     /// airborne when gravity lets it fall slower than following the bed

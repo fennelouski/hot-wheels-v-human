@@ -25,6 +25,15 @@ struct PaintShopView: View {
             : design.partColors?[slot] ?? design.paint.colorHex
     }
 
+    /// The finish the picker edits: the wheels carry their own, the body
+    /// uses `paint.finish`. nil wheel finish shows as matte (the old default).
+    private var finishBinding: Binding<PaintFinish> {
+        slot == CarPaintSlot.wheels
+            ? Binding(get: { design.wheelFinish ?? .matte },
+                      set: { design.wheelFinish = $0 })
+            : $design.paint.finish
+    }
+
     private func setSlotHex(_ hex: String) {
         if slot == CarPaintSlot.body {
             design.paint.colorHex = hex
@@ -62,7 +71,7 @@ struct PaintShopView: View {
                 .init(value: .glossy, title: "Glossy", symbol: "sun.max.fill"),
                 .init(value: .matte, title: "Matte", symbol: "square.fill"),
                 .init(value: .sparkle, title: "Sparkle", symbol: "sparkle"),
-            ], selection: $design.paint.finish)
+            ], selection: finishBinding)
         }
     }
 

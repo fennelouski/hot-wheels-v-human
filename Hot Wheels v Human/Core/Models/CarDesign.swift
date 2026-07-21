@@ -91,6 +91,11 @@ nonisolated struct CarDesign: Codable, Equatable, Identifiable, Sendable {
     /// Per-part color overrides, `CarPaintSlot` name → "#RRGGBB". Missing
     /// slot falls back to `paint.colorHex`. Optional → old designs decode.
     var partColors: [String: String]? = nil
+    /// Wheel finish, independent of the body's `paint.finish`. nil = the old
+    /// hardcoded matte rubber, so old designs decode unchanged. (Sparkle on
+    /// wheels reads as chrome — the glitter grain only renders on the body
+    /// shell.)
+    var wheelFinish: PaintFinish? = nil
     /// Livery pattern rendered onto the paint shell. Optional → old designs decode.
     var livery: LiverySpec? = nil
     /// Stickers stamped on the paint shell. Optional → old designs decode.

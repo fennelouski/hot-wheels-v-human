@@ -138,6 +138,23 @@ struct RailFollowerTests {
         #expect(follow.nextIndex == follow.waypoints.count - 1)   // it got round
     }
 
+    @Test func downhillRunsFasterThanFlat() {
+        // Same drive, same length: a descending lane must end up faster than
+        // a flat one — gravity along the slope actually pulls the car down.
+        func topSpeed(dropPerStep: Float) -> Float {
+            let wp = (0...60).map { SIMD3<Float>(0, -Float($0) * dropPerStep, Float($0) * 0.1) }
+            var follow = LaneFollowComponent(waypoints: wp)
+            var state = makeState()
+            var top: Float = 0
+            for _ in 0..<600 {
+                _ = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+                if !follow.airborne { top = max(top, follow.speed) }
+            }
+            return top
+        }
+        #expect(topSpeed(dropPerStep: 0.05) > topSpeed(dropPerStep: 0) + 0.5)
+    }
+
     @Test func boostExtendsAJump() {
         func jumpDistance(boost: Bool) -> Float {
             var wp = (0...29).map { SIMD3<Float>(0, 1, Float($0) * 0.1) }

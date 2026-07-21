@@ -161,7 +161,8 @@ enum CarFactory {
     /// (livery/stickers/drawing, plus the glitter layer for sparkle paint).
     /// Used by racing and the turntable preview.
     static func applyCustomization(to visual: Entity, design: CarDesign) async {
-        await paint(visual, spec: design.paint, partColors: design.partColors)
+        await paint(visual, spec: design.paint, partColors: design.partColors,
+                    wheelFinish: design.wheelFinish)
         // ponytail: overlay renders on the calling task — 1024² CGContext
         // is a few ms; move off-main only if the profiler ever blames it.
         // (A Task.detached hop here never resumed inside the RealityView
@@ -183,41 +184,45 @@ enum CarFactory {
     /// Tints every material in the model with the paint color/finish.
     /// `partColors` overrides the base color per `CarPaintSlot` (mesh name).
     static func paint(_ entity: Entity, spec: PaintSpec,
-                      partColors: [String: String]? = nil) async {
+                      partColors: [String: String]? = nil,
+                      wheelFinish: PaintFinish? = nil) async {
         for part in entity.descendantsAndSelf() {
             guard var model = part.components[ModelComponent.self],
                   part.name != "paint-shell" else { continue }   // overlay keeps its texture
             let slot = CarPaintSlot.slot(forPartName: part.name)
             let color = platformColor(hex: partColors?[slot] ?? spec.colorHex)
+            // Wheels default to matte rubber (nil), but the kid can now pick a
+            // finish for them too — chrome, gloss, sparkle. Body uses paint.finish.
+            let finish = slot == CarPaintSlot.wheels ? (wheelFinish ?? .matte) : spec.finish
             model.materials = model.materials.map { _ in
                 var m = PhysicallyBasedMaterial()
                 m.baseColor = .init(tint: color)
-                if slot == CarPaintSlot.wheels {
-                    // Rubber never shines: wheels stay matte in every finish.
-                    m.metallic = 0.0
-                    m.roughness = 0.9
-                    return m
-                }
-                switch spec.finish {
-                case .metallic:
-                    m.metallic = 0.9
-                    m.roughness = 0.3
-                case .glossy:
-                    m.metallic = 0.1
-                    m.roughness = 0.15
-                case .matte:
-                    m.metallic = 0.0
-                    m.roughness = 0.9
-                case .sparkle:
-                    // Base coat only — the glitter grain renders on the
-                    // paint shell, whose computed UVs are actually 2D
-                    // (the Kenney atlas UVs are ~1D and only make streaks).
-                    m.metallic = 1.0
-                    m.roughness = 0.3
-                }
+                applyFinish(finish, to: &m)
                 return m
             }
             part.components.set(model)
+        }
+    }
+
+    /// Maps a paint finish to metallic/roughness. Sparkle is just the base
+    /// coat here — its glitter grain renders on the body paint shell (the
+    /// Kenney atlas UVs are ~1D and only streak), so sparkle wheels read as
+    /// chrome, which still delights.
+    private static func applyFinish(_ finish: PaintFinish,
+                                    to m: inout PhysicallyBasedMaterial) {
+        switch finish {
+        case .metallic:
+            m.metallic = 0.9
+            m.roughness = 0.3
+        case .glossy:
+            m.metallic = 0.1
+            m.roughness = 0.15
+        case .matte:
+            m.metallic = 0.0
+            m.roughness = 0.9
+        case .sparkle:
+            m.metallic = 1.0
+            m.roughness = 0.3
         }
     }
 

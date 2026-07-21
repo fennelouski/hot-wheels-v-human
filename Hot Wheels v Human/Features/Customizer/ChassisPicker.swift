@@ -56,6 +56,44 @@ struct ChassisPicker: View {
     }
 }
 
+/// Pick the car's body shape up front — the thing a kid actually pictures
+/// when they say "my car". Rides in `modelOverride`; physics still comes from
+/// the chassis class picked on the next tab. (Used to be buried in the
+/// Garage's Body Shop as a separate "make a new car" flow.)
+struct BodyPicker: View {
+    @Binding var selection: String?
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 14) {
+                ForEach(CarDesign.bodyShop, id: \.model) { body in
+                    let isSelected = selection == body.model
+                    Button {
+                        selection = body.model
+                        SoundBank.shared.play("car_select_vroom")
+                    } label: {
+                        VStack(spacing: 8) {
+                            Image(systemName: body.symbol).font(.system(size: 38, weight: .bold))
+                                .frame(height: 44)
+                            Text(body.name)
+                                .font(.system(size: 18, weight: .bold, design: .rounded))
+                                .lineLimit(1)
+                        }
+                        .padding(16)
+                        .frame(width: 150)
+                        .background(isSelected ? .yellow.opacity(0.25) : .white.opacity(0.08),
+                                    in: RoundedRectangle(cornerRadius: 18))
+                        .overlay(RoundedRectangle(cornerRadius: 18)
+                            .stroke(isSelected ? .yellow : .clear, lineWidth: 3))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+}
+
 func normalized(_ value: Float, among table: [some Hashable: Float]) -> Float {
     let lo = table.values.min() ?? 0
     let hi = table.values.max() ?? 1
