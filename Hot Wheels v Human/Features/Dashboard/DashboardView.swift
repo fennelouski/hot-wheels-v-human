@@ -56,6 +56,7 @@ struct DashboardView: View {
                 Spacer()
                 ConnectionLadder(state: model.transportState,
                                  ready: model.readySent,
+                                 design: model.myDesign,
                                  onReady: model.sendReady)
                 Spacer()
             }
@@ -92,17 +93,28 @@ struct DashboardView: View {
 private struct ConnectionLadder: View {
     let state: TransportState
     let ready: Bool
+    let design: CarDesign?
     let onReady: () -> Void
 
     private var connected: Bool { state == .connected }
     private var searching: Bool { state == .idle || state == .searching }
+    private var awaitingTap: Bool { connected && !ready }
 
     var body: some View {
         VStack(spacing: 22) {
+            if let design {
+                CarSwatchView(design: design, size: 92)
+                    .shadow(color: ready ? .green.opacity(0.45) : .yellow.opacity(0.25), radius: 18)
+                    .transition(.scale.combined(with: .opacity))
+                    .animation(.spring(response: 0.4, dampingFraction: 0.7), value: design.id)
+            }
+
             Text(headline)
                 .font(.system(size: 30, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
+                .contentTransition(.opacity)
+                .animation(.easeInOut(duration: 0.25), value: headline)
 
             VStack(alignment: .leading, spacing: 16) {
                 step(1, "Open Hot Wheels on your Apple TV",
@@ -123,6 +135,16 @@ private struct ConnectionLadder: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.yellow)
                 .foregroundStyle(.black)
+                .scaleEffect(awaitingTap ? 1.03 : 1)
+                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: awaitingTap)
+            } else if ready {
+                Label("You're in!", systemImage: "checkmark.circle.fill")
+                    .font(.system(size: 26, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.green)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color.green.opacity(0.18), in: Capsule())
+                    .transition(.scale.combined(with: .opacity))
             }
 
             if state == .dropped {
@@ -138,7 +160,10 @@ private struct ConnectionLadder: View {
                     .frame(maxWidth: 480)
             }
         }
-        .padding(28)
+        .padding(32)
+        .background(.white.opacity(0.05), in: RoundedRectangle(cornerRadius: 28))
+        .padding(.horizontal, 24)
+        .animation(.easeInOut(duration: 0.3), value: ready)
     }
 
     private var headline: String {
@@ -152,10 +177,16 @@ private struct ConnectionLadder: View {
     private func step(_ number: Int, _ title: String, icon: String,
                       done: Bool, current: Bool) -> some View {
         HStack(spacing: 14) {
-            Image(systemName: done ? "checkmark.circle.fill" : icon)
-                .font(.system(size: 28, weight: .bold))
-                .foregroundStyle(done ? .green : current ? .yellow : .white.opacity(0.3))
-                .frame(width: 36)
+            ZStack {
+                Circle()
+                    .fill(done ? Color.green.opacity(0.22)
+                               : current ? Color.yellow.opacity(0.18) : Color.white.opacity(0.06))
+                    .frame(width: 44, height: 44)
+                Image(systemName: done ? "checkmark" : icon)
+                    .font(.system(size: 20, weight: .bold))
+                    .foregroundStyle(done ? .green : current ? .yellow : .white.opacity(0.3))
+                    .contentTransition(.symbolEffect(.replace))
+            }
             Text(title)
                 .font(.system(size: 22, weight: current ? .heavy : .semibold, design: .rounded))
                 .foregroundStyle(done || current ? .white : .white.opacity(0.45))

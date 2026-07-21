@@ -14,6 +14,11 @@ import SwiftUI
 struct ArenaLobbyView: View {
     @State private var coordinator = RaceCoordinator(transport: MultipeerTransport())
 
+    private var allReady: Bool {
+        !coordinator.players.isEmpty
+            && coordinator.players.allSatisfy { coordinator.isReady($0.id) }
+    }
+
     var body: some View {
         ZStack {
             // Always mounted, even during .lobby: this is what calls
@@ -36,61 +41,118 @@ struct ArenaLobbyView: View {
     }
 
     private var lobby: some View {
-        VStack(spacing: 32) {
-            Label("Hot Wheels vs. Human", systemImage: "flag.checkered")
-                .font(.system(size: 64, weight: .black, design: .rounded))
+        VStack(spacing: 28) {
+            VStack(spacing: 6) {
+                Label("Hot Wheels vs. Human", systemImage: "flag.checkered")
+                    .font(.system(size: 64, weight: .black, design: .rounded))
+                    .symbolEffect(.bounce, value: coordinator.players.count)
+                if !coordinator.players.isEmpty {
+                    Text("\(coordinator.players.count) of \(RaceCoordinator.maxPlayers) racers")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                        .foregroundStyle(.yellow)
+                }
+            }
             if coordinator.players.isEmpty {
                 joinGuide
             } else {
-                Text("Tap READY on your iPad, or press START on the TV!")
+                Text(allReady ? "Everybody's ready — let's race!"
+                               : "Tap READY on your iPad, or press START on the TV!")
                     .font(.system(size: 32, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(allReady ? .green : .secondary)
+                    .contentTransition(.opacity)
+                    .animation(.easeInOut(duration: 0.25), value: allReady)
             }
             HStack(spacing: 24) {
                 ForEach(Array(coordinator.players.enumerated()), id: \.element.id) { index, player in
-                    VStack(spacing: 8) {
-                        Image(systemName: "car.side.fill").font(.system(size: 56))
-                        Text(player.name)
-                            .font(.system(size: 28, weight: .bold, design: .rounded))
-                        let picks = coordinator.pickCount(player.id)
-                        if picks > 0 {
-                            // Everyone drafts tracks; the series alternates picks.
-                            Label(picks == 1 ? "picked a track!" : "picked \(picks) tracks!",
-                                  systemImage: "map.fill")
-                                .font(.system(size: 20, weight: .bold, design: .rounded))
-                                .foregroundStyle(.yellow)
-                        }
-                        Label(coordinator.isReady(player.id) ? "READY!" : "getting set…",
-                              systemImage: coordinator.isReady(player.id)
-                                  ? "checkmark.circle.fill" : "ellipsis.circle")
-                            .font(.system(size: 22, weight: .heavy, design: .rounded))
-                            .foregroundStyle(coordinator.isReady(player.id) ? .green : .secondary)
-                    }
-                    .padding(24)
-                    .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 20))
+                    playerCard(player)
+                        .transition(.scale.combined(with: .opacity))
                 }
             }
+            .animation(.spring(response: 0.45, dampingFraction: 0.75), value: coordinator.players.count)
             if !coordinator.players.isEmpty {
                 Button {
                     coordinator.hostStartRace()
                 } label: {
-                    Label("START RACE", systemImage: "flag.checkered")
-                        .font(.system(size: 30, weight: .heavy, design: .rounded))
-                        .frame(width: 380, height: 88)
+                    Label(allReady ? "START RACE!" : "START ANYWAY", systemImage: "flag.checkered")
+                        .font(.system(size: 28, weight: .heavy, design: .rounded))
+                        .frame(width: 380, height: 84)
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.yellow)
-                .foregroundStyle(.black)
+                .tint(allReady ? .yellow : .white.opacity(0.22))
+                .foregroundStyle(allReady ? .black : .white)
+                .scaleEffect(allReady ? 1.04 : 1)
+                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: allReady)
             }
             if let rejection = coordinator.lastRejection {
-                Text(rejection)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundStyle(.orange)
+                Label(rejection, systemImage: "exclamationmark.triangle.fill")
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundStyle(.black)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                    .background(.orange, in: RoundedRectangle(cornerRadius: 16))
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
             }
         }
+        .animation(.easeInOut(duration: 0.3), value: coordinator.lastRejection)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        .background(
+            RadialGradient(colors: [Color(red: 0.16, green: 0.18, blue: 0.27),
+                                     Color(red: 0.07, green: 0.08, blue: 0.13)],
+                           center: .center, startRadius: 60, endRadius: 1000)
+        )
         .foregroundStyle(.white)
+    }
+
+    /// One racer's card: their actual car (once its design has synced),
+    /// name, track picks, and a big unmistakable ready/not pill — a kid
+    /// checking the TV from across the room shouldn't have to squint.
+    private func playerCard(_ player: PlayerInfo) -> some View {
+        let ready = coordinator.isReady(player.id)
+        return VStack(spacing: 10) {
+            if let design = coordinator.design(for: player.id) {
+                CarSwatchView(design: design, size: 72)
+            } else {
+                Circle()
+                    .fill(.white.opacity(0.1))
+                    .overlay {
+                        Image(systemName: "car.side.fill")
+                            .font(.system(size: 30, weight: .bold))
+                            .foregroundStyle(.white.opacity(0.5))
+                    }
+                    .frame(width: 72, height: 72)
+            }
+            Text(player.name)
+                .font(.system(size: 26, weight: .bold, design: .rounded))
+                .lineLimit(1)
+            let picks = coordinator.pickCount(player.id)
+            if picks > 0 {
+                // Everyone drafts tracks; the series alternates picks.
+                Label(picks == 1 ? "1 track" : "\(picks) tracks", systemImage: "map.fill")
+                    .font(.system(size: 15, weight: .black, design: .rounded))
+                    .foregroundStyle(.black)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(.yellow, in: Capsule())
+            }
+            Label(ready ? "READY!" : "getting set…",
+                  systemImage: ready ? "checkmark.circle.fill" : "ellipsis.circle")
+                .font(.system(size: 19, weight: .heavy, design: .rounded))
+                .foregroundStyle(ready ? .green : .white.opacity(0.65))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 5)
+                .background(ready ? Color.green.opacity(0.2) : Color.white.opacity(0.08), in: Capsule())
+                .contentTransition(.symbolEffect(.replace))
+        }
+        .padding(22)
+        .frame(width: 200)
+        .background(.white.opacity(ready ? 0.14 : 0.08), in: RoundedRectangle(cornerRadius: 20))
+        .overlay {
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(ready ? Color.green.opacity(0.7) : .white.opacity(0.15),
+                        lineWidth: ready ? 3 : 1)
+        }
+        .shadow(color: ready ? .green.opacity(0.35) : .clear, radius: 16)
+        .animation(.easeInOut(duration: 0.3), value: ready)
     }
 
     /// Shown on the TV while no one has joined: the exact steps to get an iPad

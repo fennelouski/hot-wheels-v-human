@@ -161,6 +161,12 @@ final class RaceCoordinator {
         trackPicks.count { $0.owner == playerID }
     }
 
+    /// This player's submitted car, for the TV lobby's swatch (nil until
+    /// their `.carDesign` arrives — briefly, right after they join).
+    func design(for playerID: UUID) -> CarDesign? {
+        designs.first { $0.owner == playerID }?.design
+    }
+
     /// The playlist freezes at first race start; until then picks are
     /// still arriving, so peek at a fresh draft without caching it.
     private func nextBlueprint() -> TrackBlueprint? {
