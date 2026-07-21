@@ -18,11 +18,19 @@ import RealityKit
 /// exhaust a real device's Metal drawable pools and abort (see OPEN-THREADS
 /// "3D grid avatars").
 struct DriverGridAvatar: View {
-    /// Ceiling on concurrent live 3D scenes in a grid. RealityKit tolerates a
-    /// few; the device ceiling where it starts failing is unknown, so this is
-    /// a deliberately conservative, tunable knob — lower it if a device still
-    /// stutters or crashes, raise it only with device testing.
-    static let liveSceneCap = 5
+    /// Ceiling on concurrent live 3D scenes in a grid.
+    ///
+    /// 0 on purpose: capping at 5 STILL crashed a real device (the original
+    /// report). A `RealityView` inside a recycling `LazyVGrid`/`ScrollView` is
+    /// the problem, not the raw count — RealityKit doesn't tolerate several
+    /// simultaneous view instances there, and it aborts on device (the
+    /// tonemapLUT render crash) even with only a few. So grids get NO live
+    /// scenes at all; every tile is the cheap 2D `DriverFaceBadge`. Single,
+    /// non-recycled previews (editor turntable, customizer tab) are fine and
+    /// unaffected. Raising this above 0 requires rendering tiles to STATIC
+    /// snapshot images first (OPEN-THREADS "3D grid avatars") — never live
+    /// scenes in a grid.
+    static let liveSceneCap = 0
 
     let driver: DriverProfile
     let live: Bool

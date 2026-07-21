@@ -286,17 +286,20 @@ allocation failed`, then RealityKit binds a fallback 2D texture into the 1D
 `tonemapLUT` slot and the render thread aborts under Metal validation. Crashed
 on launch for anyone with a few profiles set up.
 
-Now capped rather than cut: `DriverGridAvatar` renders live 3D for only the
-first `liveSceneCap` tiles (default 5, by a global index across all of a
-screen's grid sections) and the cheap 2D `DriverFaceBadge` past that. Since at
-most `liveSceneCap` tiles are ever eligible, concurrent RealityViews are
-bounded by construction, however long the list or however fast you scroll.
-`liveSceneCap` is a tunable knob — the real device ceiling is unknown, 5 is a
-conservative guess; lower it if a device still stutters or crashes (0 = the
-all-2D behaviour). Single-instance previews stay live 3D (character-editor
-turntable, customizer "who's riding" tab). NOTE: the cap is per screen, so a
-push transition briefly overlaps two capped grids (~2×); if that ever bites,
-snapshot the tiles to static images instead of live scenes.
+Capping DIDN'T work: `liveSceneCap = 5` still crashed the same device. The
+count was never the real variable — a `RealityView` inside a recycling
+`LazyVGrid`/`ScrollView` is, and RealityKit aborts on device with even a few.
+So `liveSceneCap` is now 0: grids render only the 2D `DriverFaceBadge`, zero
+live scenes. `DriverGridAvatar` + the per-tile index plumbing stay as the seam
+for the real 3D path. Single, non-recycled previews (editor turntable,
+customizer "who's riding" tab) are live 3D and were never the problem.
+
+To get 3D avatars back in the grids, render each character to a STATIC
+snapshot `UIImage` ONCE and show `Image(uiImage:)` — never a live scene in a
+grid. Offscreen RealityKit→UIImage on iOS is fiddly (no clean SwiftUI
+`RealityView` snapshot API; `ARView.snapshot(...)` on a transient single
+instance, sequenced one character at a time, is the likely route) and must be
+device-tested — the Simulator never reproduced any of this.
 
 ## Closed 2026-07-20 (later session)
 
