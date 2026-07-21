@@ -405,18 +405,18 @@ nonisolated enum RaceTuning {
     /// The PiP steering wheel swings this many radians at full lean. Well
     /// past the car's own roll (reactionLeanAngle) — a real wheel turns far
     /// more than the car does, and the exaggeration is what reads at 180 pt.
-    static let cockpitWheelAngle: Float = 0.9
+    static let cockpitWheelAngle: Float = 1.0
     /// Wheel radius as a fraction of the PiP's width. Bigger than the PiP so
     /// only the top arc shows — the rest sits below the driver's chest.
-    static let cockpitWheelRadiusRatio: Float = 0.62
+    static let cockpitWheelRadiusRatio: Float = 0.233
     /// Wheel centre below the PiP's bottom edge, fraction of height. Deep
     /// enough that only the top arc shows across the driver's chest — any
     /// higher and the rim cuts across their face.
-    static let cockpitWheelCenterY: Float = 1.20
+    static let cockpitWheelCenterY: Float = 0.898
     /// How far the key light on the driver's face is washed toward white
     /// before it hits them. Straight `daylight` is fully saturated, and a
     /// saturated key flattens the low-poly rig into single-colour slabs.
-    static let cockpitKeyLightWash: Float = 0.6
+    static let cockpitKeyLightWash: Float = 0.455
     /// Spoke count per chassis — the wheel is the car's face from inside.
     static let cockpitWheelSpokes: [ChassisClass: Int] = [
         .heavyMuscle: 2,          // fat two-spoke muscle bar
@@ -434,10 +434,10 @@ nonisolated enum RaceTuning {
     /// Bottom edge of the rear window, as a fraction of the PiP's height.
     /// We're looking BACK at the driver from the hood, so what's behind them
     /// is their own seat, the rear bench, then glass — never the road.
-    static let cockpitHorizonRatio: Float = 0.52
+    static let cockpitHorizonRatio: Float = 0.482
     /// How far the view through the rear glass slides on a full-lean turn,
     /// fraction of width. This is the whole sense of "we're cornering".
-    static let cockpitVanishShift: Float = 0.26
+    static let cockpitVanishShift: Float = 0.283
     /// Scenery slabs drawn behind the glass, and how fast they slide at top
     /// speed. They travel with the car's motion — i.e. the opposite way a
     /// forward view would scroll, because we're facing the wrong way.
@@ -458,20 +458,28 @@ nonisolated enum RaceTuning {
     /// bust is a different rig from the roster characters in the car, and
     /// body types rescale it further, so anything anchored to a constant
     /// frames a different part of a different person on each of them.
-    /// How far the PiP driver is shrunk so head AND torso fit the circle.
+    /// How far the PiP driver is scaled so head AND torso fit the circle.
     /// This is the knob that actually works: the PiP's RealityView renders
     /// with its own automatic camera and ignores the PerspectiveCamera in
     /// the scene, so moving a camera changes nothing and scaling the rig is
     /// the only lever. Erring small is fine — too big is a face filling the
     /// glass with no room for the reaction to land.
-    static let cockpitBustScale: Float = 5.25
+    ///
+    /// Per body type: the female roster rigs (`BodyType.scale` narrows them
+    /// to ~0.8×) sit smaller in frame at the same multiplier, so they want a
+    /// gentler scale and a shallower drop than the men. Tuned on the
+    /// `--pip-tuner` bench, one pin per sex.
+    static func cockpitBustScale(for body: BodyType?) -> Float {
+        (body?.isFemale ?? false) ? 4.101 : 4.807
+    }
     /// How far the scaled driver is moved down, in BODY HEIGHTS of the
     /// scaled rig (see DriverPoser.applyFraming) — scale is about the rig's
     /// FEET, so growing them pushes the head out of the top of the circle
     /// and this puts it back. Body heights rather than metres so one number
-    /// means the same thing on every roster character. Dial it in with the
-    /// `--pip-tuner` bench.
-    static let cockpitBustLift: Float = -0.8
+    /// means the same thing on every roster character.
+    static func cockpitBustLift(for body: BodyType?) -> Float {
+        (body?.isFemale ?? false) ? -0.441 : -0.587
+    }
     /// Camera distance as a fraction of the rig's MEASURED world height (see
     /// DriverPoser.frameOnHead). Tuned by eye against the `--reaction-cam`
     /// bench rather than derived: the measured bounds don't map to body

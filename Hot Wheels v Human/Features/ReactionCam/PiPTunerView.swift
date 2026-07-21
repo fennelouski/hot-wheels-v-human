@@ -30,7 +30,7 @@ struct PiPTunerView: View {
     /// Held, not rebuilt per redraw: ReactionDirector is a state machine
     /// with a min-hold clock, so a fresh one each frame never settles.
     @State private var director = ReactionDirector()
-    @State private var tuning = CockpitTuning.standard
+    @State private var tuning = CockpitTuning.standard(for: .man)
     @State private var state: ReactionState = .idle
     @State private var body_: BodyType = .man
     @State private var variant = "a"
@@ -74,7 +74,13 @@ struct PiPTunerView: View {
             .padding(12)
         }
         .onChange(of: state) { _, new in director.fire(new) }
-        .onChange(of: body_) { _, new in design = Self.makeDesign(new, variant) }
+        .onChange(of: body_) { _, new in
+            design = Self.makeDesign(new, variant)
+            // Load this body's shipped framing so the readout starts from
+            // what ships, not the last body's numbers — bustScale/bustLift
+            // differ by sex. Drag from here to tune a specific body.
+            tuning = .standard(for: new)
+        }
         .onChange(of: variant) { _, new in design = Self.makeDesign(body_, new) }
         .task { director.fire(.idle) }
         // Feed the director continuously so lean/speed actually reach the
@@ -200,7 +206,7 @@ struct PiPTunerView: View {
                         pinned.append(PinnedSetting(character: characterLabel, tuning: tuning))
                     }
                     .buttonStyle(.borderedProminent)
-                    Button("Reset") { tuning = .standard }
+                    Button("Reset") { tuning = .standard(for: body_) }
                     Button("Clear pins") { pinned.removeAll() }
                 }
                 .font(.callout)

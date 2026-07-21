@@ -36,22 +36,34 @@ struct CockpitTuning: Equatable {
     var vanishShift: Float
     var keyLightWash: Float
 
-    static let standard = CockpitTuning(
-        bustScale: RaceTuning.cockpitBustScale,
-        bustLift: RaceTuning.cockpitBustLift,
-        wheelCenterY: RaceTuning.cockpitWheelCenterY,
-        wheelRadius: RaceTuning.cockpitWheelRadiusRatio,
-        wheelAngle: RaceTuning.cockpitWheelAngle,
-        horizonRatio: RaceTuning.cockpitHorizonRatio,
-        vanishShift: RaceTuning.cockpitVanishShift,
-        keyLightWash: RaceTuning.cockpitKeyLightWash)
+    /// The shipped constants for a given body type. Only bustScale/bustLift
+    /// vary by body — the female roster rigs sit smaller in frame — so those
+    /// two read the per-body functions and the rest are global.
+    static func standard(for body: BodyType?) -> CockpitTuning {
+        CockpitTuning(
+            bustScale: RaceTuning.cockpitBustScale(for: body),
+            bustLift: RaceTuning.cockpitBustLift(for: body),
+            wheelCenterY: RaceTuning.cockpitWheelCenterY,
+            wheelRadius: RaceTuning.cockpitWheelRadiusRatio,
+            wheelAngle: RaceTuning.cockpitWheelAngle,
+            horizonRatio: RaceTuning.cockpitHorizonRatio,
+            vanishShift: RaceTuning.cockpitVanishShift,
+            keyLightWash: RaceTuning.cockpitKeyLightWash)
+    }
 }
 
 struct ReactionCamView: View {
     let director: ReactionDirector
     let design: CarDesign
-    /// Defaults to the shipped constants; the PiP tuner passes live values.
-    var tuning: CockpitTuning = .standard
+    /// nil in the real PiP → the shipped constants for this driver's body
+    /// type (`effectiveTuning`). The PiP tuner passes explicit live values.
+    var tuning: CockpitTuning? = nil
+
+    /// What the view actually draws with: the caller's override, or the
+    /// per-body shipped defaults keyed on the driver's body type.
+    private var effectiveTuning: CockpitTuning {
+        tuning ?? .standard(for: design.driver?.bodyType)
+    }
 
     /// The live poser, in a reference box rather than plain `@State`: the
     /// per-frame tick below is a long-lived closure, and the character editor
@@ -76,7 +88,7 @@ struct ReactionCamView: View {
                             daylight: daylight,
                             speed01: director.speed01,
                             lean: director.lean,
-                            tuning: tuning)
+                            tuning: effectiveTuning)
 
             RealityView { content in
                 content.camera = .virtual
@@ -130,7 +142,7 @@ struct ReactionCamView: View {
                 // washed toward white so it tints the driver instead of
                 // painting them one flat colour.
                 keyLight?.light.color = UIColor(
-                    daylight.mix(with: .white, by: Double(tuning.keyLightWash)))
+                    daylight.mix(with: .white, by: Double(effectiveTuning.keyLightWash)))
                 keyLight?.light.intensity =
                     director.state == .boosted ? 9000 : 6000
                 // Size and lift the driver here, every update, so the tuner's
@@ -139,18 +151,19 @@ struct ReactionCamView: View {
                 // the tuner shows. (This used to skip at `.standard` while
                 // the numbers were unsettled, which quietly meant the
                 // shipped constants did nothing at all.)
-                poser?.applyFraming(scale: tuning.bustScale, lift: tuning.bustLift)
+                poser?.applyFraming(scale: effectiveTuning.bustScale,
+                                    lift: effectiveTuning.bustLift)
                 rebuildIfDriverChanged()
             }
 
             // The car's own wheel, in front of the driver. Counter-turns:
             // lean is + for a left turn, screen-left is a negative rotation.
             SteeringWheelView(chassis: design.chassis,
-                              angle: -CGFloat(director.lean * tuning.wheelAngle),
+                              angle: -CGFloat(director.lean * effectiveTuning.wheelAngle),
                               rim: Color(hex: design.partColors?[CarPaintSlot.wheels]
                                          ?? design.paint.colorHex),
                               hub: Color(hex: design.paint.colorHex),
-                              tuning: tuning)
+                              tuning: effectiveTuning)
                 .allowsHitTesting(false)
 
         }
