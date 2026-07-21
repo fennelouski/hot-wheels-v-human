@@ -67,6 +67,14 @@ final class DriverPoser {
     /// The rig's own height at scale 1, measured once on a render frame.
     /// `lift` is denominated in these, not metres — see `applyFraming`.
     private var unitHeight: Float?
+    /// The framing the caller last asked for. Kept so it can be RE-ASSERTED
+    /// every render frame: the idle/reaction clips re-evaluate the rig's
+    /// transform continuously, so a scale/lift set once slips back toward
+    /// rest the moment the SwiftUI update closure stops firing (which it does
+    /// the instant the director goes quiet). Applied once = flickers; applied
+    /// every frame = holds.
+    private var wantScale: Float = 1
+    private var wantLift: Float = 0
 
     private init(bust: Entity) {
         self.bust = bust
@@ -100,15 +108,25 @@ final class DriverPoser {
     /// driver is drawn several times over that again — the same slider
     /// travel is a no-op on one character and off-screen on the next.
     func applyFraming(scale: Float, lift: Float) {
-        bust.scale = restingScale * scale
+        wantScale = scale
+        wantLift = lift
+        reassertFraming()
+    }
+
+    /// Re-stamp the last-requested framing onto the rig. Cheap and
+    /// idempotent, so it runs every render frame (see ReactionCamView's
+    /// `SceneEvents.Update` tick) to win against the animation, which
+    /// re-writes the rig's transform continuously.
+    func reassertFraming() {
+        bust.scale = restingScale * wantScale
         // Measured on a render frame, never at build time: called that early
         // it races the rig's load and reads zero. Divided back out by the
-        // scale that was just applied, so the latch is scale-independent.
+        // scale in force when it was taken, so the latch is scale-independent.
         if unitHeight == nil {
             let measured = bust.visualBounds(relativeTo: bust.parent).extents.y
-            if measured > 0 { unitHeight = measured / max(scale, 0.001) }
+            if measured > 0 { unitHeight = measured / max(wantScale, 0.001) }
         }
-        bust.position.y = restingY + lift * (unitHeight ?? 1) * scale
+        bust.position.y = restingY + wantLift * (unitHeight ?? 1) * wantScale
     }
 
     /// KNOWN DEAD as of 2026-07-20 — do not tune against it, and do not

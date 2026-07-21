@@ -27,8 +27,8 @@ struct ProfilePickerView: View {
                 .font(.system(size: 64, weight: .heavy, design: .rounded))
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 24) {
-                    ForEach(records) { record in
-                        profileTile(record)
+                    ForEach(Array(records.enumerated()), id: \.element.id) { index, record in
+                        profileTile(record, index: index)
                             .contextMenu {
                                 Button(role: .destructive) {
                                     delete(record)
@@ -49,7 +49,7 @@ struct ProfilePickerView: View {
         .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
     }
 
-    private func profileTile(_ record: KidProfileRecord) -> some View {
+    private func profileTile(_ record: KidProfileRecord, index: Int) -> some View {
         Button {
             pick(record)
         } label: {
@@ -57,19 +57,20 @@ struct ProfilePickerView: View {
                 ZStack {
                     Circle()
                         .fill(Color(hex: record.profile?.colorHex ?? "#FFD500"))
-                    // No character picked yet on this profile — a symbol,
-                    // not a stand-in racer, so the tile never implies a
-                    // character the kid didn't choose.
-                    // 2D badge, not a live DriverPreviewView: this grid draws
-                    // one tile per profile, and a live RealityView per tile is
-                    // N simultaneous scenes — fine on the simulator, but on a
-                    // real device it drains the Metal drawable pools until
-                    // nextDrawable fails and RealityKit aborts (tonemap-LUT
-                    // fallback). See OPEN-THREADS "3D grid avatars".
                     if let driver = lastUsedCharacter(of: record) {
-                        DriverFaceBadge(driver: driver)
+                        // Live 3D for the first few tiles, cheap 2D badge past
+                        // the cap: a live RealityView per tile is N simultaneous
+                        // scenes and crashes a real device (OPEN-THREADS "3D
+                        // grid avatars"). DriverGridAvatar bounds it.
+                        DriverGridAvatar(
+                            driver: driver,
+                            live: index < DriverGridAvatar.liveSceneCap)
+                            .clipShape(Circle())
                             .padding(14)
                     } else {
+                        // No character picked yet on this profile — a symbol,
+                        // not a stand-in racer, so the tile never implies a
+                        // character the kid didn't choose.
                         Image(systemName: "person.fill")
                             .font(.system(size: 60, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.7))

@@ -286,12 +286,17 @@ allocation failed`, then RealityKit binds a fallback 2D texture into the 1D
 `tonemapLUT` slot and the render thread aborts under Metal validation. Crashed
 on launch for anyone with a few profiles set up.
 
-Reverted both grids to `DriverFaceBadge`. Single-instance previews are fine
-and stay live 3D (character-editor turntable, customizer "who's riding" tab).
-If the 3D avatar in grids is wanted back, render each character to a STATIC
-snapshot image once and show that — never N live scenes. There's no clean
-SwiftUI `RealityView`→`UIImage` snapshot API; the ARView `snapshot(...)` path
-or a shared offscreen scene rendered per-character is the route.
+Now capped rather than cut: `DriverGridAvatar` renders live 3D for only the
+first `liveSceneCap` tiles (default 5, by a global index across all of a
+screen's grid sections) and the cheap 2D `DriverFaceBadge` past that. Since at
+most `liveSceneCap` tiles are ever eligible, concurrent RealityViews are
+bounded by construction, however long the list or however fast you scroll.
+`liveSceneCap` is a tunable knob — the real device ceiling is unknown, 5 is a
+conservative guess; lower it if a device still stutters or crashes (0 = the
+all-2D behaviour). Single-instance previews stay live 3D (character-editor
+turntable, customizer "who's riding" tab). NOTE: the cap is per screen, so a
+push transition briefly overlaps two capped grids (~2×); if that ever bites,
+snapshot the tiles to static images instead of live scenes.
 
 ## Closed 2026-07-20 (later session)
 

@@ -9,6 +9,33 @@
 import SwiftUI
 import RealityKit
 
+/// Grid-safe driver avatar. `live` tiles render the full 3D turntable; the
+/// rest fall back to the cheap 2D `DriverFaceBadge`. A grid passes `live` for
+/// only the first `liveSceneCap` tiles (by a global index across all its
+/// sections), so however long the list or however fast you scroll, no more
+/// than `liveSceneCap` RealityViews exist at once. That's the whole safety
+/// property: many simultaneous RealityKit scenes render on the Simulator but
+/// exhaust a real device's Metal drawable pools and abort (see OPEN-THREADS
+/// "3D grid avatars").
+struct DriverGridAvatar: View {
+    /// Ceiling on concurrent live 3D scenes in a grid. RealityKit tolerates a
+    /// few; the device ceiling where it starts failing is unknown, so this is
+    /// a deliberately conservative, tunable knob — lower it if a device still
+    /// stutters or crashes, raise it only with device testing.
+    static let liveSceneCap = 5
+
+    let driver: DriverProfile
+    let live: Bool
+
+    var body: some View {
+        if live {
+            DriverPreviewView(driver: driver)
+        } else {
+            DriverFaceBadge(driver: driver)
+        }
+    }
+}
+
 struct DriverPreviewView: View {
     let driver: DriverProfile
 

@@ -103,14 +103,17 @@ struct ReactionCamView: View {
                 rim.look(at: [0, head, 0], from: [-1.5, head + 0.8, -2], relativeTo: nil)
                 content.add(rim)
 
-                // Chase the head on every RENDER frame, not every SwiftUI
-                // update. `update` only fires when the director publishes a
-                // change, and the moment a racer finishes it stops changing —
-                // while the cheer clip plays on and jumps the driver clean out
-                // of the now-frozen framing, leaving the PiP on their knees.
+                // Re-stamp the driver's size/lift on every RENDER frame, not
+                // just when the SwiftUI `update` closure fires. `update` runs
+                // only when the director publishes a change; the instant it
+                // goes quiet (steady speed, no turn, racer finished) the idle
+                // and cheer clips keep re-writing the rig's transform and drag
+                // the driver back out of frame. Re-asserting the last-set
+                // framing here every frame is what makes bustLift actually
+                // hold instead of slipping.
                 frameTick = content.subscribe(to: SceneEvents.Update.self) { [busts] _ in
                     MainActor.assumeIsolated {
-                        busts.poser?.frameOnHead()
+                        busts.poser?.reassertFraming()
                     }
                 }
 

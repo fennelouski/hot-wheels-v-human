@@ -45,9 +45,9 @@ struct CharacterSelectView: View {
                         .padding(.horizontal, 4)
                 } else {
                     LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(myRecords) { record in
+                        ForEach(Array(myRecords.enumerated()), id: \.element.id) { index, record in
                             if let driver = record.profile {
-                                characterCard(driver)
+                                characterCard(driver, liveIndex: index)
                                     .contextMenu {
                                         Button(role: .destructive) {
                                             delete(record)
@@ -62,8 +62,12 @@ struct CharacterSelectView: View {
                 sectionHeader("Starter Racers", systemImage: "sparkles")
                     .padding(.top, 12)
                 LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(DriverProfile.presets) { driver in
-                        characterCard(driver, isStarter: true)
+                    // Starters continue the same live-scene budget as My Racers
+                    // (offset by their count), so the ≤5 live-3D cap is global
+                    // across both sections, not 5-per-section.
+                    ForEach(Array(DriverProfile.presets.enumerated()), id: \.element.id) { index, driver in
+                        characterCard(driver, isStarter: true,
+                                      liveIndex: myRecords.count + index)
                     }
                 }
             }
@@ -104,22 +108,21 @@ struct CharacterSelectView: View {
             .foregroundStyle(.yellow)
     }
 
-    private func characterCard(_ driver: DriverProfile, isStarter: Bool = false) -> some View {
+    private func characterCard(_ driver: DriverProfile, isStarter: Bool = false,
+                               liveIndex: Int) -> some View {
         let isSelected = appModel.selectedDriver?.id == driver.id
         return Button {
             select(driver)
         } label: {
             VStack(spacing: 10) {
-                // 2D badge, not a live DriverPreviewView: this is a GRID, and
-                // every tile as its own RealityView means N simultaneous
-                // scenes. That survives the simulator but exhausts a real
-                // device's Metal drawable pools — nextDrawable returns nil and
-                // RealityKit aborts binding a fallback texture into the
-                // tonemap LUT slot. Live 3D is fine for the single-instance
-                // previews (editor turntable, customizer); a grid needs a
-                // cheap thumbnail. See OPEN-THREADS "3D grid avatars".
-                DriverFaceBadge(driver: driver)
+                // Live 3D up to the cap, cheap 2D badge past it: a live
+                // RealityView per tile is N simultaneous scenes and crashes a
+                // real device (OPEN-THREADS "3D grid avatars"). `liveIndex` is
+                // global across both sections so the cap is a true ≤5 total.
+                DriverGridAvatar(driver: driver,
+                                 live: liveIndex < DriverGridAvatar.liveSceneCap)
                     .frame(width: 84, height: 84)
+                    .clipShape(Circle())
                 Text(driver.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     .lineLimit(1)
