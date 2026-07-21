@@ -44,19 +44,42 @@ struct RosterColormapTests {
         #expect((map.height / RosterColormap.grid) % RosterColormap.rowsPerPatch == 0)
     }
 
-    @Test func everyRosterCharacterHasPatches() {
+    @Test func everyRosterCharacterHasPatches() throws {
         for body in BodyType.allCases {
             for variant in body.variants {
                 var profile = DriverProfile.presets[0]
                 profile.bodyType = body
                 profile.characterVariant = variant
                 let key = RosterColormap.key(for: profile)
-                #expect(RosterColormap.patches[key] != nil, "no patch table for \(key)")
-                #expect(RosterColormap.repaints(for: profile).count == 3,
-                        "\(key) should repaint skin, pants and shirt")
+                let patches = try #require(RosterColormap.patches[key], "no patch table for \(key)")
+                // skin + pants + shirt, plus eyes on the characters that have
+                // a separable eye cell.
+                #expect(RosterColormap.repaints(for: profile).count == (patches.eyes == nil ? 3 : 4),
+                        "\(key) repaint count doesn't match its patches")
             }
         }
         #expect(RosterColormap.patches.count == 12)
+    }
+
+    /// The reported bug: on a character whose eye cell is separable, the Eyes
+    /// swatch must actually land as the LAST repaint (so it wins any shared
+    /// cell). On a collision character it must stay absent rather than recolour
+    /// the garment it shares texels with.
+    @Test func eyesRepaintOnlyWhereSeparable() {
+        var separable = DriverProfile.presets[0]           // female-b: eyes [3,0]
+        separable.bodyType = .woman
+        separable.characterVariant = "b"
+        separable.eyeColorHex = "#00FF00"
+        let eyed = RosterColormap.repaints(for: separable)
+        #expect(eyed.last?.patch == RosterColormap.Patch(3, 0))
+        #expect(eyed.last?.hex == "#00FF00")
+
+        var collision = DriverProfile.presets[0]           // male-d: eyes == shirt
+        collision.bodyType = .man
+        collision.characterVariant = "d"
+        collision.eyeColorHex = "#00FF00"
+        #expect(RosterColormap.patches["character-male-d"]?.eyes == nil)
+        #expect(!RosterColormap.repaints(for: collision).contains { $0.hex == "#00FF00" })
     }
 
     /// The boy can't wear the bearded man, so his key must never name him —

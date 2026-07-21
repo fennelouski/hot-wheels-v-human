@@ -164,7 +164,11 @@ enum PaintShell {
             material.baseColor = .init(tint: .clear)
         }
         material.roughness = sparkle ? 0.32 : 0.5
-        material.metallic = sparkle ? 1.0 : 0.0
+        // NOT metallic on sparkle: metallic 1.0 discards the overlay's albedo
+        // (stickers/livery/drawing) and renders it as pure specular, which
+        // reflects nothing in the dark scene — the whole overlay vanished on
+        // sparkle cars. The glitter is the noise normal map below, not metal.
+        material.metallic = 0.0
         material.blending = .transparent(opacity: 1.0)
         material.opacityThreshold = 0.0
         if sparkle, let noise = await sparkleNormalTexture() {

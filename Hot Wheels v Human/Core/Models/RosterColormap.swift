@@ -45,12 +45,19 @@ nonisolated enum RosterColormap {
         let shirt: Patch
         let pants: Patch
         let shoes: Patch
+        /// The eyes' own cell — nil on characters where the eye texels ARE the
+        /// hair or a dark garment (Kenney maps a whole cell to one flat texel,
+        /// so those can't be recoloured apart). Non-nil ones honour the Eyes
+        /// swatch; nil ones keep the sheet's dark default.
+        let eyes: Patch?
 
-        init(skin: [Int], shirt: [Int], pants: [Int], shoes: [Int]) {
+        init(skin: [Int], shirt: [Int], pants: [Int], shoes: [Int],
+             eyes: [Int]? = nil) {
             self.skin = Patch(skin[0], skin[1])
             self.shirt = Patch(shirt[0], shirt[1])
             self.pants = Patch(pants[0], pants[1])
             self.shoes = Patch(shoes[0], shoes[1])
+            self.eyes = eyes.map { Patch($0[0], $0[1]) }
         }
     }
 
@@ -59,16 +66,16 @@ nonisolated enum RosterColormap {
     // Graphics/3DModels/Source/kenney_mini-characters/Previews/*.png.
     static let patches: [String: Patches] = [
         "character-female-a": .init(skin: [3, 6], shirt: [2, 5], pants: [2, 5], shoes: [3, 7]),   // skin #8B5641 shirt #585ABF pants #585ABF shoes #E0A57E
-        "character-female-b": .init(skin: [3, 7], shirt: [2, 2], pants: [2, 7], shoes: [3, 4]),   // skin #ECB690 shirt #FFD061 pants #8F63D8 shoes #D1D1E2
-        "character-female-c": .init(skin: [3, 5], shirt: [2, 5], pants: [3, 1], shoes: [3, 7]),   // skin #BC6A49 shirt #5D6CC7 pants #7C8199 shoes #E0A57E
-        "character-female-d": .init(skin: [3, 7], shirt: [3, 1], pants: [3, 1], shoes: [3, 0]),   // skin #D28F68 shirt #696F86 pants #696F86 shoes #3B3B41
+        "character-female-b": .init(skin: [3, 7], shirt: [2, 2], pants: [2, 7], shoes: [3, 4], eyes: [3, 0]),   // skin #ECB690 shirt #FFD061 pants #8F63D8 shoes #D1D1E2 eyes #3B3B41
+        "character-female-c": .init(skin: [3, 5], shirt: [2, 5], pants: [3, 1], shoes: [3, 7], eyes: [3, 0]),   // skin #BC6A49 shirt #5D6CC7 pants #7C8199 shoes #E0A57E eyes #3B3B41
+        "character-female-d": .init(skin: [3, 7], shirt: [3, 1], pants: [3, 1], shoes: [3, 0], eyes: [3, 0]),   // skin #D28F68 shirt #696F86 pants #696F86 shoes #3B3B41 eyes #3B3B41
         "character-female-e": .init(skin: [3, 7], shirt: [3, 4], pants: [3, 0], shoes: [3, 3]),   // skin #ECB690 shirt #C9C9DD pants #353539 shoes #878DA9
-        "character-female-f": .init(skin: [3, 7], shirt: [2, 2], pants: [2, 5], shoes: [2, 7]),   // skin #ECB690 shirt #FF952F pants #5E70C9 shoes #855BD2
+        "character-female-f": .init(skin: [3, 7], shirt: [2, 2], pants: [2, 5], shoes: [2, 7], eyes: [3, 0]),   // skin #ECB690 shirt #FF952F pants #5E70C9 shoes #855BD2 eyes #3B3B41
         "character-male-a": .init(skin: [3, 6], shirt: [2, 1], pants: [2, 5], shoes: [2, 2]),   // skin #A95E41 shirt #20896B pants #5D6CC7 shoes #FFBA4E
-        "character-male-b": .init(skin: [3, 7], shirt: [2, 4], pants: [2, 5], shoes: [3, 5]),   // skin #E9B28C shirt #EB6246 pants #6282D1 shoes #DA845D
+        "character-male-b": .init(skin: [3, 7], shirt: [2, 4], pants: [2, 5], shoes: [3, 5], eyes: [3, 0]),   // skin #E9B28C shirt #EB6246 pants #6282D1 shoes #DA845D eyes #3B3B41
         "character-male-c": .init(skin: [3, 7], shirt: [2, 5], pants: [3, 0], shoes: [3, 0]),   // skin #ECB690 shirt #6282D1 pants #3B3B41 shoes #3B3B41
         "character-male-d": .init(skin: [3, 7], shirt: [3, 0], pants: [3, 0], shoes: [3, 0]),   // skin #ECB690 shirt #3B3B41 pants #3B3B41 shoes #3B3B41
-        "character-male-e": .init(skin: [3, 7], shirt: [3, 4], pants: [3, 4], shoes: [3, 1]),   // skin #ECB690 shirt #C7C7DB pants #C7C7DB shoes #61677E
+        "character-male-e": .init(skin: [3, 7], shirt: [3, 4], pants: [3, 4], shoes: [3, 1], eyes: [3, 0]),   // skin #ECB690 shirt #C7C7DB pants #C7C7DB shoes #61677E eyes #3B3B41
         "character-male-f": .init(skin: [3, 5], shirt: [2, 1], pants: [3, 7], shoes: [3, 1]),   // skin #E38B62 shirt #319A74 pants #D99A72 shoes #61677E
     ]
 
@@ -87,7 +94,7 @@ nonisolated enum RosterColormap {
     /// swatch is the one that wins, since it's the one kids reach for.
     static func repaints(for profile: DriverProfile) -> [(patch: Patch, hex: String)] {
         guard let patches = patches[key(for: profile)] else { return [] }
-        return [
+        var out: [(patch: Patch, hex: String)] = [
             (patches.skin, profile.skinToneHex),
             // Same darkening the stripe palette gives the Quaternius rig, so
             // a shirt and pants picked from one swatch read as an outfit on
@@ -97,6 +104,16 @@ nonisolated enum RosterColormap {
                                     by: DriverPalette.pantsDarkening)),
             (patches.shirt, profile.suitColorHex),
         ]
+        // Eyes LAST, so on a character whose eye cell is also its shoe cell
+        // (female-d) the eyes win — shoes aren't a swatch. Only the six
+        // characters with a separable eye cell get here; the rest keep the
+        // sheet's dark eyes. ponytail: the other six can't be split — eyes and
+        // that garment are one flat texel in Kenney's art; upgrade needs
+        // editing the model UVs, which are pristine upstream assets.
+        if let eyes = patches.eyes {
+            out.append((eyes, profile.eyeColorHex ?? DriverPalette.defaultEyeColor))
+        }
+        return out
     }
 
     /// Repaint `patch` in an RGBA byte buffer, keeping the ramp's shading:
