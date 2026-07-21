@@ -19,6 +19,18 @@ struct ArenaLobbyView: View {
             && coordinator.players.allSatisfy { coordinator.isReady($0.id) }
     }
 
+    /// Feeds LobbyBackground: warms and quickens as connected racers join
+    /// and ready up, so the room visibly "fills up" on the TV itself.
+    private var lobbyEnergy: Double {
+        guard !coordinator.players.isEmpty else {
+            return coordinator.transportState == .searching ? 0.12 : 0
+        }
+        let readyCount = coordinator.players.filter { coordinator.isReady($0.id) }.count
+        let joinFraction = Double(coordinator.players.count) / Double(RaceCoordinator.maxPlayers)
+        let readyFraction = Double(readyCount) / Double(coordinator.players.count)
+        return 0.15 + 0.35 * joinFraction + 0.5 * readyFraction
+    }
+
     var body: some View {
         ZStack {
             // Always mounted, even during .lobby: this is what calls
@@ -95,11 +107,7 @@ struct ArenaLobbyView: View {
         }
         .animation(.easeInOut(duration: 0.3), value: coordinator.lastRejection)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(
-            RadialGradient(colors: [Color(red: 0.16, green: 0.18, blue: 0.27),
-                                     Color(red: 0.07, green: 0.08, blue: 0.13)],
-                           center: .center, startRadius: 60, endRadius: 1000)
-        )
+        .background(LobbyBackground(energy: lobbyEnergy).ignoresSafeArea())
         .foregroundStyle(.white)
     }
 

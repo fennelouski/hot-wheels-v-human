@@ -61,7 +61,27 @@ struct DashboardView: View {
                 Spacer()
             }
         }
-        .background(Color(red: 0.07, green: 0.08, blue: 0.13))
+        .background(background.ignoresSafeArea())
+    }
+
+    /// A moving, connection-state-driven glow before the race (matches the
+    /// TV lobby's — same signal, opposite end of the wire); once racing, a
+    /// flat cockpit backdrop so nothing behind the HUD steals focus.
+    @ViewBuilder private var background: some View {
+        if model.myCar == nil {
+            LobbyBackground(energy: lobbyEnergy)
+        } else {
+            Color(red: 0.07, green: 0.08, blue: 0.13)
+        }
+    }
+
+    private var lobbyEnergy: Double {
+        switch model.transportState {
+        case .idle: 0
+        case .searching: 0.15
+        case .connected: model.readySent ? 1 : 0.5
+        case .dropped: 0.05
+        }
     }
 
     private func garageStrip(livesLeft: Int) -> some View {
