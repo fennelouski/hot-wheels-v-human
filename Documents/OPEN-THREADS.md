@@ -289,17 +289,23 @@ on launch for anyone with a few profiles set up.
 Capping DIDN'T work: `liveSceneCap = 5` still crashed the same device. The
 count was never the real variable — a `RealityView` inside a recycling
 `LazyVGrid`/`ScrollView` is, and RealityKit aborts on device with even a few.
-So `liveSceneCap` is now 0: grids render only the 2D `DriverFaceBadge`, zero
-live scenes. `DriverGridAvatar` + the per-tile index plumbing stay as the seam
-for the real 3D path. Single, non-recycled previews (editor turntable,
-customizer "who's riding" tab) are live 3D and were never the problem.
 
-To get 3D avatars back in the grids, render each character to a STATIC
-snapshot `UIImage` ONCE and show `Image(uiImage:)` — never a live scene in a
-grid. Offscreen RealityKit→UIImage on iOS is fiddly (no clean SwiftUI
-`RealityView` snapshot API; `ARView.snapshot(...)` on a transient single
-instance, sequenced one character at a time, is the likely route) and must be
-device-tested — the Simulator never reproduced any of this.
+Fixed properly with STATIC SNAPSHOTS (`DriverThumbnailStore`, iOS-only):
+`DriverGridAvatar` shows the 2D `DriverFaceBadge` immediately, then swaps in a
+still `UIImage` rendered ONCE off-screen through a single transient `ARView`
+(`cameraMode: .nonAR`, parked off-screen in the key window so it actually
+ticks). Renders are serialised on a task tail — one ARView alive at a time,
+never N — so the on-grid live-scene count stays zero. Cached by appearance
+signature; a blank/failed grab returns nil and the tile keeps its 2D badge, so
+the worst case is a cosmetic downgrade, never a crash. Verified rendering real
+3D stills on the Simulator; the single transient scene is the same shape as
+the editor turntable that already works on device. Single, non-recycled
+previews (editor turntable, customizer tab) stay live 3D as before.
+
+If a device ever shows blank tiles: bump the 250 ms settle in
+`DriverThumbnailStore.snapshot` (the rig may need longer to load/draw), or the
+off-screen ARView isn't ticking there — fall back to `liveSceneCap`-style 2D
+by having `DriverGridAvatar` skip the render.
 
 ## Closed 2026-07-20 (later session)
 

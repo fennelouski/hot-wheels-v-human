@@ -27,8 +27,8 @@ struct ProfilePickerView: View {
                 .font(.system(size: 64, weight: .heavy, design: .rounded))
             ScrollView {
                 LazyVGrid(columns: columns, spacing: 24) {
-                    ForEach(Array(records.enumerated()), id: \.element.id) { index, record in
-                        profileTile(record, index: index)
+                    ForEach(records) { record in
+                        profileTile(record)
                             .contextMenu {
                                 Button(role: .destructive) {
                                     delete(record)
@@ -49,7 +49,7 @@ struct ProfilePickerView: View {
         .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
     }
 
-    private func profileTile(_ record: KidProfileRecord, index: Int) -> some View {
+    private func profileTile(_ record: KidProfileRecord) -> some View {
         Button {
             pick(record)
         } label: {
@@ -58,13 +58,10 @@ struct ProfilePickerView: View {
                     Circle()
                         .fill(Color(hex: record.profile?.colorHex ?? "#FFD500"))
                     if let driver = lastUsedCharacter(of: record) {
-                        // Live 3D for the first few tiles, cheap 2D badge past
-                        // the cap: a live RealityView per tile is N simultaneous
-                        // scenes and crashes a real device (OPEN-THREADS "3D
-                        // grid avatars"). DriverGridAvatar bounds it.
-                        DriverGridAvatar(
-                            driver: driver,
-                            live: index < DriverGridAvatar.liveSceneCap)
+                        // 3D look from a still image, not a live scene — a
+                        // RealityView per tile crashes a device (OPEN-THREADS
+                        // "3D grid avatars"). DriverGridAvatar handles it.
+                        DriverGridAvatar(driver: driver)
                             .clipShape(Circle())
                             .padding(14)
                     } else {

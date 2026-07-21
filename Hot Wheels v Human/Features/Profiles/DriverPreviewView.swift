@@ -9,39 +9,43 @@
 import SwiftUI
 import RealityKit
 
-/// Grid-safe driver avatar. `live` tiles render the full 3D turntable; the
-/// rest fall back to the cheap 2D `DriverFaceBadge`. A grid passes `live` for
-/// only the first `liveSceneCap` tiles (by a global index across all its
-/// sections), so however long the list or however fast you scroll, no more
-/// than `liveSceneCap` RealityViews exist at once. That's the whole safety
-/// property: many simultaneous RealityKit scenes render on the Simulator but
-/// exhaust a real device's Metal drawable pools and abort (see OPEN-THREADS
-/// "3D grid avatars").
+/// Grid-safe driver avatar: the character's 3D look WITHOUT a live scene.
+///
+/// A live `RealityView` per tile crashes a device — RealityKit can't hold
+/// several simultaneous scenes inside a recycling `LazyVGrid`/`ScrollView`
+/// (OPEN-THREADS "3D grid avatars"). So instead of a live scene, each tile
+/// shows a still IMAGE rendered once off-screen by `DriverThumbnailStore`,
+/// which draws one character at a time through a single transient scene — the
+/// count on screen is always zero. The cheap 2D `DriverFaceBadge` shows until
+/// (and if) the snapshot arrives, so a failed/slow render just degrades to 2D
+/// and never crashes.
 struct DriverGridAvatar: View {
-    /// Ceiling on concurrent live 3D scenes in a grid.
-    ///
-    /// 0 on purpose: capping at 5 STILL crashed a real device (the original
-    /// report). A `RealityView` inside a recycling `LazyVGrid`/`ScrollView` is
-    /// the problem, not the raw count — RealityKit doesn't tolerate several
-    /// simultaneous view instances there, and it aborts on device (the
-    /// tonemapLUT render crash) even with only a few. So grids get NO live
-    /// scenes at all; every tile is the cheap 2D `DriverFaceBadge`. Single,
-    /// non-recycled previews (editor turntable, customizer tab) are fine and
-    /// unaffected. Raising this above 0 requires rendering tiles to STATIC
-    /// snapshot images first (OPEN-THREADS "3D grid avatars") — never live
-    /// scenes in a grid.
-    static let liveSceneCap = 0
-
     let driver: DriverProfile
-    let live: Bool
+
+    #if os(iOS)
+    @State private var image: UIImage?
 
     var body: some View {
-        if live {
-            DriverPreviewView(driver: driver)
-        } else {
-            DriverFaceBadge(driver: driver)
+        Group {
+            if let image {
+                Image(uiImage: image).resizable().scaledToFill()
+            } else {
+                DriverFaceBadge(driver: driver)
+            }
+        }
+        .task(id: DriverPainter.appearanceSignature(for: driver)) {
+            if let hit = DriverThumbnailStore.shared.cached(driver) {
+                image = hit
+            } else {
+                image = await DriverThumbnailStore.shared.thumbnail(for: driver)
+            }
         }
     }
+    #else
+    // tvOS has no ARView to snapshot with, and never shows these workshop
+    // grids anyway — the 2D badge is all it needs.
+    var body: some View { DriverFaceBadge(driver: driver) }
+    #endif
 }
 
 struct DriverPreviewView: View {
@@ -124,8 +128,12 @@ struct DriverPreviewView: View {
         }
     }
 
+    /// Loads, paints, scales and idle-poses the driver into `turntable`.
+    /// Internal (not private) so the off-screen thumbnail renderer builds the
+    /// exact same rig — one code path, so a snapshot can't drift from the
+    /// live turntable.
     @MainActor
-    private static func rebuild(_ turntable: Entity, driver: DriverProfile) async {
+    static func rebuild(_ turntable: Entity, driver: DriverProfile) async {
         let signature = DriverPainter.appearanceSignature(for: driver)
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
