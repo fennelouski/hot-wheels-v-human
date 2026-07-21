@@ -7,4 +7,5 @@ iPad (`HomeView`, Phase 0 stub → Phase 3 full)
 
 tvOS (`ArenaLobbyView`, Phase 3)
 - Auto-starts advertising `hwvh-race` on appear. Shows: app logo, "Open the app on your iPad", connected player cards (name + car preview once designs sync), ready checkmarks, then hands off to `ArenaView` on `matchConfig` + all-ready.
-- tvOS focus engine: lobby is display-only (no remote interaction needed for v1) — keep it that way, the iPad is the controller.
+- `ArenaView` is mounted unconditionally underneath the lobby overlay (not gated on `phase != .lobby`) — it's what calls `RaceCoordinator.attach(root:)`, and `startRaceIfReady()` can never leave `.lobby` without a root already attached. Gating it behind phase was a deadlock: the phase could never change because the thing that changes it was waiting on this view to appear first.
+- tvOS focus engine: the iPad is still the primary controller (READY lives there), but the lobby also has one real, focusable control — a **START RACE** button, shown once ≥1 player has joined, that force-readies everyone and calls `RaceCoordinator.hostStartRace()`. Covers "couch is one iPad short" and solo-on-TV play.

@@ -139,6 +139,16 @@ final class RaceCoordinator {
     /// Is this player readied up? (TV lobby checkmarks.)
     func isReady(_ playerID: UUID) -> Bool { readiness[playerID] == true }
 
+    /// TV-side override: mark every connected player ready and try to
+    /// start, for a couch that's one iPad short of everyone tapping READY
+    /// (or just doesn't want to wait). startRaceIfReady() still no-ops
+    /// quietly if a player hasn't submitted a car/track yet, same as the
+    /// normal per-player ready flow.
+    func hostStartRace() {
+        for player in players { readiness[player.id] = true }
+        startRaceIfReady()
+    }
+
     /// The track racing next (draft gating tests, TV lobby).
     var lobbyBlueprintID: UUID? { nextBlueprint()?.trackId }
 

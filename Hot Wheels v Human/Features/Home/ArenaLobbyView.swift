@@ -3,8 +3,10 @@
 //  Hot Wheels v Human
 //
 //  TV entry point: advertises `hwvh-race` on appear, shows connected
-//  players, hands off to ArenaView once the race starts. Display-only —
-//  the iPad is the controller (Home README).
+//  players, hands off to ArenaView once the race starts. The iPad is
+//  still the primary controller (READY lives there), but the lobby also
+//  has a focusable START RACE button for a couch short an iPad
+//  (Home README).
 //
 
 import SwiftUI
@@ -14,10 +16,16 @@ struct ArenaLobbyView: View {
 
     var body: some View {
         ZStack {
+            // Always mounted, even during .lobby: this is what calls
+            // coordinator.attach(root:), and startRaceIfReady() can't
+            // leave .lobby without a root already attached. Gating this
+            // view behind "phase != .lobby" was a deadlock — the phase
+            // could never change because the thing that changes it was
+            // waiting on this view to appear first. The lobby overlay
+            // below covers the (trackless) scene until the race starts.
+            ArenaView(coordinator: coordinator)
             if coordinator.session.phase == .lobby {
                 lobby
-            } else {
-                ArenaView(coordinator: coordinator)
             }
         }
         .onAppear { coordinator.start() }
@@ -34,7 +42,7 @@ struct ArenaLobbyView: View {
             if coordinator.players.isEmpty {
                 joinGuide
             } else {
-                Text("Tap READY on your iPad to race!")
+                Text("Tap READY on your iPad, or press START on the TV!")
                     .font(.system(size: 32, weight: .semibold, design: .rounded))
                     .foregroundStyle(.secondary)
             }
@@ -61,6 +69,18 @@ struct ArenaLobbyView: View {
                     .padding(24)
                     .background(.white.opacity(0.1), in: RoundedRectangle(cornerRadius: 20))
                 }
+            }
+            if !coordinator.players.isEmpty {
+                Button {
+                    coordinator.hostStartRace()
+                } label: {
+                    Label("START RACE", systemImage: "flag.checkered")
+                        .font(.system(size: 30, weight: .heavy, design: .rounded))
+                        .frame(width: 380, height: 88)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
             }
             if let rejection = coordinator.lastRejection {
                 Text(rejection)
