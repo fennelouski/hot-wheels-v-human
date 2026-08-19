@@ -46,12 +46,17 @@ final class DashboardModel {
     /// Whether this dashboard has readied up for the pending race.
     private(set) var readySent = false
 
+    /// Our own car, for the pre-race lobby's swatch (the first of
+    /// `submit`'s designs — see its doc for why that one's ours).
+    private(set) var myDesign: CarDesign?
+
     /// Announce + submit the design(s) and ranked track picks, without
     /// readying up (Race-on-TV flow: READY is the kid's tap). The first
     /// design is ours (ownerID); extras belong to no controller (Test
     /// Mode's B car, demo opponents). Track order = the kid's ranking;
     /// the host drafts the race series from everyone's picks.
     func submit(designs: [CarDesign], tracks: [TrackBlueprint], config: MatchConfig) {
+        myDesign = designs.first
         transport.send(.hello(player, protocolVersion: gameProtocolVersion), reliably: true)
         for (i, design) in designs.enumerated() {
             transport.send(.carDesign(design, ownerID: i == 0 ? player.id : nil), reliably: true)
