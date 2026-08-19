@@ -43,6 +43,8 @@ final class RaceSession {
     private(set) var trackID: UUID?
     /// The blueprint's picked world, if the kid chose one in the builder.
     private(set) var worldTheme: String?
+    /// Hand-placed decorations riding the same blueprint.
+    private(set) var scenery: [SceneryItem] = []
     /// Ground-plane bounds of the whole track — ArenaEnvironment keeps
     /// its scattered props out of this rect.
     private(set) var trackFootprint: FootprintRect?
@@ -106,6 +108,7 @@ final class RaceSession {
         self.config = config
         trackID = blueprint.trackId
         worldTheme = blueprint.worldTheme
+        scenery = blueprint.scenery ?? []
         let layout = TrackLayoutSolver.solve(blueprint)
         let rects = layout.pieces.map(\.worldFootprint)
         trackFootprint = FootprintRect(
@@ -114,6 +117,15 @@ final class RaceSession {
         pieceTypes = layout.pieces.map(\.definition.type)
         pieceStartIndices = layout.lanes.pieceStartIndices
         let track = try await TrackSpawner.spawn(layout: layout)
+        // Groundless worlds (space): the track FLOATS — support legs
+        // standing on a ground that isn't there break the picture.
+        if RaceTuning.groundlessThemes.contains(
+            RaceTuning.resolvedThemeName(blueprint.worldTheme,
+                                         for: blueprint.trackId)) {
+            for child in Array(track.children) where child.name.hasPrefix("support-") {
+                child.removeFromParent()
+            }
+        }
         trackEntity = track
         await DebrisPool.shared.warmUp()
         track.components.set(RaceTrackComponent(lanes: layout.lanes, laps: config.laps))

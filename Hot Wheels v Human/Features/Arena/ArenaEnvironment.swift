@@ -68,6 +68,10 @@ enum ArenaEnvironment {
         /// so themes with big props (ships, cliffs, grandstands) need more
         /// room or a hull overhangs the racing line.
         var clearance: Float = 0.35
+        /// Oversized silhouettes ringed out at the horizon (skylines,
+        /// mesas, galleons). Empty = no ring.
+        var horizon: [String] = []
+        var horizonScale: Float = 3
     }
 
     /// Indexed by trackId byte-sum for tracks with no chosen world —
@@ -75,7 +79,7 @@ enum ArenaEnvironment {
     /// space one). ONLY the first `hashedThemeCount` are auto-dealt;
     /// worlds after that are pick-them-yourself (appending one must not
     /// re-theme every existing track).
-    static let hashedThemeCount = 4
+    static var hashedThemeCount: Int { RaceTuning.hashedThemeNames.count }
     static let themes: [Theme] = [
         Theme(name: "candy", displayName: "Candy", symbol: "birthday.cake.fill",
               skyTop: rgb(0.95, 0.35, 0.62), skyHorizon: rgb(1.0, 0.82, 0.88),
@@ -83,17 +87,23 @@ enum ArenaEnvironment {
               stars: false, clouds: true,
               props: ["item-banana", "item-box", "item-coin-gold", "item-cone",
                       "food-cupcake", "food-donut", "food-popsicle",
-                      "winter-cane-red", "winter-cane-green"]),
+                      "winter-cane-red", "winter-cane-green"],
+              horizon: ["food-donut", "food-popsicle", "food-icecream"],
+              horizonScale: 4),
         Theme(name: "day", displayName: "Sunny Day", symbol: "sun.max.fill",
               skyTop: rgb(0.25, 0.55, 0.95), skyHorizon: rgb(0.80, 0.93, 1.0),
               groundLight: rgb(0.35, 0.62, 0.32), groundDark: rgb(0.27, 0.52, 0.26),
               stars: false, clouds: true,
-              props: ["item-cone", "item-cone", "item-box", "item-banana"]),
+              props: ["item-cone", "item-cone", "item-box", "item-banana"],
+              horizon: ["park-tree-default", "park-tree-oak"],
+              horizonScale: 3.5),
         Theme(name: "sunset", displayName: "Sunset", symbol: "sunset.fill",
               skyTop: rgb(0.35, 0.16, 0.45), skyHorizon: rgb(1.0, 0.62, 0.30),
               groundLight: rgb(0.72, 0.58, 0.38), groundDark: rgb(0.62, 0.48, 0.30),
               stars: false, clouds: true,
-              props: ["item-cone", "item-cone", "item-box"]),
+              props: ["item-cone", "item-cone", "item-box"],
+              horizon: ["park-tree-oak", "canyon-mesa"],
+              horizonScale: 3),
         Theme(name: "space", displayName: "Space", symbol: "moon.stars.fill",
               skyTop: rgb(0.02, 0.02, 0.10), skyHorizon: rgb(0.16, 0.07, 0.32),
               groundLight: rgb(0.42, 0.38, 0.50), groundDark: rgb(0.34, 0.30, 0.42),
@@ -104,7 +114,9 @@ enum ArenaEnvironment {
                       "space-crater", "space-crater-large",
                       "space-crystals-a", "space-crystals-b", "space-dish",
                       "space-alien", "space-astronaut-a", "space-astronaut-b"],
-              propCount: 36),
+              propCount: 36,
+              horizon: ["space-meteor", "space-meteor-detailed", "space-speeder-c", "space-crystals-a"],
+              horizonScale: 3),
 
         // Pickable worlds (Kenney city/nature kits, converted at 0.3).
         Theme(name: "city", displayName: "Big City", symbol: "building.2.fill",
@@ -118,7 +130,9 @@ enum ArenaEnvironment {
                       "city-skyscraper-a", "city-skyscraper-b", "city-skyscraper-c",
                       "city-skyscraper-d", "city-skyscraper-e",
                       "city-streetlight", "city-streetlight", "city-planter"],
-              structured: true, propCount: 44),
+              structured: true, propCount: 44,
+              horizon: ["city-skyscraper-a", "city-skyscraper-b", "city-skyscraper-c", "city-skyscraper-d", "city-skyscraper-e"],
+              horizonScale: 3.5),
         Theme(name: "town", displayName: "Hometown", symbol: "house.fill",
               skyTop: rgb(0.32, 0.60, 0.95), skyHorizon: rgb(0.84, 0.94, 1.0),
               groundLight: rgb(0.42, 0.66, 0.34), groundDark: rgb(0.34, 0.56, 0.28),
@@ -130,7 +144,9 @@ enum ArenaEnvironment {
                       "city-house-q", "city-house-r", "city-house-s", "city-house-t",
                       "city-house-u",
                       "city-tree-large", "city-tree-small", "city-fence"],
-              structured: true, propCount: 40),
+              structured: true, propCount: 40,
+              horizon: ["city-house-b", "city-house-n", "city-tree-large"],
+              horizonScale: 3),
         Theme(name: "park", displayName: "Park", symbol: "tree.fill",
               skyTop: rgb(0.28, 0.58, 0.90), skyHorizon: rgb(0.82, 0.94, 0.96),
               groundLight: rgb(0.30, 0.58, 0.28), groundDark: rgb(0.24, 0.49, 0.23),
@@ -143,7 +159,9 @@ enum ArenaEnvironment {
                       "park-tree-detailed", "city-tree-large",
                       "park-mushroom-red", "park-flower-red",
                       "park-flower-yellow", "park-stump"],
-              propCount: 48),
+              propCount: 48,
+              horizon: ["park-tree-default", "park-tree-detailed", "park-tree-oak"],
+              horizonScale: 3.5),
         Theme(name: "speedway", displayName: "Speedway", symbol: "flag.checkered",
               skyTop: rgb(0.28, 0.55, 0.92), skyHorizon: rgb(0.82, 0.90, 0.97),
               groundLight: rgb(0.44, 0.56, 0.38), groundDark: rgb(0.38, 0.49, 0.33),
@@ -154,7 +172,9 @@ enum ArenaEnvironment {
                       "race-pylon", "race-pylon", "race-lightpost",
                       "race-pits-garage", "race-pits-office",
                       "race-car-red", "race-car-green"],
-              structured: true, propCount: 32, clearance: 0.8),
+              structured: true, propCount: 32, clearance: 0.8,
+              horizon: ["race-grandstand-covered", "race-billboard", "race-banner-tower-red"],
+              horizonScale: 3),
         Theme(name: "castle", displayName: "Castle", symbol: "crown.fill",
               skyTop: rgb(0.34, 0.52, 0.88), skyHorizon: rgb(0.85, 0.90, 0.95),
               groundLight: rgb(0.38, 0.60, 0.32), groundDark: rgb(0.31, 0.51, 0.27),
@@ -164,7 +184,9 @@ enum ArenaEnvironment {
                       "castle-flag", "castle-flag-wide", "castle-rocks",
                       "castle-tree", "castle-cart", "castle-cart-high",
                       "castle-fountain", "castle-hedge", "castle-lantern"],
-              structured: true, propCount: 32, clearance: 0.7),
+              structured: true, propCount: 32, clearance: 0.7,
+              horizon: ["castle-tower", "castle-siege-tower", "castle-tree"],
+              horizonScale: 3.5),
         Theme(name: "winter", displayName: "Winter", symbol: "snowflake",
               skyTop: rgb(0.55, 0.72, 0.92), skyHorizon: rgb(0.90, 0.95, 1.0),
               groundLight: rgb(0.93, 0.95, 0.98), groundDark: rgb(0.84, 0.88, 0.94),
@@ -177,7 +199,9 @@ enum ArenaEnvironment {
                       "winter-nutcracker", "winter-gingerbread-man",
                       "winter-gingerbread-woman", "winter-sled",
                       "winter-snow-pile", "winter-lantern"],
-              propCount: 44, clearance: 0.5),
+              propCount: 44, clearance: 0.5,
+              horizon: ["winter-tree-a", "winter-tree-b", "winter-tree-decorated-snow"],
+              horizonScale: 3.5),
         Theme(name: "pirate", displayName: "Pirate Cove", symbol: "sailboat.fill",
               skyTop: rgb(0.16, 0.55, 0.75), skyHorizon: rgb(0.80, 0.93, 0.94),
               groundLight: rgb(0.89, 0.80, 0.58), groundDark: rgb(0.82, 0.72, 0.50),
@@ -189,7 +213,9 @@ enum ArenaEnvironment {
                       "pirate-palm-c", "pirate-chest", "pirate-barrel",
                       "pirate-cannon", "pirate-crate", "pirate-rocks-a",
                       "pirate-rocks-b", "pirate-flag"],
-              propCount: 30, clearance: 1.0),
+              propCount: 30, clearance: 1.0,
+              horizon: ["pirate-ship-large", "pirate-ship-medium", "pirate-tower-large"],
+              horizonScale: 2.5),
         Theme(name: "spooky", displayName: "Spooky", symbol: "moon.haze.fill",
               skyTop: rgb(0.07, 0.04, 0.14), skyHorizon: rgb(0.30, 0.14, 0.36),
               groundLight: rgb(0.24, 0.29, 0.24), groundDark: rgb(0.19, 0.24, 0.19),
@@ -202,7 +228,9 @@ enum ArenaEnvironment {
                       "spooky-lantern", "spooky-lightpost", "spooky-ghost",
                       "spooky-skeleton", "spooky-vampire", "spooky-zombie",
                       "spooky-rocks"],
-              propCount: 42),
+              propCount: 42,
+              horizon: ["spooky-pine", "spooky-pine-fall", "spooky-crypt"],
+              horizonScale: 3.5),
         Theme(name: "golf", displayName: "Putt-Putt", symbol: "figure.golf",
               skyTop: rgb(0.30, 0.60, 0.92), skyHorizon: rgb(0.84, 0.94, 0.96),
               groundLight: rgb(0.36, 0.70, 0.36), groundDark: rgb(0.30, 0.61, 0.30),
@@ -211,7 +239,9 @@ enum ArenaEnvironment {
                       "golf-gate", "golf-diamond", "golf-triangle",
                       "golf-flag-red", "golf-flag-blue",
                       "golf-ball-red", "golf-ball-blue"],
-              propCount: 26),
+              propCount: 26,
+              horizon: ["golf-windmill", "golf-castle"],
+              horizonScale: 3),
         Theme(name: "snacks", displayName: "Snack Land", symbol: "fork.knife",
               skyTop: rgb(0.98, 0.62, 0.35), skyHorizon: rgb(1.0, 0.88, 0.72),
               groundLight: rgb(0.94, 0.86, 0.74), groundDark: rgb(0.88, 0.78, 0.64),
@@ -221,7 +251,9 @@ enum ArenaEnvironment {
                       "food-cake", "food-pizza", "food-fries", "food-popsicle",
                       "food-sundae", "food-waffle", "food-soda", "food-muffin",
                       "food-pancakes"],
-              propCount: 40, clearance: 0.5),
+              propCount: 40, clearance: 0.5,
+              horizon: ["food-burger", "food-sundae", "food-soda"],
+              horizonScale: 3.5),
         Theme(name: "construction", displayName: "Construction",
               symbol: "hammer.fill",
               skyTop: rgb(0.30, 0.56, 0.90), skyHorizon: rgb(0.85, 0.90, 0.94),
@@ -231,7 +263,9 @@ enum ArenaEnvironment {
                       "build-fence", "build-light", "build-dumpster", "build-pole",
                       "build-lightpost", "build-sign-stop", "build-pillar",
                       "item-box", "item-box"],
-              propCount: 40),
+              propCount: 40,
+              horizon: ["build-pole", "build-lightpost", "city-skyscraper-a"],
+              horizonScale: 3),
         Theme(name: "camp", displayName: "Campground", symbol: "tent.fill",
               skyTop: rgb(0.24, 0.50, 0.84), skyHorizon: rgb(0.80, 0.90, 0.92),
               groundLight: rgb(0.28, 0.52, 0.26), groundDark: rgb(0.22, 0.44, 0.21),
@@ -241,7 +275,9 @@ enum ArenaEnvironment {
                       "camp-bush", "camp-rock", "park-tree-default",
                       "park-tree-default", "park-tree-detailed",
                       "park-tree-detailed", "park-stump"],
-              propCount: 40),
+              propCount: 40,
+              horizon: ["park-tree-default", "park-tree-detailed", "camp-rock"],
+              horizonScale: 3.5),
         Theme(name: "canyon", displayName: "Canyon", symbol: "mountain.2.fill",
               skyTop: rgb(0.45, 0.42, 0.72), skyHorizon: rgb(1.0, 0.72, 0.45),
               groundLight: rgb(0.80, 0.53, 0.36), groundDark: rgb(0.72, 0.46, 0.30),
@@ -251,24 +287,23 @@ enum ArenaEnvironment {
                       "canyon-cactus-tall", "canyon-cactus-tall",
                       "canyon-rock-a", "canyon-rock-b", "canyon-rock-c",
                       "park-stump"],
-              propCount: 34, clearance: 1.1),
+              propCount: 34, clearance: 1.1,
+              horizon: ["canyon-cliff-large", "canyon-mesa", "canyon-cactus-tall"],
+              horizonScale: 3),
     ]
 
     static func theme(named name: String?, for trackID: UUID?) -> Theme {
-        if let name, let picked = themes.first(where: { $0.name == name }) {
-            return picked
-        }
-        guard let trackID else { return themes[1] }   // lobby default: day
-        let sum = withUnsafeBytes(of: trackID.uuid) { bytes in
-            bytes.reduce(0) { $0 + Int($1) }
-        }
-        return themes[sum % hashedThemeCount]
+        // A bogus picked name falls back to the hash, same as no pick.
+        let valid = themes.contains { $0.name == name } ? name : nil
+        let resolved = RaceTuning.resolvedThemeName(valid, for: trackID)
+        return themes.first { $0.name == resolved } ?? themes[1]
     }
 
     /// Entity name for change detection — ArenaView rebuilds when the
-    /// track OR its chosen world changes (props re-scatter).
-    static func name(for trackID: UUID?, theme: String?) -> String {
-        "env-\(theme ?? "auto")-\(trackID?.uuidString ?? "lobby")"
+    /// track, its chosen world, or its placed decorations change.
+    static func name(for trackID: UUID?, theme: String?,
+                     scenery: [SceneryItem] = []) -> String {
+        "env-\(theme ?? "auto")-\(scenery.hashValue)-\(trackID?.uuidString ?? "lobby")"
     }
 
     private static let halfPiF = Float.pi / 2
@@ -289,25 +324,42 @@ enum ArenaEnvironment {
         }
     }
 
-    /// Sky dome + ground plane (with the arena's static collision floor)
-    /// + decorative props scattered clear of `footprint` (the track).
+    /// Sky dome + terrain (with the arena's static collision floor)
+    /// + decorative props scattered clear of `footprint` (the track)
+    /// + a ring of oversized silhouettes out at the horizon.
     /// `themeName` is the blueprint's picked world; nil falls back to the
-    /// trackId hash.
+    /// trackId hash. Groundless worlds (space) skip terrain entirely —
+    /// the track floats; only the invisible physics floor remains.
     @MainActor
     static func make(for trackID: UUID?, theme themeName: String? = nil,
+                     scenery: [SceneryItem] = [],
                      around footprint: FootprintRect?) async -> Entity {
         let theme = theme(named: themeName, for: trackID)
+        let groundless = RaceTuning.groundlessThemes.contains(theme.name)
+        // Terrain stays FLAT here: the track, its prop ring, and the
+        // kid's placements all sit at y = 0. Hills start beyond.
+        let flatZone = flatRect(around: footprint)
         let root = Entity()
-        root.name = name(for: trackID, theme: themeName)
+        root.name = name(for: trackID, theme: themeName, scenery: scenery)
 
-        let ground = ModelEntity(
-            mesh: .generatePlane(width: groundSize, depth: groundSize),
-            materials: [await groundMaterial(theme)])
-        ground.position.y = -0.03
-        ground.collision = CollisionComponent(
-            shapes: [.generateBox(width: groundSize, height: 0.01, depth: groundSize)])
-        ground.physicsBody = PhysicsBodyComponent(mode: .static)
-        root.addChild(ground)
+        // Invisible physics floor + tap target for the builder's decorate
+        // mode. Always present — even a floating space track needs a floor
+        // so a flung car's wreck has somewhere to land.
+        let floor = Entity()
+        floor.position.y = -0.03
+        floor.components.set(CollisionComponent(
+            shapes: [.generateBox(width: groundSize, height: 0.01, depth: groundSize)]))
+        floor.components.set(PhysicsBodyComponent(mode: .static))
+        floor.components.set(InputTargetComponent())
+        root.addChild(floor)
+
+        if !groundless {
+            let ground = ModelEntity(
+                mesh: terrainMesh(flat: flatZone),
+                materials: [await groundMaterial(theme)])
+            ground.position.y = -0.03
+            root.addChild(ground)
+        }
 
         var skyMaterial = UnlitMaterial()
         if let image = skyImage(theme),
@@ -323,7 +375,114 @@ enum ArenaEnvironment {
 
         await scatterProps(theme: theme, trackID: trackID,
                            around: footprint, into: root)
+        await addHorizon(theme: theme, trackID: trackID, flat: flatZone,
+                         groundless: groundless, into: root)
+        if !scenery.isEmpty {
+            root.addChild(await SceneryPlacer.spawn(scenery))
+        }
         return root
+    }
+
+    // MARK: Terrain
+
+    /// The rectangle that must stay level: the track plus the ring where
+    /// theme props scatter and kids place decorations.
+    private static func flatRect(around footprint: FootprintRect?) -> FootprintRect {
+        let f = footprint ?? FootprintRect(minX: -2, minZ: -2, maxX: 2, maxZ: 2)
+        return FootprintRect(minX: f.minX - 6, minZ: f.minZ - 6,
+                             maxX: f.maxX + 6, maxZ: f.maxZ + 6)
+    }
+
+    /// Ground height at (x, z): 0 inside the flat zone, gentle rolling
+    /// hills fading in beyond it, and a mountain rim near the world's
+    /// edge so the horizon has a shape instead of a table edge.
+    private static func terrainHeight(x: Float, z: Float,
+                                      flat: FootprintRect) -> Float {
+        let dx = max(0, max(flat.minX - x, x - flat.maxX))
+        let dz = max(0, max(flat.minZ - z, z - flat.maxZ))
+        let distance = sqrt(dx * dx + dz * dz)
+        guard distance > 0 else { return 0 }
+        let fade = min(1, distance / 8)
+        let rolling = 0.35 * sin(x * 0.31) * cos(z * 0.27)
+            + 0.14 * sin(x * 0.83 + z * 0.51)
+        let edge = max(abs(x), abs(z))
+        let rim = simd_smoothstep(groundSize / 2 - 13, groundSize / 2 - 2, edge) * 2.4
+        return max(0, rolling * fade) + rim
+    }
+
+    /// Low-poly heightfield over the whole ground square, checker UVs
+    /// matching the old flat plane. Normals come from MeshDescriptor.
+    private static func terrainMesh(flat: FootprintRect) -> MeshResource {
+        let n = 72
+        var positions: [SIMD3<Float>] = []
+        var uvs: [SIMD2<Float>] = []
+        positions.reserveCapacity((n + 1) * (n + 1))
+        for iz in 0...n {
+            for ix in 0...n {
+                let x = -groundSize / 2 + Float(ix) / Float(n) * groundSize
+                let z = -groundSize / 2 + Float(iz) / Float(n) * groundSize
+                positions.append([x, terrainHeight(x: x, z: z, flat: flat), z])
+                uvs.append([Float(ix) / Float(n) * groundTiles,
+                            Float(iz) / Float(n) * groundTiles])
+            }
+        }
+        var indices: [UInt32] = []
+        indices.reserveCapacity(n * n * 6)
+        for iz in 0..<n {
+            for ix in 0..<n {
+                let a = UInt32(iz * (n + 1) + ix)
+                let b = a + 1
+                let c = a + UInt32(n + 1)
+                let d = c + 1
+                indices += [a, c, b, b, c, d]
+            }
+        }
+        var descriptor = MeshDescriptor(name: "terrain")
+        descriptor.positions = .init(positions)
+        descriptor.textureCoordinates = .init(uvs)
+        descriptor.primitives = .triangles(indices)
+        // Fallback plane: generate(from:) only throws on malformed data,
+        // which a grid never is.
+        return (try? MeshResource.generate(from: [descriptor]))
+            ?? .generatePlane(width: groundSize, depth: groundSize)
+    }
+
+    // MARK: Horizon silhouettes
+
+    /// A ring of oversized props out past the playfield — skylines,
+    /// mesas, galleons — so the distance feels alive from the chase cam.
+    /// Groundless worlds float theirs at varied heights instead.
+    @MainActor
+    private static func addHorizon(theme: Theme, trackID: UUID?,
+                                   flat: FootprintRect, groundless: Bool,
+                                   into root: Entity) async {
+        guard !theme.horizon.isEmpty else { return }
+        let trackSeed = trackID.map { id in
+            withUnsafeBytes(of: id.uuid) { $0.reduce(0) { $0 &* 31 &+ Int($1) } }
+        } ?? 0
+        var dice = Dice(seed: 0x40B1_2043 &+ UInt64(truncatingIfNeeded: trackSeed))
+        var prototypes: [Entity] = []
+        for name in theme.horizon {
+            if let entity = try? await AssetStore.shared.entity(named: name) {
+                prototypes.append(entity)
+            }
+        }
+        guard !prototypes.isEmpty else { return }
+        let count = 14
+        for i in 0..<count {
+            let angle = (Float(i) + dice.next01() * 0.7) / Float(count) * 2 * .pi
+            let radius = 31 + dice.next01() * 9
+            let x = cos(angle) * radius
+            let z = sin(angle) * radius
+            let prop = prototypes[Int(dice.next01() * 0.999 * Float(prototypes.count))]
+                .clone(recursive: true)
+            let y = groundless ? -2 + dice.next01() * 8
+                               : terrainHeight(x: x, z: z, flat: flat)
+            prop.position = [x, y, z]
+            prop.scale *= theme.horizonScale * (0.8 + dice.next01() * 0.5)
+            prop.orientation = simd_quatf(angle: atan2(-x, -z), axis: [0, 1, 0])
+            root.addChild(prop)
+        }
     }
 
     /// Toy clutter around the track: sampled in a ring just outside the

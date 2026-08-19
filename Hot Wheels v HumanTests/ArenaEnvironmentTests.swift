@@ -44,11 +44,43 @@ struct ArenaEnvironmentTests {
     /// quietly loses its buildings.
     @Test func allThemePropsHaveModels() async {
         for theme in ArenaEnvironment.themes {
-            for name in Set(theme.props) {
+            for name in Set(theme.props + theme.horizon) {
                 let entity = try? await AssetStore.shared.entity(named: name)
                 #expect(entity != nil, "\(theme.name): missing model \(name)")
             }
         }
+    }
+
+    /// Space floats: no visible ground; every other world gets terrain.
+    @Test func spaceIsGroundless() async {
+        #expect(RaceTuning.groundlessThemes.contains("space"))
+        #expect(RaceTuning.resolvedThemeName(nil, for: nil) == "day")
+        #expect(RaceTuning.resolvedThemeName("space", for: UUID()) == "space")
+        let space = await ArenaEnvironment.make(
+            for: UUID(), theme: "space",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let visibleGround = space.children.contains {
+            $0.components[ModelComponent.self] != nil
+                && $0.components[CollisionComponent.self] != nil
+        }
+        #expect(!visibleGround)
+        // The invisible physics floor stays — wrecks need somewhere to land.
+        #expect(space.children.contains {
+            $0.components[CollisionComponent.self] != nil
+                && $0.components[ModelComponent.self] == nil
+        })
+    }
+
+    /// Every non-empty horizon list draws its silhouette ring.
+    @Test func horizonRingSpawns() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "canyon",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let distant = env.children.filter {
+            let p = $0.position
+            return sqrt(p.x * p.x + p.z * p.z) > 25
+        }
+        #expect(distant.count >= 10)
     }
 
     /// City worlds are built, not spilled: buildings sit on the street

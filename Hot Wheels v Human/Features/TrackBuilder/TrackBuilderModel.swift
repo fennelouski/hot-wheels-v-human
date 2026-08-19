@@ -17,10 +17,18 @@ final class TrackBuilderModel {
     private(set) var types: [PieceType] = [.startGate]
     /// Picked world (ArenaEnvironment theme name); nil = surprise me.
     private(set) var worldTheme: String?
+    /// Hand-placed decorations — any prop from any world.
+    private(set) var scenery: [SceneryItem] = []
+    /// The decoration the kid is currently placing (palette selection);
+    /// taps on the ground drop one of these.
+    var placingModel: String?
+    /// A placed decoration picked up for moving (tap it → tap the ground).
+    var movingIndex: Int?
 
     var blueprint: TrackBlueprint {
         var bp = makeBlueprint(types)
         bp.worldTheme = worldTheme
+        bp.scenery = scenery.isEmpty ? nil : scenery
         return bp
     }
 
@@ -61,13 +69,52 @@ final class TrackBuilderModel {
         }
     }
 
-    func clear() { types = [.startGate] }
+    func clear() {
+        types = [.startGate]
+        scenery = []
+        movingIndex = nil
+    }
 
     /// "Start from one of these" — replace the build with a preset track.
     func load(preset: TrackBlueprint) {
         types = preset.segments.map(\.type)
         worldTheme = preset.worldTheme
+        scenery = preset.scenery ?? []
         SoundBank.shared.play("confirm_sparkle")
+    }
+
+    /// Drop the selected decoration where the kid tapped. Yaw is a random
+    /// quarter turn — tidy like the scattered buildings, varied enough
+    /// that a row of houses doesn't look stamped.
+    func placeScenery(atX x: Float, z: Float) {
+        guard let model = placingModel,
+              scenery.count < RaceTuning.maxSceneryItems else {
+            SoundBank.shared.play("nope_wobble")
+            return
+        }
+        let yaw = [0, .pi / 2, .pi, 3 * .pi / 2].randomElement() ?? 0 as Float
+        scenery.append(SceneryItem(model: model, x: x, z: z, yaw: yaw))
+        SoundBank.shared.play("track_snap_connect")
+    }
+
+    /// Set the picked-up decoration down where the kid tapped.
+    func moveScenery(atX x: Float, z: Float) {
+        guard let index = movingIndex, scenery.indices.contains(index) else {
+            movingIndex = nil
+            return
+        }
+        scenery[index].x = x
+        scenery[index].z = z
+        movingIndex = nil
+        SoundBank.shared.play("track_snap_connect")
+    }
+
+    func removeLastScenery() {
+        movingIndex = nil
+        if !scenery.isEmpty {
+            scenery.removeLast()
+            SoundBank.shared.play("piece_delete_pop")
+        }
     }
 
     /// World picker: nil = surprise me (trackId hash picks).

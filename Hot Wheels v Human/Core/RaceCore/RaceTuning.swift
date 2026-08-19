@@ -7,6 +7,8 @@
 //  destruction thresholds, etc. Tune feel by editing THIS file only.
 //
 
+import Foundation
+
 nonisolated enum RaceTuning {
 
     // MARK: World
@@ -394,6 +396,33 @@ nonisolated enum RaceTuning {
     /// through the roof, so CarFactory seats nobody (they're driving
     /// inside, you just can't see them). Verified by rendering every
     /// body-shop GLB: the rest are open-cockpit/open-top.
+    /// Hand-placed decoration cap — enough for a whole toy town, small
+    /// enough that the TV keeps its frame rate.
+    static let maxSceneryItems = 80
+
+    // MARK: World themes (shared with Features/Arena/ArenaEnvironment)
+
+    /// The auto-dealt themes, in wire order — a track with no picked world
+    /// hashes into THESE four only, so appending new worlds can't re-theme
+    /// existing tracks. Lives here (not ArenaEnvironment) because
+    /// RaceSession also needs to resolve a track's world (groundless
+    /// tracks lose their support legs) and Core can't see Features.
+    static let hashedThemeNames = ["candy", "day", "sunset", "space"]
+
+    /// Worlds with no ground: the track floats (no visual floor, no
+    /// support legs), only the invisible physics floor remains.
+    static let groundlessThemes: Set<String> = ["space"]
+
+    /// The world a blueprint actually races in: the picked name, else the
+    /// trackId byte-sum hash over the auto-dealt four.
+    static func resolvedThemeName(_ name: String?, for trackID: UUID?) -> String {
+        if let name { return name }
+        guard let trackID else { return "day" }   // lobby default
+        let sum = withUnsafeBytes(of: trackID.uuid) { bytes in
+            bytes.reduce(0) { $0 + Int($1) }
+        }
+        return hashedThemeNames[sum % hashedThemeNames.count]
+    }
     static let closedCabModels: Set<String> = [
         "race-future", "sedan-sports", "suv", "truck",
         "vehicle-monster-truck", "vehicle-racer", "vehicle-racer-low",

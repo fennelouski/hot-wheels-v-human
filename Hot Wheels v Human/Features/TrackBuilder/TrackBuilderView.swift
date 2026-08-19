@@ -10,6 +10,11 @@
 
 import SwiftUI
 import SwiftData
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
 
 struct TrackBuilderView: View {
     @Environment(AppModel.self) private var appModel
@@ -20,6 +25,7 @@ struct TrackBuilderView: View {
     @State private var previewing = false
     @State private var mapExpanded = false
     @State private var showingWorlds = false
+    @State private var decorating = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
@@ -49,17 +55,53 @@ struct TrackBuilderView: View {
                     // while the kid is actively picking a world.
                     if showingWorlds {
                         worldRow
-                    } else if model.types == [.startGate] {
+                    } else if model.types == [.startGate], !decorating {
                         // Fresh canvas → offer the starter tracks.
                         presetRow
                     }
                 }
+                .overlay(alignment: .topLeading) {
+                    if decorating {
+                        Text(model.movingIndex != nil ? "Tap where it should go!"
+                             : model.placingModel != nil ? "Tap the ground to place it!"
+                             : "Pick a decoration below — or tap one you placed to move it!")
+                            .font(.system(size: 18, weight: .heavy, design: .rounded))
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 8)
+                            .background(.black.opacity(0.55), in: Capsule())
+                            .padding(10)
+                    }
+                }
                 .padding(.horizontal, 16)
 
-            PiecePaletteView(model: model)
+            if decorating {
+                DecorPaletteView(model: model)
+            } else {
+                PiecePaletteView(model: model)
+            }
 
             HStack(spacing: 14) {
-                toolButton("Undo", systemImage: "arrow.uturn.backward") { model.removeLast() }
+                // Build ↔ Decorate. In decorate mode the palette turns into
+                // the decoration box (every world's props) and Undo removes
+                // the last placed decoration.
+                Button {
+                    decorating.toggle()
+                    if !decorating { model.placingModel = nil }
+                    SoundBank.shared.play("confirm_sparkle")
+                } label: {
+                    Label(decorating ? "Build" : "Decorate",
+                          systemImage: decorating
+                              ? "wrench.and.screwdriver.fill" : "paintbrush.fill")
+                        .font(.system(size: 20, weight: .heavy, design: .rounded))
+                        .padding(.horizontal, 14)
+                        .frame(height: 60)
+                }
+                .buttonStyle(.bordered)
+                .tint(decorating ? .orange : nil)
+                .accessibilityIdentifier("decorateToggle")
+                toolButton("Undo", systemImage: "arrow.uturn.backward") {
+                    decorating ? model.removeLastScenery() : model.removeLast()
+                }
                 toolButton("Clear", systemImage: "trash") { model.clear() }
                 toolButton("Shuffle", systemImage: "dice.fill") {
                     model.shuffle()
@@ -243,6 +285,90 @@ struct TrackBuilderView: View {
                 .frame(width: 64, height: 60)
         }
         .buttonStyle(.bordered)
+    }
+}
+
+/// The decoration box: every world's props, hand-placeable. A world
+/// filter row on top, the props of that world below — tap a prop, then
+/// tap the ground in the 3D scene to drop it there.
+struct DecorPaletteView: View {
+    let model: TrackBuilderModel
+
+    @State private var worldIndex = 0
+
+    /// Thumbnail from the bundle's loose PNGs (Resources/Thumbs, rendered
+    /// by tools — see Graphics/README). Explicit URL load: named-image
+    /// lookup missed loose files in practice.
+    static func thumb(_ prop: String) -> Image {
+        guard let url = Bundle.main.url(forResource: "thumb-\(prop)",
+                                        withExtension: "png") else {
+            return Image(systemName: "cube.fill")
+        }
+        #if canImport(UIKit)
+        if let image = UIImage(contentsOfFile: url.path) {
+            return Image(uiImage: image)
+        }
+        #elseif canImport(AppKit)
+        if let image = NSImage(contentsOfFile: url.path) {
+            return Image(nsImage: image)
+        }
+        #endif
+        return Image(systemName: "cube.fill")
+    }
+
+    /// (label, symbol, unique props) per world, from the theme lists —
+    /// one source of truth for what exists.
+    static let groups: [(String, String, [String])] =
+        ArenaEnvironment.themes.map { theme in
+            var seen = Set<String>()
+            let unique = theme.props.filter { seen.insert($0).inserted }
+            return (theme.displayName, theme.symbol, unique)
+        }
+
+    var body: some View {
+        VStack(spacing: 8) {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(Array(Self.groups.enumerated()), id: \.offset) { index, group in
+                        Button {
+                            worldIndex = index
+                        } label: {
+                            Label(group.0, systemImage: group.1)
+                                .font(.system(size: 16, weight: .heavy, design: .rounded))
+                                .padding(.horizontal, 12)
+                                .frame(height: 44)
+                                .background(worldIndex == index
+                                                ? .yellow.opacity(0.35) : .white.opacity(0.10),
+                                            in: Capsule())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+                .padding(.horizontal, 16)
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(Self.groups[worldIndex].2, id: \.self) { prop in
+                        let picked = model.placingModel == prop
+                        Button {
+                            model.placingModel = picked ? nil : prop
+                            SoundBank.shared.play("confirm_sparkle")
+                        } label: {
+                            Self.thumb(prop)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 64, height: 64)
+                                .padding(8)
+                                .background(picked ? .yellow.opacity(0.35) : .white.opacity(0.10),
+                                            in: RoundedRectangle(cornerRadius: 12))
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel(prop)
+                    }
+                }
+                .padding(.horizontal, 16)
+            }
+        }
     }
 }
 

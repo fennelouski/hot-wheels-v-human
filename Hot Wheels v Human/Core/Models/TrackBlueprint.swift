@@ -14,6 +14,15 @@ nonisolated struct SegmentSpec: Codable, Equatable, Sendable {
     var type: PieceType
 }
 
+/// One hand-placed decoration: any prop model from any world, dropped at
+/// (x, z) on the ground. Cosmetic only — no collision, no validation.
+nonisolated struct SceneryItem: Codable, Equatable, Hashable, Sendable {
+    var model: String
+    var x: Float
+    var z: Float
+    var yaw: Float
+}
+
 nonisolated struct TrackBlueprint: Codable, Equatable, Sendable {
     var trackId: UUID
     var lanes: Int
@@ -21,6 +30,8 @@ nonisolated struct TrackBlueprint: Codable, Equatable, Sendable {
     /// Picked world (ArenaEnvironment theme name, e.g. "city"). Additive
     /// optional — old peers decode; nil = auto-pick from trackId hash.
     var worldTheme: String?
+    /// Hand-placed decorations. Additive optional, same deal as worldTheme.
+    var scenery: [SceneryItem]?
 
     /// Phase 1 hardcoded demo: straight–loop–curve–finish (BUILD-ORDER P1 DoD).
     static let demo = TrackBlueprint(

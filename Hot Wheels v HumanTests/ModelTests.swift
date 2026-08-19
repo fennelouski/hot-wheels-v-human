@@ -104,9 +104,14 @@ struct ModelTests {
     @Test func blueprintWorldThemeRoundTrips() throws {
         var blueprint = TrackBlueprint.demo
         blueprint.worldTheme = "city"
+        blueprint.scenery = [
+            SceneryItem(model: "city-house-a", x: 1.5, z: -2, yaw: .pi / 2),
+            SceneryItem(model: "pirate-ship-large", x: -3, z: 0, yaw: 0),
+        ]
         let reencoded = try JSONDecoder().decode(
             TrackBlueprint.self, from: JSONEncoder().encode(blueprint))
         #expect(reencoded.worldTheme == "city")
+        #expect(reencoded.scenery?.count == 2)
         #expect(reencoded == blueprint)
     }
 

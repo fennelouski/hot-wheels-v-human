@@ -30,7 +30,29 @@ struct TrackBuilder3DView: View {
         #if os(tvOS)
         realityView
         #else
+        GeometryReader { proxy in
         realityView
+            // Decorate mode: tap a placed prop to pick it up, tap the
+            // ground to set it down (or to drop a new prop from the
+            // palette). Tap-tap moving instead of dragging, so the orbit
+            // drag keeps working everywhere. The targeted gesture supplies
+            // WHICH entity was hit; the ground point comes from our own
+            // camera math (iOS tap values are 2D).
+            .gesture(SpatialTapGesture().targetedToAnyEntity()
+                .onEnded { value in
+                    if let index = SceneryPlacer.itemIndex(of: value.entity) {
+                        model.movingIndex = model.movingIndex == index ? nil : index
+                        SoundBank.shared.play("confirm_sparkle")
+                        return
+                    }
+                    guard let spot = groundPoint(tap: value.location,
+                                                 size: proxy.size) else { return }
+                    if model.movingIndex != nil {
+                        model.moveScenery(atX: spot.x, z: spot.z)
+                    } else if model.placingModel != nil {
+                        model.placeScenery(atX: spot.x, z: spot.z)
+                    }
+                })
             .gesture(DragGesture(minimumDistance: 4)
                 .onChanged { value in
                     let start = dragStart ?? SIMD2(azimuth, elevation)
@@ -47,7 +69,55 @@ struct TrackBuilder3DView: View {
                     zoom = min(3, max(0.25, start / Float(value.magnification)))
                 }
                 .onEnded { _ in zoomStart = nil })
+        }
         #endif
+    }
+
+    /// Where a tap lands on the ground plane (y = 0): the camera pose is
+    /// recomputed exactly as `update` places it, then the tap is cast
+    /// through the perspective frustum.
+    /// ponytail: assumes the camera's default 60° vertical FOV — a slight
+    /// mismatch just lands the prop a touch off the fingertip, and the kid
+    /// can move it.
+    private func groundPoint(tap: CGPoint, size: CGSize) -> SIMD3<Float>? {
+        guard size.width > 0, size.height > 0 else { return nil }
+        let (target, offset) = Self.cameraPose(
+            layout: model.layout, azimuth: azimuth, elevation: elevation, zoom: zoom)
+        let camPos = target + offset
+        let forward = simd_normalize(target - camPos)
+        let right = simd_normalize(simd_cross(forward, SIMD3<Float>(0, 1, 0)))
+        let up = simd_cross(right, forward)
+        let tanY = tan(Float.pi / 6)     // half of 60°
+        let tanX = tanY * Float(size.width / size.height)
+        let ndcX = Float(tap.x / size.width) * 2 - 1
+        let ndcY = 1 - Float(tap.y / size.height) * 2
+        let sideways: SIMD3<Float> = right * (ndcX * tanX)
+        let upward: SIMD3<Float> = up * (ndcY * tanY)
+        let dir = simd_normalize(forward + sideways + upward)
+        guard dir.y < -0.001 else { return nil }   // tapped the sky
+        let t = -camPos.y / dir.y
+        return camPos + dir * t
+    }
+
+    /// The one place the camera's target and offset are derived — `update`
+    /// aims the camera with it, `groundPoint` casts taps through it.
+    static func cameraPose(layout: TrackLayout, azimuth: Float,
+                           elevation: Float, zoom: Float)
+        -> (target: SIMD3<Float>, offset: SIMD3<Float>) {
+        let rects = layout.pieces.map(\.worldFootprint)
+        let minX = rects.map(\.minX).min() ?? 0
+        let maxX = rects.map(\.maxX).max() ?? 0
+        let minZ = rects.map(\.minZ).min() ?? 0
+        let maxZ = rects.map(\.maxZ).max() ?? 0
+        let maxY = layout.lanes.center.map(\.y).max() ?? 0
+        let span = max(maxX - minX, maxZ - minZ, maxY * 2)
+        let target = SIMD3<Float>((minX + maxX) / 2, maxY * 0.35,
+                                  (minZ + maxZ) / 2)
+        let distance = max(1.2, span) * zoom
+        let offset = SIMD3<Float>(sin(azimuth) * cos(elevation),
+                                  sin(elevation),
+                                  cos(azimuth) * cos(elevation)) * distance
+        return (target, offset)
     }
 
     private var realityView: some View {
@@ -78,6 +148,11 @@ struct TrackBuilder3DView: View {
             let world = Entity()
             world.name = "world-empty"
             root.addChild(world)
+
+            // Hand-placed decorations, rebuilt when the list changes.
+            let decor = Entity()
+            decor.name = "decor-empty"
+            root.addChild(decor)
         } update: { content in
             guard let root = content.entities.first(where: { $0.name == "builder-root" }),
                   let camera = content.entities.first(where: { $0.name == "builder-camera" })
@@ -88,13 +163,23 @@ struct TrackBuilder3DView: View {
 
             // Respawn on change, ArenaView-style: holder's name is the
             // dedupe key, "building-" while the async spawn is in flight.
-            let key = "track-\(model.types.hashValue)"
+            // Groundless worlds strip the support legs (the track floats),
+            // so the picked world is part of the key.
+            let floating = RaceTuning.groundlessThemes.contains(
+                RaceTuning.resolvedThemeName(model.worldTheme, for: nil))
+            let key = "track-\(model.types.hashValue)-\(floating)"
             if let holder = root.children.first(where: {
-                    $0.name.hasPrefix("track-") || $0.name.hasPrefix("building-") }),
+                    $0.name.hasPrefix("track-") || $0.name.hasPrefix("building-track-") }),
                holder.name != key, holder.name != "building-\(key)" {
                 holder.name = "building-\(key)"
                 Task { @MainActor in
                     let track = try? await TrackSpawner.spawn(layout: layout)
+                    if let track, floating {
+                        for child in Array(track.children)
+                        where child.name.hasPrefix("support-") {
+                            child.removeFromParent()
+                        }
+                    }
                     holder.children.removeAll()
                     if let track { holder.addChild(track) }
                     holder.name = key
@@ -110,6 +195,26 @@ struct TrackBuilder3DView: View {
             // overlap props (no collision, purely visual) until the kid
             // re-taps the world chip; re-key on the track hash if it bugs
             // anyone.
+            // Placed decorations respawn on change (same dedupe pattern);
+            // the picked-up item is part of the key so it lifts on pickup.
+            let decorKey = SceneryPlacer.name(for: model.scenery)
+                + "-m\(model.movingIndex ?? -1)"
+            if let decor = root.children.first(where: {
+                    $0.name.hasPrefix("decor-") || $0.name.hasPrefix("scenery-")
+                        || $0.name.hasPrefix("building-scenery-") }),
+               decor.name != decorKey, decor.name != "building-\(decorKey)" {
+                decor.name = "building-\(decorKey)"
+                let items = model.scenery
+                let moving = model.movingIndex
+                Task { @MainActor in
+                    let spawned = await SceneryPlacer.spawn(
+                        items, tappable: true, highlight: moving)
+                    decor.children.removeAll()
+                    decor.addChild(spawned)
+                    decor.name = decorKey
+                }
+            }
+
             let worldKey = "world-\(model.worldTheme ?? "auto")"
             if let world = root.children.first(where: {
                     $0.name.hasPrefix("world-") || $0.name.hasPrefix("building-world-") }),
@@ -129,20 +234,10 @@ struct TrackBuilder3DView: View {
                     world.name = worldKey
                 }
             }
-            let minX = rects.map(\.minX).min() ?? 0
-            let maxX = rects.map(\.maxX).max() ?? 0
-            let minZ = rects.map(\.minZ).min() ?? 0
-            let maxZ = rects.map(\.maxZ).max() ?? 0
-            let maxY = layout.lanes.center.map(\.y).max() ?? 0
-            let span = max(maxX - minX, maxZ - minZ, maxY * 2)
-            // Aim near bed level (0.35·maxY, not the midpoint) — a target
+            // Aim near bed level (0.35·maxY inside cameraPose) — a target
             // hovering over the track pushes it into the bottom of the frame.
-            let target = SIMD3<Float>((minX + maxX) / 2, maxY * 0.35,
-                                      (minZ + maxZ) / 2)
-            let distance = max(1.2, span) * zoom
-            let offset = SIMD3<Float>(sin(azimuth) * cos(elevation),
-                                      sin(elevation),
-                                      cos(azimuth) * cos(elevation)) * distance
+            let (target, offset) = Self.cameraPose(
+                layout: layout, azimuth: azimuth, elevation: elevation, zoom: zoom)
             camera.look(at: target, from: target + offset, relativeTo: nil)
         }
     }
