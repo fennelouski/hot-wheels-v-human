@@ -266,9 +266,10 @@ struct SolverTests {
             return distance
         }
         let runway: [PieceType] = Array(repeating: .straight, count: 5)
-        // Real air, not a one-frame jitter: at rail pace the arc carries
-        // the car most of a piece length.
-        #expect(airDistance([.startGate] + runway + [.rampJump] + runway + [.finishGate]) > 0.3)
+        // Real air, not a one-frame jitter. The bar was 0.3 before real
+        // slope gravity (343aff6): climbing the ramp lip now genuinely
+        // costs speed, which trimmed the measured arc to ~0.28 m.
+        #expect(airDistance([.startGate] + runway + [.rampJump] + runway + [.finishGate]) > 0.25)
         // Control: the same track with a plain straight in the ramp's slot
         // must NOT launch, or the test is passing on something else.
         #expect(airDistance([.startGate] + runway + [.straight] + runway + [.finishGate]) == 0)
