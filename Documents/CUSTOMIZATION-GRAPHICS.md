@@ -49,9 +49,18 @@ they stay round. ≥60 pt targets.
 
 ### D. Freehand drawing (the flagship)
 PencilKit canvas, car side-silhouette as stencil background, kid draws with finger/Pencil.
-`PKDrawing` → image → bottom layer of the overlay. Reality notes (G4): mirroring to both
-sides is inherent to the shared side-projection UVs (a per-side toggle would need split
-UV islands — not built). Strokes persist as `drawingStrokes` (PKDrawing data, ≤200 KB)
+`PKDrawing` → image → bottom layer of the overlay. The pad matches the selected body's
+length/height ratio (reported by the turntable once the mesh loads) and the committed
+PNG is the whole pad stretched to fill UV [0,1]² — the shell maps that square onto the
+full body bounds, so a stroke lands on the car exactly where it sits over the silhouette.
+(Earlier builds rasterized a fixed 1024-pt rect into an unstretched middle band, which
+scaled with screen size and squashed everything into the middle of the car.) Reality
+notes (G4): mirroring to both sides is inherent to the shared side-projection UVs (a
+per-side toggle would need split UV islands — not built). The pad also has a stamp
+shelf: arming a sticker-sheet symbol turns pad taps into `StickerPlacement`s (pad
+point → shell UV, same clamp as stamping the 3D car), so stamps reuse the whole G3
+pipeline — overlay rendering, wire format, undo — and the pad previews them in place.
+Strokes persist as `drawingStrokes` (PKDrawing data, ≤200 KB)
 so reopened designs stay stroke-editable; the PNG still renders when strokes were too
 big to keep. Driver drawing: the specced FaceDecals texture pipeline became procedural
 vector faces (no emoji rule), so the kid instead draws **face paint** over the cartoon

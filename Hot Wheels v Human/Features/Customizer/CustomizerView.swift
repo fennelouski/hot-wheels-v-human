@@ -40,6 +40,9 @@ struct CustomizerView: View {
     /// Mid-gesture sticker state shown on the turntable; committed to the
     /// design (one undo entry) when the gesture ends.
     @State private var draftStickers: [StickerPlacement]? = nil
+    /// Selected body's length/height, reported by the turntable once its
+    /// mesh loads; the drawing pad matches its canvas to it.
+    @State private var padBodyAspect: CGFloat = 2.4
     #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
     /// Session-held pencil strokes (the design only stores the capped PNG).
     @State private var pencilStrokes = PKDrawing()
@@ -109,7 +112,8 @@ struct CustomizerView: View {
                     editNewestSticker(ended: ended) {
                         $0.rotation = (committedNewestSticker?.rotation ?? 0) + radians
                     }
-                } : nil
+                } : nil,
+                onBodyAspect: { padBodyAspect = $0 }
             )
             .frame(minHeight: 220)
             .overlay(alignment: .topLeading) {
@@ -143,7 +147,9 @@ struct CustomizerView: View {
                     #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
                     DrawingPadView(drawingPNG: $model.design.drawingPNG,
                                    drawingStrokes: $model.design.drawingStrokes,
-                                   strokes: $pencilStrokes)
+                                   strokes: $pencilStrokes,
+                                   stickers: $model.design.stickers,
+                                   bodyAspect: padBodyAspect)
                     #else
                     Text("Drawing needs the iPad")
                     #endif
@@ -254,6 +260,9 @@ struct CarTurntableView: View {
     /// Pinch / two-finger rotate (relative to gesture start, `ended` on release).
     var onPinch: ((Float, _ ended: Bool) -> Void)? = nil
     var onRotate: ((Float, _ ended: Bool) -> Void)? = nil
+    /// Fires when a chassis loads with its body length/height ratio — the
+    /// drawing pad matches its canvas to it.
+    var onBodyAspect: ((CGFloat) -> Void)? = nil
 
     @State private var spin: EventSubscription?
     @State private var refs = OrbitRefs()
@@ -343,7 +352,8 @@ struct CarTurntableView: View {
             light.look(at: .zero, from: [1, 2, -2], relativeTo: nil)
             content.add(light)
 
-            await Self.rebuild(turntable, design: design, refs: refs)
+            await Self.rebuild(turntable, design: design, refs: refs,
+                               onBodyAspect: onBodyAspect)
             spin = content.subscribe(to: SceneEvents.Update.self) { event in
                 // Once it's been grabbed the kid is driving: the car freezes
                 // where they caught it and the camera does the moving.
@@ -354,14 +364,16 @@ struct CarTurntableView: View {
         } update: { content in
             guard let turntable = content.entities.first(where: { $0.name == "turntable" }) else { return }
             Task { @MainActor in
-                await Self.rebuild(turntable, design: design, refs: refs)
+                await Self.rebuild(turntable, design: design, refs: refs,
+                                   onBodyAspect: onBodyAspect)
             }
         }
     }
 
     @MainActor
     private static func rebuild(_ turntable: Entity, design: CarDesign,
-                                refs: OrbitRefs) async {
+                                refs: OrbitRefs,
+                                onBodyAspect: ((CGFloat) -> Void)? = nil) async {
         let parts = (design.partColors ?? [:]).sorted { $0.key < $1.key }
             .map { "\($0.key)=\($0.value)" }.joined(separator: ",")
         let livery = design.livery.map {
@@ -392,6 +404,7 @@ struct CarTurntableView: View {
         car.position = -bounds.center
         turntable.addChild(car)
         refs.model = car
+        onBodyAspect?(PaintShell.bodyAspect(of: car))
     }
 }
 

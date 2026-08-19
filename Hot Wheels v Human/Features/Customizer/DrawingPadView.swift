@@ -22,15 +22,32 @@ struct DrawingPadView: View {
     @Binding var drawingStrokes: Data?
     /// Session-held strokes so reopening the tab keeps the drawing editable.
     @Binding var strokes: PKDrawing
+    /// Stamps placed from the pad — the design's sticker list (same layer
+    /// the Stickers tab stamps onto the 3D car).
+    @Binding var stickers: [StickerPlacement]?
+    /// Length/height of the selected car's body mesh (PaintShell.bodyAspect).
+    /// The pad matches it so what you draw keeps its shape on the car.
+    var bodyAspect: CGFloat = 2.4
 
     @State private var inkColor = "#F2F2F7"
     @State private var inkWidth: CGFloat = 14
     @State private var erasing = false
+    /// Armed stamp symbol: pad taps stamp instead of the pen drawing.
+    @State private var armedStamp: String? = nil
 
     var body: some View {
-        HStack(spacing: 16) {
-            canvas
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        VStack(spacing: 10) {
+            HStack(spacing: 16) {
+                canvas
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                tools
+            }
+            stampStrip
+        }
+        .padding(.horizontal, 12)
+    }
+
+    private var tools: some View {
             LazyVGrid(columns: [GridItem(.fixed(52)), GridItem(.fixed(52))], spacing: 8) {
                 ForEach(["#F2F2F7", "#FF3B30", "#FFD500", "#34C759", "#2266FF", "#1C1C1E"],
                         id: \.self) { hex in
@@ -50,6 +67,7 @@ struct DrawingPadView: View {
                 }
                 Button {
                     erasing.toggle()
+                    armedStamp = nil
                     SoundBank.shared.play("ui_tap")
                 } label: {
                     Image(systemName: "eraser.fill")
@@ -74,26 +92,82 @@ struct DrawingPadView: View {
             }
             .frame(width: 120)
             .padding(.trailing, 8)
+    }
+
+    /// The stamp shelf: arm one, then tap the pad to stamp it in the ink
+    /// color. Stamps join the design's sticker list, so they show on the
+    /// car like any sticker and the Undo button removes them.
+    private var stampStrip: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(OverlayComposer.stickerSheet, id: \.self) { symbol in
+                    Button {
+                        armedStamp = armedStamp == symbol ? nil : symbol
+                        SoundBank.shared.play("ui_tap")
+                    } label: {
+                        Group {
+                            if symbol == "skull", let skull = StickerShopView.skullImage {
+                                Image(decorative: skull, scale: 1)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .padding(12)
+                            } else {
+                                Image(systemName: symbol)
+                                    .font(.system(size: 26, weight: .bold))
+                            }
+                        }
+                        .foregroundStyle(.white)
+                        .frame(width: 60, height: 60)
+                        .background(armedStamp == symbol ? Color.yellow.opacity(0.3) : .white.opacity(0.08),
+                                    in: RoundedRectangle(cornerRadius: 14))
+                        .overlay(RoundedRectangle(cornerRadius: 14).stroke(
+                            armedStamp == symbol ? .yellow : .white.opacity(0.2),
+                            lineWidth: armedStamp == symbol ? 3 : 1))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.horizontal, 4)
         }
-        .padding(.horizontal, 12)
     }
 
     private var canvas: some View {
-        ZStack {
-            CarSilhouette()
-                .fill(.white.opacity(0.10))
-            CarSilhouette()
-                .stroke(.white.opacity(0.35), style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-            PencilCanvas(drawing: $strokes,
-                         tool: erasing
-                            ? PKEraserTool(.bitmap)
-                            : PKInkingTool(.marker,
-                                           color: PlatformColor(Color(hex: inkColor)),
-                                           width: inkWidth),
-                         onStrokesChanged: commit)
+        GeometryReader { geo in
+            ZStack {
+                CarSilhouette()
+                    .fill(.white.opacity(0.10))
+                CarSilhouette()
+                    .stroke(.white.opacity(0.35), style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
+                PencilCanvas(drawing: $strokes,
+                             tool: erasing
+                                ? PKEraserTool(.bitmap)
+                                : PKInkingTool(.marker,
+                                               color: PlatformColor(Color(hex: inkColor)),
+                                               width: inkWidth),
+                             onStrokesChanged: { commit(canvasSize: geo.size) })
+                    .allowsHitTesting(armedStamp == nil)
+                // Placed stamps, exactly where they sit on the car: the pad
+                // IS the shell's UV square, so uv maps straight to the pad
+                // (v flips — pad y is down). Sized/stretched like
+                // OverlayComposer.draw(sticker:) renders them.
+                ForEach(Array((stickers ?? []).enumerated()), id: \.offset) { _, sticker in
+                    stampImage(sticker.symbol)
+                        .foregroundStyle(Color(hex: sticker.colorHex))
+                        .frame(width: stampSide(sticker, in: geo.size),
+                               height: stampSide(sticker, in: geo.size))
+                        .rotationEffect(.radians(-Double(sticker.rotation)))
+                        .position(x: CGFloat(sticker.uv.x) * geo.size.width,
+                                  y: (1 - CGFloat(sticker.uv.y)) * geo.size.height)
+                        .allowsHitTesting(false)
+                }
+            }
+            .contentShape(Rectangle())
+            .onTapGesture { location in
+                stamp(at: location, canvasSize: geo.size)
+            }
         }
         .background(.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 16))
-        .aspectRatio(2.4, contentMode: .fit)
+        .aspectRatio(max(1, min(bodyAspect, 5)), contentMode: .fit)
         .onAppear {
             // Reopened saved design: restore the editable strokes.
             if strokes.strokes.isEmpty, let data = drawingStrokes,
@@ -103,28 +177,67 @@ struct DrawingPadView: View {
         }
     }
 
+    /// Tap with a stamp armed → sticker at that spot. Pad point == shell UV
+    /// (v flipped), same clamp as stamping on the 3D car.
+    private func stamp(at point: CGPoint, canvasSize: CGSize) {
+        guard let symbol = armedStamp,
+              canvasSize.width > 0, canvasSize.height > 0 else { return }
+        let uv = SIMD2<Float>(Float(point.x / canvasSize.width),
+                              Float(1 - point.y / canvasSize.height))
+        var placed = stickers ?? []
+        placed.append(StickerPlacement(symbol: symbol,
+                                       uv: ShellGeometry.clampStickerUV(uv),
+                                       scale: 1, rotation: 0, colorHex: inkColor))
+        stickers = placed
+        SoundBank.shared.play("customize_confirm_pop")
+    }
+
+    @ViewBuilder
+    private func stampImage(_ symbol: String) -> some View {
+        if symbol == "skull", let skull = StickerShopView.skullImage {
+            Image(decorative: skull, scale: 1).resizable()
+        } else {
+            // Stretched to the square frame, matching how the overlay
+            // renders the glyph into a square rect.
+            Image(systemName: symbol).resizable()
+        }
+    }
+
+    /// Sticker footprint on the pad: 0.22 of car height × scale — the pad's
+    /// aspect already equals the body's, so a square here lands square on
+    /// the car (same u-compression as OverlayComposer applies).
+    private func stampSide(_ sticker: StickerPlacement, in size: CGSize) -> CGFloat {
+        OverlayComposer.stickerBaseSize
+            * CGFloat(max(0.3, min(sticker.scale, 4)))
+            * size.height
+    }
+
     /// Every stroke updates the design (kid sees the car change instantly);
-    /// the 200 KB cap downsizes as needed. Output: a 1024² PNG with the drawing
-    /// in the vertical middle band, so UV [0,1]² lines up on the car side.
-    private func commit() {
+    /// the 200 KB cap downsizes as needed. Output: a 1024² PNG of the whole
+    /// pad stretched to fill UV [0,1]² — the paint shell maps that square
+    /// onto the full body bounds (u = length, v = height), so a stroke lands
+    /// on the car exactly where it sits over the silhouette. Stroke coords
+    /// are in the canvas view's point space, hence the size parameter.
+    private func commit(canvasSize: CGSize) {
         SoundBank.shared.play("paint_spray")
         guard !strokes.strokes.isEmpty else {
             drawingPNG = nil
             drawingStrokes = nil
             return
         }
-        let bandHeight: CGFloat = 1024 / 2.4
-        let bounds = CGRect(x: 0, y: 0, width: 1024, height: bandHeight)
-        // Pad onto a 1024² square so UV [0,1]² lines up: drawing occupies the
-        // vertical middle band of the car side. Through a CGImage so the PNG
-        // cap is the one shared cross-platform path in OverlayComposer.
-        let drawn = strokes.image(from: bounds, scale: 1)
-        let padded = UIGraphicsImageRenderer(size: CGSize(width: 1024, height: 1024))
+        guard canvasSize.width > 0, canvasSize.height > 0 else { return }
+        let drawn = strokes.image(from: CGRect(origin: .zero, size: canvasSize),
+                                  scale: max(1, 1024 / canvasSize.width))
+        // Through a CGImage so the PNG cap is the one shared cross-platform
+        // path in OverlayComposer.
+        let format = UIGraphicsImageRendererFormat()
+        format.scale = 1
+        let square = UIGraphicsImageRenderer(size: CGSize(width: 1024, height: 1024),
+                                             format: format)
             .image { _ in
-                drawn.draw(in: CGRect(x: 0, y: (1024 - bandHeight) / 2,
-                                      width: 1024, height: bandHeight))
+                drawn.draw(in: CGRect(x: 0, y: 0, width: 1024, height: 1024))
             }
-        if let cg = padded.cgImage {
+        if let cg = square.cgImage {
             drawingPNG = OverlayComposer.encodePNGCapped(cg)
         }
         let data = strokes.dataRepresentation()

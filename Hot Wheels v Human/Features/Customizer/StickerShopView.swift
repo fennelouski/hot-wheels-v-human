@@ -77,7 +77,8 @@ struct StickerShopView: View {
     }
 
     /// The one non-SF sticker, rendered by the same code that stamps it.
-    private static let skullImage: CGImage? = {
+    /// (Shared with DrawingPadView's stamp shelf.)
+    static let skullImage: CGImage? = {
         guard let ctx = CGContext(data: nil, width: 96, height: 96, bitsPerComponent: 8,
                                   bytesPerRow: 0, space: CGColorSpaceCreateDeviceRGB(),
                                   bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
