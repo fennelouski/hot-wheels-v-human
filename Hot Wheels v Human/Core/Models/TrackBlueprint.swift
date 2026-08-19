@@ -32,6 +32,9 @@ nonisolated struct TrackBlueprint: Codable, Equatable, Sendable {
     var worldTheme: String?
     /// Hand-placed decorations. Additive optional, same deal as worldTheme.
     var scenery: [SceneryItem]?
+    /// Empty world: keep the theme's sky/ground/terrain, skip all the
+    /// auto-placed stuff — the kid designs everything. Additive optional.
+    var worldEmpty: Bool?
 
     /// Phase 1 hardcoded demo: straight–loop–curve–finish (BUILD-ORDER P1 DoD).
     static let demo = TrackBlueprint(

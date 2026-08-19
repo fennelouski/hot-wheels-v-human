@@ -21,8 +21,12 @@ struct TrackBuilder3DView: View {
     /// Pinch multiplier over the auto-fit distance — relative, so the
     /// track keeps fitting as it grows even after the kid has zoomed.
     @State private var zoom: Float = 1
-    @State private var dragStart: SIMD2<Float>?   // (azimuth, elevation) at touch-down
+    /// Build mode: (azimuth, elevation) at touch-down. Decorate mode:
+    /// running drag translation (pan applies deltas).
+    @State private var dragStart: SIMD2<Float>?
     @State private var zoomStart: Float?
+    /// Decorate-mode camera-target offset — pan to reach the whole world.
+    @State private var pan: SIMD3<Float> = .zero
 
     var body: some View {
         // Gestures don't exist on tvOS; the builder only runs on iPad,
@@ -41,8 +45,13 @@ struct TrackBuilder3DView: View {
             .gesture(SpatialTapGesture().targetedToAnyEntity()
                 .onEnded { value in
                     if let index = SceneryPlacer.itemIndex(of: value.entity) {
-                        model.movingIndex = model.movingIndex == index ? nil : index
-                        SoundBank.shared.play("confirm_sparkle")
+                        if model.movingIndex == index {
+                            // Second tap on the held item spins it.
+                            model.rotatePickedScenery()
+                        } else {
+                            model.movingIndex = index
+                            SoundBank.shared.play("confirm_sparkle")
+                        }
                         return
                     }
                     guard let spot = groundPoint(tap: value.location,
@@ -55,18 +64,40 @@ struct TrackBuilder3DView: View {
                 })
             .gesture(DragGesture(minimumDistance: 4)
                 .onChanged { value in
-                    let start = dragStart ?? SIMD2(azimuth, elevation)
-                    dragStart = start
-                    azimuth = start.x - Float(value.translation.width) * 0.008
-                    elevation = min(1.4, max(0.1,
-                        start.y + Float(value.translation.height) * 0.008))
+                    if model.decorating {
+                        // Decorate mode: drag PANS across the ground —
+                        // you have to reach past the track to build a
+                        // town. (Orbit is a build-mode gesture.)
+                        let previous = dragStart ?? .zero
+                        let deltaX = Float(value.translation.width) - previous.x
+                        let deltaY = Float(value.translation.height) - previous.y
+                        dragStart = SIMD2(Float(value.translation.width),
+                                          Float(value.translation.height))
+                        let distance = simd_length(Self.cameraPose(
+                            layout: model.layout, azimuth: azimuth,
+                            elevation: elevation, zoom: zoom, pan: pan).offset)
+                        let scale = distance * 0.0012
+                        let right = SIMD3<Float>(cos(azimuth), 0, -sin(azimuth))
+                        let forward = SIMD3<Float>(-sin(azimuth), 0, -cos(azimuth))
+                        pan -= right * (deltaX * scale)
+                        pan += forward * (deltaY * scale)
+                        let limit = Float(30)
+                        pan.x = min(limit, max(-limit, pan.x))
+                        pan.z = min(limit, max(-limit, pan.z))
+                    } else {
+                        let start = dragStart ?? SIMD2(azimuth, elevation)
+                        dragStart = start
+                        azimuth = start.x - Float(value.translation.width) * 0.008
+                        elevation = min(1.4, max(0.1,
+                            start.y + Float(value.translation.height) * 0.008))
+                    }
                 }
                 .onEnded { _ in dragStart = nil })
             .simultaneousGesture(MagnifyGesture()
                 .onChanged { value in
                     let start = zoomStart ?? zoom
                     zoomStart = start
-                    zoom = min(3, max(0.25, start / Float(value.magnification)))
+                    zoom = min(6, max(0.25, start / Float(value.magnification)))
                 }
                 .onEnded { _ in zoomStart = nil })
         }
@@ -82,7 +113,8 @@ struct TrackBuilder3DView: View {
     private func groundPoint(tap: CGPoint, size: CGSize) -> SIMD3<Float>? {
         guard size.width > 0, size.height > 0 else { return nil }
         let (target, offset) = Self.cameraPose(
-            layout: model.layout, azimuth: azimuth, elevation: elevation, zoom: zoom)
+            layout: model.layout, azimuth: azimuth, elevation: elevation,
+            zoom: zoom, pan: pan)
         let camPos = target + offset
         let forward = simd_normalize(target - camPos)
         let right = simd_normalize(simd_cross(forward, SIMD3<Float>(0, 1, 0)))
@@ -102,7 +134,8 @@ struct TrackBuilder3DView: View {
     /// The one place the camera's target and offset are derived — `update`
     /// aims the camera with it, `groundPoint` casts taps through it.
     static func cameraPose(layout: TrackLayout, azimuth: Float,
-                           elevation: Float, zoom: Float)
+                           elevation: Float, zoom: Float,
+                           pan: SIMD3<Float> = .zero)
         -> (target: SIMD3<Float>, offset: SIMD3<Float>) {
         let rects = layout.pieces.map(\.worldFootprint)
         let minX = rects.map(\.minX).min() ?? 0
@@ -112,7 +145,7 @@ struct TrackBuilder3DView: View {
         let maxY = layout.lanes.center.map(\.y).max() ?? 0
         let span = max(maxX - minX, maxZ - minZ, maxY * 2)
         let target = SIMD3<Float>((minX + maxX) / 2, maxY * 0.35,
-                                  (minZ + maxZ) / 2)
+                                  (minZ + maxZ) / 2) + pan
         let distance = max(1.2, span) * zoom
         let offset = SIMD3<Float>(sin(azimuth) * cos(elevation),
                                   sin(elevation),
@@ -215,7 +248,7 @@ struct TrackBuilder3DView: View {
                 }
             }
 
-            let worldKey = "world-\(model.worldTheme ?? "auto")"
+            let worldKey = "world-\(model.worldTheme ?? "auto")\(model.worldEmpty ? "-empty" : "")"
             if let world = root.children.first(where: {
                     $0.name.hasPrefix("world-") || $0.name.hasPrefix("building-world-") }),
                world.name != worldKey, world.name != "building-\(worldKey)" {
@@ -226,9 +259,11 @@ struct TrackBuilder3DView: View {
                     maxX: rects.map(\.maxX).max() ?? 1,
                     maxZ: rects.map(\.maxZ).max() ?? 1)
                 let theme = model.worldTheme
+                let empty = model.worldEmpty
                 Task { @MainActor in
                     let env = await ArenaEnvironment.make(
-                        for: nil, theme: theme, around: theme == nil ? nil : footprint)
+                        for: nil, theme: theme, empty: empty,
+                        around: theme == nil ? nil : footprint)
                     world.children.removeAll()
                     world.addChild(env)
                     world.name = worldKey
@@ -237,7 +272,8 @@ struct TrackBuilder3DView: View {
             // Aim near bed level (0.35·maxY inside cameraPose) — a target
             // hovering over the track pushes it into the bottom of the frame.
             let (target, offset) = Self.cameraPose(
-                layout: layout, azimuth: azimuth, elevation: elevation, zoom: zoom)
+                layout: layout, azimuth: azimuth, elevation: elevation,
+                zoom: zoom, pan: pan)
             camera.look(at: target, from: target + offset, relativeTo: nil)
         }
     }

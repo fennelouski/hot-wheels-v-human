@@ -24,11 +24,18 @@ final class TrackBuilderModel {
     var placingModel: String?
     /// A placed decoration picked up for moving (tap it → tap the ground).
     var movingIndex: Int?
+    /// Decorate mode: palette shows the decoration box, drag pans the
+    /// world instead of orbiting. Lives here (not view state) so the 3D
+    /// view can switch its gestures on it.
+    var decorating = false
+    /// Empty world — theme look only, the kid places everything.
+    private(set) var worldEmpty = false
 
     var blueprint: TrackBlueprint {
         var bp = makeBlueprint(types)
         bp.worldTheme = worldTheme
         bp.scenery = scenery.isEmpty ? nil : scenery
+        bp.worldEmpty = worldEmpty ? true : nil
         return bp
     }
 
@@ -83,17 +90,30 @@ final class TrackBuilderModel {
         SoundBank.shared.play("confirm_sparkle")
     }
 
-    /// Drop the selected decoration where the kid tapped. Yaw is a random
-    /// quarter turn — tidy like the scattered buildings, varied enough
-    /// that a row of houses doesn't look stamped.
+    /// Street/sidewalk tiles tile: they snap to a half-tile grid and
+    /// place un-rotated so pieces butt cleanly; people place un-rotated
+    /// so their patrol axis is predictable. Everything else lands on a
+    /// random quarter turn — tidy but not stamped.
+    private static func isTile(_ model: String) -> Bool {
+        model.hasPrefix("street-") || model.hasPrefix("city-path")
+    }
+
+    private static func snapped(_ value: Float, model: String) -> Float {
+        Self.isTile(model) ? (value / 0.35).rounded() * 0.35 : value
+    }
+
+    /// Drop the selected decoration where the kid tapped.
     func placeScenery(atX x: Float, z: Float) {
         guard let model = placingModel,
               scenery.count < RaceTuning.maxSceneryItems else {
             SoundBank.shared.play("nope_wobble")
             return
         }
-        let yaw = [0, .pi / 2, .pi, 3 * .pi / 2].randomElement() ?? 0 as Float
-        scenery.append(SceneryItem(model: model, x: x, z: z, yaw: yaw))
+        let yaw: Float = Self.isTile(model) || SceneryPlacer.isPerson(model)
+            ? 0 : [0, .pi / 2, .pi, 3 * .pi / 2].randomElement() ?? 0
+        scenery.append(SceneryItem(model: model,
+                                   x: Self.snapped(x, model: model),
+                                   z: Self.snapped(z, model: model), yaw: yaw))
         SoundBank.shared.play("track_snap_connect")
     }
 
@@ -103,9 +123,16 @@ final class TrackBuilderModel {
             movingIndex = nil
             return
         }
-        scenery[index].x = x
-        scenery[index].z = z
+        scenery[index].x = Self.snapped(x, model: scenery[index].model)
+        scenery[index].z = Self.snapped(z, model: scenery[index].model)
         movingIndex = nil
+        SoundBank.shared.play("track_snap_connect")
+    }
+
+    /// Tap the picked-up item again: spin it a quarter turn (stays held).
+    func rotatePickedScenery() {
+        guard let index = movingIndex, scenery.indices.contains(index) else { return }
+        scenery[index].yaw += .pi / 2
         SoundBank.shared.play("track_snap_connect")
     }
 
@@ -121,6 +148,12 @@ final class TrackBuilderModel {
     func selectWorld(_ name: String?) {
         guard worldTheme != name else { return }
         worldTheme = name
+        SoundBank.shared.play("confirm_sparkle")
+    }
+
+    /// Empty world toggle — keep the sky and ground, clear the stuff.
+    func toggleWorldEmpty() {
+        worldEmpty.toggle()
         SoundBank.shared.play("confirm_sparkle")
     }
 

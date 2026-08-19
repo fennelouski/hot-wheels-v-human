@@ -45,6 +45,8 @@ final class RaceSession {
     private(set) var worldTheme: String?
     /// Hand-placed decorations riding the same blueprint.
     private(set) var scenery: [SceneryItem] = []
+    /// Empty world: theme look only, no auto-placed props.
+    private(set) var worldEmpty = false
     /// Ground-plane bounds of the whole track — ArenaEnvironment keeps
     /// its scattered props out of this rect.
     private(set) var trackFootprint: FootprintRect?
@@ -109,6 +111,7 @@ final class RaceSession {
         trackID = blueprint.trackId
         worldTheme = blueprint.worldTheme
         scenery = blueprint.scenery ?? []
+        worldEmpty = blueprint.worldEmpty ?? false
         let layout = TrackLayoutSolver.solve(blueprint)
         let rects = layout.pieces.map(\.worldFootprint)
         trackFootprint = FootprintRect(
@@ -116,6 +119,20 @@ final class RaceSession {
             maxX: rects.map(\.maxX).max() ?? 0, maxZ: rects.map(\.maxZ).max() ?? 0)
         pieceTypes = layout.pieces.map(\.definition.type)
         pieceStartIndices = layout.lanes.pieceStartIndices
+        // The world must be IN PLACE before the countdown starts.
+        // ArenaView's async re-theme used to handle this, but a full world
+        // build (20+ cold USDZ loads, terrain, horizon ring) lags behind
+        // the 3-second countdown and the race opened on the lobby's green
+        // field. Building it here, awaited, closes that gap; ArenaView's
+        // update sees the wanted holder name already present and skips.
+        if let holder = root.findEntity(named: "environment") {
+            let environment = await ArenaEnvironment.make(
+                for: blueprint.trackId, theme: blueprint.worldTheme,
+                scenery: scenery, empty: blueprint.worldEmpty ?? false,
+                around: trackFootprint)
+            holder.children.removeAll()
+            holder.addChild(environment)
+        }
         let track = try await TrackSpawner.spawn(layout: layout)
         // Groundless worlds (space): the track FLOATS — support legs
         // standing on a ground that isn't there break the picture.

@@ -17,18 +17,25 @@ import CoreGraphics
 import Foundation
 import RealityKit
 
-/// Spins a decorative prop about its own Y axis. Coins only, for now —
-/// a turning coin reads as "treasure" the way a static one never does,
-/// and it's the one prop whose silhouette rewards it.
-struct SpinComponent: Component {
-    var radiansPerSecond: Float
+/// Idle life for decorations — coins spin, ships and spacecraft bob and
+/// roll, flags and trees sway. One component, driven by sines off a
+/// per-entity phase so nothing pulses in unison. (Grew out of the old
+/// coin-only SpinComponent; spin is deliberately not an OrbitAnimation —
+/// that orbits a centre, so at radius 0 nothing turns.)
+struct AmbientMotionComponent: Component {
+    var spin: Float = 0            // rad/s about +Y; exclusive with sway
+    var bobAmplitude: Float = 0    // metres of vertical sine
+    var bobRate: Float = 0         // rad/s
+    var swayAngle: Float = 0       // roll wobble, radians
+    var swayRate: Float = 0
+    var phase: Float = 0
+    var time: Float = 0
+    var baseY: Float = 0
+    var baseOrientation = simd_quatf(angle: 0, axis: [0, 1, 0])
 }
 
-/// Deliberately not an OrbitAnimation: that orbits an entity around a
-/// centre, so at radius 0 (a coin spinning where it stands) there's no
-/// path to travel and nothing turns.
-struct SpinSystem: System {
-    private static let query = EntityQuery(where: .has(SpinComponent.self))
+struct AmbientMotionSystem: System {
+    private static let query = EntityQuery(where: .has(AmbientMotionComponent.self))
 
     init(scene: Scene) {}
 
@@ -36,9 +43,125 @@ struct SpinSystem: System {
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
-            guard let spin = entity.components[SpinComponent.self] else { continue }
-            entity.orientation *= simd_quatf(angle: spin.radiansPerSecond * dt,
-                                             axis: [0, 1, 0])
+            guard var motion = entity.components[AmbientMotionComponent.self] else { continue }
+            motion.time += dt
+            let t = motion.time + motion.phase
+            if motion.spin != 0 {
+                entity.orientation *= simd_quatf(angle: motion.spin * dt,
+                                                 axis: [0, 1, 0])
+            } else if motion.swayAngle != 0 {
+                let roll = sin(t * motion.swayRate) * motion.swayAngle
+                entity.orientation = motion.baseOrientation
+                    * simd_quatf(angle: roll, axis: [0, 0, 1])
+            }
+            if motion.bobAmplitude != 0 {
+                entity.position.y = motion.baseY
+                    + sin(t * motion.bobRate) * motion.bobAmplitude
+            }
+            entity.components.set(motion)
+        }
+    }
+}
+
+/// Which idle motion a prop model gets, if any. Shared by the theme
+/// scatter, the horizon ring, and hand-placed scenery so a pirate ship
+/// bobs no matter how it got there.
+enum AmbientMotion {
+    static func component(for model: String, vary: Float) -> AmbientMotionComponent? {
+        var motion = AmbientMotionComponent(phase: vary * 6.28)
+        if model.contains("coin") {
+            motion.spin = 1.1 + vary * 0.7
+        } else if model.contains("ship") || model.contains("speeder")
+                    || model.contains("ghost") || model.contains("astronaut")
+                    || model == "space-racer" || model == "space-alien" {
+            motion.bobAmplitude = 0.02 + vary * 0.02
+            motion.bobRate = 0.7 + vary * 0.5
+            motion.swayAngle = 0.04
+            motion.swayRate = 0.5 + vary * 0.4
+        } else if model.contains("flag") {
+            motion.swayAngle = 0.1
+            motion.swayRate = 2.0 + vary
+        } else if model.contains("palm") || model.contains("tree")
+                    || model.contains("pine") {
+            motion.swayAngle = 0.025
+            motion.swayRate = 1.2 + vary * 0.6
+        } else {
+            return nil
+        }
+        return motion
+    }
+
+    /// Stamp `entity` (already positioned + oriented) with its motion.
+    static func apply(to entity: Entity, model: String, vary: Float) {
+        guard var motion = component(for: model, vary: vary) else { return }
+        motion.baseY = entity.position.y
+        motion.baseOrientation = entity.orientation
+        entity.components.set(motion)
+    }
+}
+
+/// A placed person strolling their sidewalk: walk `halfLength` out along
+/// the patrol axis, turn on a dime (it's a toy), walk back.
+struct WalkerComponent: Component {
+    var origin: SIMD3<Float>
+    var yaw: Float
+    var halfLength: Float = 0.45
+    var speed: Float = 0.07
+    var time: Float = 0
+}
+
+struct WalkerSystem: System {
+    private static let query = EntityQuery(where: .has(WalkerComponent.self))
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        for entity in context.entities(matching: Self.query,
+                                       updatingSystemWhen: .rendering) {
+            guard var walker = entity.components[WalkerComponent.self] else { continue }
+            walker.time += dt
+            let lap = 4 * walker.halfLength
+            let along = (walker.time * walker.speed)
+                .truncatingRemainder(dividingBy: lap)
+            let outbound = along < 2 * walker.halfLength
+            let s = outbound ? along - walker.halfLength
+                             : 3 * walker.halfLength - along
+            let dir = SIMD3<Float>(sin(walker.yaw), 0, cos(walker.yaw))
+            entity.position = walker.origin + dir * s
+            entity.orientation = simd_quatf(
+                angle: outbound ? walker.yaw : walker.yaw + .pi, axis: [0, 1, 0])
+            entity.components.set(walker)
+        }
+    }
+}
+
+/// The Winter world's toy train, chugging an ellipse around the track.
+struct TrainCarComponent: Component {
+    var center: SIMD2<Float>
+    var radius: SIMD2<Float>
+    var angularSpeed: Float
+    var angle: Float
+}
+
+struct TrainSystem: System {
+    private static let query = EntityQuery(where: .has(TrainCarComponent.self))
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        for entity in context.entities(matching: Self.query,
+                                       updatingSystemWhen: .rendering) {
+            guard var car = entity.components[TrainCarComponent.self] else { continue }
+            car.angle += car.angularSpeed * dt
+            entity.position = [car.center.x + car.radius.x * cos(car.angle), 0,
+                               car.center.y + car.radius.y * sin(car.angle)]
+            let tangentX = -car.radius.x * sin(car.angle)
+            let tangentZ = car.radius.y * cos(car.angle)
+            entity.orientation = simd_quatf(angle: atan2(tangentX, tangentZ),
+                                            axis: [0, 1, 0])
+            entity.components.set(car)
         }
     }
 }
@@ -72,6 +195,11 @@ enum ArenaEnvironment {
         /// mesas, galleons). Empty = no ring.
         var horizon: [String] = []
         var horizonScale: Float = 3
+        /// Streets-and-blocks layout instead of loose scatter: a road
+        /// grid with buildings filling the blocks, facing their street.
+        var cityBlocks: Bool = false
+        /// A toy train circles the track (Winter's signature move).
+        var train: Bool = false
     }
 
     /// Indexed by trackId byte-sum for tracks with no chosen world —
@@ -132,7 +260,7 @@ enum ArenaEnvironment {
                       "city-streetlight", "city-streetlight", "city-planter"],
               structured: true, propCount: 44,
               horizon: ["city-skyscraper-a", "city-skyscraper-b", "city-skyscraper-c", "city-skyscraper-d", "city-skyscraper-e"],
-              horizonScale: 3.5),
+              horizonScale: 3.5, cityBlocks: true),
         Theme(name: "town", displayName: "Hometown", symbol: "house.fill",
               skyTop: rgb(0.32, 0.60, 0.95), skyHorizon: rgb(0.84, 0.94, 1.0),
               groundLight: rgb(0.42, 0.66, 0.34), groundDark: rgb(0.34, 0.56, 0.28),
@@ -146,7 +274,7 @@ enum ArenaEnvironment {
                       "city-tree-large", "city-tree-small", "city-fence"],
               structured: true, propCount: 40,
               horizon: ["city-house-b", "city-house-n", "city-tree-large"],
-              horizonScale: 3),
+              horizonScale: 3, cityBlocks: true),
         Theme(name: "park", displayName: "Park", symbol: "tree.fill",
               skyTop: rgb(0.28, 0.58, 0.90), skyHorizon: rgb(0.82, 0.94, 0.96),
               groundLight: rgb(0.30, 0.58, 0.28), groundDark: rgb(0.24, 0.49, 0.23),
@@ -201,7 +329,7 @@ enum ArenaEnvironment {
                       "winter-snow-pile", "winter-lantern"],
               propCount: 44, clearance: 0.5,
               horizon: ["winter-tree-a", "winter-tree-b", "winter-tree-decorated-snow"],
-              horizonScale: 3.5),
+              horizonScale: 3.5, train: true),
         Theme(name: "pirate", displayName: "Pirate Cove", symbol: "sailboat.fill",
               skyTop: rgb(0.16, 0.55, 0.75), skyHorizon: rgb(0.80, 0.93, 0.94),
               groundLight: rgb(0.89, 0.80, 0.58), groundDark: rgb(0.82, 0.72, 0.50),
@@ -302,8 +430,8 @@ enum ArenaEnvironment {
     /// Entity name for change detection — ArenaView rebuilds when the
     /// track, its chosen world, or its placed decorations change.
     static func name(for trackID: UUID?, theme: String?,
-                     scenery: [SceneryItem] = []) -> String {
-        "env-\(theme ?? "auto")-\(scenery.hashValue)-\(trackID?.uuidString ?? "lobby")"
+                     scenery: [SceneryItem] = [], empty: Bool = false) -> String {
+        "env-\(theme ?? "auto")\(empty ? "-empty" : "")-\(scenery.hashValue)-\(trackID?.uuidString ?? "lobby")"
     }
 
     private static let halfPiF = Float.pi / 2
@@ -330,9 +458,12 @@ enum ArenaEnvironment {
     /// `themeName` is the blueprint's picked world; nil falls back to the
     /// trackId hash. Groundless worlds (space) skip terrain entirely —
     /// the track floats; only the invisible physics floor remains.
+    /// `empty` keeps the theme's sky, colors, and terrain but none of the
+    /// auto-placed stuff (scatter, blocks, horizon, train) — a blank
+    /// world for kids who want to design everything themselves.
     @MainActor
     static func make(for trackID: UUID?, theme themeName: String? = nil,
-                     scenery: [SceneryItem] = [],
+                     scenery: [SceneryItem] = [], empty: Bool = false,
                      around footprint: FootprintRect?) async -> Entity {
         let theme = theme(named: themeName, for: trackID)
         let groundless = RaceTuning.groundlessThemes.contains(theme.name)
@@ -373,14 +504,135 @@ enum ArenaEnvironment {
         sky.scale = [-1, 1, 1]
         root.addChild(sky)
 
-        await scatterProps(theme: theme, trackID: trackID,
-                           around: footprint, into: root)
-        await addHorizon(theme: theme, trackID: trackID, flat: flatZone,
-                         groundless: groundless, into: root)
+        AmbientMotionComponent.registerComponent()
+        AmbientMotionSystem.registerSystem()
+        if !empty {
+            if theme.cityBlocks, let footprint {
+                await layCityBlocks(theme: theme, trackID: trackID,
+                                    around: footprint, into: root)
+            } else {
+                await scatterProps(theme: theme, trackID: trackID,
+                                   around: footprint, into: root)
+            }
+            await addHorizon(theme: theme, trackID: trackID, flat: flatZone,
+                             groundless: groundless, into: root)
+            if theme.train, let footprint {
+                await addTrain(around: footprint, into: root)
+            }
+        }
         if !scenery.isEmpty {
             root.addChild(await SceneryPlacer.spawn(scenery))
         }
         return root
+    }
+
+    /// Loco + tender + wagon on an ellipse just outside the prop ring,
+    /// inside the flat zone so the rails-less train never climbs a hill.
+    @MainActor
+    private static func addTrain(around footprint: FootprintRect,
+                                 into root: Entity) async {
+        TrainCarComponent.registerComponent()
+        TrainSystem.registerSystem()
+        let center = SIMD2<Float>((footprint.minX + footprint.maxX) / 2,
+                                  (footprint.minZ + footprint.maxZ) / 2)
+        let radius = SIMD2<Float>((footprint.maxX - footprint.minX) / 2 + 5.2,
+                                  (footprint.maxZ - footprint.minZ) / 2 + 5.2)
+        let meanRadius = (radius.x + radius.y) / 2
+        let speed = 0.5 / meanRadius          // ~0.5 m/s along the loop
+        let gap = 0.24 / meanRadius           // one car length apart
+        for (index, model) in ["winter-train-loco", "winter-train-tender",
+                               "winter-train-wagon"].enumerated() {
+            guard let car = try? await AssetStore.shared.entity(named: model) else { continue }
+            car.components.set(TrainCarComponent(
+                center: center, radius: radius, angularSpeed: speed,
+                angle: -Float(index) * gap))
+            root.addChild(car)
+        }
+    }
+
+    /// Streets and blocks for the city worlds: road tiles every third
+    /// grid line (crossroads where they meet), buildings filling the
+    /// blocks between, each facing its street. Replaces loose scatter,
+    /// which read as buildings dropped from the sky.
+    @MainActor
+    private static func layCityBlocks(theme: Theme, trackID: UUID?,
+                                      around footprint: FootprintRect,
+                                      into root: Entity) async {
+        let step: Float = 0.7
+        let margin: Float = 5.0
+        let trackSeed = trackID.map { id in
+            withUnsafeBytes(of: id.uuid) { $0.reduce(0) { $0 &* 31 &+ Int($1) } }
+        } ?? 0
+        var dice = Dice(seed: 0xC17B10C5 &+ UInt64(truncatingIfNeeded: trackSeed))
+        guard let straightProto = try? await AssetStore.shared.entity(named: "street-straight"),
+              let crossProto = try? await AssetStore.shared.entity(named: "street-cross")
+        else { return }
+        var seen = Set<String>()
+        var prototypes: [Entity] = []
+        for name in theme.props where seen.insert(name).inserted {
+            if let entity = try? await AssetStore.shared.entity(named: name) {
+                entity.name = name
+                prototypes.append(entity)
+            }
+        }
+        guard !prototypes.isEmpty else { return }
+
+        func gridLine(_ n: Int) -> Bool { ((n % 3) + 3) % 3 == 0 }
+        let iRange = Int(((footprint.minX - margin) / step).rounded(.down))
+            ... Int(((footprint.maxX + margin) / step).rounded(.up))
+        let jRange = Int(((footprint.minZ - margin) / step).rounded(.down))
+            ... Int(((footprint.maxZ + margin) / step).rounded(.up))
+        var entityCount = 0
+        for i in iRange {
+            for j in jRange {
+                guard entityCount < 600 else { return }   // runaway-track cap
+                let x = Float(i) * step
+                let z = Float(j) * step
+                let insideTrack = x > footprint.minX - theme.clearance
+                    && x < footprint.maxX + theme.clearance
+                    && z > footprint.minZ - theme.clearance
+                    && z < footprint.maxZ + theme.clearance
+                guard !insideTrack else { continue }
+                let onRow = gridLine(i)
+                let onCol = gridLine(j)
+                if onRow || onCol {
+                    let tile = (onRow && onCol ? crossProto : straightProto)
+                        .clone(recursive: true)
+                    tile.name = "street-tile"
+                    // Streets hug the ground plane (its top is at −0.03)
+                    // instead of floating at prop height.
+                    tile.position = [x, -0.025, z]
+                    // A row line (constant x) runs along z = model yaw 0;
+                    // a column line runs along x.
+                    if onCol && !onRow {
+                        tile.orientation = simd_quatf(angle: halfPiF, axis: [0, 1, 0])
+                    }
+                    root.addChild(tile)
+                    entityCount += 1
+                } else {
+                    // Blocks breathe: some cells stay open like tiny parks.
+                    guard dice.next01() > 0.3 else { continue }
+                    let building = prototypes[
+                        Int(dice.next01() * 0.999 * Float(prototypes.count))]
+                        .clone(recursive: true)
+                    building.position = [x, 0, z]
+                    // Face the nearer street: interior cells sit 1 cell
+                    // from a row street and 1 from a column street — pick
+                    // one per die so a block's houses don't all match.
+                    let yaw: Float
+                    if dice.next01() < 0.5 {
+                        yaw = ((i % 3) + 3) % 3 == 1 ? -halfPiF : halfPiF
+                    } else {
+                        yaw = ((j % 3) + 3) % 3 == 1 ? .pi : 0
+                    }
+                    building.orientation = simd_quatf(angle: yaw, axis: [0, 1, 0])
+                    AmbientMotion.apply(to: building, model: building.name,
+                                        vary: dice.next01())
+                    root.addChild(building)
+                    entityCount += 1
+                }
+            }
+        }
     }
 
     // MARK: Terrain
@@ -464,6 +716,7 @@ enum ArenaEnvironment {
         var prototypes: [Entity] = []
         for name in theme.horizon {
             if let entity = try? await AssetStore.shared.entity(named: name) {
+                entity.name = name
                 prototypes.append(entity)
             }
         }
@@ -481,6 +734,9 @@ enum ArenaEnvironment {
             prop.position = [x, y, z]
             prop.scale *= theme.horizonScale * (0.8 + dice.next01() * 0.5)
             prop.orientation = simd_quatf(angle: atan2(-x, -z), axis: [0, 1, 0])
+            // Distant galleons bob, distant trees sway — scaled up, the
+            // idle motion is what sells them as part of the world.
+            AmbientMotion.apply(to: prop, model: prop.name, vary: dice.next01())
             root.addChild(prop)
         }
     }
@@ -497,9 +753,6 @@ enum ArenaEnvironment {
             withUnsafeBytes(of: id.uuid) { $0.reduce(0) { $0 &* 31 &+ Int($1) } }
         } ?? 0
         var dice = Dice(seed: 0xD1CE &+ UInt64(truncatingIfNeeded: trackSeed))
-
-        SpinComponent.registerComponent()
-        SpinSystem.registerSystem()
 
         // Prototype each model once; clone per placement.
         var prototypes: [Entity] = []
@@ -555,12 +808,9 @@ enum ArenaEnvironment {
                 yaw = dice.next01() * 2 * .pi
             }
             prop.orientation = simd_quatf(angle: yaw, axis: [0, 1, 0])
-            // Coins turn; cones and boxes stay put (a spinning traffic cone
-            // reads as a glitch). Varied rate so they don't pulse in unison.
-            if prop.name.contains("coin") {
-                prop.components.set(SpinComponent(
-                    radiansPerSecond: 1.1 + dice.next01() * 0.7))
-            }
+            // Coins turn, ships bob, trees sway; cones and boxes stay put
+            // (a spinning traffic cone reads as a glitch).
+            AmbientMotion.apply(to: prop, model: prop.name, vary: dice.next01())
             root.addChild(prop)
         }
     }

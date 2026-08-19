@@ -25,7 +25,6 @@ struct TrackBuilderView: View {
     @State private var previewing = false
     @State private var mapExpanded = false
     @State private var showingWorlds = false
-    @State private var decorating = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
@@ -55,14 +54,14 @@ struct TrackBuilderView: View {
                     // while the kid is actively picking a world.
                     if showingWorlds {
                         worldRow
-                    } else if model.types == [.startGate], !decorating {
+                    } else if model.types == [.startGate], !model.decorating {
                         // Fresh canvas → offer the starter tracks.
                         presetRow
                     }
                 }
                 .overlay(alignment: .topLeading) {
-                    if decorating {
-                        Text(model.movingIndex != nil ? "Tap where it should go!"
+                    if model.decorating {
+                        Text(model.movingIndex != nil ? "Tap where it should go — tap it again to spin it!"
                              : model.placingModel != nil ? "Tap the ground to place it!"
                              : "Pick a decoration below — or tap one you placed to move it!")
                             .font(.system(size: 18, weight: .heavy, design: .rounded))
@@ -74,7 +73,7 @@ struct TrackBuilderView: View {
                 }
                 .padding(.horizontal, 16)
 
-            if decorating {
+            if model.decorating {
                 DecorPaletteView(model: model)
             } else {
                 PiecePaletteView(model: model)
@@ -85,22 +84,25 @@ struct TrackBuilderView: View {
                 // the decoration box (every world's props) and Undo removes
                 // the last placed decoration.
                 Button {
-                    decorating.toggle()
-                    if !decorating { model.placingModel = nil }
+                    model.decorating.toggle()
+                    if !model.decorating {
+                        model.placingModel = nil
+                        model.movingIndex = nil
+                    }
                     SoundBank.shared.play("confirm_sparkle")
                 } label: {
-                    Label(decorating ? "Build" : "Decorate",
-                          systemImage: decorating
+                    Label(model.decorating ? "Build" : "Decorate",
+                          systemImage: model.decorating
                               ? "wrench.and.screwdriver.fill" : "paintbrush.fill")
                         .font(.system(size: 20, weight: .heavy, design: .rounded))
                         .padding(.horizontal, 14)
                         .frame(height: 60)
                 }
                 .buttonStyle(.bordered)
-                .tint(decorating ? .orange : nil)
+                .tint(model.decorating ? .orange : nil)
                 .accessibilityIdentifier("decorateToggle")
                 toolButton("Undo", systemImage: "arrow.uturn.backward") {
-                    decorating ? model.removeLastScenery() : model.removeLast()
+                    model.decorating ? model.removeLastScenery() : model.removeLast()
                 }
                 toolButton("Clear", systemImage: "trash") { model.clear() }
                 toolButton("Shuffle", systemImage: "dice.fill") {
@@ -164,6 +166,7 @@ struct TrackBuilderView: View {
     private var worldRow: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
+                emptyWorldCard
                 worldCard(name: nil, label: "Surprise", symbol: "sparkles")
                 ForEach(ArenaEnvironment.themes, id: \.name) { theme in
                     worldCard(name: theme.name, label: theme.displayName,
@@ -173,6 +176,27 @@ struct TrackBuilderView: View {
             .padding(.horizontal, 16)
         }
         .padding(.bottom, 16)
+    }
+
+    /// Empty World: keep the picked world's sky and ground, none of the
+    /// auto-placed stuff — he builds everything himself.
+    private var emptyWorldCard: some View {
+        Button {
+            model.toggleWorldEmpty()
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: "square.dashed")
+                    .font(.system(size: 30, weight: .bold))
+                    .frame(height: 36)
+                Text("Empty")
+                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+            }
+            .frame(width: 108, height: 84)
+            .background(model.worldEmpty ? .orange.opacity(0.45) : .black.opacity(0.45),
+                        in: RoundedRectangle(cornerRadius: 14))
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("emptyWorldCard")
     }
 
     private func worldCard(name: String?, label: String, symbol: String) -> some View {
@@ -318,12 +342,17 @@ struct DecorPaletteView: View {
 
     /// (label, symbol, unique props) per world, from the theme lists —
     /// one source of truth for what exists.
-    static let groups: [(String, String, [String])] =
-        ArenaEnvironment.themes.map { theme in
-            var seen = Set<String>()
-            let unique = theme.props.filter { seen.insert($0).inserted }
-            return (theme.displayName, theme.symbol, unique)
-        }
+    static let groups: [(String, String, [String])] = [
+        ("Streets", "road.lanes",
+         ["street-straight", "street-cross", "street-square",
+          "city-path-long", "city-path-short"]),
+        ("People", "figure.walk",
+         ["person-a", "person-b", "person-c", "person-d"]),
+    ] + ArenaEnvironment.themes.map { theme in
+        var seen = Set<String>()
+        let unique = theme.props.filter { seen.insert($0).inserted }
+        return (theme.displayName, theme.symbol, unique)
+    }
 
     var body: some View {
         VStack(spacing: 8) {

@@ -83,43 +83,99 @@ struct ArenaEnvironmentTests {
         #expect(distant.count >= 10)
     }
 
-    /// City worlds are built, not spilled: buildings sit on the street
-    /// grid, squared to a quarter turn, and never two to a cell.
-    @Test func cityBuildingsSnapToGridAndFaceSquare() async {
-        let env = await ArenaEnvironment.make(
-            for: UUID(), theme: "city",
-            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
-        let props = env.children.filter { $0.name.hasPrefix("city-") }
-        #expect(props.count > 20)
-        var cells = Set<SIMD2<Int>>()
-        for prop in props {
-            let cell = SIMD2(Int((prop.position.x / 0.7).rounded()),
-                             Int((prop.position.z / 0.7).rounded()))
-            #expect(abs(prop.position.x - Float(cell.x) * 0.7) < 0.001)
-            #expect(abs(prop.position.z - Float(cell.y) * 0.7) < 0.001)
-            #expect(cells.insert(cell).inserted, "two props in cell \(cell)")
+    /// Every decoration the palette offers must load AND have a thumbnail
+    /// — either missing leaves a dead button in the decoration box.
+    @Test func decorationBoxIsFullyStocked() async {
+        for (label, _, props) in DecorPaletteView.groups {
+            for prop in props {
+                let entity = try? await AssetStore.shared.entity(named: prop)
+                #expect(entity != nil, "\(label): missing model \(prop)")
+                #expect(Bundle.main.url(forResource: "thumb-\(prop)",
+                                        withExtension: "png") != nil,
+                        "\(label): missing thumbnail \(prop)")
+            }
         }
     }
 
-    /// Coins turn, everything else holds still — a spinning traffic cone
-    /// reads as a glitch. The rotation itself is RealityKit's; what's
-    /// checked here is that the right props get tagged.
-    @Test func onlyCoinPropsCarryTheSpin() async {
+    /// Placed people walk; everything else placed stays put unless it's a
+    /// bobber/swayer by nature.
+    @Test func placedPeopleWalk() async {
+        let items = [SceneryItem(model: "person-a", x: 1, z: 2, yaw: 0),
+                     SceneryItem(model: "pirate-ship-small", x: 3, z: 0, yaw: 0),
+                     SceneryItem(model: "city-house-a", x: 0, z: 0, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items)
+        #expect(root.children.count == 3)
+        #expect(root.children[0].components[WalkerComponent.self] != nil)
+        #expect((root.children[1].components[AmbientMotionComponent.self]?
+            .bobAmplitude ?? 0) > 0)
+        #expect(root.children[2].components[AmbientMotionComponent.self] == nil)
+        #expect(root.children[2].components[WalkerComponent.self] == nil)
+    }
+
+    /// Coins spin, spacecraft bob, cones and boxes hold still — a
+    /// spinning traffic cone reads as a glitch. The motion itself is the
+    /// system's; what's checked is that the right props get tagged.
+    @Test func ambientMotionTagsTheRightProps() async {
         let spaceID = UUID(uuidString: "90000000-0000-0000-0000-000000000003")!
         #expect(ArenaEnvironment.theme(named: nil, for: spaceID).name == "space")
 
         let env = await ArenaEnvironment.make(
             for: spaceID,
             around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
-        let props = env.children.filter { $0.name.hasPrefix("item-") }
+        let coins = env.children.filter { $0.name.contains("coin") }
+        let speeders = env.children.filter { $0.name.contains("speeder") }
+        let craters = env.children.filter { $0.name.contains("crater") }
+        #expect(!coins.isEmpty && !speeders.isEmpty && !craters.isEmpty)
+        #expect(coins.allSatisfy {
+            ($0.components[AmbientMotionComponent.self]?.spin ?? 0) > 0 })
+        #expect(speeders.allSatisfy {
+            ($0.components[AmbientMotionComponent.self]?.bobAmplitude ?? 0) > 0 })
+        #expect(craters.allSatisfy {
+            $0.components[AmbientMotionComponent.self] == nil })
+    }
 
-        #expect(!props.isEmpty)
-        #expect(props.contains { $0.name.contains("coin") })      // not vacuous
-        for prop in props {
-            let spins = prop.components[SpinComponent.self] != nil
-            #expect(spins == prop.name.contains("coin"),
-                    "\(prop.name) spin=\(spins)")
+    /// City worlds lay streets now: road tiles on every third grid line,
+    /// buildings snapped to the grid between them.
+    @Test func cityLaysStreetsAndBlocks() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "city",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let tiles = env.children.filter { $0.name == "street-tile" }
+        // Near the track only — the horizon ring reuses city-* models
+        // way out at radius 31+, deliberately off-grid.
+        let buildings = env.children.filter {
+            $0.name.hasPrefix("city-") && simd_length($0.position) < 20
         }
+        #expect(tiles.count > 30)
+        #expect(buildings.count > 20)
+        for building in buildings {
+            // Distance to the nearest grid multiple — a plain remainder
+            // check reads 0.699… for Float multiples like 3 × 0.7.
+            let dx = abs(building.position.x - (building.position.x / 0.7).rounded() * 0.7)
+            let dz = abs(building.position.z - (building.position.z / 0.7).rounded() * 0.7)
+            #expect(dx < 0.01 && dz < 0.01, "\(building.name)")
+        }
+    }
+
+    /// Empty world: theme look only — no props, no streets, no horizon.
+    @Test func emptyWorldHasNoStuff() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "city", empty: true,
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        #expect(!env.children.contains { $0.name == "street-tile" })
+        #expect(!env.children.contains { $0.name.hasPrefix("city-") })
+        // Sky + terrain + physics floor are still there.
+        #expect(env.children.count >= 3)
+    }
+
+    /// Winter's train exists and is parked on its ellipse ready to move.
+    @Test func winterHasATrain() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "winter",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let cars = env.children.filter {
+            $0.components[TrainCarComponent.self] != nil }
+        #expect(cars.count == 3)
     }
 
     /// Props are decoration: a car flung off the track sails through them

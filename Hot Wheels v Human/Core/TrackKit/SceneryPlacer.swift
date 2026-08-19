@@ -30,10 +30,18 @@ enum SceneryPlacer {
     /// can pick it up and move it; the arena spawns plain visuals — no
     /// collision, flung cars sail through. `highlight` lifts the item
     /// currently being moved so it reads as "picked up".
+    /// Placeable people (mini-characters with a baked walk clip) —
+    /// they stroll a little patrol line from where the kid puts them.
+    static func isPerson(_ model: String) -> Bool { model.hasPrefix("person-") }
+
     static func spawn(_ items: [SceneryItem], tappable: Bool = false,
                       highlight: Int? = nil,
                       assets: AssetStore? = nil) async -> Entity {
         let assets = assets ?? AssetStore.shared
+        AmbientMotionComponent.registerComponent()
+        AmbientMotionSystem.registerSystem()
+        WalkerComponent.registerComponent()
+        WalkerSystem.registerSystem()
         let root = Entity()
         root.name = name(for: items)
         for (index, item) in items.enumerated() {
@@ -51,6 +59,18 @@ enum SceneryPlacer {
             if index == highlight {
                 entity.position.y += 0.15
                 entity.scale *= 1.15
+            } else if isPerson(item.model) {
+                // Stroll along the placement yaw; the walk clip loops.
+                // (Held items stand still so the kid can grab them.)
+                entity.components.set(WalkerComponent(
+                    origin: entity.position, yaw: item.yaw))
+            } else {
+                AmbientMotion.apply(to: entity, model: item.model,
+                                    vary: Float(index % 7) / 7)
+            }
+            if isPerson(item.model),
+               let animation = entity.availableAnimations.first {
+                entity.playAnimation(animation.repeat())
             }
             root.addChild(entity)
         }

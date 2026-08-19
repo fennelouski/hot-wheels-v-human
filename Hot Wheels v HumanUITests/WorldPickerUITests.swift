@@ -55,20 +55,63 @@ final class WorldPickerUITests: XCTestCase {
         for _ in 0..<2 { straight.tap() }
 
         app.buttons["decorateToggle"].tap()
-        // Pick the first prop of the first world group (candy).
-        let prop = app.buttons["item-banana"]
-        XCTAssertTrue(prop.waitForExistence(timeout: 5))
-        prop.tap()
 
-        // Drop three of them on the ground around the scene.
-        for spot in [CGPoint(x: 0.3, y: 0.30), CGPoint(x: 0.7, y: 0.28),
-                     CGPoint(x: 0.55, y: 0.38)] {
+        // Sidewalk tiles from the Streets shelf...
+        let streets = app.buttons.containing(
+            NSPredicate(format: "label CONTAINS 'Streets'")).firstMatch
+        XCTAssertTrue(streets.waitForExistence(timeout: 5))
+        streets.tap()
+        let tile = app.buttons["street-square"]
+        XCTAssertTrue(tile.waitForExistence(timeout: 5))
+        tile.tap()
+        for spot in [CGPoint(x: 0.35, y: 0.30), CGPoint(x: 0.45, y: 0.30),
+                     CGPoint(x: 0.55, y: 0.30)] {
+            app.coordinate(withNormalizedOffset: CGVector(dx: spot.x, dy: spot.y)).tap()
+            sleep(1)
+        }
+
+        // ...and a couple of people to stroll them.
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'People'"))
+            .firstMatch.tap()
+        let person = app.buttons["person-a"]
+        XCTAssertTrue(person.waitForExistence(timeout: 5))
+        person.tap()
+        for spot in [CGPoint(x: 0.4, y: 0.28), CGPoint(x: 0.6, y: 0.33)] {
             app.coordinate(withNormalizedOffset: CGVector(dx: spot.x, dy: spot.y)).tap()
             sleep(1)
         }
         sleep(2)
         let shot = XCTAttachment(screenshot: app.screenshot())
         shot.name = "decorated"
+        shot.lifetime = .keepAlways
+        add(shot)
+    }
+
+    @MainActor
+    func testEmptyWorldAndTrain() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--trackbuilder"]
+        app.launch()
+        let straight = app.buttons.containing(
+            NSPredicate(format: "label CONTAINS 'Straight'")).firstMatch
+        XCTAssertTrue(straight.waitForExistence(timeout: 10))
+        for _ in 0..<2 { straight.tap() }
+
+        app.buttons["worldChip"].tap()
+        let winter = app.buttons.containing(
+            NSPredicate(format: "label CONTAINS 'Winter'")).firstMatch
+        XCTAssertTrue(winter.waitForExistence(timeout: 5))
+        winter.tap()
+        sleep(4)
+        var shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "winter-train"
+        shot.lifetime = .keepAlways
+        add(shot)
+
+        app.buttons["emptyWorldCard"].tap()
+        sleep(3)
+        shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "winter-empty"
         shot.lifetime = .keepAlways
         add(shot)
     }
