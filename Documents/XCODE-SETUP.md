@@ -54,12 +54,12 @@ Synchronized folders may treat the per-directory `README.md` files as bundle res
 ```bash
 # iPad build
 xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
-  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M4)' build
+  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' build
 # tvOS build
 xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
   -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)' build
 # unit tests
 xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
-  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M4)' test
+  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' test
 ```
 (Adjust simulator names to `xcrun simctl list devices available`.)

@@ -6,7 +6,7 @@ description: Build, launch, and drive Hot Wheels v Human in the iPad simulator t
 # Verifying Hot Wheels v Human
 
 ## Build / launch
-- iPad sim: `iPad Pro 11-inch (M4)` = `F11899C4-D27C-4878-9AF0-BDDE4C72D549`; tvOS sim: `Apple TV 4K (3rd generation)` = `740ECE7B-E146-4AD2-BE24-B30D93AA5DC1`.
+- iPad sim: `iPad Pro 11-inch (M5)` = `DDC5317E-2A59-4F3A-8F09-EEAAD7523147`; tvOS sim: `Apple TV 4K (3rd generation)` = `51F3A534-E242-4C74-A928-5ECF7A5C1441`.
 - Build commands: `Documents/XCODE-SETUP.md` §8. Keep BOTH destinations green.
 - Static screens: `xcrun simctl launch com.nathanfennel.Hot-Wheels-v-Human <dev-arg>` then `xcrun simctl io <id> screenshot`. Dev args live at the top of `App/RootView.swift` (`--solo-arena`, `--race-on-tv`, `--trackbuilder`, …) and skip the profile gate.
 
