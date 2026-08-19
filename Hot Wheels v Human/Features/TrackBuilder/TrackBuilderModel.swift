@@ -15,10 +15,13 @@ import SwiftData
 final class TrackBuilderModel {
 
     private(set) var types: [PieceType] = [.startGate]
+    /// Picked world (ArenaEnvironment theme name); nil = surprise me.
+    private(set) var worldTheme: String?
 
     var blueprint: TrackBlueprint {
-        TrackBlueprint(trackId: UUID(), lanes: 2,
-                       segments: types.enumerated().map { SegmentSpec(index: $0.offset, type: $0.element) })
+        var bp = makeBlueprint(types)
+        bp.worldTheme = worldTheme
+        return bp
     }
 
     var layout: TrackLayout { TrackLayoutSolver.solve(blueprint) }
@@ -63,6 +66,14 @@ final class TrackBuilderModel {
     /// "Start from one of these" — replace the build with a preset track.
     func load(preset: TrackBlueprint) {
         types = preset.segments.map(\.type)
+        worldTheme = preset.worldTheme
+        SoundBank.shared.play("confirm_sparkle")
+    }
+
+    /// World picker: nil = surprise me (trackId hash picks).
+    func selectWorld(_ name: String?) {
+        guard worldTheme != name else { return }
+        worldTheme = name
         SoundBank.shared.play("confirm_sparkle")
     }
 

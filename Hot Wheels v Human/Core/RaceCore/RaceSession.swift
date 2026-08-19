@@ -41,6 +41,8 @@ final class RaceSession {
     /// Which track is (about to be) built — ArenaView themes the
     /// environment from this, so a TV series re-themes per race.
     private(set) var trackID: UUID?
+    /// The blueprint's picked world, if the kid chose one in the builder.
+    private(set) var worldTheme: String?
     /// Ground-plane bounds of the whole track — ArenaEnvironment keeps
     /// its scattered props out of this rect.
     private(set) var trackFootprint: FootprintRect?
@@ -103,6 +105,7 @@ final class RaceSession {
         Self.drillLogStarted = true
         self.config = config
         trackID = blueprint.trackId
+        worldTheme = blueprint.worldTheme
         let layout = TrackLayoutSolver.solve(blueprint)
         let rects = layout.pieces.map(\.worldFootprint)
         trackFootprint = FootprintRect(

@@ -16,18 +16,57 @@ import RealityKit
 struct ArenaEnvironmentTests {
 
     /// Starter-track ids are `90000000-…-00000000000N`, so the byte sum is
-    /// 0x90 + N and the theme is that mod 4. Kids remember which track is
-    /// the space one — this pins the mapping against a reshuffle.
+    /// 0x90 + N and the theme is that mod `hashedThemeCount`. Kids remember
+    /// which track is the space one — this pins the mapping against a
+    /// reshuffle AND against new pickable worlds shifting the modulus.
     @Test func starterTrackThemesAreStable() {
         func theme(_ n: Int) -> String {
             let id = UUID(uuidString: String(format: "90000000-0000-0000-0000-%012d", n))!
-            return ArenaEnvironment.theme(for: id).name
+            return ArenaEnvironment.theme(named: nil, for: id).name
         }
+        #expect(ArenaEnvironment.hashedThemeCount == 4)
         #expect(theme(1) == "day")        // Wiggle Worm
         #expect(theme(2) == "sunset")     // Mount Kaboom
         #expect(theme(3) == "space")      // Loopy Louie
         #expect(theme(4) == "candy")      // Jumpy Junction
-        #expect(ArenaEnvironment.theme(for: nil).name == "day")   // lobby
+        #expect(ArenaEnvironment.theme(named: nil, for: nil).name == "day")   // lobby
+    }
+
+    /// A picked world beats the hash; a bogus name falls back to it.
+    @Test func pickedWorldOverridesHash() {
+        let spaceID = UUID(uuidString: "90000000-0000-0000-0000-000000000003")!
+        #expect(ArenaEnvironment.theme(named: "city", for: spaceID).name == "city")
+        #expect(ArenaEnvironment.theme(named: "no-such-world", for: spaceID).name == "space")
+    }
+
+    /// Every prop a theme names must exist as a converted USDZ — a typo'd
+    /// model name fails silently at spawn (try? on the load) and a world
+    /// quietly loses its buildings.
+    @Test func allThemePropsHaveModels() async {
+        for theme in ArenaEnvironment.themes {
+            for name in Set(theme.props) {
+                let entity = try? await AssetStore.shared.entity(named: name)
+                #expect(entity != nil, "\(theme.name): missing model \(name)")
+            }
+        }
+    }
+
+    /// City worlds are built, not spilled: buildings sit on the street
+    /// grid, squared to a quarter turn, and never two to a cell.
+    @Test func cityBuildingsSnapToGridAndFaceSquare() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "city",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let props = env.children.filter { $0.name.hasPrefix("city-") }
+        #expect(props.count > 20)
+        var cells = Set<SIMD2<Int>>()
+        for prop in props {
+            let cell = SIMD2(Int((prop.position.x / 0.7).rounded()),
+                             Int((prop.position.z / 0.7).rounded()))
+            #expect(abs(prop.position.x - Float(cell.x) * 0.7) < 0.001)
+            #expect(abs(prop.position.z - Float(cell.y) * 0.7) < 0.001)
+            #expect(cells.insert(cell).inserted, "two props in cell \(cell)")
+        }
     }
 
     /// Coins turn, everything else holds still — a spinning traffic cone
@@ -35,7 +74,7 @@ struct ArenaEnvironmentTests {
     /// checked here is that the right props get tagged.
     @Test func onlyCoinPropsCarryTheSpin() async {
         let spaceID = UUID(uuidString: "90000000-0000-0000-0000-000000000003")!
-        #expect(ArenaEnvironment.theme(for: spaceID).name == "space")
+        #expect(ArenaEnvironment.theme(named: nil, for: spaceID).name == "space")
 
         let env = await ArenaEnvironment.make(
             for: spaceID,

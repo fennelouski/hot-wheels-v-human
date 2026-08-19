@@ -18,6 +18,9 @@ nonisolated struct TrackBlueprint: Codable, Equatable, Sendable {
     var trackId: UUID
     var lanes: Int
     var segments: [SegmentSpec]
+    /// Picked world (ArenaEnvironment theme name, e.g. "city"). Additive
+    /// optional — old peers decode; nil = auto-pick from trackId hash.
+    var worldTheme: String?
 
     /// Phase 1 hardcoded demo: straight–loop–curve–finish (BUILD-ORDER P1 DoD).
     static let demo = TrackBlueprint(

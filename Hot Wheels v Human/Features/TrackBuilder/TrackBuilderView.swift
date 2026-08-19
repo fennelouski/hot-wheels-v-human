@@ -19,6 +19,7 @@ struct TrackBuilderView: View {
     @State private var savedName: String?
     @State private var previewing = false
     @State private var mapExpanded = false
+    @State private var showingWorlds = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
@@ -26,6 +27,7 @@ struct TrackBuilderView: View {
             HStack(spacing: 16) {
                 Label("Track Builder", systemImage: "wrench.and.screwdriver.fill")
                     .font(.system(size: 36, weight: .heavy, design: .rounded))
+                worldChip
                 Spacer()
                 Text("\(model.types.count) \(model.types.count == 1 ? "piece" : "pieces")")
                     .font(.system(size: 22, weight: .semibold, design: .rounded))
@@ -43,8 +45,12 @@ struct TrackBuilderView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 20))
                 .overlay(alignment: .topTrailing) { miniMap }
                 .overlay(alignment: .bottom) {
-                    // Fresh canvas → offer the starter tracks.
-                    if model.types == [.startGate] {
+                    // World strip beats the preset row — it only shows
+                    // while the kid is actively picking a world.
+                    if showingWorlds {
+                        worldRow
+                    } else if model.types == [.startGate] {
+                        // Fresh canvas → offer the starter tracks.
                         presetRow
                     }
                 }
@@ -83,6 +89,69 @@ struct TrackBuilderView: View {
         .racePreview(isPresented: $previewing,
                      designs: [appModel.stampedRaceDesign()],
                      blueprint: model.blueprint)
+    }
+
+    /// Shows the current world; tapping opens/closes the world strip over
+    /// the 3D scene, where each pick rebuilds the world live.
+    private var worldChip: some View {
+        let theme = model.worldTheme.flatMap { name in
+            ArenaEnvironment.themes.first { $0.name == name }
+        }
+        return Button {
+            withAnimation(.snappy) { showingWorlds.toggle() }
+        } label: {
+            HStack(spacing: 8) {
+                Image(systemName: theme?.symbol ?? "sparkles")
+                    .font(.system(size: 24, weight: .bold))
+                // "Pick a World!" until one is picked — "Surprise" said
+                // nothing about what the button does and nobody tapped it.
+                Text(theme?.displayName ?? "Pick a World!")
+                    .font(.system(size: 20, weight: .heavy, design: .rounded))
+            }
+            .padding(.horizontal, 18)
+            .frame(height: 60)
+            .background(.white.opacity(showingWorlds ? 0.28 : 0.12), in: Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("World: \(theme?.displayName ?? "Surprise me")")
+        .accessibilityIdentifier("worldChip")
+    }
+
+    /// One button per world; the picked one glows. Stays open so a kid can
+    /// tap through every world and watch the scene change behind it.
+    private var worldRow: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                worldCard(name: nil, label: "Surprise", symbol: "sparkles")
+                ForEach(ArenaEnvironment.themes, id: \.name) { theme in
+                    worldCard(name: theme.name, label: theme.displayName,
+                              symbol: theme.symbol)
+                }
+            }
+            .padding(.horizontal, 16)
+        }
+        .padding(.bottom, 16)
+    }
+
+    private func worldCard(name: String?, label: String, symbol: String) -> some View {
+        let picked = model.worldTheme == name
+        return Button {
+            model.selectWorld(name)
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: symbol)
+                    .font(.system(size: 30, weight: .bold))
+                    .frame(height: 36)
+                Text(label)
+                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+            }
+            .frame(width: 108, height: 84)
+            .background(picked ? .yellow.opacity(0.35) : .black.opacity(0.45),
+                        in: RoundedRectangle(cornerRadius: 14))
+        }
+        .buttonStyle(.plain)
     }
 
     /// Overhead schematic in the corner of the 3D scene. A Button, not a

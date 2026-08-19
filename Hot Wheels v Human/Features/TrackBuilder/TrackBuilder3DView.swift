@@ -72,13 +72,12 @@ struct TrackBuilder3DView: View {
             camera.name = "builder-camera"
             content.add(camera)
 
-            // Fixed day theme (nil id), no props (nil footprint) — sky +
-            // ground so the track sits in a place, not a void. On the
-            // calling task: Task.detached inside RealityView closures
-            // silently never resumes.
-            Task { @MainActor in
-                root.addChild(await ArenaEnvironment.make(for: nil, around: nil))
-            }
+            // World holder — filled/rebuilt in `update` when the kid picks
+            // a world. (Task, not Task.detached: detached inside RealityView
+            // closures silently never resumes.)
+            let world = Entity()
+            world.name = "world-empty"
+            root.addChild(world)
         } update: { content in
             guard let root = content.entities.first(where: { $0.name == "builder-root" }),
                   let camera = content.entities.first(where: { $0.name == "builder-camera" })
@@ -105,6 +104,31 @@ struct TrackBuilder3DView: View {
             // Aim at the track's center, auto-fit the distance, apply the
             // kid's orbit + zoom on top.
             let rects = layout.pieces.map(\.worldFootprint)
+            // Rebuild the world when the picked theme changes, scattering
+            // its buildings/trees around the track as it is right now.
+            // ponytail: keyed on theme only — pieces added afterwards can
+            // overlap props (no collision, purely visual) until the kid
+            // re-taps the world chip; re-key on the track hash if it bugs
+            // anyone.
+            let worldKey = "world-\(model.worldTheme ?? "auto")"
+            if let world = root.children.first(where: {
+                    $0.name.hasPrefix("world-") || $0.name.hasPrefix("building-world-") }),
+               world.name != worldKey, world.name != "building-\(worldKey)" {
+                world.name = "building-\(worldKey)"
+                let footprint = FootprintRect(
+                    minX: rects.map(\.minX).min() ?? -1,
+                    minZ: rects.map(\.minZ).min() ?? -1,
+                    maxX: rects.map(\.maxX).max() ?? 1,
+                    maxZ: rects.map(\.maxZ).max() ?? 1)
+                let theme = model.worldTheme
+                Task { @MainActor in
+                    let env = await ArenaEnvironment.make(
+                        for: nil, theme: theme, around: theme == nil ? nil : footprint)
+                    world.children.removeAll()
+                    world.addChild(env)
+                    world.name = worldKey
+                }
+            }
             let minX = rects.map(\.minX).min() ?? 0
             let maxX = rects.map(\.maxX).max() ?? 0
             let minZ = rects.map(\.minZ).min() ?? 0

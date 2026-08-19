@@ -93,9 +93,20 @@ struct ModelTests {
         #expect(blueprint.lanes == 2)
         #expect(blueprint.segments.map(\.type) ==
                 [.startGate, .straight, .loop, .curve90R, .finishGate])
+        // No worldTheme key (pre-worlds peer) → nil, auto-pick.
+        #expect(blueprint.worldTheme == nil)
         // And back out with identical shape.
         let reencoded = try JSONDecoder().decode(
             TrackBlueprint.self, from: JSONEncoder().encode(blueprint))
+        #expect(reencoded == blueprint)
+    }
+
+    @Test func blueprintWorldThemeRoundTrips() throws {
+        var blueprint = TrackBlueprint.demo
+        blueprint.worldTheme = "city"
+        let reencoded = try JSONDecoder().decode(
+            TrackBlueprint.self, from: JSONEncoder().encode(blueprint))
+        #expect(reencoded.worldTheme == "city")
         #expect(reencoded == blueprint)
     }
 

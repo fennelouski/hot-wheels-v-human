@@ -29,6 +29,28 @@ This folder holds original downloaded asset packs. Converted, app-ready USDZ fil
 - **Reaction-cam clips** (`DriverPoser.clipAssets`), all converted from `character-male-a.glb` because the donor is arbitrary: `reaction-boost` ← `emote-yes`, `reaction-crash` ← `die`, `reaction-cheer` ← `attack-melee-right`. These replaced the Quaternius `driver-idle/-boost/-crash/-cheer` set (retired — the PiP now shows whoever is actually driving). The base pose is each character's own `-drive` USDZ, so no fourth donor is needed.
   **Pick reaction clips on what moves above the waist** — the PiP crops to head-and-shoulders, so a clip's name lies about how it reads. Measured peak joint swing across all 32 (`--action` candidates): `jump` is a 21° leg tuck with 5° of arm and is invisible in that crop, `sit`/`crouch`/`holding-*`/`drive` are static single-pose clips (0°), and the ones that actually read are `die` (arm 151°, root 90°), `attack-melee-*` (arm 164°, torso 61°), `pick-up` (arm 98°, torso 60° — but it bends *down*), `emote-no` (head 60°) and `emote-yes` (head 30°). `drive` being a static pose is why the PiP driver holds still between reactions: that's the seated pose, not a bug.
 
+### 5. City & nature packs — the pickable "worlds" (added 2026-08-19)
+All Kenney, all **CC0** (License.txt in each), GLB format (nature kit: `Models/GLTF format`), all converted at **scale 0.3** (a suburban house ≈ 0.39 m wide vs the 0.18 m cars — chunky toy-city proportions; 0.2 made houses car-sized):
+- `3DModels/Source/kenney_city-kit-suburban/` — https://kenney.nl/assets/city-kit-suburban — 21 houses (`building-type-a…u` → `city-house-a…u.usdz`), `tree-large/small`, `fence`, `planter` (→ `city-*`). Powers the **Hometown** world.
+- `3DModels/Source/kenney_city-kit-commercial/` — https://kenney.nl/assets/city-kit-commercial — 14 shops (`building-a…n` → `city-shop-a…n`) + 5 skyscrapers (→ `city-skyscraper-a…e`). Powers **Big City**.
+- `3DModels/Source/kenney_city-kit-roads/` — https://kenney.nl/assets/city-kit-roads — only `light-curved` → `city-streetlight` converted so far; 95 more models (roads, signs, poles) ready if streets ever get laid for real.
+- `3DModels/Source/kenney_nature-kit/` — https://kenney.nl/assets/nature-kit — trees/flowers/mushrooms/stump (→ `park-*`). Powers **Park**. 300+ more models (cliffs, camps, canoes) in reserve.
+
+### 6. World packs, round two (added 2026-08-19) — all Kenney, all CC0
+Each powers one `ArenaEnvironment` world; converted names take the world's prefix. **Kits do NOT share a unit scale** — each was converted at whatever makes it sit right next to the 0.18 m cars (checked against printed DIMENSIONS):
+- `kenney_racing-kit/` (GLTF folder) — **Speedway** (`race-*`): grandstands/billboards/pits at **0.6**, raceCar props at **0.15**.
+- `kenney_castle-kit/` + `kenney_fantasy-town-kit/` — **Castle** (`castle-*`) at **0.3**: siege engines, tower, flags + fantasy carts/fountain/hedge/lantern. (Both kits are mostly modular wall/roof parts — only complete objects converted.)
+- `kenney_holiday-kit/` — **Winter** (`winter-*`) at **0.3**: snow trees, snowman, reindeer, presents, nutcracker, gingerbread.
+- `kenney_pirate-kit/` — **Pirate Cove** (`pirate-*`) at **0.08** (huge native units): complete ships, towers, palms, chest/cannon/barrels.
+- `kenney_graveyard-kit/` — **Spooky** (`spooky-*`) at **0.3**: crypts, gravestones, carved pumpkins, ghost/skeleton/vampire/zombie statues.
+- `kenney_space-kit/` (GLTF folder) — upgrades the hashed **Space** theme (`space-*`) at **0.15**: speeders, meteors, craters, crystals, alien, astronauts.
+- `kenney_minigolf-kit/` — **Putt-Putt** (`golf-*`) at **0.3** (balls at **1.5**): windmill, castle, gates, obstacles, flags.
+- `kenney_food-kit/` — **Snack Land** (`food-*`) at **0.8** (giant snacks are the point); a few also join the Candy theme.
+- `kenney_city-kit-roads/` construction props — **Construction** (`build-*`) at **1.2** (tiny native units).
+- `kenney_nature-kit/` again — **Campground** (`camp-*`) at **0.45**, **Canyon** (`canyon-*`): cliffs at **1.2**, cactus **0.6**, rocks **0.8**.
+
+Batch conversion used the standard tool per model: `blender -b -P tools/convert_glb_to_usdz.py -- in.glb out.usdz <scale>`. Theme prop lists live in `ArenaEnvironment.themes`.
+
 ### 4. `3DModels/Source/quaternius_animated_human/` — rigged driver avatar
 - Source: https://opengameart.org/content/animated-human-low-poly (Quaternius) · License: **CC0** · Formats: FBX / Blend / OBJ / DAE + skin/clothes textures
 - Rigged + animated (idle, run, jump, death…). Use the FBX or Blend for conversion. Custom driver poses (seated, steer-lean, brace, facepalm) get authored in Blender on top of this rig in Phase 6; face expressions are texture-decal swaps, not rig work.
