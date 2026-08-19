@@ -158,6 +158,10 @@ struct TrafficComponent: Component {
     var pause: Float = 0           // stop-sign timer
     var opacity: Float = 0         // fades in on spawn / out at dead ends
     var fading: Bool = false
+    /// Off-road start (a car placed on the grass): bee-line for `cell`,
+    /// then join the network and stay on it.
+    var seeking: Bool = false
+    var worldPos: SIMD3<Float> = .zero
     var seed: UInt64
 }
 
@@ -182,6 +186,32 @@ struct TrafficSystem: System {
                 entity.components.set(car)
                 entity.components.set(OpacityComponent(opacity: car.opacity))
             }
+            if car.seeking {
+                // Placed on the grass: drive straight for the nearest
+                // road cell, then merge into traffic.
+                car.opacity = min(1, car.opacity + dt * 2)
+                let target = SIMD3<Float>(Float(car.cell.x) * Self.step, -0.02,
+                                          Float(car.cell.y) * Self.step)
+                let delta = target - car.worldPos
+                let distance = simd_length(delta)
+                if distance < max(0.02, car.speed * dt) {
+                    car.seeking = false
+                    car.progress = 0
+                    if let next = Self.exit(from: car.cell, cells: car.cells,
+                                            avoid: nil, seed: &car.seed) {
+                        car.direction = next
+                    } else {
+                        car.fading = true
+                    }
+                } else {
+                    let heading = delta / distance
+                    car.worldPos += heading * (car.speed * dt)
+                    entity.position = car.worldPos
+                    entity.orientation = simd_quatf(
+                        angle: atan2(heading.x, heading.z), axis: [0, 1, 0])
+                    continue
+                }
+            }
             let heading = SIMD3<Float>(Float(car.direction.x), 0, Float(car.direction.y))
             let lane = SIMD3<Float>(heading.z, 0, -heading.x) * -0.14  // right side
             let base = SIMD3<Float>(Float(car.cell.x) * Self.step, -0.02,
@@ -193,14 +223,12 @@ struct TrafficSystem: System {
             if car.fading {
                 car.opacity = max(0, car.opacity - dt * 2)
                 if car.opacity == 0 {
-                    // Reappear somewhere else on the network.
-                    car.seed = car.seed &* 6364136223846793005 &+ 1442695040888963407
-                    let cells = Array(car.cells)
-                    guard !cells.isEmpty else { continue }
-                    car.cell = cells[Int(car.seed >> 33) % cells.count]
-                    car.direction = Self.exit(from: car.cell, cells: car.cells,
-                                              avoid: nil, seed: &car.seed)
-                        ?? SIMD2(0, 1)
+                    // The SAME car reappears at the start of another
+                    // road (a dead-end tile) and drives in from there.
+                    guard let start = Self.roadStart(in: car.cells,
+                                                     seed: &car.seed) else { continue }
+                    car.cell = start.cell
+                    car.direction = start.direction
                     car.progress = 0
                     car.fading = false
                 }
@@ -239,6 +267,38 @@ struct TrafficSystem: System {
     private static func degree(of cell: SIMD2<Int32>,
                                cells: Set<SIMD2<Int32>>) -> Int {
         compass.filter { cells.contains(cell &+ $0) }.count
+    }
+
+    /// Where a car enters the network: a road START (dead-end cell,
+    /// degree 1) facing its one neighbour, so cars appear at the
+    /// beginning of a road and drive in. Falls back to any connected
+    /// cell when the network is all loops; nil if there's no road at
+    /// all worth driving (isolated cells don't count).
+    static func roadStart(in cells: Set<SIMD2<Int32>>,
+                          seed: inout UInt64) -> (cell: SIMD2<Int32>,
+                                                  direction: SIMD2<Int32>)? {
+        let connected = cells.filter { degree(of: $0, cells: cells) >= 1 }
+        guard !connected.isEmpty else { return nil }
+        let ends = connected.filter { degree(of: $0, cells: cells) == 1 }
+        let pool = Array(ends.isEmpty ? connected : ends)
+        seed = seed &* 6364136223846793005 &+ 1442695040888963407
+        let cell = pool[Int(seed >> 33) % pool.count]
+        guard let direction = exit(from: cell, cells: cells,
+                                   avoid: nil, seed: &seed) else { return nil }
+        return (cell, direction)
+    }
+
+    /// The road cell nearest a world position — where an off-road car
+    /// should drive to join traffic. Nil when there are no roads.
+    static func nearestCell(to position: SIMD3<Float>,
+                            in cells: Set<SIMD2<Int32>>) -> SIMD2<Int32>? {
+        let connected = cells.filter { degree(of: $0, cells: cells) >= 1 }
+        return connected.min { a, b in
+            let pa = SIMD2<Float>(Float(a.x), Float(a.y)) * step
+            let pb = SIMD2<Float>(Float(b.x), Float(b.y)) * step
+            let p = SIMD2<Float>(position.x, position.z)
+            return simd_length_squared(pa - p) < simd_length_squared(pb - p)
+        }
     }
 
     /// Pick where to go from `cell`, never doubling back (`avoid`).
@@ -648,7 +708,13 @@ enum ArenaEnvironment {
             }
         }
         if !scenery.isEmpty {
-            root.addChild(await SceneryPlacer.spawn(scenery))
+            // Placed vehicles drive the same street grid the world laid
+            // (plus any roads the kid placed by hand).
+            let autoStreets: Set<SIMD2<Int32>> =
+                (theme.cityBlocks && !empty && footprint != nil)
+                    ? autoStreetCells(around: footprint!, clearance: theme.clearance)
+                    : []
+            root.addChild(await SceneryPlacer.spawn(scenery, autoStreets: autoStreets))
         }
         return root
     }
@@ -707,16 +773,10 @@ enum ArenaEnvironment {
         }
         guard tileProtos["street-straight"] != nil else { return }
 
-        func gridLine(_ n: Int) -> Bool { ((n % 3) + 3) % 3 == 0 }
         let iRange = Int(((footprint.minX - margin) / step).rounded(.down))
             ... Int(((footprint.maxX + margin) / step).rounded(.up))
         let jRange = Int(((footprint.minZ - margin) / step).rounded(.down))
             ... Int(((footprint.maxZ + margin) / step).rounded(.up))
-
-        // First pass: which cells actually hold street — a grid line cell
-        // that ISN'T punched out by the track or the region edge. The
-        // second pass reads this connectivity so every tile is the right
-        // piece: crossroad, tee, bend, straight, or a proper dead end.
         func insideTrack(_ i: Int, _ j: Int) -> Bool {
             let x = Float(i) * step
             let z = Float(j) * step
@@ -725,12 +785,7 @@ enum ArenaEnvironment {
                 && z > footprint.minZ - theme.clearance
                 && z < footprint.maxZ + theme.clearance
         }
-        var streets = Set<SIMD2<Int32>>()
-        for i in iRange {
-            for j in jRange where (gridLine(i) || gridLine(j)) && !insideTrack(i, j) {
-                streets.insert(SIMD2(Int32(i), Int32(j)))
-            }
-        }
+        let streets = autoStreetCells(around: footprint, clearance: theme.clearance)
 
         var entityCount = 0
         for i in iRange {
@@ -780,24 +835,56 @@ enum ArenaEnvironment {
             }
         }
 
-        // Traffic: little cars driving the streets they were laid on.
+        // Traffic: little cars driving the streets they were laid on,
+        // entering the network at road STARTS (dead-end tiles) so every
+        // car appears at the beginning of some road and drives in.
         if !theme.traffic.isEmpty, streets.count > 8 {
             TrafficComponent.registerComponent()
             TrafficSystem.registerSystem()
-            let cells = Array(streets)
             let carCount = min(8, max(2, streets.count / 20))
             for index in 0..<carCount {
                 let model = theme.traffic[index % theme.traffic.count]
                 guard let car = try? await AssetStore.shared.entity(named: model) else { continue }
-                let start = cells[Int(dice.next01() * 0.999 * Float(cells.count))]
+                var seed = dice.seed &+ UInt64(index) &* 977
+                guard let start = TrafficSystem.roadStart(in: streets,
+                                                          seed: &seed) else { break }
                 car.components.set(TrafficComponent(
-                    cells: streets, cell: start, direction: SIMD2(0, 1),
-                    speed: theme.trafficSpeed,
-                    seed: dice.seed &+ UInt64(index)))
+                    cells: streets, cell: start.cell, direction: start.direction,
+                    speed: theme.trafficSpeed, seed: seed))
                 car.components.set(OpacityComponent(opacity: 0))
                 root.addChild(car)
             }
         }
+    }
+
+    /// The auto-laid street network for a cityBlocks world, in 0.7 m grid
+    /// cells: every third grid line, minus where the track punches
+    /// through. Deterministic — the builder recomputes it to give
+    /// hand-placed cars the same map the arena drives on.
+    static func autoStreetCells(around footprint: FootprintRect,
+                                clearance: Float) -> Set<SIMD2<Int32>> {
+        let step: Float = 0.7
+        let margin: Float = 5.0
+        func gridLine(_ n: Int) -> Bool { ((n % 3) + 3) % 3 == 0 }
+        var streets = Set<SIMD2<Int32>>()
+        let iRange = Int(((footprint.minX - margin) / step).rounded(.down))
+            ... Int(((footprint.maxX + margin) / step).rounded(.up))
+        let jRange = Int(((footprint.minZ - margin) / step).rounded(.down))
+            ... Int(((footprint.maxZ + margin) / step).rounded(.up))
+        for i in iRange {
+            for j in jRange where gridLine(i) || gridLine(j) {
+                let x = Float(i) * step
+                let z = Float(j) * step
+                let insideTrack = x > footprint.minX - clearance
+                    && x < footprint.maxX + clearance
+                    && z > footprint.minZ - clearance
+                    && z < footprint.maxZ + clearance
+                if !insideTrack {
+                    streets.insert(SIMD2(Int32(i), Int32(j)))
+                }
+            }
+        }
+        return streets
     }
 
     /// Which street tile a cell needs, from which neighbours are street.

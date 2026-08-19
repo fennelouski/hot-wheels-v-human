@@ -90,16 +90,20 @@ final class TrackBuilderModel {
         SoundBank.shared.play("confirm_sparkle")
     }
 
-    /// Street/sidewalk tiles tile: they snap to a half-tile grid and
-    /// place un-rotated so pieces butt cleanly; people place un-rotated
-    /// so their patrol axis is predictable. Everything else lands on a
-    /// random quarter turn — tidy but not stamped.
+    /// Tiles tile: street pieces snap to the FULL 0.7 m traffic grid
+    /// (so hand-laid roads join the street graph placed cars drive),
+    /// paths to a half-tile grid; both place un-rotated so pieces butt
+    /// cleanly. People place un-rotated so their patrol axis is
+    /// predictable. Everything else lands on a random quarter turn —
+    /// tidy but not stamped.
     private static func isTile(_ model: String) -> Bool {
         model.hasPrefix("street-") || model.hasPrefix("city-path")
     }
 
     private static func snapped(_ value: Float, model: String) -> Float {
-        Self.isTile(model) ? (value / 0.35).rounded() * 0.35 : value
+        if model.hasPrefix("street-") { return (value / 0.7).rounded() * 0.7 }
+        if model.hasPrefix("city-path") { return (value / 0.35).rounded() * 0.35 }
+        return value
     }
 
     /// Drop the selected decoration where the kid tapped.

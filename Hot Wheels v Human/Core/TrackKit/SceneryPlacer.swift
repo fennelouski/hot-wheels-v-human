@@ -165,6 +165,27 @@ enum SceneryPlacer {
     /// they stroll a little patrol line from where the kid puts them.
     static func isPerson(_ model: String) -> Bool { model.hasPrefix("person-") }
 
+    /// Placeable vehicles — placed on a road they join traffic; placed on
+    /// the grass they drive to the nearest road first; no roads at all
+    /// and they sit parked where the kid left them.
+    static let vehicles: Set<String> = [
+        "taxi", "police", "ambulance", "sedan-sports", "suv", "truck",
+        "race-car-red", "race-car-green",
+    ]
+    static func isVehicle(_ model: String) -> Bool { vehicles.contains(model) }
+
+    /// Street cells implied by hand-placed road tiles (street-* snap to
+    /// the 0.7 m traffic grid) — unioned with a world's auto-laid grid so
+    /// traffic drives the kid's roads too.
+    static func handStreetCells(in items: [SceneryItem]) -> Set<SIMD2<Int32>> {
+        var cells = Set<SIMD2<Int32>>()
+        for item in items where item.model.hasPrefix("street-") {
+            cells.insert(SIMD2(Int32((item.x / 0.7).rounded()),
+                               Int32((item.z / 0.7).rounded())))
+        }
+        return cells
+    }
+
     /// One resolver for every placeable thing: kit models come from the
     /// AssetStore, sky-stuff is generated. (Tests use this too — it is
     /// the definition of "this palette entry actually works".)
@@ -175,14 +196,21 @@ enum SceneryPlacer {
         return try? await (assets ?? AssetStore.shared).entity(named: model)
     }
 
+    /// `autoStreets` is the world's own road grid (empty for worlds
+    /// without one); hand-laid street tiles in `items` extend it, and
+    /// placed vehicles drive the union.
     static func spawn(_ items: [SceneryItem], tappable: Bool = false,
                       highlight: Int? = nil,
+                      autoStreets: Set<SIMD2<Int32>> = [],
                       assets: AssetStore? = nil) async -> Entity {
         let assets = assets ?? AssetStore.shared
         AmbientMotionComponent.registerComponent()
         AmbientMotionSystem.registerSystem()
         WalkerComponent.registerComponent()
         WalkerSystem.registerSystem()
+        TrafficComponent.registerComponent()
+        TrafficSystem.registerSystem()
+        let streets = autoStreets.union(handStreetCells(in: items))
         let root = Entity()
         root.name = name(for: items)
         for (index, item) in items.enumerated() {
@@ -208,6 +236,18 @@ enum SceneryPlacer {
                 // (Held items stand still so the kid can grab them.)
                 entity.components.set(WalkerComponent(
                     origin: entity.position, yaw: item.yaw))
+            } else if isVehicle(item.model),
+                      let target = TrafficSystem.nearestCell(to: entity.position,
+                                                             in: streets) {
+                // Drive to the nearest road, then join traffic. (No roads
+                // anywhere → the guard fails and the car stays parked.)
+                var seed = UInt64(truncatingIfNeeded: item.model.hashValue)
+                    &+ UInt64(index) &* 7919
+                seed = seed &* 6364136223846793005 &+ 1442695040888963407
+                entity.components.set(TrafficComponent(
+                    cells: streets, cell: target, direction: SIMD2(0, 1),
+                    seeking: true, worldPos: entity.position, seed: seed))
+                entity.components.set(OpacityComponent(opacity: 0))
             } else {
                 AmbientMotion.apply(to: entity, model: item.model,
                                     vary: Float(index % 7) / 7)

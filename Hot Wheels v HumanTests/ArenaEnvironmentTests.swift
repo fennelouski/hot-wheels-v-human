@@ -129,6 +129,47 @@ struct ArenaEnvironmentTests {
         }
     }
 
+    /// Cars respawn at road STARTS: a dead-end cell, driving toward its
+    /// one neighbour — never parachuted into the middle of a block.
+    @Test func trafficEntersAtRoadStarts() {
+        // A straight road: (0,0)…(0,3). Starts are its two ends.
+        let road: Set<SIMD2<Int32>> = [SIMD2(0, 0), SIMD2(0, 1),
+                                       SIMD2(0, 2), SIMD2(0, 3)]
+        var seed: UInt64 = 42
+        for _ in 0..<10 {
+            let start = TrafficSystem.roadStart(in: road, seed: &seed)
+            #expect(start != nil)
+            #expect(start!.cell == SIMD2(0, 0) || start!.cell == SIMD2(0, 3))
+            #expect(road.contains(start!.cell &+ start!.direction))
+        }
+        // Isolated cells aren't roads — nobody spawns on them.
+        #expect(TrafficSystem.roadStart(in: [SIMD2(9, 9)], seed: &seed) == nil)
+    }
+
+    /// A car placed on the grass gets a seek target: the nearest
+    /// connected road cell; with no roads it stays a parked prop.
+    @Test func placedCarsSeekTheNearestRoad() async {
+        let road: Set<SIMD2<Int32>> = [SIMD2(0, 0), SIMD2(0, 1), SIMD2(0, 2)]
+        let items = [SceneryItem(model: "taxi", x: 2, z: 0.7, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items, autoStreets: road)
+        let car = root.children[0]
+        let traffic = car.components[TrafficComponent.self]
+        #expect(traffic?.seeking == true)
+        #expect(traffic?.cell == SIMD2(0, 1))     // nearest cell to (2, 0.7)
+        // No roads → parked, no traffic behaviour.
+        let parked = await SceneryPlacer.spawn(items)
+        #expect(parked.children[0].components[TrafficComponent.self] == nil)
+    }
+
+    /// Hand-laid street tiles extend the traffic graph (0.7 m snap).
+    @Test func handLaidTilesJoinTheStreetGraph() {
+        let items = [SceneryItem(model: "street-straight", x: 1.4, z: 0, yaw: 0),
+                     SceneryItem(model: "street-end", x: 2.1, z: 0, yaw: 0),
+                     SceneryItem(model: "city-house-a", x: 0.7, z: 0.7, yaw: 0)]
+        let cells = SceneryPlacer.handStreetCells(in: items)
+        #expect(cells == [SIMD2(2, 0), SIMD2(3, 0)])
+    }
+
     /// Placed sky-stuff floats and turns; a nebula never spins (it's a
     /// billboard — spinning would fight the facing).
     @Test func placedPlanetsFloatAndTurn() async {

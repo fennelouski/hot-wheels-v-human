@@ -104,6 +104,39 @@ final class WorldPickerUITests: XCTestCase {
     }
 
     @MainActor
+    func testPlacedCarsHeadForTheRoad() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--trackbuilder"]
+        app.launch()
+        let straight = app.buttons.containing(
+            NSPredicate(format: "label CONTAINS 'Straight'")).firstMatch
+        XCTAssertTrue(straight.waitForExistence(timeout: 10))
+        for _ in 0..<2 { straight.tap() }
+
+        app.buttons["worldChip"].tap()
+        let city = app.buttons.containing(
+            NSPredicate(format: "label CONTAINS 'Big City'")).firstMatch
+        XCTAssertTrue(city.waitForExistence(timeout: 5))
+        city.tap()
+        sleep(4)
+        app.buttons["worldChip"].tap()   // close the strip
+
+        app.buttons["decorateToggle"].tap()
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Cars'"))
+            .firstMatch.tap()
+        let taxi = app.buttons["taxi"]
+        XCTAssertTrue(taxi.waitForExistence(timeout: 5))
+        taxi.tap()
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.42, dy: 0.42)).tap()
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.6, dy: 0.35)).tap()
+        sleep(6)   // long enough to seek the road and start driving
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "placed-cars"
+        shot.lifetime = .keepAlways
+        add(shot)
+    }
+
+    @MainActor
     func testEmptyWorldAndTrain() throws {
         let app = XCUIApplication()
         app.launchArguments = ["--trackbuilder"]

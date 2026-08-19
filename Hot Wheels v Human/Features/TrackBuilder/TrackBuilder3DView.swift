@@ -239,9 +239,27 @@ struct TrackBuilder3DView: View {
                 decor.name = "building-\(decorKey)"
                 let items = model.scenery
                 let moving = model.movingIndex
+                // Placed cars need the world's road grid to drive on —
+                // recomputed here because the decor holder rebuilds
+                // independently of the world holder.
+                var autoStreets = Set<SIMD2<Int32>>()
+                if let themeName = model.worldTheme, !model.worldEmpty {
+                    let theme = ArenaEnvironment.theme(named: themeName, for: nil)
+                    if theme.cityBlocks {
+                        autoStreets = ArenaEnvironment.autoStreetCells(
+                            around: FootprintRect(
+                                minX: rects.map(\.minX).min() ?? -1,
+                                minZ: rects.map(\.minZ).min() ?? -1,
+                                maxX: rects.map(\.maxX).max() ?? 1,
+                                maxZ: rects.map(\.maxZ).max() ?? 1),
+                            clearance: theme.clearance)
+                    }
+                }
+                let streets = autoStreets
                 Task { @MainActor in
                     let spawned = await SceneryPlacer.spawn(
-                        items, tappable: true, highlight: moving)
+                        items, tappable: true, highlight: moving,
+                        autoStreets: streets)
                     decor.children.removeAll()
                     decor.addChild(spawned)
                     decor.name = decorKey

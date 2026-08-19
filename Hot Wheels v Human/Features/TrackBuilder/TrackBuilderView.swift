@@ -348,6 +348,9 @@ struct DecorPaletteView: View {
           "street-end", "street-square", "city-path-long", "city-path-short"]),
         ("People", "figure.walk",
          ["person-a", "person-b", "person-c", "person-d"]),
+        ("Cars", "car.fill",
+         ["taxi", "police", "ambulance", "sedan-sports", "suv", "truck",
+          "race-car-red", "race-car-green"]),
         ("Planets", "globe.americas.fill", SpaceStuff.models),
     ] + ArenaEnvironment.themes.map { theme in
         var seen = Set<String>()
