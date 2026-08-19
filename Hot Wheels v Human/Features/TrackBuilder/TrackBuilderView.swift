@@ -344,10 +344,11 @@ struct DecorPaletteView: View {
     /// one source of truth for what exists.
     static let groups: [(String, String, [String])] = [
         ("Streets", "road.lanes",
-         ["street-straight", "street-cross", "street-square",
-          "city-path-long", "city-path-short"]),
+         ["street-straight", "street-cross", "street-bend", "street-tee",
+          "street-end", "street-square", "city-path-long", "city-path-short"]),
         ("People", "figure.walk",
          ["person-a", "person-b", "person-c", "person-d"]),
+        ("Planets", "globe.americas.fill", SpaceStuff.models),
     ] + ArenaEnvironment.themes.map { theme in
         var seen = Set<String>()
         let unique = theme.props.filter { seen.insert($0).inserted }

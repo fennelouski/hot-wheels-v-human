@@ -8,7 +8,138 @@
 //  scattered theme props).
 //
 
+import CoreGraphics
 import RealityKit
+#if canImport(UIKit)
+import UIKit
+#elseif canImport(AppKit)
+import AppKit
+#endif
+
+/// Placeable sky-stuff for the Space world (any world, really): planets,
+/// a moon, nebulae. No kit ships these, so they're generated — spheres
+/// with banded CG textures, a ring disc, soft billboarded gradient quads.
+/// They float above the ground where placed and turn slowly.
+@MainActor
+enum SpaceStuff {
+    static let models = ["space-planet-a", "space-planet-b", "space-planet-rings",
+                         "space-moon", "space-nebula-pink", "space-nebula-teal"]
+
+    static func isSpaceStuff(_ model: String) -> Bool { models.contains(model) }
+
+    /// How high off the ground each floats when placed — sky-height for
+    /// the TOY scale (a skyscraper is ~1.2 m), not real-sky height, so
+    /// they hang in view of the builder camera and the chase cam.
+    static func floatHeight(_ model: String) -> Float {
+        if model.hasPrefix("space-nebula") { return 1.3 }
+        if model == "space-moon" { return 0.7 }
+        return 0.95
+    }
+
+    static func make(_ model: String) async -> Entity? {
+        switch model {
+        case "space-planet-a":
+            return await planet(radius: 0.34,
+                                colors: [(0.95, 0.55, 0.25), (0.85, 0.35, 0.20),
+                                         (0.98, 0.75, 0.45)])
+        case "space-planet-b":
+            return await planet(radius: 0.28,
+                                colors: [(0.25, 0.55, 0.90), (0.20, 0.35, 0.70),
+                                         (0.55, 0.80, 0.95)])
+        case "space-planet-rings":
+            guard let body = await planet(
+                radius: 0.26, colors: [(0.90, 0.80, 0.55), (0.80, 0.65, 0.40),
+                                       (0.96, 0.90, 0.70)]) else { return nil }
+            var ringMaterial = PhysicallyBasedMaterial()
+            ringMaterial.baseColor = .init(tint: .init(red: 0.85, green: 0.78,
+                                                       blue: 0.60, alpha: 1))
+            ringMaterial.roughness = 0.8
+            let ring = ModelEntity(
+                mesh: .generateCylinder(height: 0.006, radius: 0.48),
+                materials: [ringMaterial])
+            ring.orientation = simd_quatf(angle: 0.35, axis: [1, 0, 0.3])
+            body.addChild(ring)
+            return body
+        case "space-moon":
+            return await planet(radius: 0.16,
+                                colors: [(0.72, 0.72, 0.74), (0.55, 0.55, 0.58),
+                                         (0.82, 0.82, 0.84)])
+        case "space-nebula-pink":
+            return await nebula(red: 0.95, green: 0.45, blue: 0.75)
+        case "space-nebula-teal":
+            return await nebula(red: 0.35, green: 0.85, blue: 0.85)
+        default:
+            return nil
+        }
+    }
+
+    private static func planet(radius: Float,
+                               colors: [(CGFloat, CGFloat, CGFloat)]) async -> Entity? {
+        var material = PhysicallyBasedMaterial()
+        material.roughness = 0.9
+        if let image = bandedImage(colors: colors),
+           let texture = try? await TextureResource(
+               image: image, options: .init(semantic: .color)) {
+            material.baseColor = .init(texture: .init(texture))
+        } else {
+            material.baseColor = .init(tint: .init(red: colors[0].0, green: colors[0].1,
+                                                   blue: colors[0].2, alpha: 1))
+        }
+        return ModelEntity(mesh: .generateSphere(radius: radius),
+                           materials: [material])
+    }
+
+    /// A soft gradient quad that always faces the camera.
+    private static func nebula(red: CGFloat, green: CGFloat, blue: CGFloat) async -> Entity? {
+        var material = UnlitMaterial()
+        if let image = glowImage(red: red, green: green, blue: blue),
+           let texture = try? await TextureResource(
+               image: image, options: .init(semantic: .color)) {
+            material.color = .init(texture: .init(texture))
+        }
+        material.blending = .transparent(opacity: 1.0)
+        material.opacityThreshold = 0
+        let quad = ModelEntity(mesh: .generatePlane(width: 1.5, height: 1.0),
+                               materials: [material])
+        quad.components.set(BillboardComponent())
+        return quad
+    }
+
+    private static func bandedImage(colors: [(CGFloat, CGFloat, CGFloat)]) -> CGImage? {
+        let w = 256, h = 128
+        guard let ctx = CGContext(
+            data: nil, width: w, height: h, bitsPerComponent: 8, bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
+        for y in 0..<h {
+            // Wobbly latitude bands — reads as a cartoon gas giant.
+            let band = Int((Float(y) / 14 + 1.5 * sin(Float(y) * 0.35)).rounded())
+            let color = colors[((band % colors.count) + colors.count) % colors.count]
+            ctx.setFillColor(CGColor(red: color.0, green: color.1, blue: color.2, alpha: 1))
+            ctx.fill(CGRect(x: 0, y: y, width: w, height: 1))
+        }
+        return ctx.makeImage()
+    }
+
+    private static func glowImage(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGImage? {
+        let size = 256
+        guard let ctx = CGContext(
+            data: nil, width: size, height: size, bitsPerComponent: 8, bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue) else { return nil }
+        let colors = [CGColor(red: red, green: green, blue: blue, alpha: 0.85),
+                      CGColor(red: red, green: green, blue: blue, alpha: 0.35),
+                      CGColor(red: red, green: green, blue: blue, alpha: 0)] as CFArray
+        guard let gradient = CGGradient(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+                                        colors: colors,
+                                        locations: [0, 0.45, 1]) else { return nil }
+        let center = CGPoint(x: size / 2, y: size / 2)
+        ctx.drawRadialGradient(gradient, startCenter: center, startRadius: 0,
+                               endCenter: center, endRadius: CGFloat(size) / 2,
+                               options: [])
+        return ctx.makeImage()
+    }
+}
 
 @MainActor
 enum SceneryPlacer {
@@ -34,6 +165,16 @@ enum SceneryPlacer {
     /// they stroll a little patrol line from where the kid puts them.
     static func isPerson(_ model: String) -> Bool { model.hasPrefix("person-") }
 
+    /// One resolver for every placeable thing: kit models come from the
+    /// AssetStore, sky-stuff is generated. (Tests use this too — it is
+    /// the definition of "this palette entry actually works".)
+    static func entity(for model: String, assets: AssetStore? = nil) async -> Entity? {
+        if SpaceStuff.isSpaceStuff(model) {
+            return await SpaceStuff.make(model)
+        }
+        return try? await (assets ?? AssetStore.shared).entity(named: model)
+    }
+
     static func spawn(_ items: [SceneryItem], tappable: Bool = false,
                       highlight: Int? = nil,
                       assets: AssetStore? = nil) async -> Entity {
@@ -45,9 +186,12 @@ enum SceneryPlacer {
         let root = Entity()
         root.name = name(for: items)
         for (index, item) in items.enumerated() {
-            guard let entity = try? await assets.entity(named: item.model) else { continue }
+            guard let entity = await entity(for: item.model, assets: assets) else { continue }
             entity.name = "decor-item-\(index)"
-            entity.position = [item.x, 0, item.z]
+            // Sky-stuff floats where placed; everything else sits down.
+            let height = SpaceStuff.isSpaceStuff(item.model)
+                ? SpaceStuff.floatHeight(item.model) : 0
+            entity.position = [item.x, height, item.z]
             entity.orientation = simd_quatf(angle: item.yaw, axis: [0, 1, 0])
             if tappable {
                 let bounds = entity.visualBounds(relativeTo: entity)

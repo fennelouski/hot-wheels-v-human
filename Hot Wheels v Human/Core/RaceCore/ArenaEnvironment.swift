@@ -71,6 +71,15 @@ enum AmbientMotion {
         var motion = AmbientMotionComponent(phase: vary * 6.28)
         if model.contains("coin") {
             motion.spin = 1.1 + vary * 0.7
+        } else if model.hasPrefix("space-planet") || model == "space-moon" {
+            // Placeable planets turn slowly and drift a little.
+            motion.spin = 0.10 + vary * 0.08
+            motion.bobAmplitude = 0.03
+            motion.bobRate = 0.4 + vary * 0.3
+        } else if model.hasPrefix("space-nebula") {
+            // Billboarded — position-only motion, never fight the facing.
+            motion.bobAmplitude = 0.05
+            motion.bobRate = 0.3 + vary * 0.2
         } else if model.contains("ship") || model.contains("speeder")
                     || model.contains("ghost") || model.contains("astronaut")
                     || model == "space-racer" || model == "space-alien" {
@@ -133,6 +142,117 @@ struct WalkerSystem: System {
                 angle: outbound ? walker.yaw : walker.yaw + .pi, axis: [0, 1, 0])
             entity.components.set(walker)
         }
+    }
+}
+
+/// A little car driving the city's street grid: keeps to the right lane,
+/// pauses at intersections like a stop sign, brakes for anyone walking
+/// nearby, and when a road just ends, fades out and reappears on some
+/// other street (a toy city has no need for three-point turns).
+struct TrafficComponent: Component {
+    var cells: Set<SIMD2<Int32>>   // the street graph, in grid coords
+    var cell: SIMD2<Int32>         // cell being driven FROM
+    var direction: SIMD2<Int32>    // grid step toward the next cell
+    var progress: Float = 0        // 0…1 across the current cell edge
+    var speed: Float = 0.35        // m/s
+    var pause: Float = 0           // stop-sign timer
+    var opacity: Float = 0         // fades in on spawn / out at dead ends
+    var fading: Bool = false
+    var seed: UInt64
+}
+
+struct TrafficSystem: System {
+    private static let cars = EntityQuery(where: .has(TrafficComponent.self))
+    private static let walkers = EntityQuery(where: .has(WalkerComponent.self))
+    private static let step: Float = 0.7
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        var pedestrians: [SIMD3<Float>] = []
+        for walker in context.entities(matching: Self.walkers,
+                                       updatingSystemWhen: .rendering) {
+            pedestrians.append(walker.position)
+        }
+        for entity in context.entities(matching: Self.cars,
+                                       updatingSystemWhen: .rendering) {
+            guard var car = entity.components[TrafficComponent.self] else { continue }
+            defer {
+                entity.components.set(car)
+                entity.components.set(OpacityComponent(opacity: car.opacity))
+            }
+            let heading = SIMD3<Float>(Float(car.direction.x), 0, Float(car.direction.y))
+            let lane = SIMD3<Float>(heading.z, 0, -heading.x) * -0.14  // right side
+            let base = SIMD3<Float>(Float(car.cell.x) * Self.step, -0.02,
+                                    Float(car.cell.y) * Self.step)
+            entity.position = base + heading * (car.progress * Self.step) + lane
+            entity.orientation = simd_quatf(angle: atan2(heading.x, heading.z),
+                                            axis: [0, 1, 0])
+
+            if car.fading {
+                car.opacity = max(0, car.opacity - dt * 2)
+                if car.opacity == 0 {
+                    // Reappear somewhere else on the network.
+                    car.seed = car.seed &* 6364136223846793005 &+ 1442695040888963407
+                    let cells = Array(car.cells)
+                    guard !cells.isEmpty else { continue }
+                    car.cell = cells[Int(car.seed >> 33) % cells.count]
+                    car.direction = Self.exit(from: car.cell, cells: car.cells,
+                                              avoid: nil, seed: &car.seed)
+                        ?? SIMD2(0, 1)
+                    car.progress = 0
+                    car.fading = false
+                }
+                continue
+            }
+            car.opacity = min(1, car.opacity + dt * 2)
+            if car.pause > 0 {
+                car.pause -= dt
+                continue
+            }
+            // Brake for anyone strolling just ahead of the bumper.
+            let lookahead = entity.position + heading * 0.22
+            if pedestrians.contains(where: { simd_length($0 - lookahead) < 0.3 }) {
+                continue
+            }
+            car.progress += car.speed * dt / Self.step
+            if car.progress >= 1 {
+                car.progress -= 1
+                car.cell &+= car.direction
+                let neighbours = Self.degree(of: car.cell, cells: car.cells)
+                if neighbours >= 3 { car.pause = 0.6 }   // stop sign
+                if let next = Self.exit(from: car.cell, cells: car.cells,
+                                        avoid: car.direction &* -1, seed: &car.seed) {
+                    car.direction = next
+                } else {
+                    car.fading = true                    // road ends here
+                }
+            }
+        }
+    }
+
+    private static let compass: [SIMD2<Int32>] = [
+        SIMD2(0, 1), SIMD2(0, -1), SIMD2(1, 0), SIMD2(-1, 0),
+    ]
+
+    private static func degree(of cell: SIMD2<Int32>,
+                               cells: Set<SIMD2<Int32>>) -> Int {
+        compass.filter { cells.contains(cell &+ $0) }.count
+    }
+
+    /// Pick where to go from `cell`, never doubling back (`avoid`).
+    /// Prefers carrying straight on so traffic reads as going somewhere.
+    private static func exit(from cell: SIMD2<Int32>, cells: Set<SIMD2<Int32>>,
+                             avoid: SIMD2<Int32>?, seed: inout UInt64) -> SIMD2<Int32>? {
+        let options = compass.filter { $0 != avoid && cells.contains(cell &+ $0) }
+        guard !options.isEmpty else { return nil }
+        seed = seed &* 6364136223846793005 &+ 1442695040888963407
+        if let ahead = avoid.map({ $0 &* -1 }), options.contains(ahead),
+           (seed >> 33) % 10 < 6 {
+            return ahead
+        }
+        return options[Int(seed >> 33) % options.count]
     }
 }
 
@@ -200,6 +320,9 @@ enum ArenaEnvironment {
         var cityBlocks: Bool = false
         /// A toy train circles the track (Winter's signature move).
         var train: Bool = false
+        /// Car models driving the street grid (cityBlocks worlds only).
+        var traffic: [String] = []
+        var trafficSpeed: Float = 0.35
     }
 
     /// Indexed by trackId byte-sum for tracks with no chosen world —
@@ -260,7 +383,8 @@ enum ArenaEnvironment {
                       "city-streetlight", "city-streetlight", "city-planter"],
               structured: true, propCount: 44,
               horizon: ["city-skyscraper-a", "city-skyscraper-b", "city-skyscraper-c", "city-skyscraper-d", "city-skyscraper-e"],
-              horizonScale: 3.5, cityBlocks: true),
+              horizonScale: 3.5, cityBlocks: true,
+              traffic: ["taxi", "police", "sedan-sports", "suv", "ambulance"]),
         Theme(name: "town", displayName: "Hometown", symbol: "house.fill",
               skyTop: rgb(0.32, 0.60, 0.95), skyHorizon: rgb(0.84, 0.94, 1.0),
               groundLight: rgb(0.42, 0.66, 0.34), groundDark: rgb(0.34, 0.56, 0.28),
@@ -274,7 +398,8 @@ enum ArenaEnvironment {
                       "city-tree-large", "city-tree-small", "city-fence"],
               structured: true, propCount: 40,
               horizon: ["city-house-b", "city-house-n", "city-tree-large"],
-              horizonScale: 3, cityBlocks: true),
+              horizonScale: 3, cityBlocks: true,
+              traffic: ["sedan-sports", "suv", "truck", "taxi"]),
         Theme(name: "park", displayName: "Park", symbol: "tree.fill",
               skyTop: rgb(0.28, 0.58, 0.90), skyHorizon: rgb(0.82, 0.94, 0.96),
               groundLight: rgb(0.30, 0.58, 0.28), groundDark: rgb(0.24, 0.49, 0.23),
@@ -302,7 +427,9 @@ enum ArenaEnvironment {
                       "race-car-red", "race-car-green"],
               structured: true, propCount: 32, clearance: 0.8,
               horizon: ["race-grandstand-covered", "race-billboard", "race-banner-tower-red"],
-              horizonScale: 3),
+              horizonScale: 3, cityBlocks: true,
+              traffic: ["race-car-red", "race-car-green", "race"],
+              trafficSpeed: 0.9),
         Theme(name: "castle", displayName: "Castle", symbol: "crown.fill",
               skyTop: rgb(0.34, 0.52, 0.88), skyHorizon: rgb(0.85, 0.90, 0.95),
               groundLight: rgb(0.38, 0.60, 0.32), groundDark: rgb(0.31, 0.51, 0.27),
@@ -564,9 +691,6 @@ enum ArenaEnvironment {
             withUnsafeBytes(of: id.uuid) { $0.reduce(0) { $0 &* 31 &+ Int($1) } }
         } ?? 0
         var dice = Dice(seed: 0xC17B10C5 &+ UInt64(truncatingIfNeeded: trackSeed))
-        guard let straightProto = try? await AssetStore.shared.entity(named: "street-straight"),
-              let crossProto = try? await AssetStore.shared.entity(named: "street-cross")
-        else { return }
         var seen = Set<String>()
         var prototypes: [Entity] = []
         for name in theme.props where seen.insert(name).inserted {
@@ -576,37 +700,59 @@ enum ArenaEnvironment {
             }
         }
         guard !prototypes.isEmpty else { return }
+        var tileProtos: [String: Entity] = [:]
+        for name in ["street-straight", "street-cross", "street-bend",
+                     "street-tee", "street-end"] {
+            tileProtos[name] = try? await AssetStore.shared.entity(named: name)
+        }
+        guard tileProtos["street-straight"] != nil else { return }
 
         func gridLine(_ n: Int) -> Bool { ((n % 3) + 3) % 3 == 0 }
         let iRange = Int(((footprint.minX - margin) / step).rounded(.down))
             ... Int(((footprint.maxX + margin) / step).rounded(.up))
         let jRange = Int(((footprint.minZ - margin) / step).rounded(.down))
             ... Int(((footprint.maxZ + margin) / step).rounded(.up))
+
+        // First pass: which cells actually hold street — a grid line cell
+        // that ISN'T punched out by the track or the region edge. The
+        // second pass reads this connectivity so every tile is the right
+        // piece: crossroad, tee, bend, straight, or a proper dead end.
+        func insideTrack(_ i: Int, _ j: Int) -> Bool {
+            let x = Float(i) * step
+            let z = Float(j) * step
+            return x > footprint.minX - theme.clearance
+                && x < footprint.maxX + theme.clearance
+                && z > footprint.minZ - theme.clearance
+                && z < footprint.maxZ + theme.clearance
+        }
+        var streets = Set<SIMD2<Int32>>()
+        for i in iRange {
+            for j in jRange where (gridLine(i) || gridLine(j)) && !insideTrack(i, j) {
+                streets.insert(SIMD2(Int32(i), Int32(j)))
+            }
+        }
+
         var entityCount = 0
         for i in iRange {
             for j in jRange {
                 guard entityCount < 600 else { return }   // runaway-track cap
                 let x = Float(i) * step
                 let z = Float(j) * step
-                let insideTrack = x > footprint.minX - theme.clearance
-                    && x < footprint.maxX + theme.clearance
-                    && z > footprint.minZ - theme.clearance
-                    && z < footprint.maxZ + theme.clearance
-                guard !insideTrack else { continue }
-                let onRow = gridLine(i)
-                let onCol = gridLine(j)
-                if onRow || onCol {
-                    let tile = (onRow && onCol ? crossProto : straightProto)
-                        .clone(recursive: true)
+                guard !insideTrack(i, j) else { continue }
+                if streets.contains(SIMD2(Int32(i), Int32(j))) {
+                    let cell = SIMD2(Int32(i), Int32(j))
+                    guard let pick = streetTile(
+                        north: streets.contains(cell &+ SIMD2(0, 1)),
+                        south: streets.contains(cell &- SIMD2(0, 1)),
+                        east: streets.contains(cell &+ SIMD2(1, 0)),
+                        west: streets.contains(cell &- SIMD2(1, 0))),
+                        let proto = tileProtos[pick.model] else { continue }
+                    let tile = proto.clone(recursive: true)
                     tile.name = "street-tile"
                     // Streets hug the ground plane (its top is at −0.03)
                     // instead of floating at prop height.
                     tile.position = [x, -0.025, z]
-                    // A row line (constant x) runs along z = model yaw 0;
-                    // a column line runs along x.
-                    if onCol && !onRow {
-                        tile.orientation = simd_quatf(angle: halfPiF, axis: [0, 1, 0])
-                    }
+                    tile.orientation = simd_quatf(angle: pick.yaw, axis: [0, 1, 0])
                     root.addChild(tile)
                     entityCount += 1
                 } else {
@@ -632,6 +778,53 @@ enum ArenaEnvironment {
                     entityCount += 1
                 }
             }
+        }
+
+        // Traffic: little cars driving the streets they were laid on.
+        if !theme.traffic.isEmpty, streets.count > 8 {
+            TrafficComponent.registerComponent()
+            TrafficSystem.registerSystem()
+            let cells = Array(streets)
+            let carCount = min(8, max(2, streets.count / 20))
+            for index in 0..<carCount {
+                let model = theme.traffic[index % theme.traffic.count]
+                guard let car = try? await AssetStore.shared.entity(named: model) else { continue }
+                let start = cells[Int(dice.next01() * 0.999 * Float(cells.count))]
+                car.components.set(TrafficComponent(
+                    cells: streets, cell: start, direction: SIMD2(0, 1),
+                    speed: theme.trafficSpeed,
+                    seed: dice.seed &+ UInt64(index)))
+                car.components.set(OpacityComponent(opacity: 0))
+                root.addChild(car)
+            }
+        }
+    }
+
+    /// Which street tile a cell needs, from which neighbours are street.
+    /// Yaw conventions measured off the converted Kenney tiles: straight
+    /// runs along z at yaw 0; the bend joins south and east; the tee's
+    /// closed side faces north; the end's open side faces south.
+    static func streetTile(north: Bool, south: Bool, east: Bool, west: Bool)
+        -> (model: String, yaw: Float)? {
+        switch (north, south, east, west) {
+        case (true, true, true, true):
+            return ("street-cross", 0)
+        case (false, true, true, true): return ("street-tee", 0)
+        case (true, false, true, true): return ("street-tee", .pi)
+        case (true, true, false, true): return ("street-tee", halfPiF)
+        case (true, true, true, false): return ("street-tee", -halfPiF)
+        case (true, true, false, false): return ("street-straight", 0)
+        case (false, false, true, true): return ("street-straight", halfPiF)
+        case (false, true, true, false): return ("street-bend", 0)
+        case (false, true, false, true): return ("street-bend", halfPiF)
+        case (true, false, false, true): return ("street-bend", .pi)
+        case (true, false, true, false): return ("street-bend", -halfPiF)
+        case (false, true, false, false): return ("street-end", 0)
+        case (true, false, false, false): return ("street-end", .pi)
+        case (false, false, true, false): return ("street-end", -halfPiF)
+        case (false, false, false, true): return ("street-end", halfPiF)
+        case (false, false, false, false):
+            return nil   // orphan cell — no road to nowhere
         }
     }
 

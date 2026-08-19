@@ -88,13 +88,60 @@ struct ArenaEnvironmentTests {
     @Test func decorationBoxIsFullyStocked() async {
         for (label, _, props) in DecorPaletteView.groups {
             for prop in props {
-                let entity = try? await AssetStore.shared.entity(named: prop)
+                let entity = await SceneryPlacer.entity(for: prop)
                 #expect(entity != nil, "\(label): missing model \(prop)")
                 #expect(Bundle.main.url(forResource: "thumb-\(prop)",
                                         withExtension: "png") != nil,
                         "\(label): missing thumbnail \(prop)")
             }
         }
+    }
+
+    /// The street autotiler: every neighbour pattern gets the right tile,
+    /// and an orphan cell gets none — no roads to nowhere.
+    @Test func streetTilesMatchConnectivity() {
+        #expect(ArenaEnvironment.streetTile(north: true, south: true,
+                                            east: true, west: true)?.0 == "street-cross")
+        #expect(ArenaEnvironment.streetTile(north: false, south: true,
+                                            east: true, west: true)?.0 == "street-tee")
+        #expect(ArenaEnvironment.streetTile(north: true, south: true,
+                                            east: false, west: false)?.0 == "street-straight")
+        #expect(ArenaEnvironment.streetTile(north: false, south: true,
+                                            east: true, west: false)?.0 == "street-bend")
+        #expect(ArenaEnvironment.streetTile(north: true, south: false,
+                                            east: false, west: false)?.0 == "street-end")
+        #expect(ArenaEnvironment.streetTile(north: false, south: false,
+                                            east: false, west: false) == nil)
+    }
+
+    /// City and Speedway streets carry traffic; the cars fade in from
+    /// nothing (opacity 0 at spawn) so appearing never pops.
+    @Test func cityStreetsCarryTraffic() async {
+        for themeName in ["city", "speedway"] {
+            let env = await ArenaEnvironment.make(
+                for: UUID(), theme: themeName,
+                around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+            let cars = env.children.filter {
+                $0.components[TrafficComponent.self] != nil }
+            #expect(cars.count >= 2, "\(themeName)")
+            #expect(cars.allSatisfy {
+                $0.components[OpacityComponent.self]?.opacity == 0 })
+        }
+    }
+
+    /// Placed sky-stuff floats and turns; a nebula never spins (it's a
+    /// billboard — spinning would fight the facing).
+    @Test func placedPlanetsFloatAndTurn() async {
+        let items = [SceneryItem(model: "space-planet-rings", x: 1, z: 1, yaw: 0),
+                     SceneryItem(model: "space-nebula-pink", x: 2, z: 2, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items)
+        #expect(root.children.count == 2)
+        let planet = root.children[0]
+        #expect(planet.position.y > 0.5)
+        #expect((planet.components[AmbientMotionComponent.self]?.spin ?? 0) > 0)
+        let nebula = root.children[1]
+        #expect(nebula.position.y > 1)
+        #expect(nebula.components[AmbientMotionComponent.self]?.spin == 0)
     }
 
     /// Placed people walk; everything else placed stays put unless it's a

@@ -28,7 +28,7 @@ final class WorldPickerUITests: XCTestCase {
         XCTAssertTrue(chip.waitForExistence(timeout: 5))
         chip.tap()    // open the world strip
 
-        for world in ["Big City", "Canyon", "Space"] {
+        for world in ["Big City", "Speedway"] {
             let card = app.buttons.containing(
                 NSPredicate(format: "label CONTAINS '\(world)'")).firstMatch
             XCTAssertTrue(card.waitForExistence(timeout: 5), world)
@@ -81,8 +81,24 @@ final class WorldPickerUITests: XCTestCase {
             sleep(1)
         }
         sleep(2)
-        let shot = XCTAttachment(screenshot: app.screenshot())
+        var shot = XCTAttachment(screenshot: app.screenshot())
         shot.name = "decorated"
+        shot.lifetime = .keepAlways
+        add(shot)
+
+        // Sky-stuff: a ringed planet and a nebula floating over the track.
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Planets'"))
+            .firstMatch.tap()
+        let planet = app.buttons["space-planet-rings"]
+        XCTAssertTrue(planet.waitForExistence(timeout: 5))
+        planet.tap()
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.35, dy: 0.45)).tap()
+        sleep(1)
+        app.buttons["space-nebula-pink"].tap()
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)).tap()
+        sleep(2)
+        shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "planets"
         shot.lifetime = .keepAlways
         add(shot)
     }
