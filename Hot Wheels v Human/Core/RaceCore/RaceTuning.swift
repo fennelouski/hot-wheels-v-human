@@ -427,6 +427,10 @@ nonisolated enum RaceTuning {
         "race-future", "sedan-sports", "suv", "truck",
         "vehicle-monster-truck", "vehicle-racer", "vehicle-racer-low",
         "vehicle-truck",
+        // Around-town rides — all boxed cabs. (The tractor stays open:
+        // its driver perches on the seat, which is the whole charm.)
+        "taxi", "police", "ambulance", "firetruck", "garbage-truck",
+        "delivery", "van", "sedan", "suv-luxury", "hatchback-sports",
     ]
     /// Head JOINT (neck top) height as a fraction of the rig's source
     /// height — the dress-up wardrobe's bind-pose fallback anchor when

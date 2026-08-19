@@ -349,7 +349,9 @@ struct DecorPaletteView: View {
         ("People", "figure.walk",
          ["person-a", "person-b", "person-c", "person-d"]),
         ("Cars", "car.fill",
-         ["taxi", "police", "ambulance", "sedan-sports", "suv", "truck",
+         ["taxi", "police", "ambulance", "firetruck", "garbage-truck",
+          "delivery", "van", "sedan", "suv-luxury", "hatchback-sports",
+          "tractor", "sedan-sports", "suv", "truck",
           "race-car-red", "race-car-green"]),
         ("Planets", "globe.americas.fill", SpaceStuff.models),
     ] + ArenaEnvironment.themes.map { theme in

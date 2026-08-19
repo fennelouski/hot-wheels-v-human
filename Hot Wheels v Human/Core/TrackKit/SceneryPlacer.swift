@@ -170,9 +170,44 @@ enum SceneryPlacer {
     /// and they sit parked where the kid left them.
     static let vehicles: Set<String> = [
         "taxi", "police", "ambulance", "sedan-sports", "suv", "truck",
-        "race-car-red", "race-car-green",
+        "race-car-red", "race-car-green", "firetruck", "garbage-truck",
+        "delivery", "van", "sedan", "suv-luxury", "hatchback-sports", "tractor",
     ]
     static func isVehicle(_ model: String) -> Bool { vehicles.contains(model) }
+
+    /// Nearest CONNECTED pavement cell — a lone path stone is no
+    /// sidewalk, just a stepping stone.
+    static func nearestPavement(to position: SIMD3<Float>,
+                                in cells: Set<SIMD2<Int32>>) -> SIMD2<Int32>? {
+        let connected = cells.filter { cell in
+            [SIMD2<Int32>(0, 1), SIMD2(0, -1), SIMD2(1, 0), SIMD2(-1, 0)]
+                .contains { cells.contains(cell &+ $0) }
+        }
+        let p = SIMD2(position.x, position.z)
+        return connected.min { a, b in
+            simd_length_squared(SIMD2(Float(a.x), Float(a.y)) * 0.35 - p)
+                < simd_length_squared(SIMD2(Float(b.x), Float(b.y)) * 0.35 - p)
+        }
+    }
+
+    /// Sidewalk graph implied by hand-placed pavement (0.35 m cells):
+    /// path stones map to their cell, the wide pavement square covers its
+    /// cell plus the four around it, so adjacent squares connect.
+    static func pavementCells(in items: [SceneryItem]) -> Set<SIMD2<Int32>> {
+        var cells = Set<SIMD2<Int32>>()
+        for item in items {
+            let cell = SIMD2(Int32((item.x / 0.35).rounded()),
+                             Int32((item.z / 0.35).rounded()))
+            if item.model.hasPrefix("city-path") {
+                cells.insert(cell)
+            } else if item.model == "street-square" {
+                cells.insert(cell)
+                cells.formUnion([cell &+ SIMD2(0, 1), cell &- SIMD2(0, 1),
+                                 cell &+ SIMD2(1, 0), cell &- SIMD2(1, 0)])
+            }
+        }
+        return cells
+    }
 
     /// Street cells implied by hand-placed road tiles (street-* snap to
     /// the 0.7 m traffic grid) — unioned with a world's auto-laid grid so
@@ -210,7 +245,12 @@ enum SceneryPlacer {
         WalkerSystem.registerSystem()
         TrafficComponent.registerComponent()
         TrafficSystem.registerSystem()
+        WanderComponent.registerComponent()
+        WanderSystem.registerSystem()
+        PedestrianComponent.registerComponent()
+        PedestrianSystem.registerSystem()
         let streets = autoStreets.union(handStreetCells(in: items))
+        let pavement = pavementCells(in: items)
         let root = Entity()
         root.name = name(for: items)
         for (index, item) in items.enumerated() {
@@ -232,22 +272,38 @@ enum SceneryPlacer {
                 entity.position.y += 0.15
                 entity.scale *= 1.15
             } else if isPerson(item.model) {
-                // Stroll along the placement yaw; the walk clip loops.
-                // (Held items stand still so the kid can grab them.)
-                entity.components.set(WalkerComponent(
-                    origin: entity.position, yaw: item.yaw))
-            } else if isVehicle(item.model),
-                      let target = TrafficSystem.nearestCell(to: entity.position,
-                                                             in: streets) {
-                // Drive to the nearest road, then join traffic. (No roads
-                // anywhere → the guard fails and the car stays parked.)
+                var seed = UInt64(truncatingIfNeeded: index &* 271) &+ 0x9ED
+                // Near a sidewalk (path stones or pavement)? Walk the
+                // network, turning around at its ends. Otherwise the
+                // little back-and-forth patrol from the placement spot.
+                if let target = nearestPavement(to: entity.position, in: pavement),
+                   simd_length(SIMD3<Float>(Float(target.x) * 0.35, 0,
+                                            Float(target.y) * 0.35)
+                       - entity.position) < 1.5 {
+                    entity.components.set(PedestrianComponent(
+                        cells: pavement, cell: target, direction: SIMD2(0, 1),
+                        seeking: true, worldPos: entity.position, seed: seed))
+                } else {
+                    entity.components.set(WalkerComponent(
+                        origin: entity.position, yaw: item.yaw))
+                }
+            } else if isVehicle(item.model) {
                 var seed = UInt64(truncatingIfNeeded: item.model.hashValue)
                     &+ UInt64(index) &* 7919
                 seed = seed &* 6364136223846793005 &+ 1442695040888963407
-                entity.components.set(TrafficComponent(
-                    cells: streets, cell: target, direction: SIMD2(0, 1),
-                    seeking: true, worldPos: entity.position, seed: seed))
-                entity.components.set(OpacityComponent(opacity: 0))
+                if let target = TrafficSystem.nearestCell(to: entity.position,
+                                                          in: streets) {
+                    // Drive to the nearest road, then join traffic.
+                    entity.components.set(TrafficComponent(
+                        cells: streets, cell: target, direction: SIMD2(0, 1),
+                        seeking: true, worldPos: entity.position, seed: seed))
+                    entity.components.set(OpacityComponent(opacity: 0))
+                } else {
+                    // No roads anywhere: wander near the placement spot.
+                    entity.components.set(WanderComponent(
+                        origin: entity.position, heading: item.yaw,
+                        phase: Float(index % 5) * 1.3))
+                }
             } else {
                 AmbientMotion.apply(to: entity, model: item.model,
                                     vary: Float(index % 7) / 7)

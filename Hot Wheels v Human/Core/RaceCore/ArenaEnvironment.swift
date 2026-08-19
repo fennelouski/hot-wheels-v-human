@@ -168,6 +168,7 @@ struct TrafficComponent: Component {
 struct TrafficSystem: System {
     private static let cars = EntityQuery(where: .has(TrafficComponent.self))
     private static let walkers = EntityQuery(where: .has(WalkerComponent.self))
+    private static let strollers = EntityQuery(where: .has(PedestrianComponent.self))
     private static let step: Float = 0.7
 
     init(scene: Scene) {}
@@ -178,6 +179,10 @@ struct TrafficSystem: System {
         for walker in context.entities(matching: Self.walkers,
                                        updatingSystemWhen: .rendering) {
             pedestrians.append(walker.position)
+        }
+        for stroller in context.entities(matching: Self.strollers,
+                                         updatingSystemWhen: .rendering) {
+            pedestrians.append(stroller.position)
         }
         for entity in context.entities(matching: Self.cars,
                                        updatingSystemWhen: .rendering) {
@@ -260,12 +265,12 @@ struct TrafficSystem: System {
         }
     }
 
-    private static let compass: [SIMD2<Int32>] = [
+    fileprivate static let compass: [SIMD2<Int32>] = [
         SIMD2(0, 1), SIMD2(0, -1), SIMD2(1, 0), SIMD2(-1, 0),
     ]
 
-    private static func degree(of cell: SIMD2<Int32>,
-                               cells: Set<SIMD2<Int32>>) -> Int {
+    fileprivate static func degree(of cell: SIMD2<Int32>,
+                                   cells: Set<SIMD2<Int32>>) -> Int {
         compass.filter { cells.contains(cell &+ $0) }.count
     }
 
@@ -303,8 +308,8 @@ struct TrafficSystem: System {
 
     /// Pick where to go from `cell`, never doubling back (`avoid`).
     /// Prefers carrying straight on so traffic reads as going somewhere.
-    private static func exit(from cell: SIMD2<Int32>, cells: Set<SIMD2<Int32>>,
-                             avoid: SIMD2<Int32>?, seed: inout UInt64) -> SIMD2<Int32>? {
+    fileprivate static func exit(from cell: SIMD2<Int32>, cells: Set<SIMD2<Int32>>,
+                                 avoid: SIMD2<Int32>?, seed: inout UInt64) -> SIMD2<Int32>? {
         let options = compass.filter { $0 != avoid && cells.contains(cell &+ $0) }
         guard !options.isEmpty else { return nil }
         seed = seed &* 6364136223846793005 &+ 1442695040888963407
@@ -313,6 +318,126 @@ struct TrafficSystem: System {
             return ahead
         }
         return options[Int(seed >> 33) % options.count]
+    }
+}
+
+/// A placed car with no road anywhere: it wanders — lazy curves near
+/// where the kid set it down, leashed so it never drives off to the
+/// mountains. The moment a track has roads, cars prefer those
+/// (SceneryPlacer picks the component at spawn).
+struct WanderComponent: Component {
+    var origin: SIMD3<Float>
+    var heading: Float
+    var speed: Float = 0.22
+    var leash: Float = 2.2
+    var phase: Float = 0
+    var time: Float = 0
+}
+
+struct WanderSystem: System {
+    private static let query = EntityQuery(where: .has(WanderComponent.self))
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        for entity in context.entities(matching: Self.query,
+                                       updatingSystemWhen: .rendering) {
+            guard var car = entity.components[WanderComponent.self] else { continue }
+            car.time += dt
+            let home = car.origin - entity.position
+            let distance = simd_length(SIMD2(home.x, home.z))
+            if distance > car.leash {
+                // Past the leash: bend toward home.
+                let homeYaw = atan2(home.x, home.z)
+                var delta = homeYaw - car.heading
+                while delta > .pi { delta -= 2 * .pi }
+                while delta < -.pi { delta += 2 * .pi }
+                car.heading += max(-1.2 * dt, min(1.2 * dt, delta))
+            } else {
+                // Meandering: a slow sine on the wheel.
+                car.heading += sin(car.time * 0.6 + car.phase) * 0.8 * dt
+            }
+            let direction = SIMD3<Float>(sin(car.heading), 0, cos(car.heading))
+            entity.position += direction * (car.speed * dt)
+            entity.position.y = -0.02
+            entity.orientation = simd_quatf(angle: car.heading, axis: [0, 1, 0])
+            entity.components.set(car)
+        }
+    }
+}
+
+/// A placed person near a sidewalk (path stones or pavement squares):
+/// same graph logic as the cars — walk the network, random turns at
+/// junctions — but at the end of a sidewalk they just TURN AROUND and
+/// walk back (people don't fade out; that would be alarming).
+struct PedestrianComponent: Component {
+    var cells: Set<SIMD2<Int32>>   // pavement graph, 0.35 m cells
+    var cell: SIMD2<Int32>
+    var direction: SIMD2<Int32>
+    var progress: Float = 0
+    var speed: Float = 0.07
+    var seeking: Bool = false
+    var worldPos: SIMD3<Float> = .zero
+    var seed: UInt64
+}
+
+struct PedestrianSystem: System {
+    private static let query = EntityQuery(where: .has(PedestrianComponent.self))
+    static let step: Float = 0.35
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        for entity in context.entities(matching: Self.query,
+                                       updatingSystemWhen: .rendering) {
+            guard var person = entity.components[PedestrianComponent.self] else { continue }
+            defer { entity.components.set(person) }
+            if person.seeking {
+                let target = SIMD3<Float>(Float(person.cell.x) * Self.step, 0,
+                                          Float(person.cell.y) * Self.step)
+                let delta = target - person.worldPos
+                let distance = simd_length(delta)
+                if distance < max(0.01, person.speed * dt) {
+                    person.seeking = false
+                    person.progress = 0
+                    if let next = TrafficSystem.exit(from: person.cell,
+                                                     cells: person.cells,
+                                                     avoid: nil, seed: &person.seed) {
+                        person.direction = next
+                    }
+                } else {
+                    let heading = delta / distance
+                    person.worldPos += heading * (person.speed * dt)
+                    entity.position = person.worldPos
+                    entity.orientation = simd_quatf(
+                        angle: atan2(heading.x, heading.z), axis: [0, 1, 0])
+                    continue
+                }
+            }
+            person.progress += person.speed * dt / Self.step
+            if person.progress >= 1 {
+                person.progress -= 1
+                person.cell &+= person.direction
+                if let next = TrafficSystem.exit(from: person.cell,
+                                                 cells: person.cells,
+                                                 avoid: person.direction &* -1,
+                                                 seed: &person.seed) {
+                    person.direction = next
+                } else {
+                    // End of the sidewalk: turn around, walk back.
+                    person.direction = person.direction &* -1
+                }
+            }
+            let heading = SIMD3<Float>(Float(person.direction.x), 0,
+                                       Float(person.direction.y))
+            let base = SIMD3<Float>(Float(person.cell.x) * Self.step, 0,
+                                    Float(person.cell.y) * Self.step)
+            entity.position = base + heading * (person.progress * Self.step)
+            entity.orientation = simd_quatf(angle: atan2(heading.x, heading.z),
+                                            axis: [0, 1, 0])
+        }
     }
 }
 
@@ -444,7 +569,8 @@ enum ArenaEnvironment {
               structured: true, propCount: 44,
               horizon: ["city-skyscraper-a", "city-skyscraper-b", "city-skyscraper-c", "city-skyscraper-d", "city-skyscraper-e"],
               horizonScale: 3.5, cityBlocks: true,
-              traffic: ["taxi", "police", "sedan-sports", "suv", "ambulance"]),
+              traffic: ["taxi", "police", "sedan-sports", "suv", "ambulance",
+                        "delivery", "garbage-truck", "sedan", "suv-luxury"]),
         Theme(name: "town", displayName: "Hometown", symbol: "house.fill",
               skyTop: rgb(0.32, 0.60, 0.95), skyHorizon: rgb(0.84, 0.94, 1.0),
               groundLight: rgb(0.42, 0.66, 0.34), groundDark: rgb(0.34, 0.56, 0.28),
@@ -459,7 +585,8 @@ enum ArenaEnvironment {
               structured: true, propCount: 40,
               horizon: ["city-house-b", "city-house-n", "city-tree-large"],
               horizonScale: 3, cityBlocks: true,
-              traffic: ["sedan-sports", "suv", "truck", "taxi"]),
+              traffic: ["sedan-sports", "suv", "truck", "taxi", "van", "sedan",
+                        "firetruck", "tractor"]),
         Theme(name: "park", displayName: "Park", symbol: "tree.fill",
               skyTop: rgb(0.28, 0.58, 0.90), skyHorizon: rgb(0.82, 0.94, 0.96),
               groundLight: rgb(0.30, 0.58, 0.28), groundDark: rgb(0.24, 0.49, 0.23),

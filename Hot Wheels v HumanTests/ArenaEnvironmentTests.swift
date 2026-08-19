@@ -161,6 +161,32 @@ struct ArenaEnvironmentTests {
         #expect(parked.children[0].components[TrafficComponent.self] == nil)
     }
 
+    /// No roads anywhere: a placed car wanders instead of parking.
+    @Test func roadlessCarsWander() async {
+        let items = [SceneryItem(model: "firetruck", x: 1, z: 1, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items)
+        let car = root.children[0]
+        #expect(car.components[WanderComponent.self] != nil)
+        #expect(car.components[TrafficComponent.self] == nil)
+    }
+
+    /// A person placed near hand-laid pavement follows the sidewalk
+    /// network (turning around at ends); far from any pavement they keep
+    /// the little patrol. A lone stepping stone is not a sidewalk.
+    @Test func peopleFollowSidewalks() async {
+        let items = [SceneryItem(model: "street-square", x: 0.7, z: 0, yaw: 0),
+                     SceneryItem(model: "street-square", x: 1.4, z: 0, yaw: 0),
+                     SceneryItem(model: "person-a", x: 0.8, z: 0.3, yaw: 0),
+                     SceneryItem(model: "person-b", x: 9, z: 9, yaw: 0),
+                     SceneryItem(model: "city-path-short", x: 5, z: 5, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items)
+        let nearPerson = root.children[2]
+        #expect(nearPerson.components[PedestrianComponent.self]?.seeking == true)
+        let farPerson = root.children[3]
+        #expect(farPerson.components[PedestrianComponent.self] == nil)
+        #expect(farPerson.components[WalkerComponent.self] != nil)
+    }
+
     /// Hand-laid street tiles extend the traffic graph (0.7 m snap).
     @Test func handLaidTilesJoinTheStreetGraph() {
         let items = [SceneryItem(model: "street-straight", x: 1.4, z: 0, yaw: 0),

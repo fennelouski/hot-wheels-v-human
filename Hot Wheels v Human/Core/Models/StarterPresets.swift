@@ -242,6 +242,18 @@ extension CarDesign {
         ("Kart Ooli", "kart-ooli", "circle.hexagongrid.fill"),
         ("Kart Oopi", "kart-oopi", "circle.hexagongrid.fill"),
         ("Kart Oozi", "kart-oozi", "circle.hexagongrid.fill"),
+        // Around-town rides (car kit) — same models the traffic drives.
+        ("Taxi", "taxi", "car.fill"),
+        ("Police Car", "police", "light.beacon.max.fill"),
+        ("Ambulance", "ambulance", "cross.case.fill"),
+        ("Fire Truck", "firetruck", "flame.circle.fill"),
+        ("Garbage Truck", "garbage-truck", "trash.fill"),
+        ("Delivery Van", "delivery", "shippingbox.fill"),
+        ("Camper Van", "van", "bus.fill"),
+        ("City Sedan", "sedan", "car.rear.fill"),
+        ("Fancy SUV", "suv-luxury", "sparkle"),
+        ("Speedy Hatchback", "hatchback-sports", "hare.fill"),
+        ("Tractor", "tractor", "leaf.fill"),
     ]
 
     /// A blank car wearing one of the body-shop bodies, ready for the
