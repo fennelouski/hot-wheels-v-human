@@ -377,12 +377,16 @@ struct PedestrianComponent: Component {
     var direction: SIMD2<Int32>
     var progress: Float = 0
     var speed: Float = 0.07
-    /// Metres beside the walked line — city strollers keep to the road's
-    /// sidewalk edge; hand-placed people walk their pavement dead centre.
+    /// Metres beside the walked line on ROAD cells — everyone keeps to
+    /// the road's sidewalk edge; hand-laid pavement is walked dead
+    /// centre (the offset fades in and out between the two, `roadside`).
     var sideOffset: Float = 0
     /// Building cells (0.7 m street grid) beside the sidewalks. Each cell
     /// stepped past a building carries a 1-in-100 shopper's impulse.
     var buildings: Set<SIMD2<Int32>> = []
+    /// The subset of `cells` that are road centrelines (where the side
+    /// offset applies). Hand-laid pavement cells aren't in it.
+    var roadside: Set<SIMD2<Int32>> = []
     var seeking: Bool = false
     var worldPos: SIMD3<Float> = .zero
     var seed: UInt64
@@ -438,18 +442,20 @@ struct PedestrianSystem: System {
                 person.cell &+= person.direction
                 // A shopper's impulse: 1 step in 100, if a building sits
                 // right there beside the sidewalk, pop in for a browse.
-                if person.sideOffset != 0, !person.buildings.isEmpty {
+                if !person.buildings.isEmpty {
                     person.seed = person.seed &* 6364136223846793005
                         &+ 1442695040888963407
+                    let effective = person.roadside.contains(person.cell)
+                        ? person.sideOffset : 0
                     if (person.seed >> 33) % 100 == 0,
                        let door = Self.doorBeside(
                            cell: person.cell, direction: person.direction,
-                           sideOffset: person.sideOffset,
+                           sideOffset: effective,
                            buildings: person.buildings) {
                         person.visitDoor = door
                         person.visitReturn = Self.pavementPoint(
                             cell: person.cell, direction: person.direction,
-                            progress: 0, sideOffset: person.sideOffset)
+                            progress: 0, sideOffset: effective)
                         person.leaving = false
                         continue
                     }
@@ -469,9 +475,18 @@ struct PedestrianSystem: System {
             }
             let heading = SIMD3<Float>(Float(person.direction.x), 0,
                                        Float(person.direction.y))
+            // The side offset only applies on road cells; crossing between
+            // a road edge and hand-laid pavement it fades in over the
+            // step instead of side-stepping.
+            let hereOffset: Float = person.roadside.contains(person.cell)
+                ? person.sideOffset : 0
+            let nextOffset: Float =
+                person.roadside.contains(person.cell &+ person.direction)
+                ? person.sideOffset : 0
             entity.position = Self.pavementPoint(
                 cell: person.cell, direction: person.direction,
-                progress: person.progress, sideOffset: person.sideOffset)
+                progress: person.progress,
+                sideOffset: hereOffset + (nextOffset - hereOffset) * person.progress)
             entity.orientation = simd_quatf(angle: atan2(heading.x, heading.z),
                                             axis: [0, 1, 0])
         }
@@ -489,20 +504,27 @@ struct PedestrianSystem: System {
 
     /// The building doorway beside a sidewalk step, if that block cell
     /// actually holds a building — nil over parks and open cells, so
-    /// nobody fades out into thin air.
+    /// nobody fades out into thin air. On a road edge only the walked
+    /// side counts; centre-walked pavement (offset 0) checks both sides.
     static func doorBeside(cell: SIMD2<Int32>, direction: SIMD2<Int32>,
                            sideOffset: Float,
                            buildings: Set<SIMD2<Int32>>) -> SIMD3<Float>? {
         let here = pavementPoint(cell: cell, direction: direction,
                                  progress: 0, sideOffset: sideOffset)
         let heading = SIMD3<Float>(Float(direction.x), 0, Float(direction.y))
-        let outward = SIMD3<Float>(heading.z, 0, -heading.x)
-            * (sideOffset > 0 ? 1 : -1)
-        let candidate = here + outward * 0.5
-        let building = SIMD2<Int32>(Int32((candidate.x / 0.7).rounded()),
-                                    Int32((candidate.z / 0.7).rounded()))
-        guard buildings.contains(building) else { return nil }
-        return SIMD3<Float>(Float(building.x) * 0.7, 0, Float(building.y) * 0.7)
+        let signs: [Float] = sideOffset == 0 ? [1, -1]
+                                             : [sideOffset > 0 ? 1 : -1]
+        for sign in signs {
+            let outward = SIMD3<Float>(heading.z, 0, -heading.x) * sign
+            let candidate = here + outward * 0.5
+            let building = SIMD2<Int32>(Int32((candidate.x / 0.7).rounded()),
+                                        Int32((candidate.z / 0.7).rounded()))
+            if buildings.contains(building) {
+                return SIMD3<Float>(Float(building.x) * 0.7, 0,
+                                    Float(building.y) * 0.7)
+            }
+        }
+        return nil
     }
 
     /// Run one visit: walk to the door fading out, browse invisibly for a
@@ -920,10 +942,14 @@ enum ArenaEnvironment {
 
         AmbientMotionComponent.registerComponent()
         AmbientMotionSystem.registerSystem()
+        var autoBuildings = Set<SIMD2<Int32>>()
         if !empty {
             if theme.cityBlocks, let footprint {
-                await layCityBlocks(theme: theme, trackID: trackID,
-                                    around: footprint, into: root)
+                autoBuildings = await layCityBlocks(
+                    theme: theme, trackID: trackID, around: footprint,
+                    handPavement: SceneryPlacer.pavementCells(in: scenery),
+                    handBuildings: SceneryPlacer.handBuildingCells(in: scenery),
+                    into: root)
             } else {
                 await scatterProps(theme: theme, trackID: trackID,
                                    around: footprint, into: root)
@@ -936,12 +962,14 @@ enum ArenaEnvironment {
         }
         if !scenery.isEmpty {
             // Placed vehicles drive the same street grid the world laid
-            // (plus any roads the kid placed by hand).
+            // (plus any roads the kid placed by hand); placed people walk
+            // the same joined sidewalk network and know the same doors.
             let autoStreets: Set<SIMD2<Int32>> =
                 (theme.cityBlocks && !empty && footprint != nil)
                     ? autoStreetCells(around: footprint!, clearance: theme.clearance)
                     : []
-            root.addChild(await SceneryPlacer.spawn(scenery, autoStreets: autoStreets))
+            root.addChild(await SceneryPlacer.spawn(
+                scenery, autoStreets: autoStreets, autoBuildings: autoBuildings))
         }
         return root
     }
@@ -974,10 +1002,16 @@ enum ArenaEnvironment {
     /// grid line (crossroads where they meet), buildings filling the
     /// blocks between, each facing its street. Replaces loose scatter,
     /// which read as buildings dropped from the sky.
-    @MainActor
+    /// `handPavement` / `handBuildings` are the kid's own sidewalks and
+    /// buildings — the strollers' network joins them to the city's, and
+    /// returns the auto building cells so placed people learn the same
+    /// doors (`SceneryPlacer.spawn`).
+    @MainActor @discardableResult
     private static func layCityBlocks(theme: Theme, trackID: UUID?,
                                       around footprint: FootprintRect,
-                                      into root: Entity) async {
+                                      handPavement: Set<SIMD2<Int32>> = [],
+                                      handBuildings: Set<SIMD2<Int32>> = [],
+                                      into root: Entity) async -> Set<SIMD2<Int32>> {
         let step: Float = 0.7
         let margin: Float = 5.0
         let trackSeed = trackID.map { id in
@@ -992,13 +1026,13 @@ enum ArenaEnvironment {
                 prototypes.append(entity)
             }
         }
-        guard !prototypes.isEmpty else { return }
+        guard !prototypes.isEmpty else { return [] }
         var tileProtos: [String: Entity] = [:]
         for name in ["street-straight", "street-cross", "street-bend",
                      "street-tee", "street-end"] {
             tileProtos[name] = try? await AssetStore.shared.entity(named: name)
         }
-        guard tileProtos["street-straight"] != nil else { return }
+        guard tileProtos["street-straight"] != nil else { return [] }
 
         let iRange = Int(((footprint.minX - margin) / step).rounded(.down))
             ... Int(((footprint.maxX + margin) / step).rounded(.up))
@@ -1018,7 +1052,7 @@ enum ArenaEnvironment {
         var buildingCells = Set<SIMD2<Int32>>()
         for i in iRange {
             for j in jRange {
-                guard entityCount < 600 else { return }   // runaway-track cap
+                guard entityCount < 600 else { return buildingCells }   // runaway-track cap
                 let x = Float(i) * step
                 let z = Float(j) * step
                 guard !insideTrack(i, j) else { continue }
@@ -1091,7 +1125,12 @@ enum ArenaEnvironment {
         if streets.count > 8 {
             PedestrianComponent.registerComponent()
             PedestrianSystem.registerSystem()
-            let pavement = sidewalkCells(from: streets)
+            // One joined network: the city's road-edge sidewalks plus any
+            // pavement the kid laid, so a hand path off a street is just
+            // another place to stroll to.
+            let roadside = sidewalkCells(from: streets)
+            let pavement = roadside.union(handPavement)
+            let doors = buildingCells.union(handBuildings)
             let people = ["person-a", "person-b", "person-c", "person-d"]
             let strollerCount = min(6, max(2, streets.count / 25))
             for index in 0..<strollerCount {
@@ -1104,13 +1143,14 @@ enum ArenaEnvironment {
                     cells: pavement, cell: start.cell,
                     direction: start.direction,
                     sideOffset: index % 2 == 0 ? -0.26 : 0.26,
-                    buildings: buildingCells, seed: seed))
+                    buildings: doors, roadside: roadside, seed: seed))
                 if let animation = person.availableAnimations.first {
                     person.playAnimation(animation.repeat())
                 }
                 root.addChild(person)
             }
         }
+        return buildingCells
     }
 
     /// The street grid re-sampled at pedestrian resolution (0.35 m — half

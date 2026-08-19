@@ -231,6 +231,36 @@ struct ArenaEnvironmentTests {
             buildings: [SIMD2(1, 1)]) == nil)
     }
 
+    /// A hand-placed person near a road walks the SAME joined network as
+    /// the city strollers — road-edge sidewalks plus hand pavement, with
+    /// the side offset on road cells and the shop-visit door list.
+    @Test func placedPeopleJoinTheCitySidewalks() async {
+        let road: Set<SIMD2<Int32>> = [SIMD2(0, 0), SIMD2(1, 0),
+                                       SIMD2(2, 0), SIMD2(3, 0)]
+        let items = [SceneryItem(model: "person-a", x: 0.7, z: 0.15, yaw: 0),
+                     SceneryItem(model: "city-house-a", x: 0.7, z: 0.7, yaw: 0),
+                     // A hand path leading off the road's sidewalk end.
+                     SceneryItem(model: "city-path-short", x: 2.45, z: 0, yaw: 0)]
+        let root = await SceneryPlacer.spawn(items, autoStreets: road)
+        let person = root.children[0].components[PedestrianComponent.self]
+        #expect(person?.seeking == true)
+        #expect(person?.sideOffset != 0)
+        #expect(person?.buildings.contains(SIMD2(1, 1)) == true)
+        // The road's sidewalk cells and the hand path share one graph,
+        // adjacent where they meet — sidewalks join together.
+        #expect(person?.cells.contains(SIMD2(6, 0)) == true)   // road edge
+        #expect(person?.cells.contains(SIMD2(7, 0)) == true)   // hand path
+        #expect(person?.roadside.contains(SIMD2(6, 0)) == true)
+        #expect(person?.roadside.contains(SIMD2(7, 0)) == false)
+    }
+
+    /// Hand-placed buildings become doors people can pop into.
+    @Test func handPlacedBuildingsGetDoors() {
+        let items = [SceneryItem(model: "city-shop-a", x: 1.4, z: -0.7, yaw: 0),
+                     SceneryItem(model: "park-tree-oak", x: 0.7, z: 0, yaw: 0)]
+        #expect(SceneryPlacer.handBuildingCells(in: items) == [SIMD2(2, -1)])
+    }
+
     /// Hand-laid street tiles extend the traffic graph (0.7 m snap).
     @Test func handLaidTilesJoinTheStreetGraph() {
         let items = [SceneryItem(model: "street-straight", x: 1.4, z: 0, yaw: 0),

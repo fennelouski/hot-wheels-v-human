@@ -209,6 +209,22 @@ enum SceneryPlacer {
         return cells
     }
 
+    /// Hand-placed buildings people can pop into (the 1-in-100 shop
+    /// visit): anything with a door, mapped to its 0.7 m street-grid cell.
+    static func isBuilding(_ model: String) -> Bool {
+        model.hasPrefix("city-house") || model.hasPrefix("city-shop")
+            || model.hasPrefix("city-skyscraper")
+    }
+
+    static func handBuildingCells(in items: [SceneryItem]) -> Set<SIMD2<Int32>> {
+        var cells = Set<SIMD2<Int32>>()
+        for item in items where isBuilding(item.model) {
+            cells.insert(SIMD2(Int32((item.x / 0.7).rounded()),
+                               Int32((item.z / 0.7).rounded())))
+        }
+        return cells
+    }
+
     /// Street cells implied by hand-placed road tiles (street-* snap to
     /// the 0.7 m traffic grid) — unioned with a world's auto-laid grid so
     /// traffic drives the kid's roads too.
@@ -233,10 +249,13 @@ enum SceneryPlacer {
 
     /// `autoStreets` is the world's own road grid (empty for worlds
     /// without one); hand-laid street tiles in `items` extend it, and
-    /// placed vehicles drive the union.
+    /// placed vehicles drive the union. Placed people walk ONE joined
+    /// sidewalk network — the road edges plus hand-laid pavement — and
+    /// `autoBuildings` (the world's block cells) joins their door list.
     static func spawn(_ items: [SceneryItem], tappable: Bool = false,
                       highlight: Int? = nil,
                       autoStreets: Set<SIMD2<Int32>> = [],
+                      autoBuildings: Set<SIMD2<Int32>> = [],
                       assets: AssetStore? = nil) async -> Entity {
         let assets = assets ?? AssetStore.shared
         AmbientMotionComponent.registerComponent()
@@ -250,7 +269,12 @@ enum SceneryPlacer {
         PedestrianComponent.registerComponent()
         PedestrianSystem.registerSystem()
         let streets = autoStreets.union(handStreetCells(in: items))
-        let pavement = pavementCells(in: items)
+        // People walk one network: the streets' sidewalk edges joined
+        // with hand-laid pavement (same 0.35 m grid, so adjacent cells
+        // connect and a hand path can lead off a city street).
+        let roadside = ArenaEnvironment.sidewalkCells(from: streets)
+        let pavement = pavementCells(in: items).union(roadside)
+        let doors = autoBuildings.union(handBuildingCells(in: items))
         let root = Entity()
         root.name = name(for: items)
         for (index, item) in items.enumerated() {
@@ -282,6 +306,8 @@ enum SceneryPlacer {
                        - entity.position) < 1.5 {
                     entity.components.set(PedestrianComponent(
                         cells: pavement, cell: target, direction: SIMD2(0, 1),
+                        sideOffset: index % 2 == 0 ? -0.26 : 0.26,
+                        buildings: doors, roadside: roadside,
                         seeking: true, worldPos: entity.position, seed: seed))
                 } else {
                     entity.components.set(WalkerComponent(
