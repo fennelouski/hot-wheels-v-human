@@ -187,6 +187,50 @@ struct ArenaEnvironmentTests {
         #expect(farPerson.components[WalkerComponent.self] != nil)
     }
 
+    /// City worlds spawn their own sidewalk strollers: pedestrians on the
+    /// street edges (side offset), who know which cells hold buildings so
+    /// the 1-in-100 shop visit has real doors to walk into.
+    @Test func citySidewalksBustleOnTheirOwn() async {
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "city",
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let strollers = env.children.compactMap {
+            $0.components[PedestrianComponent.self] }
+        #expect(strollers.count >= 2)
+        #expect(strollers.allSatisfy { $0.sideOffset != 0 })
+        #expect(strollers.allSatisfy { !$0.buildings.isEmpty })
+        #expect(strollers.allSatisfy { $0.cells.contains($0.cell) })
+    }
+
+    /// The sidewalk graph is the street grid at half resolution: doubled
+    /// cells plus the midpoints between adjacent road cells, so it
+    /// connects wherever the road does.
+    @Test func sidewalkGraphHugsTheStreets() {
+        let road: Set<SIMD2<Int32>> = [SIMD2(0, 0), SIMD2(0, 1), SIMD2(0, 2)]
+        let pavement = ArenaEnvironment.sidewalkCells(from: road)
+        #expect(pavement == [SIMD2(0, 0), SIMD2(0, 1), SIMD2(0, 2),
+                             SIMD2(0, 3), SIMD2(0, 4)])
+        // A lone road cell contributes no walkable connection.
+        #expect(ArenaEnvironment.sidewalkCells(from: [SIMD2(5, 5)])
+            == [SIMD2(10, 10)])
+    }
+
+    /// The shop-visit roll only fires when a building actually sits
+    /// beside the sidewalk — nobody fades out into an empty park cell.
+    @Test func shoppersOnlyEnterRealBuildings() {
+        // Walking north up street column 0, on the west edge: the west
+        // neighbour of street cell (0, 1) is block cell (-1, 1).
+        let door = PedestrianSystem.doorBeside(
+            cell: SIMD2(0, 2), direction: SIMD2(0, 1), sideOffset: -0.26,
+            buildings: [SIMD2(-1, 1)])
+        #expect(door != nil)
+        #expect(door.map { abs($0.x + 0.7) < 0.001 && abs($0.z - 0.7) < 0.001 } == true)
+        // Same step, building only on the OTHER side: no visit.
+        #expect(PedestrianSystem.doorBeside(
+            cell: SIMD2(0, 2), direction: SIMD2(0, 1), sideOffset: -0.26,
+            buildings: [SIMD2(1, 1)]) == nil)
+    }
+
     /// Hand-laid street tiles extend the traffic graph (0.7 m snap).
     @Test func handLaidTilesJoinTheStreetGraph() {
         let items = [SceneryItem(model: "street-straight", x: 1.4, z: 0, yaw: 0),
