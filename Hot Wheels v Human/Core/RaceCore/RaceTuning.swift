@@ -390,6 +390,15 @@ nonisolated enum RaceTuning {
     static let driverHeightRatio: Float = 0.9
     /// How far below the car's roofline the driver sinks (fraction of car height).
     static let driverSinkRatio: Float = 0.5
+    /// Car models with a CLOSED cab — a driver sunk into these pokes out
+    /// through the roof, so CarFactory seats nobody (they're driving
+    /// inside, you just can't see them). Verified by rendering every
+    /// body-shop GLB: the rest are open-cockpit/open-top.
+    static let closedCabModels: Set<String> = [
+        "race-future", "sedan-sports", "suv", "truck",
+        "vehicle-monster-truck", "vehicle-racer", "vehicle-racer-low",
+        "vehicle-truck",
+    ]
     /// Head JOINT (neck top) height as a fraction of the rig's source
     /// height — the dress-up wardrobe's bind-pose fallback anchor when
     /// HeadPinSystem can't find the skinned joint. Matches the reaction

@@ -132,9 +132,11 @@ enum CarFactory {
         // The little human, in the roster's DRIVE pose — hands out on the
         // wheel. The old standing rig had to be sunk hip-deep with its legs
         // hidden inside the chassis to read as seated; a real sitting pose
-        // retires that trick.
+        // retires that trick. Closed-cab cars seat nobody: sunk hip-deep,
+        // the driver pokes out through the roof.
         let profile = design.driver ?? DriverProfile.presets[0]
-        if let driver = try? await assets.entity(named: profile.modelName(pose: .drive)) {
+        if !RaceTuning.closedCabModels.contains(design.modelName),
+           let driver = try? await assets.entity(named: profile.modelName(pose: .drive)) {
             await DriverPainter.apply(profile, to: driver)
             let carHeight = bounds.extents.y
             let scale = carHeight * RaceTuning.driverHeightRatio / RaceTuning.driverSourceHeight
