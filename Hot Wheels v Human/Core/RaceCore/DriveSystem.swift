@@ -166,6 +166,12 @@ struct DriveSystem: System {
             if follow.nextIndex < wp.count - 1 {
                 follow.nextIndex += 1
                 follow.fraction = 0
+                // Portal: the segment just entered is a teleport gap —
+                // cross it instantly (into one ring, out of the other).
+                if follow.teleports.contains(follow.nextIndex - 1),
+                   follow.nextIndex < wp.count - 1 {
+                    follow.nextIndex += 1
+                }
             } else {
                 follow.fraction = 1   // end of lane — rules catch the finish
                 break
@@ -233,7 +239,8 @@ struct DriveSystem: System {
         // ── Drift: corners demand v²·κ of grip; what the stats can't hold
         // becomes a lateral slide (capped inside the rails) + slip yaw.
         var driftTarget: Float = 0
-        if !follow.airborne, !inLoop, follow.nextIndex + 1 < wp.count {
+        if !follow.airborne, !inLoop, follow.nextIndex + 1 < wp.count,
+           !follow.teleports.contains(follow.nextIndex) {   // gap ≠ a corner
             let ahead = wp[follow.nextIndex + 1] - b
             let aheadLength = simd_length(ahead)
             let segLength = simd_length(b - a)

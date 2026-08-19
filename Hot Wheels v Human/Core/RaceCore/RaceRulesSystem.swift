@@ -145,7 +145,12 @@ struct RaceRulesSystem: System {
 
             // ── Destruction checks.
             var reason: String?
-            if position.y < -RaceTuning.destructionFallDepth {
+            // Relative to the car's own lane, not to y = 0 — an
+            // underground section legitimately drives below the world.
+            let laneY = follow.waypoints.isEmpty ? 0
+                : follow.waypoints[min(follow.nextIndex,
+                                       follow.waypoints.count - 1)].y
+            if position.y < laneY - RaceTuning.destructionFallDepth {
                 reason = "fell"
             }
             if let anchor = state.stuckAnchor,

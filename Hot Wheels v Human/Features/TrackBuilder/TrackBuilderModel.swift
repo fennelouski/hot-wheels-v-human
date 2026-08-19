@@ -15,6 +15,12 @@ import SwiftData
 final class TrackBuilderModel {
 
     private(set) var types: [PieceType] = [.startGate]
+    /// Portal exit spots, keyed by SEGMENT INDEX of the portalOut piece.
+    /// Indices are stable because mutations are append/removeLast only.
+    private(set) var portalExits: [Int: SIMD2<Float>] = [:]
+    /// The portal exit awaiting placement — the next ground tap puts it
+    /// there (then normal tapping resumes).
+    private(set) var placingPortalIndex: Int?
     /// Picked world (ArenaEnvironment theme name); nil = surprise me.
     private(set) var worldTheme: String?
     /// Hand-placed decorations — any prop from any world.
@@ -54,6 +60,8 @@ final class TrackBuilderModel {
     func canAppend(_ type: PieceType) -> Bool {
         guard !hasFinish, types.count < RaceTuning.maxTrackPieces else { return false }
         guard type != .startGate else { return false }
+        // Portals only arrive as a pair, through appendPortal().
+        guard type != .portalIn, type != .portalOut else { return false }
         let candidate = makeBlueprint(types + [type])
         // Finish gate must produce a fully valid track; anything else only
         // needs to keep the structure sound (ending comes later).
@@ -70,24 +78,85 @@ final class TrackBuilderModel {
     }
 
     func removeLast() {
-        if types.count > 1 {
+        guard types.count > 1 else { return }
+        // Portals leave as the pair they arrived as — a lone ring is
+        // nothing (and the validator would brick every further append).
+        if types.last == .portalOut {
+            portalExits.removeValue(forKey: types.count - 1)
+            placingPortalIndex = nil
             types.removeLast()
-            SoundBank.shared.play("piece_delete_pop")
         }
+        types.removeLast()
+        SoundBank.shared.play("piece_delete_pop")
     }
 
     func clear() {
         types = [.startGate]
         scenery = []
         movingIndex = nil
+        portalExits = [:]
+        placingPortalIndex = nil
     }
 
     /// "Start from one of these" — replace the build with a preset track.
     func load(preset: TrackBlueprint) {
         types = preset.segments.map(\.type)
+        portalExits = Dictionary(uniqueKeysWithValues:
+            preset.segments.compactMap { segment in
+                guard let x = segment.portalX, let z = segment.portalZ else { return nil }
+                return (segment.index, SIMD2(x, z))
+            })
+        placingPortalIndex = nil
         worldTheme = preset.worldTheme
         scenery = preset.scenery ?? []
         SoundBank.shared.play("confirm_sparkle")
+    }
+
+    // MARK: Portals
+
+    /// Any piece of the track below the ground? (The 3D view fades the
+    /// terrain so digging feels fluid — never a fight with the dirt.)
+    var isDigging: Bool {
+        layout.pieces.contains {
+            min($0.entryLevel, $0.entryLevel + $0.definition.elevationDelta) < 0
+        }
+    }
+
+    var canAppendPortal: Bool {
+        !hasFinish && types.count + 2 <= RaceTuning.maxTrackPieces
+    }
+
+    /// Add a portal PAIR: the entry ring on the open exit, the exit ring
+    /// at a default spot beside the track — then the next ground tap
+    /// moves it wherever the kid wants.
+    func appendPortal() {
+        guard canAppendPortal else {
+            SoundBank.shared.play("nope_wobble")
+            return
+        }
+        let exit = layout.exitPosition
+        let side = rotated([1.6, 0, 0], by: layout.exitYaw)
+        types.append(.portalIn)
+        types.append(.portalOut)
+        portalExits[types.count - 1] = SIMD2(exit.x + side.x, exit.z + side.z)
+        placingPortalIndex = types.count - 1
+        SoundBank.shared.play("track_snap_connect")
+    }
+
+    /// Set the pending portal exit down where the kid tapped — rejected
+    /// (with the nope sound) if the track would land on top of itself.
+    func placePortalExit(atX x: Float, z: Float) {
+        guard let index = placingPortalIndex else { return }
+        let previous = portalExits[index]
+        portalExits[index] = SIMD2(x, z)
+        let check = BlueprintValidator.validate(blueprint, requireEnding: false)
+        guard check.isValid else {
+            portalExits[index] = previous
+            SoundBank.shared.play("nope_wobble")
+            return
+        }
+        placingPortalIndex = nil
+        SoundBank.shared.play("track_snap_connect")
     }
 
     /// Tiles tile: street pieces snap to the FULL 0.7 m traffic grid
@@ -162,6 +231,8 @@ final class TrackBuilderModel {
     }
 
     func shuffle() {
+        portalExits = [:]
+        placingPortalIndex = nil
         types = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
             .segments.map(\.type)
         SoundBank.shared.play("shuffle_dice")
@@ -179,6 +250,10 @@ final class TrackBuilderModel {
 
     private func makeBlueprint(_ types: [PieceType]) -> TrackBlueprint {
         TrackBlueprint(trackId: UUID(), lanes: 2,
-                       segments: types.enumerated().map { SegmentSpec(index: $0.offset, type: $0.element) })
+                       segments: types.enumerated().map { index, type in
+                           SegmentSpec(index: index, type: type,
+                                       portalX: portalExits[index]?.x,
+                                       portalZ: portalExits[index]?.y)
+                       })
     }
 }

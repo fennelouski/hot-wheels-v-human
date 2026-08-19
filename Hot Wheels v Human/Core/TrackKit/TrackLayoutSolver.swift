@@ -48,6 +48,11 @@ nonisolated struct LaneSplines: Sendable {
     /// the full track frame — the rail follower derives its up vector from
     /// `cross(tangent, lateral)` so cars roll correctly through the loop.
     var laterals: [SIMD3<Float>] = []
+    /// Waypoint indices i where the segment [i, i+1] is a PORTAL jump —
+    /// the gap between a portalIn's last waypoint and its portalOut's
+    /// first. The rail follower crosses these instantly (teleport) instead
+    /// of driving the distance.
+    var teleports: Set<Int> = []
 }
 
 nonisolated struct TrackLayout: Sendable {
@@ -82,23 +87,30 @@ nonisolated enum TrackLayoutSolver {
 
     /// Places every segment. Does NOT validate — BlueprintValidator uses this
     /// same placement to check overlaps/closure, so they can never disagree.
+    ///
+    /// Down means DOWN: the start gate sits at ground level and a hillDown
+    /// from there digs UNDERGROUND (negative levels). The solver used to
+    /// lift the whole layout so its lowest point rested on the ground —
+    /// that made underground impossible and turned a leading descent into
+    /// an elevated start. Underground is a feature now (tunnels through
+    /// hills, whole tracks buried); an elevated start is built the honest
+    /// way, with hillUps first.
     static func solve(_ blueprint: TrackBlueprint) -> TrackLayout {
         var pieces: [PlacedPiece] = []
-        // Levels are RELATIVE until we know how far the track digs, then the
-        // whole thing is lifted so its lowest point rests on the ground.
-        // That is what lets a track start on a descent: the start gate ends
-        // up above ground and the finish at level 0, instead of the first
-        // hillDown reading as "underground" and being rejected. It also
-        // makes underground impossible by construction — the validator used
-        // to carry a rule for it and no longer needs one.
         let defs = definitions(for: blueprint)
-        let startLevel = -min(0, runningLevels(defs).min() ?? 0)
-        var position = SIMD3<Float>(0, Float(startLevel) * RaceTuning.elevationLevelHeight, 0)
+        var position = SIMD3<Float>.zero
         let startPosition = position
         var yaw: Float = 0
-        var level = startLevel
+        var level = 0
 
         for (segment, def) in zip(blueprint.segments, defs) {
+            // A portal exit doesn't attach to the previous piece — the
+            // chain teleports to wherever the kid placed it (same height;
+            // the ring leads where the ring leads).
+            if def.type == .portalOut, let px = segment.portalX,
+               let pz = segment.portalZ {
+                position = SIMD3<Float>(px, position.y, pz)
+            }
             pieces.append(PlacedPiece(
                 index: segment.index, definition: def,
                 entryPosition: position, entryYaw: yaw, entryLevel: level))
@@ -112,17 +124,6 @@ nonisolated enum TrackLayoutSolver {
             lanes: splines(for: pieces),
             startPosition: startPosition,
             exitPosition: position, exitYaw: yaw, exitLevel: level)
-    }
-
-    /// Elevation level at every piece's ENTRY plus the final exit, measured
-    /// from a level-0 start. Only the minimum is interesting — it says how
-    /// far the track would dig below ground if it started there.
-    private static func runningLevels(_ defs: [TrackPieceDefinition]) -> [Int] {
-        var level = 0
-        return [0] + defs.map {
-            level += $0.elevationDelta
-            return level
-        }
     }
 
     /// One definition per segment, with each hill resolved against its
@@ -161,9 +162,17 @@ nonisolated enum TrackLayoutSolver {
         var laterals: [SIMD3<Float>] = []
         var widths: [Float] = []
         var pieceStarts: [Int] = []
+        var teleports: Set<Int> = []
 
         for piece in pieces {
             pieceStarts.append(center.count)
+            // The gap from the previous piece to a portal exit is a
+            // teleport, not a drive — but only when the exit really was
+            // placed elsewhere (a coord-less portalOut is a plain straight).
+            if piece.definition.type == .portalOut, let last = center.last,
+               simd_length(last - piece.entryPosition) > 0.2 {
+                teleports.insert(center.count - 1)
+            }
             let (localCenter, localLateral) = localCenterline(piece.definition)
             for (p, lat) in zip(localCenter, localLateral) {
                 let world = piece.entryPosition + rotated(p, by: piece.entryYaw)
@@ -197,7 +206,8 @@ nonisolated enum TrackLayoutSolver {
             right.append(center[i] - laterals[i] * smoothed[i])
         }
         return LaneSplines(center: center, left: left, right: right,
-                           pieceStartIndices: pieceStarts, laterals: laterals)
+                           pieceStartIndices: pieceStarts, laterals: laterals,
+                           teleports: teleports)
     }
 
     /// Fraction of the rise reached at `t` along a measured bed profile.

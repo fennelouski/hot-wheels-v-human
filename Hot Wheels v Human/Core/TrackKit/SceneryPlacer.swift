@@ -237,14 +237,49 @@ enum SceneryPlacer {
         return cells
     }
 
+    /// Barrier roads: a dead-end road tile with a roadblock standing on
+    /// it. NPC traffic reaching one TURNS AROUND instead of fading out
+    /// (TrafficComponent.barriers). Two looks; both are composed from
+    /// pieces already in the bundle.
+    static let barrierRoads: [String: String] = [
+        "street-barrier-a": "build-barrier",    // construction roadblock
+        "street-barrier-b": "city-fence",       // white picket roadblock
+    ]
+
+    static func isBarrierRoad(_ model: String) -> Bool {
+        barrierRoads.keys.contains(model)
+    }
+
+    /// Cells of hand-placed barrier roads (0.7 m street grid).
+    static func barrierCells(in items: [SceneryItem]) -> Set<SIMD2<Int32>> {
+        var cells = Set<SIMD2<Int32>>()
+        for item in items where isBarrierRoad(item.model) {
+            cells.insert(SIMD2(Int32((item.x / 0.7).rounded()),
+                               Int32((item.z / 0.7).rounded())))
+        }
+        return cells
+    }
+
     /// One resolver for every placeable thing: kit models come from the
-    /// AssetStore, sky-stuff is generated. (Tests use this too — it is
-    /// the definition of "this palette entry actually works".)
+    /// AssetStore, sky-stuff is generated, barrier roads are composed.
+    /// (Tests use this too — it is the definition of "this palette entry
+    /// actually works".)
     static func entity(for model: String, assets: AssetStore? = nil) async -> Entity? {
         if SpaceStuff.isSpaceStuff(model) {
             return await SpaceStuff.make(model)
         }
-        return try? await (assets ?? AssetStore.shared).entity(named: model)
+        let store = assets ?? AssetStore.shared
+        if let blockModel = barrierRoads[model] {
+            // Dead-end tile (open side faces −z at yaw 0) with the
+            // roadblock standing across its closed end.
+            guard let tile = try? await store.entity(named: "street-end"),
+                  let block = try? await store.entity(named: blockModel)
+            else { return nil }
+            block.position = [0, 0.005, 0.22]
+            tile.addChild(block)
+            return tile
+        }
+        return try? await store.entity(named: model)
     }
 
     /// `autoStreets` is the world's own road grid (empty for worlds
@@ -269,6 +304,7 @@ enum SceneryPlacer {
         PedestrianComponent.registerComponent()
         PedestrianSystem.registerSystem()
         let streets = autoStreets.union(handStreetCells(in: items))
+        let barriers = barrierCells(in: items)
         // People walk one network: the streets' sidewalk edges joined
         // with hand-laid pavement (same 0.35 m grid, so adjacent cells
         // connect and a hand path can lead off a city street).
@@ -322,7 +358,8 @@ enum SceneryPlacer {
                     // Drive to the nearest road, then join traffic.
                     entity.components.set(TrafficComponent(
                         cells: streets, cell: target, direction: SIMD2(0, 1),
-                        seeking: true, worldPos: entity.position, seed: seed))
+                        seeking: true, worldPos: entity.position,
+                        barriers: barriers, seed: seed))
                     entity.components.set(OpacityComponent(opacity: 0))
                 } else {
                     // No roads anywhere: wander near the placement spot.

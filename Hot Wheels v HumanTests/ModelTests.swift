@@ -115,10 +115,32 @@ struct ModelTests {
         #expect(reencoded == blueprint)
     }
 
+    /// Portal exit coords are additive optionals on SegmentSpec — old
+    /// JSON without them decodes, new JSON round-trips them.
+    @Test func portalCoordsRideTheWireAdditively() throws {
+        let legacy = try JSONDecoder().decode(
+            SegmentSpec.self,
+            from: Data(#"{ "index": 1, "type": "straight" }"#.utf8))
+        #expect(legacy.portalX == nil && legacy.portalZ == nil)
+
+        var blueprint = TrackBlueprint.demo
+        blueprint.segments = [
+            SegmentSpec(index: 0, type: .startGate),
+            SegmentSpec(index: 1, type: .portalIn),
+            SegmentSpec(index: 2, type: .portalOut, portalX: 4.2, portalZ: -1.4),
+            SegmentSpec(index: 3, type: .finishGate),
+        ]
+        let reencoded = try JSONDecoder().decode(
+            TrackBlueprint.self, from: JSONEncoder().encode(blueprint))
+        #expect(reencoded == blueprint)
+        #expect(reencoded.segments[2].portalX == 4.2)
+    }
+
     @Test func wireRawValuesAreStable() {
         #expect(PieceType.allCases.map(\.rawValue) == [
             "startGate", "finishGate", "straight", "curve90L", "curve90R",
             "curveLarge", "hillUp", "hillDown", "bump", "loop", "rampJump",
+            "portalIn", "portalOut",
         ])
         #expect(ChassisClass.allCases.map(\.rawValue) ==
                 ["heavyMuscle", "balancedFormula", "superlightDrift"])

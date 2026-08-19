@@ -162,6 +162,10 @@ struct TrafficComponent: Component {
     /// then join the network and stay on it.
     var seeking: Bool = false
     var worldPos: SIMD3<Float> = .zero
+    /// Barrier-road cells (hand-placed `street-barrier-*` tiles): a road
+    /// end with a barrier is a TURN-AROUND, not a fade-out — the car
+    /// respects the roadblock and heads back the way it came.
+    var barriers: Set<SIMD2<Int32>> = []
     var seed: UInt64
 }
 
@@ -258,6 +262,9 @@ struct TrafficSystem: System {
                 if let next = Self.exit(from: car.cell, cells: car.cells,
                                         avoid: car.direction &* -1, seed: &car.seed) {
                     car.direction = next
+                } else if car.barriers.contains(car.cell) {
+                    // A barrier road: turn around and drive back.
+                    car.direction = car.direction &* -1
                 } else {
                     car.fading = true                    // road ends here
                 }
@@ -560,6 +567,46 @@ struct PedestrianSystem: System {
         let doorDistance = simd_length(door - entity.position)
         entity.components.set(OpacityComponent(
             opacity: min(1, doorDistance / 0.3)))
+    }
+}
+
+/// X-ray ground: while any car is UNDER the terrain (an underground track
+/// section, a tunnel through a hill) the ground fades to ~30% so the kid
+/// never loses sight of their car. Fades back the moment everyone
+/// surfaces. The builder forces the fade while a dug track is being built
+/// (`forced`) — no cars there to trigger it.
+struct GroundFadeComponent: Component {
+    var forced: Float? = nil
+    var opacity: Float = 1
+}
+
+struct GroundFadeSystem: System {
+    private static let grounds = EntityQuery(where: .has(GroundFadeComponent.self))
+    private static let cars = EntityQuery(where: .has(CarComponent.self))
+    /// Visual-only numbers (same rule as the ground/sky constants).
+    static let fadedOpacity: Float = 0.3
+    private static let fadeRate: Float = 3
+
+    init(scene: Scene) {}
+
+    func update(context: SceneUpdateContext) {
+        let dt = Float(context.deltaTime)
+        var buried = false
+        for car in context.entities(matching: Self.cars,
+                                    updatingSystemWhen: .rendering) {
+            if car.position(relativeTo: nil).y < -0.05 {
+                buried = true
+                break
+            }
+        }
+        for ground in context.entities(matching: Self.grounds,
+                                       updatingSystemWhen: .rendering) {
+            guard var fade = ground.components[GroundFadeComponent.self] else { continue }
+            let target = fade.forced ?? (buried ? Self.fadedOpacity : 1)
+            fade.opacity += (target - fade.opacity) * min(1, Self.fadeRate * dt)
+            ground.components.set(fade)
+            ground.components.set(OpacityComponent(opacity: fade.opacity))
+        }
     }
 }
 
@@ -897,15 +944,26 @@ enum ArenaEnvironment {
     /// `empty` keeps the theme's sky, colors, and terrain but none of the
     /// auto-placed stuff (scatter, blocks, horizon, train) — a blank
     /// world for kids who want to design everything themselves.
+    /// `tunnels` are the ground rects of track pieces that dip BELOW the
+    /// ground — the terrain mounds a hill over each, so an underground run
+    /// reads as driving through a hill rather than through a floor.
     @MainActor
     static func make(for trackID: UUID?, theme themeName: String? = nil,
                      scenery: [SceneryItem] = [], empty: Bool = false,
+                     tunnels: [FootprintRect] = [],
                      around footprint: FootprintRect?) async -> Entity {
         let theme = theme(named: themeName, for: trackID)
         let groundless = RaceTuning.groundlessThemes.contains(theme.name)
         // Terrain stays FLAT here: the track, its prop ring, and the
-        // kid's placements all sit at y = 0. Hills start beyond.
+        // kid's placements all sit at y = 0. Hills start beyond — except
+        // the mounds over underground sections.
         let flatZone = flatRect(around: footprint)
+        let mounds = tunnels.map { rect in
+            TunnelMound(
+                center: SIMD2((rect.minX + rect.maxX) / 2,
+                              (rect.minZ + rect.maxZ) / 2),
+                radius: max(rect.maxX - rect.minX, rect.maxZ - rect.minZ) / 2 + 0.8)
+        }
         let root = Entity()
         root.name = name(for: trackID, theme: themeName, scenery: scenery)
 
@@ -922,9 +980,13 @@ enum ArenaEnvironment {
 
         if !groundless {
             let ground = ModelEntity(
-                mesh: terrainMesh(flat: flatZone),
+                mesh: terrainMesh(flat: flatZone, mounds: mounds),
                 materials: [await groundMaterial(theme)])
+            ground.name = "terrain"
             ground.position.y = -0.03
+            GroundFadeComponent.registerComponent()
+            GroundFadeSystem.registerSystem()
+            ground.components.set(GroundFadeComponent())
             root.addChild(ground)
         }
 
@@ -1237,27 +1299,50 @@ enum ArenaEnvironment {
                              maxX: f.maxX + 6, maxZ: f.maxZ + 6)
     }
 
+    /// A hill mounded over an underground track section — the dirt the
+    /// car drives through.
+    struct TunnelMound: Equatable {
+        var center: SIMD2<Float>
+        var radius: Float
+        /// How high the dome crests, metres. Tall enough to read as a
+        /// hill over a one-level dig (bed at −0.2).
+        static let height: Float = 0.5
+    }
+
     /// Ground height at (x, z): 0 inside the flat zone, gentle rolling
-    /// hills fading in beyond it, and a mountain rim near the world's
-    /// edge so the horizon has a shape instead of a table edge.
-    private static func terrainHeight(x: Float, z: Float,
-                                      flat: FootprintRect) -> Float {
+    /// hills fading in beyond it, a mountain rim near the world's edge so
+    /// the horizon has a shape instead of a table edge — plus a smooth
+    /// dome over every tunnel (cosine falloff; overlapping domes merge as
+    /// a ridge via max, not a sum of lumps).
+    static func terrainHeight(x: Float, z: Float, flat: FootprintRect,
+                              mounds: [TunnelMound] = []) -> Float {
+        var mound: Float = 0
+        for m in mounds {
+            let d = simd_length(SIMD2(x, z) - m.center)
+            if d < m.radius {
+                mound = max(mound, TunnelMound.height
+                    * (0.5 + 0.5 * cos(.pi * d / m.radius)))
+            }
+        }
         let dx = max(0, max(flat.minX - x, x - flat.maxX))
         let dz = max(0, max(flat.minZ - z, z - flat.maxZ))
         let distance = sqrt(dx * dx + dz * dz)
-        guard distance > 0 else { return 0 }
+        guard distance > 0 else { return mound }
         let fade = min(1, distance / 8)
         let rolling = 0.35 * sin(x * 0.31) * cos(z * 0.27)
             + 0.14 * sin(x * 0.83 + z * 0.51)
         let edge = max(abs(x), abs(z))
         let rim = simd_smoothstep(groundSize / 2 - 13, groundSize / 2 - 2, edge) * 2.4
-        return max(0, rolling * fade) + rim
+        return max(0, rolling * fade) + rim + mound
     }
 
     /// Low-poly heightfield over the whole ground square, checker UVs
     /// matching the old flat plane. Normals come from MeshDescriptor.
-    private static func terrainMesh(flat: FootprintRect) -> MeshResource {
-        let n = 72
+    /// 120 segments ≈ 0.75 m spacing — fine enough that a tunnel mound
+    /// (radius ≥ 1.2) renders as a dome, not an aliased spike.
+    private static func terrainMesh(flat: FootprintRect,
+                                    mounds: [TunnelMound] = []) -> MeshResource {
+        let n = 120
         var positions: [SIMD3<Float>] = []
         var uvs: [SIMD2<Float>] = []
         positions.reserveCapacity((n + 1) * (n + 1))
@@ -1265,7 +1350,8 @@ enum ArenaEnvironment {
             for ix in 0...n {
                 let x = -groundSize / 2 + Float(ix) / Float(n) * groundSize
                 let z = -groundSize / 2 + Float(iz) / Float(n) * groundSize
-                positions.append([x, terrainHeight(x: x, z: z, flat: flat), z])
+                positions.append([x, terrainHeight(x: x, z: z, flat: flat,
+                                                   mounds: mounds), z])
                 uvs.append([Float(ix) / Float(n) * groundTiles,
                             Float(iz) / Float(n) * groundTiles])
             }

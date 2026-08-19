@@ -25,6 +25,25 @@ struct RailFollowerTests {
         return LaneFollowComponent(waypoints: wp)
     }
 
+    /// A portal gap is crossed INSTANTLY: the car is never placed inside
+    /// the jump segment — one frame it's at the entry ring, the next it's
+    /// driving out of the exit ring across the map.
+    @Test func portalGapIsTeleportedNotDriven() {
+        // 1 m of lane, then an 8 m portal jump, then 1 m more.
+        var wp = (0...10).map { SIMD3<Float>(0, 0, Float($0) * 0.1) }
+        wp += (0...10).map { SIMD3<Float>(8, 0, 5 + Float($0) * 0.1) }
+        var follow = LaneFollowComponent(waypoints: wp, teleports: [10])
+        var state = makeState()
+        var arrived = false
+        for _ in 0..<900 {
+            let pose = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+            // Never in the void between the rings.
+            #expect(pose.position.x < 0.1 || pose.position.x > 7.9)
+            if pose.position.x > 7.9 { arrived = true }
+        }
+        #expect(arrived)   // it came out the other portal
+    }
+
     @Test func advancesMonotonicallyAndStaysOnLane() {
         var follow = flatLane()
         var state = makeState()

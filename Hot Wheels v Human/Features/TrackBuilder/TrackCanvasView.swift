@@ -109,6 +109,8 @@ extension PieceType {
         case .rampJump: "airplane.departure"
         case .hillUp: "chevron.up"
         case .hillDown: "chevron.down"
+        case .portalIn: "circle.circle"
+        case .portalOut: "circle.circle.fill"
         }
     }
 }

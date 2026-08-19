@@ -126,10 +126,16 @@ final class RaceSession {
         // field. Building it here, awaited, closes that gap; ArenaView's
         // update sees the wanted holder name already present and skips.
         if let holder = root.findEntity(named: "environment") {
+            // Pieces that dip below ground get a hill mounded over them —
+            // the tunnel the car drives through.
+            let tunnels = layout.pieces
+                .filter { min($0.entryLevel,
+                              $0.entryLevel + $0.definition.elevationDelta) < 0 }
+                .map(\.worldFootprint)
             let environment = await ArenaEnvironment.make(
                 for: blueprint.trackId, theme: blueprint.worldTheme,
                 scenery: scenery, empty: blueprint.worldEmpty ?? false,
-                around: trackFootprint)
+                tunnels: tunnels, around: trackFootprint)
             holder.children.removeAll()
             holder.addChild(environment)
         }
@@ -167,7 +173,8 @@ final class RaceSession {
             let car = try await CarFactory.makeCar(
                 design: design, playerID: playerID, lane: lane,
                 lives: lives, loopRanges: loopRanges,
-                laterals: layout.lanes.laterals)
+                laterals: layout.lanes.laterals,
+                teleports: layout.lanes.teleports)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so

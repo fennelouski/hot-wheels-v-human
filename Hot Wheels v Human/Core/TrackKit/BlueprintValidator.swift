@@ -48,6 +48,22 @@ nonisolated enum BlueprintValidator {
             reasons.append("Only one finish gate allowed.")
         }
 
+        // Portals travel in pairs, IN then OUT, back to back — the gap
+        // between them IS the teleport, so nothing may sit inside it.
+        for (i, segment) in blueprint.segments.enumerated() {
+            if segment.type == .portalIn,
+               i + 1 >= blueprint.segments.count
+                   || blueprint.segments[i + 1].type != .portalOut {
+                reasons.append("A portal needs its exit ring right after it.")
+                break
+            }
+            if segment.type == .portalOut,
+               i == 0 || blueprint.segments[i - 1].type != .portalIn {
+                reasons.append("A portal exit needs its entry ring right before it.")
+                break
+            }
+        }
+
         let layout = TrackLayoutSolver.solve(blueprint)
 
         // A race ends at a finish gate (sprint) or back at the start (circuit).
@@ -59,11 +75,11 @@ nonisolated enum BlueprintValidator {
             reasons.append("The track needs a finish gate, or to loop back to the start.")
         }
 
-        // No "can't go underground" rule any more: the solver normalises
-        // levels so the track's lowest point sits ON the ground, which makes
-        // digging impossible by construction — and unblocks the downhill
-        // start, which this rule used to reject as a track beginning below
-        // the world (TrackLayoutSolver.solve).
+        // No "can't go underground" rule: digging is a FEATURE. A hillDown
+        // from ground level goes underground, the terrain mounds a hill
+        // over the buried run, and the ground fades when it hides a car
+        // (ArenaEnvironment.GroundFadeSystem). Negative levels are just
+        // levels.
 
         // Footprint overlap at the same elevation level. Rects are shrunk a
         // hair so touching edges (which is the whole point) don't count.

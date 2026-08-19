@@ -64,6 +64,9 @@ struct LaneFollowComponent: Component {
     /// Unit "left" vector per waypoint (LaneSplines.laterals) — with the
     /// tangent this frames the track so loops roll the car correctly.
     var laterals: [SIMD3<Float>] = []
+    /// Portal jumps (LaneSplines.teleports): segment [i, i+1] is crossed
+    /// instantly — into one ring, out of the other.
+    var teleports: Set<Int> = []
 
     // Rail-mode state (RaceTuning.railPinned) — ignored by chaos physics.
     /// Progress within the current segment [waypoint nextIndex−1, nextIndex], 0…1.
@@ -85,6 +88,7 @@ enum CarFactory {
     static func makeCar(design: CarDesign, playerID: UUID, lane: [SIMD3<Float>],
                         lives: Int, loopRanges: [ClosedRange<Int>] = [],
                         laterals: [SIMD3<Float>] = [],
+                        teleports: Set<Int> = [],
                         assets: AssetStore? = nil) async throws -> ModelEntity {
         let assets = assets ?? AssetStore.shared
         CarComponent.registerComponent()
@@ -127,7 +131,8 @@ enum CarFactory {
         car.components.set(CarComponent(playerID: playerID, design: design, livesLeft: lives,
                                         rideHeight: rideHeight(visualHeight: bounds.extents.y)))
         car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
-                                               laterals: laterals))
+                                               laterals: laterals,
+                                               teleports: teleports))
 
         // The little human, in the roster's DRIVE pose — hands out on the
         // wheel. The old standing rig had to be sunk hip-deep with its legs

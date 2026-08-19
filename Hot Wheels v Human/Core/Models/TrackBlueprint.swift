@@ -12,6 +12,19 @@ import Foundation
 nonisolated struct SegmentSpec: Codable, Equatable, Sendable {
     var index: Int
     var type: PieceType
+    /// Where a `portalOut` piece lands (world ground coords) — the one
+    /// place a position rides the wire, because a portal exit is the one
+    /// piece that DOESN'T attach to the previous piece. Additive optional;
+    /// nil on a portalOut means "continue the chain" (plain straight).
+    var portalX: Float?
+    var portalZ: Float?
+
+    init(index: Int, type: PieceType, portalX: Float? = nil, portalZ: Float? = nil) {
+        self.index = index
+        self.type = type
+        self.portalX = portalX
+        self.portalZ = portalZ
+    }
 }
 
 /// One hand-placed decoration: any prop model from any world, dropped at

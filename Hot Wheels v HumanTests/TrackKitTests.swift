@@ -55,15 +55,26 @@ struct ValidatorTests {
         #expect(result.reasons.contains { $0.contains("on top of each other") })
     }
 
-    /// Was `rejectsUndergroundTrack`. A track that opens with a hillDown is
-    /// no longer digging — it's a downhill start, which is a feature now.
-    /// The solver lifts the whole layout so the lowest point rests on the
-    /// ground, so there is nothing left to reject: underground is
-    /// unreachable by construction rather than by rule.
-    /// (Geometry side: aTrackThatDescendsFromTheStartIsLiftedNotBuried.)
-    @Test func acceptsATrackThatStartsDownhill() {
+    /// Underground is a FEATURE: a hillDown from ground level digs. The
+    /// validator has nothing to say about it — negative levels are levels.
+    @Test func acceptsUndergroundTracks() {
         #expect(BlueprintValidator.validate(
             blueprint([.startGate, .hillDown, .finishGate])).isValid)
+        // A whole track underground: dive, cruise buried, race to the line.
+        #expect(BlueprintValidator.validate(
+            blueprint([.startGate, .hillDown, .hillDown, .straight,
+                       .straight, .finishGate])).isValid)
+    }
+
+    /// Portals travel in pairs, back to back — a lone ring is rejected
+    /// with a kid-readable reason.
+    @Test func portalsMustComeInPairs() {
+        #expect(!BlueprintValidator.validate(
+            blueprint([.startGate, .portalIn, .straight, .finishGate])).isValid)
+        #expect(!BlueprintValidator.validate(
+            blueprint([.startGate, .portalOut, .finishGate])).isValid)
+        #expect(BlueprintValidator.validate(
+            blueprint([.startGate, .portalIn, .portalOut, .finishGate])).isValid)
     }
 
     @Test func rejectsOversizedTrack() {
@@ -263,44 +274,54 @@ struct SolverTests {
         #expect(airDistance([.startGate] + runway + [.straight] + runway + [.finishGate]) == 0)
     }
 
-    /// The downhill start: a track may now BEGIN on a descent. The solver
-    /// normalises levels so the lowest point rests on the ground, which
-    /// lifts the start above it instead of digging the first hillDown
-    /// underground (which is what `solve` hardcoding level 0 used to do,
-    /// and what BlueprintValidator then rejected).
-    @Test func aTrackThatDescendsFromTheStartIsLiftedNotBuried() {
+    /// Down means DOWN: the start sits at ground level and a leading
+    /// hillDown digs UNDERGROUND — negative levels, negative y. (The old
+    /// solver lifted the layout so its lowest point rested on the ground;
+    /// underground killed that rule.)
+    @Test func aTrackThatDescendsFromTheStartDigsUnderground() {
         let layout = TrackLayoutSolver.solve(
             blueprint([.startGate, .hillDown, .straight, .finishGate]))
-
-        // Nothing underground, ever — the lowest point sits exactly on it.
-        #expect(layout.pieces.allSatisfy { $0.entryLevel >= 0 })
-        #expect(layout.pieces.map(\.entryPosition.y).min()! == 0)
-        // ...and the start really is up in the air, on a descent.
-        #expect(layout.startPosition.y == RaceTuning.elevationLevelHeight)
-        #expect(layout.pieces[1].entryPosition.y > layout.pieces[2].entryPosition.y)
-        // Which the validator now accepts rather than calling it digging.
-        #expect(BlueprintValidator.validate(
-            blueprint([.startGate, .hillDown, .straight, .finishGate])).isValid)
-    }
-
-    /// A flat track must be exactly where it always was — normalising levels
-    /// is a no-op unless something actually descends below the start.
-    @Test func levelNormalisationLeavesFlatTracksAtTheOrigin() {
-        let layout = TrackLayoutSolver.solve(
-            blueprint([.startGate, .straight, .hillUp, .straight, .finishGate]))
         #expect(layout.startPosition == .zero)
         #expect(layout.pieces[0].entryLevel == 0)
-    }
-
-    /// Circuit closure is measured against the START, not the origin — an
-    /// elevated circuit returns to where it began, which is no longer zero.
-    @Test func closedCircuitStillClosesWhenTheStartIsLifted() {
+        // The pieces after the dig are genuinely below the world.
+        #expect(layout.pieces[2].entryLevel == -1)
+        #expect(abs(layout.pieces[2].entryPosition.y
+                    + RaceTuning.elevationLevelHeight) < 1e-5)
+        // Underground circuits still close (dig down, come back up).
         let ring: [PieceType] = [.startGate, .hillDown, .straight]
             + [.curve90R, .curve90R] + [.straight, .hillUp, .straight]
             + [.curve90R, .curve90R]
-        let layout = TrackLayoutSolver.solve(blueprint(ring))
-        #expect(layout.startPosition.y > 0)          // not vacuous
-        #expect(layout.isClosedCircuit)
+        let ringLayout = TrackLayoutSolver.solve(blueprint(ring))
+        #expect(ringLayout.pieces.contains { $0.entryLevel < 0 })   // not vacuous
+        #expect(ringLayout.isClosedCircuit)
+    }
+
+    /// A portal exit doesn't attach to the previous piece: the chain
+    /// TELEPORTS to the spot on its SegmentSpec, the spline records the
+    /// jump, and everything after builds from the new place.
+    @Test func portalTeleportsTheChain() {
+        var bp = blueprint([.startGate, .portalIn, .portalOut,
+                            .straight, .finishGate])
+        bp.segments[2].portalX = 5
+        bp.segments[2].portalZ = 7
+        let layout = TrackLayoutSolver.solve(bp)
+        let out = layout.pieces[2]
+        #expect(out.entryPosition == SIMD3<Float>(5, 0, 7))
+        // The next piece attaches to the portal exit, not to the entry ring.
+        #expect(simd_length(layout.pieces[3].entryPosition
+                            - SIMD3<Float>(5, 0, 7.8)) < 1e-5)
+        // The spline knows the gap segment — the follower crosses it
+        // instantly rather than driving 8 metres of thin air.
+        #expect(layout.lanes.teleports.count == 1)
+        let jump = layout.lanes.teleports.first!
+        let gap = simd_length(layout.lanes.center[jump + 1]
+                              - layout.lanes.center[jump])
+        #expect(gap > 5)
+        // Without coords the portalOut degrades to a plain straight.
+        let plain = TrackLayoutSolver.solve(
+            blueprint([.startGate, .portalIn, .portalOut, .finishGate]))
+        #expect(plain.lanes.teleports.isEmpty)
+        #expect(plain.pieces[2].entryPosition == SIMD3<Float>(0, 0, 1.6))
     }
 
     /// TrackSpawner stacks `entryLevel` cosmetic legs of one

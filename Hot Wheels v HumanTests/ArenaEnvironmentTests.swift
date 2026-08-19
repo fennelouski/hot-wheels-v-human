@@ -254,6 +254,51 @@ struct ArenaEnvironmentTests {
         #expect(person?.roadside.contains(SIMD2(7, 0)) == false)
     }
 
+    /// Underground sections get a hill mounded over them — and the ground
+    /// carries the fade component so it turns see-through (~30%) whenever
+    /// a car is underneath it.
+    @Test func tunnelsMoundHillsAndTheGroundCanFade() async {
+        let flat = FootprintRect(minX: -3, minZ: -3, maxX: 3, maxZ: 3)
+        let mound = ArenaEnvironment.TunnelMound(center: SIMD2(0, 0), radius: 1.5)
+        // The dome crests over the tunnel and is gone past its radius.
+        #expect(ArenaEnvironment.terrainHeight(x: 0, z: 0, flat: flat,
+                                               mounds: [mound])
+                == ArenaEnvironment.TunnelMound.height)
+        #expect(ArenaEnvironment.terrainHeight(x: 2, z: 0, flat: flat,
+                                               mounds: [mound]) == 0)
+        #expect(ArenaEnvironment.terrainHeight(x: 0, z: 0, flat: flat) == 0)
+
+        let env = await ArenaEnvironment.make(
+            for: UUID(), theme: "day",
+            tunnels: [FootprintRect(minX: -0.2, minZ: 0, maxX: 0.2, maxZ: 0.8)],
+            around: FootprintRect(minX: -1, minZ: -1, maxX: 1, maxZ: 1))
+        let terrain = env.findEntity(named: "terrain")
+        #expect(terrain != nil)
+        #expect(terrain?.components[GroundFadeComponent.self] != nil)
+        #expect(GroundFadeSystem.fadedOpacity == 0.3)
+    }
+
+    /// A barrier road is a real tile (in the street graph, with a
+    /// roadblock standing on it), and cars know to TURN AROUND there
+    /// instead of fading out.
+    @Test func barrierRoadsTurnTrafficAround() async {
+        let items = [SceneryItem(model: "street-straight", x: 0.7, z: 0, yaw: 0),
+                     SceneryItem(model: "street-straight", x: 1.4, z: 0, yaw: 0),
+                     SceneryItem(model: "street-barrier-a", x: 2.1, z: 0, yaw: 0),
+                     SceneryItem(model: "taxi", x: 0.7, z: 0.3, yaw: 0)]
+        // The composed tile resolves (dead-end road + roadblock on top).
+        #expect(await SceneryPlacer.entity(for: "street-barrier-a") != nil)
+        #expect(await SceneryPlacer.entity(for: "street-barrier-b") != nil)
+        // Its cell joins the drivable graph AND the barrier set.
+        #expect(SceneryPlacer.handStreetCells(in: items).contains(SIMD2(3, 0)))
+        #expect(SceneryPlacer.barrierCells(in: items) == [SIMD2(3, 0)])
+        // The placed car carries the barrier map into traffic.
+        let root = await SceneryPlacer.spawn(items)
+        let car = root.children[3].components[TrafficComponent.self]
+        #expect(car?.barriers == [SIMD2(3, 0)])
+        #expect(car?.cells.contains(SIMD2(3, 0)) == true)
+    }
+
     /// Hand-placed buildings become doors people can pop into.
     @Test func handPlacedBuildingsGetDoors() {
         let items = [SceneryItem(model: "city-shop-a", x: 1.4, z: -0.7, yaw: 0),

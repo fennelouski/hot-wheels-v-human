@@ -56,7 +56,10 @@ struct TrackBuilder3DView: View {
                     }
                     guard let spot = groundPoint(tap: value.location,
                                                  size: proxy.size) else { return }
-                    if model.movingIndex != nil {
+                    if model.placingPortalIndex != nil {
+                        // A portal exit is waiting: this tap places it.
+                        model.placePortalExit(atX: spot.x, z: spot.z)
+                    } else if model.movingIndex != nil {
                         model.moveScenery(atX: spot.x, z: spot.z)
                     } else if model.placingModel != nil {
                         model.placeScenery(atX: spot.x, z: spot.z)
@@ -200,7 +203,7 @@ struct TrackBuilder3DView: View {
             // so the picked world is part of the key.
             let floating = RaceTuning.groundlessThemes.contains(
                 RaceTuning.resolvedThemeName(model.worldTheme, for: nil))
-            let key = "track-\(model.types.hashValue)-\(floating)"
+            let key = "track-\(model.types.hashValue)-\(model.portalExits.hashValue)-\(floating)"
             if let holder = root.children.first(where: {
                     $0.name.hasPrefix("track-") || $0.name.hasPrefix("building-track-") }),
                holder.name != key, holder.name != "building-\(key)" {
@@ -287,6 +290,18 @@ struct TrackBuilder3DView: View {
                     world.name = worldKey
                 }
             }
+            // Digging? See through the dirt: force the terrain to the
+            // faded opacity while the track has underground pieces, so
+            // the kid never has to fight the ground while building.
+            // (No cars here — GroundFadeSystem's own trigger never fires.)
+            if let terrain = root.children
+                .first(where: { $0.name.hasPrefix("world-") })?
+                .findEntity(named: "terrain"),
+               var fade = terrain.components[GroundFadeComponent.self] {
+                fade.forced = model.isDigging ? GroundFadeSystem.fadedOpacity : nil
+                terrain.components.set(fade)
+            }
+
             // Aim near bed level (0.35·maxY inside cameraPose) — a target
             // hovering over the track pushes it into the bottom of the frame.
             let (target, offset) = Self.cameraPose(

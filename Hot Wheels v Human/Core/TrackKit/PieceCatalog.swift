@@ -402,6 +402,26 @@ nonisolated enum PieceCatalog {
             laneHalfWidth: RaceTuning.laneOffsetNarrow,
             minEntrySpeed: RaceTuning.loopMinEntrySpeed),
 
+        // Portals: a straight with a ring arch over it. Drive into the IN
+        // ring, come out of the OUT ring — which sits wherever the kid
+        // tapped, because the solver teleports the chain to
+        // SegmentSpec.portalX/Z at the portalOut piece. The arch stands at
+        // the IN piece's exit and the OUT piece's entry, so the car
+        // visibly enters one ring and leaves the other.
+        TrackPieceDefinition(
+            type: .portalIn, modelName: "track-wide-straight",
+            overlayModelName: "golf-gate", overlayOffset: [0, 0, 0.65],
+            modelOffset: bedLift,
+            exitOffset: [0, 0, 0.8],
+            footprint: straightRect, shape: .line(length: 0.8, rise: 0)),
+
+        TrackPieceDefinition(
+            type: .portalOut, modelName: "track-wide-straight",
+            overlayModelName: "golf-gate", overlayOffset: [0, 0, 0.15],
+            modelOffset: bedLift,
+            exitOffset: [0, 0, 0.8],
+            footprint: straightRect, shape: .line(length: 0.8, rise: 0)),
+
         // Straight-line jump. Was a corner-ramp — so the only "jump" was a
         // banked turn; a jump should launch you STRAIGHT. Kinematically a
         // plain straight (0.8 forward, no turn, level exit) so it drops into

@@ -345,7 +345,8 @@ struct DecorPaletteView: View {
     static let groups: [(String, String, [String])] = [
         ("Streets", "road.lanes",
          ["street-straight", "street-cross", "street-bend", "street-tee",
-          "street-end", "street-square", "city-path-long", "city-path-short"]),
+          "street-end", "street-barrier-a", "street-barrier-b",
+          "street-square", "city-path-long", "city-path-short"]),
         ("People", "figure.walk",
          ["person-a", "person-b", "person-c", "person-d"]),
         ("Cars", "car.fill",
@@ -447,6 +448,27 @@ struct PiecePaletteView: View {
                     .buttonStyle(.plain)
                     .disabled(!allowed)
                 }
+
+                // Portal adds a PAIR: the entry ring snaps on, then the
+                // next tap on the ground places the exit ring.
+                Button {
+                    model.appendPortal()
+                } label: {
+                    VStack(spacing: 4) {
+                        Image(systemName: "circle.circle")
+                            .font(.system(size: 34, weight: .bold))
+                            .frame(height: 40)
+                        Text(model.placingPortalIndex != nil
+                             ? "Tap ground!" : "Portal")
+                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                    }
+                    .frame(width: 96, height: 86)
+                    .background(.white.opacity(model.canAppendPortal ? 0.12 : 0.04),
+                                in: RoundedRectangle(cornerRadius: 14))
+                    .opacity(model.canAppendPortal ? 1 : 0.35)
+                }
+                .buttonStyle(.plain)
+                .disabled(!model.canAppendPortal || model.placingPortalIndex != nil)
             }
             .padding(.horizontal, 16)
         }
