@@ -65,6 +65,26 @@ final class DebrisPool {
         chunk.physicsMotion?.angularVelocity = .zero
         free.append(chunk)
     }
+
+    /// Pooled Kenney debris chunks flung outward; expiry returns them.
+    /// (Shared by crashes and the losers' breakdown show.)
+    func explode(at position: SIMD3<Float>, in parent: Entity?) {
+        guard let parent else { return }
+        for _ in 0..<RaceTuning.debrisCount {
+            guard let model = take() else { break }
+            model.setPosition(position + [Float.random(in: -0.05...0.05), 0.05,
+                                          Float.random(in: -0.05...0.05)],
+                              relativeTo: nil)
+            model.components.set(DebrisComponent(secondsLeft: RaceTuning.debrisLifetime))
+            parent.addChild(model)
+            model.isEnabled = true
+            let impulse = SIMD3<Float>(Float.random(in: -1...1),
+                                       Float.random(in: 0.5...1.5),
+                                       Float.random(in: -1...1))
+                * Float.random(in: RaceTuning.debrisImpulse)
+            model.applyLinearImpulse(impulse, relativeTo: nil)
+        }
+    }
 }
 
 /// Set on the track root by the spawner/session so rules can find spline data.
@@ -204,7 +224,8 @@ struct RaceRulesSystem: System {
                 state.stuckAnchor = nil
                 state.flippedSeconds = 0
                 RaceEventBus.shared.emit(.carDestroyed(playerID: state.playerID))
-                explodeDebris(at: position, in: car.parent)
+                let parent = car.parent
+                Task { @MainActor in DebrisPool.shared.explode(at: position, in: parent) }
 
                 if state.livesLeft > 0 {
                     // Respawn two pieces BEFORE the one the car died on — a
@@ -240,26 +261,6 @@ struct RaceRulesSystem: System {
         // with RaceCoordinator polish once the loop is proven fun.
     }
 
-    /// Pooled Kenney debris chunks flung outward; expiry returns them.
-    private func explodeDebris(at position: SIMD3<Float>, in parent: Entity?) {
-        guard let parent else { return }
-        Task { @MainActor in
-            for _ in 0..<RaceTuning.debrisCount {
-                guard let model = DebrisPool.shared.take() else { break }
-                model.setPosition(position + [Float.random(in: -0.05...0.05), 0.05,
-                                              Float.random(in: -0.05...0.05)],
-                                  relativeTo: nil)
-                model.components.set(DebrisComponent(secondsLeft: RaceTuning.debrisLifetime))
-                parent.addChild(model)
-                model.isEnabled = true
-                let impulse = SIMD3<Float>(Float.random(in: -1...1),
-                                           Float.random(in: 0.5...1.5),
-                                           Float.random(in: -1...1))
-                    * Float.random(in: RaceTuning.debrisImpulse)
-                model.applyLinearImpulse(impulse, relativeTo: nil)
-            }
-        }
-    }
 }
 
 extension ModelEntity {

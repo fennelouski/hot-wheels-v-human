@@ -376,6 +376,27 @@ nonisolated enum RaceTuning {
     /// Random impulse magnitude range for debris chunks, N·s.
     static let debrisImpulse: ClosedRange<Float> = 0.05...0.25
 
+    // MARK: Breakdown show (losers cross the line, then fall apart)
+
+    /// Pause between the results appearing and the first breakdown, seconds
+    /// — the finish has to read before the comedy starts.
+    static let breakdownDelay: Float = 1.2
+    /// Stagger between each wheel popping off, seconds.
+    static let breakdownWheelStagger: Float = 0.35
+    /// Random impulse magnitude range for popped wheels, N·s.
+    static let breakdownWheelImpulse: ClosedRange<Float> = 0.03...0.12
+    /// How far the wheel-less body drops onto the deck, metres, and the
+    /// lopsided roll it settles at, radians.
+    static let breakdownSag: Float = 0.035
+    static let breakdownSagRoll: Float = 0.10
+    /// Sputter hops: metres of bounce, rad/s, and how long the car coughs
+    /// before the flop.
+    static let breakdownSputterAmplitude: Float = 0.02
+    static let breakdownSputterRate: Float = 16
+    static let breakdownSputterSeconds: Float = 1.8
+    /// The flop: how far over on its side the sputterer ends up, radians.
+    static let breakdownFlopRoll: Float = 1.25
+
     // MARK: AI opponent (PRD §6.4 — decision quality only, never stat bonuses)
 
     /// Easy AI: probability per second of firing a full boost meter.

@@ -364,6 +364,15 @@ final class RaceSession {
         if allDone {
             phase = .results
             RaceEventBus.shared.raceActive = false
+            // The kid rule: losing is funny. Everyone who finished but
+            // didn't win falls apart at the line (BreakdownShow).
+            let winner = racers.filter { $0.finishTime != nil }
+                .min { $0.finishTime! < $1.finishTime! }?.id
+            for r in racers where r.finishTime != nil && r.id != winner {
+                if let car = r.entity {
+                    BreakdownShow.play(on: car, style: BreakdownShow.style(for: r.id))
+                }
+            }
             for r in racers {
                 let time = r.finishTime.map { String(format: "%.1fs", $0) } ?? "OUT"
                 Self.drillLog("[race] result \(r.design.name): \(time), top \(String(format: "%.1f", r.topSpeed)) m/s, crashes \(r.crashes)")
