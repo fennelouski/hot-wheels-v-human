@@ -354,6 +354,14 @@ nonisolated enum RaceTuning {
     /// than the edge-on wall it is from straight behind. ~2 m at 0.1 spacing.
     static let loopCamLead: Int = 20
 
+    /// Driver's-eye camera, in CAR HEIGHTS (recovered from the car's own
+    /// `rideHeight`, so a monster truck sits high and a formula car low).
+    /// Eye = above the car's centre, roughly where the seated driver's head
+    /// is; nose = forward of it, far enough that the kid sees the track
+    /// instead of the back of their own driver's head.
+    static let driverCamEyeRatio: Float = 0.45
+    static let driverCamNoseRatio: Float = 0.6
+
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 
     /// Car is destroyed when it falls this far below the track plane, metres.

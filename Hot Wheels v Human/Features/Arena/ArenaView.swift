@@ -51,6 +51,32 @@ struct ArenaView: View {
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
                     audio.tick(session: session)
+
+                    // Driver's-eye view: sit where the little human sits.
+                    // Rolled with the car (upVector: its own up), so a loop
+                    // really does go upside down. Falls through to the chase
+                    // camera if that car is wrecked or out.
+                    let hero = session.racers.first { !$0.isAI && $0.entity?.isEnabled == true }
+                        ?? session.racers.first { $0.entity?.isEnabled == true }
+                    if coordinator.driverView, let car = hero?.entity,
+                       let ride = car.components[CarComponent.self]?.rideHeight {
+                        let m = car.transformMatrix(relativeTo: nil)
+                        let forward = simd_normalize(SIMD3(m.columns.2.x, m.columns.2.y,
+                                                           m.columns.2.z))
+                        let up = simd_normalize(SIMD3(m.columns.1.x, m.columns.1.y,
+                                                      m.columns.1.z))
+                        // CarFactory pinned rideHeight to half the visual
+                        // height plus the bed offset — read it back out.
+                        let height = (ride - RaceTuning.bedSurfaceHeight) * 2
+                        let eye = car.position(relativeTo: nil)
+                            + up * height * RaceTuning.driverCamEyeRatio
+                            + forward * height * RaceTuning.driverCamNoseRatio
+                        cameraEntity.look(at: eye + forward, from: eye,
+                                          upVector: up, relativeTo: nil)
+                        smoothed = eye   // chase eases out from here if the hero drops
+                        return
+                    }
+
                     let positions = session.racers.compactMap {
                         $0.entity.flatMap { $0.isEnabled ? $0.position(relativeTo: nil) : nil }
                     }
@@ -114,6 +140,31 @@ struct ArenaView: View {
                          seriesLabel: coordinator.raceCount > 1
                              ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
                              : nil)
+
+            // Camera toggle — top-trailing, clear of the banners (top
+            // centre), the PiPs (bottom) and Solo Arena's close button
+            // (top-leading). One button for both platforms: the camera
+            // belongs to the host, so tapping on iPad and clicking with
+            // the Siri Remote hit the same switch.
+            VStack {
+                HStack {
+                    Spacer()
+                    Button {
+                        coordinator.driverView.toggle()
+                    } label: {
+                        Label(coordinator.driverView ? "Driver View" : "Chase Cam",
+                              systemImage: coordinator.driverView ? "steeringwheel" : "video.fill")
+                            .font(.system(size: 22, weight: .heavy, design: .rounded))
+                            .lineLimit(1)
+                            .padding(.horizontal, 16)
+                            .frame(minHeight: 60)
+                    }
+                    .buttonStyle(.bordered)
+                    .tint(.yellow)
+                }
+                Spacer()
+            }
+            .padding(24)
 
             // Reaction Cam PiPs — bottom-left for player 1, bottom-right
             // for player 2, while they hold the cam button on their iPad.

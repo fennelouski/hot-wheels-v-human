@@ -25,6 +25,9 @@ final class RaceCoordinator {
     private(set) var lastRejection: String?
     /// Players currently holding their Reaction Cam button (ArenaView PiPs).
     private(set) var reactionCamsOn: Set<UUID> = []
+    /// Ride in the driver's seat instead of the chase camera (ArenaView).
+    /// Lives here so the same toggle works on the TV and in Solo Arena.
+    var driverView = true
 
     private let transport: any GameTransport
     private var designs: [(owner: UUID?, design: CarDesign)] = []
