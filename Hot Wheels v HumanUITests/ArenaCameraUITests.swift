@@ -69,6 +69,14 @@ final class ArenaRadioUITests: XCTestCase {
         shot.lifetime = .keepAlways
         add(shot)
 
+        // The power key kills the radio and says so in the display window.
+        let power = app.buttons["Radio on"]
+        XCTAssertTrue(power.exists)
+        power.tap()
+        XCTAssertTrue(app.staticTexts["OFF"].waitForExistence(timeout: 3))
+        app.buttons["Radio off"].tap()
+        XCTAssertFalse(app.staticTexts["OFF"].exists)
+
         // Chase cam stows the dash — there's no cockpit to bolt it to.
         app.buttons.containing(NSPredicate(format: "label CONTAINS 'Driver View'"))
             .firstMatch.tap()

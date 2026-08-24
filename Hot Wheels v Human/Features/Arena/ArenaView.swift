@@ -17,6 +17,12 @@ struct ArenaView: View {
     @State private var reactionFeed = ReactionFeed()
     @State private var arenaAudio = ArenaAudio()
 
+    /// The car the driver camera rides in — same pick as the arena camera's.
+    private var heroSpeed: Float {
+        let racers = coordinator.session.racers
+        return (racers.first { !$0.isAI } ?? racers.first)?.speed ?? 0
+    }
+
     var body: some View {
         ZStack {
             RealityView { content in
@@ -51,7 +57,8 @@ struct ArenaView: View {
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
-                    audio.tick(session: session, station: coordinator.radioStation)
+                    audio.tick(session: session, station: coordinator.radioStation,
+                               radioOn: coordinator.radioOn)
 
                     // Driver's-eye view: sit where the little human sits.
                     // Rolled with the car (upVector: its own up), so a loop
@@ -179,12 +186,25 @@ struct ArenaView: View {
             if coordinator.driverView, coordinator.session.phase != .results {
                 VStack {
                     Spacer()
-                    DriverDashboardView(station: coordinator.radioStation) { preset in
-                        coordinator.radioStation = preset
-                        SoundBank.shared.play("ui_tap")
-                        SoundBank.shared.playMusic(preset.track)
-                    }
-                    .padding(.bottom, 20)
+                    DriverDashboardView(
+                        station: coordinator.radioStation,
+                        speed: heroSpeed,
+                        powered: coordinator.radioOn,
+                        onPick: { preset in
+                            coordinator.radioStation = preset
+                            coordinator.radioOn = true
+                            SoundBank.shared.play("ui_tap")
+                            SoundBank.shared.playMusic(preset.track)
+                        },
+                        onPower: {
+                            coordinator.radioOn.toggle()
+                            SoundBank.shared.play("ui_tap")
+                            if coordinator.radioOn {
+                                SoundBank.shared.playMusic(coordinator.radioStation.track)
+                            } else {
+                                SoundBank.shared.stopMusic()
+                            }
+                        })
                 }
             }
 
