@@ -18,9 +18,9 @@ struct ArenaView: View {
     @State private var arenaAudio = ArenaAudio()
 
     /// The car the driver camera rides in — same pick as the arena camera's.
-    private var heroSpeed: Float {
+    private var hero: RaceSession.Racer? {
         let racers = coordinator.session.racers
-        return (racers.first { !$0.isAI } ?? racers.first)?.speed ?? 0
+        return racers.first { !$0.isAI } ?? racers.first
     }
 
     var body: some View {
@@ -188,8 +188,9 @@ struct ArenaView: View {
                     Spacer()
                     DriverDashboardView(
                         station: coordinator.radioStation,
-                        speed: heroSpeed,
+                        speed: hero?.speed ?? 0,
                         powered: coordinator.radioOn,
+                        style: DashStyle(design: hero?.design ?? CarDesign.demoPair[0]),
                         onPick: { preset in
                             coordinator.radioStation = preset
                             coordinator.radioOn = true

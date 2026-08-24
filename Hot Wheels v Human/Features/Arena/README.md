@@ -11,7 +11,17 @@ Files
   strip and it just showed sky through it, reading as a floating toolbar rather than a dash.
   Carries a speed gauge (real telemetry off the hero racer), the car radio, and a punched
   speaker grille that stops short of the bottom-trailing corner so Solo Arena's boost dial
-  lands on bare moulding instead of on the speaker.
+  lands on bare moulding instead of on the speaker. A `ViewThatFits` sheds the trim before
+  the controls on narrow screens — speaker first, then the gauge — because portrait iPad is
+  834 pt and the full row wants ~800.
+- Every car gets its own dash (`DashStyle`, built from the hero's `CarDesign`). Chassis picks
+  the material: heavy muscle is brushed steel with exposed bolts, balanced formula is carbon
+  weave, superlight drift is dark plastic with a lit underline. The paint colours everything
+  that glows — display, gauge numerals, lit keys, power key — lifted toward legibility first
+  (`Color.dashAccent`), since a navy car would otherwise get a navy display nobody can read
+  from the couch, and black paint comes back chrome. Finish sets the top lip's gloss (matte
+  barely catches the sky, glossy flares) and sparkle flecks the moulding. The car's name is
+  stamped on the gauge housing like a real dash badge.
   The radio: a lit display window, a round power key, and six numbered preset keys
   (`RadioStation`) built to look pressable — domed gradient, hard top highlight, amber when
   lit. One tap swaps the music on the spot via `SoundBank.playMusic`, and the pick sticks on
