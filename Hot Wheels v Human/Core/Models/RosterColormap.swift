@@ -97,11 +97,14 @@ nonisolated enum RosterColormap {
 
     /// The table key for a profile — the roster person, without the pose or
     /// bald-cut suffix `DriverProfile.modelName` adds.
-    static func key(for profile: DriverProfile) -> String {
-        let body = profile.bodyType ?? .man
-        var variant = profile.characterVariant ?? body.defaultVariant
-        if !body.variants.contains(variant) { variant = body.defaultVariant }
-        return "character-\(body.isFemale ? "female" : "male")-\(variant)"
+    static func key(for profile: DriverProfile) -> String { profile.rosterName }
+
+    /// Whether the Eyes swatch can do anything for this profile. Half the
+    /// roster has no separable eye cell — Kenney maps a whole cell to one flat
+    /// texel, so those eyes ARE their hair or a garment. The swatch used to be
+    /// offered anyway and saved a colour that never reached a pixel.
+    static func canRecolorEyes(for profile: DriverProfile) -> Bool {
+        patches[key(for: profile)]?.eyes != nil
     }
 
     /// Patch → colour, in paint order. Some characters wear a one-piece

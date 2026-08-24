@@ -399,6 +399,45 @@ struct TrackSpawnerTests {
         #expect(layout.pieces.contains { $0.definition.elevationDelta < 0 })
     }
 
+    /// The seam fix, at the only place it can silently fall out: the spawner.
+    ///
+    /// Both hill TRANSITION meshes miss the round elevation level on their own
+    /// (0.2056 and 0.1955 against 0.2). The models used to be placed at true
+    /// size and aligned at their ENTRY only, which left up to 6 mm — a third
+    /// of a wheel — as a step at the far seam of every hill on every track.
+    /// `PieceCatalog` now stretches each one onto the level; if `TrackSpawner`
+    /// stops applying `modelScale`, the step comes straight back and nothing
+    /// else in the suite notices.
+    @Test func spawnedHillModelsCarryTheirSeamCorrectingScale() async throws {
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .hillUp, .straight, .hillDown, .finishGate]))
+        let root = try await TrackSpawner.spawn(layout: layout)
+
+        var stretched = 0
+        for piece in layout.pieces {
+            let model = try #require(root.children.first {
+                $0.name == "piece-\(piece.index)-\(piece.definition.type.rawValue)"
+            })
+            #expect(model.scale == piece.definition.modelScale)
+            if piece.definition.modelScale.y != 1 { stretched += 1 }
+        }
+        // Not vacuous: a solo hill is hill-complete, which rises exactly one
+        // level and so is NOT stretched. Cover the transitions too.
+        let entry = PieceCatalog.definition(for: .hillUp, role: .entry)
+        let exit = PieceCatalog.definition(for: .hillUp, role: .exit)
+        #expect(entry.modelScale.y != 1)
+        #expect(exit.modelScale.y != 1)
+        // A correction, not a resize — anything past a few percent is a bug.
+        for def in [entry, exit] {
+            #expect(abs(def.modelScale.y - 1) < 0.03)
+            #expect(def.modelScale.x == 1 && def.modelScale.z == 1)
+        }
+        // The pitched straight mid-run is a different mechanism (a flat piece
+        // rotated), so it must NOT be scaled.
+        #expect(PieceCatalog.definition(for: .hillUp, role: .middle).modelScale == .one)
+        #expect(PieceCatalog.definition(for: .straight).modelScale == .one)
+    }
+
     /// Climbs to level 2 and back down, so the top flats need two legs each.
     private static let climb: [PieceType] =
         [.startGate, .straight, .hillUp, .straight, .hillUp,

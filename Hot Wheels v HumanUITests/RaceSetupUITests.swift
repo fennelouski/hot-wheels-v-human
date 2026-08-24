@@ -29,9 +29,18 @@ final class RaceSetupUITests: XCTestCase {
         app.buttons.containing(NSPredicate(format: "label CONTAINS 'Banana Bolt'"))
             .firstMatch.tap()
 
+        // Setup is a three-step wizard — car, racer, tracks — and picking a
+        // car does NOT advance it. This walked straight to the track cards and
+        // had been failing ever since the racer step was added.
+        next(app).tap()
+        XCTAssertTrue(app.staticTexts
+            .containing(NSPredicate(format: "label CONTAINS 'Pick your racer'"))
+            .firstMatch.waitForExistence(timeout: 10))
+        next(app).tap()
+
         // Every track card's label ends in "N pieces".
         let tracks = app.buttons.containing(NSPredicate(format: "label CONTAINS 'pieces'"))
-        XCTAssertTrue(tracks.firstMatch.exists)
+        XCTAssertTrue(tracks.firstMatch.waitForExistence(timeout: 10))
 
         // Draft three tracks in order.
         tracks.element(boundBy: 0).tap()
@@ -53,10 +62,21 @@ final class RaceSetupUITests: XCTestCase {
         snap(app, "3-capped-at-five")
 
         // GO → the dashboard takes over and starts browsing for the TV.
+        // Matched loosely: the headline is kid-facing copy with a curly
+        // apostrophe, and an exact-string match on it is what left this
+        // assertion stale when the wording changed.
         goButton(app, "RACE 5 TRACKS!").tap()
-        XCTAssertTrue(app.staticTexts["Looking for the arena…"]
-            .waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts
+            .containing(NSPredicate(format: "label CONTAINS 'find your TV'"))
+            .firstMatch.waitForExistence(timeout: 10))
         snap(app, "4-dashboard-browsing")
+    }
+
+    /// The wizard's forward button. It becomes the GO button on the last
+    /// step, so it's only "Next" while there's a step left.
+    @MainActor
+    private func next(_ app: XCUIApplication) -> XCUIElement {
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Next'")).firstMatch
     }
 
     @MainActor

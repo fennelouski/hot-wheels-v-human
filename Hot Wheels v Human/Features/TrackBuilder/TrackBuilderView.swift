@@ -320,25 +320,10 @@ struct DecorPaletteView: View {
 
     @State private var worldIndex = 0
 
-    /// Thumbnail from the bundle's loose PNGs (Resources/Thumbs, rendered
-    /// by tools — see Graphics/README). Explicit URL load: named-image
-    /// lookup missed loose files in practice.
-    static func thumb(_ prop: String) -> Image {
-        guard let url = Bundle.main.url(forResource: "thumb-\(prop)",
-                                        withExtension: "png") else {
-            return Image(systemName: "cube.fill")
-        }
-        #if canImport(UIKit)
-        if let image = UIImage(contentsOfFile: url.path) {
-            return Image(uiImage: image)
-        }
-        #elseif canImport(AppKit)
-        if let image = NSImage(contentsOfFile: url.path) {
-            return Image(nsImage: image)
-        }
-        #endif
-        return Image(systemName: "cube.fill")
-    }
+    /// Thumbnail from the bundle's loose PNGs (Resources/Thumbs, rendered by
+    /// tools — see Graphics/README). Shares `bundleImage` with the home
+    /// screen's tile art, which loads the same way from the same folder.
+    static func thumb(_ prop: String) -> Image { bundleImage("thumb-\(prop)") }
 
     /// (label, symbol, unique props) per world, from the theme lists —
     /// one source of truth for what exists.

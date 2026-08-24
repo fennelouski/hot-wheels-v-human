@@ -49,6 +49,15 @@ nonisolated enum DriverPalette {
     /// instead of pajamas; little enough that the swatch still looks right.
     static let pantsDarkening: Float = 0.15
 
+    /// True when `hex` is dark enough that anything drawn on top of it has
+    /// to be white. The profile swatches run from `#1C1C1E` to `#F2F2F7`, so
+    /// a glyph sitting ON a profile colour can't use a fixed ink. Core has no
+    /// SwiftUI, hence a Bool rather than a Color.
+    static func needsLightInk(on hex: String) -> Bool {
+        guard let rgb = rgb(hex: hex) else { return true }
+        return 0.299 * rgb.x + 0.587 * rgb.y + 0.114 * rgb.z < 0.6
+    }
+
     /// `hex` with every channel scaled down by `amount`. Malformed hex is
     /// returned untouched — same garbage-in rule as `nearest(hex:in:)`.
     static func darkened(_ hex: String, by amount: Float) -> String {

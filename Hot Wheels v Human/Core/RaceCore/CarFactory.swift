@@ -31,6 +31,10 @@ struct CarComponent: Component {
     /// Counts down from `RaceTuning.boostHoldGrace` on every boost packet;
     /// hits zero shortly after the kid lifts their finger.
     var boostHoldGrace: Float = 0
+    /// Cruise-speed multiplier. 1 for every human car; the AI's is rewritten
+    /// each tick by the rubber band (`AIBoostPolicy.pace`) so the race stays
+    /// close and the kid wins his share of them.
+    var paceScale: Float = 1
     var stuckSeconds: Float = 0
     /// Anchor for no-net-progress stuck detection (RaceTuning.stuckRadius).
     var stuckAnchor: SIMD3<Float>? = nil

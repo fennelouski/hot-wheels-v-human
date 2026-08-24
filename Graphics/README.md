@@ -23,17 +23,49 @@ This folder holds original downloaded asset packs. Converted, app-ready USDZ fil
 - **12 genuinely different people** — `character-{male,female}-{a…f}` — each its own mesh + baked outfit/hair/face on a shared `colormap` texture. This is what fixes "man, woman, boy and girl are the same model": they always were, because the Quaternius pack is ONE rig that we could only rescale.
 - Rigged, and every character carries **32 named clips** including `idle`, `drive`, `sit`, `emote-yes/no`, `die`, plus wheelchair moves. `drive` poses the arms out on a wheel — the driver no longer has to be a standing rig sunk hip-deep to fake sitting.
 - Accessories: `aid-glasses`, `aid-sunglasses` (real meshes, vs. the procedural boxes/cylinders in `DriverDressUp`), plus masks, canes, crutches, hearing aid and four wheelchairs — an inclusive roster that's free to offer.
+- **`character-female-a` ships with forearm crutches welded into her `body-mesh`** — this is an accessibility pack, and she is its wheelchair/crutch user. Standing in the bind pose it reads fine; in this game she is *sitting in a race car*, and because the aid is rigidly bound to the arm and leg joints the `drive` clip scatters it into loose blocks around her. She is the only one of the twelve wider than the shared 0.3836 arm span (she reaches 0.5494), which is how `tools/strip_mobility_aid.py` finds the geometry: the 8 islands (176 polys, 4 mirrored pairs) whose shape appears on no other character. **Her four USDZs are the only ones not converted straight from the pristine source** — run the strip first, and run it on the bald cut too (`extract_character_hair.py` only touches the head):
+  ```bash
+  blender -b -P tools/extract_character_hair.py -- <tmp>
+  blender -b -P tools/strip_mobility_aid.py -- <out> <tmp>/character-female-a-bald.glb
+  # then convert <out>/character-female-a{,-bald}.glb for both poses at 10.73
+  ```
+  Nothing in RealityKit can hide part of one mesh with one material, so this has to happen at conversion time. If Kenney re-exports the pack, the tool refuses rather than guessing — it asserts the 8/176 count.
 - **v1 mapping:** converted as `character-<sex>-<v>-{idle,drive}.usdz` (24 files) + the two glasses, plus the three shared reaction clips below. Head joint is named `head` (lowercase, flat path); `HeadPinSystem.jointMatrix` matches the leaf case-insensitively so both this and the Mixamo-style `…/Head` pin correctly.
 - **All twelve characters share ONE skeleton** (verified 2026-07-20 by parsing the GLB JSON chunks): identical 7 joints — `root / leg-left, leg-right, torso / arm-left, arm-right, head` — identical hierarchy, identical 32 clip names, and **byte-identical keyframe data per clip**. Bind poses differ in three groups (kid vs. adult limb lengths), but the clips are local rotations plus a root translation, so they play correctly on any of the twelve regardless.
   **This is why an animation is converted once, not twelve times.** A clip USDZ from any character retargets onto every character — the same trick the old Quaternius bust used to play four clips on one mesh. The reaction cam's three clips are 3 files (~80 KB each), not 12 × 3 = 36. Re-verify with the same GLB parse before assuming it of a *different* Kenney pack.
 - **Reaction-cam clips** (`DriverPoser.clipAssets`), all converted from `character-male-a.glb` because the donor is arbitrary: `reaction-boost` ← `emote-yes`, `reaction-crash` ← `die`, `reaction-cheer` ← `attack-melee-right`. These replaced the Quaternius `driver-idle/-boost/-crash/-cheer` set (retired — the PiP now shows whoever is actually driving). The base pose is each character's own `-drive` USDZ, so no fourth donor is needed.
   **Pick reaction clips on what moves above the waist** — the PiP crops to head-and-shoulders, so a clip's name lies about how it reads. Measured peak joint swing across all 32 (`--action` candidates): `jump` is a 21° leg tuck with 5° of arm and is invisible in that crop, `sit`/`crouch`/`holding-*`/`drive` are static single-pose clips (0°), and the ones that actually read are `die` (arm 151°, root 90°), `attack-melee-*` (arm 164°, torso 61°), `pick-up` (arm 98°, torso 60° — but it bends *down*), `emote-no` (head 60°) and `emote-yes` (head 30°). `drive` being a static pose is why the PiP driver holds still between reactions: that's the seated pose, not a bug.
 
+### 4c. Home-screen tile art (added 2026-08-24)
+`tools/render_tile_art.py` renders one picture of the actual toy per home
+button, into `Resources/Thumbs/tile-*.png` — the same loose-PNG pattern as the
+decoration box's 243 prop thumbnails, loaded by `bundleImage`. Kids who can't
+read yet pick buttons by picture, and in a game about toys the picture should
+be the toy.
+
+Run: `blender -b -P tools/render_tile_art.py`
+
+Three things it has to get right, all of which bit once:
+- **Render from the source GLB, not the bundled USDZ.** The toy-car kit and the
+  roster share one atlas texture, and Blender's USD importer collapses that UV
+  lookup to a single texel — every model comes out the same flat brown. The
+  glTF importer is fine, and they're the same meshes.
+- **Drop Kenney's turntable Icosphere** (unparented, no material) before
+  framing, or the invisible ball inflates the bounds and the character renders
+  at a third of the tile. `extract_character_hair.py` drops it the same way.
+- **Fit in camera space, at the subject's own aspect.** A fixed canvas bakes
+  empty margin into the PNG which the card then fits *again*, and the toys end
+  up smaller than the SF Symbols beside them.
+
+Two tiles have no toy and keep an SF Symbol (`RootView.HomeTile.Art`): no pack
+ships a **television**, and the pit **garage** has "TANKCO." branding baked into
+its texture — fine trackside, wrong on a kid's home screen.
+
 ### 5. City & nature packs — the pickable "worlds" (added 2026-08-19)
 All Kenney, all **CC0** (License.txt in each), GLB format (nature kit: `Models/GLTF format`), all converted at **scale 0.3** (a suburban house ≈ 0.39 m wide vs the 0.18 m cars — chunky toy-city proportions; 0.2 made houses car-sized):
 - `3DModels/Source/kenney_city-kit-suburban/` — https://kenney.nl/assets/city-kit-suburban — 21 houses (`building-type-a…u` → `city-house-a…u.usdz`), `tree-large/small`, `fence`, `planter` (→ `city-*`). Powers the **Hometown** world.
 - `3DModels/Source/kenney_city-kit-commercial/` — https://kenney.nl/assets/city-kit-commercial — 14 shops (`building-a…n` → `city-shop-a…n`) + 5 skyscrapers (→ `city-skyscraper-a…e`). Powers **Big City**.
-- `3DModels/Source/kenney_city-kit-roads/` — https://kenney.nl/assets/city-kit-roads — only `light-curved` → `city-streetlight` converted so far; 95 more models (roads, signs, poles) ready if streets ever get laid for real.
+- `3DModels/Source/kenney_city-kit-roads/` — https://kenney.nl/assets/city-kit-roads — `light-curved` → `city-streetlight`, plus the road tiles the city/hometown/speedway autotiler lays: `road-straight` → `street-straight`, `road-crossroad` → `street-cross`, `road-bend` → `street-bend`, `road-intersection` → `street-tee`, `road-end` → `street-end`, `road-square` → `street-square`. **These tiles are flat quads with the road in the texture, and they are authored road-along-X** (straight opens east+west, bend joins north+west, tee is closed to the south, end opens east) — `ArenaEnvironment.streetTileOpenSides` records that and the autotiler's yaws are derived from it. Reconvert at a different orientation and you must update that table, not the yaws. ~90 more models (signs, poles, more road shapes) still unconverted.
 - `3DModels/Source/kenney_nature-kit/` — https://kenney.nl/assets/nature-kit — trees/flowers/mushrooms/stump (→ `park-*`). Powers **Park**. 300+ more models (cliffs, camps, canoes) in reserve.
 
 ### 6. World packs, round two (added 2026-08-19) — all Kenney, all CC0

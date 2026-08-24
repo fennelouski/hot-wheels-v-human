@@ -169,7 +169,9 @@ Each piece boundary is a checkpoint (piece index). Progress = (lap, pieceIndex, 
 `CustomizerSplitView` = VStack of two independent `CustomizerView`s, top one `.rotationEffect(.degrees(180))`. Each half owns its player context. Builder is shared (one track) — after customization, Player 1 builds the track while Player 2's half shows a "hype" preview carousel of both cars.
 
 ### 6.4 AI opponent ("The Hot Wheels")
-Same simulation as human cars (fair!). AI differences: pre-built car from a themed roster (`kart-*`, `race-future` — robotic liveries) and a boost policy: easy = random timing; medium = boosts on straights; hard = boosts optimally out of curves and never before loops it can't survive. AI never gets stat bonuses — difficulty is purely decision quality.
+Same simulation as human cars, same stat tables — no stat bonuses. AI differences: pre-built car from a themed roster (`kart-*`, `race-future` — robotic liveries), a boost policy (easy = random timing; medium = boosts on straights; hard = boosts optimally out of curves and never before loops it can't survive), and a **rubber band**.
+
+**Rubber band / win rate (designer's call, 2026-08-23):** "fair" here means *fun for a kid*, not evenly matched. Each race the bot rolls once against `RaceTuning.aiWinChance` for whether it's allowed to win — 1% on easy, 10% on medium and hard, so the kid takes 99% and 90%. It then paces itself off the kid's car (`AIBoostPolicy.pace`), hovering ~3% of a lane behind, or ahead on the races it won, which keeps every finish close no matter how the two cars are built. Boost policy still decides where the meter goes, so the difficulties still look and sound different on the way round. The kid can still lose a "won" race by wrecking out of his five lives — the roll decides the racing, not the crashing.
 
 ### 6.5 Error / edge cases
 - iPad rotates or app backgrounds mid-race → dashboard rejoins with state from next snapshot.

@@ -104,7 +104,8 @@ struct DriveSystem: System {
         var t = tangent(at: follow.nextIndex)
         var inLoop = follow.loopRanges.contains { $0.contains(follow.nextIndex) }
         let scale = RaceTuning.railSpeedScale
-        let top = RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]! * scale
+        let top = RaceTuning.maxSpeed[chassis]! * RaceTuning.tireSpeedFactor[tires]!
+            * scale * state.paceScale
 
         // ── Scalar speed: target-speed model. Terrain shapes an effective
         // cruise target — uphill/ramps lower it, downhill raises it,

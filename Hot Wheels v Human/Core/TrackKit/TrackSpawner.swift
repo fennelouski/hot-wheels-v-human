@@ -38,6 +38,10 @@ enum TrackSpawner {
             model.position = piece.modelPosition
             model.orientation = simd_quatf(angle: piece.modelYaw, axis: [0, 1, 0])
                 * simd_quatf(angle: piece.definition.modelPitch, axis: [1, 0, 0])
+            // Scale is applied before rotation (TRS), which is what the hill
+            // meshes' Y stretch assumes — it has to act along the mesh's own
+            // up axis, not the world's.
+            model.scale = piece.definition.modelScale
             // Cars collide with SOLVED geometry, not the visual meshes —
             // the models carry raised ramps/tabs/lead-ins beyond their
             // logical footprints, and cars hitting those exact meshes got

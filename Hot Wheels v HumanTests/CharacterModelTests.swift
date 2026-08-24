@@ -110,6 +110,10 @@ struct CharacterModelTests {
                 var driver = DriverProfile.presets[0]
                 driver.bodyType = body
                 driver.characterVariant = variant
+                // Their own hair, un-recoloured — the one combination that
+                // still wears the character's baked head.
+                driver.hair = .character
+                driver.hairColorHex = nil
                 let sex = body.isFemale ? "female" : "male"
                 #expect(driver.modelName(pose: .idle) == "character-\(sex)-\(variant)-idle")
             }
@@ -299,6 +303,7 @@ struct CharacterModelTests {
         driver.hat = HatStyle.none
         driver.glasses = GlassesStyle.none
         driver.hair = .character  // wears the hair it was modelled with
+        driver.hairColorHex = nil // ...at the colour it was modelled in
         #expect(DriverDressUp.props(for: driver).isEmpty)
         driver.hair = .bald       // ...and bald attaches nothing either
         #expect(DriverDressUp.props(for: driver).isEmpty)
@@ -485,12 +490,71 @@ struct CharacterModelTests {
     @Test func hairOverridesTheCharactersOwn() {
         var profile = DriverProfile.presets[0]
         profile.hair = .character
+        profile.hairColorHex = nil
         let own = profile.modelName(pose: .drive)
         #expect(!own.contains("bald"))
         for style in HairStyle.allCases where style != .character {
             profile.hair = style
             #expect(profile.modelName(pose: .drive) == own.replacingOccurrences(
                 of: "-drive", with: "-bald-drive"))
+        }
+    }
+
+    /// Picking a hair COLOUR on "Their Own" lifts the character's own hair
+    /// onto their bald cut so it can be tinted — the only way to recolour
+    /// hair without dragging the eyes with it, since Kenney paints both to
+    /// one flat texel on more than half the roster.
+    @Test func theirOwnHairBecomesAPropOnceRecoloured() {
+        var profile = DriverProfile.presets[0]
+        profile.hair = .character
+        profile.bodyType = .woman
+        profile.characterVariant = "d"
+
+        profile.hairColorHex = nil
+        #expect(profile.hairPropModelName == nil)
+        #expect(profile.modelName(pose: .drive) == "character-female-d-drive")
+
+        profile.hairColorHex = "#E7C87B"
+        #expect(profile.hairPropModelName == "hair-female-d")
+        #expect(profile.modelName(pose: .drive) == "character-female-d-bald-drive")
+        #expect(DriverDressUp.props(for: profile).contains("hair-female-d"))
+    }
+
+    /// Two roster people have no hair mesh of their own — male-b's island is
+    /// a beard (it stays on the bald cut) and male-c's is a police cap. The
+    /// editor hides the colour swatch for them rather than offering a tap
+    /// that repaints a hat, so nothing may claim they can be recoloured.
+    @Test func charactersWithoutTheirOwnHairMeshDontOfferTheSwatch() {
+        var profile = DriverProfile.presets[0]
+        profile.hair = .character
+        profile.bodyType = .man
+        for variant in ["b", "c"] {
+            profile.characterVariant = variant
+            #expect(profile.ownHairModelName == nil)
+            #expect(profile.canRecolorHair == false)
+            // ...and asking for a colour anyway must not swap the mesh.
+            profile.hairColorHex = "#E7C87B"
+            #expect(profile.modelName(pose: .idle) == "character-male-\(variant)-idle")
+            profile.hairColorHex = nil
+        }
+        // A picked style still works on them — it brings its own mesh.
+        profile.characterVariant = "b"
+        profile.hair = .crop
+        #expect(profile.canRecolorHair)
+        #expect(profile.modelName(pose: .idle) == "character-male-b-bald-idle")
+    }
+
+    /// Every hair mesh the roster can ask for as "their own" must be bundled.
+    @Test func everyOwnHairMeshIsBundled() {
+        var profile = DriverProfile.presets[0]
+        for body in BodyType.allCases {
+            for variant in body.variants {
+                profile.bodyType = body
+                profile.characterVariant = variant
+                guard let mesh = profile.ownHairModelName else { continue }
+                #expect(Bundle.main.url(forResource: mesh, withExtension: "usdz") != nil,
+                        "missing \(mesh).usdz")
+            }
         }
     }
 

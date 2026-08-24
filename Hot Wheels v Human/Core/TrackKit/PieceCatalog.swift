@@ -93,6 +93,11 @@ nonisolated struct TrackPieceDefinition: Sendable {
     /// +X carries +Z toward −Y, so a climb wants a NEGATIVE pitch.
     let modelPitch: Float
     let modelOffset: SIMD3<Float>
+    /// Non-uniform scale applied to the MODEL only (never the spline, the
+    /// footprint or the collision). The hill transition meshes rise a few
+    /// millimetres off the round elevation level the layout stacks in, and
+    /// this is what stretches them onto it — see `PieceCatalog.hill`.
+    let modelScale: SIMD3<Float>
     let exitOffset: SIMD3<Float>
     let headingChange: Float          // radians about +Y, + = left
     let elevationDelta: Int
@@ -105,6 +110,7 @@ nonisolated struct TrackPieceDefinition: Sendable {
     init(type: PieceType, modelName: String,
          overlayModelName: String? = nil, overlayOffset: SIMD3<Float> = .zero,
          modelYaw: Float = 0, modelPitch: Float = 0, modelOffset: SIMD3<Float> = .zero,
+         modelScale: SIMD3<Float> = .one,
          exitOffset: SIMD3<Float>, headingChange: Float = 0, elevationDelta: Int = 0,
          footprint: FootprintRect, shape: CenterlineShape,
          laneHalfWidth: Float = RaceTuning.laneOffsetWide, minEntrySpeed: Float? = nil) {
@@ -115,6 +121,7 @@ nonisolated struct TrackPieceDefinition: Sendable {
         self.modelYaw = modelYaw
         self.modelPitch = modelPitch
         self.modelOffset = modelOffset
+        self.modelScale = modelScale
         self.exitOffset = exitOffset
         self.headingChange = headingChange
         self.elevationDelta = elevationDelta
@@ -155,11 +162,12 @@ nonisolated enum PieceCatalog {
     /// miss it by a few millimetres, and the layout uses the round number
     /// so that heights stay whole support legs.
     ///
-    /// ponytail: the models are placed to be exact at the piece's ENTRY —
-    /// where the spline starts and where the car arrives — which leaves the
-    /// difference (≤ 6 mm) as a step at the far seam. Scaling each mesh's Y
-    /// by level/meshRise would zero it out; not worth a transform and a
-    /// re-derived bed offset for a third of a wheel's height.
+    /// Each mesh is scaled in Y by `level / meshRise` so its bed rises
+    /// EXACTLY one elevation level (`hillYScale`). Placing them at true size
+    /// made the entry seam exact and left the difference — up to 6 mm, a
+    /// third of a wheel — as a step at the far seam, on every hill on every
+    /// track. The scale is ≤ 2.7%, invisible on the bed's own faceting, and
+    /// it moves the bed offset with it, which is why `offset` multiplies.
     private static let completeMeshRise: Float = 0.2000
     private static let beginningMeshRise: Float = 0.2056
     private static let endMeshRise: Float = 0.1955
@@ -227,11 +235,19 @@ nonisolated enum PieceCatalog {
         // A descent runs the meshes in reverse: yaw 180° and shift the
         // model so its HIGH connector lands on the traversal entry.
         let yaw: Float = up ? 0 : .pi
+        /// What a mesh's Y must be scaled by for its bed to rise exactly one
+        /// elevation level, so BOTH its seams land on a whole level instead
+        /// of just its entry.
+        func yScale(_ meshRise: Float) -> SIMD3<Float> { [1, level / meshRise, 1] }
         /// Places a hill mesh so its bed meets the traversal entry at y = 0.
         /// Climbing, that's the mesh's low end and the lift is all it takes;
         /// descending, the entry is the mesh's high end, one true rise up.
+        /// Both are measured on the UNSCALED mesh, so both scale with it —
+        /// `yScale` stretches about the model origin, and the bed sits below
+        /// that origin, so the gap to it stretches too.
         func offset(_ lift: Float, _ meshRise: Float) -> SIMD3<Float> {
-            up ? [0, lift, 0] : [0, lift - meshRise, 0.8]
+            let k = level / meshRise
+            return up ? [0, lift * k, 0] : [0, (lift - meshRise) * k, 0.8]
         }
 
         switch role {
@@ -244,6 +260,7 @@ nonisolated enum PieceCatalog {
             return TrackPieceDefinition(
                 type: type, modelName: "track-wide-straight-hill-complete",
                 modelYaw: yaw, modelOffset: offset(hillBedLift, completeMeshRise),
+                modelScale: yScale(completeMeshRise),
                 exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
                 footprint: straightRect,
                 shape: .profiled(length: 0.8, rise: sign * level,
@@ -259,6 +276,7 @@ nonisolated enum PieceCatalog {
                 modelYaw: yaw,
                 modelOffset: up ? offset(hillBedLift, beginningMeshRise)
                                : offset(hillEndBedLift, endMeshRise),
+                modelScale: yScale(up ? beginningMeshRise : endMeshRise),
                 exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
                 footprint: straightRect,
                 shape: .profiled(length: 0.8, rise: sign * level,
@@ -293,6 +311,7 @@ nonisolated enum PieceCatalog {
                 modelYaw: yaw,
                 modelOffset: up ? offset(hillEndBedLift, endMeshRise)
                                : offset(hillBedLift, beginningMeshRise),
+                modelScale: yScale(up ? endMeshRise : beginningMeshRise),
                 exitOffset: [0, sign * level, 0.8], elevationDelta: up ? 1 : -1,
                 footprint: straightRect,
                 shape: .profiled(length: 0.8, rise: sign * level,

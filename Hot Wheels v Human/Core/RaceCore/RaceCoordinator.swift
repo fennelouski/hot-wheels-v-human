@@ -28,6 +28,10 @@ final class RaceCoordinator {
     /// Ride in the driver's seat instead of the chase camera (ArenaView).
     /// Lives here so the same toggle works on the TV and in Solo Arena.
     var driverView = true
+    /// Which preset the cockpit radio is tuned to. Defaults to the chiptune
+    /// station, which IS the old race track — so a kid who never touches the
+    /// radio hears exactly what they heard before.
+    var radioStation: RadioStation = .chiptune
 
     private let transport: any GameTransport
     private var designs: [(owner: UUID?, design: CarDesign)] = []

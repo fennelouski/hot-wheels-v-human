@@ -48,9 +48,11 @@ enum DriverDressUp {
         case .squareShades: names.append("square-shades")
         }
         // Hair is a real mesh lifted off the roster's own heads, attached to
-        // the bald cut of whichever character you picked (see HairStyle).
-        // `.character` wears its own; `.bald` wears nothing.
-        if let hair = profile.hair.modelName {
+        // the bald cut of whichever character you picked. A picked style
+        // wears someone else's; `.character` wears its own once a colour has
+        // been chosen (see `DriverProfile.hairPropModelName`); `.bald` wears
+        // nothing.
+        if let hair = profile.hairPropModelName {
             names.append(hair)
         }
         return names

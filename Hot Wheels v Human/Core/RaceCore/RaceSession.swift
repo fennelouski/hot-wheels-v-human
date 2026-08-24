@@ -65,6 +65,9 @@ final class RaceSession {
     private var pieceTypes: [PieceType] = []
     private var pieceStartIndices: [Int] = []
     private var aiRNG = SystemRandomNumberGenerator()
+    /// This race's roll: may the bot take it? Rolled once in `start`, then
+    /// the rubber band spends the whole race making the result look earned.
+    private var botMayWin = false
 
     /// Forwarded discrete events (countdown, crash, respawn, finish) —
     /// RaceCoordinator relays these onto the transport.
@@ -108,6 +111,11 @@ final class RaceSession {
                       reset: !Self.drillLogStarted)
         Self.drillLogStarted = true
         self.config = config
+        // The kid asked to win ~99% on easy and ~90% on the harder bots.
+        // One roll per race decides it; `AIBoostPolicy.pace` below keeps it
+        // a photo finish either way.
+        botMayWin = Float.random(in: 0..<1, using: &aiRNG)
+            < (config.aiDifficulty.flatMap { RaceTuning.aiWinChance[$0] } ?? 0)
         trackID = blueprint.trackId
         worldTheme = blueprint.worldTheme
         scenery = blueprint.scenery ?? []
@@ -315,6 +323,9 @@ final class RaceSession {
                 }
             }
         }
+        // Who the bot is pacing off (nil in 2P/test, or once the kid is out —
+        // then it just drives). Last tick's value; 100 ms of stale is fine.
+        let kidProgress = racers.first { !$0.isAI && !$0.isOut }?.progress
         for i in racers.indices {
             guard let car = racers[i].entity,
                   let state = car.components[CarComponent.self],
@@ -341,6 +352,16 @@ final class RaceSession {
                 }
                 racers[i].lastPieceIndex = piece
                 racers[i].segmentStartClock = raceClock
+            }
+
+            // Rubber band: hover just behind the kid (or just ahead on the
+            // races the roll gave the bot). Written before the boost block
+            // below, which re-reads the component.
+            if racers[i].isAI, let kidProgress {
+                var paced = state
+                paced.paceScale = AIBoostPolicy.pace(
+                    gap: kidProgress - racers[i].progress, botMayWin: botMayWin)
+                car.components.set(paced)
             }
 
             // AI boost decision — same meter rules as humans, fair by design.

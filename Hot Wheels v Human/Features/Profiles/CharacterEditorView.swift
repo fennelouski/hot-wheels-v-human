@@ -26,12 +26,15 @@ struct CharacterEditorView: View {
         _model = State(initialValue: CharacterEditorModel(driver: driver))
     }
 
+    /// No `.camera` ("Me!") case: the lookalike flow doesn't work yet, and a
+    /// tab that does nothing is worse than no tab. `cameraTab`, `LookalikeView`
+    /// and `LookalikeAnalyzer` are all still here — put the case back to
+    /// re-open the entry point once the flow lands.
     enum Tab: String, CaseIterable {
         case face = "Face"
         case hair = "Hair"
         case clothes = "Clothes"
         case extras = "Extras"
-        case camera = "Me!"
 
         var symbolName: String {
             switch self {
@@ -39,7 +42,6 @@ struct CharacterEditorView: View {
             case .hair: "comb.fill"
             case .clothes: "tshirt.fill"
             case .extras: "crown.fill"
-            case .camera: "camera.fill"
             }
         }
     }
@@ -98,7 +100,6 @@ struct CharacterEditorView: View {
                 case .hair: hairTab
                 case .clothes: clothesTab
                 case .extras: extrasTab
-                case .camera: cameraTab
                 }
             }
             // Uncapped on purpose — see CustomizerView. The Face bench is
@@ -200,9 +201,15 @@ struct CharacterEditorView: View {
                 }
                 swatchColumn("Skin", options: DriverPalette.skinTones,
                              selection: $model.driver.skinToneHex)
-                swatchColumn("Eyes", options: DriverPalette.eyeColors,
-                             selection: optionalColor(\.eyeColorHex,
-                                                      default: DriverPalette.defaultEyeColor))
+                // Hidden on the half of the roster whose eye texels are also
+                // their hair or a garment — there the swatch saved a colour
+                // and changed nothing on screen, which is worse than no
+                // swatch. Those characters wear glasses instead (Extras).
+                if RosterColormap.canRecolorEyes(for: model.driver) {
+                    swatchColumn("Eyes", options: DriverPalette.eyeColors,
+                                 selection: optionalColor(\.eyeColorHex,
+                                                          default: DriverPalette.defaultEyeColor))
+                }
             }
             .padding(.horizontal, 20)
         }
@@ -216,16 +223,24 @@ struct CharacterEditorView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .top, spacing: 36) {
                 // Color reads first, so picking a color never means hunting
-                // for the Style row first. Still hidden for the two styles
-                // that have no hair mesh to paint: `.character` wears its
-                // baked colormap (roster models are painted, not striped —
-                // see DriverPainter.apply's bakedAppearance) and `.bald`
-                // takes the scalp from the skin swatch. Swatches there would
-                // be dead taps.
-                if model.driver.hair != .character && model.driver.hair != .bald {
+                // for the Style row first. "Their Own" is live now: the first
+                // tap lifts the character's OWN hair mesh onto their bald cut
+                // and tints that, so hair colour works without dragging the
+                // eyes along (see DriverProfile.hairPropModelName). Still
+                // hidden where there's nothing to paint — `.bald`, and the
+                // two roster people with no hair mesh of their own.
+                if model.driver.canRecolorHair {
+                    // "Their Own" starts at whatever colour the character was
+                    // DRAWN in, which isn't one of these swatches — so nothing
+                    // is ringed until a kid picks, rather than ringing a brown
+                    // the character isn't. Every picked style really does
+                    // default to that brown, so there it shows selected.
+                    let unset = model.driver.hair == .character
+                        ? "" : DriverPalette.defaultHairColor
                     swatchColumn("Color", options: DriverPalette.hairColors,
-                                 selection: optionalColor(\.hairColorHex,
-                                                          default: DriverPalette.defaultHairColor))
+                                 selection: Binding(
+                                    get: { model.driver.hairColorHex ?? unset },
+                                    set: { model.driver.hairColorHex = $0 }))
                 }
                 VStack(spacing: 10) {
                     label("Style")
@@ -293,6 +308,9 @@ struct CharacterEditorView: View {
         .defaultScrollAnchor(.center)
     }
 
+    /// Unreachable while `Tab.camera` is commented out of the strip — parked,
+    /// not deleted, because the lookalike flow is unfinished rather than
+    /// unwanted.
     private var cameraTab: some View {
         VStack(spacing: 14) {
             #if os(iOS)

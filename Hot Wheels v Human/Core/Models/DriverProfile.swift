@@ -56,11 +56,6 @@ nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
     /// Prefix, not `contains`: "female" contains "male".
     var isFeminine: Bool? { modelName.map { $0.hasPrefix("hair-female") } }
 
-    /// Does this style replace the character's baked hair? (Everything but
-    /// `.character` does — including `.bald`, which is how you get a head
-    /// with nothing on it.)
-    var needsBaldHead: Bool { self != .character }
-
     /// Unknown raw values (older or newer peers) fall back instead of
     /// failing the whole profile decode. The C-series styles are mapped to
     /// their closest real mesh rather than dropped, so a kid who saved
@@ -193,6 +188,52 @@ nonisolated struct DriverProfile: Codable, Equatable, Identifiable, Sendable {
 }
 
 extension DriverProfile {
+    /// The roster person this profile is, clamped the way every reader needs
+    /// it — `character-female-d` and so on, without a pose or bald suffix.
+    /// Clamped here rather than at the picker so a saved profile, an old
+    /// peer's message, or a body-type switch can't put a body in a variant it
+    /// isn't allowed (today: the bearded man as a boy).
+    var rosterName: String {
+        let body = bodyType ?? .man
+        var variant = characterVariant ?? body.defaultVariant
+        if !body.variants.contains(variant) { variant = body.defaultVariant }
+        return "character-\(body.isFemale ? "female" : "male")-\(variant)"
+    }
+
+    /// The hair cut off THIS character's own head, when there's one to wear.
+    /// `tools/extract_character_hair.py` produced eleven of these; the two
+    /// gaps are deliberate. `male-b`'s only island is a beard, which sits
+    /// below the cranium and stays on the bald cut. `male-c`'s is a police
+    /// cap — it's `HatStyle.policeCap`, and handing it to the Hair swatch
+    /// would repaint his hat when a kid asks for blonde.
+    var ownHairModelName: String? {
+        let roster = rosterName
+        guard roster != "character-male-b", roster != "character-male-c" else { return nil }
+        return roster.replacingOccurrences(of: "character-", with: "hair-")
+    }
+
+    /// The hair mesh pinned to the head as a prop, or nil when the head keeps
+    /// the hair it was modelled with.
+    ///
+    /// A picked style always attaches. `.character` — the default — attaches
+    /// only once a kid has actually chosen a colour: then their OWN hair is
+    /// lifted onto the bald cut of the same character so it can be tinted,
+    /// which is the only way to recolour hair independently of eyes. Kenney
+    /// paints hair and eyes to the same flat texel on more than half the
+    /// roster, so the shared colormap can't separate them; the geometry can.
+    /// Until a colour is picked nothing swaps and nobody looks different.
+    var hairPropModelName: String? {
+        if let picked = hair.modelName { return picked }
+        guard hair == .character, hairColorHex != nil else { return nil }
+        return ownHairModelName
+    }
+
+    /// Whether the Hair colour swatch can do anything here. `.bald` has no
+    /// hair to paint, and two roster people have no hair mesh to swap in.
+    var canRecolorHair: Bool {
+        hair != .bald && (hair.modelName != nil || ownHairModelName != nil)
+    }
+
     /// The six roster meshes Kenney Mini Characters ship per sex. With the
     /// sex coming from `bodyType`, these are the twelve people in the game.
     /// One list: the editor's picker, the bundle check, and the pose check
@@ -206,18 +247,12 @@ extension DriverProfile {
     /// Characters) replace the single Quaternius rig that every body type
     /// used to share at different scales.
     func modelName(pose: DriverPose) -> String {
-        let body = bodyType ?? .man
-        let sex = body.isFemale ? "female" : "male"
-        // Clamped here rather than at the picker so a saved profile, an old
-        // peer's message, or a body-type switch can't put a body in a
-        // variant it isn't allowed (today: the bearded man as a boy).
-        var variant = characterVariant ?? body.defaultVariant
-        if !body.variants.contains(variant) { variant = body.defaultVariant }
-        // Picking a hairstyle swaps in the bald cut of the same character,
-        // so the chosen hair replaces the baked hair instead of stacking on
-        // top of it. Same skeleton, same poses, 144-ish fewer polys.
-        let scalp = hair.needsBaldHead ? "-bald" : ""
-        return "character-\(sex)-\(variant)\(scalp)-\(pose.rawValue)"
+        // Wearing hair as a prop swaps in the bald cut of the same character,
+        // so the prop replaces the baked hair instead of stacking on top of
+        // it. Same skeleton, same poses, 144-ish fewer polys. `.bald` takes
+        // the bald cut with no prop at all — that's how you get a bare head.
+        let scalp = (hair == .bald || hairPropModelName != nil) ? "-bald" : ""
+        return "\(rosterName)\(scalp)-\(pose.rawValue)"
     }
 
     /// Kid-sized racer names for the dice button (profile picker + editors).

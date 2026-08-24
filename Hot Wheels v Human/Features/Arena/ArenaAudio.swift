@@ -27,7 +27,7 @@ final class ArenaAudio {
     private var engineResources: [String: AudioFileResource] = [:]
     private var tapeSnapped = false
 
-    func tick(session: RaceSession) {
+    func tick(session: RaceSession, station: RadioStation = .chiptune) {
         let phase = session.phase
         if phase != lastPhase {
             switch phase {
@@ -39,7 +39,7 @@ final class ArenaAudio {
                 playAIVoice(session: session, moment: "intro")
             case .racing:
                 SoundBank.shared.play("start_gate_drop")
-                SoundBank.shared.playMusic("race_intensity")
+                SoundBank.shared.playMusic(station.track)
                 startEngines(session: session)
             case .results:
                 SoundBank.shared.duckMusic(seconds: 4)

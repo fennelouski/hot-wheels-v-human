@@ -12,6 +12,12 @@ import RealityKit
 struct RootView: View {
     @Environment(AppModel.self) private var appModel
 
+    /// Browses for an Apple TV the whole time the home screen is up, so the
+    /// "Race on TV" tile only appears when there's a TV to race on. A tile
+    /// that leads to a permanent "Looking for your TV…" is a dead end for a
+    /// kid; no tile asks no questions.
+    @State private var tvFinder = TVFinder()
+
     /// Dev deep links: `simctl launch <app> --solo-arena | --customizer`.
     private let launchIntoArena = ProcessInfo.processInfo.arguments.contains("--solo-arena")
     private let launchIntoCustomizer = ProcessInfo.processInfo.arguments.contains("--customizer")
@@ -28,6 +34,14 @@ struct RootView: View {
     /// Dev arg: the PiP tuner — a live reaction cam with a slider per
     /// cockpit number, for dialling the driver's framing in by eye.
     private let launchIntoPiPTuner = ProcessInfo.processInfo.arguments.contains("--pip-tuner")
+    /// Dev arg: the physics A/B bench (PRD §2.1 "Test Mode") — two builds run
+    /// side by side, no lives, no boosts. It's how physics FEEL is tuned, and
+    /// it was never a kid feature: the pickers are hard-wired to
+    /// `CarDesign.demoPair`, not to saved cars, and its "Glued to the Track"
+    /// toggle writes `RaceTuning.railPinned` — a global that outlives the
+    /// screen and would change the physics of every later race in the session.
+    /// Behind a launch arg, that global can no longer be flipped by a player.
+    private let launchIntoTestMode = ProcessInfo.processInfo.arguments.contains("--test-mode")
     private let launchIntoBuilder = ProcessInfo.processInfo.arguments.contains("--trackbuilder")
     private let launchIntoGarage = ProcessInfo.processInfo.arguments.contains("--garage")
     /// P7 memory drill: max-size random track, crash-prone demo pair.
@@ -106,6 +120,8 @@ struct RootView: View {
             #if os(iOS)
             PiPTunerView()
             #endif
+        } else if launchIntoTestMode {
+            TestModeView()
         } else if launchIntoBuilder {
             TrackBuilderView()
         } else if launchIntoGarage {
@@ -123,7 +139,6 @@ struct RootView: View {
         }
     }
 
-
     private var homeScreen: some View {
         NavigationStack {
             VStack(spacing: 20) {
@@ -139,34 +154,21 @@ struct RootView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.yellow)
                 .foregroundStyle(.black)
-                SpinningCarView()
-                    .frame(maxHeight: 240)
-                Grid(horizontalSpacing: 20, verticalSpacing: 20) {
-                    GridRow {
-                        homeLink("Build a Car", systemImage: "car.fill") { CustomizerView() }
-                        homeLink("Build a Track", systemImage: "road.lanes.curved.right") { TrackBuilderView() }
-                    }
-                    GridRow {
-                        homeLink("Race a Robot", systemImage: "flag.checkered") { RobotRacePickerView() }
-                        homeLink("Race on TV", systemImage: "tv.fill") { RaceOnTVView() }
-                    }
-                    GridRow {
-                        homeLink("Garage", systemImage: "door.garage.closed") { GarageView() }
-                        homeLink("Test My Cars", systemImage: "stopwatch.fill") { TestModeView() }
-                    }
-                    GridRow {
-                        homeLink("2-Player Build", systemImage: "person.2.fill") { CustomizerSplitView() }
-                        homeLink("My Racers", systemImage: "person.crop.circle.fill") { CharacterSelectView() }
-                    }
-                    // PiP framing is settled; the home tile is gone. The tuner
-                    // itself stays, reachable by the `--pip-tuner` launch arg
-                    // for any future per-body re-tuning.
-                }
+                homeBoard
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(red: 0.09, green: 0.10, blue: 0.16))
             .foregroundStyle(.white)
-            .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
+            // Browsing is cheap and stops the moment you leave home. The
+            // tile fades in when a TV starts advertising, which is exactly
+            // when a kid opens the app on the Apple TV.
+            .onAppear {
+                SoundBank.shared.playMusic("workshop_ambience")
+                tvFinder.start()
+            }
+            .onDisappear { tvFinder.stop() }
+            .animation(.easeInOut(duration: 0.3), value: tvFinder.foundTV)
+            .animation(.easeInOut(duration: 0.3), value: tvFinder.blocked)
             #if os(iOS)
             .toolbar { ToolbarItem(placement: .topBarLeading) { profileChip } }
             #endif
@@ -174,33 +176,157 @@ struct RootView: View {
     }
 
     /// Tap to go back to "Who's playing?" — switching kids mid-session.
+    /// The profile colour alone read as decoration, not a way out, so the
+    /// circle carries a back caret and the whole chip sits in a capsule —
+    /// the same back affordance RaceOnTVView uses.
     private var profileChip: some View {
-        Button {
+        let colorHex = appModel.selectedProfile?.colorHex ?? "#FFD500"
+        return Button {
             appModel.selectedProfile = nil
             appModel.selectedDriver = nil
         } label: {
             HStack(spacing: 10) {
                 Circle()
-                    .fill(Color(hex: appModel.selectedProfile?.colorHex ?? "#FFD500"))
+                    .fill(Color(hex: colorHex))
                     .frame(width: 34, height: 34)
+                    .overlay {
+                        Image(systemName: "chevron.left")
+                            .font(.system(size: 19, weight: .black))
+                            // The profile swatches run all the way from near
+                            // black to near white, so the caret's ink has to
+                            // follow the circle it sits on.
+                            .foregroundStyle(DriverPalette.needsLightInk(on: colorHex)
+                                             ? .white : .black)
+                    }
                 Text(appModel.selectedProfile?.name ?? "")
                     .font(.system(size: 24, weight: .heavy, design: .rounded))
             }
             .padding(.horizontal, 14)
             .frame(height: 60)
+            .background(.white.opacity(0.12), in: Capsule())
         }
         .buttonStyle(.plain)
         .foregroundStyle(.white)
     }
 
-    private func homeLink(_ title: String, systemImage: String,
-                          destination: @escaping () -> some View) -> some View {
+    /// The home board's tiles, in the order they read: build, race, manage,
+    /// share. Declared as a list rather than hand-laid GridRows so a tile that
+    /// isn't available closes the gap behind it — a fixed grid left a hole in
+    /// the middle of the board whenever "Race on TV" was away.
+    ///
+    /// Two screens deliberately have no tile, both reachable by launch arg:
+    /// the PiP tuner (`--pip-tuner`, framing is settled) and the physics A/B
+    /// bench (`--test-mode`). The bench went behind a flag because "Test My
+    /// Cars" couldn't test your cars — its pickers are hard-wired to
+    /// `CarDesign.demoPair` — and its rails toggle wrote a session-wide
+    /// physics global that no other screen mentions.
+    private enum HomeTile: CaseIterable {
+        case buildCar, buildTrack, raceRobot, raceOnTV
+        case garage, twoPlayer, myRacers
+
+        var title: String {
+            switch self {
+            case .buildCar: "Build a Car"
+            case .buildTrack: "Build a Track"
+            case .raceRobot: "Race a Robot"
+            case .raceOnTV: "Race on TV"
+            case .garage: "Garage"
+            case .twoPlayer: "2-Player Build"
+            case .myRacers: "My Racers"
+            }
+        }
+
+        /// What the tile shows above its label. Kids who can't read yet pick
+        /// buttons by picture, and in a game about toys the picture should be
+        /// the toy — so most tiles carry a render of the actual model
+        /// (`tools/render_tile_art.py`). Two can't: no pack ships a
+        /// television, and Kenney's pit garage has "TANKCO." branding baked
+        /// into its texture, which is fine trackside and wrong on a kid's home
+        /// screen. Those two keep a symbol rather than borrow a wrong toy.
+        enum Art {
+            case toy(String)        // loose PNG in Resources/Thumbs
+            case symbol(String)     // SF Symbol
+        }
+
+        var art: Art {
+            switch self {
+            case .buildCar: .toy("tile-build-car")
+            case .buildTrack: .toy("tile-build-track")
+            case .raceRobot: .toy("tile-race-robot")
+            case .raceOnTV: .symbol("tv.fill")
+            case .garage: .symbol("door.garage.closed")
+            case .twoPlayer: .toy("tile-two-player")
+            case .myRacers: .toy("tile-my-racers")
+            }
+        }
+    }
+
+    /// Two to a row, in order, with an odd tile centred under the board rather
+    /// than hanging off the left edge. Two columns of 320 + 20 of gutter is
+    /// 660 — the same width as QUICK PLAY above it, which is what makes the
+    /// whole screen line up.
+    private var homeBoard: some View {
+        let tiles = HomeTile.allCases.filter { tile in
+            // "Race on TV" is only real when there's a TV to race on — or when
+            // we were blocked from looking, so denying the Local Network
+            // prompt doesn't hide the feature for good.
+            tile != .raceOnTV || tvFinder.foundTV || tvFinder.blocked
+        }
+        let rows = stride(from: 0, to: tiles.count, by: 2).map {
+            Array(tiles[$0..<min($0 + 2, tiles.count)])
+        }
+        return Grid(horizontalSpacing: 20, verticalSpacing: 20) {
+            ForEach(Array(rows.enumerated()), id: \.offset) { _, row in
+                GridRow {
+                    ForEach(row, id: \.self) { tile in
+                        homeLink(tile)
+                        // A lone tile spans both columns so the Grid centres
+                        // it. Spanning cells don't set column widths, so the
+                        // full rows above still size the board.
+                        .gridCellColumns(row.count == 1 ? 2 : 1)
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func destination(for tile: HomeTile) -> some View {
+        switch tile {
+        case .buildCar: CustomizerView()
+        case .buildTrack: TrackBuilderView()
+        case .raceRobot: RobotRacePickerView()
+        case .raceOnTV: RaceOnTVView()
+        case .garage: GarageView()
+        case .twoPlayer: CustomizerSplitView()
+        case .myRacers: CharacterSelectView()
+        }
+    }
+
+    /// A picture card: the toy on top, the name under it. Sized 320 × 140 so
+    /// two columns still come to the 660 pt of QUICK PLAY above, and three
+    /// rows still clear an 11-inch iPad in landscape.
+    private func homeLink(_ tile: HomeTile) -> some View {
         NavigationLink {
-            destination()
+            destination(for: tile)
         } label: {
-            Label(title, systemImage: systemImage)
-                .font(.system(size: 30, weight: .heavy, design: .rounded))
-                .frame(width: 320, height: 76)
+            VStack(spacing: 6) {
+                Group {
+                    switch tile.art {
+                    case .toy(let name):
+                        // Rendered 2:1 and fitted, so it fills the strip
+                        // without the card having to crop it.
+                        bundleImage(name).resizable().scaledToFit()
+                    case .symbol(let name):
+                        Image(systemName: name)
+                            .font(.system(size: 64, weight: .semibold))
+                    }
+                }
+                .frame(height: 84)
+                Text(tile.title)
+                    .font(.system(size: 26, weight: .heavy, design: .rounded))
+            }
+            .frame(width: 320, height: 140)
         }
         .buttonStyle(.bordered)
         .tint(.yellow)
@@ -249,47 +375,6 @@ struct RobotRacePickerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
-    }
-}
-
-/// Loads the pilot car USDZ and spins it on a turntable.
-struct SpinningCarView: View {
-    @State private var spin: EventSubscription?
-
-    var body: some View {
-        RealityView { content in
-            content.camera = .virtual
-
-            guard let car = try? await Entity(named: "vehicle-speedster") else {
-                assertionFailure("vehicle-speedster.usdz missing from bundle")
-                return
-            }
-
-            // Auto-frame whatever scale the conversion produced.
-            let bounds = car.visualBounds(relativeTo: nil)
-            car.position = -bounds.center
-            let radius = max(bounds.boundingRadius, 0.01)
-
-            let camera = PerspectiveCamera()
-            camera.look(at: .zero, from: [0, radius * 0.9, radius * 2.2], relativeTo: nil)
-            content.add(camera)
-
-            let light = DirectionalLight()
-            light.light.intensity = 5000
-            light.look(at: .zero, from: [1, 2, 2], relativeTo: nil)
-            content.add(light)
-
-            let turntable = Entity()
-            turntable.addChild(car)
-            content.add(turntable)
-
-            spin = content.subscribe(to: SceneEvents.Update.self) { event in
-                turntable.transform.rotation *= simd_quatf(
-                    angle: Float(event.deltaTime) * 1.2,
-                    axis: [0, 1, 0]
-                )
-            }
-        }
     }
 }
 

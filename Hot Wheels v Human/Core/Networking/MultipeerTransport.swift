@@ -80,7 +80,9 @@ final class MultipeerTransport: NSObject, GameTransport {
         continuation.yield(.stateChanged(new))
     }
 
-    private static func deviceDisplayName() -> String {
+    /// Also used by `TVFinder`, which browses the same service with the same
+    /// name so a TV's peer list doesn't fill up with two entries per iPad.
+    static func deviceDisplayName() -> String {
         #if os(tvOS)
         return "Living Room TV"
         #else

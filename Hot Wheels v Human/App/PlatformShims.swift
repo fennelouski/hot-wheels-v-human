@@ -12,6 +12,7 @@
 import CoreGraphics
 import Foundation
 import ImageIO
+import SwiftUI
 import UniformTypeIdentifiers
 
 #if canImport(UIKit)
@@ -46,4 +47,24 @@ func scaledCGImage(_ image: CGImage, width: Int) -> CGImage? {
     ctx.interpolationQuality = .high
     ctx.draw(image, in: CGRect(x: 0, y: 0, width: w, height: h))
     return ctx.makeImage()
+}
+
+/// A loose PNG from the bundle by file name — the home tiles' toy art and the
+/// decoration box's 243 prop thumbnails both ship this way (rendered by
+/// `tools/render_tile_art.py`, dropped in `Resources/Thumbs`), not as asset
+/// catalog entries.
+///
+/// Explicit URL load on purpose: SwiftUI's named-image lookup misses loose
+/// files outside an asset catalog, which cost the decoration box a screen of
+/// grey cubes before.
+func bundleImage(_ name: String, fallbackSymbol: String = "cube.fill") -> Image {
+    guard let url = Bundle.main.url(forResource: name, withExtension: "png"),
+          let image = PlatformImage(contentsOfFile: url.path) else {
+        return Image(systemName: fallbackSymbol)
+    }
+    #if canImport(UIKit)
+    return Image(uiImage: image)
+    #else
+    return Image(nsImage: image)
+    #endif
 }

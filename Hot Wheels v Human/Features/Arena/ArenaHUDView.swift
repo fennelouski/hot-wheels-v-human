@@ -12,6 +12,9 @@ struct ArenaHUDView: View {
     let session: RaceSession
     /// "Race 2 of 5" when a drafted series is running (nil = single race).
     var seriesLabel: String?
+    /// Bottom clearance for the race clock — the driver's-seat dashboard
+    /// parks along the bottom edge and the clock would land behind it.
+    var bottomInset: CGFloat = 0
 
     var body: some View {
         ZStack {
@@ -35,12 +38,19 @@ struct ArenaHUDView: View {
                     Text(String(format: "%.1f s", session.raceClock))
                         .font(.system(size: 28, weight: .bold, design: .monospaced))
                         .foregroundStyle(.white.opacity(0.8))
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 8 + bottomInset)
                 }
             }
 
             if session.phase == .results {
-                resultsPanel
+                // Docked, not centred: the arena camera swings the cars into
+                // the other two thirds so the breakdown stays watchable.
+                HStack {
+                    Spacer(minLength: 0)
+                    resultsPanel
+                        .frame(maxWidth: 560)
+                        .padding(.trailing, 24)
+                }
             }
         }
     }
@@ -80,7 +90,7 @@ struct ArenaHUDView: View {
     private var resultsPanel: some View {
         let ranked = ranked
         let winner = ranked.first(where: { $0.finishTime != nil })
-        return VStack(spacing: 16) {
+        return VStack(spacing: 12) {
             if let seriesLabel {
                 Text(seriesLabel)
                     .font(.system(size: 28, weight: .heavy, design: .rounded))
@@ -88,14 +98,14 @@ struct ArenaHUDView: View {
             }
             if let winner {
                 Label("\(winner.design.name.uppercased()) WINS!", systemImage: "trophy.fill")
-                    .font(.system(size: 56, weight: .black, design: .rounded))
+                    .font(.system(size: 44, weight: .black, design: .rounded))
                     .foregroundStyle(.yellow)
             } else {
                 Label("EVERYBODY CRASHED!", systemImage: "burst.fill")
-                    .font(.system(size: 48, weight: .black, design: .rounded))
+                    .font(.system(size: 38, weight: .black, design: .rounded))
                     .foregroundStyle(.orange)
             }
-            Grid(horizontalSpacing: 24, verticalSpacing: 8) {
+            Grid(horizontalSpacing: 14, verticalSpacing: 8) {
                 GridRow {
                     Text("Car").bold()
                     Text("Time").bold()
@@ -121,14 +131,14 @@ struct ArenaHUDView: View {
                     }
                 }
             }
-            .font(.system(size: 24, design: .rounded))
+            .font(.system(size: 19, design: .rounded))
             Text(seriesLabel == nil
                  ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
                  : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
-                .font(.system(size: 24, weight: .bold, design: .rounded))
+                .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
         }
-        .padding(32)
+        .padding(22)
         .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 24))
         .foregroundStyle(.white)
     }

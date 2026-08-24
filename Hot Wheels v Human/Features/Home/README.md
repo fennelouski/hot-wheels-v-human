@@ -1,7 +1,9 @@
 # Features/Home/ — entry screens
 
 iPad (`HomeView`, Phase 0 stub → Phase 3 full)
-- Big kid-friendly buttons: **Race on TV** (1P / 2P), **Test My Cars**, **Solo Race** (no TV), **Garage** (saved cars/tracks).
+- Big kid-friendly buttons: **Race on TV** (1P / 2P, shown only when a TV is advertising), **Solo Race** (no TV), **Garage** (saved cars/tracks). The tiles are a flowing list, not a fixed grid — a tile that isn't available closes the gap behind it rather than leaving a hole mid-board.
+- The physics A/B bench (PRD §2.1 "Test Mode") has **no tile**: it is a tuning tool, not a kid feature, and it is reached with `--test-mode`. See RootView.
+- Tiles are **picture cards**: a render of the actual toy above the label (`tools/render_tile_art.py` → `Resources/Thumbs/tile-*.png`), 320 × 140. "Race on TV" and "Garage" keep SF Symbols — no pack ships a TV, and the pit garage art carries "TANKCO." branding.
 - Connection chip: searching / found "Living Room" / connected (drives from `TransportState`).
 - Chooses `MatchConfig` (mode, laps, AI difficulty as emoji faces 😀😼🤖).
 

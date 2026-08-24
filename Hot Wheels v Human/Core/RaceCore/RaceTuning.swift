@@ -122,8 +122,11 @@ nonisolated enum RaceTuning {
     /// NEVER leave the track. Corners read as stat-driven drift, jumps as a
     /// ballistic arc above the lane line. OFF: the original chaotic
     /// force-based physics (everything under "Staying on the track" below).
-    /// Flipped from Test Mode's A/B bench before a run; races started while
-    /// it's set use it for their whole duration (body mode is fixed at spawn).
+    /// Flipped from the `--test-mode` A/B bench before a run; races started
+    /// while it's set use it for their whole duration (body mode is fixed at
+    /// spawn). The bench is launch-arg only precisely because this is a
+    /// session-wide global — a player flipping it would silently change the
+    /// physics of every race afterwards.
     nonisolated(unsafe) static var railPinned = true
 
     /// Kid-first floor: a pinned car always crawls forward at least this
@@ -354,13 +357,38 @@ nonisolated enum RaceTuning {
     /// than the edge-on wall it is from straight behind. ~2 m at 0.1 spacing.
     static let loopCamLead: Int = 20
 
-    /// Driver's-eye camera, in CAR HEIGHTS (recovered from the car's own
-    /// `rideHeight`, so a monster truck sits high and a formula car low).
-    /// Eye = above the car's centre, roughly where the seated driver's head
-    /// is; nose = forward of it, far enough that the kid sees the track
-    /// instead of the back of their own driver's head.
-    static let driverCamEyeRatio: Float = 0.45
-    static let driverCamNoseRatio: Float = 0.6
+    /// Driver's-eye camera, scaled off the car's own body so a monster truck
+    /// sits high and a formula car low. Eye = above the centre, about where
+    /// the seated driver's head is; nose = forward of it, past the driver's
+    /// own head so the kid sees track instead of a haircut.
+    ///
+    /// Eye height in car heights (recovered from `CarComponent.rideHeight`),
+    /// tuned on the monster truck (the tallest
+    /// car, and the one whose own body most fills the frame): 0.45 buried
+    /// the bottom half of the screen in hood, 0.55 left a 9% sliver.
+    static let driverCamEyeRatio: Float = 0.52
+    /// Nose offset is in car LENGTHS, not heights. Heights vary 2:1 across the
+    /// roster (speedster 0.075, monster truck 0.15) while every model is the
+    /// same 0.175 long — so a height-scaled nose put the tall cars' camera out
+    /// past their own bumper, with the whole hood behind the lens.
+    static let driverCamNoseRatio: Float = 0.18
+    /// Nose-down tilt, radians. Enough to seat the hood in the frame; more
+    /// than this and the horizon climbs out the top.
+    static let driverCamPitch: Float = 0.14
+    /// At the flag the camera leaves the cockpit and frames the finish, with
+    /// the pack pushed this far off-centre (in units of the camera's distance
+    /// from the pack) so the results panel can dock beside them instead of on
+    /// top of them. The whole point is watching the loser fall apart.
+    static let finishCamSideBias: Float = 0.22
+    /// …and closes in, because the whole race just ended and the wreck is
+    /// small: the chase distance is sized for two cars in motion, not for
+    /// looking at one that has come apart.
+    static let finishCamZoom: Float = 0.7
+
+    /// Near clip, metres. RealityKit's 0.01 default is life-sized: at toy
+    /// scale the hood is 5–20 mm from the driver's eye, so the default plane
+    /// sliced it — and every wobble popped the slice in and out of view.
+    static let driverCamNear: Float = 0.004
 
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 
@@ -405,12 +433,41 @@ nonisolated enum RaceTuning {
     /// The flop: how far over on its side the sputterer ends up, radians.
     static let breakdownFlopRoll: Float = 1.25
 
-    // MARK: AI opponent (PRD §6.4 — decision quality only, never stat bonuses)
+    // MARK: AI opponent (PRD §6.4)
 
     /// Easy AI: probability per second of firing a full boost meter.
     static let aiEasyBoostChancePerSecond: Float = 0.25
     /// Hard AI refuses to boost if a loop appears within this many pieces ahead.
     static let aiLoopLookaheadPieces = 2
+
+    // MARK: AI rubber band (the kid's win rate)
+    //
+    // The bot no longer just races — it PACES. Every race it rolls for
+    // whether it's allowed to win, then rubber-bands itself to hover just
+    // behind (or just ahead of) the kid's car, so the finish is always a
+    // photo finish and the winner is the roll, not a stat table. Boost
+    // policy above still decides where it spends its meter, so easy and
+    // hard still look different on the way round.
+
+    /// Chance the bot is allowed to take the race, per difficulty — the
+    /// kid asked for "I win basically always on easy, most of the time on
+    /// hard". 0.01 = the kid wins 99 races in 100.
+    static let aiWinChance: [AIDifficulty: Float] = [
+        .easy: 0.01, .medium: 0.10, .hard: 0.10,
+    ]
+    /// Where the bot tries to sit, in fractions of the lane: this far
+    /// behind the kid on races it must lose, this far ahead on the ones
+    /// it's allowed to win. Small = photo finish, and small enough that a
+    /// lead change still happens several times a lap.
+    static let aiTrailMargin: Float = 0.03
+    static let aiLeadMargin: Float = 0.03
+    /// How hard the bot corrects toward that gap: pace multiplier per
+    /// fraction-of-lane of error. 6 closes a 5% gap at ~1.3× pace.
+    static let aiRubberBandGain: Float = 6
+    /// Clamp on the correction. The floor keeps a losing bot moving (a
+    /// crawling opponent is no fun to beat); the ceiling keeps a winning
+    /// one from teleporting away when the kid wrecks.
+    static let aiPaceRange: ClosedRange<Float> = 0.55...1.35
 
     // MARK: Drivers & reactions (Phase 6)
 

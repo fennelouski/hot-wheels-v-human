@@ -44,3 +44,37 @@ final class ArenaCameraUITests: XCTestCase {
         add(attachment)
     }
 }
+
+/// The dashboard radio that rides along with Driver View.
+final class ArenaRadioUITests: XCTestCase {
+
+    @MainActor
+    func testRadioPresetsTuneTheDashboard() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--hill-track"]
+        app.launch()
+
+        // Races start in Driver View, so the dash is up with them.
+        let rock = app.buttons.containing(NSPredicate(format: "label CONTAINS 'ROCK'")).firstMatch
+        XCTAssertTrue(rock.waitForExistence(timeout: 20))
+        for preset in ["JAZZ", "POP", "FUNK", "SMOOTH", "8-BIT"] {
+            XCTAssertTrue(app.buttons.containing(
+                NSPredicate(format: "label CONTAINS %@", preset)).firstMatch.exists,
+                          "\(preset) preset missing from the dashboard")
+        }
+
+        rock.tap()
+        let shot = XCTAttachment(screenshot: app.screenshot())
+        shot.name = "radio-rock-tuned"
+        shot.lifetime = .keepAlways
+        add(shot)
+
+        // Chase cam stows the dash — there's no cockpit to bolt it to.
+        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Driver View'"))
+            .firstMatch.tap()
+        XCTAssertTrue(app.buttons.containing(NSPredicate(format: "label CONTAINS 'Chase Cam'"))
+            .firstMatch.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons.containing(NSPredicate(format: "label CONTAINS 'FUNK'"))
+            .firstMatch.exists)
+    }
+}

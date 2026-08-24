@@ -137,7 +137,7 @@ private struct ConnectionLadder: View {
                 .animation(.easeInOut(duration: 0.25), value: headline)
 
             VStack(alignment: .leading, spacing: 16) {
-                step(1, "Open Hot Wheels on your Apple TV",
+                step(1, "Open \(AppBranding.name) on your Apple TV",
                      icon: "tv.fill", done: connected, current: !connected)
                 step(2, "This iPad connects to the TV",
                      icon: "wifi", done: connected, current: !connected)

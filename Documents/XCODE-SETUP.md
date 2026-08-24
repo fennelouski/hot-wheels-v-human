@@ -7,19 +7,40 @@ In `project.pbxproj` (or Xcode → target → Build Settings), for both Debug an
 
 ```
 SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx xros xrsimulator";
-TARGETED_DEVICE_FAMILY = "1,2,3,7";        // 3 = Apple TV
+TARGETED_DEVICE_FAMILY = "2,3,7";          // 2 = iPad, 3 = Apple TV, 7 = Vision
 TVOS_DEPLOYMENT_TARGET = 26.0;
 ```
+**iPhone (family 1) is deliberately not shipped.** The workshop UI is laid out
+for an iPad — 660 pt buttons, side-by-side benches, a split-screen 2-player
+mode — and it does not survive the shrink. The test targets match at `"2,7"`
+(they never built for tvOS). Dropping family 1 also makes
+`INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone` dead, so it's gone.
 Keep `SDKROOT = auto`. Then add a tvOS run destination via Product → Destination. If any template code fails to compile on tvOS (e.g., iPad-only APIs), wrap with `#if !os(tvOS)` rather than removing.
 
 Why one target: the synced folder means every new file lands in *the* target automatically; two targets would require re-doing membership continually and is the main way this project could get miserable for an agent to maintain.
+
+## 1b. Display name is per-configuration
+"Hot Wheels" is a Mattel trademark (PRD §1.1), so the shipped build must not
+show it. The app target sets, in the app target's two configurations:
+
+```
+INFOPLIST_KEY_CFBundleDisplayName = "Hot Wheels vs Humans";   // Debug
+INFOPLIST_KEY_CFBundleDisplayName = "HWvH";                   // Release
+```
+
+On-screen text goes through `AppBranding.name` (`App/Platform.swift`), which
+switches on `#if DEBUG` to match. `PRODUCT_NAME`, the bundle ID, the scheme and
+the `hwvh-race` Multipeer service are unchanged — they are tooling and wire
+identifiers, and renaming the service would break discovery against installed
+builds. Verify a release name with `-configuration Release`; the commands in §8
+all default to Debug.
 
 ## 2. Info.plist — required for Multipeer Connectivity
 Without these, peers silently never find each other on modern OSes:
 
 ```xml
 <key>NSLocalNetworkUsageDescription</key>
-<string>Hot Wheels vs. Human connects your iPad to your Apple TV to race.</string>
+<string>Connects your iPad to your Apple TV so you can race together.</string>
 <key>NSBonjourServices</key>
 <array>
     <string>_hwvh-race._tcp</string>
@@ -63,3 +84,8 @@ xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" 
   -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' test
 ```
 (Adjust simulator names to `xcrun simctl list devices available`.)
+
+Dev benches have no home-screen tile and are reached by launch argument —
+`xcrun simctl launch <udid> com.nathanfennel.Hot-Wheels-v-Human <arg>`:
+`--test-mode` (physics A/B), `--pip-tuner`, `--wardrobe`, `--reaction-cam`.
+The full list is at the top of `App/RootView.swift`.

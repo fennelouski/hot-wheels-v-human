@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Hot Wheels vs. Human connects your iPad to your Apple TV to race.</string>
+	<string>Connects your iPad to your Apple TV so you can race together.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Takes one picture to color your racer like you. The picture is never saved.</string>
 	<key>NSBonjourServices</key>

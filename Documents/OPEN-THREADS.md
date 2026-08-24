@@ -268,11 +268,14 @@ add to `RosterColormap` if someone wants "their own hair, my colour".
 patch, not a patch of their own, so `eyeColorHex` only moves the
 reaction-cam bust. Either extract an eye mask offline or accept it.
 
-**Thin pale slivers** float beside some roster characters in the wardrobe
+~~**Thin pale slivers** float beside some roster characters in the wardrobe
 bench (`--wardrobe`) and the character editor — most visible on `bald`,
 `longHair` and `spike`. Pre-existing geometry, confirmed present before the
 colormap work (it read as a dark sliver then and simply repaints lighter
-now); nobody has yet identified which mesh it belongs to.
+now); nobody has yet identified which mesh it belongs to.~~ — **SOLVED
+2026-08-23**: it was `character-female-a`'s forearm crutches. The bench's hair
+grid is all `body: .woman`, so those tiles were all her. See the App Store
+readiness pass above.
 
 ## 3D grid avatars (crash — fixed by reverting)
 
@@ -306,6 +309,81 @@ If a device ever shows blank tiles: bump the 250 ms settle in
 `DriverThumbnailStore.snapshot` (the rig may need longer to load/draw), or the
 off-screen ARView isn't ticking there — fall back to `liveSceneCap`-style 2D
 by having `DriverGridAvatar` skip the render.
+
+
+## Closed 2026-08-23 — App Store readiness pass
+
+**Track seams (`PieceCatalog.modelScale`).** The `ponytail:` note in
+`PieceCatalog` was right about the cause and wrong about the cost. Hill
+transition meshes rise 0.2056 and 0.1955 against a 0.2 elevation level; the
+models were placed to be exact at the piece's ENTRY, leaving up to 6 mm as a
+step at the far seam of every hill on every track. Fixed by scaling each mesh's
+Y by `level / meshRise` — ≤ 2.7%, invisible against the bed's own faceting.
+The catch worth knowing: the scale acts about the MODEL ORIGIN and the bed sits
+below it, so the bed lift has to scale with it or the entry seam breaks instead.
+`spawnedHillModelsCarryTheirSeamCorrectingScale` guards the spawner wiring,
+which is the only place this can silently fall out.
+
+**`character-female-a` is a crutch user, and that was the "stray triangles".**
+Kenney Mini Characters is an accessibility pack. female-a ships with forearm
+crutches welded into `body-mesh` and rigidly bound to the arm and leg joints —
+fine standing, but the `drive` clip swings those joints independently and
+scatters the aid into loose blocks around her. She is `variants[0]`, so she is
+"Person 1" for BOTH Woman and Girl, which is exactly the two the bug was
+reported against. `tools/strip_mobility_aid.py` cuts it: the 8 islands (176
+polys, 4 mirrored pairs) whose shape appears on none of the other eleven. Her
+four USDZs are now the only ones not converted straight from pristine source.
+
+**This also closes "thin pale slivers" (below), which was the same bug.** That
+note said slivers floated beside some characters in `--wardrobe`, "most visible
+on `bald`, `longHair` and `spike`", and that nobody had identified the mesh.
+They're the crutches: `WardrobePreviewGrid`'s whole hair grid is built on
+`body: .woman`, so every one of those tiles IS female-a. A before/after of the
+bench settles it — at `fdb16be` every woman tile has shafts jutting out of it,
+and after the strip not one does. Read as slivers rather than crutches because
+the bench renders them nearly edge-on at that camera.
+
+**Hair colour on "Their Own" (`DriverProfile.hairPropModelName`).** The colormap
+route was tried first and abandoned: Kenney paints hair and eyes to the SAME
+flat texel on more than half the roster, so a hair patch can only be separated
+on 3 of 12, and on the dark-haired characters (female-a, male-a, male-f) a Hair
+swatch would repaint the eyes. The geometry route wins — picking a colour lifts
+the character's own extracted hair mesh onto their bald cut and tints it,
+reusing the path every picked hairstyle already uses. 10 of 12 get it.
+
+Ceiling, deliberate: **male-b and male-c can't.** male-b's only cranium island
+is a beard (it stays on the bald cut) and male-c's is a police cap — already
+`HatStyle.policeCap`, and a "hair" swatch that repaints a police hat is worse
+than no swatch. `canRecolorHair` is false for both and the editor hides the
+column. Two more small ones: the tinted prop is FLAT (it loses the colormap's
+light/dark ramp — same as every picked style already looks), and once a colour
+is picked there's no swatch that means "back to their own" — Undo is the only
+way back. A "Their Own" chip in the colour row would fix the second.
+
+**Four UI tests had been failing since the features they cover changed**, and
+nobody noticed because nobody ran the UI suite. All four were stale
+assertions, not app bugs — verified by reproducing each at `fdb16be` before
+touching anything, which is the only way to tell the two apart:
+`RaceSetupUITests` walked straight to the track cards after the setup screen
+became a three-step wizard, and matched a headline whose wording had changed;
+`WorkshopTryItUITests` looked for the chassis chips while the customizer now
+opens on the Body tab, and waited on the exact label `"m/s"` — that's
+`DashboardView`'s standalone unit, while the race cover shows `SoloArenaView`,
+which formats "1.3 m/s". **The whole suite is green now, both destinations.**
+If you add a screen, run the UI suite; these went stale one commit at a time.
+
+### Worth knowing: the Local Network prompt now fires on the home screen
+Gating "Race on TV" on a real TV means browsing from the home screen, so iOS
+asks for Local Network permission on first launch rather than when a kid taps
+through. Denying it can't strand them — `TVFinder.blocked` shows the tile
+anyway, and `RaceOnTVView`'s connection ladder explains the permission — but
+the prompt is earlier and more out-of-context than it used to be. If that
+reads badly with real kids, the fix is to hold `TVFinder.start()` until
+something warmer than a cold launch.
+
+**Eyes swatch hidden where it does nothing (`RosterColormap.canRecolorEyes`).**
+Six of twelve have `eyes: nil` and the Face tab offered the column to all
+twelve, saving a colour that never reached a pixel.
 
 ## Closed 2026-07-20 (later session)
 

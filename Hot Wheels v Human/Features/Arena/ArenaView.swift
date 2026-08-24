@@ -40,6 +40,7 @@ struct ArenaView: View {
                 RaceRulesSystem.registerSystem()
 
                 let cameraEntity = PerspectiveCamera()
+                cameraEntity.camera.near = RaceTuning.driverCamNear
                 content.add(cameraEntity)
 
                 let session = coordinator.session
@@ -50,7 +51,7 @@ struct ArenaView: View {
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
-                    audio.tick(session: session)
+                    audio.tick(session: session, station: coordinator.radioStation)
 
                     // Driver's-eye view: sit where the little human sits.
                     // Rolled with the car (upVector: its own up), so a loop
@@ -58,24 +59,42 @@ struct ArenaView: View {
                     // camera if that car is wrecked or out.
                     let hero = session.racers.first { !$0.isAI && $0.entity?.isEnabled == true }
                         ?? session.racers.first { $0.entity?.isEnabled == true }
-                    if coordinator.driverView, let car = hero?.entity,
+                    // The flag ends the ride: from here the camera watches the
+                    // cars, because the finish is where the loser falls apart
+                    // and the cockpit points the other way.
+                    let atTheFlag = session.phase == .results
+                    if coordinator.driverView, !atTheFlag, let car = hero?.entity,
                        let ride = car.components[CarComponent.self]?.rideHeight {
-                        let m = car.transformMatrix(relativeTo: nil)
-                        let forward = simd_normalize(SIMD3(m.columns.2.x, m.columns.2.y,
-                                                           m.columns.2.z))
-                        let up = simd_normalize(SIMD3(m.columns.1.x, m.columns.1.y,
-                                                      m.columns.1.z))
+                        // BOLTED to the car, not re-aimed at it every frame:
+                        // a world-space look() reads the car's transform one
+                        // frame stale, so the hood juddered against the near
+                        // plane. As a child, the camera composes with the
+                        // car's CURRENT pose — the hood is nailed in place,
+                        // and a loop rolls the view upside down for free.
                         // CarFactory pinned rideHeight to half the visual
                         // height plus the bed offset — read it back out.
-                        let height = (ride - RaceTuning.bedSurfaceHeight) * 2
-                        let eye = car.position(relativeTo: nil)
-                            + up * height * RaceTuning.driverCamEyeRatio
-                            + forward * height * RaceTuning.driverCamNoseRatio
-                        cameraEntity.look(at: eye + forward, from: eye,
-                                          upVector: up, relativeTo: nil)
-                        smoothed = eye   // chase eases out from here if the hero drops
-                        return
+                        if cameraEntity.parent !== car {
+                            car.addChild(cameraEntity)
+                            // Height off rideHeight, not the bounds: the bounds
+                            // include the driver, whose head clears the roof.
+                            let height = (ride - RaceTuning.bedSurfaceHeight) * 2
+                            let length = car.visualBounds(relativeTo: car).extents.z
+                            cameraEntity.transform = Transform(
+                                // A camera looks down its own −Z and the car's
+                                // forward is +Z, hence the half turn; then nose
+                                // down onto the hood.
+                                rotation: simd_quatf(angle: .pi, axis: [0, 1, 0])
+                                    * simd_quatf(angle: -RaceTuning.driverCamPitch,
+                                                 axis: [1, 0, 0]),
+                                translation: [0, height * RaceTuning.driverCamEyeRatio,
+                                              length * RaceTuning.driverCamNoseRatio])
+                        }
+                        smoothed = cameraEntity.position(relativeTo: nil)
+                        return   // chase eases out from here if the hero drops
                     }
+                    // Back to the world: a camera left parented to a car
+                    // vanishes with it on the next respawn.
+                    if cameraEntity.parent !== root { root.addChild(cameraEntity) }
 
                     let positions = session.racers.compactMap {
                         $0.entity.flatMap { $0.isEnabled ? $0.position(relativeTo: nil) : nil }
@@ -83,7 +102,8 @@ struct ArenaView: View {
                     guard !positions.isEmpty else { return }
                     let mid = positions.reduce(SIMD3<Float>.zero, +) / Float(positions.count)
                     let spread = positions.map { simd_length($0 - mid) }.max() ?? 0
-                    let distance = max(1.6, spread * 2.2)
+                    var distance = max(1.6, spread * 2.2)
+                    if atTheFlag { distance *= RaceTuning.finishCamZoom }
                     // 0.4 keeps the horizon + sky dome in the top of the
                     // frame (0.65 looked straight down at the play mat).
                     // A loop's circle lies in the plane of travel, so from
@@ -105,7 +125,18 @@ struct ArenaView: View {
                     let side = SIMD3<Float>(distance * 0.9, distance * 0.4, -distance * 0.35)
                     let goal = mid + simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
                     smoothed = simd_mix(smoothed, goal, SIMD3<Float>(repeating: 0.04))
-                    cameraEntity.look(at: mid, from: smoothed, relativeTo: nil)
+                    // Aiming BESIDE the pack slides it across the frame, which
+                    // is what leaves the results panel a lane of its own.
+                    var aim = mid
+                    if atTheFlag {
+                        let dir = simd_normalize(mid - smoothed)
+                        let right = simd_cross(SIMD3<Float>(0, 1, 0), dir)
+                        let length = simd_length(right)
+                        if length > 1e-5 {
+                            aim -= right / length * distance * RaceTuning.finishCamSideBias
+                        }
+                    }
+                    cameraEntity.look(at: aim, from: smoothed, relativeTo: nil)
                 }
 
                 coordinator.attach(root: root)
@@ -139,7 +170,23 @@ struct ArenaView: View {
             ArenaHUDView(session: coordinator.session,
                          seriesLabel: coordinator.raceCount > 1
                              ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
-                             : nil)
+                             : nil,
+                         // Lift the race clock over the dash when it's up.
+                         bottomInset: coordinator.driverView
+                             && coordinator.session.phase != .results ? 110 : 0)
+
+            // Driver's-seat dashboard: the radio, sitting on the hood line.
+            if coordinator.driverView, coordinator.session.phase != .results {
+                VStack {
+                    Spacer()
+                    DriverDashboardView(station: coordinator.radioStation) { preset in
+                        coordinator.radioStation = preset
+                        SoundBank.shared.play("ui_tap")
+                        SoundBank.shared.playMusic(preset.track)
+                    }
+                    .padding(.bottom, 20)
+                }
+            }
 
             // Camera toggle — top-trailing, clear of the banners (top
             // centre), the PiPs (bottom) and Solo Arena's close button

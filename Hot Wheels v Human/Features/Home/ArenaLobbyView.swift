@@ -55,7 +55,7 @@ struct ArenaLobbyView: View {
     private var lobby: some View {
         VStack(spacing: 28) {
             VStack(spacing: 6) {
-                Label("Hot Wheels vs. Human", systemImage: "flag.checkered")
+                Label(AppBranding.name, systemImage: "flag.checkered")
                     .font(.system(size: 64, weight: .black, design: .rounded))
                     .symbolEffect(.bounce, value: coordinator.players.count)
                 if !coordinator.players.isEmpty {
@@ -172,7 +172,7 @@ struct ArenaLobbyView: View {
                 .font(.system(size: 34, weight: .heavy, design: .rounded))
                 .foregroundStyle(.yellow)
             VStack(alignment: .leading, spacing: 14) {
-                joinStep(1, "Open Hot Wheels on your iPad", icon: "ipad")
+                joinStep(1, "Open \(AppBranding.name) on your iPad", icon: "ipad")
                 joinStep(2, "Tap “Race on TV” — then Allow Local Network", icon: "wifi")
                 joinStep(3, "Pick your car & tracks, then “To the TV!”", icon: "car.side.fill")
                 joinStep(4, "Tap READY — the race starts when everyone’s set", icon: "flag.fill")

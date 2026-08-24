@@ -33,7 +33,7 @@ final class WorkshopLayoutUITests: XCTestCase {
         app.launchArguments = ["--character-editor"]
         app.launch()
 
-        for tab in ["Face", "Hair", "Clothes", "Extras", "Me!"] {
+        for tab in ["Face", "Hair", "Clothes", "Extras"] {
             app.buttons.containing(NSPredicate(format: "label CONTAINS %@", tab))
                 .firstMatch.tap()
             snap(app, "character-\(tab)")

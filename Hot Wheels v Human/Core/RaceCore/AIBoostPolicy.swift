@@ -2,11 +2,17 @@
 //  AIBoostPolicy.swift
 //  Hot Wheels v Human
 //
-//  The Hot Wheels opponent's brain (PRD §6.4). Same car physics as humans —
-//  difficulty is purely boost-decision quality:
+//  The Hot Wheels opponent's brain (PRD §6.4). Boost-decision quality is
+//  what difficulty LOOKS like:
 //    easy   = random timing
 //    medium = boosts on straights
 //    hard   = boosts out of curves, never before a loop it could get flung off
+//
+//  What difficulty actually DECIDES is `pace`: the bot rolls once per race
+//  for whether it may win (`RaceTuning.aiWinChance`), then rubber-bands its
+//  speed to hover just behind — or just ahead of — the kid's car. Races stay
+//  close to the last corner and the kid wins the share he asked for.
+//
 //  Pure functions; RaceSession feeds it piece context each tick.
 //
 
@@ -42,10 +48,29 @@ nonisolated enum AIBoostPolicy {
             return true
         }
     }
+
+    /// Rubber band: the bot's cruise-speed multiplier right now.
+    /// - Parameters:
+    ///   - gap: the kid's progress minus the bot's, in fractions of the
+    ///     lane. Positive = the bot is behind.
+    ///   - botMayWin: this race's roll (`RaceTuning.aiWinChance`).
+    ///
+    /// The bot steers its gap toward `aiTrailMargin` behind the kid, or
+    /// `aiLeadMargin` ahead on a race it's allowed to win — so whoever
+    /// crosses first is the roll, not the stat table, and it's always
+    /// close. Clamped so a losing bot still drives and a winning one can't
+    /// run away.
+    static func pace(gap: Float, botMayWin: Bool) -> Float {
+        let want = botMayWin ? -RaceTuning.aiLeadMargin : RaceTuning.aiTrailMargin
+        let pace = 1 + (gap - want) * RaceTuning.aiRubberBandGain
+        return min(max(pace, RaceTuning.aiPaceRange.lowerBound),
+                   RaceTuning.aiPaceRange.upperBound)
+    }
 }
 
 /// Pre-built robotic cars for 1P mode — Kenney karts, factory liveries.
-/// Same physics tables as everyone else (PRD: AI never gets stat bonuses).
+/// Same physics tables as everyone else — no stat bonuses; what the bot
+/// gets instead is the rubber band above (`pace`).
 nonisolated enum AIRoster {
     /// Stable identity for the AI racer on the wire and in results.
     static let playerID = UUID(uuidString: "A1000000-0000-0000-0000-000000000001")!

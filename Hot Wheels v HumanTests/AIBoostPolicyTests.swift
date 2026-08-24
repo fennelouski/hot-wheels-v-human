@@ -53,6 +53,42 @@ struct AIBoostPolicyTests {
         #expect(!decide(.hard, previous: .curve90L, current: .curve90R, rng: &rng))
     }
 
+    // MARK: Rubber band (the kid's win rate)
+
+    @Test func paceChasesWhenBehindAndEasesWhenAhead() {
+        // Way back → floor it. Way ahead → back off. Never outside the clamp.
+        #expect(AIBoostPolicy.pace(gap: 0.5, botMayWin: false)
+                == RaceTuning.aiPaceRange.upperBound)
+        #expect(AIBoostPolicy.pace(gap: -0.5, botMayWin: false)
+                == RaceTuning.aiPaceRange.lowerBound)
+    }
+
+    @Test func paceHoldsTheBotJustBehindOnRacesItMustLose() {
+        // Sitting exactly on its target gap → cruise, no correction.
+        #expect(AIBoostPolicy.pace(gap: RaceTuning.aiTrailMargin, botMayWin: false) == 1)
+        // Level with the kid is too far forward → ease off.
+        #expect(AIBoostPolicy.pace(gap: 0, botMayWin: false) < 1)
+        // Slipping further back than the target → push.
+        #expect(AIBoostPolicy.pace(gap: RaceTuning.aiTrailMargin + 0.02,
+                                   botMayWin: false) > 1)
+    }
+
+    @Test func paceLetsTheBotLeadOnTheRacesItWon() {
+        // Same gap, opposite verdict: the winning bot pushes where the
+        // losing one would coast. That flip IS the win rate.
+        let gap: Float = 0
+        #expect(AIBoostPolicy.pace(gap: gap, botMayWin: true) > 1)
+        #expect(AIBoostPolicy.pace(gap: gap, botMayWin: false) < 1)
+        // Already ahead by its lead margin → cruise there.
+        #expect(AIBoostPolicy.pace(gap: -RaceTuning.aiLeadMargin, botMayWin: true) == 1)
+    }
+
+    @Test func winChanceMatchesWhatTheKidAskedFor() {
+        #expect(RaceTuning.aiWinChance[.easy] == 0.01)     // kid wins 99%
+        #expect(RaceTuning.aiWinChance[.medium] == 0.10)   // kid wins 90%
+        #expect(RaceTuning.aiWinChance[.hard] == 0.10)
+    }
+
     @Test func hardNeverBoostsIntoALoop() {
         var rng = SystemRandomNumberGenerator()
         #expect(!decide(.hard, previous: .curve90R, current: .straight,

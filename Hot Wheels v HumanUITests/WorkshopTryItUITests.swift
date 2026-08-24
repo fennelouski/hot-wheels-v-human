@@ -48,7 +48,13 @@ final class WorkshopTryItUITests: XCTestCase {
         XCTAssertTrue(testDrive.waitForExistence(timeout: 10))
 
         // Change the car first: the point is that the *unsaved* edit races.
-        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Muscle'")).firstMatch.tap()
+        // Chassis is its own tab now — the customizer opens on Body (the car
+        // types added in 8162f23), and only the selected tab's chips are
+        // built, so "Muscle" isn't in the hierarchy until Chassis is up.
+        button(app, "Chassis").tap()
+        let muscle = app.buttons.containing(NSPredicate(format: "label CONTAINS 'Muscle'")).firstMatch
+        XCTAssertTrue(muscle.waitForExistence(timeout: 10))
+        muscle.tap()
         snap(app, "car-1-chassis-changed")
 
         testDrive.tap()
@@ -114,12 +120,19 @@ final class WorkshopTryItUITests: XCTestCase {
         app.buttons.containing(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
     }
 
-    /// The cover is up AND a real race is behind it: the mini-dashboard only
-    /// draws its speedometer once snapshots are actually flowing from the
+    /// The cover is up AND a real race is behind it: the arena HUD only draws
+    /// a speed readout once snapshots are actually flowing from the
     /// coordinator, so "m/s" means the loopback rig came up, not just a sheet.
+    ///
+    /// Matched with CONTAINS. This used to be the exact label `"m/s"`, which
+    /// is `DashboardView`'s standalone unit label — the cover shows
+    /// `SoloArenaView`, whose HUD formats the whole thing as "1.3 m/s", so the
+    /// exact match could never hit and these tests failed on every run.
     @MainActor
     private func assertRaceIsRunning(_ app: XCUIApplication, named name: String) {
-        XCTAssertTrue(app.staticTexts["m/s"].waitForExistence(timeout: 30),
+        let speed = app.staticTexts
+            .containing(NSPredicate(format: "label CONTAINS 'm/s'")).firstMatch
+        XCTAssertTrue(speed.waitForExistence(timeout: 30),
                       "Race cover should present a live Solo Arena rig")
         snap(app, name)
     }

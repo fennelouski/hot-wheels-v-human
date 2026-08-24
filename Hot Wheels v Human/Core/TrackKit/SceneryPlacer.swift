@@ -270,12 +270,14 @@ enum SceneryPlacer {
         }
         let store = assets ?? AssetStore.shared
         if let blockModel = barrierRoads[model] {
-            // Dead-end tile (open side faces −z at yaw 0) with the
-            // roadblock standing across its closed end.
+            // Dead-end tile with the roadblock standing across its closed
+            // end. `street-end` opens EAST at yaw 0 (measured — see
+            // ArenaEnvironment.streetTileOpenSides), so the wall is at −x;
+            // the block was sitting out on the kerb at +z before.
             guard let tile = try? await store.entity(named: "street-end"),
                   let block = try? await store.entity(named: blockModel)
             else { return nil }
-            block.position = [0, 0.005, 0.22]
+            block.position = [-0.22, 0.005, 0]
             tile.addChild(block)
             return tile
         }

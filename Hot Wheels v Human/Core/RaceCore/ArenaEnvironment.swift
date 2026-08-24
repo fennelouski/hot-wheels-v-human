@@ -1262,32 +1262,61 @@ enum ArenaEnvironment {
     }
 
     /// Which street tile a cell needs, from which neighbours are street.
-    /// Yaw conventions measured off the converted Kenney tiles: straight
-    /// runs along z at yaw 0; the bend joins south and east; the tee's
-    /// closed side faces north; the end's open side faces south.
+    ///
+    /// The old yaws here were guessed from the tile NAMES and every one of
+    /// them was wrong, which is why the city read as rows of disconnected
+    /// squares: roads crossing their own street sideways. These are MEASURED
+    /// out of the converted meshes (`streetTileOpenSides` — the tiles are
+    /// flat quads with the road painted in the texture, so the geometry that
+    /// gives it away is which edges the road surface actually reaches).
+    /// At yaw 0 the road reaches:
+    ///
+    ///     straight → east, west          cross → all four
+    ///     bend     → north, west         tee   → all but south
+    ///     end      → east
+    ///
+    /// Yaw is right-handed about +Y, so +90° carries north→east→south→west.
     static func streetTile(north: Bool, south: Bool, east: Bool, west: Bool)
         -> (model: String, yaw: Float)? {
         switch (north, south, east, west) {
         case (true, true, true, true):
             return ("street-cross", 0)
-        case (false, true, true, true): return ("street-tee", 0)
-        case (true, false, true, true): return ("street-tee", .pi)
-        case (true, true, false, true): return ("street-tee", halfPiF)
-        case (true, true, true, false): return ("street-tee", -halfPiF)
-        case (true, true, false, false): return ("street-straight", 0)
-        case (false, false, true, true): return ("street-straight", halfPiF)
-        case (false, true, true, false): return ("street-bend", 0)
-        case (false, true, false, true): return ("street-bend", halfPiF)
-        case (true, false, false, true): return ("street-bend", .pi)
-        case (true, false, true, false): return ("street-bend", -halfPiF)
-        case (false, true, false, false): return ("street-end", 0)
-        case (true, false, false, false): return ("street-end", .pi)
-        case (false, false, true, false): return ("street-end", -halfPiF)
-        case (false, false, false, true): return ("street-end", halfPiF)
+        // Tee: turn its closed south side onto the side with no neighbour.
+        case (false, true, true, true): return ("street-tee", .pi)
+        case (true, false, true, true): return ("street-tee", 0)
+        case (true, true, false, true): return ("street-tee", -halfPiF)
+        case (true, true, true, false): return ("street-tee", halfPiF)
+        // Straight: authored east–west, so a north–south street turns.
+        case (true, true, false, false): return ("street-straight", halfPiF)
+        case (false, false, true, true): return ("street-straight", 0)
+        // Bend: authored joining north and west.
+        case (false, true, true, false): return ("street-bend", .pi)
+        case (false, true, false, true): return ("street-bend", -halfPiF)
+        case (true, false, false, true): return ("street-bend", 0)
+        case (true, false, true, false): return ("street-bend", halfPiF)
+        // End: authored opening east.
+        case (false, true, false, false): return ("street-end", halfPiF)
+        case (true, false, false, false): return ("street-end", -halfPiF)
+        case (false, false, true, false): return ("street-end", 0)
+        case (false, false, false, true): return ("street-end", .pi)
         case (false, false, false, false):
             return nil   // orphan cell — no road to nowhere
         }
     }
+
+    /// Which sides each tile's road reaches when it is NOT rotated, measured
+    /// off the meshes in `Resources/Models3D`. `streetTile` above is just
+    /// this table plus the turn that lands it on the cell's neighbours, and
+    /// the tests re-derive one from the other — so if a tile is ever
+    /// reconverted at a different orientation, fix it here and the yaws
+    /// follow. Sides are (north, south, east, west).
+    static let streetTileOpenSides: [String: (Bool, Bool, Bool, Bool)] = [
+        "street-straight": (false, false, true, true),
+        "street-cross": (true, true, true, true),
+        "street-bend": (true, false, false, true),
+        "street-tee": (true, false, true, true),
+        "street-end": (false, false, true, false),
+    ]
 
     // MARK: Terrain
 

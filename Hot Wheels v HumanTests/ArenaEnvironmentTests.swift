@@ -114,6 +114,35 @@ struct ArenaEnvironmentTests {
                                             east: false, west: false) == nil)
     }
 
+    /// The autotiler's YAW, re-derived rather than restated: turn each
+    /// tile's MEASURED open sides by the yaw the autotiler hands back, and
+    /// they must land exactly on the neighbours that asked for it. This is
+    /// the check the city was missing — the old table picked the right tile
+    /// every time and then turned all but the (symmetric) crossroads the
+    /// wrong way, so the roads ran across their own street.
+    @Test func streetTileYawsPointTheRoadAtItsNeighbours() {
+        /// Sides clockwise from north; one quarter turn carries N→E→S→W→N.
+        func turned(_ sides: (Bool, Bool, Bool, Bool), by yaw: Float) -> [Bool] {
+            let clockwise = [sides.0, sides.2, sides.1, sides.3]   // N E S W
+            let quarters = ((Int((yaw / (.pi / 2)).rounded()) % 4) + 4) % 4
+            return (0..<4).map { clockwise[(($0 - quarters) % 4 + 4) % 4] }
+        }
+        for bits in 0..<16 {
+            let north = bits & 1 != 0, south = bits & 2 != 0
+            let east = bits & 4 != 0, west = bits & 8 != 0
+            guard let pick = ArenaEnvironment.streetTile(
+                north: north, south: south, east: east, west: west) else {
+                #expect(!north && !south && !east && !west)   // only the orphan
+                continue
+            }
+            let authored = ArenaEnvironment.streetTileOpenSides[pick.model]
+            #expect(authored != nil, "\(pick.model) has no measured orientation")
+            guard let authored else { continue }
+            #expect(turned(authored, by: pick.yaw) == [north, east, south, west],
+                    "\(pick.model) at yaw \(pick.yaw) misses N\(north) S\(south) E\(east) W\(west)")
+        }
+    }
+
     /// City and Speedway streets carry traffic; the cars fade in from
     /// nothing (opacity 0 at spawn) so appearing never pops.
     @Test func cityStreetsCarryTraffic() async {
