@@ -228,6 +228,23 @@ struct RailFollowerTests {
         #expect(cut.landedAt <= 19)                     // no landing piece: down at the seam
     }
 
+    @Test func downhillKicksDiminishAndConverge() {
+        // Geometric series: n tiles never exceed kick/(1−decay).
+        let total = (0..<50).reduce(Float(0)) { $0 + RaceTuning.downhillKick * pow(RaceTuning.downhillKickDecay, Float($1)) }
+        #expect(total <= RaceTuning.downhillKick / (1 - RaceTuning.downhillKickDecay) + 0.001)
+        // And the follower pays a kick exactly once, on entering the waypoint.
+        var follow = flatLane()
+        follow.speedKicks = [5: 1.0]
+        var state = makeState()
+        var before: Float = 0, after: Float = 0
+        for _ in 0..<300 {
+            if follow.nextIndex == 4 { before = follow.speed }
+            _ = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+            if follow.nextIndex == 5, after == 0 { after = follow.speed }
+        }
+        #expect(after > before + 0.9)
+    }
+
     // MARK: Boost state machine (DriveSystem.stepBoost)
 
     private let step: Float = 1 / 60

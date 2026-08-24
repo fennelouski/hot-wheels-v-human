@@ -191,6 +191,15 @@ final class RaceSession {
             }
             return JumpZone(launch: starts[pi]...pieceEnd(pi), landBy: landBy)
         }
+        // Downhill tiles each kick the speed up on entry, every consecutive
+        // one a bit less than the last (geometric — converges, never caps).
+        var speedKicks: [Int: Float] = [:]
+        var run = 0
+        for (pi, piece) in layout.pieces.enumerated() {
+            guard piece.definition.type == .hillDown else { run = 0; continue }
+            speedKicks[starts[pi]] = RaceTuning.downhillKick * pow(RaceTuning.downhillKickDecay, Float(run))
+            run += 1
+        }
         for (i, entry) in entries.enumerated() {
             let (playerID, design) = entry
             let lane = i % 2 == 0 ? layout.lanes.left : layout.lanes.right
@@ -198,7 +207,8 @@ final class RaceSession {
                 design: design, playerID: playerID, lane: lane,
                 lives: lives, loopRanges: loopRanges,
                 laterals: layout.lanes.laterals,
-                teleports: layout.lanes.teleports, jumps: jumps)
+                teleports: layout.lanes.teleports, jumps: jumps,
+                speedKicks: speedKicks)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so

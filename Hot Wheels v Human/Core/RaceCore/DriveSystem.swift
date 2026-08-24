@@ -172,6 +172,7 @@ struct DriveSystem: System {
             if follow.nextIndex < wp.count - 1 {
                 follow.nextIndex += 1
                 follow.fraction = 0
+                follow.speed += follow.speedKicks[follow.nextIndex] ?? 0
                 // Portal: the segment just entered is a teleport gap —
                 // cross it instantly (into one ring, out of the other).
                 if follow.teleports.contains(follow.nextIndex - 1),

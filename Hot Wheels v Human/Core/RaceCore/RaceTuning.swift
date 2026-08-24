@@ -166,6 +166,12 @@ nonisolated enum RaceTuning {
     /// — the ramp is a booster, so the car visibly speeds up onto the lip.
     static let jumpRampAccel: Float = 8
 
+    /// Speed kick, m/s, on entering a downhill tile. Each consecutive
+    /// downhill tile kicks `downhillKickDecay`× the previous one, so a long
+    /// descent keeps getting faster but converges (sum < kick/(1−decay)).
+    static let downhillKick: Float = 0.3
+    static let downhillKickDecay: Float = 0.6
+
     /// Ballistic launch margin, m/s of VERTICAL VELOCITY: the car goes
     /// airborne when gravity lets it fall slower than following the bed
     /// would demand, by more than this (the track dropping away faster

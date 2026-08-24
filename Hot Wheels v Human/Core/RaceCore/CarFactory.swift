@@ -82,6 +82,9 @@ struct LaneFollowComponent: Component {
     var jumps: [JumpZone] = []
     /// `landBy` of the jump this flight left from; nil for ordinary air.
     var jumpLandBy: Int? = nil
+    /// One-shot speed kicks, m/s, paid on entering the keyed waypoint —
+    /// downhill tiles (RaceTuning.downhillKick), each a bit less than the last.
+    var speedKicks: [Int: Float] = [:]
 
     // Rail-mode state (RaceTuning.railPinned) — ignored by chaos physics.
     /// Progress within the current segment [waypoint nextIndex−1, nextIndex], 0…1.
@@ -105,6 +108,7 @@ enum CarFactory {
                         laterals: [SIMD3<Float>] = [],
                         teleports: Set<Int> = [],
                         jumps: [JumpZone] = [],
+                        speedKicks: [Int: Float] = [:],
                         assets: AssetStore? = nil) async throws -> ModelEntity {
         let assets = assets ?? AssetStore.shared
         CarComponent.registerComponent()
@@ -148,7 +152,8 @@ enum CarFactory {
                                         rideHeight: rideHeight(visualHeight: bounds.extents.y)))
         car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
                                                laterals: laterals,
-                                               teleports: teleports, jumps: jumps))
+                                               teleports: teleports, jumps: jumps,
+                                               speedKicks: speedKicks))
 
         // The little human, in the roster's DRIVE pose — hands out on the
         // wheel. The old standing rig had to be sunk hip-deep with its legs
