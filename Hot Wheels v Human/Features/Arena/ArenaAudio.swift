@@ -26,8 +26,15 @@ final class ArenaAudio {
     private var engines: [UUID: AudioPlaybackController] = [:]
     private var engineResources: [String: AudioFileResource] = [:]
     private var tapeSnapped = false
+    /// Whose cockpit the camera (and so the listener) is sitting in, if any.
+    private var inCar: UUID?
+    private var appliedGain: [UUID: Double] = [:]
 
-    func tick(session: RaceSession, station: RadioStation = .chiptune, radioOn: Bool = true) {
+    /// - Parameter driverCarID: the car the driver camera rides in, or nil in
+    ///   chase cam. Its engine mixes down — see `RaceTuning.engineGainInCar`.
+    func tick(session: RaceSession, station: RadioStation = .chiptune,
+              radioOn: Bool = true, driverCarID: UUID? = nil) {
+        inCar = driverCarID
         let phase = session.phase
         if phase != lastPhase {
             switch phase {
@@ -79,6 +86,14 @@ final class ArenaAudio {
                     tapeSnapped = true
                     SoundBank.shared.play("finish_tape_snap")
                 }
+            }
+
+            // Sitting in this one? Pull its engine down out of the way.
+            // Re-checked every frame because the camera toggle flips mid-race.
+            let gain = engineGain(for: racer.id)
+            if let engine = engines[racer.id], appliedGain[racer.id] != gain {
+                engine.gain = gain
+                appliedGain[racer.id] = gain
             }
 
             // Engine pitch follows speed (clamped range per Audio/README).
@@ -136,14 +151,21 @@ final class ArenaAudio {
                 guard let resource = engineResources[sample] else { continue }
                 car.spatialAudio = SpatialAudioComponent(gain: RaceTuning.engineGain)
                 let controller = car.prepareAudio(resource)
+                controller.gain = engineGain(for: racer.id)
+                appliedGain[racer.id] = controller.gain
                 controller.play()
                 engines[racer.id] = controller
             }
         }
     }
 
+    private func engineGain(for racer: UUID) -> Double {
+        racer == inCar ? RaceTuning.engineGainInCar : RaceTuning.engineGain
+    }
+
     private func stopEngines() {
         for controller in engines.values { controller.stop() }
         engines.removeAll()
+        appliedGain.removeAll()
     }
 }

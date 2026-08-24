@@ -4,8 +4,9 @@
 //
 //  The dash you see over the hood in driver view: a moulded plastic cowl
 //  bolted to the bottom edge of the screen, carrying a speed gauge, the car
-//  radio, and a speaker grille. OPAQUE on purpose — a translucent panel just
-//  showed the sky through it and read as a floating toolbar.
+//  radio (volume knob included), and a speaker grille. OPAQUE on purpose —
+//  a translucent panel just showed the sky through it and read as a
+//  floating toolbar.
 //
 //  Only shown in driver view (and never at the flag, where the camera leaves
 //  the cockpit). Same controls on both platforms: tapped on iPad, clicked
@@ -22,6 +23,9 @@ struct DriverDashboardView: View {
     let powered: Bool
     /// Moulded to the car you're riding in (`DashStyle`).
     let style: DashStyle
+    /// Music level, 0…1. Only the wide (landscape) dash has room for the
+    /// knob; tvOS has no Slider at all, so there it's the speaker alone.
+    @Binding var volume: Double
     let onPick: (RadioStation) -> Void
     let onPower: () -> Void
 
@@ -34,7 +38,7 @@ struct DriverDashboardView: View {
         ViewThatFits(in: .horizontal) {
             HStack(alignment: .center, spacing: 20) {
                 gauge
-                faceplate
+                faceplate(knob: true)
                 SpeakerGrille(housing: style.housing)
                     .frame(maxWidth: 300, maxHeight: 84)
                 // Bare moulding: Solo Arena parks the boost dial in this
@@ -44,9 +48,12 @@ struct DriverDashboardView: View {
             }
             HStack(alignment: .center, spacing: 16) {
                 gauge
-                faceplate
+                faceplate(knob: true)
             }
-            faceplate
+            faceplate(knob: true)
+            // Portrait: the volume knob is the last thing to go, after the
+            // speaker and the gauge. Six presets and a power key are the dash.
+            faceplate(knob: false)
         }
         .padding(.horizontal, 26)
         .padding(.top, 14)
@@ -120,11 +127,14 @@ struct DriverDashboardView: View {
 
     // MARK: Radio
 
-    private var faceplate: some View {
+    private func faceplate(knob: Bool) -> some View {
         HStack(spacing: 12) {
             PowerKey(on: powered, accent: style.accent, action: onPower)
             VStack(alignment: .leading, spacing: 8) {
-                display
+                HStack(spacing: 12) {
+                    display
+                    if knob { volumeKnob }
+                }
                 HStack(spacing: 8) {
                     ForEach(Array(RadioStation.allCases.enumerated()), id: \.element) { slot, preset in
                         PresetKey(preset: preset, slot: slot + 1, accent: style.accent,
@@ -135,6 +145,25 @@ struct DriverDashboardView: View {
         }
         .padding(12)
         .background(inset)
+    }
+
+    /// Volume, beside the display window where a car radio keeps it. It lives
+    /// INSIDE the faceplate rather than out by the speaker because Solo
+    /// Arena parks the boost dial over that corner of the dash.
+    /// tvOS has no Slider at all, and no music knob on the remote either.
+    @ViewBuilder private var volumeKnob: some View {
+        #if os(iOS)
+        HStack(spacing: 8) {
+            Image(systemName: "speaker.fill")
+            Slider(value: $volume, in: 0...1)
+                .tint(amber)
+                .accessibilityLabel("Music volume")
+            Image(systemName: "speaker.wave.3.fill")
+        }
+        .font(.system(size: 12, weight: .bold))
+        .foregroundStyle(.white.opacity(0.45))
+        .frame(width: 210)
+        #endif
     }
 
     /// The little lit window every car radio has.

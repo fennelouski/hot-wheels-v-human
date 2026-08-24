@@ -34,7 +34,7 @@ point doesn't click — `level()` in the tool. 8-BIT has no file of its own on p
 `race_intensity` is already a chiptune loop.
 
 Implementation notes
-- TV: `AudioFileResource` attached to car entities → spatial audio follows the cars. Engine loop via `prepareAudio` + playback rate mapped to speed (clamp 0.8–1.6×).
-- iPad: plain `AVAudioPlayer` for UI sounds/music; duck music −8 dB during countdown & finish fanfare.
+- TV: `AudioFileResource` attached to car entities → spatial audio follows the cars. Engine loop via `prepareAudio` + playback rate mapped to speed (clamp 0.8–1.6×). The car you are RIDING IN drops to `RaceTuning.engineGainInCar` (−30 dB against the field's −12): the driver camera is parented inside the car, so the listener sits on top of that engine and the race mix arrives as a roar. `ArenaAudio.tick(driverCarID:)` re-checks it every frame, because the camera toggle flips mid-race.
+- iPad: plain `AVAudioPlayer` for UI sounds/music; duck music −8 dB during countdown & finish fanfare. The dash volume knob is `SoundBank.musicLevel` (0…1), which scales the music mix only — engines, SFX and the AI voices keep their level, so turning the radio down never mutes the race.
 - Keep WAV for SFX (latency), AAC/m4a for music (size). Target < 10 MB total audio.
 - Log every downloaded file's source URL + license in this README when added (same discipline as Graphics/).

@@ -20,6 +20,15 @@ final class SoundBank {
     private var variantLists: [String: [String]] = [:]
     private var lastVariant: [String: String] = [:]
 
+    /// The dash volume knob, 0…1. Scales the music mix only — engines, SFX
+    /// and the AI's voice keep their level, so turning the radio down leaves
+    /// the race audible instead of muting it.
+    var musicLevel: Float = 1 {
+        didSet { music?.setVolume(mixVolume, fadeDuration: 0.15) }
+    }
+
+    private var mixVolume: Float { RaceTuning.musicVolume * musicLevel }
+
     /// Play a one-shot WAV from Resources/Audio (base name, no extension).
     /// High-frequency sounds have `_b`/`_c` siblings (SFX-SPEC variant
     /// convention) — picks randomly, never the same one back-to-back.
@@ -61,7 +70,7 @@ final class SoundBank {
         music?.stop()
         music = player
         player.numberOfLoops = -1
-        player.volume = RaceTuning.musicVolume
+        player.volume = mixVolume
         player.play()
     }
 
@@ -74,12 +83,12 @@ final class SoundBank {
     func duckMusic(seconds: TimeInterval) {
         guard let music else { return }
         duckedUntil = Date(timeIntervalSinceNow: seconds)
-        music.setVolume(RaceTuning.musicVolume * RaceTuning.musicDuckFactor,
+        music.setVolume(mixVolume * RaceTuning.musicDuckFactor,
                         fadeDuration: 0.2)
         Task { @MainActor [weak self] in
             try? await Task.sleep(for: .seconds(seconds))
             guard let self, Date() >= self.duckedUntil else { return }
-            self.music?.setVolume(RaceTuning.musicVolume, fadeDuration: 0.5)
+            self.music?.setVolume(self.mixVolume, fadeDuration: 0.5)
         }
     }
 }

@@ -35,6 +35,9 @@ final class RaceCoordinator {
     /// Radio power. Off means off — no race music either, which is the point
     /// of a switch a kid can reach.
     var radioOn = true
+    /// Dash volume knob, 0…1. Mirrored into `SoundBank.musicLevel` by the
+    /// dashboard; kept here so it survives a rematch like the station does.
+    var musicLevel: Double = 1
 
     private let transport: any GameTransport
     private var designs: [(owner: UUID?, design: CarDesign)] = []

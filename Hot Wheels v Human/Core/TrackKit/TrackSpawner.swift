@@ -17,11 +17,13 @@ struct CheckpointComponent: Component {
 @MainActor
 enum TrackSpawner {
 
-    /// Sink the leg stack this far so the bottom plants in the play-mat
-    /// (ArenaEnvironment puts it at −0.03) instead of hovering 3 cm over it,
-    /// with 0.01 spare against z-fighting. The top still hides inside the
-    /// 0.06 m bed. Cosmetic, so it lives here rather than in RaceTuning —
-    /// same as ArenaEnvironment's own ground/sky numbers.
+    /// Plant the BOTTOM of a ground stack this far down so it meets the
+    /// play-mat (ArenaEnvironment puts it at −0.03) instead of hovering 3 cm
+    /// over it, with 0.01 spare against z-fighting. It stretches the bottom
+    /// leg rather than sinking the whole stack: sinking dropped the TOP of
+    /// the stack 4 cm clear of the bed it holds up, which read as legs
+    /// floating under the track. Cosmetic, so it lives here rather than in
+    /// RaceTuning — same as ArenaEnvironment's own ground/sky numbers.
     private static let legPlant: Float = -0.04
 
     /// Builds the whole track under one root entity. Caller adds it to the scene.
@@ -86,9 +88,9 @@ enum TrackSpawner {
 
             // Cosmetic legs under elevated pieces. The supports* models are
             // authored one elevation level tall (0.2 m) with their base at
-            // the origin, so level N stacks N of them from the ground up —
-            // no scaling. Hills are skipped: their bed slopes through the
-            // piece, so a full-height post pokes through a hillDown, and the
+            // the origin, so the stack runs one per level from whatever is
+            // underneath up to the bed. Hills are skipped: their bed slopes
+            // through the piece, so a post pokes through a hillDown, and the
             // flat neighbours at each end carry the legs anyway.
             // No collision — a car that flies off must fall PAST these.
             if piece.entryLevel > 0, piece.definition.elevationDelta == 0 {
@@ -99,17 +101,48 @@ enum TrackSpawner {
                 // stalls the type-checker.
                 let centerX: Float = (rect.minX + rect.maxX) / 2
                 let centerZ: Float = (rect.minZ + rect.maxZ) / 2
-                for level in 0..<piece.entryLevel {
+                // Where track crosses over itself the lower deck IS the
+                // support — a stack that starts at the ground stands its legs
+                // on the orange track and runs up through it.
+                let base = deckLevel(atX: centerX, z: centerZ,
+                                     under: piece.entryLevel, in: layout.pieces)
+                for level in base..<piece.entryLevel {
                     let leg = try await assets.entity(named: legModel)
                     leg.name = "support-\(piece.index)-\(level)"
-                    let y = Float(level) * RaceTuning.elevationLevelHeight + legPlant
-                    leg.position = SIMD3<Float>(centerX, y, centerZ)
+                    // Exact level heights, so the top of the stack MEETS the
+                    // bed it holds up (the models are one level tall, base at
+                    // the origin). Only a ground stack reaches down further.
+                    leg.position = SIMD3<Float>(
+                        centerX, Float(level) * RaceTuning.elevationLevelHeight, centerZ)
+                    if level == 0 {
+                        leg.position.y = legPlant
+                        leg.scale.y = (RaceTuning.elevationLevelHeight - legPlant)
+                            / RaceTuning.elevationLevelHeight
+                    }
                     leg.orientation = simd_quatf(angle: piece.entryYaw, axis: [0, 1, 0])
                     root.addChild(leg)
                 }
             }
         }
         return root
+    }
+
+    /// Lowest level a support stack may start at under (x, z): one above the
+    /// highest deck already crossing that spot, or 0 over bare ground. The
+    /// point test (not a rect overlap) is the question a leg actually asks —
+    /// is there track directly under THIS post.
+    static func deckLevel(atX x: Float, z: Float,
+                          under level: Int, in pieces: [PlacedPiece]) -> Int {
+        var base = 0
+        for other in pieces {
+            let top = max(other.entryLevel,
+                          other.entryLevel + other.definition.elevationDelta)
+            guard top < level else { continue }
+            let rect = other.worldFootprint
+            guard rect.minX < x, x < rect.maxX, rect.minZ < z, z < rect.maxZ else { continue }
+            base = max(base, top + 1)
+        }
+        return base
     }
 
     /// Invisible drivable slab matching the piece's logical footprint,

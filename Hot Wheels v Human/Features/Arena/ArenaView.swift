@@ -17,6 +17,18 @@ struct ArenaView: View {
     @State private var reactionFeed = ReactionFeed()
     @State private var arenaAudio = ArenaAudio()
 
+    /// Does this collision hit belong to a car (its own body, a wheel, the
+    /// driver) rather than to the track? Cars are the thing we're trying to
+    /// see, so they never count as blocking the view of themselves.
+    private static func isCar(_ entity: Entity) -> Bool {
+        var node: Entity? = entity
+        while let current = node {
+            if current.components[CarComponent.self] != nil { return true }
+            node = current.parent
+        }
+        return false
+    }
+
     /// The car the driver camera rides in — same pick as the arena camera's.
     private var hero: RaceSession.Racer? {
         let racers = coordinator.session.racers
@@ -54,11 +66,10 @@ struct ArenaView: View {
                 let audio = arenaAudio
                 var smoothed = SIMD3<Float>(0, 2.2, -3)
                 var loopBias: Float = 0   // 0 = chase from behind, 1 = 3/4 side (loops)
+                var blockedFor: Double = 0   // seconds of track between us and the cars
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     feed.tick(session: session, dt: event.deltaTime)
-                    audio.tick(session: session, station: coordinator.radioStation,
-                               radioOn: coordinator.radioOn)
 
                     // Driver's-eye view: sit where the little human sits.
                     // Rolled with the car (upVector: its own up), so a loop
@@ -66,6 +77,12 @@ struct ArenaView: View {
                     // camera if that car is wrecked or out.
                     let hero = session.racers.first { !$0.isAI && $0.entity?.isEnabled == true }
                         ?? session.racers.first { $0.entity?.isEnabled == true }
+                    // The listener rides with the camera, so the cockpit's own
+                    // engine has to duck — ArenaAudio needs to know whose.
+                    let inCar = coordinator.driverView && session.phase != .results
+                        ? hero?.id : nil
+                    audio.tick(session: session, station: coordinator.radioStation,
+                               radioOn: coordinator.radioOn, driverCarID: inCar)
                     // The flag ends the ride: from here the camera watches the
                     // cars, because the finish is where the loser falls apart
                     // and the cockpit points the other way.
@@ -130,8 +147,45 @@ struct ArenaView: View {
                     loopBias = simd_mix(loopBias, nearLoop ? 1 : 0, 0.08)
                     let behind = SIMD3<Float>(0, distance * 0.4, -distance)
                     let side = SIMD3<Float>(distance * 0.9, distance * 0.4, -distance * 0.35)
-                    let goal = mid + simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
-                    smoothed = simd_mix(smoothed, goal, SIMD3<Float>(repeating: 0.04))
+                    var goal = mid + simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
+
+                    // Elevated track parks itself between the camera and the
+                    // cars, and from behind a deck the race is an orange wall.
+                    // Ask the physics whether anything that isn't a car is in
+                    // the way; if the normal framing is still blocked a few
+                    // seconds later, go stand somewhere it isn't.
+                    //
+                    // The test is on the DEFAULT spot, not on where the camera
+                    // currently is — testing the current spot makes the escape
+                    // undo itself the moment it works, and the camera flaps
+                    // back and forth between the two.
+                    let subject = hero?.entity?.position(relativeTo: nil) ?? mid
+                    func clear(_ from: SIMD3<Float>) -> Bool {
+                        !event.scene.raycast(from: from, to: subject, query: .nearest,
+                                             mask: .all, relativeTo: nil)
+                            .contains { !Self.isCar($0.entity) }
+                    }
+                    blockedFor = clear(goal) ? 0 : blockedFor + event.deltaTime
+                    var ease: Float = 0.04
+                    if blockedFor > RaceTuning.camBlockedGrace {
+                        let offset = goal - mid
+                        let flat = SIMD3<Float>(offset.x, 0, offset.z)
+                        for escape in RaceTuning.camEscapes {
+                            let turned = simd_quatf(angle: escape.x, axis: [0, 1, 0]).act(flat)
+                            let spot = mid + turned * escape.z
+                                + SIMD3<Float>(0, distance * escape.y, 0)
+                            if clear(spot) {
+                                goal = spot
+                                // The lazy drift is for framing, not rescue —
+                                // at 0.04 the trip to the escape spot ate two
+                                // more seconds of not seeing the race.
+                                ease = RaceTuning.camEscapeEase
+                                break
+                            }
+                        }
+                    }
+
+                    smoothed = simd_mix(smoothed, goal, SIMD3<Float>(repeating: ease))
                     // Aiming BESIDE the pack slides it across the frame, which
                     // is what leaves the results panel a lane of its own.
                     var aim = mid
@@ -191,6 +245,12 @@ struct ArenaView: View {
                         speed: hero?.speed ?? 0,
                         powered: coordinator.radioOn,
                         style: DashStyle(design: hero?.design ?? CarDesign.demoPair[0]),
+                        volume: Binding(
+                            get: { coordinator.musicLevel },
+                            set: {
+                                coordinator.musicLevel = $0
+                                SoundBank.shared.musicLevel = Float($0)
+                            }),
                         onPick: { preset in
                             coordinator.radioStation = preset
                             coordinator.radioOn = true

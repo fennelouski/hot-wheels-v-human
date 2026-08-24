@@ -466,16 +466,45 @@ struct TrackSpawnerTests {
             .max { $0.entryLevel < $1.entryLevel }!
         let stack = root.children.filter { $0.name.hasPrefix("support-\(highest.index)-") }
 
-        // Top of the stack tucks inside the 0.06 m bed: no daylight gap
-        // under the track, no post poking up through the driving surface.
+        // Top of the stack MEETS the bed it holds up. Sinking the stack to
+        // plant its foot dropped this 4 cm and left daylight under the
+        // track; the foot stretches down on its own now.
         let reach = stack.max { $0.position.y < $1.position.y }!
             .visualBounds(relativeTo: nil).max.y
         #expect(reach <= highest.entryPosition.y + 0.005)
-        #expect(reach >= highest.entryPosition.y - 0.06)
+        #expect(reach >= highest.entryPosition.y - 0.005)
         // Foot of the stack plants in the mat (−0.03), not hovering over it.
         let foot = stack.min { $0.position.y < $1.position.y }!
             .visualBounds(relativeTo: nil).min.y
         #expect(foot <= -0.025)
+    }
+
+    /// Track stacked over track: a stack that starts at the ground stands its
+    /// legs ON the lower deck and runs up through the orange. It has to start
+    /// on top of whatever is already down there — which, for a piece sitting
+    /// directly on the next deck down, means no legs at all.
+    @Test func legStacksStartOnTopOfTrackTheyCrossOver() {
+        let straight = PieceCatalog.definition(for: .straight)
+        func piece(_ index: Int, level: Int) -> PlacedPiece {
+            PlacedPiece(index: index, definition: straight,
+                        entryPosition: .zero, entryYaw: 0, entryLevel: level)
+        }
+        let over = piece(1, level: 2)
+        let rect = over.worldFootprint
+        let x = (rect.minX + rect.maxX) / 2
+        let z = (rect.minZ + rect.maxZ) / 2
+
+        // Ground piece under it → the stack starts on that deck.
+        #expect(TrackSpawner.deckLevel(atX: x, z: z, under: 2,
+                                       in: [piece(0, level: 0), over]) == 1)
+        // Bare ground → all the way down to the mat.
+        #expect(TrackSpawner.deckLevel(atX: x, z: z, under: 2, in: [over]) == 0)
+        // Track ABOVE holds nothing up.
+        #expect(TrackSpawner.deckLevel(atX: x, z: z, under: 2,
+                                       in: [piece(2, level: 3), over]) == 0)
+        // Off to the side is not underneath.
+        #expect(TrackSpawner.deckLevel(atX: x + 10, z: z, under: 2,
+                                       in: [piece(0, level: 0), over]) == 0)
     }
 }
 

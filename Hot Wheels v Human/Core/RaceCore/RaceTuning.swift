@@ -390,6 +390,29 @@ nonisolated enum RaceTuning {
     /// sliced it — and every wobble popped the slice in and out of view.
     static let driverCamNear: Float = 0.004
 
+    /// Chase cam: how long track may sit between the camera and the cars
+    /// before the camera goes looking for a spot it can see them from,
+    /// seconds. Plus the ~1 s ease into that spot, that lands well under the
+    /// 5 s the view may ever be lost.
+    static let camBlockedGrace: Double = 3
+    /// Where to look, in order: (yaw around the pack, height, distance) with
+    /// the last two as multiples of the chase distance. Climb over it, duck
+    /// under it, then walk around it — the first clear spot wins. Lifting
+    /// alone isn't enough: half the time the cars are UNDER the deck that's
+    /// in the way, and climbing puts more track between you and them.
+    static let camEscapes: [SIMD3<Float>] = [
+        [0, 1.5, 1.0],          // straight up and over
+        [0, 0.08, 0.8],         // down under the deck, in close
+        [.pi / 2, 0.4, 1.0],    // round one side…
+        [-.pi / 2, 0.4, 1.0],   // …or the other
+        [.pi, 0.4, 1.0],        // head-on
+        [0, 2.6, 1.5],          // last resort: high and wide
+    ]
+    /// Per-frame blend into an escape spot, 0…1 — three times the chase
+    /// cam's own drift, so getting the cars back on screen takes under half
+    /// a second once the search has picked somewhere.
+    static let camEscapeEase: Float = 0.12
+
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 
     /// Car is destroyed when it falls this far below the track plane, metres.
@@ -645,6 +668,10 @@ nonisolated enum RaceTuning {
     /// Engine loop playback-rate range mapped over 0…max speed (Audio/README).
     static let enginePitchRange: ClosedRange<Double> = 0.8...1.6
     static let engineGain: Double = -12   // dB, under the music/SFX
+    /// The engine of the car you're SITTING IN, dB. The driver camera is
+    /// bolted inside the car, so the listener sits on top of its own engine
+    /// and the race mix's −12 arrives as a roar over everything else.
+    static let engineGainInCar: Double = -30
 
     // MARK: Networking cadence
 
