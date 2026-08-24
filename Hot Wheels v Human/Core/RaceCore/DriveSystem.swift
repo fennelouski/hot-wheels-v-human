@@ -173,6 +173,13 @@ struct DriveSystem: System {
                 follow.nextIndex += 1
                 follow.fraction = 0
                 follow.speed += follow.speedKicks[follow.nextIndex] ?? 0
+                // Arm the jump on ENTERING its piece: a fast car crosses
+                // several waypoints a frame and can be past the lip by the
+                // time the launch check below runs.
+                if !follow.airborne,
+                   let z = follow.jumps.first(where: { $0.launch.contains(follow.nextIndex) }) {
+                    follow.jumpLandBy = z.landBy
+                }
                 // Portal: the segment just entered is a teleport gap —
                 // cross it instantly (into one ring, out of the other).
                 if follow.teleports.contains(follow.nextIndex - 1),
@@ -233,16 +240,17 @@ struct DriveSystem: System {
                 // phase independent; a height check only sampled the one
                 // frame that crossed the lip and missed at slow speeds.
                 follow.airborne = true
-                let jump = follow.jumps.first { $0.launch.contains(follow.nextIndex) }
-                follow.jumpLandBy = jump?.landBy
                 follow.verticalVelocity = ballisticVY
-                    * (jump == nil ? RaceTuning.railLaunchBoost : RaceTuning.jumpLaunchBoost)
+                    * (follow.jumpLandBy == nil ? RaceTuning.railLaunchBoost : RaceTuning.jumpLaunchBoost)
                 follow.height += ballisticVY * dt
-                if follow.height <= bedY {   // micro-hop resolved in-frame
+                if follow.height <= bedY {
+                    // Micro-hop resolved in-frame — but KEEP the ballistic
+                    // velocity: snapping to bed velocity here glued cars to
+                    // crest tops (the bed is near-flat at the peak, so the
+                    // launch never re-fired as it fell away).
                     follow.airborne = false
-                    follow.jumpLandBy = nil
                     follow.height = bedY
-                    follow.verticalVelocity = follow.speed * t.y
+                    follow.verticalVelocity = ballisticVY
                 }
             } else {
                 follow.height = bedY

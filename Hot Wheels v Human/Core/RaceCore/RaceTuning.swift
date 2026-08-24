@@ -146,9 +146,11 @@ nonisolated enum RaceTuning {
     static let railSlopeSpeedFactor: Float = 1.2
     static let railCornerSlowFactor: Float = 0.25
     /// Above-target bleed rate, 1/s of the overshoot: downhill or
-    /// post-jump overspeed eases back to the average on the next straight
-    /// instead of coasting forever.
-    static let railReturnRate: Float = 1.5
+    /// post-jump overspeed eases back to the average instead of coasting
+    /// forever. 1.5 killed it within a piece; 0.35 (~3 s time constant,
+    /// ~6 s to mostly settle) lets a hill's speed carry through the next
+    /// few straights — going fast for a while is the fun.
+    static let railReturnRate: Float = 0.35
     /// Real gravity along the lane slope, added on top of the terrain-target
     /// model: downhill genuinely accelerates the car (g·sinθ) instead of only
     /// raising a cruise cap the car crept up to. Uphill it bites back. A knob
