@@ -135,6 +135,11 @@ struct DriveSystem: System {
             // uphill slows down. The target model above only shifts the cruise
             // cap — this is the actual plunge, so drops feel like drops.
             accel += -g * t.y * RaceTuning.railGravityAccelFactor
+            // Jump ramp = booster: the climbing half throws the car at the lip.
+            if let z = follow.jumps.first(where: { $0.launch.contains(follow.nextIndex) }),
+               follow.nextIndex <= (z.launch.lowerBound + z.launch.upperBound) / 2 {
+                accel += RaceTuning.jumpRampAccel
+            }
         }
         accel -= chassis.dragCoefficient * follow.speed * follow.speed / chassis.mass
         // Boost pushes even in the air and inside a loop — it's the one
@@ -211,9 +216,12 @@ struct DriveSystem: System {
         } else if follow.airborne {
             follow.verticalVelocity -= g * dt
             follow.height += follow.verticalVelocity * dt
-            if follow.height <= bedY {   // touchdown
+            // Touchdown: the arc meets the bed, or the landing piece ran out
+            // (the next piece can't host a landing — corner, loop, portal).
+            if follow.height <= bedY || follow.nextIndex > (follow.jumpLandBy ?? .max) {
                 follow.height = bedY
                 follow.airborne = false
+                follow.jumpLandBy = nil
                 follow.verticalVelocity = follow.speed * t.y
             }
         } else {
@@ -224,10 +232,14 @@ struct DriveSystem: System {
                 // phase independent; a height check only sampled the one
                 // frame that crossed the lip and missed at slow speeds.
                 follow.airborne = true
-                follow.verticalVelocity = ballisticVY * RaceTuning.railLaunchBoost
+                let jump = follow.jumps.first { $0.launch.contains(follow.nextIndex) }
+                follow.jumpLandBy = jump?.landBy
+                follow.verticalVelocity = ballisticVY
+                    * (jump == nil ? RaceTuning.railLaunchBoost : RaceTuning.jumpLaunchBoost)
                 follow.height += ballisticVY * dt
                 if follow.height <= bedY {   // micro-hop resolved in-frame
                     follow.airborne = false
+                    follow.jumpLandBy = nil
                     follow.height = bedY
                     follow.verticalVelocity = follow.speed * t.y
                 }

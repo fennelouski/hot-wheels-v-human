@@ -159,6 +159,12 @@ nonisolated enum RaceTuning {
     /// (launch VV = speed·slope), this exaggerates it so a fast downhill
     /// run-up visibly throws the car higher. A knob — feel is human-tuned.
     static let railLaunchBoost: Float = 1.5
+    /// Jump pieces throw harder than a plain crest: a bump is a tiny hop
+    /// (railLaunchBoost), a jump is AIR. Knob — human-tuned.
+    static let jumpLaunchBoost: Float = 3.0
+    /// Extra forward accel, m/s², through the climbing half of a jump piece
+    /// — the ramp is a booster, so the car visibly speeds up onto the lip.
+    static let jumpRampAccel: Float = 8
 
     /// Ballistic launch margin, m/s of VERTICAL VELOCITY: the car goes
     /// airborne when gravity lets it fall slower than following the bed

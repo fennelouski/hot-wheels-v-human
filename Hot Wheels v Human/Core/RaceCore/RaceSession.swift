@@ -175,6 +175,22 @@ final class RaceSession {
             let end = pi + 1 < starts.count ? starts[pi + 1] : layout.lanes.center.count - 1
             return starts[pi]...end
         }
+        // Jump pieces: boost + big air, landing in the next piece when it's
+        // flat-ish (a straight or a hill); otherwise touch down at the seam.
+        let pieceEnd = { (pi: Int) in
+            pi + 1 < starts.count ? starts[pi + 1] : layout.lanes.center.count - 1
+        }
+        let jumps: [JumpZone] = layout.pieces.enumerated().compactMap { pi, piece in
+            guard piece.definition.type == .rampJump else { return nil }
+            var landBy = pieceEnd(pi)
+            if pi + 1 < layout.pieces.count {
+                switch layout.pieces[pi + 1].definition.shape {
+                case .line, .profiled: landBy = pieceEnd(pi + 1)
+                default: break
+                }
+            }
+            return JumpZone(launch: starts[pi]...pieceEnd(pi), landBy: landBy)
+        }
         for (i, entry) in entries.enumerated() {
             let (playerID, design) = entry
             let lane = i % 2 == 0 ? layout.lanes.left : layout.lanes.right
@@ -182,7 +198,7 @@ final class RaceSession {
                 design: design, playerID: playerID, lane: lane,
                 lives: lives, loopRanges: loopRanges,
                 laterals: layout.lanes.laterals,
-                teleports: layout.lanes.teleports)
+                teleports: layout.lanes.teleports, jumps: jumps)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so

@@ -200,6 +200,34 @@ struct RailFollowerTests {
         #expect(boosted > plain + 0.1)   // boost status shapes the arc
     }
 
+    @Test func jumpPieceFliesFartherThanABumpAndLandsWhereTold() {
+        /// Flat run-up, a raised-cosine crest (the bump-up mesh), then flat.
+        func flight(jumps: [JumpZone]) -> (distance: Float, landedAt: Int) {
+            var wp = (0..<10).map { SIMD3<Float>(0, 0, Float($0) * 0.1) }
+            wp += (0...8).map { i in
+                let t = Float(i) / 8
+                return [0, RaceTuning.rampCrestHeight / 2 * (1 - cos(2 * .pi * t)), 1 + 0.8 * t]
+            }
+            wp += (1...40).map { SIMD3<Float>(0, 0, 1.8 + Float($0) * 0.1) }
+            var follow = LaneFollowComponent(waypoints: wp, jumps: jumps)
+            var state = makeState()
+            var launch: Float?
+            for _ in 0..<900 {
+                let pose = DriveSystem.railStep(follow: &follow, state: &state, dt: 1 / 60)
+                if follow.airborne, launch == nil { launch = pose.position.z }
+                if let launch, !follow.airborne { return (pose.position.z - launch, follow.nextIndex) }
+            }
+            return (0, follow.nextIndex)
+        }
+        let bump = flight(jumps: [])
+        let jump = flight(jumps: [JumpZone(launch: 10...18, landBy: 30)])
+        let cut = flight(jumps: [JumpZone(launch: 10...18, landBy: 18)])
+        #expect(bump.distance > 0)                      // a bump still hops
+        #expect(jump.distance > bump.distance * 1.5)    // a jump is AIR
+        #expect(jump.landedAt <= 31)                    // inside the landing piece
+        #expect(cut.landedAt <= 19)                     // no landing piece: down at the seam
+    }
+
     // MARK: Boost state machine (DriveSystem.stepBoost)
 
     private let step: Float = 1 / 60
