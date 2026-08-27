@@ -120,9 +120,18 @@ extension TrackBlueprint {
     ///
     /// Done by REPLACING the first straight after the start gate rather than
     /// inserting a piece: piece counts, footprints and headings are untouched,
-    /// so all seven locked layouts stay valid to the centimetre. The solver
-    /// then lifts the whole track so its lowest point rests on the ground,
-    /// which leaves the start gate standing one level up on its legs.
+    /// so all seven locked layouts stay valid to the centimetre.
+    ///
+    /// The solver USED to lift the whole track so its lowest point rested on
+    /// the ground, leaving the start gate one level up on its legs. That lift
+    /// is gone (down means down — see `TrackLayoutSolver.solve`), so what
+    /// this actually does now is DIG: the gate stays at ground level and
+    /// everything after the descent sits at level −1. None of the seven
+    /// presets climbs back out, so they run underground for almost their
+    /// whole length — the arena mounds hills over them, `TunnelDressing`
+    /// puts an arch at the mouth, and the ground fades to keep the cars
+    /// visible. If a downhill LAUNCH was all this was ever meant to be,
+    /// the pieces to pair it with a `hillUp` belong here.
     private static func downhillStart(_ types: [PieceType]) -> [PieceType] {
         guard types.count > 1, types[1] == .straight else { return types }
         var types = types

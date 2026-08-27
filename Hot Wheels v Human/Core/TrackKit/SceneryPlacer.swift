@@ -121,7 +121,9 @@ enum SpaceStuff {
         return ctx.makeImage()
     }
 
-    private static func glowImage(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGImage? {
+    /// A soft radial glow, drawn once. Shared with `TunnelDressing`,
+    /// whose tunnel lamps throw the same kind of pool of light.
+    static func glowImage(red: CGFloat, green: CGFloat, blue: CGFloat) -> CGImage? {
         let size = 256
         guard let ctx = CGContext(
             data: nil, width: size, height: size, bitsPerComponent: 8, bytesPerRow: 0,

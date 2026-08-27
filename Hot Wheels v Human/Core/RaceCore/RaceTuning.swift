@@ -78,6 +78,39 @@ nonisolated enum RaceTuning {
     /// the mesh on the way up, so a taller ramp needs taller geometry.
     static let rampCrestHeight: Float = 0.10
 
+    // MARK: Tunnels
+
+    /// How far apart lamps hang down a buried run, metres. 0.6 m is
+    /// roughly one lamp per three-quarters of a straight — close enough
+    /// to read as a lit tunnel from the chase cam, far enough that a long
+    /// dig doesn't turn into a bead curtain.
+    static let tunnelLampSpacing: Float = 0.6
+
+    /// How high a lamp sits above the lane, metres.
+    ///
+    /// Bounded from above by the SHALLOWEST tunnel, not by the mounded
+    /// one: a one-level dig puts the bed at −0.2 and the terrain at
+    /// −0.03, which is only 0.17 m of headroom. Don't count on the dirt
+    /// mound for more — `TunnelMound` crests 0.5 m but the terrain mesh
+    /// samples every ~0.75 m, so a 1.2 m dome barely survives the grid
+    /// and the ground over a tunnel is nearly flat in practice. At 0.16
+    /// the bulbs poked up through the field like mushrooms; 0.10 leaves
+    /// them a clear 5 cm under it, and they still read as wall lamps.
+    static let tunnelLampHeight: Float = 0.10
+
+    /// How far a lamp sits OUT from the lane centre, metres — lamps line
+    /// the tunnel wall, alternating sides, rather than hanging down the
+    /// middle. Dead-centre lamps read fine from outside, but the chase cam
+    /// drives straight THROUGH them, and a bulb passing through the lens
+    /// fills the screen with a yellow blob. Just past the 0.2 m
+    /// half-width, so a car never clips one either.
+    static let tunnelLampSideOffset: Float = 0.24
+
+    /// Radius of the pool of light a lamp throws on the bed, metres.
+    /// Wider than the 0.4 m bed on purpose — the glow washes off the
+    /// track instead of sitting on it like a sticker.
+    static let tunnelLampGlowRadius: Float = 0.26
+
     // MARK: Drive (Phase 2 — the feel lives here)
 
     /// Constant forward drive force per chassis, newtons. Slot-car model:

@@ -222,7 +222,8 @@ struct TrackBuilder3DView: View {
                     let track = try? await TrackSpawner.spawn(layout: layout)
                     if let track, floating {
                         for child in Array(track.children)
-                        where child.name.hasPrefix("support-") {
+                        where child.name.hasPrefix("support-")
+                            || child.name.hasPrefix("tunnel-") {
                             child.removeFromParent()
                         }
                     }
