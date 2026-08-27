@@ -149,6 +149,9 @@ final class RaceCoordinator {
             session.requestBoost(playerID: playerID)
         case .reactionCam(let playerID, let on):
             if on { reactionCamsOn.insert(playerID) } else { reactionCamsOn.remove(playerID) }
+        case .trackVisibility(let mode):
+            // The host owns it; the next snapshot tells every controller.
+            trackVisibility = mode
         case .raceEvent, .raceSnapshot:
             break   // host-authored, never inbound
         }
@@ -314,6 +317,7 @@ final class RaceCoordinator {
                 CarSnapshot(playerID: racer.id, progress: racer.progress,
                             speed: racer.speed, boostMeter: racer.boostMeter,
                             livesLeft: racer.livesLeft, lane: i % 2)
-            })
+            },
+            trackVisibility: trackVisibility)
     }
 }

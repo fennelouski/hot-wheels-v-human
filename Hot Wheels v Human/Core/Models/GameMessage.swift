@@ -27,6 +27,11 @@ nonisolated enum GameMessage: Codable, Equatable, Sendable {
     // unreliable, high-frequency
     case boost(playerID: UUID, token: UUID)
     case reactionCam(playerID: UUID, on: Bool)
+    /// A controller asking the host to show/hide track. The host owns the
+    /// state and reports it back in every snapshot, so both ends agree.
+    /// Old peers can't decode this case — transports drop what they can't
+    /// read, so an old TV just keeps whatever it was showing.
+    case trackVisibility(TrackVisibility)
     case raceSnapshot(RaceSnapshot)
 }
 

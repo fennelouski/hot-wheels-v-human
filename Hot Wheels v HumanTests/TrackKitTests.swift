@@ -384,6 +384,25 @@ struct GhostBuildingTests {
         #expect(model.ghostIndices.isEmpty)
     }
 
+    /// Tapping a placed piece flips it either way — the thing ghost MODE
+    /// can't do, because most of building is changing your mind about one
+    /// piece you already put down.
+    @Test func tappingAPlacedPieceFlipsItBothWays() {
+        let model = TrackBuilderModel()
+        model.append(.straight)
+        model.append(.curve90R)
+
+        model.toggleGhost(at: 1)
+        #expect(model.blueprint.segments[1].isGhost == true)
+        model.toggleGhost(at: 1)
+        #expect(model.blueprint.segments[1].isGhost == nil)
+        #expect(model.ghostIndices.isEmpty)
+
+        // Out of range is a miss, not a crash — taps come from a hit test.
+        model.toggleGhost(at: 99)
+        #expect(model.ghostIndices.isEmpty)
+    }
+
     /// Round trip: a saved/received track rebuilds with its ghosts intact.
     @Test func loadingATrackRestoresItsGhosts() {
         var bp = blueprint([.startGate, .straight, .straight, .finishGate])
@@ -538,6 +557,34 @@ struct TrackSpawnerTests {
                                 solid: TrackVisibility.all.solidOpacity)
         #expect(opacity("piece-").allSatisfy { $0 == 1 })
         #expect(opacity("support-3-").allSatisfy { $0 == 1 })
+    }
+
+    /// The builder's tap-to-toggle rides on this: whatever the hit test
+    /// returns — a bed slab, one of a spline bed's unnamed boxes, a model
+    /// part, a support leg — has to name its piece. Tappability is the
+    /// builder's alone; the arena has no gestures and shouldn't pay for it.
+    @Test func anyTrackHitNamesItsPiece() async throws {
+        // A jump keeps its exact mesh (collision on the model, no bed) and
+        // a hill gets a spline bed of unnamed boxes — both odd shapes.
+        let layout = TrackLayoutSolver.solve(
+            blueprint([.startGate, .straight, .hillUp, .rampJump, .finishGate]))
+        let root = try await TrackSpawner.spawn(layout: layout)
+        TrackSpawner.makeTappable(root)
+
+        var targeted = 0
+        for child in root.children {
+            for entity in [child] + child.children {
+                guard entity.components[CollisionComponent.self] != nil else { continue }
+                targeted += 1
+                #expect(entity.components[InputTargetComponent.self] != nil)
+                #expect(TrackSpawner.pieceIndex(of: entity) != nil)
+            }
+        }
+        #expect(targeted >= layout.pieces.count)      // not vacuous
+        // Names carry the index, not the position in the list.
+        #expect(TrackSpawner.pieceIndex(of: root.children.first {
+            $0.name.hasPrefix("piece-3-") }!) == 3)
+        #expect(TrackSpawner.pieceIndex(of: Entity()) == nil)
     }
 
     @Test func legStackReachesTheBedItHoldsUp() async throws {

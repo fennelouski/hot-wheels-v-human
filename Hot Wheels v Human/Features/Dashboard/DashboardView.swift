@@ -23,6 +23,14 @@ struct DashboardView: View {
                 HStack {
                     garageStrip(livesLeft: car.livesLeft)
                     Spacer()
+                    // The TV's track switch, on the controller too — the
+                    // host owns the state, so flipping it here or there
+                    // lands in the same place and both ends redraw.
+                    TrackVisibilityPicker(selection: model.trackVisibility,
+                                          size: 64) {
+                        model.setTrackVisibility($0)
+                    }
+                    Spacer()
                     speedometer(speed: car.speed)
                 }
                 .padding(.horizontal)

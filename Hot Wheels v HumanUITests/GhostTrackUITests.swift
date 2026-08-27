@@ -50,6 +50,34 @@ final class GhostTrackUITests: XCTestCase {
         snap(app, "4-map-ghosts-dashed")
     }
 
+    /// Tap a piece already on the track to flip it — the thing ghost mode
+    /// can't do. The camera auto-fits and aims at the footprint centre, so
+    /// on a straight run the middle of the canvas IS a piece.
+    @MainActor
+    func testTapAPlacedPieceToFlipIt() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--trackbuilder"]
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["Track Builder"].waitForExistence(timeout: 10))
+        for _ in 0..<3 {
+            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Straight"))
+                .firstMatch.tap()
+        }
+        XCTAssertTrue(app.staticTexts["4 pieces"].waitForExistence(timeout: 5))
+        sleep(2)
+        snap(app, "9-all-solid")
+
+        // Middle of the 3D canvas → a piece. Tap ghosts it, tap again undoes.
+        let piece = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.42))
+        piece.tap()
+        sleep(2)
+        snap(app, "10-tapped-piece-now-ghost")
+        piece.tap()
+        sleep(2)
+        snap(app, "11-tapped-again-solid")
+    }
+
     @MainActor
     func testArenaTrackSwitch() throws {
         let app = XCUIApplication()
