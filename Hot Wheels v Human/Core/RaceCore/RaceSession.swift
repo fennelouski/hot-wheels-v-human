@@ -69,6 +69,16 @@ final class RaceSession {
     /// the rubber band spends the whole race making the result look earned.
     private var botMayWin = false
 
+    /// Show or hide the track under the arena's switch. Visuals only —
+    /// collision, splines and checkpoints are untouched, so a hidden piece
+    /// still drives, still counts and still catches you.
+    func applyTrackVisibility(_ visibility: TrackVisibility) {
+        guard let trackEntity else { return }
+        TrackSpawner.setOpacity(on: trackEntity,
+                                ghosts: visibility.ghostOpacity,
+                                solid: visibility.solidOpacity)
+    }
+
     /// Forwarded discrete events (countdown, crash, respawn, finish) —
     /// RaceCoordinator relays these onto the transport.
     var onEvent: ((RaceEvent) -> Void)?

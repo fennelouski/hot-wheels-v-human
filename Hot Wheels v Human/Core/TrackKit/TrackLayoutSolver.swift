@@ -19,6 +19,9 @@ nonisolated struct PlacedPiece: Sendable {
     let entryYaw: Float
     /// Elevation level at entry (integer, level 0 = ground).
     let entryLevel: Int
+    /// Invisible-when-asked piece. Geometry is identical either way — only
+    /// TrackSpawner (and the builder's map) care.
+    var isGhost = false
 
     /// Where the model itself goes.
     var modelPosition: SIMD3<Float> { entryPosition + rotated(definition.modelOffset, by: entryYaw) }
@@ -113,7 +116,8 @@ nonisolated enum TrackLayoutSolver {
             }
             pieces.append(PlacedPiece(
                 index: segment.index, definition: def,
-                entryPosition: position, entryYaw: yaw, entryLevel: level))
+                entryPosition: position, entryYaw: yaw, entryLevel: level,
+                isGhost: segment.isGhost ?? false))
             position += rotated(def.exitOffset, by: yaw)
             yaw += def.headingChange
             level += def.elevationDelta

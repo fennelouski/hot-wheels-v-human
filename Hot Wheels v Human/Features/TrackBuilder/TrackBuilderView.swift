@@ -413,6 +413,28 @@ struct PiecePaletteView: View {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 12) {
+                // Ghost mode: sticky, so a whole invisible stretch is one
+                // tap here then normal piece taps. Leading the row because
+                // it's a thing you set BEFORE you place.
+                Button {
+                    model.placingGhost.toggle()
+                    SoundBank.shared.play("confirm_sparkle")
+                } label: {
+                    VStack(spacing: 4) {
+                        Image(systemName: "circle.dashed")
+                            .font(.system(size: 34, weight: .bold))
+                            .frame(height: 40)
+                        Text("Ghost")
+                            .font(.system(size: 17, weight: .bold, design: .rounded))
+                    }
+                    .frame(width: 96, height: 86)
+                    .background(model.placingGhost
+                                    ? .yellow.opacity(0.35) : .white.opacity(0.12),
+                                in: RoundedRectangle(cornerRadius: 14))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("ghostToggle")
+
                 ForEach(Self.cards, id: \.0) { type, name in
                     let allowed = model.canAppend(type)
                     Button {

@@ -358,6 +358,45 @@ struct SolverTests {
 /// overlay (and with it every CheckpointComponent) and the whole suite
 /// still went green.
 @MainActor
+struct GhostBuildingTests {
+
+    /// Ghost mode is sticky and index-keyed, so the two things that can rot
+    /// are undo (must drop the right index) and the blueprint (must carry
+    /// the flag onto the wire, only for the pieces placed in ghost mode).
+    @Test func ghostModeMarksOnlyThePiecesPlacedWhileItIsOn() {
+        let model = TrackBuilderModel()
+        model.append(.straight)             // 1, solid
+        model.placingGhost = true
+        model.append(.straight)             // 2, ghost
+        model.append(.curve90L)             // 3, ghost
+        model.placingGhost = false
+        model.append(.straight)             // 4, solid
+
+        #expect(model.ghostIndices == [2, 3])
+        let ghosts = model.blueprint.segments.filter { $0.isGhost == true }.map(\.index)
+        #expect(ghosts == [2, 3])
+
+        model.removeLast()                  // the solid 4
+        #expect(model.ghostIndices == [2, 3])
+        model.removeLast()                  // the ghost 3
+        #expect(model.ghostIndices == [2])
+        model.clear()
+        #expect(model.ghostIndices.isEmpty)
+    }
+
+    /// Round trip: a saved/received track rebuilds with its ghosts intact.
+    @Test func loadingATrackRestoresItsGhosts() {
+        var bp = blueprint([.startGate, .straight, .straight, .finishGate])
+        bp.segments[2].isGhost = true
+        let model = TrackBuilderModel()
+        model.load(preset: bp)
+        #expect(model.ghostIndices == [2])
+        #expect(model.blueprint.segments[2].isGhost == true)
+        #expect(model.blueprint.segments[1].isGhost == nil)
+    }
+}
+
+@MainActor
 struct TrackSpawnerTests {
 
     /// Gate arches carry the CheckpointComponent that RaceRulesSystem
@@ -456,6 +495,49 @@ struct TrackSpawnerTests {
         #expect(legs.count == expected)
         // A car that flies off has to fall PAST them.
         #expect(legs.allSatisfy { $0.components[CollisionComponent.self] == nil })
+    }
+
+    /// Ghost pieces: invisible on demand, drivable always. The whole point
+    /// is that hiding one changes NOTHING else — collision bed, checkpoint,
+    /// spline all stay put — so this pins the visuals moving and the physics
+    /// not. Legs go with their ghost (a piece you can't see standing on
+    /// posts you can gives it away).
+    @Test func ghostPiecesHideTheirVisualsAndKeepTheirCollision() async throws {
+        var bp = blueprint([.startGate, .straight, .hillUp, .straight, .finishGate])
+        bp.segments[3].isGhost = true          // an elevated flat → has legs
+        let layout = TrackLayoutSolver.solve(bp)
+        #expect(layout.pieces[3].isGhost)
+        #expect(!layout.pieces[1].isGhost)
+
+        let root = try await TrackSpawner.spawn(layout: layout)
+        func opacity(_ prefix: String) -> [Float] {
+            root.children.filter { $0.name.hasPrefix(prefix) }
+                .map { $0.components[OpacityComponent.self]?.opacity ?? 1 }
+        }
+        let beds = root.children.filter { $0.name.hasPrefix("bed-") }
+        #expect(!opacity("support-3-").isEmpty)     // not vacuous: it has legs
+
+        TrackSpawner.setOpacity(on: root, ghosts: TrackVisibility.hideGhosts.ghostOpacity,
+                                solid: TrackVisibility.hideGhosts.solidOpacity)
+        #expect(opacity("piece-3-").allSatisfy { $0 == 0 })
+        #expect(opacity("support-3-").allSatisfy { $0 == 0 })
+        #expect(opacity("piece-1-").allSatisfy { $0 == 1 })
+        // Gates stay lit, and the track is still solid underneath.
+        #expect(opacity("overlay-").allSatisfy { $0 == 1 })
+        #expect(beds.allSatisfy { bed in
+            bed.components[CollisionComponent.self] != nil
+                || bed.children.contains { $0.components[CollisionComponent.self] != nil }
+        })
+
+        TrackSpawner.setOpacity(on: root, ghosts: TrackVisibility.hideAll.ghostOpacity,
+                                solid: TrackVisibility.hideAll.solidOpacity)
+        #expect(opacity("piece-").allSatisfy { $0 == 0 })
+        #expect(opacity("overlay-").allSatisfy { $0 == 0 })
+
+        TrackSpawner.setOpacity(on: root, ghosts: TrackVisibility.all.ghostOpacity,
+                                solid: TrackVisibility.all.solidOpacity)
+        #expect(opacity("piece-").allSatisfy { $0 == 1 })
+        #expect(opacity("support-3-").allSatisfy { $0 == 1 })
     }
 
     @Test func legStackReachesTheBedItHoldsUp() async throws {

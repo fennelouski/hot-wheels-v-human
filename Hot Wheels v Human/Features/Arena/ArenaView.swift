@@ -35,6 +35,44 @@ struct ArenaView: View {
         return racers.first { !$0.isAI } ?? racers.first
     }
 
+    /// Track show/hide, sitting under the camera switch. Icon only: the eye
+    /// opens, half-closes, shuts — no words to read at 3 m from a sofa, and
+    /// nothing to translate. Ghosts-hidden is the middle one and the default.
+    private var trackSwitch: some View {
+        HStack(spacing: 8) {
+            ForEach(TrackVisibility.allCases, id: \.self) { mode in
+                let picked = coordinator.trackVisibility == mode
+                Button {
+                    coordinator.trackVisibility = mode
+                } label: {
+                    Label(Self.trackSwitchLabel(mode), systemImage: Self.trackSwitchSymbol(mode))
+                        .labelStyle(.iconOnly)
+                        .font(.system(size: 26, weight: .bold))
+                        .frame(width: 60, height: 60)
+                }
+                .buttonStyle(.bordered)
+                .tint(picked ? .yellow : .gray)
+            }
+        }
+    }
+
+    private static func trackSwitchSymbol(_ mode: TrackVisibility) -> String {
+        switch mode {
+        case .all: "eye.fill"
+        case .hideGhosts: "eye.half.closed.fill"
+        case .hideAll: "eye.slash.fill"
+        }
+    }
+
+    /// VoiceOver still gets the words the button doesn't show.
+    private static func trackSwitchLabel(_ mode: TrackVisibility) -> String {
+        switch mode {
+        case .all: "Show all track"
+        case .hideGhosts: "Hide ghost track"
+        case .hideAll: "Hide all track"
+        }
+    }
+
     var body: some View {
         ZStack {
             RealityView { content in
@@ -274,7 +312,7 @@ struct ArenaView: View {
             // (top-leading). One button for both platforms: the camera
             // belongs to the host, so tapping on iPad and clicking with
             // the Siri Remote hit the same switch.
-            VStack {
+            VStack(alignment: .trailing, spacing: 12) {
                 HStack {
                     Spacer()
                     Button {
@@ -290,6 +328,7 @@ struct ArenaView: View {
                     .buttonStyle(.bordered)
                     .tint(.yellow)
                 }
+                trackSwitch
                 Spacer()
             }
             .padding(24)

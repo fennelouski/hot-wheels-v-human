@@ -28,6 +28,11 @@ final class RaceCoordinator {
     /// Ride in the driver's seat instead of the chase camera (ArenaView).
     /// Lives here so the same toggle works on the TV and in Solo Arena.
     var driverView = true
+    /// Which track pieces are drawn (ArenaView's three-way switch). Ghosts
+    /// hidden by default — a ghost piece you can see isn't a ghost.
+    var trackVisibility: TrackVisibility = .hideGhosts {
+        didSet { session.applyTrackVisibility(trackVisibility) }
+    }
     /// Which preset the cockpit radio is tuned to. Defaults to the chiptune
     /// station, which IS the old race track — so a kid who never touches the
     /// radio hears exactly what they heard before.
@@ -264,6 +269,8 @@ final class RaceCoordinator {
             do {
                 try await session.start(blueprint: blueprint, entries: entries,
                                         config: config, root: root)
+                // Fresh track each race — re-apply whatever the switch is on.
+                session.applyTrackVisibility(trackVisibility)
                 broadcastSnapshots()
             } catch {
                 lastRejection = "Arena build failed: \(error)"

@@ -18,12 +18,18 @@ nonisolated struct SegmentSpec: Codable, Equatable, Sendable {
     /// nil on a portalOut means "continue the chain" (plain straight).
     var portalX: Float?
     var portalZ: Float?
+    /// Ghost piece: the track is all still there — collision, spline,
+    /// checkpoints — but the arena can make the model vanish, so the car
+    /// drives on thin air. Additive optional; nil = a normal, solid piece.
+    var isGhost: Bool?
 
-    init(index: Int, type: PieceType, portalX: Float? = nil, portalZ: Float? = nil) {
+    init(index: Int, type: PieceType, portalX: Float? = nil, portalZ: Float? = nil,
+         isGhost: Bool? = nil) {
         self.index = index
         self.type = type
         self.portalX = portalX
         self.portalZ = portalZ
+        self.isGhost = isGhost
     }
 }
 
