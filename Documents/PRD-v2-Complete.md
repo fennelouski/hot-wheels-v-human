@@ -132,7 +132,9 @@ enum GameMessage: Codable {
     // unreliable, high-frequency
     case boost(playerID: UUID, token: UUID)
     case reactionCam(playerID: UUID, on: Bool)
-    case raceSnapshot(RaceSnapshot)   // TV → iPads @10Hz: positions, speeds, meters, lives
+    case trackVisibility(TrackVisibility)  // iPad → TV: show all / hide ghosts / hide all
+    case raceSnapshot(RaceSnapshot)   // TV → iPads @10Hz: positions, speeds, meters, lives,
+                                      // and the track switch the host is on (keeps both ends synced)
 }
 ```
 
@@ -143,9 +145,11 @@ enum GameMessage: Codable {
     { "index": 0, "type": "startGate" },
     { "index": 1, "type": "straight" },
     { "index": 2, "type": "loop" },
-    { "index": 3, "type": "curve90R" },
+    { "index": 3, "type": "curve90R", "isGhost": true },
     { "index": 4, "type": "finishGate" } ] }
 ```
+`isGhost` (additive optional) is a **ghost piece**: identical geometry, collision and checkpoints — only the visuals can be switched off, so the car drives a track nobody can see.
+
 Rotations are derived from the path (v1 stored explicit rotations; deriving them eliminates an entire class of invalid data).
 
 Connection lifecycle: auto-reconnect with session resume; if an iPad drops mid-race the TV pauses after 5 s grace. Single-iPad "Solo Arena" bypasses networking entirely behind the same `GameTransport` protocol (a `LoopbackTransport` implementation) — this is what makes everything testable in Simulator/CI.

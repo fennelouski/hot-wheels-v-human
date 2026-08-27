@@ -35,44 +35,6 @@ struct ArenaView: View {
         return racers.first { !$0.isAI } ?? racers.first
     }
 
-    /// Track show/hide, sitting under the camera switch. Icon only: the eye
-    /// opens, half-closes, shuts — no words to read at 3 m from a sofa, and
-    /// nothing to translate. Ghosts-hidden is the middle one and the default.
-    private var trackSwitch: some View {
-        HStack(spacing: 8) {
-            ForEach(TrackVisibility.allCases, id: \.self) { mode in
-                let picked = coordinator.trackVisibility == mode
-                Button {
-                    coordinator.trackVisibility = mode
-                } label: {
-                    Label(Self.trackSwitchLabel(mode), systemImage: Self.trackSwitchSymbol(mode))
-                        .labelStyle(.iconOnly)
-                        .font(.system(size: 26, weight: .bold))
-                        .frame(width: 60, height: 60)
-                }
-                .buttonStyle(.bordered)
-                .tint(picked ? .yellow : .gray)
-            }
-        }
-    }
-
-    private static func trackSwitchSymbol(_ mode: TrackVisibility) -> String {
-        switch mode {
-        case .all: "eye.fill"
-        case .hideGhosts: "eye.half.closed.fill"
-        case .hideAll: "eye.slash.fill"
-        }
-    }
-
-    /// VoiceOver still gets the words the button doesn't show.
-    private static func trackSwitchLabel(_ mode: TrackVisibility) -> String {
-        switch mode {
-        case .all: "Show all track"
-        case .hideGhosts: "Hide ghost track"
-        case .hideAll: "Hide all track"
-        }
-    }
-
     var body: some View {
         ZStack {
             RealityView { content in
@@ -328,7 +290,9 @@ struct ArenaView: View {
                     .buttonStyle(.bordered)
                     .tint(.yellow)
                 }
-                trackSwitch
+                TrackVisibilityPicker(selection: coordinator.trackVisibility) {
+                    coordinator.trackVisibility = $0
+                }
                 Spacer()
             }
             .padding(24)
@@ -358,6 +322,54 @@ struct ArenaView: View {
             }
         }
         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
+    }
+}
+
+/// The three-way track switch. Icon only, per the ask — and it has to read
+/// at 3 m from a sofa anyway; `Label` still hands the words to VoiceOver.
+/// The eye opens, half-closes, shuts, which is the same progression the
+/// track makes. The SAME control sits over the arena and on the iPad
+/// controller, because whichever one the kid grabs should look identical.
+struct TrackVisibilityPicker: View {
+    let selection: TrackVisibility
+    var size: CGFloat = 60
+    let onPick: (TrackVisibility) -> Void
+
+    var body: some View {
+        HStack(spacing: 8) {
+            ForEach(TrackVisibility.allCases, id: \.self) { mode in
+                Button {
+                    onPick(mode)
+                    SoundBank.shared.play("ui_tap")
+                } label: {
+                    Label(mode.title, systemImage: mode.symbolName)
+                        .labelStyle(.iconOnly)
+                        .font(.system(size: size * 0.43, weight: .bold))
+                        .frame(width: size, height: size)
+                }
+                .buttonStyle(.bordered)
+                .tint(selection == mode ? .yellow : .gray)
+            }
+        }
+    }
+}
+
+/// SF Symbols + the words VoiceOver reads (CLAUDE.md: no emoji).
+extension TrackVisibility {
+    var symbolName: String {
+        switch self {
+        case .all: "eye.fill"
+        case .hideGhosts: "eye.half.closed.fill"
+        case .hideAll: "eye.slash.fill"
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .all: "Show all track"
+        case .hideGhosts: "Hide ghost track"
+        case .hideAll: "Hide all track"
+        }
     }
 }
 

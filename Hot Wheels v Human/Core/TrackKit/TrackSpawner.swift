@@ -22,8 +22,10 @@ struct TrackVisualComponent: Component {
     let isGhost: Bool
 }
 
-/// The arena's three-way track switch (ArenaView), in the order it steps.
-nonisolated enum TrackVisibility: CaseIterable, Sendable {
+/// The three-way track switch, in the order it steps. String-backed
+/// because it rides the wire both ways — the iPad asks for a state, the
+/// host's snapshots report the one that's actually on (GameMessage).
+nonisolated enum TrackVisibility: String, Codable, CaseIterable, Sendable {
     case all, hideGhosts, hideAll
 
     var ghostOpacity: Float { self == .all ? 1 : 0 }
@@ -163,6 +165,33 @@ enum TrackSpawner {
             } else {
                 child.components.set(OpacityComponent(opacity: opacity))
             }
+        }
+    }
+
+    /// Which piece a hit entity belongs to — walks up to the named holder
+    /// this spawner parented it under (`bed-3`, `piece-3-straight`,
+    /// `support-3-1`, `overlay-3-…`). The builder taps pieces with it.
+    static func pieceIndex(of entity: Entity) -> Int? {
+        var node: Entity? = entity
+        while let current = node {
+            for prefix in ["bed-", "piece-", "overlay-", "support-"]
+            where current.name.hasPrefix(prefix) {
+                let digits = current.name.dropFirst(prefix.count).prefix(while: \.isNumber)
+                if let index = Int(digits) { return index }
+            }
+            node = current.parent
+        }
+        return nil
+    }
+
+    /// Builder only: let taps hit the track. Targets the COLLISION, not the
+    /// models — collision is where a ghost piece still exists, and it's the
+    /// only hit test that stays honest at elevation (a ground-plane cast
+    /// lands past a raised piece and picks the wrong one).
+    static func makeTappable(_ track: Entity) {
+        for entity in allDescendants(of: track)
+        where entity.components[CollisionComponent.self] != nil {
+            entity.components.set(InputTargetComponent())
         }
     }
 

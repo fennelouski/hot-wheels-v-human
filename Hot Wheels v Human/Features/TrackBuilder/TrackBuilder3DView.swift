@@ -54,6 +54,15 @@ struct TrackBuilder3DView: View {
                         }
                         return
                     }
+                    // Build mode: tap a piece to flip it ghost ↔ solid.
+                    // Hit-tested against the track's collision, so it picks
+                    // the right piece at any elevation and a see-through
+                    // ghost is just as tappable as a solid piece.
+                    if !model.decorating, model.placingPortalIndex == nil,
+                       let piece = TrackSpawner.pieceIndex(of: value.entity) {
+                        model.toggleGhost(at: piece)
+                        return
+                    }
                     guard let spot = groundPoint(tap: value.location,
                                                  size: proxy.size) else { return }
                     if model.placingPortalIndex != nil {
@@ -221,6 +230,7 @@ struct TrackBuilder3DView: View {
                     // kid has to see what they placed to keep building on it.
                     if let track {
                         TrackSpawner.setOpacity(on: track, ghosts: 0.3)
+                        TrackSpawner.makeTappable(track)
                     }
                     holder.children.removeAll()
                     if let track { holder.addChild(track) }

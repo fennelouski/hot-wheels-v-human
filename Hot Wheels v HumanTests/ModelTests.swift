@@ -31,10 +31,13 @@ struct ModelTests {
         .raceEvent(.blueprintRejected(reason: "needs a start gate")),
         .boost(playerID: player.id, token: UUID()),
         .reactionCam(playerID: player.id, on: true),
+        .trackVisibility(.hideAll),
         .raceSnapshot(RaceSnapshot(raceClock: 12.3, phase: .racing, cars: [
             CarSnapshot(playerID: player.id, progress: 0.5, speed: 2.1,
                         boostMeter: 0.8, livesLeft: 4, lane: 0),
         ])),
+        .raceSnapshot(RaceSnapshot(raceClock: 1, phase: .racing, cars: [],
+                                   trackVisibility: .all)),
     ]
 
     @Test func everyMessageCaseRoundTrips() throws {
@@ -42,6 +45,22 @@ struct ModelTests {
             let decoded = try GameMessage.decoded(from: message.encoded())
             #expect(decoded == message)
         }
+    }
+
+    /// The switch is additive: a snapshot from a peer that predates it
+    /// still decodes, and reads as "no opinion" rather than a default that
+    /// would stomp what the host is actually showing.
+    @Test func oldSnapshotWithoutTrackVisibilityStillDecodes() throws {
+        let json = """
+        { "raceSnapshot": { "_0": {
+            "raceClock": 3.5, "phase": "racing", "cars": [] } } }
+        """
+        let decoded = try GameMessage.decoded(from: Data(json.utf8))
+        guard case .raceSnapshot(let snap) = decoded else {
+            Issue.record("decoded as \(decoded)")
+            return
+        }
+        #expect(snap.trackVisibility == nil)
     }
 
     @Test func oldCarDesignMessageWithoutOwnerIDStillDecodes() throws {

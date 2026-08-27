@@ -32,6 +32,17 @@ nonisolated struct RaceSnapshot: Codable, Equatable, Sendable {
     var raceClock: TimeInterval
     var phase: RacePhase
     var cars: [CarSnapshot]
+    /// What the host's track switch is set to, so every controller shows the
+    /// same state whoever flipped it. Additive optional; nil from old peers.
+    var trackVisibility: TrackVisibility?
+
+    init(raceClock: TimeInterval, phase: RacePhase, cars: [CarSnapshot],
+         trackVisibility: TrackVisibility? = nil) {
+        self.raceClock = raceClock
+        self.phase = phase
+        self.cars = cars
+        self.trackVisibility = trackVisibility
+    }
 }
 
 nonisolated enum RaceEvent: Codable, Equatable, Sendable {

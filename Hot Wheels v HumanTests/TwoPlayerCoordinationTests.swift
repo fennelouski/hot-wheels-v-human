@@ -80,6 +80,39 @@ struct TwoPlayerLobbyTests {
         }
     }
 
+    /// The track switch is host-owned and mirrored: whichever end flips it,
+    /// both agree. An iPad's request reaches the host, and the host's
+    /// snapshots carry the state back so a flip made on the TV — or by the
+    /// OTHER iPad — lands on every controller.
+    @Test func trackSwitchStaysInSyncBothWays() async {
+        let hub = LoopbackTransport.hub(playerCount: 2)
+        let coordinator = RaceCoordinator(transport: hub.host)
+        coordinator.start()
+        let dashboards = hub.players.map {
+            DashboardModel(transport: $0, playerName: "Kid")
+        }
+        for dashboard in dashboards { dashboard.start() }
+        #expect(coordinator.trackVisibility == .hideGhosts)   // the default
+        #expect(dashboards[0].trackVisibility == .hideGhosts)
+
+        // iPad → host.
+        dashboards[0].setTrackVisibility(.hideAll)
+        await settle(until: coordinator.trackVisibility == .hideAll)
+        #expect(coordinator.trackVisibility == .hideAll)
+
+        // Host → every iPad, riding the snapshot (the TV's own switch, or
+        // the other iPad's, reaches this one the same way).
+        coordinator.trackVisibility = .all
+        hub.host.send(.raceSnapshot(RaceSnapshot(
+            raceClock: 1, phase: .racing, cars: [],
+            trackVisibility: coordinator.trackVisibility)), reliably: false)
+        await settle(until: dashboards.allSatisfy { $0.trackVisibility == .all })
+        #expect(dashboards[1].trackVisibility == .all)
+
+        for dashboard in dashboards { dashboard.stop() }
+        coordinator.stop()
+    }
+
     @Test func thirdIPadIsKindlyCapped() async {
         let hub = LoopbackTransport.hub(playerCount: 3)
         let coordinator = RaceCoordinator(transport: hub.host)

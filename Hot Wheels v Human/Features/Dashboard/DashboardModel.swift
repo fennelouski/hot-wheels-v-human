@@ -86,6 +86,17 @@ final class DashboardModel {
         SoundBank.shared.play("rematch_ding")
     }
 
+    /// The host's track switch, mirrored. Set locally the instant the kid
+    /// taps so the button answers without a round trip, then re-synced by
+    /// every snapshot — which is also how a flip made on the TV shows up
+    /// here. Snapshots only flow while a race is on, hence the local set.
+    private(set) var trackVisibility: TrackVisibility = .hideGhosts
+
+    func setTrackVisibility(_ mode: TrackVisibility) {
+        trackVisibility = mode
+        transport.send(.trackVisibility(mode), reliably: true)
+    }
+
     /// Toggle the driver PiP on the TV (Phase 6). Reliable — a lost
     /// "off" would strand the PiP on screen.
     func setReactionCam(on: Bool) {
@@ -121,6 +132,7 @@ final class DashboardModel {
             transportState = state
         case .message(.raceSnapshot(let snap)):
             snapshot = snap
+            if let mode = snap.trackVisibility { trackVisibility = mode }
         case .message(.raceEvent(let raceEvent)):
             lastEvent = raceEvent
             if case .blueprintRejected(let reason) = raceEvent {

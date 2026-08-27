@@ -84,6 +84,15 @@ final class TrackBuilderModel {
         SoundBank.shared.play("track_snap_connect")
     }
 
+    /// Tap a piece already on the track to flip it solid ↔ ghost. Placing
+    /// in ghost mode is for a run of them; this is for changing your mind
+    /// about one, which is most of what building actually is.
+    func toggleGhost(at index: Int) {
+        guard types.indices.contains(index) else { return }
+        if ghostIndices.remove(index) == nil { ghostIndices.insert(index) }
+        SoundBank.shared.play("confirm_sparkle")
+    }
+
     func removeLast() {
         guard types.count > 1 else { return }
         // Portals leave as the pair they arrived as — a lone ring is
