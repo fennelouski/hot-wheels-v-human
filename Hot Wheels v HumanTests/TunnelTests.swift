@@ -132,12 +132,30 @@ struct TunnelPlanTests {
                                   (rect.minZ + rect.maxZ) / 2),
                     radius: max(rect.maxX - rect.minX, rect.maxZ - rect.minZ) / 2 + 0.8)
             }
+            // Without this the check is vacuous: no mounds at all also
+            // measures zero at the arch.
+            #expect(!mounds.isEmpty, "\(digs) hillDowns: nothing was mounded")
             let flat = FootprintRect(minX: -9, minZ: -9, maxX: 9, maxZ: 9)
             let height = ArenaEnvironment.terrainHeight(
                 x: entrance.position.x, z: entrance.position.z,
                 flat: flat, mounds: mounds)
             #expect(height < 0.02, "\(digs) hillDowns: dirt is \(height) m deep at the arch")
         }
+    }
+
+    /// The shallowest possible dig — straight down and straight back up,
+    /// with nothing buried in between. It still gets both arches, and it
+    /// gets NO dirt mound, because no piece is buried at both ends. That
+    /// is the intended trade: a one-down-one-up dip is a dip, not a
+    /// tunnel through a hill, and mounding its ramps would bury the two
+    /// arches that are the whole point.
+    @Test func aDipWithNoBuriedMiddleGetsArchesButNoHill() {
+        let solved = layout([.startGate, .hillDown, .hillUp, .finishGate])
+        let mouths = TunnelPlan.mouths(in: solved)
+        #expect(mouths.count == 2)
+        #expect(mouths.filter(\.isEntrance).count == 1)
+        for mouth in mouths { #expect(abs(mouth.position.y) < 1e-5) }
+        #expect(TunnelPlan.moundFootprints(in: solved).isEmpty)
     }
 
     /// Lamps hang over the buried bed, spaced along it — and nowhere else.
@@ -205,6 +223,38 @@ struct TunnelPlanTests {
                     + simd_distance(lamp.position, b)
                 #expect(along > gap + 0.05,
                         "a lamp is stranded inside the portal jump")
+            }
+        }
+    }
+
+    /// The lamp walk indexes `lanes.center`, `pieceStartIndices` and
+    /// `laterals` together, and those don't line up as simply as they
+    /// look: `pieceStartIndices` is appended BEFORE duplicate joint
+    /// waypoints are dropped, so a piece can contribute none at all and
+    /// the last piece's end has to be clamped. Fuzz it rather than argue
+    /// about it — every shipped preset plus 300 random tracks, checking
+    /// it doesn't crash and that what comes out is sane.
+    @Test func mouthsAndLampsSurviveEveryTrackWeCanThrowAtThem() {
+        var blueprints = TrackBlueprint.presets.map(\.1)
+        for i in 0..<300 {
+            blueprints.append(RandomTrackGenerator.generate(pieceCount: 3 + i % 12))
+        }
+        for bp in blueprints {
+            let solved = TrackLayoutSolver.solve(bp)
+            for mouth in TunnelPlan.mouths(in: solved) {
+                #expect(mouth.position.y.isFinite)
+                #expect(mouth.yaw.isFinite)
+                // An arch only ever stands where the bed meets the ground.
+                #expect(abs(mouth.position.y) < 1e-4)
+            }
+            for lamp in TunnelPlan.lamps(in: solved) {
+                #expect(lamp.position.x.isFinite && lamp.position.y.isFinite
+                        && lamp.position.z.isFinite)
+                // Never above the ground it is supposed to be lighting under.
+                #expect(lamp.position.y <= 0)
+                #expect(abs(simd_length(lamp.up) - 1) < 1e-3)
+                #expect(abs(simd_length(lamp.forward) - 1) < 1e-3)
+                #expect(abs(lamp.side) == 1)
             }
         }
     }
