@@ -50,8 +50,15 @@ struct TrackCanvasView: View {
                 let b = point(f.maxX, f.maxZ)
                 let rect = CGRect(x: min(a.x, b.x), y: min(a.y, b.y),
                                   width: abs(b.x - a.x), height: abs(b.y - a.y))
-                context.fill(Path(roundedRect: rect.insetBy(dx: 1, dy: 1), cornerRadius: 6),
-                             with: .color(color(piece.definition.type)))
+                let shape = Path(roundedRect: rect.insetBy(dx: 1, dy: 1), cornerRadius: 6)
+                // Ghost pieces read as an outline — the map has to admit
+                // there's track there that nobody will see.
+                if piece.isGhost {
+                    context.stroke(shape, with: .color(color(piece.definition.type)),
+                                   style: StrokeStyle(lineWidth: 2, dash: [4, 3]))
+                } else {
+                    context.fill(shape, with: .color(color(piece.definition.type)))
+                }
             }
 
             var path = Path()

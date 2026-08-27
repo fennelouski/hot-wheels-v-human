@@ -1,0 +1,85 @@
+//
+//  GhostTrackUITests.swift
+//  Hot Wheels v HumanUITests
+//
+//  Ghost tracks end to end: the builder's sticky Ghost mode (palette card,
+//  translucent pieces in the 3D scene, dashed footprints on the mini-map)
+//  and the arena's icon-only three-way track switch under the camera
+//  toggle. Screenshots attach at each step for visual review.
+//
+
+import XCTest
+
+final class GhostTrackUITests: XCTestCase {
+
+    @MainActor
+    func testGhostPiecesInTheBuilder() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--trackbuilder"]
+        app.launch()
+
+        XCTAssertTrue(app.staticTexts["Track Builder"].waitForExistence(timeout: 10))
+
+        // Two solid pieces, then Ghost on and two more — the difference has
+        // to be visible in the same shot.
+        for piece in ["Straight", "Right"] {
+            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", piece))
+                .firstMatch.tap()
+        }
+        let ghost = app.buttons["ghostToggle"]
+        XCTAssertTrue(ghost.exists)
+        ghost.tap()
+        snap(app, "1-ghost-mode-on")
+
+        for piece in ["Straight", "Straight"] {
+            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", piece))
+                .firstMatch.tap()
+        }
+        XCTAssertTrue(app.staticTexts["5 pieces"].waitForExistence(timeout: 5))
+        sleep(2)                                   // async respawn
+        snap(app, "2-two-ghost-pieces")
+
+        // Back to solid, one more piece: ghost mode is sticky, not one-shot.
+        ghost.tap()
+        app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Left"))
+            .firstMatch.tap()
+        sleep(2)
+        snap(app, "3-solid-again")
+
+        app.buttons["miniMap"].tap()
+        snap(app, "4-map-ghosts-dashed")
+    }
+
+    @MainActor
+    func testArenaTrackSwitch() throws {
+        let app = XCUIApplication()
+        app.launchArguments = ["--solo-arena"]
+        app.launch()
+
+        // Let the world build and the countdown run out.
+        sleep(12)
+        snap(app, "5-arena-default-hide-ghosts")
+
+        let showAll = app.buttons["Show all track"]
+        XCTAssertTrue(showAll.waitForExistence(timeout: 10))
+        showAll.tap()
+        sleep(1)
+        snap(app, "6-show-all-track")
+
+        app.buttons["Hide all track"].tap()
+        sleep(1)
+        snap(app, "7-hide-all-track")
+
+        app.buttons["Hide ghost track"].tap()
+        sleep(1)
+        snap(app, "8-back-to-default")
+    }
+
+    @MainActor
+    private func snap(_ app: XCUIApplication, _ name: String) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+}

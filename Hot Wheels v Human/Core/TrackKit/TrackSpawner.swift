@@ -14,6 +14,22 @@ struct CheckpointComponent: Component {
     let isFinish: Bool
 }
 
+/// Tags a spawned track VISUAL — the piece model, its gate arch, its
+/// support legs — so the arena's show/hide switch can find them. Collision
+/// beds are deliberately untagged: they're invisible already and must never
+/// change, which is what keeps a hidden piece fully drivable.
+struct TrackVisualComponent: Component {
+    let isGhost: Bool
+}
+
+/// The arena's three-way track switch (ArenaView), in the order it steps.
+nonisolated enum TrackVisibility: CaseIterable, Sendable {
+    case all, hideGhosts, hideAll
+
+    var ghostOpacity: Float { self == .all ? 1 : 0 }
+    var solidOpacity: Float { self == .hideAll ? 0 : 1 }
+}
+
 @MainActor
 enum TrackSpawner {
 
@@ -30,6 +46,7 @@ enum TrackSpawner {
     static func spawn(layout: TrackLayout, assets: AssetStore? = nil) async throws -> Entity {
         let assets = assets ?? AssetStore.shared
         CheckpointComponent.registerComponent()
+        TrackVisualComponent.registerComponent()
 
         let root = Entity()
         root.name = "track"
@@ -44,6 +61,7 @@ enum TrackSpawner {
             // meshes' Y stretch assumes — it has to act along the mesh's own
             // up axis, not the world's.
             model.scale = piece.definition.modelScale
+            model.components.set(TrackVisualComponent(isGhost: piece.isGhost))
             // Cars collide with SOLVED geometry, not the visual meshes —
             // the models carry raised ramps/tabs/lead-ins beyond their
             // logical footprints, and cars hitting those exact meshes got
@@ -83,6 +101,7 @@ enum TrackSpawner {
                 overlay.components.set(CheckpointComponent(
                     pieceIndex: piece.index,
                     isFinish: piece.definition.type == .finishGate))
+                overlay.components.set(TrackVisualComponent(isGhost: piece.isGhost))
                 root.addChild(overlay)
             }
 
@@ -120,11 +139,31 @@ enum TrackSpawner {
                             / RaceTuning.elevationLevelHeight
                     }
                     leg.orientation = simd_quatf(angle: piece.entryYaw, axis: [0, 1, 0])
+                    // A ghost's legs go with it — a piece you can't see
+                    // held up by posts you can gives the trick away.
+                    leg.components.set(TrackVisualComponent(isGhost: piece.isGhost))
                     root.addChild(leg)
                 }
             }
         }
         return root
+    }
+
+    /// Repaint a spawned track's visuals. Ghost pieces get `ghosts`,
+    /// everything else gets `solid` — the arena switch maps its three states
+    /// onto 0/1 (`TrackVisibility`), the builder fades ghosts part-way so the
+    /// kid can still see what they placed. Nothing else is touched, so the
+    /// track drives exactly the same whatever you can see of it.
+    static func setOpacity(on track: Entity, ghosts: Float, solid: Float = 1) {
+        for child in track.children {
+            guard let visual = child.components[TrackVisualComponent.self] else { continue }
+            let opacity = visual.isGhost ? ghosts : solid
+            if opacity >= 1 {
+                child.components.remove(OpacityComponent.self)
+            } else {
+                child.components.set(OpacityComponent(opacity: opacity))
+            }
+        }
     }
 
     /// Lowest level a support stack may start at under (x, z): one above the

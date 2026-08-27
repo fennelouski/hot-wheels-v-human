@@ -203,7 +203,8 @@ struct TrackBuilder3DView: View {
             // so the picked world is part of the key.
             let floating = RaceTuning.groundlessThemes.contains(
                 RaceTuning.resolvedThemeName(model.worldTheme, for: nil))
-            let key = "track-\(model.types.hashValue)-\(model.portalExits.hashValue)-\(floating)"
+            let key = "track-\(model.types.hashValue)-\(model.portalExits.hashValue)"
+                + "-\(model.ghostIndices.hashValue)-\(floating)"
             if let holder = root.children.first(where: {
                     $0.name.hasPrefix("track-") || $0.name.hasPrefix("building-track-") }),
                holder.name != key, holder.name != "building-\(key)" {
@@ -215,6 +216,11 @@ struct TrackBuilder3DView: View {
                         where child.name.hasPrefix("support-") {
                             child.removeFromParent()
                         }
+                    }
+                    // Ghosts are see-through in the builder, not gone: the
+                    // kid has to see what they placed to keep building on it.
+                    if let track {
+                        TrackSpawner.setOpacity(on: track, ghosts: 0.3)
                     }
                     holder.children.removeAll()
                     if let track { holder.addChild(track) }

@@ -135,6 +135,11 @@ struct DriveSystem: System {
             // uphill slows down. The target model above only shifts the cruise
             // cap — this is the actual plunge, so drops feel like drops.
             accel += -g * t.y * RaceTuning.railGravityAccelFactor
+            // Jump ramp = booster: the climbing half throws the car at the lip.
+            if let z = follow.jumps.first(where: { $0.launch.contains(follow.nextIndex) }),
+               follow.nextIndex <= (z.launch.lowerBound + z.launch.upperBound) / 2 {
+                accel += RaceTuning.jumpRampAccel
+            }
         }
         accel -= chassis.dragCoefficient * follow.speed * follow.speed / chassis.mass
         // Boost pushes even in the air and inside a loop — it's the one
@@ -167,6 +172,14 @@ struct DriveSystem: System {
             if follow.nextIndex < wp.count - 1 {
                 follow.nextIndex += 1
                 follow.fraction = 0
+                follow.speed += follow.speedKicks[follow.nextIndex] ?? 0
+                // Arm the jump on ENTERING its piece: a fast car crosses
+                // several waypoints a frame and can be past the lip by the
+                // time the launch check below runs.
+                if !follow.airborne,
+                   let z = follow.jumps.first(where: { $0.launch.contains(follow.nextIndex) }) {
+                    follow.jumpLandBy = z.landBy
+                }
                 // Portal: the segment just entered is a teleport gap —
                 // cross it instantly (into one ring, out of the other).
                 if follow.teleports.contains(follow.nextIndex - 1),
@@ -211,9 +224,12 @@ struct DriveSystem: System {
         } else if follow.airborne {
             follow.verticalVelocity -= g * dt
             follow.height += follow.verticalVelocity * dt
-            if follow.height <= bedY {   // touchdown
+            // Touchdown: the arc meets the bed, or the landing piece ran out
+            // (the next piece can't host a landing — corner, loop, portal).
+            if follow.height <= bedY || follow.nextIndex > (follow.jumpLandBy ?? .max) {
                 follow.height = bedY
                 follow.airborne = false
+                follow.jumpLandBy = nil
                 follow.verticalVelocity = follow.speed * t.y
             }
         } else {
@@ -224,12 +240,17 @@ struct DriveSystem: System {
                 // phase independent; a height check only sampled the one
                 // frame that crossed the lip and missed at slow speeds.
                 follow.airborne = true
-                follow.verticalVelocity = ballisticVY * RaceTuning.railLaunchBoost
+                follow.verticalVelocity = ballisticVY
+                    * (follow.jumpLandBy == nil ? RaceTuning.railLaunchBoost : RaceTuning.jumpLaunchBoost)
                 follow.height += ballisticVY * dt
-                if follow.height <= bedY {   // micro-hop resolved in-frame
+                if follow.height <= bedY {
+                    // Micro-hop resolved in-frame — but KEEP the ballistic
+                    // velocity: snapping to bed velocity here glued cars to
+                    // crest tops (the bed is near-flat at the peak, so the
+                    // launch never re-fired as it fell away).
                     follow.airborne = false
                     follow.height = bedY
-                    follow.verticalVelocity = follow.speed * t.y
+                    follow.verticalVelocity = ballisticVY
                 }
             } else {
                 follow.height = bedY

@@ -21,6 +21,12 @@ final class TrackBuilderModel {
     /// The portal exit awaiting placement — the next ground tap puts it
     /// there (then normal tapping resumes).
     private(set) var placingPortalIndex: Int?
+    /// Segment indices built as ghost pieces. Stable for the same reason
+    /// `portalExits` is: mutations are append/removeLast only.
+    private(set) var ghostIndices: Set<Int> = []
+    /// Ghost mode: pieces placed while this is on come out invisible.
+    /// Sticky, so a kid can lay a whole ghost stretch without re-tapping.
+    var placingGhost = false
     /// Picked world (ArenaEnvironment theme name); nil = surprise me.
     private(set) var worldTheme: String?
     /// Hand-placed decorations — any prop from any world.
@@ -74,6 +80,7 @@ final class TrackBuilderModel {
             return
         }
         types.append(type)
+        if placingGhost { ghostIndices.insert(types.count - 1) }
         SoundBank.shared.play("track_snap_connect")
     }
 
@@ -83,9 +90,11 @@ final class TrackBuilderModel {
         // nothing (and the validator would brick every further append).
         if types.last == .portalOut {
             portalExits.removeValue(forKey: types.count - 1)
+            ghostIndices.remove(types.count - 1)
             placingPortalIndex = nil
             types.removeLast()
         }
+        ghostIndices.remove(types.count - 1)
         types.removeLast()
         SoundBank.shared.play("piece_delete_pop")
     }
@@ -95,6 +104,7 @@ final class TrackBuilderModel {
         scenery = []
         movingIndex = nil
         portalExits = [:]
+        ghostIndices = []
         placingPortalIndex = nil
     }
 
@@ -106,6 +116,7 @@ final class TrackBuilderModel {
                 guard let x = segment.portalX, let z = segment.portalZ else { return nil }
                 return (segment.index, SIMD2(x, z))
             })
+        ghostIndices = Set(preset.segments.filter { $0.isGhost == true }.map(\.index))
         placingPortalIndex = nil
         worldTheme = preset.worldTheme
         scenery = preset.scenery ?? []
@@ -138,6 +149,9 @@ final class TrackBuilderModel {
         let side = rotated([1.6, 0, 0], by: layout.exitYaw)
         types.append(.portalIn)
         types.append(.portalOut)
+        if placingGhost {
+            ghostIndices.formUnion([types.count - 2, types.count - 1])
+        }
         portalExits[types.count - 1] = SIMD2(exit.x + side.x, exit.z + side.z)
         placingPortalIndex = types.count - 1
         SoundBank.shared.play("track_snap_connect")
@@ -232,6 +246,7 @@ final class TrackBuilderModel {
 
     func shuffle() {
         portalExits = [:]
+        ghostIndices = []
         placingPortalIndex = nil
         types = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
             .segments.map(\.type)
@@ -253,7 +268,8 @@ final class TrackBuilderModel {
                        segments: types.enumerated().map { index, type in
                            SegmentSpec(index: index, type: type,
                                        portalX: portalExits[index]?.x,
-                                       portalZ: portalExits[index]?.y)
+                                       portalZ: portalExits[index]?.y,
+                                       isGhost: ghostIndices.contains(index) ? true : nil)
                        })
     }
 }

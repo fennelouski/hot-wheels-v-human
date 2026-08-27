@@ -146,9 +146,11 @@ nonisolated enum RaceTuning {
     static let railSlopeSpeedFactor: Float = 1.2
     static let railCornerSlowFactor: Float = 0.25
     /// Above-target bleed rate, 1/s of the overshoot: downhill or
-    /// post-jump overspeed eases back to the average on the next straight
-    /// instead of coasting forever.
-    static let railReturnRate: Float = 1.5
+    /// post-jump overspeed eases back to the average instead of coasting
+    /// forever. 1.5 killed it within a piece; 0.35 (~3 s time constant,
+    /// ~6 s to mostly settle) lets a hill's speed carry through the next
+    /// few straights — going fast for a while is the fun.
+    static let railReturnRate: Float = 0.35
     /// Real gravity along the lane slope, added on top of the terrain-target
     /// model: downhill genuinely accelerates the car (g·sinθ) instead of only
     /// raising a cruise cap the car crept up to. Uphill it bites back. A knob
@@ -159,6 +161,18 @@ nonisolated enum RaceTuning {
     /// (launch VV = speed·slope), this exaggerates it so a fast downhill
     /// run-up visibly throws the car higher. A knob — feel is human-tuned.
     static let railLaunchBoost: Float = 1.5
+    /// Jump pieces throw harder than a plain crest: a bump is a tiny hop
+    /// (railLaunchBoost), a jump is AIR. Knob — human-tuned.
+    static let jumpLaunchBoost: Float = 3.0
+    /// Extra forward accel, m/s², through the climbing half of a jump piece
+    /// — the ramp is a booster, so the car visibly speeds up onto the lip.
+    static let jumpRampAccel: Float = 8
+
+    /// Speed kick, m/s, on entering a downhill tile. Each consecutive
+    /// downhill tile kicks `downhillKickDecay`× the previous one, so a long
+    /// descent keeps getting faster but converges (sum < kick/(1−decay)).
+    static let downhillKick: Float = 0.3
+    static let downhillKickDecay: Float = 0.6
 
     /// Ballistic launch margin, m/s of VERTICAL VELOCITY: the car goes
     /// airborne when gravity lets it fall slower than following the bed

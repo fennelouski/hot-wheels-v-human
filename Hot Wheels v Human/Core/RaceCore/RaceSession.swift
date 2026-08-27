@@ -69,6 +69,16 @@ final class RaceSession {
     /// the rubber band spends the whole race making the result look earned.
     private var botMayWin = false
 
+    /// Show or hide the track under the arena's switch. Visuals only —
+    /// collision, splines and checkpoints are untouched, so a hidden piece
+    /// still drives, still counts and still catches you.
+    func applyTrackVisibility(_ visibility: TrackVisibility) {
+        guard let trackEntity else { return }
+        TrackSpawner.setOpacity(on: trackEntity,
+                                ghosts: visibility.ghostOpacity,
+                                solid: visibility.solidOpacity)
+    }
+
     /// Forwarded discrete events (countdown, crash, respawn, finish) —
     /// RaceCoordinator relays these onto the transport.
     var onEvent: ((RaceEvent) -> Void)?
@@ -175,6 +185,31 @@ final class RaceSession {
             let end = pi + 1 < starts.count ? starts[pi + 1] : layout.lanes.center.count - 1
             return starts[pi]...end
         }
+        // Jump pieces: boost + big air, landing in the next piece when it's
+        // flat-ish (a straight or a hill); otherwise touch down at the seam.
+        let pieceEnd = { (pi: Int) in
+            pi + 1 < starts.count ? starts[pi + 1] : layout.lanes.center.count - 1
+        }
+        let jumps: [JumpZone] = layout.pieces.enumerated().compactMap { pi, piece in
+            guard piece.definition.type == .rampJump else { return nil }
+            var landBy = pieceEnd(pi)
+            if pi + 1 < layout.pieces.count {
+                switch layout.pieces[pi + 1].definition.shape {
+                case .line, .profiled: landBy = pieceEnd(pi + 1)
+                default: break
+                }
+            }
+            return JumpZone(launch: starts[pi]...pieceEnd(pi), landBy: landBy)
+        }
+        // Downhill tiles each kick the speed up on entry, every consecutive
+        // one a bit less than the last (geometric — converges, never caps).
+        var speedKicks: [Int: Float] = [:]
+        var run = 0
+        for (pi, piece) in layout.pieces.enumerated() {
+            guard piece.definition.type == .hillDown else { run = 0; continue }
+            speedKicks[starts[pi]] = RaceTuning.downhillKick * pow(RaceTuning.downhillKickDecay, Float(run))
+            run += 1
+        }
         for (i, entry) in entries.enumerated() {
             let (playerID, design) = entry
             let lane = i % 2 == 0 ? layout.lanes.left : layout.lanes.right
@@ -182,7 +217,8 @@ final class RaceSession {
                 design: design, playerID: playerID, lane: lane,
                 lives: lives, loopRanges: loopRanges,
                 laterals: layout.lanes.laterals,
-                teleports: layout.lanes.teleports)
+                teleports: layout.lanes.teleports, jumps: jumps,
+                speedKicks: speedKicks)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so

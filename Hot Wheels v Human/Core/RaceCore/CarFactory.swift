@@ -57,6 +57,11 @@ struct CarComponent: Component {
     var rideHeight: Float = 0
 }
 
+struct JumpZone: Sendable, Equatable {
+    var launch: ClosedRange<Int>
+    var landBy: Int
+}
+
 /// Which lane spline the car follows and how far along it is.
 struct LaneFollowComponent: Component {
     var waypoints: [SIMD3<Float>]
@@ -71,6 +76,15 @@ struct LaneFollowComponent: Component {
     /// Portal jumps (LaneSplines.teleports): segment [i, i+1] is crossed
     /// instantly — into one ring, out of the other.
     var teleports: Set<Int> = []
+    /// Jump pieces: boost through the first half of `launch`, throw harder
+    /// off the lip, and touch down no later than waypoint `landBy` (the end
+    /// of the next piece if it can host a landing, else the lip's own piece).
+    var jumps: [JumpZone] = []
+    /// `landBy` of the jump this flight left from; nil for ordinary air.
+    var jumpLandBy: Int? = nil
+    /// One-shot speed kicks, m/s, paid on entering the keyed waypoint —
+    /// downhill tiles (RaceTuning.downhillKick), each a bit less than the last.
+    var speedKicks: [Int: Float] = [:]
 
     // Rail-mode state (RaceTuning.railPinned) — ignored by chaos physics.
     /// Progress within the current segment [waypoint nextIndex−1, nextIndex], 0…1.
@@ -93,6 +107,8 @@ enum CarFactory {
                         lives: Int, loopRanges: [ClosedRange<Int>] = [],
                         laterals: [SIMD3<Float>] = [],
                         teleports: Set<Int> = [],
+                        jumps: [JumpZone] = [],
+                        speedKicks: [Int: Float] = [:],
                         assets: AssetStore? = nil) async throws -> ModelEntity {
         let assets = assets ?? AssetStore.shared
         CarComponent.registerComponent()
@@ -136,7 +152,8 @@ enum CarFactory {
                                         rideHeight: rideHeight(visualHeight: bounds.extents.y)))
         car.components.set(LaneFollowComponent(waypoints: lane, loopRanges: loopRanges,
                                                laterals: laterals,
-                                               teleports: teleports))
+                                               teleports: teleports, jumps: jumps,
+                                               speedKicks: speedKicks))
 
         // The little human, in the roster's DRIVE pose — hands out on the
         // wheel. The old standing rig had to be sunk hip-deep with its legs
