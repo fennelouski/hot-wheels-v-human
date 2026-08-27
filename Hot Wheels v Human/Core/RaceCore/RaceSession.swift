@@ -144,12 +144,11 @@ final class RaceSession {
         // field. Building it here, awaited, closes that gap; ArenaView's
         // update sees the wanted holder name already present and skips.
         if let holder = root.findEntity(named: "environment") {
-            // Pieces that dip below ground get a hill mounded over them —
-            // the tunnel the car drives through.
-            let tunnels = layout.pieces
-                .filter { min($0.entryLevel,
-                              $0.entryLevel + $0.definition.elevationDelta) < 0 }
-                .map(\.worldFootprint)
+            // Pieces buried at BOTH ends get a hill mounded over them —
+            // the tunnel the car drives through. The dive and climb ramps
+            // are left bare on purpose: dirt over a ramp buries the mouth
+            // it leads into (see TunnelPlan.moundFootprints).
+            let tunnels = TunnelPlan.moundFootprints(in: layout)
             let environment = await ArenaEnvironment.make(
                 for: blueprint.trackId, theme: blueprint.worldTheme,
                 scenery: scenery, empty: blueprint.worldEmpty ?? false,
@@ -163,7 +162,8 @@ final class RaceSession {
         if RaceTuning.groundlessThemes.contains(
             RaceTuning.resolvedThemeName(blueprint.worldTheme,
                                          for: blueprint.trackId)) {
-            for child in Array(track.children) where child.name.hasPrefix("support-") {
+            for child in Array(track.children)
+            where child.name.hasPrefix("support-") || child.name.hasPrefix("tunnel-") {
                 child.removeFromParent()
             }
         }

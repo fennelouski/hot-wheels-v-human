@@ -148,6 +148,12 @@ enum TrackSpawner {
                 }
             }
         }
+        // Arches at the mouths, lamps down the bore. Direct children of
+        // the root, so `setOpacity` reaches their TrackVisualComponent
+        // and a ghost piece's tunnel hides along with it.
+        for dressing in await TunnelDressing.spawn(layout: layout) {
+            root.addChild(dressing)
+        }
         return root
     }
 

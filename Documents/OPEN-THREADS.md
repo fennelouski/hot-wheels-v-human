@@ -105,6 +105,11 @@ reads as underground. Cleanest is normalising levels so the minimum is 0
 (which also makes "underground" impossible by construction), then spawning
 cars on the descent in `RaceSession`.
 
+**Superseded (ec2ce1a).** The level-normalising lift was tried (see Closed
+item 9) and then REMOVED: down means down, and underground is a feature —
+tunnels through hills, whole tracks buried. An elevated start is built the
+honest way, with `hillUp`s first.
+
 ## 10. More assets available if wanted
 
 - **Kenney Blocky Characters** (CC0, 18 more characters, also ships
@@ -206,12 +211,25 @@ Body in the Face tab. The variant list moved onto `DriverProfile` so the
 picker, the bundle check and the pose check share one list.
 
 **9 — the downhill start (3c61274, 26dc6ce).** `TrackLayoutSolver.solve`
-normalises elevation so the track's lowest point rests on the ground, which
-lifts the start instead of burying the first descent. That made
-BlueprintValidator's "can't go underground" rule unreachable, so it's gone —
-underground is now impossible by construction. `TrackLayout` gained
-`startPosition`, and circuit closure is measured against it rather than the
-origin (an elevated circuit no longer returns to zero).
+normalised elevation so the track's lowest point rested on the ground, which
+lifted the start instead of burying the first descent. That made
+BlueprintValidator's "can't go underground" rule unreachable, so it's gone.
+`TrackLayout` gained `startPosition`, and circuit closure is measured against
+it rather than the origin (an elevated circuit no longer returns to zero).
+
+**The lift itself was then reverted (ec2ce1a)**, so "underground is now
+impossible by construction" — which this entry originally claimed — is NOT
+true any more. Digging is a feature: `hillDown` from ground level goes to
+negative levels, the arena mounds a hill over the buried run, and
+`TunnelDressing` gives it a mouth at each end and lamps down the middle.
+
+**Known consequence, still open:** because `downhillStart` digs and none of
+the seven presets climbs back out, every starter track now runs almost
+entirely at level −1 — Wiggle Worm has 19 of its 20 pieces underground. They
+race correctly (the x-ray ground fade keeps the cars visible) but they are,
+literally, buried tracks. If the intent was only a downhill *launch*, the
+fix belongs in `StarterPresets` — pair the opening `hillDown` with a
+`hillUp` — not in the solver.
 
 All 7 starter tracks now open downhill: `StarterPresets.downhillStart`
 *replaces* the first straight after the start gate with a `hillDown` rather

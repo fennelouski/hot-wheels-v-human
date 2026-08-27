@@ -137,9 +137,7 @@ final class TrackBuilderModel {
     /// Any piece of the track below the ground? (The 3D view fades the
     /// terrain so digging feels fluid — never a fight with the dirt.)
     var isDigging: Bool {
-        layout.pieces.contains {
-            min($0.entryLevel, $0.entryLevel + $0.definition.elevationDelta) < 0
-        }
+        layout.pieces.contains(where: TunnelPlan.isUnderground)
     }
 
     var canAppendPortal: Bool {
