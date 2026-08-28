@@ -132,23 +132,34 @@ extension TrackBlueprint {
     /// the line, run a short lit tunnel, and pop out onto a lap that sits on
     /// the ground the way it always did.
     ///
-    /// The climb has to land on a `straight` with no hill on either side of
-    /// it. A `hillUp` next to another hill isn't a lone S-curve any more —
-    /// the solver reads consecutive same-direction hills as a RUN and gives
-    /// the middles ±2 levels over a shorter advance (`HillRole`), which
-    /// would neither balance the dig nor keep the layout to the centimetre.
+    /// The climb lands on a `straight` with no hill on either side of it.
+    /// `TrackLayoutSolver.definitions(for:)` calls a RUN a stretch of the
+    /// SAME piece type, and only a run of three or more grows a `.middle`,
+    /// which is the role that moves ±2 levels over a shorter advance
+    /// (`HillRole`). A lone neighbour would therefore be harmless — a pair
+    /// resolves to `.entry` + `.exit`, still ±1 each — so this guard is
+    /// deliberately stricter than it strictly needs to be. It costs a
+    /// slightly longer tunnel and buys never having to re-derive that.
+    ///
+    /// The dig only happens if there IS somewhere to climb back out. A
+    /// preset that dives with no matching climb is a buried track, which
+    /// is the exact bug this function used to ship; better to launch flat
+    /// than to bury the lap silently.
     private static func downhillStart(_ types: [PieceType]) -> [PieceType] {
         guard types.count > 1, types[1] == .straight else { return types }
-        var types = types
-        types[1] = .hillDown
         func isHill(_ i: Int) -> Bool {
             types.indices.contains(i) && (types[i] == .hillUp || types[i] == .hillDown)
         }
-        for i in 2..<types.count
-        where types[i] == .straight && !isHill(i - 1) && !isHill(i + 1) {
-            types[i] = .hillUp
-            break
-        }
+        // Index 1 becomes the dig, so it can never host the climb, and
+        // index 2 would sit right beside it. `dropFirst`, not `3..<count`:
+        // the guard above only proves there are two pieces, and `3..<2`
+        // traps with "Range requires lowerBound <= upperBound".
+        guard let climb = types.indices.dropFirst(3).first(where: {
+            types[$0] == .straight && !isHill($0 - 1) && !isHill($0 + 1)
+        }) else { return types }
+        var types = types
+        types[1] = .hillDown
+        types[climb] = .hillUp
         return types
     }
 
