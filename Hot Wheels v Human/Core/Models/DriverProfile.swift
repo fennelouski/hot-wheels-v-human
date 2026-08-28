@@ -20,7 +20,6 @@ nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
     /// Whatever hair this character was modelled with — the default, and
     /// the reason picking a character still means something.
     case character
-    case bald
     case bob
     case bun
     case buns
@@ -31,6 +30,9 @@ nonisolated enum HairStyle: String, Codable, CaseIterable, Sendable {
     case spike
     case bowl
     case mop
+    /// Last: it's the one style that takes hair away, so it sits at the end
+    /// of the row rather than second, where it read as a real hairstyle.
+    case bald
 
     /// The extracted mesh in `Resources/Models3D`, or nil when nothing gets
     /// attached (the character wears its own, or nothing at all).
