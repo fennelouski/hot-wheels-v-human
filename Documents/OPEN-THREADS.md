@@ -1,9 +1,14 @@
 # Open threads — known gaps and unfinished work
 
-Written 2026-07-20 against `1f2b6a1`. **Updated the same day**: items 1, 2, 4
-and 9 are done — see "Closed" at the bottom for what actually turned out to
-be true, which was not always what this file predicted. Ordered by how much
-a player would notice.
+Written 2026-07-20 against `1f2b6a1`, and rewritten as items closed. **Read
+the "Closed" sections at the bottom first** — they record where previous
+sessions' diagnoses were *wrong*, which saves more time than what they got
+right. Ordered by how much a player would notice.
+
+**Current as of 2026-08-28.** Items 1–7 and 9 are done. Still open: the loop
+(8), spare asset packs (10), hardware validation (11). The ghost-track,
+tunnel and dig work that landed after 2026-08-23 went unrecorded here until
+now — if you add a feature, add its thread.
 
 Paste the prompt at the bottom into a fresh session to pick this up.
 
@@ -41,18 +46,14 @@ Reproduce: `--preset-track 1`, grep `rescued`.
 `TrackSpawner.bedCollision`. A lip at the junction catches the low-profile
 car box.
 
-## 3. Reaction cam is a different person from the driver
+## ~~3. Reaction cam is a different person from the driver~~ — DONE
 
-`DriverPoser` still loads the legacy Quaternius `driver-idle` bust, because
-its four pose clips (`driver-idle/-boost/-crash/-cheer`) have no roster
-equivalent. So the PiP face and the character in the car are different
-people.
-
-**Fix:** Kenney ships `emote-yes`, `emote-no`, `die` and `idle` per
-character. Convert them per-pose with the existing tool
-(`--action <clip>`, see `Graphics/README.md`) and map them onto
-`ReactionState`. Then drop `bakedAppearance: false` at `DriverPoser.swift:29`
-— it exists solely to keep painting the blank Quaternius mesh.
+Fixed by whoever did the Kenney clip conversion; this entry outlived it.
+`DriverPoser.loadBust` loads `profile.modelName(pose: .idle)` — the driver's
+OWN roster model — and the clip map at the top of the file is Kenney's
+(`emote-yes` for boosted, `die` for crashed, `attack-melee-right` for
+celebrating, picked on what moves above the waist because the PiP crops to
+head-and-shoulders). There is no `bakedAppearance` flag left in the file.
 
 ## ~~4. Eight of the twelve characters are unreachable~~ — DONE
 
@@ -68,12 +69,13 @@ already guards them.
 
 Hair is real geometry now, cut out of the roster itself. See "Closed" below.
 
-## 6. `crashes` no longer earns its place
+## ~~6. `crashes` no longer earns its place~~ — DONE
 
-With flinging fixed and stuck reclassified as a rescue, the results panel
-reads `crashes 0` almost every race (7-track drill: 14/14 finished, 0
-crashes). It's honest — it now counts only falls and flips — but it may be
-dead space on the results screen.
+The column now appears only when somebody actually crashed
+(`ArenaHUDView.anyCrashes`). Rail mode finishes clean, so the usual race
+prints a tidier table and a crash-strewn one still gets its scoreboard.
+Deleting the column outright would have thrown away the only place the
+count is ever visible.
 
 ## ~~7. Dev tooling shipping in the app~~ — DONE (6fe1481)
 
@@ -124,6 +126,22 @@ honest way, with `hillUp`s first.
 
 ---
 
+## 11. Never validated on hardware
+
+Everything in this repo has been verified on Simulators. Still unproven on
+real devices, and all three are the kind of thing a Simulator cannot tell
+you:
+
+- **Multipeer reconnect drills** (`MULTIPEER-HANDTEST.md`). Simulator-to-
+  Simulator Multipeer doesn't work reliably, so the lobby, the drop, and the
+  auto-reconnect have never run over real Wi-Fi between a real iPad and a
+  real Apple TV.
+- **Memory on device.** The `--stress-track` drill sits flat at ~497 MB RSS
+  on the Simulator. A real iPad's budget is not the Mac's.
+- **Anything GPU-shaped.** The 3D-grid-avatar crash (below) rendered
+  perfectly on the Simulator and killed real devices on launch. That class of
+  bug is invisible here by construction.
+
 ## Prompt
 
 > Work on Hot Wheels vs. Human (repo is the cwd). Read `CLAUDE.md` and
@@ -134,25 +152,20 @@ honest way, with `hillUp`s first.
 >
 > Open, roughly in the order a player would notice:
 >
-> 1. **`.bump` drives through its own mesh.** It uses the same
->    `track-wide-straight-bump-up` model as `rampJump` but kept a flat
->    `.line` spline, so cars pass through a 10 cm hump on every track that
->    has one. `CenterlineShape.crest` already exists and fixes it in one
->    line — but that turns every bump into a jump, which is a feel decision,
->    not a bug fix. Decide first. Related: `.bump` and `.rampJump` now render
->    as the same piece and behave differently; a taller dedicated ramp mesh
->    would settle both.
-> 2. **Dev tooling ships in the app** (item 7). `RaceSession.drillLog` writes
->    `Documents/drill-log.txt` on every call, in release too. Gate it behind
->    `#if DEBUG` or a launch argument.
-> 3. **The loop still reads wrong** (item 8) — never isolated. Needs eyes on
->    it before code.
-> 4. **`crashes` may be dead space** on the results panel (item 6).
-> 5. Leftovers from the hair work: `character-male-c`'s extracted island is a
->    **police cap**, already converted and offered nowhere — it belongs in
->    `HatStyle`. And `.character` hair ignores `hairColorHex` while every
->    picked style honours it, so a kid dragging the hair-colour swatches on
->    a default character sees nothing happen.
+> 1. **The loop still reads wrong** (item 8) — never isolated, and still the
+>    only entry in this file that asks for a human's eyes before anybody
+>    writes code. Race `--preset-track 2` (Loopy Louie) and watch it.
+> 2. **Nothing has run on real hardware** (item 11). Multipeer reconnect,
+>    device memory, and anything GPU-shaped are all unproven.
+> 3. **Music is seven synthesized placeholders** (`Audio/README.md`).
+>    Ducking and looping are done; somebody has to pick real tracks.
+> 4. **Accessibility is thin** — three files carry labels, nothing honours
+>    Reduce Motion. Low urgency for a family build, but the character roster
+>    is literally an accessibility pack.
+> 5. **The hair row is twelve chips wide on an 834 pt screen.** Bald sits at
+>    the end (deliberately — it's the option that takes hair away), so it
+>    needs a drag to reach and scrolling to it pushes the middle styles off
+>    the left edge. Wrapping to two rows fixes both; left alone on purpose.
 >
 > Things that will cost you an hour if nobody tells you:
 >

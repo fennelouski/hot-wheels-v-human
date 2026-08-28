@@ -26,7 +26,11 @@ Every folder has a `README.md` saying what gets built there. Start with `CLAUDE.
 
 Xcode 26+. Open `Hot Wheels v Human.xcodeproj` and run on an iPad or Apple TV simulator, or from the CLI per `Documents/XCODE-SETUP.md` §8. No dependencies to install — zero SPM packages.
 
-**Status:** Phase 0 complete — builds and runs on both platforms with a spinning pilot car. Next up: core models + track kit (Phase 1).
+**Status:** every phase in `Documents/BUILD-ORDER.md` is built — P0–P7 plus the
+C-series profile/character work — and the game is playable end to end: build a
+car and a track on the iPad, race it in the Solo Arena or on an Apple TV, with
+characters, worlds, tunnels, ghost pieces and a cockpit radio. What's left is
+polish and hardware validation; the live list is `Documents/OPEN-THREADS.md`.
 
 ## Asset credits
 
