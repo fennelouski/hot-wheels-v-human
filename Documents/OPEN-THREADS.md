@@ -223,13 +223,15 @@ true any more. Digging is a feature: `hillDown` from ground level goes to
 negative levels, the arena mounds a hill over the buried run, and
 `TunnelDressing` gives it a mouth at each end and lamps down the middle.
 
-**Known consequence, still open:** because `downhillStart` digs and none of
-the seven presets climbs back out, every starter track now runs almost
-entirely at level −1 — Wiggle Worm has 19 of its 20 pieces underground. They
-race correctly (the x-ray ground fade keeps the cars visible) but they are,
-literally, buried tracks. If the intent was only a downhill *launch*, the
-fix belongs in `StarterPresets` — pair the opening `hillDown` with a
-`hillUp` — not in the solver.
+**Consequence, since fixed:** because `downhillStart` dug and nothing
+climbed back out, every starter track ran almost entirely at level −1 —
+Wiggle Worm had 19 of its 20 pieces underground. `downhillStart` now pairs
+the opening `hillDown` with a `hillUp` on the first straight that has no
+hill on either side of it (a `hillUp` beside another hill becomes a RUN,
+which is ±2 levels per middle and wouldn't balance). The plunge off the
+line survives, the dig became a short lit tunnel, and every preset ends
+back at level 0: Wiggle Worm is down to 4 buried pieces of 20, and the
+seven tracks carry 2–4 tunnel mouths each.
 
 All 7 starter tracks now open downhill: `StarterPresets.downhillStart`
 *replaces* the first straight after the start gate with a `hillDown` rather
