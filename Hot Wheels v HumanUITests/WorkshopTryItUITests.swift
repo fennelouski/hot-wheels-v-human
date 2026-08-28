@@ -84,8 +84,8 @@ final class WorkshopTryItUITests: XCTestCase {
         // different styles, because the editor picks a random starting racer
         // and one of them could have been a no-op. Visual evidence: compare
         // the PiP circle across racer-1 / -2 / -3.
-        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Hair'")).firstMatch.tap()
-        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Bald'")).firstMatch.tap()
+        tap(app, "Hair")
+        tap(app, "Bald")
         settle(seconds: 3)
         snap(app, "racer-2-pip-after-bald")
 
@@ -93,7 +93,7 @@ final class WorkshopTryItUITests: XCTestCase {
         // roster's own heads and renamed them, and this tap has been failing
         // ever since. Any style with an actual mesh works — the point is that
         // the PiP changes again, from bald to something.
-        app.buttons.containing(NSPredicate(format: "label CONTAINS 'Top Bun'")).firstMatch.tap()
+        tap(app, "Top Bun")
         settle(seconds: 3)
         snap(app, "racer-3-pip-after-bun")
 
@@ -118,6 +118,36 @@ final class WorkshopTryItUITests: XCTestCase {
     @MainActor
     private func button(_ app: XCUIApplication, _ text: String) -> XCUIElement {
         app.buttons.containing(NSPredicate(format: "label CONTAINS %@", text)).firstMatch
+    }
+
+    /// Tap a button by label, waiting for it to arrive and scrolling its row
+    /// across if it starts off-screen. Two ways this bites in the character
+    /// editor: bare `firstMatch.tap()` resolves its query in the same run
+    /// loop, so a chip that only exists after a tab swap reads as "no matches
+    /// found" rather than "not yet"; and the style rows are wider than the
+    /// iPad, so an end-of-row chip like `Bald` has no hit point until its
+    /// scroll view is dragged. A finger can reach it either way.
+    @MainActor
+    private func tap(_ app: XCUIApplication, _ text: String) {
+        let target = button(app, text)
+        XCTAssertTrue(target.waitForExistence(timeout: 10), "No button labelled \(text)")
+        let predicate = NSPredicate(format: "label CONTAINS %@", text)
+        let row = app.scrollViews.containing(predicate).firstMatch
+        // Frame, not `isHittable`: asking a fully off-screen element whether
+        // it's hittable throws ("Activation point invalid"), so the check that
+        // decides whether to scroll can't be the one that needs the scroll.
+        // Both directions: the style row is wide enough that scrolling to
+        // its far end (Bald) pushes the middle of the row off the left edge,
+        // so the next tap has to come back the other way.
+        var swipes = 0
+        while swipes < 8, row.exists, !app.frame.contains(target.frame) {
+            if target.frame.minX < app.frame.minX { row.swipeRight() }
+            else { row.swipeLeft() }
+            swipes += 1
+        }
+        XCTAssertTrue(app.frame.contains(target.frame),
+                      "\(text) never scrolled into reach")
+        target.tap()
     }
 
     /// The cover is up AND a real race is behind it: the arena HUD only draws
