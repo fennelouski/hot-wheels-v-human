@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftData
 import Testing
 @testable import Hot_Wheels_v_Human
 
@@ -212,5 +213,31 @@ struct ModelTests {
         #expect(TireType.slickRacing.staticFriction < TireType.standard.staticFriction)
         #expect(TireType.standard.staticFriction < TireType.grippyOffroad.staticFriction)
         #expect(TireType.slickRacing.restitution < TireType.grippyOffroad.restitution)
+    }
+
+    // MARK: Track records
+
+    /// The record line is only honest if the old best is read before the new
+    /// race is filed — otherwise every race ties its own time and no kid ever
+    /// sees "NEW TRACK RECORD".
+    @MainActor @Test func bestTimeIsTheFastestRunOnThatTrackAlone() throws {
+        let container = try ModelContainer(
+            for: RaceResultRecord.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true))
+        let context = container.mainContext
+        let track = UUID()
+        let otherTrack = UUID()
+
+        #expect(context.bestTime(onTrack: track) == nil)
+
+        context.recordFinish(trackID: track, carName: "Lightning", seconds: 14.2)
+        context.recordFinish(trackID: track, carName: "Tank", seconds: 12.5)
+        context.recordFinish(trackID: track, carName: "Pip", seconds: 18.9)
+        // A blistering run on a DIFFERENT track must not become this one's
+        // time to beat.
+        context.recordFinish(trackID: otherTrack, carName: "Nova", seconds: 3.1)
+
+        #expect(context.bestTime(onTrack: track) == 12.5)
+        #expect(context.bestTime(onTrack: otherTrack) == 3.1)
     }
 }

@@ -59,7 +59,10 @@ final class RaceSession {
 
     private var updateSubscription: (any Cancellable)?
     private var trackEntity: Entity?
-    private var config = MatchConfig(mode: .solo)
+    /// Readable so the HUD can tell a real race from a Test Mode run — test
+    /// times are runs of `CarDesign.demoPair` on infinite lives and must
+    /// never land in a kid's track records.
+    private(set) var config = MatchConfig(mode: .solo)
     /// Piece types in track order + where each starts on the spline —
     /// the AI policy and best-segment stat both read these.
     private var pieceTypes: [PieceType] = []

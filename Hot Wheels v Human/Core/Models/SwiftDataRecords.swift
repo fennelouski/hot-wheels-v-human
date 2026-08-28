@@ -96,3 +96,45 @@ final class TrackBlueprintRecord {
 
     var blueprint: TrackBlueprint? { try? JSONDecoder().decode(TrackBlueprint.self, from: blueprintData) }
 }
+
+/// One finished run, kept so a track can tell a kid whether they just beat
+/// themselves. Local only, like everything else here — no accounts, no
+/// leaderboards, nothing leaves the device.
+///
+/// Every finish is stored rather than one best-per-track row: a kid's third
+/// go being slower than their second is worth showing later, and rows this
+/// small never need pruning.
+@Model
+final class RaceResultRecord {
+    var trackID: UUID
+    var carName: String
+    var seconds: TimeInterval
+    var date: Date
+
+    init(trackID: UUID, carName: String, seconds: TimeInterval, date: Date = .now) {
+        self.trackID = trackID
+        self.carName = carName
+        self.seconds = seconds
+        self.date = date
+    }
+}
+
+extension ModelContext {
+    /// The fastest run ever recorded on this track, or nil the first time.
+    /// Read it BEFORE recording the race that just ended, or the new time
+    /// becomes its own record to beat.
+    func bestTime(onTrack trackID: UUID) -> TimeInterval? {
+        var descriptor = FetchDescriptor<RaceResultRecord>(
+            predicate: #Predicate { $0.trackID == trackID },
+            sortBy: [SortDescriptor(\.seconds)])
+        descriptor.fetchLimit = 1
+        return (try? fetch(descriptor))?.first?.seconds
+    }
+
+    /// Store one finisher's time. Cars that didn't finish have no time and
+    /// aren't recorded — "OUT" is not a lap.
+    func recordFinish(trackID: UUID, carName: String, seconds: TimeInterval) {
+        insert(RaceResultRecord(trackID: trackID, carName: carName, seconds: seconds))
+        try? save()
+    }
+}

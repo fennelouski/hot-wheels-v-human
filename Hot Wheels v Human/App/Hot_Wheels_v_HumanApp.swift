@@ -16,6 +16,7 @@ struct Hot_Wheels_v_HumanApp: App {
                 .environment(appModel)
         }
         .modelContainer(for: [CarDesignRecord.self, DriverProfileRecord.self,
-                              TrackBlueprintRecord.self, KidProfileRecord.self])
+                              TrackBlueprintRecord.self, KidProfileRecord.self,
+                              RaceResultRecord.self])
     }
 }

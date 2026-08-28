@@ -7,9 +7,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ArenaHUDView: View {
     let session: RaceSession
+    @Environment(\.modelContext) private var modelContext
+    /// The time to beat, read once when the results panel appears — before
+    /// this race is filed, so the run that just set the record still gets to
+    /// be compared against the old one.
+    @State private var previousBest: TimeInterval?
+    @State private var filedRace: UUID?
     /// "Race 2 of 5" when a drafted series is running (nil = single race).
     var seriesLabel: String?
     /// Bottom clearance for the race clock — the driver's-seat dashboard
@@ -53,6 +60,46 @@ struct ArenaHUDView: View {
                 }
             }
         }
+        .onChange(of: session.phase) { fileResults() }
+        .onAppear { fileResults() }
+    }
+
+    /// Read the old record, then file every finisher's time. Guarded on the
+    /// track id so a redraw can't file the same race twice, and skipped
+    /// entirely for Test Mode, whose cars aren't anybody's.
+    private func fileResults() {
+        guard session.phase == .results,
+              session.config.mode != .test,
+              let trackID = session.trackID,
+              filedRace != trackID else { return }
+        filedRace = trackID
+        previousBest = modelContext.bestTime(onTrack: trackID)
+        for racer in session.racers {
+            guard let seconds = racer.finishTime else { continue }
+            modelContext.recordFinish(trackID: trackID,
+                                      carName: racer.design.name,
+                                      seconds: seconds)
+        }
+    }
+
+    /// The record line under the results table: a new best if this race beat
+    /// what was there (or set the first one), otherwise the time still to
+    /// beat. Nothing at all in Test Mode, which files nothing.
+    @ViewBuilder private var recordLine: some View {
+        if session.config.mode != .test,
+           let winning = ranked.first(where: { $0.finishTime != nil })?.finishTime {
+            if let previousBest, previousBest <= winning {
+                Label(String(format: "Track best %.1f s", previousBest),
+                      systemImage: "stopwatch")
+                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.85))
+            } else {
+                Label(String(format: "NEW TRACK RECORD! %.1f s", winning),
+                      systemImage: "star.fill")
+                    .font(.system(size: 26, weight: .black, design: .rounded))
+                    .foregroundStyle(.yellow)
+            }
+        }
     }
 
     private func racerBanner(_ racer: RaceSession.Racer) -> some View {
@@ -87,6 +134,12 @@ struct ArenaHUDView: View {
         }
     }
 
+    /// Rail mode is the mode we ship, and it finishes clean: a race where
+    /// nobody crashed printed a column of zeroes, which reads as a scoreboard
+    /// for something that never happens. The column shows up on the races
+    /// that earned it.
+    private var anyCrashes: Bool { session.racers.contains { $0.crashes > 0 } }
+
     private var resultsPanel: some View {
         let ranked = ranked
         let winner = ranked.first(where: { $0.finishTime != nil })
@@ -110,7 +163,7 @@ struct ArenaHUDView: View {
                     Text("Car").bold()
                     Text("Time").bold()
                     Text("Top speed").bold()
-                    Text("Crashes").bold()
+                    if anyCrashes { Text("Crashes").bold() }
                     Text("Best segment").bold()
                 }
                 ForEach(ranked) { racer in
@@ -124,7 +177,7 @@ struct ArenaHUDView: View {
                         .fixedSize()
                         Text(racer.finishTime.map { String(format: "%.1f s", $0) } ?? "OUT")
                         Text(String(format: "%.1f m/s", racer.topSpeed))
-                        Text("\(racer.crashes)")
+                        if anyCrashes { Text("\(racer.crashes)") }
                         Text(racer.bestSegment.map {
                             String(format: "#%d · %.2f s", $0.piece + 1, $0.seconds)
                         } ?? "—")
@@ -132,6 +185,7 @@ struct ArenaHUDView: View {
                 }
             }
             .font(.system(size: 19, design: .rounded))
+            recordLine
             Text(seriesLabel == nil
                  ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
                  : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
