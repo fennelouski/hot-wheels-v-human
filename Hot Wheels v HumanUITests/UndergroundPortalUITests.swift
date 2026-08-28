@@ -28,15 +28,13 @@ final class UndergroundPortalUITests: XCTestCase {
         chip.tap()
         sleep(3)
 
-        // Dig: two hill-downs then some buried straights.
-        let hillDown = app.buttons.containing(
-            NSPredicate(format: "label CONTAINS 'Hill Down'")).firstMatch
-        XCTAssertTrue(hillDown.waitForExistence(timeout: 5))
-        hillDown.tap()
-        hillDown.tap()
-        let straight = app.buttons.containing(
-            NSPredicate(format: "label CONTAINS 'Straight'")).firstMatch
-        for _ in 0..<3 { straight.tap() }
+        // Dig: two hill-downs then some buried straights. The hill cards
+        // are off the end of the shelf, so they need scrolling to — this
+        // test used to tap them where they weren't and fail with
+        // "Activation point invalid".
+        tapPieceCard("Hill Down", in: app)
+        tapPieceCard("Hill Down", in: app)
+        for _ in 0..<3 { tapPieceCard("Straight", in: app) }
         sleep(2)
 
         let shot = XCTAttachment(screenshot: app.screenshot())
@@ -51,19 +49,10 @@ final class UndergroundPortalUITests: XCTestCase {
         app.launchArguments = ["--trackbuilder"]
         app.launch()
 
-        let straight = app.buttons.containing(
-            NSPredicate(format: "label CONTAINS 'Straight'")).firstMatch
-        XCTAssertTrue(straight.waitForExistence(timeout: 10))
-        for _ in 0..<2 { straight.tap() }
-
-        let portal = app.buttons.containing(
-            NSPredicate(format: "label CONTAINS 'Portal'")).firstMatch
-        XCTAssertTrue(portal.waitForExistence(timeout: 5))
-        // The Portal card sits at the far end of the piece shelf —
-        // scroll the shelf over to it (swiping ON a shelf button keeps
-        // the gesture inside the ScrollView).
-        straight.swipeLeft()
-        portal.tap()
+        for _ in 0..<2 { tapPieceCard("Straight", in: app) }
+        // The Portal card sits at the far end of the piece shelf; the
+        // same scroll-then-tap gets there.
+        tapPieceCard("Portal", in: app)
         sleep(1)
 
         let pending = XCTAttachment(screenshot: app.screenshot())
