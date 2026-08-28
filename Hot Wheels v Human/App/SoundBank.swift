@@ -9,6 +9,9 @@
 //
 
 import AVFoundation
+#if os(iOS)
+import UIKit
+#endif
 
 @MainActor
 final class SoundBank {
@@ -40,6 +43,7 @@ final class SoundBank {
             pick = other
         }
         lastVariant[name] = pick
+        buzz(for: name)
 
         if let player = oneShots[pick] {
             player.currentTime = 0
@@ -50,6 +54,40 @@ final class SoundBank {
               let player = try? AVAudioPlayer(contentsOf: url) else { return }
         oneShots[pick] = player
         player.play()
+    }
+
+    /// The matching haptic for a sound. Every UI moment in the app already
+    /// routes through `play(_:)`, so the taps, snaps and refusals get their
+    /// thump here rather than at thirty call sites — and a sound added later
+    /// gets one for free by naming itself like its neighbours.
+    ///
+    /// iOS only: `UIFeedbackGenerator` doesn't exist on tvOS, and the TV has
+    /// nothing to buzz. `#if os(iOS)`, not `canImport(UIKit)` — UIKit imports
+    /// fine on tvOS and would break the TV build (CLAUDE.md).
+    private func buzz(for name: String) {
+        #if os(iOS)
+        switch name {
+        // Refusals: the wobble a kid hears when a piece won't go there.
+        case "nope_wobble":
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        // Something landed and stuck: saved, finished, confirmed.
+        case "confirm_sparkle", "track_save_stamp":
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
+        // Track pieces: a click going on, a softer pop coming off.
+        case "track_snap_connect":
+            UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
+        case "piece_delete_pop":
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        // Metal on metal — the biggest thump the phone has.
+        case "car_crash_metal":
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        // Picking one of something: chips, swatches, tabs.
+        case "ui_tap", "ui_back", "paint_spray", "shuffle_dice", "car_select_vroom":
+            UISelectionFeedbackGenerator().selectionChanged()
+        default:
+            break
+        }
+        #endif
     }
 
     private func variants(of name: String) -> [String] {
