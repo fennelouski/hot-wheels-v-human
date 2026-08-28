@@ -20,6 +20,45 @@ struct StarterPresetTests {
         }
     }
 
+    /// Every preset launches downhill AND climbs back out.
+    ///
+    /// `downhillStart` replaces the first straight with a `hillDown`; if
+    /// nothing puts the track back up, every piece after it sits at level
+    /// −1 for the rest of the lap and the whole track is buried (which is
+    /// exactly what shipped for a while — Wiggle Worm ran 19 of its 20
+    /// pieces underground). Ending at level 0 is the check that the climb
+    /// is really there.
+    ///
+    /// It also catches the subtle way this breaks: the climb has to land
+    /// on a straight with no hill beside it. Put a `hillUp` next to
+    /// another hill and the solver reads the pair as a hill RUN, whose
+    /// middles move ±2 levels instead of ±1 (`HillRole`) — so the dig
+    /// wouldn't balance and this would land somewhere other than 0.
+    @Test func everyPresetDivesAndClimbsBackToTheSurface() {
+        for (name, blueprint) in TrackBlueprint.presets {
+            let layout = TrackLayoutSolver.solve(blueprint)
+            #expect(blueprint.segments[1].type == .hillDown,
+                    Comment(rawValue: "\(name): doesn't launch downhill"))
+            #expect(layout.exitLevel == 0,
+                    Comment(rawValue: "\(name): ends at level "
+                        + "\(layout.exitLevel), not back on the ground"))
+            // It really does dig on the way — otherwise "ends at 0" is
+            // satisfied by never leaving 0.
+            #expect(layout.pieces.contains { $0.entryLevel < 0 },
+                    Comment(rawValue: "\(name): never actually digs"))
+            // ...but the dig is an OPENING, not the whole track.
+            let buried = layout.pieces.filter(TunnelPlan.isUnderground).count
+            #expect(buried * 2 < layout.pieces.count,
+                    Comment(rawValue: "\(name): \(buried) of "
+                        + "\(layout.pieces.count) pieces are underground — "
+                        + "that's a buried track, not a tunnel"))
+            // Every dig it does make is a real tunnel with a way in.
+            let entrances = TunnelPlan.mouths(in: layout).filter(\.isEntrance).count
+            #expect(entrances > 0,
+                    Comment(rawValue: "\(name): digs with no tunnel mouth"))
+        }
+    }
+
     /// Every preset's lane must actually be as long as the track it claims
     /// to be. A short lane is how "the race ended in 3.5 seconds" happens:
     /// the finish check is `nextIndex >= waypoints.count - 1`, so a lane
