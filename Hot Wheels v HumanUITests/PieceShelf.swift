@@ -43,8 +43,13 @@ extension XCTestCase {
                 return
             }
             // Off the right-hand end scrolls left, off the left end right.
-            guard scrollPieceShelf(app, left: frame.midX > window.frame.midX)
-            else { break }
+            // An element that is scrolled out of view can report an EMPTY
+            // frame rather than a real off-screen one, and `.zero.midX` is
+            // 0 — which reads as "off to the left" and would scroll away
+            // from the card for all ten tries. The shelf only ever grows
+            // rightward, so treat an empty frame as off the right-hand end.
+            let offRight = frame.isEmpty || frame.midX > window.frame.midX
+            guard scrollPieceShelf(app, left: offRight) else { break }
         }
         XCTFail("'\(label)' never scrolled into view", file: file, line: line)
     }

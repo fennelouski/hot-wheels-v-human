@@ -29,11 +29,11 @@ struct StarterPresetTests {
     /// pieces underground). Ending at level 0 is the check that the climb
     /// is really there.
     ///
-    /// It also catches the subtle way this breaks: the climb has to land
-    /// on a straight with no hill beside it. Put a `hillUp` next to
-    /// another hill and the solver reads the pair as a hill RUN, whose
-    /// middles move ±2 levels instead of ±1 (`HillRole`) — so the dig
-    /// wouldn't balance and this would land somewhere other than 0.
+    /// It also catches the subtle way this breaks. A RUN is consecutive
+    /// pieces of the SAME type, and a run of three or more grows a
+    /// `.middle` that moves ±2 levels instead of ±1 (`HillRole`) — drop
+    /// the climb into a stretch of hills and the dig stops balancing, so
+    /// this lands somewhere other than 0.
     @Test func everyPresetDivesAndClimbsBackToTheSurface() {
         for (name, blueprint) in TrackBlueprint.presets {
             let layout = TrackLayoutSolver.solve(blueprint)
