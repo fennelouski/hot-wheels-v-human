@@ -21,11 +21,17 @@ final class TrackBuilder3DUITests: XCTestCase {
         snap(app, "1-fresh-builder")
 
         // Build: straight, loop, straight, right — 5 pieces with the gate.
+        // Each tap waits for its own chip: `firstMatch` resolves in the same
+        // run loop, so under a parallel suite the palette can still be
+        // arriving and the tap misses. Then wait on the count rather than the
+        // clock — each piece spawns 3D asynchronously.
         for piece in ["Straight", "Loop", "Straight", "Right"] {
-            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", piece))
-                .firstMatch.tap()
+            let chip = app.buttons
+                .containing(NSPredicate(format: "label CONTAINS %@", piece)).firstMatch
+            XCTAssertTrue(chip.waitForExistence(timeout: 10), "No \(piece) in the palette")
+            chip.tap()
         }
-        XCTAssertTrue(app.staticTexts["5 pieces"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["5 pieces"].waitForExistence(timeout: 20))
         // Let the async spawn land before the shot.
         sleep(2)
         snap(app, "2-five-pieces-3d")

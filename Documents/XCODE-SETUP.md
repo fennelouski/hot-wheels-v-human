@@ -85,6 +85,22 @@ xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" 
 ```
 (Adjust simulator names to `xcrun simctl list devices available`.)
 
+**The UI suite needs `-parallel-testing-enabled NO` to be trustworthy on this
+machine.** Xcode fans the UI tests across four simulator clones by default,
+and under that load taps land before the view they're aimed at exists — a
+different one or two tests fail on each run and every one of them passes in
+isolation. Serially: 26 UI tests, 0 failures, ~7 minutes. In parallel: green
+about as often as not. Chasing one of those failures as a real bug costs an
+hour; the tests that are load-sensitive are the ones that tap a palette chip
+and then assert on a piece count, because the 3D spawn behind it is async.
+
+**Never pipe these without `set -o pipefail`.** `xcodebuild … test | tail`
+reports *tail's* exit code, which is always 0 — a failing suite looks green.
+That is how `WorkshopTryItUITests.testCharacterEditorPiPAndTestDrive` sat
+broken through several sessions: the failure was in the log the whole time,
+under an exit status that said everything passed. Read the log for
+`** TEST FAILED **`, or don't pipe.
+
 Dev benches have no home-screen tile and are reached by launch argument —
 `xcrun simctl launch <udid> com.nathanfennel.Hot-Wheels-v-Human <arg>`:
 `--test-mode` (physics A/B), `--pip-tuner`, `--wardrobe`, `--reaction-cam`.

@@ -22,27 +22,20 @@ final class GhostTrackUITests: XCTestCase {
 
         // Two solid pieces, then Ghost on and two more — the difference has
         // to be visible in the same shot.
-        for piece in ["Straight", "Right"] {
-            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", piece))
-                .firstMatch.tap()
-        }
+        for piece in ["Straight", "Right"] { tapPiece(app, piece) }
         let ghost = app.buttons["ghostToggle"]
         XCTAssertTrue(ghost.exists)
         ghost.tap()
         snap(app, "1-ghost-mode-on")
 
-        for piece in ["Straight", "Straight"] {
-            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", piece))
-                .firstMatch.tap()
-        }
-        XCTAssertTrue(app.staticTexts["5 pieces"].waitForExistence(timeout: 5))
+        for piece in ["Straight", "Straight"] { tapPiece(app, piece) }
+        XCTAssertTrue(app.staticTexts["5 pieces"].waitForExistence(timeout: 20))
         sleep(2)                                   // async respawn
         snap(app, "2-two-ghost-pieces")
 
         // Back to solid, one more piece: ghost mode is sticky, not one-shot.
         ghost.tap()
-        app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Left"))
-            .firstMatch.tap()
+        tapPiece(app, "Left")
         sleep(2)
         snap(app, "3-solid-again")
 
@@ -60,11 +53,8 @@ final class GhostTrackUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(app.staticTexts["Track Builder"].waitForExistence(timeout: 10))
-        for _ in 0..<3 {
-            app.buttons.containing(NSPredicate(format: "label CONTAINS %@", "Straight"))
-                .firstMatch.tap()
-        }
-        XCTAssertTrue(app.staticTexts["4 pieces"].waitForExistence(timeout: 5))
+        for _ in 0..<3 { tapPiece(app, "Straight") }
+        XCTAssertTrue(app.staticTexts["4 pieces"].waitForExistence(timeout: 20))
         sleep(2)
         snap(app, "9-all-solid")
 
@@ -101,6 +91,17 @@ final class GhostTrackUITests: XCTestCase {
         app.buttons["Hide ghost track"].tap()
         sleep(1)
         snap(app, "8-back-to-default")
+    }
+
+    /// Wait for the chip, then tap it. `firstMatch` resolves in the same run
+    /// loop, so under a parallel suite a palette that is still arriving eats
+    /// the tap and the piece count never reaches the number asserted below.
+    @MainActor
+    private func tapPiece(_ app: XCUIApplication, _ piece: String) {
+        let chip = app.buttons
+            .containing(NSPredicate(format: "label CONTAINS %@", piece)).firstMatch
+        XCTAssertTrue(chip.waitForExistence(timeout: 10), "No \(piece) in the palette")
+        chip.tap()
     }
 
     @MainActor
