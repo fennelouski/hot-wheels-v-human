@@ -5,9 +5,10 @@ the "Closed" sections at the bottom first** — they record where previous
 sessions' diagnoses were *wrong*, which saves more time than what they got
 right. Ordered by how much a player would notice.
 
-**Current as of 2026-08-28.** Items 1–7 and 9 are done. Still open: the loop
-(8), spare asset packs (10), hardware validation (11). The ghost-track,
-tunnel and dig work that landed after 2026-08-23 went unrecorded here until
+**Current as of 2026-08-28.** Items 1–7 and 9 are done, and item 8 (the loop)
+is isolated — it's a corkscrew by design, so what's left there is a decision,
+not an investigation. Still open: that decision (8), spare asset packs (10),
+hardware validation (11). The ghost-track, tunnel and dig work that landed after 2026-08-23 went unrecorded here until
 now — if you add a feature, add its thread.
 
 Paste the prompt at the bottom into a fresh session to pick this up.
@@ -82,17 +83,42 @@ count is ever visible.
 Gated behind `#if DEBUG`, print included. One guard at the sink, not
 eight at the call sites.
 
-## 8. Loop: "camera helps but something's still off"
+## 8. Loop: "camera helps but something's still off" — ISOLATED 2026-08-28
 
-The loop's geometry measures correct (a true 0.8 m ring in the Y-Z plane
-matching its spline) and the chase camera now swings to a 3/4 side angle so
-it reads as a circle rather than an edge-on wall. Feedback after that fix
-was that something remains wrong, and it was never isolated.
+**It isn't the camera and it isn't a rendering bug. The loop is a
+corkscrew.** `PieceCatalog.swift` defines it as
+`.verticalLoop(radius: 0.4, advance: 0, lateralShift: -0.2)`: the car climbs,
+crosses over, and is set down one bed-width to the SIDE having advanced
+**zero** distance along the track. Drive it and you go around and come out on
+a parallel lane, next to where you went in.
 
-Prime suspects, both inherent to the current piece: the exit jogs 0.2 m
-sideways (`lateralShift`, so entry and exit tracks don't collide), and the
-ring overhangs its neighbours (occupies z −0.31…+0.49 while advancing only
-0.18). Needs eyes on it before code.
+That is what "something's still off" is. A kid's expectation of a loop is
+Hot Wheels': in one side, around, out the far side, still travelling the same
+line. This one translates you sideways instead of forwards, and no camera
+angle can make a sideways exit read as a loop-the-loop.
+
+It is also not a defect — it's faithful to the mesh. `track-narrow-looping`
+IS a corkscrew piece, measured off the GLB, and the catalogue comment above
+it says so plainly ("It climbs, crosses over, and sets you down one bed width
+to the RIGHT having advanced nothing — the toy"). An earlier session even
+fixed a real bug here (the mesh was mounted backwards); the fix was correct
+and the strangeness survived it, which is why this thread outlived it.
+
+Reproduce: race `--preset-track 2` (Loopy Louie) and toggle Chase Cam. The
+loop is the barrel-shaped ring; watch the lane the car leaves on.
+
+**The choice is a design one, so it's still yours:**
+1. **Accept it.** It's the real toy geometry and the pieces either side line
+   up. Costs nothing.
+2. **Pair it.** Follow every `.loop` with a compensating jog so the net line
+   through the piece is straight. Solver work, no new art, and the loop stops
+   moving you sideways.
+3. **New art.** A true loop-the-loop that returns to the same line. Kenney's
+   toy kit doesn't ship one; this means modelling or sourcing a piece.
+
+Don't tune the radius to "fix" it — the radius is what decides whether a
+heavy car clears the loop and a light one gets flung, which is the game
+(PRD §2.1) and is human-tested, not test-covered.
 
 ## ~~9. Downhill start~~ — DONE
 
@@ -142,6 +168,19 @@ you:
   perfectly on the Simulator and killed real devices on launch. That class of
   bug is invisible here by construction.
 
+## 12. Rail mode is deterministic, so records rarely move
+
+Tracks keep a best time now (`RaceResultRecord`, shown on the results panel).
+Worth knowing before someone reports it as broken: rail-mode physics are
+deterministic, so the same cars on the same preset finish in *exactly* the
+same time every run — Loopy Louie is 14.5 s twice in a row. So an AI-vs-AI
+drill sets the record on its first run and then ties it forever.
+
+Real play does move it: a kid's boost taps are the variable, and different
+cars and tracks have their own rows. But if you're testing the feature from
+the CLI with `--preset-track`, "NEW TRACK RECORD!" appears once and never
+again, and that's correct behaviour rather than a bug.
+
 ## Prompt
 
 > Work on Hot Wheels vs. Human (repo is the cwd). Read `CLAUDE.md` and
@@ -152,9 +191,9 @@ you:
 >
 > Open, roughly in the order a player would notice:
 >
-> 1. **The loop still reads wrong** (item 8) — never isolated, and still the
->    only entry in this file that asks for a human's eyes before anybody
->    writes code. Race `--preset-track 2` (Loopy Louie) and watch it.
+> 1. **The loop is a corkscrew** (item 8) — isolated at last, and now a
+>    design call rather than a bug hunt: accept it, pair it with a
+>    compensating jog, or get new art. Read the item before touching it.
 > 2. **Nothing has run on real hardware** (item 11). Multipeer reconnect,
 >    device memory, and anything GPU-shaped are all unproven.
 > 3. **Music is seven synthesized placeholders** (`Audio/README.md`).
