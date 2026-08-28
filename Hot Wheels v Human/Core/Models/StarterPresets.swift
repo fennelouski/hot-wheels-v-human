@@ -151,8 +151,10 @@ extension TrackBlueprint {
             types.indices.contains(i) && (types[i] == .hillUp || types[i] == .hillDown)
         }
         // Index 1 becomes the dig, so it can never host the climb, and
-        // index 2 would sit right beside it.
-        guard let climb = (3..<types.count).first(where: {
+        // index 2 would sit right beside it. `dropFirst`, not `3..<count`:
+        // the guard above only proves there are two pieces, and `3..<2`
+        // traps with "Range requires lowerBound <= upperBound".
+        guard let climb = types.indices.dropFirst(3).first(where: {
             types[$0] == .straight && !isHill($0 - 1) && !isHill($0 + 1)
         }) else { return types }
         var types = types
