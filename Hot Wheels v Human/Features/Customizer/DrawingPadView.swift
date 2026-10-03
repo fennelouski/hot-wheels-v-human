@@ -269,6 +269,7 @@ struct PencilCanvas: UIViewRepresentable {
     }
 
     func updateUIView(_ view: PKCanvasView, context: Context) {
+        context.coordinator.parent = self
         view.tool = tool
         if view.drawing != drawing {
             view.drawing = drawing
@@ -278,7 +279,7 @@ struct PencilCanvas: UIViewRepresentable {
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
     final class Coordinator: NSObject, PKCanvasViewDelegate {
-        let parent: PencilCanvas
+        var parent: PencilCanvas
         init(_ parent: PencilCanvas) { self.parent = parent }
 
         func canvasViewDrawingDidChange(_ canvasView: PKCanvasView) {

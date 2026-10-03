@@ -23,7 +23,16 @@ struct CustomizerView: View {
     /// edit in place — Save writes back over that car, not to a sibling.
     init(design: CarDesign? = nil, isPlayerTwo: Bool = false) {
         self.isPlayerTwo = isPlayerTwo
-        _model = State(initialValue: CustomizerModel(design: design))
+        let model = CustomizerModel(design: design)
+        _model = State(initialValue: model)
+        #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
+        // Restore before PKCanvasView is created. An empty canvas's delayed
+        // delegate callback must not replace a reopened car's saved strokes.
+        var session = CarDrawingSession()
+        session.restore(png: model.design.drawingPNG,
+                        editableStrokes: model.design.drawingStrokes)
+        _pencilSession = State(initialValue: session)
+        #endif
     }
 
     @State private var model: CustomizerModel
