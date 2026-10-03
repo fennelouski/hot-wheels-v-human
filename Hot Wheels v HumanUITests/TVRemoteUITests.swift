@@ -327,18 +327,52 @@ final class TVRemoteUITests: XCTestCase {
     }
 
     func testTV09CameraRadioAndVolumeWithRemoteFocus() throws {
-        let app = launch(["--stress-track"])
+        let app = launch(["--preset-track", "6"])
         let camera = app.buttons["race-camera"]
         try focus(camera, in: app)
         XCTAssertEqual(camera.value as? String, "Driver View")
         XCUIRemote.shared.press(.select)
         try expect("The camera toggle must switch to chase view", in: app) { camera.value as? String == "Chase Cam" }
+        settle(5)
+        let speed = app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'm/s'"))
+            .firstMatch
+        try expect("The settled starter race must report a moving car", timeout: 15, in: app) {
+            speed.exists && (Double(speed.label.prefix { $0.isNumber || $0 == "." }) ?? 0) > 0.2
+        }
         screenshot("TV20 - Chase camera and race world")
+
+        let boost = app.buttons["race-boost"].firstMatch
+        try expect("The deterministic starter race must charge its real boost", timeout: 25, in: app) {
+            boost.exists && boostPercent(boost) >= 100
+        }
+        try focus(boost, in: app)
+        XCUIRemote.shared.press(.select)
+        try expect("Select must start the actual remote boost", in: app) { boost.label == "Stop boost" }
+        let charged = boostPercent(boost)
+        try expect("The held remote boost must consume the charged meter", timeout: 3, in: app) {
+            boostPercent(boost) < charged
+        }
+        screenshot("TV23 - Deterministic starter race with real remote boost active")
+        XCTAssertTrue(boost.hasFocus)
+        XCUIRemote.shared.press(.playPause)
+        try expect("Play Pause must stop the actual remote boost", in: app) { boost.label == "Boost" }
+
+        for mode in ["all", "hideGhosts", "hideAll", "hideGhosts"] {
+            let selected = app.buttons["race-track-\(mode)"]
+            try select(selected, in: app)
+            XCTAssertTrue(selected.hasFocus, "Selecting visibility must retain native remote focus")
+            XCTAssertTrue(selected.isSelected, "The actual chosen visibility mode must stay selected")
+            for other in ["all", "hideGhosts", "hideAll"] where other != mode {
+                XCTAssertFalse(app.buttons["race-track-\(other)"].isSelected)
+            }
+        }
         try select(camera, in: app)
+        XCTAssertEqual(camera.value as? String, "Driver View")
         try select(app.buttons["race-radio-jazz"], in: app)
         XCTAssertTrue(app.buttons["race-radio-jazz"].isSelected)
         try select(app.buttons["race-volume-down"], in: app)
         XCTAssertEqual(app.buttons["race-volume-down"].value as? String, "90%", "Volume down must change the actual music level")
+        settle(2)
         screenshot("TV21 - Driver view with the TV radio")
         try select(app.buttons["race-volume-up"], in: app)
         XCTAssertEqual(app.buttons["race-volume-up"].value as? String, "100%")
@@ -361,6 +395,10 @@ final class TVRemoteUITests: XCTestCase {
         try expect("Rematch must leave results and start another race", timeout: 25, in: app) {
             !rematch.exists && app.buttons["race-boost"].exists
         }
+    }
+
+    private func settle(_ seconds: TimeInterval) {
+        _ = XCTWaiter.wait(for: [expectation(description: "native rendered camera settle")], timeout: seconds)
     }
 
     private func launch(_ arguments: [String] = []) -> XCUIApplication {

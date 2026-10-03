@@ -287,8 +287,12 @@ struct ArenaView: View {
                             .padding(.horizontal, 16)
                             .frame(minHeight: 60)
                     }
+                    #if os(tvOS)
+                    .buttonStyle(TVWorkshopButtonStyle(selected: coordinator.driverView))
+                    #else
                     .buttonStyle(.bordered)
                     .tint(.yellow)
+                    #endif
                     .accessibilityIdentifier("race-camera")
                     .accessibilityValue(coordinator.driverView ? "Driver View" : "Chase Cam")
                 }
@@ -349,8 +353,12 @@ struct TrackVisibilityPicker: View {
                         .font(.system(size: size * 0.43, weight: .bold))
                         .frame(width: size, height: size)
                 }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle(selected: selection == mode))
+                #else
                 .buttonStyle(.bordered)
                 .tint(selection == mode ? .yellow : .gray)
+                #endif
                 .accessibilityIdentifier("race-track-\(mode.rawValue)")
                 .accessibilityAddTraits(selection == mode ? .isSelected : [])
             }

@@ -238,6 +238,63 @@ final class IPadWorkshopReleaseUITests: XCTestCase {
         add(proof)
     }
 
+    func testIPad04DeterministicPresetRaceAfterRenderedCameraSettles() throws {
+        let app = XCUIApplication()
+        // This is the ordinary, fixed starter blueprint available in the
+        // Library. Keep the separate random stress-track test unchanged.
+        app.launchArguments = ["--preset-track", "6"]
+        app.launch()
+        let camera = app.buttons["race-camera"]
+        XCTAssertTrue(camera.waitForExistence(timeout: 15))
+        XCTAssertGreaterThan(app.frame.width, app.frame.height)
+        XCTAssertEqual(camera.value as? String, "Driver View")
+
+        camera.tap()
+        try wait("The native camera must switch to Chase Cam", timeout: 5) {
+            camera.value as? String == "Chase Cam"
+        }
+        // The camera's accessibility value changes before RealityKit finishes
+        // reparenting and easing it out of the car. Wait beyond the production
+        // occlusion grace interval before taking an original full-screen image.
+        settle(5)
+        let speed = app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'm/s'"))
+            .firstMatch
+        try wait("The deterministic starter race must report a moving car", timeout: 15) {
+            speed.exists && self.leadingNumber(speed.label) > 0.2
+        }
+        capture("IPAD16 - Deterministic starter track after five seconds of Chase Cam rendering")
+
+        let meter = app.staticTexts.matching(NSPredicate(format: "label MATCHES %@", "^[0-9]{1,3}%$"))
+            .firstMatch
+        try wait("The moving deterministic race must charge its actual boost meter", timeout: 30) {
+            speed.exists && self.leadingNumber(speed.label) > 0.2
+                && meter.exists && self.leadingNumber(meter.label) >= 100
+        }
+        capture("IPAD17 - Charged boost on the deterministic starter track in Chase Cam")
+        let before = leadingNumber(meter.label)
+        XCTContext.runActivity(named: "Hold the actual boost dial in Chase Cam for three seconds") { _ in
+            meter.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                .press(forDuration: 3)
+        }
+        try wait("The real held boost must consume the charged meter", timeout: 3) {
+            meter.exists && self.leadingNumber(meter.label) < before - 10
+        }
+        let after = leadingNumber(meter.label)
+        XCTAssertLessThan(after, before - 10)
+        capture("IPAD18 - Deterministic starter race after the actual charged boost hold")
+
+        camera.tap()
+        try wait("The native camera must return to Driver View", timeout: 5) {
+            camera.value as? String == "Driver View"
+        }
+        settle(2)
+        capture("IPAD19 - Deterministic starter race after two seconds of Driver View rendering")
+        let proof = XCTAttachment(string: "Existing native launch route: --preset-track 6. Starter blueprint: The Mega Mega Track, 75 pieces. Chase camera render settling: 5 seconds. Driver render settling: 2 seconds. Native boost touch hold: 3 seconds. Meter before: \(before)%; after: \(after)%. Final camera: \(camera.value ?? "missing"). No production source edits or screenshot transformations.")
+        proof.name = "iPad deterministic starter race - actual camera and boost evidence"
+        proof.lifetime = .keepAlways
+        add(proof)
+    }
+
     // MARK: Native UI helpers
 
     private func launch(_ argument: String, app: XCUIApplication = XCUIApplication(),
