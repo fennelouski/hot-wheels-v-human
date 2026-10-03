@@ -427,10 +427,12 @@ final class TVRemoteUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts["75 pieces"].exists)
         try select(button("Worlds", in: app), in: app)
         try select(app.buttons["tvTrackWorld-day"], in: app)
-        XCTAssertTrue(app.buttons["tvTrackWorld-day"].isSelected)
+        XCTAssertTrue(app.buttons["tvTrackWorld-day"].hasFocus)
+        XCTAssertTrue(app.buttons["tvTrackWorld-day"].label.contains("Sunny Day"))
         let emptyWorld = app.buttons["tvTrackEmptyWorld"]
         if emptyWorld.label.contains("On") { try select(emptyWorld, in: app) }
         XCTAssertTrue(emptyWorld.label.contains("Off"))
+        screenshot("TV27 - Sunny Day selected through the native world picker")
         try select(app.buttons["tvTrackRace"], in: app)
         try expect("The ordinary Sunny Day library track must enter a real race", in: app) {
             app.buttons["race-camera"].exists && app.buttons["race-preview-close"].exists
