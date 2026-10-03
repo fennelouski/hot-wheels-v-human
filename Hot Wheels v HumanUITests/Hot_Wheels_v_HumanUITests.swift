@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  Hot_Wheels_v_HumanUITests.swift
 //  Hot Wheels v HumanUITests
@@ -41,3 +42,4 @@ final class Hot_Wheels_v_HumanUITests: XCTestCase {
         }
     }
 }
+#endif

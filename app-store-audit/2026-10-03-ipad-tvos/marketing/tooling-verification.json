@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "status": "tooling-ready-native-captures-pending",
+  "checkedOn": "2026-10-03",
+  "compositor": "tools/marketing-compose.swift",
+  "compositorSHA256": "c003f482b56b77985d6283f9d5b0ab1f40906321b3da5fb431c4a96ac1e69817",
+  "basis": "/Users/nathan/Documents/GitHub/How-To-Adult/scripts/make-marketing-images.swift",
+  "basisSHA256": "0c72bf90efe6350c5eea41a41abf03f85ed162f432d21ba425c885c10b5c3081",
+  "compositorSelfTest": {
+    "command": "swift tools/marketing-compose.swift --self-test",
+    "result": "passed",
+    "checks": [
+      "iPad/TV output dimensions",
+      "opaque sRGB JPEG encoding",
+      "upright front hero",
+      "outward support fan geometry",
+      "source bytes unchanged",
+      "invalid/cross-platform source rejection",
+      "unverified/changed/build-mismatched headline rejection"
+    ],
+    "testInput": "temporary solid-color fixtures, removed; no native claims",
+    "logPath": "app-store-audit/2026-10-03-ipad-tvos/marketing/compositor-self-test.log",
+    "logSHA256": "d7803a42d470dac70b1dd2eec251b2a663753b2c950fcb8b0da7cff3905fa7f0"
+  },
+  "draftValidation": {
+    "command": "swift tools/marketing-compose.swift --validate app-store-audit/2026-10-03-ipad-tvos/marketing/manifest.draft.json",
+    "expectedExitCode": 1,
+    "actualExitCode": 1,
+    "result": "correctly rejected pending revision"
+  },
+  "planChecks": {
+    "platforms": [
+      "ipad-13",
+      "apple-tv"
+    ],
+    "imagesPerPlatform": 10,
+    "captureStatesPerPlatform": 12,
+    "distinctAlternatingBackgrounds": 4,
+    "captureLayersPerImage": "1\u20133",
+    "sourceCapturesPresent": 0,
+    "marketingImagesExported": 0
+  },
+  "pending": [
+    "final native source freeze",
+    "actual native capture manifest",
+    "headline evidence from final native build",
+    "composition export",
+    "visual gallery review",
+    "App Store Connect gallery inspection"
+  ]
+}

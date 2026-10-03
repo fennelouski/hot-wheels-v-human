@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  RaceSetupUITests.swift
 //  Hot Wheels v HumanUITests
@@ -92,3 +93,4 @@ final class RaceSetupUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif

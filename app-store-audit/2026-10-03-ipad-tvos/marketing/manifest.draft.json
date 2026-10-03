@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-awaiting-final-native-evidence",
+  "revision": "PENDING_FINAL_SOURCE_FREEZE",
+  "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+  "outputDirectory": "exports/final-01",
+  "captures": [],
+  "galleries": [
+    {
+      "platform": "ipad-13",
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build your own track",
+          "featureID": "track-builder",
+          "hero": "ipad-track",
+          "left": "ipad-world",
+          "right": "ipad-race",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "hero": "ipad-car",
+          "left": "ipad-paint",
+          "right": "ipad-stickers",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "hero": "ipad-race",
+          "left": null,
+          "right": "ipad-driver",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "hero": "ipad-racer",
+          "left": "ipad-car",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "hero": "ipad-paint",
+          "left": null,
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "hero": "ipad-draw",
+          "left": "ipad-car",
+          "right": "ipad-stickers",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "hero": "ipad-stickers",
+          "left": "ipad-paint",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "08-build-worlds",
+          "headline": "Build a whole toy world",
+          "featureID": "world-decoration",
+          "hero": "ipad-world",
+          "left": "ipad-track",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "hero": "ipad-garage",
+          "left": "ipad-library",
+          "right": "ipad-car",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "10-hold-boost",
+          "headline": "Hold boost. Chase the flag.",
+          "featureID": "race-boost",
+          "hero": "ipad-boost",
+          "left": null,
+          "right": "ipad-race",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        }
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build on the big screen",
+          "featureID": "track-builder",
+          "hero": "tv-track",
+          "left": "tv-world",
+          "right": "tv-race",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "hero": "tv-car",
+          "left": "tv-paint",
+          "right": "tv-stickers",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "hero": "tv-race",
+          "left": null,
+          "right": "tv-driver",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "hero": "tv-racer",
+          "left": "tv-car",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "hero": "tv-paint",
+          "left": null,
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "hero": "tv-draw",
+          "left": "tv-car",
+          "right": "tv-stickers",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "hero": "tv-stickers",
+          "left": "tv-paint",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "08-build-worlds",
+          "headline": "Build a whole toy world",
+          "featureID": "world-decoration",
+          "hero": "tv-world",
+          "left": "tv-track",
+          "right": null,
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "hero": "tv-garage",
+          "left": "tv-library",
+          "right": "tv-car",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        },
+        {
+          "id": "10-hold-boost",
+          "headline": "Hold boost. Chase the flag.",
+          "featureID": "race-boost",
+          "hero": "tv-boost",
+          "left": null,
+          "right": "tv-race",
+          "evidence": {
+            "status": "pending-native-verification",
+            "summary": "PENDING observation from the final native build",
+            "sourceBuildRef": "PENDING_FINAL_NATIVE_BUILD",
+            "proofPath": "PENDING-native-feature-verification.json",
+            "proofSHA256": "PENDING_SHA256"
+          }
+        }
+      ]
+    }
+  ],
+  "pendingPlatforms": []
+}

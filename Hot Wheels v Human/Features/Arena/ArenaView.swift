@@ -289,6 +289,8 @@ struct ArenaView: View {
                     }
                     .buttonStyle(.bordered)
                     .tint(.yellow)
+                    .accessibilityIdentifier("race-camera")
+                    .accessibilityValue(coordinator.driverView ? "Driver View" : "Chase Cam")
                 }
                 TrackVisibilityPicker(selection: coordinator.trackVisibility) {
                     coordinator.trackVisibility = $0
@@ -349,6 +351,8 @@ struct TrackVisibilityPicker: View {
                 }
                 .buttonStyle(.bordered)
                 .tint(selection == mode ? .yellow : .gray)
+                .accessibilityIdentifier("race-track-\(mode.rawValue)")
+                .accessibilityAddTraits(selection == mode ? .isSelected : [])
             }
         }
     }

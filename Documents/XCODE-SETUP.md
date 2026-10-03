@@ -6,16 +6,34 @@ The project (`objectVersion 77`, Xcode 26) uses **filesystem-synchronized folder
 In `project.pbxproj` (or Xcode → target → Build Settings), for both Debug and Release of the app target:
 
 ```
-SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator macosx xros xrsimulator";
-TARGETED_DEVICE_FAMILY = "2,3,7";          // 2 = iPad, 3 = Apple TV, 7 = Vision
+SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+TARGETED_DEVICE_FAMILY = "2,3";
+"TARGETED_DEVICE_FAMILY[sdk=iphoneos*]" = 2;
+"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = 2;
+"TARGETED_DEVICE_FAMILY[sdk=appletvos*]" = 3;
+"TARGETED_DEVICE_FAMILY[sdk=appletvsimulator*]" = 3;
+IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 TVOS_DEPLOYMENT_TARGET = 26.0;
+SUPPORTS_MACCATALYST = NO;
+SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 ```
-**iPhone (family 1) is deliberately not shipped.** The workshop UI is laid out
-for an iPad — 660 pt buttons, side-by-side benches, a split-screen 2-player
-mode — and it does not survive the shrink. The test targets match at `"2,7"`
-(they never built for tvOS). Dropping family 1 also makes
-`INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone` dead, so it's gone.
-Keep `SDKROOT = auto`. Then add a tvOS run destination via Product → Destination. If any template code fails to compile on tvOS (e.g., iPad-only APIs), wrap with `#if !os(tvOS)` rather than removing.
+
+These settings apply to the app, unit-test and UI-test targets in Debug and
+Release. Xcode generates `UIDeviceFamily` as `[2]` for iPadOS and `[3]` for
+tvOS. Never add it by hand to Info.plist. Verify the generated value in both
+signed exports before upload.
+
+**iPhone is deliberately not shipped.** The iPad workshop has no supported
+phone layout. macOS and visionOS are excluded as well. Existing platform
+source and previous release artifacts remain preserved. The user has stopped
+all visionOS build, Simulator, capture and submission work.
+
+Keep `SDKROOT = auto`. The existing touch-specific UI suites compile only on
+iOS. tvOS has a separate Siri Remote suite, using focus and directional
+navigation. A successful iPad UI suite does not establish TV functionality.
+iPad-only camera and PencilKit APIs must use `#if os(iOS)` because UIKit also
+exists on tvOS.
 
 Why one target: the synced folder means every new file lands in *the* target automatically; two targets would require re-doing membership continually and is the main way this project could get miserable for an agent to maintain.
 
@@ -40,7 +58,7 @@ Without these, peers silently never find each other on modern OSes:
 
 ```xml
 <key>NSLocalNetworkUsageDescription</key>
-<string>Connects your iPad to your Apple TV so you can race together.</string>
+<string>Connects nearby iPads and Apple TVs so you can race together.</string>
 <key>NSBonjourServices</key>
 <array>
     <string>_hwvh-race._tcp</string>
@@ -49,11 +67,20 @@ Without these, peers silently never find each other on modern OSes:
 ```
 Service type constant in code must match: `hwvh-race`.
 
+The camera usage description is generated only for the iOS SDKs. tvOS does
+not request camera access. `ITSAppUsesNonExemptEncryption = false` records
+that local multiplayer uses Apple's encrypted `MCSession` rather than an
+app-owned encryption implementation. `PrivacyInfo.xcprivacy` declares no
+tracking or developer collection and the `CA92.1` required reason for the
+app's own `lastProfileID` UserDefaults value. Review these declarations if
+networking, persistence or permissions change.
+
+
 ## 3. Entitlements
 `Hot_Wheels_v_Human.entitlements` already exists. No special entitlements are needed for Multipeer. If SwiftData/CloudKit sync is ever added, do it later — keep v1 local-only.
 
 ## 4. SwiftData template cleanup
-Delete `Item.swift`; replace the `ModelContainer` schema with `[CarDesign.self, DriverProfile.self, TrackBlueprintRecord.self]` once those exist (Phase 1/4). On tvOS, SwiftData is available but we don't persist designs there — guard container usage with `#if !os(tvOS)` if simpler.
+Delete `Item.swift`; replace the `ModelContainer` schema with `[CarDesign.self, DriverProfile.self, TrackBlueprintRecord.self]` once those exist (Phase 1/4). SwiftData is available on both destinations. Keep profiles, driver designs, cars, tracks and race records persistent on tvOS as well as iPad. A TV-only session must not require an iPad to create or edit them.
 
 ## 5. Asset conversion tooling (on this Mac)
 GLB/FBX → USDZ options, pick whichever is installed:
@@ -79,9 +106,14 @@ xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" 
 # tvOS build
 xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
   -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)' build
-# unit tests
+# iPad unit and touch UI tests
 xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
-  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' test
+  -destination 'platform=iOS Simulator,name=iPad Pro 11-inch (M5)' \
+  -parallel-testing-enabled NO test
+# tvOS unit and Siri Remote UI tests
+xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" \
+  -destination 'platform=tvOS Simulator,name=Apple TV 4K (3rd generation)' \
+  -parallel-testing-enabled NO test
 ```
 (Adjust simulator names to `xcrun simctl list devices available`.)
 
@@ -89,7 +121,7 @@ xcodebuild -project "Hot Wheels v Human.xcodeproj" -scheme "Hot Wheels v Human" 
 machine.** Xcode fans the UI tests across four simulator clones by default,
 and under that load taps land before the view they're aimed at exists — a
 different one or two tests fail on each run and every one of them passes in
-isolation. Serially: 26 UI tests, 0 failures, ~7 minutes. In parallel: green
+isolation. The historical pre-October iPad run had 26 UI tests, 0 failures in about 7 minutes. Current release evidence belongs in `app-store-audit/2026-10-03-ipad-tvos`; do not reuse that historical result as current proof. In parallel: green
 about as often as not. Chasing one of those failures as a real bug costs an
 hour; the tests that are load-sensitive are the ones that tap a palette chip
 and then assert on a piece count, because the 3D spawn behind it is async.

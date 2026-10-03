@@ -14,6 +14,7 @@ import SwiftData
 @Observable
 final class TrackBuilderModel {
 
+    private var trackID = UUID()
     private(set) var types: [PieceType] = [.startGate]
     /// Portal exit spots, keyed by SEGMENT INDEX of the portalOut piece.
     /// Indices are stable because mutations are append/removeLast only.
@@ -31,6 +32,17 @@ final class TrackBuilderModel {
     private(set) var worldTheme: String?
     /// Hand-placed decorations — any prop from any world.
     private(set) var scenery: [SceneryItem] = []
+    private var sceneryIDs: [UUID] = []
+    struct DecorationChoice: Identifiable {
+        let id: UUID
+        let index: Int
+        let item: SceneryItem
+    }
+    var decorationChoices: [DecorationChoice] {
+        zip(sceneryIDs, scenery.enumerated()).map { id, indexed in
+            DecorationChoice(id: id, index: indexed.offset, item: indexed.element)
+        }
+    }
     /// The decoration the kid is currently placing (palette selection);
     /// taps on the ground drop one of these.
     var placingModel: String?
@@ -109,8 +121,11 @@ final class TrackBuilderModel {
     }
 
     func clear() {
+        trackID = UUID()
         types = [.startGate]
         scenery = []
+        sceneryIDs = []
+        placingModel = nil
         movingIndex = nil
         portalExits = [:]
         ghostIndices = []
@@ -119,6 +134,7 @@ final class TrackBuilderModel {
 
     /// "Start from one of these" — replace the build with a preset track.
     func load(preset: TrackBlueprint) {
+        trackID = preset.trackId
         types = preset.segments.map(\.type)
         portalExits = Dictionary(uniqueKeysWithValues:
             preset.segments.compactMap { segment in
@@ -129,6 +145,10 @@ final class TrackBuilderModel {
         placingPortalIndex = nil
         worldTheme = preset.worldTheme
         scenery = preset.scenery ?? []
+        sceneryIDs = scenery.map { _ in UUID() }
+        worldEmpty = preset.worldEmpty ?? false
+        placingModel = nil
+        movingIndex = nil
         SoundBank.shared.play("confirm_sparkle")
     }
 
@@ -141,44 +161,73 @@ final class TrackBuilderModel {
     }
 
     var canAppendPortal: Bool {
-        !hasFinish && types.count + 2 <= RaceTuning.maxTrackPieces
+        defaultPortalExit != nil
+    }
+
+    /// Keep the familiar nearby exit when it fits, then try the other side.
+    /// A clear corner beyond the current footprint remains available when
+    /// a bend points the nearby defaults back through an earlier segment.
+    private var defaultPortalExit: SIMD2<Float>? {
+        guard !hasFinish, placingPortalIndex == nil,
+              types.count + 2 <= RaceTuning.maxTrackPieces else { return nil }
+        let exit = layout.exitPosition
+        let side = rotated([1.6, 0, 0], by: layout.exitYaw)
+        let farX = (layout.pieces.map(\.worldFootprint.maxX).max() ?? exit.x) + 3
+        let farZ = (layout.pieces.map(\.worldFootprint.maxZ).max() ?? exit.z) + 3
+        for position in [SIMD2(exit.x + side.x, exit.z + side.z),
+                         SIMD2(exit.x - side.x, exit.z - side.z),
+                         SIMD2(farX, farZ)] {
+            var candidate = makeBlueprint(types + [.portalIn, .portalOut])
+            candidate.segments[candidate.segments.count - 1].portalX = position.x
+            candidate.segments[candidate.segments.count - 1].portalZ = position.y
+            if BlueprintValidator.validate(candidate, requireEnding: false).isValid { return position }
+        }
+        return nil
     }
 
     /// Add a portal PAIR: the entry ring on the open exit, the exit ring
     /// at a default spot beside the track — then the next ground tap
     /// moves it wherever the kid wants.
     func appendPortal() {
-        guard canAppendPortal else {
+        guard let position = defaultPortalExit else {
             SoundBank.shared.play("nope_wobble")
             return
         }
-        let exit = layout.exitPosition
-        let side = rotated([1.6, 0, 0], by: layout.exitYaw)
         types.append(.portalIn)
         types.append(.portalOut)
         if placingGhost {
             ghostIndices.formUnion([types.count - 2, types.count - 1])
         }
-        portalExits[types.count - 1] = SIMD2(exit.x + side.x, exit.z + side.z)
+        portalExits[types.count - 1] = position
         placingPortalIndex = types.count - 1
         SoundBank.shared.play("track_snap_connect")
     }
 
     /// Set the pending portal exit down where the kid tapped — rejected
     /// (with the nope sound) if the track would land on top of itself.
-    func placePortalExit(atX x: Float, z: Float) {
-        guard let index = placingPortalIndex else { return }
+    @discardableResult
+    func placePortalExit(atX x: Float, z: Float) -> Bool {
+        guard x.isFinite, z.isFinite, let index = placingPortalIndex else { return false }
         let previous = portalExits[index]
         portalExits[index] = SIMD2(x, z)
         let check = BlueprintValidator.validate(blueprint, requireEnding: false)
         guard check.isValid else {
             portalExits[index] = previous
             SoundBank.shared.play("nope_wobble")
-            return
+            return false
         }
         placingPortalIndex = nil
         SoundBank.shared.play("track_snap_connect")
+        return true
     }
+
+    /// Remote-native equivalent of picking an exit ring in the scene.
+    func pickPortalExit(at index: Int) {
+        guard types.indices.contains(index), types[index] == .portalOut else { return }
+        placingPortalIndex = index
+    }
+
+    func cancelPortalPlacement() { placingPortalIndex = nil }
 
     /// Tiles tile: street pieces snap to the FULL 0.7 m traffic grid
     /// (so hand-laid roads join the street graph placed cars drive),
@@ -208,6 +257,7 @@ final class TrackBuilderModel {
         scenery.append(SceneryItem(model: model,
                                    x: Self.snapped(x, model: model),
                                    z: Self.snapped(z, model: model), yaw: yaw))
+        sceneryIDs.append(UUID())
         SoundBank.shared.play("track_snap_connect")
     }
 
@@ -230,10 +280,21 @@ final class TrackBuilderModel {
         SoundBank.shared.play("track_snap_connect")
     }
 
+    /// The TV's selected-item inspector can remove any decoration, not
+    /// only the most recently placed one. Picking another remains explicit.
+    func removePickedScenery() {
+        guard let index = movingIndex, scenery.indices.contains(index) else { return }
+        scenery.remove(at: index)
+        sceneryIDs.remove(at: index)
+        movingIndex = nil
+        SoundBank.shared.play("piece_delete_pop")
+    }
+
     func removeLastScenery() {
         movingIndex = nil
         if !scenery.isEmpty {
             scenery.removeLast()
+            sceneryIDs.removeLast()
             SoundBank.shared.play("piece_delete_pop")
         }
     }
@@ -255,23 +316,40 @@ final class TrackBuilderModel {
         portalExits = [:]
         ghostIndices = []
         placingPortalIndex = nil
-        types = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
-            .segments.map(\.type)
+        movingIndex = nil
+        placingModel = nil
+        let generated = RandomTrackGenerator.generate(pieceCount: Int.random(in: 8...14))
+        trackID = generated.trackId
+        types = generated.segments.map(\.type)
         SoundBank.shared.play("shuffle_dice")
     }
 
-    func save(named name: String, into context: ModelContext, appModel: AppModel) {
-        let bp = blueprint
-        if let record = try? TrackBlueprintRecord(name: name, blueprint: bp) {
+    @discardableResult
+    func save(named name: String, into context: ModelContext, appModel: AppModel) -> Bool {
+        // Save keeps the previous version available in the library. A
+        // new record identity avoids overwriting a preset or loaded track.
+        var bp = blueprint
+        bp.trackId = UUID()
+        do {
+            let record = try TrackBlueprintRecord(name: name, blueprint: bp)
             context.insert(record)
-            try? context.save()
+            do {
+                try context.save()
+            } catch {
+                context.delete(record)
+                return false
+            }
+        } catch {
+            return false
         }
+        trackID = bp.trackId
         appModel.selectedBlueprint = bp
         SoundBank.shared.play("track_save_stamp")
+        return true
     }
 
     private func makeBlueprint(_ types: [PieceType]) -> TrackBlueprint {
-        TrackBlueprint(trackId: UUID(), lanes: 2,
+        TrackBlueprint(trackId: trackID, lanes: 2,
                        segments: types.enumerated().map { index, type in
                            SegmentSpec(index: index, type: type,
                                        portalX: portalExits[index]?.x,

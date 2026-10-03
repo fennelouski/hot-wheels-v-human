@@ -15,6 +15,7 @@ struct ProfilePickerView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \KidProfileRecord.name) private var records: [KidProfileRecord]
     @State private var creating = false
+    @State private var deleteFailed = false
 
     private var lastProfileID: UUID? {
         UserDefaults.standard.string(forKey: "lastProfileID").flatMap(UUID.init)
@@ -25,6 +26,14 @@ struct ProfilePickerView: View {
     // TimelineView drives every motion off wall-clock time — no timers, no
     // animation state to keep in sync.
     var body: some View {
+        #if os(tvOS)
+        tvBody
+        #else
+        iPadBody
+        #endif
+    }
+
+    private var iPadBody: some View {
         VStack(spacing: 8) {
             Text("Who's playing?")
                 .font(.system(size: 64, weight: .heavy, design: .rounded))
@@ -40,8 +49,69 @@ struct ProfilePickerView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .sheet(isPresented: $creating) { NewProfileSheet(onCreate: create) }
+        .alert("Couldn't Remove Profile", isPresented: $deleteFailed) {
+            Button("OK", role: .cancel) { }
+        } message: { Text("Please try again. Your other profiles haven't changed.") }
         .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
     }
+
+    #if os(tvOS)
+    /// Stable positions let a remote's directional focus stay predictable.
+    private var tvBody: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 32) {
+                Text("Who's playing?")
+                    .font(.system(size: 54, weight: .heavy, design: .rounded))
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 280), spacing: 32)], spacing: 32) {
+                    ForEach(records) { record in
+                        VStack(spacing: 18) {
+                            Button { pick(record) } label: {
+                                VStack(spacing: 18) {
+                                    if let driver = lastUsedCharacter(of: record) {
+                                        DriverGridAvatar(driver: driver).frame(width: 130, height: 130)
+                                    } else {
+                                        Image(systemName: "person.fill").font(.system(size: 72))
+                                            .frame(width: 130, height: 130)
+                                    }
+                                    Text(record.name).font(.system(size: 30, weight: .heavy, design: .rounded))
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding(24)
+                                .frame(maxWidth: .infinity)
+                            }
+                            .buttonStyle(TVWorkshopButtonStyle(selected: record.id == lastProfileID))
+                            .accessibilityIdentifier("tv-profile-pick-\(record.id.uuidString)")
+                            Button(role: .destructive) { delete(record) } label: {
+                                Label("Remove Profile", systemImage: "trash")
+                                    .font(.system(size: 22, weight: .bold, design: .rounded))
+                            }
+                            .buttonStyle(TVWorkshopButtonStyle())
+                        }
+                    }
+                    Button { creating = true } label: {
+                        VStack(spacing: 18) {
+                            Image(systemName: "plus.circle.fill").font(.system(size: 72))
+                                .frame(width: 130, height: 130)
+                            Text("New Racer").font(.system(size: 30, weight: .heavy, design: .rounded))
+                        }
+                        .padding(24)
+                        .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(TVWorkshopButtonStyle())
+                    .accessibilityIdentifier("tv-new-profile")
+                }
+            }
+            .padding(60)
+        }
+        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        .foregroundStyle(.white)
+        .sheet(isPresented: $creating) { NewProfileSheet(onCreate: create) }
+        .alert("Couldn't Remove Profile", isPresented: $deleteFailed) {
+            Button("OK", role: .cancel) { }
+        } message: { Text("Please try again. Your other profiles haven't changed.") }
+        .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
+    }
+    #endif
 
     private func orbit(in size: CGSize, time: TimeInterval) -> some View {
         let count = records.count + 1                     // + the New Racer tile
@@ -138,34 +208,61 @@ struct ProfilePickerView: View {
 
     /// New profile starts with a copy of a random starter character so the
     /// kid has someone to race as (and remix) immediately.
-    private func create(name: String, colorHex: String) {
+    private func create(name: String, colorHex: String) -> Bool {
         let profile = KidProfile(id: UUID(), name: name, colorHex: colorHex)
         var starter = DriverProfile.presets.randomElement()!
         starter.id = UUID()
-        guard let profileRecord = try? KidProfileRecord(profile: profile),
-              let characterRecord = try? DriverProfileRecord(
-                  profile: starter, ownerProfileID: profile.id) else { return }
-        profileRecord.lastUsedDriverID = starter.id
-        modelContext.insert(profileRecord)
-        modelContext.insert(characterRecord)
-        try? modelContext.save()
+        var insertedProfile: KidProfileRecord?
+        var insertedCharacter: DriverProfileRecord?
+        do {
+            let profileRecord = try KidProfileRecord(profile: profile)
+            let characterRecord = try DriverProfileRecord(profile: starter, ownerProfileID: profile.id)
+            profileRecord.lastUsedDriverID = starter.id
+            modelContext.insert(profileRecord)
+            insertedProfile = profileRecord
+            modelContext.insert(characterRecord)
+            insertedCharacter = characterRecord
+            try modelContext.save()
+        } catch {
+            if let insertedCharacter { modelContext.delete(insertedCharacter) }
+            if let insertedProfile { modelContext.delete(insertedProfile) }
+            return false
+        }
         SoundBank.shared.play("confirm_sparkle")
         appModel.selectedProfile = profile
         appModel.selectedDriver = starter
         UserDefaults.standard.set(profile.id.uuidString, forKey: "lastProfileID")
+        return true
     }
 
     private func delete(_ record: KidProfileRecord) {
         let ownerID = record.id
-        let characters = FetchDescriptor<DriverProfileRecord>(
-            predicate: #Predicate { $0.ownerProfileID == ownerID })
-        for character in (try? modelContext.fetch(characters)) ?? [] {
-            modelContext.delete(character)
+        var removedCharacters: [DriverProfileRecord] = []
+        var deletionStarted = false
+        do {
+            let descriptor = FetchDescriptor<DriverProfileRecord>(predicate: #Predicate { $0.ownerProfileID == ownerID })
+            removedCharacters = try modelContext.fetch(descriptor)
+            for character in removedCharacters { modelContext.delete(character) }
+            modelContext.delete(record)
+            deletionStarted = true
+            try modelContext.save()
+        } catch {
+            if deletionStarted {
+                // Cancel only this removal; preserve other pending edits.
+                modelContext.insert(record)
+                for character in removedCharacters { modelContext.insert(character) }
+            }
+            deleteFailed = true
+            return
         }
-        modelContext.delete(record)
-        try? modelContext.save()
+        if appModel.selectedProfile?.id == record.id {
+            appModel.selectedProfile = nil
+            appModel.selectedDriver = nil
+        }
+        if lastProfileID == record.id { UserDefaults.standard.removeObject(forKey: "lastProfileID") }
         SoundBank.shared.play("piece_delete_pop")
     }
+
 }
 
 /// A near-circle whose edge breathes: radius modulated by two slow sines of
@@ -198,8 +295,9 @@ private struct BlobShape: Shape {
 
 /// Name + color, nothing else — a kid can finish this in five seconds.
 private struct NewProfileSheet: View {
-    let onCreate: (String, String) -> Void
+    let onCreate: (String, String) -> Bool
     @Environment(\.dismiss) private var dismiss
+    @State private var saveFailed = false
     @State private var name = DriverProfile.randomName()
     @State private var colorHex = DriverPalette.outfitColors.randomElement()!
 
@@ -222,6 +320,10 @@ private struct NewProfileSheet: View {
                 }
                 .buttonStyle(.plain)
             }
+            #if os(tvOS)
+            TVColorPalette(title: "Profile Color", options: DriverPalette.outfitColors, selection: $colorHex)
+                .frame(maxWidth: 700)
+            #else
             HStack(spacing: 14) {
                 ForEach(DriverPalette.outfitColors, id: \.self) { option in
                     Button {
@@ -236,9 +338,10 @@ private struct NewProfileSheet: View {
                     .buttonStyle(.plain)
                 }
             }
+            #endif
             Button {
-                onCreate(name.isEmpty ? DriverProfile.randomName() : name, colorHex)
-                dismiss()
+                if onCreate(name.isEmpty ? DriverProfile.randomName() : name, colorHex) { dismiss() }
+                else { saveFailed = true }
             } label: {
                 Label("Let's go!", systemImage: "flag.checkered")
                     .font(.system(size: 34, weight: .black, design: .rounded))
@@ -247,9 +350,15 @@ private struct NewProfileSheet: View {
             .buttonStyle(.borderedProminent)
             .tint(.yellow)
             .foregroundStyle(.black)
+            .accessibilityIdentifier("tv-profile-create")
         }
         .padding(40)
+        .alert("Couldn't Save Profile", isPresented: $saveFailed) {
+            Button("OK", role: .cancel) { }
+        } message: { Text("Your choices are still here. Please try again.") }
+        #if !os(tvOS)
         .presentationDetents([.medium])
+        #endif
     }
 }
 

@@ -1,0 +1,225 @@
+{
+  "verification": "xcodebuild -showBuildSettings only. No build, install or Simulator run.",
+  "status": "passed",
+  "targets": [
+    {
+      "configuration": "Debug",
+      "sdk": "ipad",
+      "target": "Hot Wheels v Human",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-Human",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "INFOPLIST_KEY_NSCameraUsageDescription": "Takes one picture to color your racer like you. The picture is never saved."
+      }
+    },
+    {
+      "configuration": "Debug",
+      "sdk": "ipad",
+      "target": "Hot Wheels v HumanTests",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanTests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Debug",
+      "sdk": "ipad",
+      "target": "Hot Wheels v HumanUITests",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanUITests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Debug",
+      "sdk": "tvos",
+      "target": "Hot Wheels v Human",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-Human",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Debug",
+      "sdk": "tvos",
+      "target": "Hot Wheels v HumanTests",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanTests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Debug",
+      "sdk": "tvos",
+      "target": "Hot Wheels v HumanUITests",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanUITests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "ipad",
+      "target": "Hot Wheels v Human",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-Human",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "INFOPLIST_KEY_NSCameraUsageDescription": "Takes one picture to color your racer like you. The picture is never saved."
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "ipad",
+      "target": "Hot Wheels v HumanTests",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanTests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "ipad",
+      "target": "Hot Wheels v HumanUITests",
+      "settings": {
+        "PLATFORM_NAME": "iphoneos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanUITests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "tvos",
+      "target": "Hot Wheels v Human",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-Human",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "tvos",
+      "target": "Hot Wheels v HumanTests",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanTests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    },
+    {
+      "configuration": "Release",
+      "sdk": "tvos",
+      "target": "Hot Wheels v HumanUITests",
+      "settings": {
+        "PLATFORM_NAME": "appletvos",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.nathanfennel.Hot-Wheels-v-HumanUITests",
+        "INFOPLIST_KEY_CFBundleDisplayName": null,
+        "INFOPLIST_KEY_NSCameraUsageDescription": null
+      }
+    }
+  ],
+  "uniqueTargetConfigurationSDKCombinations": 12,
+  "verifiedAt": "2026-10-03T07:09:31.664392+00:00",
+  "projectSHA256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756"
+}

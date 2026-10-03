@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  TrackBuilder3DUITests.swift
 //  Hot Wheels v HumanUITests
@@ -63,3 +64,4 @@ final class TrackBuilder3DUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif

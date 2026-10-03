@@ -59,6 +59,8 @@ final class RaceSession {
 
     private var updateSubscription: (any Cancellable)?
     private var trackEntity: Entity?
+    private var countdownTask: Task<Void, Never>?
+    private var runID = UUID()
     /// Readable so the HUD can tell a real race from a Test Mode run — test
     /// times are runs of `CarDesign.demoPair` on infinite lives and must
     /// never land in a kid's track records.
@@ -118,6 +120,13 @@ final class RaceSession {
     /// `entries` pair each design with the owning player's stable ID.
     func start(blueprint: TrackBlueprint, entries: [(playerID: UUID, design: CarDesign)],
                config: MatchConfig, root: Entity) async throws {
+        try Task.checkCancellation()
+        reset()
+        let runID = self.runID
+        var didStart = false
+        defer {
+            if !didStart, self.runID == runID { reset() }
+        }
         phase = .buildingTrack
         // Append across a TV series' races; fresh file per app launch.
         Self.drillLog("[race] building \(blueprint.trackId)",
@@ -156,10 +165,12 @@ final class RaceSession {
                 for: blueprint.trackId, theme: blueprint.worldTheme,
                 scenery: scenery, empty: blueprint.worldEmpty ?? false,
                 tunnels: tunnels, around: trackFootprint)
+            try checkRun(runID)
             holder.children.removeAll()
             holder.addChild(environment)
         }
         let track = try await TrackSpawner.spawn(layout: layout)
+        try checkRun(runID)
         // Groundless worlds (space): the track FLOATS — support legs
         // standing on a ground that isn't there break the picture.
         if RaceTuning.groundlessThemes.contains(
@@ -172,6 +183,7 @@ final class RaceSession {
         }
         trackEntity = track
         await DebrisPool.shared.warmUp()
+        try checkRun(runID)
         track.components.set(RaceTrackComponent(lanes: layout.lanes, laps: config.laps))
         root.addChild(track)
         // ponytail: scene default gravity (-9.81) for now — a custom
@@ -222,6 +234,7 @@ final class RaceSession {
                 laterals: layout.lanes.laterals,
                 teleports: layout.lanes.teleports, jumps: jumps,
                 speedKicks: speedKicks)
+            try checkRun(runID)
             // Staggered grid on the gate bed. Waypoint 1 (0.1 m in) is
             // proven solid; the gate's raised ramp geometry (~z 0.25–0.45)
             // and the piece seam (z 0.8) both wedge drop-spawned cars, so
@@ -244,19 +257,33 @@ final class RaceSession {
         }
 
         countdown(root: root)
+        didStart = true
+    }
+
+    private func checkRun(_ runID: UUID) throws {
+        try Task.checkCancellation()
+        guard self.runID == runID else { throw CancellationError() }
     }
 
     private func countdown(root: Entity) {
         phase = .countdown
         countdownValue = 3
-        Task { @MainActor in
-            while countdownValue > 0 {
-                onEvent?(.countdownTick(countdownValue))
-                try? await Task.sleep(for: .seconds(1))
-                countdownValue -= 1
+        let runID = self.runID
+        countdownTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                guard let self, self.runID == runID else { return }
+                guard self.countdownValue > 0 else {
+                    self.onEvent?(.countdownTick(0))
+                    self.countdownTask = nil
+                    self.go(root: root)
+                    return
+                }
+                self.onEvent?(.countdownTick(self.countdownValue))
+                do { try await Task.sleep(for: .seconds(1)) }
+                catch { return }
+                guard !Task.isCancelled, self.runID == runID else { return }
+                self.countdownValue -= 1
             }
-            onEvent?(.countdownTick(0))
-            go(root: root)
         }
     }
 
@@ -444,17 +471,36 @@ final class RaceSession {
 
     /// Tear down the finished race so start() can run again (REMATCH).
     func reset() {
+        runID = UUID()
+        countdownTask?.cancel()
+        countdownTask = nil
         updateSubscription?.cancel()
         updateSubscription = nil
+        for racer in racers { racer.entity?.removeFromParent() }
         trackEntity?.removeFromParent()
         trackEntity = nil
         racers = []
+        lastPoses.removeAll()
+        awaitingGreenFlag = false
+        raceClock = 0
+        countdownValue = 3
         RaceEventBus.shared.raceActive = false
         _ = RaceEventBus.shared.drain()   // stale events must not leak into the next race
         // .buildingTrack, NOT .lobby — the TV shows ArenaView for every
         // non-lobby phase; dropping to .lobby would tear down the
         // RealityView whose root the next race builds into.
         phase = .buildingTrack
+    }
+
+    /// Leaving a preview or lobby releases the scene and cancels its countdown.
+    /// Rematches continue to use reset(), preserving their existing transition.
+    func stop() {
+        reset()
+        phase = .lobby
+        trackID = nil
+        worldTheme = nil
+        scenery.removeAll()
+        trackFootprint = nil
     }
 
     /// Is a loop piece coming up within `seconds` at current speed?

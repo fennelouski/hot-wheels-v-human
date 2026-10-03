@@ -14,6 +14,7 @@ struct CharacterSelectView: View {
     @Environment(AppModel.self) private var appModel
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \DriverProfileRecord.name) private var records: [DriverProfileRecord]
+    @State private var persistenceError: String?
 
     private let columns = [GridItem(.adaptive(minimum: 220), spacing: 20)]
 
@@ -76,26 +77,66 @@ struct CharacterSelectView: View {
         .toolbarColorScheme(.dark, for: .navigationBar)
         #endif
         .onAppear { SoundBank.shared.play("player_join_horn") }
+        .alert("Couldn't Save Changes", isPresented: Binding(get: { persistenceError != nil }, set: { if !$0 { persistenceError = nil } })) {
+            Button("OK", role: .cancel) { persistenceError = nil }
+        } message: { Text(persistenceError ?? "Please try again.") }
     }
 
-    private func select(_ driver: DriverProfile) {
+    @discardableResult
+    private func select(_ driver: DriverProfile, reportFailure: Bool = true) -> Bool {
+        var owner: KidProfileRecord?
+        var previous: UUID?
+        do {
+            if let profileID = appModel.selectedProfile?.id {
+                let descriptor = FetchDescriptor<KidProfileRecord>(predicate: #Predicate { $0.id == profileID })
+                owner = try modelContext.fetch(descriptor).first
+                guard let owner else {
+                    if reportFailure { persistenceError = "Your profile couldn't be found. Choose your profile again, then select a racer." }
+                    return false
+                }
+                previous = owner.lastUsedDriverID
+                owner.lastUsedDriverID = driver.id
+                try modelContext.save()
+            }
+        } catch {
+            owner?.lastUsedDriverID = previous
+            if reportFailure { persistenceError = "Your racer choice couldn't be saved. Please try again." }
+            return false
+        }
         appModel.selectedDriver = driver
-        if let profileID = appModel.selectedProfile?.id {
-            let descriptor = FetchDescriptor<KidProfileRecord>(
-                predicate: #Predicate { $0.id == profileID })
-            (try? modelContext.fetch(descriptor).first)?.lastUsedDriverID = driver.id
-            try? modelContext.save()
-        }
         SoundBank.shared.play("driver_woohoo")
+        return true
     }
 
-    private func delete(_ record: DriverProfileRecord) {
-        if appModel.selectedDriver?.id == record.id {
-            appModel.selectedDriver = nil
+    @discardableResult
+    private func delete(_ record: DriverProfileRecord, reportFailure: Bool = true) -> Bool {
+        var owner: KidProfileRecord?
+        var oldLastUsed: UUID?
+        var deletionStarted = false
+        do {
+            if let profileID = appModel.selectedProfile?.id {
+                let descriptor = FetchDescriptor<KidProfileRecord>(predicate: #Predicate { $0.id == profileID })
+                owner = try modelContext.fetch(descriptor).first
+                oldLastUsed = owner?.lastUsedDriverID
+                if oldLastUsed == record.id { owner?.lastUsedDriverID = nil }
+            }
+            modelContext.delete(record)
+            deletionStarted = true
+            try modelContext.save()
+        } catch {
+            if deletionStarted { modelContext.insert(record) }
+            owner?.lastUsedDriverID = oldLastUsed
+            if reportFailure { persistenceError = "Your racer couldn't be removed. Please try again." }
+            return false
         }
-        modelContext.delete(record)
-        try? modelContext.save()
+        if appModel.selectedDriver?.id == record.id { appModel.selectedDriver = nil }
         SoundBank.shared.play("piece_delete_pop")
+        return true
+    }
+
+    private func deleteDriver(_ id: UUID) -> Bool {
+        guard let record = records.first(where: { $0.id == id }) else { return false }
+        return delete(record, reportFailure: false)
     }
 
     private func sectionHeader(_ title: String, systemImage: String) -> some View {
@@ -106,6 +147,26 @@ struct CharacterSelectView: View {
 
     private func characterCard(_ driver: DriverProfile, isStarter: Bool = false) -> some View {
         let isSelected = appModel.selectedDriver?.id == driver.id
+        #if os(tvOS)
+        return NavigationLink {
+            TVCharacterDetailView(driver: driver, isStarter: isStarter,
+                                  onSelect: { select($0, reportFailure: false) }, onDelete: { deleteDriver(driver.id) })
+        } label: {
+            VStack(spacing: 16) {
+                DriverGridAvatar(driver: driver).frame(width: 120, height: 120)
+                Text(driver.name).font(.system(size: 28, weight: .heavy, design: .rounded))
+                    .multilineTextAlignment(.center)
+                if isSelected {
+                    Label("Racing Next", systemImage: "checkmark")
+                        .font(.system(size: 22, weight: .bold, design: .rounded))
+                }
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity)
+        }
+        .buttonStyle(TVWorkshopButtonStyle(selected: isSelected))
+        .accessibilityIdentifier("tv-racer-card-\(driver.id.uuidString)")
+        #else
         return Button {
             select(driver)
         } label: {
@@ -141,6 +202,7 @@ struct CharacterSelectView: View {
             }
             .buttonStyle(.plain)
         }
+        #endif
     }
 
     private func personalCopy(of starter: DriverProfile) -> DriverProfile {

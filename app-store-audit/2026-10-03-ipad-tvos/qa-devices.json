@@ -1,0 +1,20 @@
+{
+  "createdOn": "2026-10-03",
+  "scope": "Only HWvH owned iPad and TV devices; no Vision builds or runs",
+  "devices": [
+    {
+      "name": "HWvH QA iPad 20261003",
+      "udid": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "runtime": "iOS 26.5",
+      "type": "iPad Pro 13-inch (M5)"
+    },
+    {
+      "name": "HWvH QA TV 20261003",
+      "udid": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "runtime": "tvOS 26.5",
+      "type": "Apple TV 4K (3rd generation) at 1080p"
+    }
+  ],
+  "bootedForThisTask": false,
+  "simulatorLane": "pending acknowledgement from authorized Audit and submit App Store apps chat"
+}

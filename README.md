@@ -1,13 +1,13 @@
 # Hot Wheels vs. Human
 
-A toy-racing game for iPad + Apple TV, designed by a kid and built as a family project. You build tracks and cars on the iPad, race them with real physics on the TV, and the iPad becomes your boost button and reaction cam.
+A toy-racing game for iPad + Apple TV, designed by a kid and built as a family project. Build tracks, cars and racers on either platform, then race them with real physics. The Siri Remote controls the TV workshop and local races. An iPad can also become the controller for a nearby Apple TV.
 
-> "Hot Wheels vs. Human" is a working title (see PRD §1.1 — a rename is planned before any public release). This is a hobby project with no affiliation to Mattel.
+> The public release is named HWvH. The repository and bundle identifier keep their existing names. This is a family project with no affiliation to Mattel.
 
 ## How it plays
 
 - **iPad = Workshop.** Build a car (chassis, tires, paint), draw a track (straights, curves, a loop), customize your driver.
-- **Apple TV = Arena.** The track assembles on the big screen and the race runs there with physics — heavy cars clear the loop, light ones get flung.
+- **Apple TV = Workshop and Arena.** Use the remote to build tracks, decorate worlds, paint cars, create racers, save designs and race on the big screen. Choose Race with iPad to host nearby players.
 - **iPad during the race = Controller.** Tap to boost, watch your driver's reaction cam.
 - Local Multipeer networking only. No accounts, no analytics, no ads — it's for kids.
 
@@ -28,7 +28,7 @@ Xcode 26+. Open `Hot Wheels v Human.xcodeproj` and run on an iPad or Apple TV si
 
 **Status:** every phase in `Documents/BUILD-ORDER.md` is built — P0–P7 plus the
 C-series profile/character work — and the game is playable end to end: build a
-car and a track on the iPad, race it in the Solo Arena or on an Apple TV, with
+car and a track on iPad or Apple TV, race locally or with nearby iPads, with
 characters, worlds, tunnels, ghost pieces and a cockpit radio. What's left is
 polish and hardware validation; the live list is `Documents/OPEN-THREADS.md`.
 

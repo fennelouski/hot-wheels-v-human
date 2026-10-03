@@ -52,20 +52,52 @@ final class CharacterEditorModel {
         SoundBank.shared.play("ui_back")
     }
 
-    /// Upsert by id: editing "me" updates in place, a new character inserts.
-    func save(into context: ModelContext, ownerProfileID: UUID?) {
-        let id = driver.id
-        let descriptor = FetchDescriptor<DriverProfileRecord>(
-            predicate: #Predicate { $0.id == id })
-        if let existing = try? context.fetch(descriptor).first {
-            if let data = try? JSONEncoder().encode(driver) {
-                existing.profileData = data
-                existing.name = driver.name
+    private(set) var lastSaveError: String?
+
+    /// Upsert by id. Remembering a selected racer commits together with its
+    /// appearance, so failed storage never leaves a false last-used pointer.
+    @discardableResult
+    func save(into context: ModelContext, ownerProfileID: UUID?,
+              rememberAsLastUsed: Bool = false) -> Bool {
+        var edited: DriverProfileRecord?
+        var oldName: String?
+        var oldData: Data?
+        var inserted: DriverProfileRecord?
+        var owner: KidProfileRecord?
+        var oldLastUsed: UUID?
+        do {
+            let data = try JSONEncoder().encode(driver)
+            let id = driver.id
+            let descriptor = FetchDescriptor<DriverProfileRecord>(predicate: #Predicate { $0.id == id })
+            if let record = try context.fetch(descriptor).first {
+                edited = record
+                oldName = record.name
+                oldData = record.profileData
+                record.profileData = data
+                record.name = driver.name
+            } else {
+                let record = try DriverProfileRecord(profile: driver, ownerProfileID: ownerProfileID)
+                context.insert(record)
+                inserted = record
             }
-        } else if let record = try? DriverProfileRecord(
-                profile: driver, ownerProfileID: ownerProfileID) {
-            context.insert(record)
+            if rememberAsLastUsed, let ownerProfileID {
+                let descriptor = FetchDescriptor<KidProfileRecord>(predicate: #Predicate { $0.id == ownerProfileID })
+                owner = try context.fetch(descriptor).first
+                oldLastUsed = owner?.lastUsedDriverID
+                owner?.lastUsedDriverID = driver.id
+            }
+            try context.save()
+            lastSaveError = nil
+            return true
+        } catch {
+            if let edited, let oldName, let oldData {
+                edited.name = oldName
+                edited.profileData = oldData
+            }
+            if let inserted { context.delete(inserted) }
+            owner?.lastUsedDriverID = oldLastUsed
+            lastSaveError = "Your racer couldn't be saved. Your changes are still here; try Save again."
+            return false
         }
-        try? context.save()
     }
 }

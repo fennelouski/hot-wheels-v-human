@@ -21,3 +21,15 @@ Tuning workflow (human + Claude Code pair task)
 3. Adjust `RaceTuning` only. Never scatter constants.
 
 Tests: meter/lives/win-condition logic (pure funcs); checkpoint sequencing with a scripted position feed; AI policy decisions for fixture tracks. Physics feel is validated by humans in Test Mode, not asserts.
+
+## Preview lifecycle
+
+`RaceCoordinator` owns its event listener, build and snapshot tasks. `stop()`
+cancels them, clears the lobby draft and returns the session to `.lobby`.
+`RaceSession` owns its countdown and scene update subscription. Its build
+checks both task cancellation and run identity after model-loading awaits,
+so a closed preview cannot attach stale cars or restart the race later.
+`reset()` removes each racer and track and keeps `.buildingTrack` for the
+existing rematch transition. `RaceLifecycleTests.swift` covers queued inputs
+after stop, cancellation before a build, and closing the three-second
+countdown. Current test results belong in the October release audit.

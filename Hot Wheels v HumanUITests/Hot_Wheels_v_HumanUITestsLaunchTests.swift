@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  Hot_Wheels_v_HumanUITestsLaunchTests.swift
 //  Hot Wheels v HumanUITests
@@ -33,3 +34,4 @@ final class Hot_Wheels_v_HumanUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+#endif

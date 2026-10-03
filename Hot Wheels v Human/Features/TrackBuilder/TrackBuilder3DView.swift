@@ -15,6 +15,7 @@ import simd
 
 struct TrackBuilder3DView: View {
     let model: TrackBuilderModel
+    var remote: TVTrackControls? = nil
 
     @State private var azimuth: Float = 2.5
     @State private var elevation: Float = 0.55
@@ -29,8 +30,8 @@ struct TrackBuilder3DView: View {
     @State private var pan: SIMD3<Float> = .zero
 
     var body: some View {
-        // Gestures don't exist on tvOS; the builder only runs on iPad,
-        // the TV merely compiles this file (same split as CarTurntableView).
+        // The TV inspector drives the same scene through `remote`. Touch
+        // gestures remain local to the iPad canvas.
         #if os(tvOS)
         realityView
         #else
@@ -198,6 +199,28 @@ struct TrackBuilder3DView: View {
             let decor = Entity()
             decor.name = "decor-empty"
             root.addChild(decor)
+
+            // Cosmetic, collision-free remote placement target. A cross
+            // and center pin remain readable over light or dark terrain.
+            let cursor = Entity()
+            cursor.name = "remote-cursor"
+            let material = UnlitMaterial(color: .yellow)
+            for size: SIMD3<Float> in [[0.5, 0.012, 0.035], [0.035, 0.012, 0.5]] {
+                cursor.addChild(ModelEntity(mesh: .generateBox(size: size),
+                                             materials: [material]))
+            }
+            let pin = ModelEntity(mesh: .generateCylinder(height: 0.12, radius: 0.025),
+                                  materials: [material])
+            pin.position.y = 0.06
+            cursor.addChild(pin)
+            cursor.isEnabled = false
+            root.addChild(cursor)
+
+            let selected = ModelEntity(mesh: .generateCylinder(height: 0.015, radius: 0.25),
+                                        materials: [UnlitMaterial(color: .cyan)])
+            selected.name = "remote-piece-selection"
+            selected.isEnabled = false
+            root.addChild(selected)
         } update: { content in
             guard let root = content.entities.first(where: { $0.name == "builder-root" }),
                   let camera = content.entities.first(where: { $0.name == "builder-camera" })
@@ -205,6 +228,25 @@ struct TrackBuilder3DView: View {
             else { return }
 
             let layout = model.layout   // reads model.types → reruns on every edit
+
+            if let cursor = root.findEntity(named: "remote-cursor") {
+                cursor.isEnabled = remote != nil
+                    && (model.decorating || model.placingPortalIndex != nil)
+                if let remote {
+                    cursor.position = [remote.cursor.x, 0.04, remote.cursor.y]
+                }
+            }
+            if let marker = root.findEntity(named: "remote-piece-selection") {
+                if let index = remote?.selectedPiece, layout.pieces.indices.contains(index) {
+                    let piece = layout.pieces[index]
+                    marker.position = [(piece.worldFootprint.minX + piece.worldFootprint.maxX) / 2,
+                                       piece.entryPosition.y + 0.055,
+                                       (piece.worldFootprint.minZ + piece.worldFootprint.maxZ) / 2]
+                    marker.isEnabled = true
+                } else {
+                    marker.isEnabled = false
+                }
+            }
 
             // Respawn on change, ArenaView-style: holder's name is the
             // dedupe key, "building-" while the async spawn is in flight.
@@ -220,6 +262,7 @@ struct TrackBuilder3DView: View {
                 holder.name = "building-\(key)"
                 Task { @MainActor in
                     let track = try? await TrackSpawner.spawn(layout: layout)
+                    guard holder.name == "building-\(key)" else { return }
                     if let track, floating {
                         for child in Array(track.children)
                         where child.name.hasPrefix("support-")
@@ -280,6 +323,7 @@ struct TrackBuilder3DView: View {
                     let spawned = await SceneryPlacer.spawn(
                         items, tappable: true, highlight: moving,
                         autoStreets: streets)
+                    guard decor.name == "building-\(decorKey)" else { return }
                     decor.children.removeAll()
                     decor.addChild(spawned)
                     decor.name = decorKey
@@ -302,6 +346,7 @@ struct TrackBuilder3DView: View {
                     let env = await ArenaEnvironment.make(
                         for: nil, theme: theme, empty: empty,
                         around: theme == nil ? nil : footprint)
+                    guard world.name == "building-\(worldKey)" else { return }
                     world.children.removeAll()
                     world.addChild(env)
                     world.name = worldKey
@@ -322,8 +367,9 @@ struct TrackBuilder3DView: View {
             // Aim near bed level (0.35·maxY inside cameraPose) — a target
             // hovering over the track pushes it into the bottom of the frame.
             let (target, offset) = Self.cameraPose(
-                layout: layout, azimuth: azimuth, elevation: elevation,
-                zoom: zoom, pan: pan)
+                layout: layout, azimuth: remote?.azimuth ?? azimuth,
+                elevation: remote?.elevation ?? elevation,
+                zoom: remote?.zoom ?? zoom, pan: remote?.pan ?? pan)
             camera.look(at: target, from: target + offset, relativeTo: nil)
         }
     }

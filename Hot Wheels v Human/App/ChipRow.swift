@@ -21,6 +21,7 @@ struct ChipRow<Value: Hashable>: View {
     @Binding var selection: Value
     /// false = plain HStack, for rows that live inside another ScrollView.
     var scrolls = true
+    var identifierPrefix: String? = nil
 
     var body: some View {
         if scrolls {
@@ -43,13 +44,23 @@ struct ChipRow<Value: Hashable>: View {
                         Text(chip.title)
                     }
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
-                    .foregroundStyle(selection == chip.value ? .black : .white)
                     .padding(.horizontal, 20)
                     .frame(height: 60)
+                    #if !os(tvOS)
+                    .foregroundStyle(selection == chip.value ? .black : .white)
                     .background(selection == chip.value ? Color.yellow : .white.opacity(0.1),
                                 in: Capsule())
+                    #endif
                 }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle(selected: selection == chip.value, cornerRadius: 30))
+                #else
                 .buttonStyle(.plain)
+                #endif
+                .accessibilityAddTraits(selection == chip.value ? .isSelected : [])
+                .accessibilityIdentifier(identifierPrefix.map {
+                    "\($0)-\(String(describing: chip.value))"
+                } ?? chip.title)
             }
         }
         .padding(.horizontal, 4)

@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  UndergroundPortalUITests.swift
 //  Hot Wheels v HumanUITests
@@ -71,3 +72,4 @@ final class UndergroundPortalUITests: XCTestCase {
         add(placed)
     }
 }
+#endif

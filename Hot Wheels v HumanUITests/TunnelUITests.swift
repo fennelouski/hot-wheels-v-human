@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  TunnelUITests.swift
 //  Hot Wheels v HumanUITests
@@ -39,3 +40,4 @@ final class TunnelUITests: XCTestCase {
         add(shot)
     }
 }
+#endif

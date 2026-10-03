@@ -29,12 +29,18 @@ struct ChassisPicker: View {
                     }
                     .padding(16)
                     .frame(width: 190)
+                    #if !os(tvOS)
                     .background(selection == chassis ? .yellow.opacity(0.25) : .white.opacity(0.08),
                                 in: RoundedRectangle(cornerRadius: 18))
                     .overlay(RoundedRectangle(cornerRadius: 18)
                         .stroke(selection == chassis ? .yellow : .clear, lineWidth: 3))
+                    #endif
                 }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle(selected: selection == chassis))
+                #else
                 .buttonStyle(.plain)
+                #endif
             }
         }
     }
@@ -77,16 +83,24 @@ struct BodyPicker: View {
                                 .frame(height: 44)
                             Text(body.name)
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
+                                #if !os(tvOS)
                                 .lineLimit(1)
+                                #endif
                         }
                         .padding(16)
                         .frame(width: 150)
+                        #if !os(tvOS)
                         .background(isSelected ? .yellow.opacity(0.25) : .white.opacity(0.08),
                                     in: RoundedRectangle(cornerRadius: 18))
                         .overlay(RoundedRectangle(cornerRadius: 18)
                             .stroke(isSelected ? .yellow : .clear, lineWidth: 3))
+                        #endif
                     }
+                    #if os(tvOS)
+                    .buttonStyle(TVWorkshopButtonStyle(selected: isSelected))
+                    #else
                     .buttonStyle(.plain)
+                    #endif
                 }
             }
             .padding(.horizontal)
@@ -108,8 +122,13 @@ struct StatBar: View {
     var body: some View {
         HStack(spacing: 8) {
             Text(name)
+                #if os(tvOS)
+                .font(.system(size: 22, weight: .semibold, design: .rounded))
+                .frame(width: 84, alignment: .leading)
+                #else
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
                 .frame(width: 52, alignment: .leading)
+                #endif
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Capsule().fill(.white.opacity(0.15))

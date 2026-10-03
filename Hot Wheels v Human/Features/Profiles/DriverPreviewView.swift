@@ -42,14 +42,16 @@ struct DriverGridAvatar: View {
         }
     }
     #else
-    // tvOS has no ARView to snapshot with, and never shows these workshop
-    // grids anyway — the 2D badge is all it needs.
+    // tvOS has no ARView snapshot API. Its grid uses the painted badge;
+    // opening a racer shows the full, editable RealityKit preview.
     var body: some View { DriverFaceBadge(driver: driver) }
     #endif
 }
 
 struct DriverPreviewView: View {
     let driver: DriverProfile
+    /// Remote-owned camera state; nil preserves the iPad gesture camera.
+    var remoteOrbit: TurntableOrbit? = nil
 
     @State private var spin: EventSubscription?
     @State private var refs = OrbitRefs()
@@ -62,8 +64,7 @@ struct DriverPreviewView: View {
     private static let swayRate: Float = 0.7
 
     var body: some View {
-        // Same deal as CarTurntableView: no drag or pinch on tvOS, which
-        // only ever compiles this file.
+        // Apple TV uses explicit remote camera controls; iPad keeps gestures.
         #if os(tvOS)
         realityView
         #else
@@ -121,6 +122,7 @@ struct DriverPreviewView: View {
                 turntable.transform.rotation = simd_quatf(angle: angle, axis: [0, 1, 0])
             }
         } update: { content in
+            if let remoteOrbit { refs.orbit = remoteOrbit }
             guard let turntable = content.entities.first(where: { $0.name == "turntable" }) else { return }
             Task { @MainActor in
                 await Self.rebuild(turntable, driver: driver)

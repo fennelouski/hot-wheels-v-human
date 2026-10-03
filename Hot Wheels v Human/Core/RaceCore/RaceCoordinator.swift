@@ -55,6 +55,11 @@ final class RaceCoordinator {
     private var config = MatchConfig(mode: .onePlayer)
     private var arenaRoot: Entity?
     private var raceRunning = false
+    private var isStarted = false
+    private var lifecycleID = UUID()
+    private var eventTask: Task<Void, Never>?
+    private var buildTask: Task<Void, Never>?
+    private var snapshotTask: Task<Void, Never>?
 
     init(transport: any GameTransport) {
         self.transport = transport
@@ -70,17 +75,42 @@ final class RaceCoordinator {
     }
 
     func start() {
+        guard !isStarted else { return }
+        isStarted = true
+        let lifecycleID = self.lifecycleID
         transport.start(role: .host)
-        Task { [weak self] in
+        eventTask = Task { [weak self] in
             guard let events = self?.transport.events else { return }
             for await event in events {
-                self?.handle(event)
+                guard !Task.isCancelled, let self,
+                      self.isStarted, self.lifecycleID == lifecycleID else { return }
+                self.handle(event)
             }
         }
     }
 
     func stop() {
+        isStarted = false
+        lifecycleID = UUID()
+        eventTask?.cancel()
+        buildTask?.cancel()
+        snapshotTask?.cancel()
+        eventTask = nil
+        buildTask = nil
+        snapshotTask = nil
+        session.stop()
+        arenaRoot = nil
+        raceRunning = false
+        players.removeAll()
+        designs.removeAll()
+        readiness.removeAll()
+        trackPicks.removeAll()
+        playlist.removeAll()
+        raceIndex = 0
+        reactionCamsOn.removeAll()
+        lastRejection = nil
         transport.stop()
+        transportState = .idle
     }
 
     private func handle(_ event: TransportEvent) {
@@ -254,7 +284,7 @@ final class RaceCoordinator {
     }
 
     private func startRaceIfReady() {
-        guard !raceRunning,
+        guard isStarted, !raceRunning,
               let root = arenaRoot,
               !players.isEmpty,
               players.allSatisfy({ readiness[$0.id] == true }),
@@ -268,31 +298,46 @@ final class RaceCoordinator {
         let (entries, effectiveConfig) = Self.raceEntries(
             players: players, designs: designs, config: config)
         config = effectiveConfig
-        Task { @MainActor in
+        let lifecycleID = self.lifecycleID
+        buildTask = Task { @MainActor [weak self] in
+            guard let self else { return }
             do {
                 try await session.start(blueprint: blueprint, entries: entries,
                                         config: config, root: root)
+                try Task.checkCancellation()
+                guard isStarted, self.lifecycleID == lifecycleID else { return }
                 // Fresh track each race — re-apply whatever the switch is on.
                 session.applyTrackVisibility(trackVisibility)
                 broadcastSnapshots()
+            } catch is CancellationError {
+                // Leaving the arena is ordinary navigation, not a build failure.
             } catch {
+                guard isStarted, self.lifecycleID == lifecycleID else { return }
                 lastRejection = "Arena build failed: \(error)"
                 raceRunning = false
             }
+            if self.lifecycleID == lifecycleID { buildTask = nil }
         }
     }
 
     private func broadcastSnapshots() {
-        Task { @MainActor [weak self] in
-            while let self, self.session.phase != .results {
+        snapshotTask?.cancel()
+        let lifecycleID = self.lifecycleID
+        snapshotTask = Task { @MainActor [weak self] in
+            while !Task.isCancelled {
+                guard let self, self.isStarted,
+                      self.lifecycleID == lifecycleID else { return }
+                if self.session.phase == .results {
+                    // Final results are reliable; fresh READYs are required.
+                    self.transport.send(.raceSnapshot(self.currentSnapshot()), reliably: true)
+                    self.readiness = self.readiness.mapValues { _ in false }
+                    self.snapshotTask = nil
+                    return
+                }
                 self.transport.send(.raceSnapshot(self.currentSnapshot()), reliably: false)
-                try? await Task.sleep(for: .seconds(Double(1 / RaceTuning.snapshotRate)))
-            }
-            // One final reliable snapshot so dashboards land on results,
-            // then require fresh READYs so a stale one can't auto-rematch.
-            if let self {
-                self.transport.send(.raceSnapshot(self.currentSnapshot()), reliably: true)
-                self.readiness = self.readiness.mapValues { _ in false }
+                do {
+                    try await Task.sleep(for: .seconds(Double(1 / RaceTuning.snapshotRate)))
+                } catch { return }
             }
         }
     }

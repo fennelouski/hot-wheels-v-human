@@ -1,0 +1,94 @@
+{
+  "preparedAt": "2026-10-03T07:09:31.664392+00:00",
+  "status": "development and release preparation in progress",
+  "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+  "scheme": "Hot Wheels v Human",
+  "team": "EJLR2RPSV2",
+  "version": "1.0",
+  "build": "1",
+  "releaseDisplayName": "HWvH",
+  "baselineSourceCommit": "de7eb6d276ed9f3be4c8c64f5e07da54bd0bb5f4",
+  "sourceFreezeCommit": null,
+  "supportedNativePlatforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "excludedNativePlatforms": [
+    "iPhone",
+    "macOS",
+    "Mac Catalyst",
+    "Mac Designed for iPad",
+    "visionOS",
+    "Vision Designed for iPad"
+  ],
+  "platformSettings": {
+    "status": "passed read-only resolution for 12 target/configuration/SDK combinations",
+    "evidence": "resolved-build-settings.json",
+    "iPadOSFamily": 2,
+    "tvOSFamily": 3,
+    "minimumOS": "26.0",
+    "signedExportFamiliesVerified": false
+  },
+  "appStoreConnect": {
+    "appID": null,
+    "SKU": null,
+    "existingRecordStatus": "not verified in authenticated App Store Connect",
+    "priorPublishedDeviceFamilies": null,
+    "iOSUploadAttempted": false,
+    "tvOSUploadAttempted": false,
+    "submissionAttempted": false,
+    "countryAvailabilityVerified": false,
+    "freePricingVerified": false,
+    "macCompatibilityOptOutSaved": false,
+    "visionCompatibilityOptOutSaved": false,
+    "reviewContact": "Local ignored review-contact.private.json; exact user-approved email and phone; not saved in ASC"
+  },
+  "privacy": {
+    "manifest": "Hot Wheels v Human/PrivacyInfo.xcprivacy",
+    "developerCollectionDraft": "Data Not Collected",
+    "tracking": false,
+    "requiredReasonAPIs": {
+      "UserDefaults": "CA92.1"
+    },
+    "privacyLabelPublished": false,
+    "cameraPermission": "iPadOS only; original camera picture analyzed in memory and not saved/transmitted",
+    "localNetwork": "Profiles/player names, vehicle/driver styles, drawing artwork, track/world configurations and race input/state exchanged with nearby game participants over Apple encrypted MCSession. No developer server."
+  },
+  "runtimeQA": {
+    "iPadOS": "pending final integrated build",
+    "tvOS": "pending final integrated build and remote focus suite",
+    "hardwareLocalMultiplayer": "pending real iPad/Apple TV reconnect verification; two Simulators cannot establish hardware networking parity"
+  },
+  "signedPackages": {
+    "iPadOS": null,
+    "tvOS": null
+  },
+  "marketing": {
+    "iPadGalleryImages": 0,
+    "tvGalleryImages": 0,
+    "requiredGalleryImagesEach": 10,
+    "status": "pending actual native captures and composed images from frozen source"
+  },
+  "website": {
+    "privacyURLProposed": "https://nathanfennel.com/hwvh/privacy.html",
+    "supportURLProposed": "https://nathanfennel.com/hwvh/support.html",
+    "status": "Standalone pages prepared and committed locally; source/static/link checks passed. No push, deployment or live HWvH route verification.",
+    "dualDeploymentVerified": false,
+    "preparedCommit": "b5a6148f09666b133b6d90155739731832671365",
+    "evidence": "website-preparation.json",
+    "pages": {
+      "privacy.html": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+      "support.html": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288"
+    },
+    "deploymentAllowlistContainsNewPages": false,
+    "pendingDeploymentPreparation": "Release owner must add hwvh/privacy.html, hwvh/support.html, how-to-adult/privacy.html and how-to-adult/support.html to scripts/deploy-app-privacy.py PAGES before future same-revision dual deployment."
+  },
+  "storeGates": [
+    "Inspect existing ASC app and previously published UIDeviceFamily before upload. Apple QA1623 forbids ordinary updates removing previously supported device families.",
+    "Complete actual iPad/TV UI, Siri Remote focus, editor save/relaunch, standalone race, preview close/reopen, rematch and local multiplayer checks.",
+    "Build signed iPad-only and tvOS packages from the frozen revision; inspect generated UIDeviceFamily, permissions, compiled icons and manifest.",
+    "Compose and review ten genuine native screenshots for each supported gallery.",
+    "Deploy and verify unlisted privacy/support routes under workspace dual-deployment policy before setting ASC URLs.",
+    "Fill ASC platform metadata, free prices/all eligible countries, review contact and owner-required attestations; verify saves; submit both supported platforms only."
+  ]
+}

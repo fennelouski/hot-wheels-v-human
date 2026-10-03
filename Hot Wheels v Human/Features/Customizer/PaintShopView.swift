@@ -64,6 +64,8 @@ struct PaintShopView: View {
                                 lineWidth: slotHex == hex ? 5 : 2))
                     }
                     .buttonStyle(.plain)
+                    .accessibilityLabel(Self.swatchName(hex))
+                    .accessibilityAddTraits(slotHex == hex ? .isSelected : [])
                 }
             }
             ChipRow(chips: [
@@ -90,6 +92,24 @@ struct PaintShopView: View {
                                           lineWidth: slot == name ? 3 : 1))
         }
         .buttonStyle(.plain)
+        .accessibilityAddTraits(slot == name ? .isSelected : [])
+    }
+
+    private static func swatchName(_ hex: String) -> String {
+        switch hex {
+        case "#FF3B30": "Red"
+        case "#FF6600": "Orange"
+        case "#FFD500": "Yellow"
+        case "#34C759": "Green"
+        case "#00C7BE": "Teal"
+        case "#2266FF": "Blue"
+        case "#5856D6": "Indigo"
+        case "#AF52DE": "Purple"
+        case "#FF2D92": "Pink"
+        case "#8E5B3A": "Brown"
+        case "#F2F2F7": "White"
+        default: "Black"
+        }
     }
 }
 

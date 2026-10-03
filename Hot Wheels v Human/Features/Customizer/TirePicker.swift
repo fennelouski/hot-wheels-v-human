@@ -29,12 +29,18 @@ struct TirePicker: View {
                     }
                     .padding(16)
                     .frame(width: 190)
+                    #if !os(tvOS)
                     .background(selection == tire ? .yellow.opacity(0.25) : .white.opacity(0.08),
                                 in: RoundedRectangle(cornerRadius: 18))
                     .overlay(RoundedRectangle(cornerRadius: 18)
                         .stroke(selection == tire ? .yellow : .clear, lineWidth: 3))
+                    #endif
                 }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle(selected: selection == tire))
+                #else
                 .buttonStyle(.plain)
+                #endif
             }
         }
     }

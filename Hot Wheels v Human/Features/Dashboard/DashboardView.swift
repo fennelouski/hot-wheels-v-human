@@ -145,7 +145,7 @@ private struct ConnectionLadder: View {
                 .animation(.easeInOut(duration: 0.25), value: headline)
 
             VStack(alignment: .leading, spacing: 16) {
-                step(1, "Open \(AppBranding.name) on your Apple TV",
+                step(1, "Choose Race with iPad on your Apple TV",
                      icon: "tv.fill", done: connected, current: !connected)
                 step(2, "This iPad connects to the TV",
                      icon: "wifi", done: connected, current: !connected)
@@ -238,16 +238,25 @@ struct ReactionCamButton: View {
             if on { SoundBank.shared.play("camera_shutter") }
         } label: {
             Label(on ? "CAM ON" : "CAM OFF", systemImage: "video.fill")
-                .font(.system(size: 20, weight: .heavy, design: .rounded))
-                .frame(width: 240, height: 64)
+                .font(.system(size: Platform.isTV ? 24 : 20, weight: .heavy, design: .rounded))
+                .frame(width: Platform.isTV ? 280 : 240, height: Platform.isTV ? 70 : 64)
                 // Same black-45 as the HUD banners: this also floats over
                 // the live 3D scene on iPad, where a bright sky would
                 // swallow a white-tinted pill.
+                #if !os(tvOS)
                 .background(on ? .yellow.opacity(0.5) : .black.opacity(0.45),
                             in: Capsule())
                 .foregroundStyle(.white)
+                #endif
         }
+        #if os(tvOS)
+        .buttonStyle(TVWorkshopButtonStyle(selected: on, cornerRadius: 32))
+        #else
         .buttonStyle(.plain)
+        #endif
+        .accessibilityValue(on ? "On" : "Off")
+        .accessibilityIdentifier("race-reaction-cam")
+        .onDisappear { setOn(false) }
     }
 }
 
@@ -276,6 +285,33 @@ struct BoostButtonView: View {
     private var dial: CGFloat { CGFloat(min(max(meter, 0), 2) / 2) }
 
     var body: some View {
+        #if os(tvOS)
+        Button {
+            toggleRemoteBoost()
+        } label: {
+            HStack(spacing: 14) {
+                Image(systemName: pressed ? "flame.fill" : "bolt.fill")
+                    .font(.system(size: 32, weight: .heavy))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(pressed ? "STOP BOOST" : armed ? "BOOST!" : "CHARGING")
+                        .font(.system(size: 25, weight: .black, design: .rounded))
+                    Text("\(Int(min(max(meter, 0), 2) * 100))%")
+                        .font(.system(size: 22, weight: .bold, design: .monospaced))
+                }
+            }
+            .padding(.horizontal, 24).frame(width: 280, height: 86)
+        }
+        .buttonStyle(TVWorkshopButtonStyle(selected: pressed))
+        .accessibilityLabel(pressed ? "Stop boost" : "Boost")
+        .accessibilityValue("\(Int(min(max(meter, 0), 2) * 100)) percent")
+        .accessibilityHint("Press Select or Play Pause to start. Press again to stop.")
+        .accessibilityIdentifier("race-boost")
+        .onPlayPauseCommand { toggleRemoteBoost() }
+        .onChange(of: meter) { _, value in
+            if pressed && value <= 0 { stopRemoteBoost() }
+        }
+        .onDisappear { stopRemoteBoost() }
+        #else
         TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing)) { timeline in
             let jitter = firing
                 ? sin(timeline.date.timeIntervalSinceReferenceDate * 47) * 2
@@ -289,9 +325,6 @@ struct BoostButtonView: View {
         .contentShape(Circle())
         // Touch DOWN starts the boost — a race button that waits for
         // touch-up feels broken, and holding is now the whole mechanic.
-        // ponytail: DragGesture is unavailable on tvOS, and the TV routes to
-        // ArenaLobbyView so this dial is never presented there — it only has
-        // to compile. An inert dial on TV is the correct outcome.
         #if !os(tvOS)
         .gesture(
             DragGesture(minimumDistance: 0)
@@ -328,7 +361,24 @@ struct BoostButtonView: View {
             was == false && now ? .impact(weight: .heavy) : nil
         }
         #endif
+        #endif
     }
+
+    #if os(tvOS)
+    private func toggleRemoteBoost() {
+        if pressed { stopRemoteBoost() }
+        else if armed {
+            pressed = true
+            armedAtPress = true
+            begin()
+        }
+    }
+
+    private func stopRemoteBoost() {
+        pressed = false
+        end()
+    }
+    #endif
 
     private var dialFace: some View {
         ZStack {

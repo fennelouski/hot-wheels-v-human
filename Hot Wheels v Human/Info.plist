@@ -3,9 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Connects your iPad to your Apple TV so you can race together.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Takes one picture to color your racer like you. The picture is never saved.</string>
+	<string>Connects nearby iPads and Apple TVs so you can race together.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_hwvh-race._tcp</string>
@@ -14,6 +12,8 @@
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
 </plist>

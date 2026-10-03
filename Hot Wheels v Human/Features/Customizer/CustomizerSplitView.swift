@@ -10,6 +10,9 @@ import SwiftUI
 
 struct CustomizerSplitView: View {
     var body: some View {
+        #if os(tvOS)
+        TVTwoPlayerCustomizerView()
+        #else
         VStack(spacing: 0) {
             CustomizerView(isPlayerTwo: true)
                 .rotationEffect(.degrees(180))
@@ -17,5 +20,6 @@ struct CustomizerSplitView: View {
             CustomizerView()
         }
         .ignoresSafeArea(.keyboard)   // half-rotated layouts fight the keyboard
+        #endif
     }
 }

@@ -101,8 +101,43 @@ final class CustomizerModel {
         SoundBank.shared.play("ui_back")
     }
 
-    func save(into context: ModelContext) {
-        context.saveDesign(design)
+    private(set) var lastSaveError: String?
+
+    @discardableResult
+    func save(into context: ModelContext) -> Bool {
+        var edited: CarDesignRecord?
+        var oldName: String?
+        var oldData: Data?
+        var inserted: CarDesignRecord?
+        do {
+            let data = try JSONEncoder().encode(design)
+            let id = design.id
+            let descriptor = FetchDescriptor<CarDesignRecord>(predicate: #Predicate { $0.id == id })
+            if let record = try context.fetch(descriptor).first {
+                edited = record
+                oldName = record.name
+                oldData = record.designData
+                record.name = design.name
+                record.designData = data
+            } else {
+                let record = try CarDesignRecord(design: design)
+                context.insert(record)
+                inserted = record
+            }
+            try context.save()
+            lastSaveError = nil
+            return true
+        } catch {
+            // Restore this operation only; another editor may have pending
+            // changes in the same context, so a global rollback is unsafe.
+            if let edited, let oldName, let oldData {
+                edited.name = oldName
+                edited.designData = oldData
+            }
+            if let inserted { context.delete(inserted) }
+            lastSaveError = "Your car couldn't be saved. Your changes are still here; try Save again."
+            return false
+        }
     }
 
     static func randomCarName() -> String {

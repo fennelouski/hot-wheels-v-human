@@ -33,6 +33,7 @@ struct CustomizerView: View {
         return args.contains("--demo-design") ? .draw : .body
     }()
     @State private var saved = false
+    @State private var saveFailed = false
     @State private var testing = false
     @State private var paintSlot = CarPaintSlot.body
     @State private var armedSticker: String? = nil
@@ -44,8 +45,8 @@ struct CustomizerView: View {
     /// mesh loads; the drawing pad matches its canvas to it.
     @State private var padBodyAspect: CGFloat = 2.4
     #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
-    /// Session-held pencil strokes (the design only stores the capped PNG).
-    @State private var pencilStrokes = PKDrawing()
+    /// Both drawing layers outlive switching away from the Draw tab.
+    @State private var pencilSession = CarDrawingSession()
     #endif
 
     enum Tab: String, CaseIterable {
@@ -73,6 +74,14 @@ struct CustomizerView: View {
     }
 
     var body: some View {
+        #if os(tvOS)
+        TVCustomizerView(model: model, isPlayerTwo: isPlayerTwo)
+        #else
+        iPadBody
+        #endif
+    }
+
+    private var iPadBody: some View {
         VStack(spacing: 12) {
             TextField("Car name", text: $model.design.name)
                 .font(.system(size: 34, weight: .heavy, design: .rounded))
@@ -118,7 +127,7 @@ struct CustomizerView: View {
             .frame(minHeight: 220)
             .overlay(alignment: .topLeading) {
                 Button {
-                    model.undo()
+                    undoDesign()
                 } label: {
                     Label("Undo", systemImage: "arrow.uturn.backward")
                         .font(.system(size: 22, weight: .heavy, design: .rounded))
@@ -147,7 +156,7 @@ struct CustomizerView: View {
                     #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
                     DrawingPadView(drawingPNG: $model.design.drawingPNG,
                                    drawingStrokes: $model.design.drawingStrokes,
-                                   strokes: $pencilStrokes,
+                                   session: $pencilSession,
                                    stickers: $model.design.stickers,
                                    bodyAspect: padBodyAspect)
                     #else
@@ -191,7 +200,7 @@ struct CustomizerView: View {
                     testing = true
                 }
                 SaveItButton(saved: saved) {
-                    model.save(into: modelContext)
+                    guard model.save(into: modelContext) else { saveFailed = true; return }
                     if isPlayerTwo {
                         appModel.playerTwoDesign = model.design
                     } else {
@@ -211,6 +220,20 @@ struct CustomizerView: View {
         .foregroundStyle(.white)
         .racePreview(isPresented: $testing,
                      designs: [appModel.stampedRaceDesign(car: model.design)])
+        .alert("Couldn't Save Car", isPresented: $saveFailed) {
+            Button("OK", role: .cancel) { }
+        } message: { Text(model.lastSaveError ?? "Please try Save again.") }
+    }
+
+    private func undoDesign() {
+        let old = model.design
+        model.undo()
+        #if canImport(PencilKit) && !os(tvOS) && !os(macOS)
+        if old.drawingPNG != model.design.drawingPNG || old.drawingStrokes != model.design.drawingStrokes {
+            pencilSession.restore(png: model.design.drawingPNG,
+                                  editableStrokes: model.design.drawingStrokes)
+        }
+        #endif
     }
 
     /// Whose gestures these are: the sticker tools' on the Stickers tab,
@@ -249,6 +272,8 @@ struct CustomizerView: View {
 /// Live rebuildable turntable preview of the current design.
 struct CarTurntableView: View {
     let design: CarDesign
+    /// Optional remote-owned camera state. Touch previews keep their local orbit.
+    var remoteOrbit: TurntableOrbit? = nil
     /// Tap a part (body/wheel) on the turntable → part name, for paint-slot
     /// selection. nil = preview is not tappable.
     var onPartTapped: ((String) -> Void)? = nil
@@ -268,8 +293,8 @@ struct CarTurntableView: View {
     @State private var refs = OrbitRefs()
 
     var body: some View {
-        // These gestures don't exist on tvOS; the customizer only runs
-        // on iPad, the TV merely compiles this file.
+        // Apple TV uses the workshop's explicit remote camera controls.
+        // iPad keeps its direct drag / pinch interactions.
         #if os(tvOS)
         realityView
         #else
@@ -362,6 +387,7 @@ struct CarTurntableView: View {
                     angle: Float(event.deltaTime) * 1.0, axis: [0, 1, 0])
             }
         } update: { content in
+            if let remoteOrbit { refs.orbit = remoteOrbit }
             guard let turntable = content.entities.first(where: { $0.name == "turntable" }) else { return }
             Task { @MainActor in
                 await Self.rebuild(turntable, design: design, refs: refs,

@@ -5,3 +5,6 @@ DerivedData/
 
 # Local xcodebuild DerivedData (device/sim builds)
 build/
+
+# App Review contact details stay in local release preparation.
+/app-store-audit/2026-10-03-ipad-tvos/review-contact.private.json

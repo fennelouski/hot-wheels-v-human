@@ -1,0 +1,53 @@
+{
+  "verifiedAt": "2026-10-03T07:28:09.224275+00:00",
+  "mode": "local-static-preparation",
+  "status": "HTML/source/link checks passed; no browser visual verification or deployment performed",
+  "siteRevision": "b5a6148f09666b133b6d90155739731832671365",
+  "pages": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/nathanfennel.com/public/hwvh/privacy.html",
+      "sha256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+      "byteLength": 3606,
+      "links": [
+        "https://nathanfennel.com/contact",
+        "https://nathanfennel.com/hwvh/support.html"
+      ],
+      "robots": "noindex, nofollow, noarchive",
+      "balancedMarkup": true,
+      "privateReviewContactAbsent": true
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/nathanfennel.com/public/hwvh/support.html",
+      "sha256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+      "byteLength": 3290,
+      "links": [
+        "https://nathanfennel.com/contact",
+        "https://nathanfennel.com/hwvh/privacy.html"
+      ],
+      "robots": "noindex, nofollow, noarchive",
+      "balancedMarkup": true,
+      "privateReviewContactAbsent": true
+    }
+  ],
+  "publicContactReadOnlyCheck": {
+    "url": "https://nathanfennel.com/contact",
+    "status": 200,
+    "contentType": "text/html",
+    "resolvedURL": "https://nathanfennel.com/contact"
+  },
+  "unlisted": "No nav, search or sitemap entries added; noindex/nofollow/noarchive in both standalone pages.",
+  "typography": "Same system font, 68ch body width, 1.05rem body, 1.5rem h2 and 2rem-to-2.35rem h1 as existing How to Adult pages. HWvH navy/yellow accents.",
+  "deployment": {
+    "attempted": false,
+    "liveHWvHRoutesVerified": false,
+    "commandRead": "npm exec --yes --package=node@22 -- python3 scripts/deploy-app-privacy.py",
+    "commandExecuted": false,
+    "pending": "Add hwvh and how-to-adult routes to verified explicit PAGES allowlist before future dual deployment; AWS login confirmation still pending."
+  },
+  "committedFilesOnly": [
+    "public/hwvh/privacy.html",
+    "public/hwvh/support.html"
+  ],
+  "pushed": false,
+  "otherChatDesignArtifacts": "Existing untracked nathanfennel.com/.impeccable/ preserved and excluded from commit."
+}

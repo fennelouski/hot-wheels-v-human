@@ -1,0 +1,3 @@
+PASS TEST ONLY ipad-13: dimensions, sRGB, hero layering and outward fan geometry.
+PASS TEST ONLY apple-tv: dimensions, sRGB, hero layering and outward fan geometry.
+PASS validator rejection checks; fixture bytes unchanged. Temporary test images removed.

@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  PieceShelf.swift
 //  Hot Wheels v HumanUITests
@@ -73,3 +74,4 @@ extension XCTestCase {
         return false
     }
 }
+#endif

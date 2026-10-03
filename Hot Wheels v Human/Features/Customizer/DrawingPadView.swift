@@ -20,8 +20,8 @@ import PencilKit
 struct DrawingPadView: View {
     @Binding var drawingPNG: Data?
     @Binding var drawingStrokes: Data?
-    /// Session-held strokes so reopening the tab keeps the drawing editable.
-    @Binding var strokes: PKDrawing
+    /// Parent-owned raster and pencil layers survive Draw tab recreation.
+    @Binding var session: CarDrawingSession
     /// Stamps placed from the pad — the design's sticker list (same layer
     /// the Stickers tab stamps onto the 3D car).
     @Binding var stickers: [StickerPlacement]?
@@ -78,7 +78,7 @@ struct DrawingPadView: View {
                 }
                 .buttonStyle(.plain)
                 Button {
-                    strokes = PKDrawing()
+                    session.clear()
                     drawingPNG = nil
                     drawingStrokes = nil
                     SoundBank.shared.play("piece_delete_pop")
@@ -138,7 +138,10 @@ struct DrawingPadView: View {
                     .fill(.white.opacity(0.10))
                 CarSilhouette()
                     .stroke(.white.opacity(0.35), style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                PencilCanvas(drawing: $strokes,
+                if let rasterBase = session.rasterBase, let image = UIImage(data: rasterBase) {
+                    Image(uiImage: image).resizable().allowsHitTesting(false)
+                }
+                PencilCanvas(drawing: $session.strokes,
                              tool: erasing
                                 ? PKEraserTool(.bitmap)
                                 : PKInkingTool(.marker,
@@ -169,11 +172,7 @@ struct DrawingPadView: View {
         .background(.white.opacity(0.04), in: RoundedRectangle(cornerRadius: 16))
         .aspectRatio(max(1, min(bodyAspect, 5)), contentMode: .fit)
         .onAppear {
-            // Reopened saved design: restore the editable strokes.
-            if strokes.strokes.isEmpty, let data = drawingStrokes,
-               let restored = try? PKDrawing(data: data) {
-                strokes = restored
-            }
+            session.prepareIfNeeded(png: drawingPNG, editableStrokes: drawingStrokes)
         }
     }
 
@@ -220,29 +219,11 @@ struct DrawingPadView: View {
     /// are in the canvas view's point space, hence the size parameter.
     private func commit(canvasSize: CGSize) {
         SoundBank.shared.play("paint_spray")
-        guard !strokes.strokes.isEmpty else {
-            drawingPNG = nil
-            drawingStrokes = nil
-            return
-        }
-        guard canvasSize.width > 0, canvasSize.height > 0 else { return }
-        let drawn = strokes.image(from: CGRect(origin: .zero, size: canvasSize),
-                                  scale: max(1, 1024 / canvasSize.width))
-        // Through a CGImage so the PNG cap is the one shared cross-platform
-        // path in OverlayComposer.
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = 1
-        let square = UIGraphicsImageRenderer(size: CGSize(width: 1024, height: 1024),
-                                             format: format)
-            .image { _ in
-                drawn.draw(in: CGRect(x: 0, y: 0, width: 1024, height: 1024))
-            }
-        if let cg = square.cgImage {
-            drawingPNG = OverlayComposer.encodePNGCapped(cg)
-        }
-        let data = strokes.dataRepresentation()
-        drawingStrokes = data.count <= 200_000 ? data : nil
+        guard let exported = session.export(canvasSize: canvasSize) else { return }
+        drawingPNG = exported.png
+        drawingStrokes = exported.editableStrokes
     }
+
 }
 
 /// Toy-car side profile used as the stencil background.

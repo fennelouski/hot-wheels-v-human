@@ -2,8 +2,9 @@
 //  RootView.swift
 //  Hot Wheels v Human
 //
-//  Platform router + iPad home. iPadOS → Workshop home, tvOS → Arena
-//  lobby. `--solo-arena` launch arg jumps straight into a demo race.
+//  Both platforms open their workshop after the profile picker. The TV
+//  also hosts iPad races through Race with iPad. Development launch
+//  arguments can jump straight to a particular workshop or demo race.
 //
 
 import SwiftUI
@@ -128,14 +129,16 @@ struct RootView: View {
             NavigationStack { GarageView() }
         } else if launchIntoRaceOnTV {
             NavigationStack { RaceOnTVView() }
-        } else if Platform.isTV {
-            ArenaLobbyView()
         } else if appModel.selectedProfile == nil {
             // "Who's playing?" gate — one tap, then home. Dev deep links
             // above skip it on purpose.
             ProfilePickerView()
         } else {
+            #if os(tvOS)
+            TVWorkshopHome()
+            #else
             homeScreen
+            #endif
         }
     }
 

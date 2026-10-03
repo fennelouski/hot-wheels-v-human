@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  WorkshopTryItUITests.swift
 //  Hot Wheels v HumanUITests
@@ -12,6 +13,12 @@
 import XCTest
 
 final class WorkshopTryItUITests: XCTestCase {
+    @MainActor
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+        XCUIDevice.shared.orientation = .landscapeLeft
+    }
+
 
     /// Track builder: load a starter track, drive it, come back still holding it.
     @MainActor
@@ -187,3 +194,4 @@ final class WorkshopTryItUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif

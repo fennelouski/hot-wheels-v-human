@@ -12,12 +12,12 @@ iPad + Apple TV toy-racing game: build tracks & cars on iPad, race with real phy
 ## Facts you'd otherwise have to rediscover
 - Xcode 26 project, `objectVersion 77`, **filesystem-synchronized folders**: files created under `Hot Wheels v Human/` are automatically in the app target — no pbxproj edits to add files. Tests folders are likewise synced.
 - One multiplatform target (iPadOS 26 + tvOS 26 after Phase 0). RealityKit works on tvOS since tvOS 26 (WWDC25); SceneKit is deprecated — never use it.
-- Platform behavior: iPad = workshop/controller; TV = physics-authoritative arena; iPad Solo Arena (LoopbackTransport) = primary dev/test loop. Multipeer needs a real device; don't fight Simulator-to-Simulator.
+- Platform behavior: iPad and TV both offer the workshop, profiles, car/driver editors, saved tracks and standalone racing. TV remains the physics-authoritative arena during local multiplayer. Use focusable Siri Remote controls for TV editing. iPad Solo Arena (LoopbackTransport) is the primary dev/test loop. Multipeer needs a real device; don't fight Simulator-to-Simulator.
 - 3D assets: CC0 packs already downloaded in `Graphics/3DModels/Source/` (Kenney Toy Car Kit = track system incl. loop; Kenney Car Kit = cars/wheels/debris; Quaternius rigged human; OGA racetrack extras). Convert GLB→USDZ into `Hot Wheels v Human/Resources/Models3D/` per `Graphics/README.md`.
 - Multipeer service `hwvh-race`; Info.plist needs `NSLocalNetworkUsageDescription` + `NSBonjourServices` or discovery silently fails.
 - The Quaternius driver rig is ONE mesh + ONE material colored by a 32×32 stripe-palette texture (rows top-down: 0–5 skin, 6–10 eyes+eyebrows, 11–16 hair, 17–22 shirt, 23–31 pants — constants in `DriverPalette.StripeRows`). Painting the whole character = generating 5 stripes (`DriverPainter`); no UV work needed. Bones are Mixamo-named (`Hips…Neck/Head`) — `HeadPinSystem` pins dress-up props to the posed Head joint.
 - The character rides the wire inside the design: `CarDesign.driver: DriverProfile?`, stamped by `AppModel.stampedRaceDesign()` at race time. Additive optional → old peers decode; never add a new message case for driver data.
-- Ships to iPad + Apple TV (+ Vision) only — `TARGETED_DEVICE_FAMILY = "2,3,7"`. iPhone is out: the workshop UI is sized for an iPad.
+- Ships to iPad + Apple TV only. `SUPPORTED_PLATFORMS` contains iOS and tvOS SDKs, with SDK-specific device family 2 on iPadOS and 3 on tvOS. iPhone, Mac Catalyst, Mac Designed for iPad and Vision Designed for iPad are excluded. Do not build, boot, run, capture, upload or submit visionOS until the user explicitly resumes it.
 - iPad-only code (camera, PencilKit flows) must gate with `#if os(iOS)` — `#if canImport(UIKit)` is TRUE on tvOS and will break the TV build.
 
 ## Conventions

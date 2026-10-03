@@ -32,6 +32,12 @@ struct DriverDashboardView: View {
     private var amber: Color { style.accent }
 
     var body: some View {
+        #if os(tvOS)
+        tvDashboard
+            .padding(.horizontal, 28).padding(.vertical, 18)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(cowl)
+        #else
         // Narrow screens (portrait iPad is 834 pt, and the full row wants
         // ~800) shed the trim before the controls: speaker first, then the
         // gauge. The radio itself never goes.
@@ -60,7 +66,71 @@ struct DriverDashboardView: View {
         .padding(.bottom, 12)
         .frame(maxWidth: .infinity)
         .background(cowl)
+        #endif
     }
+
+    #if os(tvOS)
+    private var tvDashboard: some View {
+        HStack(spacing: 22) {
+            gauge
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 18) {
+                    Button(action: onPower) {
+                        Image(systemName: "power")
+                            .font(.system(size: 28, weight: .bold))
+                            .frame(width: 70, height: 70)
+                    }
+                    .buttonStyle(TVWorkshopButtonStyle(selected: powered))
+                    .accessibilityLabel("Radio power")
+                    .accessibilityValue(powered ? "On" : "Off")
+                    .accessibilityIdentifier("race-radio-power")
+                    Label(powered ? station.label : "Radio off", systemImage: "radio")
+                        .font(.system(size: 27, weight: .heavy, design: .rounded))
+                        .foregroundStyle(amber)
+                        .frame(width: 300, alignment: .leading)
+                    HStack(spacing: 12) {
+                        Button { volume = max(0, volume - 0.1) } label: {
+                            Image(systemName: "speaker.minus.fill")
+                                .font(.system(size: 26)).frame(width: 66, height: 66)
+                        }
+                        .buttonStyle(TVWorkshopButtonStyle())
+                        .accessibilityLabel("Lower music volume")
+                        .accessibilityValue("\(Int((volume * 100).rounded()))%")
+                        .accessibilityIdentifier("race-volume-down")
+                        Text("\(Int((volume * 100).rounded()))%")
+                            .font(.system(size: 22, weight: .bold, design: .monospaced))
+                            .foregroundStyle(.white).frame(width: 66)
+                        Button { volume = min(1, volume + 0.1) } label: {
+                            Image(systemName: "speaker.plus.fill")
+                                .font(.system(size: 26)).frame(width: 66, height: 66)
+                        }
+                        .buttonStyle(TVWorkshopButtonStyle())
+                        .accessibilityLabel("Raise music volume")
+                        .accessibilityValue("\(Int((volume * 100).rounded()))%")
+                        .accessibilityIdentifier("race-volume-up")
+                    }
+                }
+                HStack(spacing: 12) {
+                    ForEach(RadioStation.allCases, id: \.self) { preset in
+                        Button { onPick(preset) } label: {
+                            VStack(spacing: 4) {
+                                Image(systemName: preset.symbol)
+                                Text(preset.label)
+                            }
+                            .font(.system(size: 20, weight: .bold, design: .rounded))
+                            .frame(width: 124, height: 76)
+                        }
+                        .buttonStyle(TVWorkshopButtonStyle(selected: powered && station == preset))
+                        .accessibilityIdentifier("race-radio-\(preset.rawValue)")
+                        .accessibilityAddTraits(powered && station == preset ? .isSelected : [])
+                    }
+                }
+                .focusSection()
+            }
+        }
+        .frame(maxWidth: 1120, alignment: .leading)
+    }
+    #endif
 
     // MARK: The dash itself
 

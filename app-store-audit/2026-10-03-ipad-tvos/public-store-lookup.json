@@ -1,0 +1,29 @@
+{
+  "scope": "Read-only Apple public Store lookup for three storefronts. Empty results do not prove no draft, TestFlight build, removed app, or listing elsewhere exists.",
+  "lookups": [
+    {
+      "country": "us",
+      "url": "https://itunes.apple.com/lookup?bundleId=com.nathanfennel.Hot-Wheels-v-Human&country=us",
+      "verifiedAt": "2026-10-03T07:09:31.664392+00:00",
+      "httpResult": "success",
+      "resultCount": 0,
+      "results": []
+    },
+    {
+      "country": "nl",
+      "url": "https://itunes.apple.com/lookup?bundleId=com.nathanfennel.Hot-Wheels-v-Human&country=nl",
+      "verifiedAt": "2026-10-03T07:09:31.664392+00:00",
+      "httpResult": "success",
+      "resultCount": 0,
+      "results": []
+    },
+    {
+      "country": "gb",
+      "url": "https://itunes.apple.com/lookup?bundleId=com.nathanfennel.Hot-Wheels-v-Human&country=gb",
+      "verifiedAt": "2026-10-03T07:09:31.664392+00:00",
+      "httpResult": "success",
+      "resultCount": 0,
+      "results": []
+    }
+  ]
+}

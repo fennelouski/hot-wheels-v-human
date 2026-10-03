@@ -1,0 +1,13 @@
+{
+  "finalPNGColorType" : 2,
+  "height" : 1024,
+  "operation" : "Lossless packaging export removing an unused alpha channel. Existing artwork preserved.",
+  "originalPNGColorType" : 6,
+  "originalSHA256" : "d6fb78e3b57987e9514142956a7a6dc79fe7085d3409d3b2b7cac042042de3bc",
+  "path" : "\/Users\/nathan\/Documents\/GitHub\/hot-wheels-v-human\/Hot Wheels v Human\/Assets.xcassets\/AppIcon.appiconset\/icon-ios-1024.png",
+  "rgbPixelsChanged" : 0,
+  "sha256" : "c9169cf2f8994684a40abd12883e761082bddf10fa4100cb837a8f2a862564fd",
+  "sRGBRenderedPixelsSHA256" : "604af49cd644d553ef09d4cbe59acb44fee157118b2204b9890a279a9ea5bc6f",
+  "transparentPixels" : 0,
+  "width" : 1024
+}

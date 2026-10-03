@@ -103,7 +103,9 @@ struct GarageView: View {
                 CarSwatchView(design: design, size: 96)
                 Text(design.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    #if !os(tvOS)
                     .lineLimit(1)
+                    #endif
                 if isSelected {
                     Text("RACING NEXT")
                         .font(.system(size: 14, weight: .black, design: .rounded))
@@ -112,10 +114,17 @@ struct GarageView: View {
             }
             .padding(20)
             .frame(maxWidth: .infinity)
+            #if !os(tvOS)
             .background(isSelected ? .yellow.opacity(0.2) : .white.opacity(0.08),
                         in: RoundedRectangle(cornerRadius: 18))
+            #endif
         }
+        #if os(tvOS)
+        .buttonStyle(TVWorkshopButtonStyle(selected: isSelected))
+        #else
         .buttonStyle(.plain)
+        #endif
+        .accessibilityIdentifier("\(isStarter ? "tv-garage-starter-car" : "tv-garage-car")-\(design.id.uuidString)")
     }
 
     private func bodyCard(_ body: (name: String, model: String, symbol: String)) -> some View {
@@ -128,13 +137,21 @@ struct GarageView: View {
                     .frame(height: 96)
                 Text(body.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
+                    #if !os(tvOS)
                     .lineLimit(1)
+                    #endif
             }
             .padding(20)
             .frame(maxWidth: .infinity)
+            #if !os(tvOS)
             .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 18))
+            #endif
         }
+        #if os(tvOS)
+        .buttonStyle(TVWorkshopButtonStyle())
+        #else
         .buttonStyle(.plain)
+        #endif
     }
 }
 
@@ -149,6 +166,10 @@ struct CarDetailView: View {
     let isStarter: Bool
     @State private var design: CarDesign
     @State private var testing = false
+    @State private var persistenceError: String?
+    #if os(tvOS)
+    @State private var tvOrbit = TurntableOrbit()
+    #endif
 
     init(design: CarDesign, isStarter: Bool = false) {
         self.isStarter = isStarter
@@ -156,6 +177,19 @@ struct CarDetailView: View {
     }
 
     var body: some View {
+        Group {
+            #if os(tvOS)
+            tvBody
+            #else
+            iPadBody
+            #endif
+        }
+        .alert("Couldn't Save Changes", isPresented: Binding(get: { persistenceError != nil }, set: { if !$0 { persistenceError = nil } })) {
+            Button("Keep Editing", role: .cancel) { persistenceError = nil }
+        } message: { Text(persistenceError ?? "Please try again.") }
+    }
+
+    private var iPadBody: some View {
         // Deliberately NOT a ScrollView: the turntable's drag-to-orbit and a
         // vertical scroll would both claim the same finger. The turntable
         // gives up height instead (as in CustomizerView), so it all fits.
@@ -175,7 +209,7 @@ struct CarDetailView: View {
                         .font(.system(size: 40, weight: .heavy, design: .rounded))
                         .multilineTextAlignment(.center)
                         .textFieldStyle(.plain)
-                        .onChange(of: design.name) { modelContext.saveDesign(design) }
+                        .onChange(of: design.name) { persist(design) }
                 }
 
                 // Bars come straight off RaceTuning, so they can't lie
@@ -218,6 +252,55 @@ struct CarDetailView: View {
                      designs: [appModel.stampedRaceDesign(car: design)])
     }
 
+    #if os(tvOS)
+    private var tvBody: some View {
+        HStack(spacing: 44) {
+            VStack(spacing: 24) {
+                CarTurntableView(design: design, remoteOrbit: tvOrbit)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                TVPreviewOrbitControls(orbit: $tvOrbit)
+            }
+            .frame(maxWidth: .infinity)
+            .focusSection()
+            ScrollView {
+                VStack(spacing: 24) {
+                    if isStarter {
+                        Text(design.name).font(.system(size: 44, weight: .heavy, design: .rounded))
+                    } else {
+                        TextField("Car name", text: $design.name)
+                            .font(.system(size: 38, weight: .heavy, design: .rounded))
+                            .onChange(of: design.name) { persist(design) }
+                    }
+                    VStack(spacing: 16) {
+                        StatBar(name: "Speed", value: normalized(RaceTuning.maxSpeed[design.chassis]!, among: RaceTuning.maxSpeed))
+                        StatBar(name: "Weight", value: normalized(design.chassis.mass, among: RaceTuning.chassisMass))
+                        StatBar(name: "Grip", value: normalized(design.tires.staticFriction, among: RaceTuning.tireStaticFriction))
+                    }
+                    Button {
+                        appModel.selectedDesign = design
+                        SoundBank.shared.play("car_select_vroom")
+                        dismiss()
+                    } label: { Label("Race This Car", systemImage: "flag.checkered") }
+                    .font(.system(size: 30, weight: .heavy, design: .rounded))
+                    .buttonStyle(TVWorkshopButtonStyle(selected: true))
+                    actions
+                }
+                .padding(24)
+                .frame(maxWidth: .infinity)
+            }
+            .frame(maxWidth: .infinity)
+            .focusSection()
+        }
+        .padding(44)
+        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        .foregroundStyle(.white)
+        .onAppear {
+            if let fresh = modelContext.carRecord(design.id)?.design { design = fresh }
+        }
+        .racePreview(isPresented: $testing, designs: [appModel.stampedRaceDesign(car: design)])
+    }
+    #endif
+
     @ViewBuilder
     private var actions: some View {
         NavigationLink {
@@ -228,6 +311,7 @@ struct CarDetailView: View {
         }
         .buttonStyle(.bordered)
         .tint(.yellow)
+        .accessibilityIdentifier("tv-garage-edit-car")
 
         Button {
             testing = true
@@ -270,21 +354,45 @@ struct CarDetailView: View {
     private func makeCopy() {
         var copy = personalCopy()
         copy.name = "\(design.name) 2"
-        modelContext.saveDesign(copy)
+        guard persist(copy, failureMessage: "Your car copy couldn't be saved. Your original car is still here; try Make a Copy again.") else { return }
         SoundBank.shared.play("confirm_sparkle")
         dismiss()
     }
 
-    private func scrap() {
-        guard let record = modelContext.carRecord(design.id) else { return }
-        if appModel.selectedDesign?.id == design.id {
-            appModel.selectedDesign = nil
+    /// The editor's success-gated upsert also covers inline rename and copy.
+    @discardableResult
+    private func persist(_ value: CarDesign, failureMessage: String = "Your car name couldn't be saved. Your typed name is still here; try editing it again.") -> Bool {
+        let editor = CustomizerModel(design: value)
+        guard editor.save(into: modelContext) else {
+            persistenceError = failureMessage
+            return false
         }
-        modelContext.delete(record)
-        try? modelContext.save()
+        if value.id == appModel.selectedDesign?.id { appModel.selectedDesign = value }
+        persistenceError = nil
+        return true
+    }
+
+    private func scrap() {
+        var removed: CarDesignRecord?
+        do {
+            let id = design.id
+            let descriptor = FetchDescriptor<CarDesignRecord>(predicate: #Predicate { $0.id == id })
+            guard let record = try modelContext.fetch(descriptor).first else { return }
+            removed = record
+            modelContext.delete(record)
+            try modelContext.save()
+        } catch {
+            // Reinsert only the requested car; never roll back other drafts.
+            if let removed { modelContext.insert(removed) }
+            persistenceError = "Your car couldn't be removed. Please try Scrap It again."
+            return
+        }
+        if appModel.selectedDesign?.id == design.id { appModel.selectedDesign = nil }
+        persistenceError = nil
         SoundBank.shared.play("piece_delete_pop")
         dismiss()
     }
+
 }
 
 /// The card's paint swatch: the design's actual look — paint color with the

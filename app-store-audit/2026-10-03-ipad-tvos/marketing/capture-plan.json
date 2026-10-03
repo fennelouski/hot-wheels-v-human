@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "status": "draft-awaiting-final-native-captures",
+  "preparedOn": "2026-10-03",
+  "observedBaseRevision": "de7eb6d276ed9f3be4c8c64f5e07da54bd0bb5f4",
+  "releaseName": "HWvH",
+  "appleSpecification": {
+    "url": "https://developer.apple.com/help/app-store-connect/reference/app-information/screenshot-specifications/",
+    "checkedOn": "2026-10-03",
+    "maxImagesPerGallery": 10,
+    "opaqueRequired": true
+  },
+  "layout": {
+    "headline": "short and centered at top",
+    "hero": "upright, centered, in front",
+    "leftRotation": "counterclockwise, negative clockwise degrees",
+    "rightRotation": "clockwise, positive clockwise degrees",
+    "screenshotsPerImage": [
+      1,
+      3
+    ],
+    "backgroundCycle": [
+      "navyTrackLoops",
+      "yellowPitGrid",
+      "orangeLaunchLanes",
+      "blueToyBlocks"
+    ]
+  },
+  "excludedPlatforms": [
+    "iPhone",
+    "macOS",
+    "Mac Catalyst",
+    "visionOS"
+  ],
+  "galleries": [
+    {
+      "platform": "ipad-13",
+      "outputPixels": [
+        2752,
+        2064
+      ],
+      "requestedDevice": "iPad Pro 13-inch native landscape capture",
+      "verificationStatus": "pending-final-native-build",
+      "captureStates": [
+        {
+          "requestedID": "ipad-track",
+          "screen": "Track builder with a complete, visibly readable track and piece palette.",
+          "runtimeCheck": "Add a piece, undo, save, reopen and verify the same track remains. Do not claim TV drawing by touch.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-car",
+          "screen": "Car workshop Body tab with the chosen 3D toy car and actual controls.",
+          "runtimeCheck": "Choose body/chassis/tires, save, reopen and test drive the same car.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-race",
+          "screen": "Active 3D race in chase view with cars and track visibly loaded.",
+          "runtimeCheck": "Start a standalone race, observe telemetry and complete or close it cleanly.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-racer",
+          "screen": "Racer editor with a loaded 3D preview and real outfit or color choices.",
+          "runtimeCheck": "Change a visible choice, save, reopen and verify persistence and the race driver.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-paint",
+          "screen": "Paint controls plus 3D preview with the chosen part and finish visibly changed.",
+          "runtimeCheck": "Change Body and Wheels paint/finish using the platform controls and verify the displayed material.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-draw",
+          "screen": "Drawing controls with a simple user-authored stroke on the actual car.",
+          "runtimeCheck": "Use native iPad drawing or Siri Remote TV drawing tools, save, reopen and confirm the stroke.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-stickers",
+          "screen": "Sticker editor with a deliberately placed sticker visible on the 3D car.",
+          "runtimeCheck": "Add, move, size, rotate and recolor a sticker using native controls, then save and reopen.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-world",
+          "screen": "World or decoration editor with clear toy scenery and the real editing controls.",
+          "runtimeCheck": "Select a world, place or move a prop, save and reopen the blueprint.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-garage",
+          "screen": "Saved car garage with deliberately named local designs and genuine car art.",
+          "runtimeCheck": "Save a new design, reopen it from the garage and verify its identity and values.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-boost",
+          "screen": "Native racing controls with a real boost meter and loaded race.",
+          "runtimeCheck": "Hold boost using touch on iPad or the TV remote control and observe meter or speed response.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-driver",
+          "screen": "The same native race in driver view with the actual cockpit.",
+          "runtimeCheck": "Toggle between driver and chase views and confirm the loaded race continues.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "ipad-library",
+          "screen": "Saved track library with named local tracks.",
+          "runtimeCheck": "Save a track, relaunch or reopen the library and load that exact blueprint.",
+          "status": "pending"
+        }
+      ],
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build your own track",
+          "featureID": "track-builder",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-track",
+          "left": "ipad-world",
+          "right": "ipad-race",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-car",
+          "left": "ipad-paint",
+          "right": "ipad-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-race",
+          "left": null,
+          "right": "ipad-driver",
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-racer",
+          "left": "ipad-car",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-paint",
+          "left": null,
+          "right": null,
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-draw",
+          "left": "ipad-car",
+          "right": "ipad-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-stickers",
+          "left": "ipad-paint",
+          "right": null,
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "08-build-worlds",
+          "headline": "Build a whole toy world",
+          "featureID": "world-decoration",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-world",
+          "left": "ipad-track",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-garage",
+          "left": "ipad-library",
+          "right": "ipad-car",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "10-hold-boost",
+          "headline": "Hold boost. Chase the flag.",
+          "featureID": "race-boost",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "ipad-boost",
+          "left": null,
+          "right": "ipad-race",
+          "background": "yellowPitGrid"
+        }
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "outputPixels": [
+        1920,
+        1080
+      ],
+      "requestedDevice": "Apple TV native 1080p landscape capture",
+      "verificationStatus": "pending-final-native-build",
+      "captureStates": [
+        {
+          "requestedID": "tv-track",
+          "screen": "Track builder with a complete, visibly readable track and piece palette.",
+          "runtimeCheck": "Add a piece, undo, save, reopen and verify the same track remains. Do not claim TV drawing by touch.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-car",
+          "screen": "Car workshop Body tab with the chosen 3D toy car and actual controls.",
+          "runtimeCheck": "Choose body/chassis/tires, save, reopen and test drive the same car.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-race",
+          "screen": "Active 3D race in chase view with cars and track visibly loaded.",
+          "runtimeCheck": "Start a standalone race, observe telemetry and complete or close it cleanly.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-racer",
+          "screen": "Racer editor with a loaded 3D preview and real outfit or color choices.",
+          "runtimeCheck": "Change a visible choice, save, reopen and verify persistence and the race driver.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-paint",
+          "screen": "Paint controls plus 3D preview with the chosen part and finish visibly changed.",
+          "runtimeCheck": "Change Body and Wheels paint/finish using the platform controls and verify the displayed material.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-draw",
+          "screen": "Drawing controls with a simple user-authored stroke on the actual car.",
+          "runtimeCheck": "Use native iPad drawing or Siri Remote TV drawing tools, save, reopen and confirm the stroke.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-stickers",
+          "screen": "Sticker editor with a deliberately placed sticker visible on the 3D car.",
+          "runtimeCheck": "Add, move, size, rotate and recolor a sticker using native controls, then save and reopen.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-world",
+          "screen": "World or decoration editor with clear toy scenery and the real editing controls.",
+          "runtimeCheck": "Select a world, place or move a prop, save and reopen the blueprint.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-garage",
+          "screen": "Saved car garage with deliberately named local designs and genuine car art.",
+          "runtimeCheck": "Save a new design, reopen it from the garage and verify its identity and values.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-boost",
+          "screen": "Native racing controls with a real boost meter and loaded race.",
+          "runtimeCheck": "Hold boost using touch on iPad or the TV remote control and observe meter or speed response.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-driver",
+          "screen": "The same native race in driver view with the actual cockpit.",
+          "runtimeCheck": "Toggle between driver and chase views and confirm the loaded race continues.",
+          "status": "pending"
+        },
+        {
+          "requestedID": "tv-library",
+          "screen": "Saved track library with named local tracks.",
+          "runtimeCheck": "Save a track, relaunch or reopen the library and load that exact blueprint.",
+          "status": "pending"
+        }
+      ],
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build on the big screen",
+          "featureID": "track-builder",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-track",
+          "left": "tv-world",
+          "right": "tv-race",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-car",
+          "left": "tv-paint",
+          "right": "tv-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-race",
+          "left": null,
+          "right": "tv-driver",
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-racer",
+          "left": "tv-car",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-paint",
+          "left": null,
+          "right": null,
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-draw",
+          "left": "tv-car",
+          "right": "tv-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-stickers",
+          "left": "tv-paint",
+          "right": null,
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "08-build-worlds",
+          "headline": "Build a whole toy world",
+          "featureID": "world-decoration",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-world",
+          "left": "tv-track",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-garage",
+          "left": "tv-library",
+          "right": "tv-car",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "10-hold-boost",
+          "headline": "Hold boost. Chase the flag.",
+          "featureID": "race-boost",
+          "status": "pending-runtime-and-visual-verification",
+          "hero": "tv-boost",
+          "left": null,
+          "right": "tv-race",
+          "background": "yellowPitGrid"
+        }
+      ]
+    }
+  ]
+}

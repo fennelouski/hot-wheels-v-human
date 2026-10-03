@@ -1,6 +1,13 @@
 # Architecture — Hot Wheels vs. Human
 
-One Xcode target, three roles. The same binary runs as:
+October 3 scope update: both iPad and Apple TV must offer profiles, character
+and car customization, saved libraries, track/world editing and standalone
+racing. The TV remains authoritative during networked races. Its workshop
+uses Siri Remote focus and select controls. iPad-only camera and PencilKit
+hardware tools keep their iOS guards. The role description below documents
+the earlier controller/arena split, not a restriction on TV editing.
+
+One Xcode target, three original roles. The same binary runs as:
 - **Workshop + Dashboard** (iPadOS)
 - **Arena host** (tvOS)
 - **Solo Arena** (iPadOS, arena + dashboard in one screen — the dev/test loop)

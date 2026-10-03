@@ -24,7 +24,7 @@ struct SoloArenaView: View {
         ZStack(alignment: .bottomTrailing) {
             if let rig {
                 ArenaView(coordinator: rig.coordinator)
-                RaceControlsView(model: rig.dashboard)
+                RaceControlsView(models: rig.dashboards)
             } else {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -32,19 +32,34 @@ struct SoloArenaView: View {
         .background(Color(red: 0.07, green: 0.08, blue: 0.13).ignoresSafeArea())
         .task {
             guard rig == nil else { return }
-            let pair = LoopbackTransport.pair()
-            let coordinator = RaceCoordinator(transport: pair.host)
-            let dashboard = DashboardModel(transport: pair.player, playerName: "Solo Racer")
+            let localPlayers = config.mode == .twoPlayer ? 2 : 1
+            let hub = LoopbackTransport.hub(playerCount: localPlayers)
+            let coordinator = RaceCoordinator(transport: hub.host)
+            let dashboards = hub.players.enumerated().map { index, transport in
+                DashboardModel(transport: transport,
+                               playerName: localPlayers == 1 ? "Solo Racer" : "Player \(index + 1)")
+            }
             coordinator.start()
-            dashboard.start()
-            dashboard.submitAndReady(designs: designs,
-                                     tracks: [blueprint ?? appModel.raceBlueprint],
-                                     config: config)
-            rig = SoloRig(coordinator: coordinator, dashboard: dashboard)
+            for dashboard in dashboards { dashboard.start() }
+            if localPlayers == 2 {
+                var localDesigns = Array(designs.prefix(2))
+                while localDesigns.count < 2 { localDesigns.append(CarDesign.demoPair[localDesigns.count]) }
+                if localDesigns[0].id == localDesigns[1].id { localDesigns[1].id = UUID() }
+                // Submit both players before either READY can start a race.
+                for (index, dashboard) in dashboards.enumerated() {
+                    dashboard.submit(designs: [localDesigns[index]],
+                                     tracks: [blueprint ?? appModel.raceBlueprint], config: config)
+                }
+            } else {
+                dashboards[0].submit(designs: designs,
+                                     tracks: [blueprint ?? appModel.raceBlueprint], config: config)
+            }
+            for dashboard in dashboards { dashboard.sendReady() }
+            rig = SoloRig(coordinator: coordinator, dashboards: dashboards)
         }
         .onDisappear {
             rig?.coordinator.stop()
-            rig?.dashboard.stop()
+            for dashboard in rig?.dashboards ?? [] { dashboard.stop() }
         }
     }
 }
@@ -52,7 +67,7 @@ struct SoloArenaView: View {
 /// Keeps the loopback pair + both endpoints alive together.
 struct SoloRig {
     let coordinator: RaceCoordinator
-    let dashboard: DashboardModel
+    let dashboards: [DashboardModel]
 }
 
 /// The buttons that float over the arena when the iPad is both screen and
@@ -60,13 +75,13 @@ struct SoloRig {
 /// bottom-leading and the race clock bottom-center. Same 24 pt inset as
 /// the PiPs so everything along the bottom edge lines up.
 private struct RaceControlsView: View {
-    let model: DashboardModel
+    let models: [DashboardModel]
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 12) {
-            if model.phase == .results {
+            if models.first?.phase == .results {
                 Button {
-                    model.requestRematch()
+                    for model in models { model.requestRematch() }
                 } label: {
                     Label("REMATCH!", systemImage: "arrow.clockwise")
                         .font(.system(size: 30, weight: .black, design: .rounded))
@@ -75,10 +90,22 @@ private struct RaceControlsView: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.yellow)
                 .foregroundStyle(.black)
-            } else if let car = model.myCar {
-                ReactionCamButton { model.setReactionCam(on: $0) }
-                BoostButtonView(meter: car.boostMeter,
-                                begin: model.beginBoost, end: model.endBoost)
+                .accessibilityIdentifier("race-rematch")
+            } else {
+                ForEach(models, id: \.player.id) { model in
+                    if let car = model.myCar {
+                        VStack(alignment: .trailing, spacing: 10) {
+                            if models.count > 1 {
+                                Text(model.player.name)
+                                    .font(.system(size: 24, weight: .heavy, design: .rounded))
+                                    .foregroundStyle(.white)
+                            }
+                            ReactionCamButton { model.setReactionCam(on: $0) }
+                            BoostButtonView(meter: car.boostMeter,
+                                            begin: model.beginBoost, end: model.endBoost)
+                        }
+                    }
+                }
             }
         }
         .padding(24)
@@ -133,7 +160,11 @@ private struct RacePreviewModifier: ViewModifier {
             }
             .tint(.white.opacity(0.7))
             .accessibilityLabel("Close")
+            .accessibilityIdentifier("race-preview-close")
         }
+        #if os(tvOS)
+        .onExitCommand { isPresented = false }
+        #endif
     }
 }
 

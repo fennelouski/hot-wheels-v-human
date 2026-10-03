@@ -1,17 +1,11 @@
-# App/ — entry point, routing, app-wide state
+# App routing and shared controls
 
-**Phase 0.** Move `Hot_Wheels_v_HumanApp.swift` and `ContentView.swift` here (synced folder: a plain file move, Xcode picks it up).
+`Hot_Wheels_v_HumanApp` installs the same local SwiftData schema on iPad and Apple TV. `AppModel` holds the selected player, racer, car and next track. Each platform opens the profile picker, then its workshop home.
 
-Files to create
-- `Hot_Wheels_v_HumanApp.swift` (moved): strips SwiftData `Item` boilerplate. tvOS gets no `modelContainer` (or guarded one).
-- `AppModel.swift` (deferred to Phase 1 — every property it holds is a Phase 1/3 type): `@Observable final class AppModel` — current route, `GameTransport` instance, local `PlayerInfo`, selected designs/blueprint, race snapshot cache. Injected via `.environment`.
-- `RootView.swift`: platform router.
-  - iPadOS → `HomeView` (Workshop): navigate to Customizer / TrackBuilder / TestMode / Dashboard / SoloArena.
-  - tvOS → `ArenaLobbyView` → `ArenaView` (auto-advertises as host on launch).
-- `Platform.swift`: tiny helpers (`isTV`), the only file where `#if os(tvOS)` is expected to be dense.
-- `ChipRow.swift` (added post-G4): big high-contrast capsule-chip picker shared by Customizer + Profiles — the app-wide replacement for segmented controls (which rendered white-on-light-gray on the dark screens and sat under the 60 pt tap-target rule).
-- `LobbyBackground.swift`: slow drifting gradient shared by the TV lobby (`Features/Home/ArenaLobbyView`) and the iPad's pre-race screen (`Features/Dashboard`'s `ConnectionLadder`) — takes an `energy` (0...1) each caller computes from its own view of the connection state; always used with `.ignoresSafeArea()` so it reaches every edge, TV overscan included.
+The iPad home retains its picture tiles and touch layout. `TVWorkshopHome` offers Quick Play, Build a Car, Build a Track, Race a Robot, Garage, 2-Player Build, My Racers and Race with iPad. Local network hosting starts when Race with iPad opens, rather than blocking standalone TV play behind the lobby.
 
-`AppModel.stampedRaceDesign(car:driver:)` takes optional overrides that both default to the saved selection. Workshops pass the piece they're editing so a "try it" button races what's on screen right now, saved or not — see Features/Arena/README.md for the shared preview kit.
+`TVWorkshopButtonStyle` distinguishes persistent selection, yellow, from remote focus, a white outline. Controls have a minimum 60-point target and honor Reduce Motion. `ChipRow` keeps its touch capsule presentation on iPad and uses the same focus treatment on TV.
 
-Rules: no gameplay logic here. Navigation state lives in `AppModel`; features read/write it. Keep `App/` under ~300 lines total.
+The production display name is HWvH. Debug builds retain the development name. Existing launch arguments open individual workshops and race drills for native testing. They do not change the normal profile and home flow.
+
+`AppModel.stampedRaceDesign(car:driver:)` stamps the current draft for race previews. Unsaved edits can be tested without losing the workshop when the preview closes.

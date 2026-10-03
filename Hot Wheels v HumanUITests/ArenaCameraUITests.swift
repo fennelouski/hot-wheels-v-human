@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  ArenaCameraUITests.swift
 //  Hot Wheels v HumanUITests
@@ -86,3 +87,4 @@ final class ArenaRadioUITests: XCTestCase {
             .firstMatch.exists)
     }
 }
+#endif

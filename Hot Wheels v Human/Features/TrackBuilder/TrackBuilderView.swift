@@ -25,9 +25,13 @@ struct TrackBuilderView: View {
     @State private var previewing = false
     @State private var mapExpanded = false
     @State private var showingWorlds = false
+    @State private var saveFailed = false
     @Query(sort: \TrackBlueprintRecord.name) private var savedRecords: [TrackBlueprintRecord]
 
     var body: some View {
+        #if os(tvOS)
+        TVTrackBuilderView()
+        #else
         VStack(spacing: 12) {
             HStack(spacing: 16) {
                 Label("Track Builder", systemImage: "wrench.and.screwdriver.fill")
@@ -119,8 +123,11 @@ struct TrackBuilderView: View {
                 .disabled(!model.isRaceable)
                 SaveItButton(saved: savedName != nil) {
                     let name = "Track \(Int.random(in: 100...999))"
-                    model.save(named: name, into: modelContext, appModel: appModel)
-                    savedName = name
+                    if model.save(named: name, into: modelContext, appModel: appModel) {
+                        savedName = name
+                    } else {
+                        saveFailed = true
+                    }
                 }
                 .disabled(!model.isRaceable)
             }
@@ -130,9 +137,15 @@ struct TrackBuilderView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .onChange(of: model.types) { savedName = nil }
+        .alert("Couldn't save this track", isPresented: $saveFailed) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text("Your track is still here. Try saving again.")
+        }
         .racePreview(isPresented: $previewing,
                      designs: [appModel.stampedRaceDesign()],
                      blueprint: model.blueprint)
+        #endif
     }
 
     /// Shows the current world; tapping opens/closes the world strip over

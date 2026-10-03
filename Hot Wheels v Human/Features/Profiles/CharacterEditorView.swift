@@ -17,6 +17,7 @@ struct CharacterEditorView: View {
     @State private var model: CharacterEditorModel
     @State private var tab: Tab = .face
     @State private var saved = false
+    @State private var saveFailed = false
     @State private var testing = false
     @State private var showingLookalike = false
     /// Drives the live PiP preview (see `demoDrive`).
@@ -47,6 +48,14 @@ struct CharacterEditorView: View {
     }
 
     var body: some View {
+        #if os(tvOS)
+        TVCharacterEditorView(model: model, onSave: save)
+        #else
+        iPadBody
+        #endif
+    }
+
+    private var iPadBody: some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
                 TextField("Racer name", text: $model.driver.name)
@@ -112,7 +121,7 @@ struct CharacterEditorView: View {
                 TryItButton(title: "Test Drive!") {
                     testing = true
                 }
-                SaveItButton(saved: saved) { save() }
+                SaveItButton(saved: saved) { _ = save() }
             }
             .onChange(of: model.driver) { old, _ in
                 saved = false
@@ -124,6 +133,9 @@ struct CharacterEditorView: View {
         .background(Color(red: 0.09, green: 0.10, blue: 0.16))
         .foregroundStyle(.white)
         .racePreview(isPresented: $testing, designs: [previewDesign])
+        .alert("Couldn't Save Racer", isPresented: $saveFailed) {
+            Button("OK", role: .cancel) { }
+        } message: { Text(model.lastSaveError ?? "Please try Save again.") }
     }
 
     /// This racer in the car that's queued to race — what both the PiP and
@@ -161,17 +173,16 @@ struct CharacterEditorView: View {
 
     /// Save = this racer is now "me": persisted, selected, and remembered
     /// as the profile's last-used character.
-    private func save() {
-        model.save(into: modelContext, ownerProfileID: appModel.selectedProfile?.id)
-        appModel.selectedDriver = model.driver
-        if let profileID = appModel.selectedProfile?.id {
-            let descriptor = FetchDescriptor<KidProfileRecord>(
-                predicate: #Predicate { $0.id == profileID })
-            (try? modelContext.fetch(descriptor).first)?.lastUsedDriverID = model.driver.id
-            try? modelContext.save()
+    private func save() -> Bool {
+        guard model.save(into: modelContext, ownerProfileID: appModel.selectedProfile?.id,
+                         rememberAsLastUsed: true) else {
+            saveFailed = true
+            return false
         }
+        appModel.selectedDriver = model.driver
         saved = true
         SoundBank.shared.play("confirm_sparkle")
+        return true
     }
 
     // MARK: Tabs

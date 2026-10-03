@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  WorldPickerUITests.swift
 //  Hot Wheels v HumanUITests
@@ -9,6 +10,12 @@
 import XCTest
 
 final class WorldPickerUITests: XCTestCase {
+    @MainActor
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+        XCUIDevice.shared.orientation = .landscapeLeft
+    }
+
 
     @MainActor
     func testPickWorldsAndScreenshot() throws {
@@ -165,3 +172,4 @@ final class WorldPickerUITests: XCTestCase {
         add(shot)
     }
 }
+#endif

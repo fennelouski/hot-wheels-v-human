@@ -41,7 +41,11 @@ final class DashboardModel {
         }
     }
 
-    func stop() { transport.stop() }
+    func stop() {
+        endBoost()
+        setReactionCam(on: false)
+        transport.stop()
+    }
 
     /// Whether this dashboard has readied up for the pending race.
     private(set) var readySent = false

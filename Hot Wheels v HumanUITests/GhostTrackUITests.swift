@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  GhostTrackUITests.swift
 //  Hot Wheels v HumanUITests
@@ -112,3 +113,4 @@ final class GhostTrackUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif

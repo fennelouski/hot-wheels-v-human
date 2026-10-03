@@ -1,0 +1,94 @@
+{
+  "status": "Source assets present and dimensionally complete; compiled signed export validation remains pending.",
+  "artwork": "Existing orange loop and yellow car, preserved. iPad unused alpha removed without changing pixels. Existing two-layer tvOS icon and top shelf images preserved.",
+  "files": [
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.appiconset/icon-ios-1024.png",
+      "width": 1024,
+      "height": 1024,
+      "PNGColorType": 2,
+      "scale": null,
+      "SHA256": "c9169cf2f8994684a40abd12883e761082bddf10fa4100cb837a8f2a862564fd"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-appstore.png",
+      "width": 1280,
+      "height": 768,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "1826c28b21e0942fbef556b8206886e946cc4767ae85d630ba136deafaf59319"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-appstore.png",
+      "width": 1280,
+      "height": 768,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "22c36954c66c44dc9e73f62439a436c84db328d42300ec7bd7bb0c4a9d0396cb"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small.png",
+      "width": 400,
+      "height": 240,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "86f84a18abad28e157ed1f7f687c85147cc6187bd7e88418dd499bbed4b82f9d"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small@2x.png",
+      "width": 800,
+      "height": 480,
+      "PNGColorType": 6,
+      "scale": "2x",
+      "SHA256": "97df3722510db4216d397d30eb372ecdb5aa1379a8ebb52fe8a893ff005a82f7"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small.png",
+      "width": 400,
+      "height": 240,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "7c2cb94a74deb01feba7712e6843d8492b36d7df819da356830e732da11620ef"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small@2x.png",
+      "width": 800,
+      "height": 480,
+      "PNGColorType": 6,
+      "scale": "2x",
+      "SHA256": "55ff19ceca866bbbfe4d650ef918fe3ea2c7202a5e3d98b5a67bd53de8874021"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide.png",
+      "width": 2320,
+      "height": 720,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "b70693e3919966af1a0d0380a148cfac6eace5445065ebff568182059fde8764"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide@2x.png",
+      "width": 4640,
+      "height": 1440,
+      "PNGColorType": 6,
+      "scale": "2x",
+      "SHA256": "91394a8eb82c2c9f951eb4646429dee85f5788739df61a6d36be932e71412901"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf.png",
+      "width": 1920,
+      "height": 720,
+      "PNGColorType": 6,
+      "scale": "1x",
+      "SHA256": "5522a7ff6f1256588d06809d0554d5e4afaaee26c0299499f49b516f2b6c9cbf"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf@2x.png",
+      "width": 3840,
+      "height": 1440,
+      "PNGColorType": 6,
+      "scale": "2x",
+      "SHA256": "da16f28f048cb58f3c56b5c4f0748acefcd1142bba5348ad7fd7501f8e57e881"
+    }
+  ]
+}

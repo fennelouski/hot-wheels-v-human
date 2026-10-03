@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  WorkshopLayoutUITests.swift
 //  Hot Wheels v HumanUITests
@@ -12,6 +13,12 @@
 import XCTest
 
 final class WorkshopLayoutUITests: XCTestCase {
+    @MainActor
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+        XCUIDevice.shared.orientation = .landscapeLeft
+    }
+
 
     @MainActor
     func testCarWorkshopTabsClearTheActionRow() throws {
@@ -69,3 +76,4 @@ final class WorkshopLayoutUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif

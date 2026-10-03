@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  GarageUITests.swift
 //  Hot Wheels v HumanUITests
@@ -12,6 +13,12 @@
 import XCTest
 
 final class GarageUITests: XCTestCase {
+    @MainActor
+    override func setUpWithError() throws {
+        continueAfterFailure = false
+        XCUIDevice.shared.orientation = .landscapeLeft
+    }
+
 
     @MainActor
     func testStarterCarOpensItsOwnPageWithEveryAction() throws {
@@ -56,3 +63,4 @@ final class GarageUITests: XCTestCase {
         add(attachment)
     }
 }
+#endif
