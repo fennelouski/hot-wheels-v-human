@@ -48,10 +48,14 @@ struct TVTrackBuilderView: View {
 
     var body: some View {
         VStack(spacing: 20) {
+            // In placement mode, arrows move the target instead of navigating
+            // to the surrounding tools. Select or Back restores those tools.
             header
+                .disabled(movingCursor)
             GeometryReader { geometry in
                 HStack(spacing: 24) {
                     scene
+                        .disabled(movingCursor)
                         .frame(width: max(0, (geometry.size.width - 24) * 0.60))
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
@@ -70,6 +74,7 @@ struct TVTrackBuilderView: View {
                 }
             }
             footer
+                .disabled(movingCursor)
         }
         .padding(24)
         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())

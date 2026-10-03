@@ -42,7 +42,7 @@ final class WorldPickerUITests: XCTestCase {
             if !card.isHittable { app.swipeLeft() }
             card.tap()
             sleep(3)    // async world rebuild + prop spawn
-            let shot = XCTAttachment(screenshot: app.screenshot())
+            let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
             shot.name = "world-\(world)"
             shot.lifetime = .keepAlways
             add(shot)
@@ -88,7 +88,7 @@ final class WorldPickerUITests: XCTestCase {
             sleep(1)
         }
         sleep(2)
-        var shot = XCTAttachment(screenshot: app.screenshot())
+        var shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         shot.name = "decorated"
         shot.lifetime = .keepAlways
         add(shot)
@@ -104,7 +104,7 @@ final class WorldPickerUITests: XCTestCase {
         app.buttons["space-nebula-pink"].tap()
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.65, dy: 0.4)).tap()
         sleep(2)
-        shot = XCTAttachment(screenshot: app.screenshot())
+        shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         shot.name = "planets"
         shot.lifetime = .keepAlways
         add(shot)
@@ -137,7 +137,7 @@ final class WorldPickerUITests: XCTestCase {
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.42, dy: 0.42)).tap()
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.6, dy: 0.35)).tap()
         sleep(6)   // long enough to seek the road and start driving
-        let shot = XCTAttachment(screenshot: app.screenshot())
+        let shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         shot.name = "placed-cars"
         shot.lifetime = .keepAlways
         add(shot)
@@ -159,14 +159,14 @@ final class WorldPickerUITests: XCTestCase {
         XCTAssertTrue(winter.waitForExistence(timeout: 5))
         winter.tap()
         sleep(4)
-        var shot = XCTAttachment(screenshot: app.screenshot())
+        var shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         shot.name = "winter-train"
         shot.lifetime = .keepAlways
         add(shot)
 
         app.buttons["emptyWorldCard"].tap()
         sleep(3)
-        shot = XCTAttachment(screenshot: app.screenshot())
+        shot = XCTAttachment(screenshot: XCUIScreen.main.screenshot())
         shot.name = "winter-empty"
         shot.lifetime = .keepAlways
         add(shot)

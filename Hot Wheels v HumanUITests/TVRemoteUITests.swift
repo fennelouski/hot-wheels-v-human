@@ -86,9 +86,9 @@ final class TVRemoteUITests: XCTestCase {
         XCTAssertTrue(app.buttons["tv-drawing-pen"].label.contains("Pen Up"))
         screenshot("TV07 - Draw on the car without touch")
 
-        try select(app.buttons["tv-save-car"], in: app)
+        try select(saveButton("Save Car", in: app), in: app)
         try expect("Save Car must report a successful persistent save", in: app) {
-            app.buttons["tv-save-car"].label.contains("Saved")
+            saveButton("Save Car", in: app).label.contains("Saved")
         }
         try returnHome(app)
         try select(app.buttons["tv-home-garage"], in: app)
@@ -114,7 +114,8 @@ final class TVRemoteUITests: XCTestCase {
 
     func testTV03GhostTrackWorldSaveAndColdLibraryLoad() throws {
         let app = launch(["--trackbuilder"])
-        XCTAssertFalse(app.buttons["tvTrackSave"].isEnabled, "An unfinished track must not be saved as raceable")
+        try require(button("Save a copy", in: app).waitForExistence(timeout: 8), "The track footer must expose Save a copy", in: app)
+        XCTAssertFalse(button("Save a copy", in: app).isEnabled, "An unfinished track must not be saved as raceable")
         try select(app.buttons["tvTrackGhostMode"], in: app)
         XCTAssertTrue(app.buttons["tvTrackGhostMode"].label.contains("On"))
         try select(app.buttons["tvTrackAppend-straight"], in: app)
@@ -125,24 +126,24 @@ final class TVRemoteUITests: XCTestCase {
         XCTAssertFalse(app.buttons["tvTrackAppend-straight"].isEnabled, "A finished sprint must reject another piece")
         screenshot("TV09 - Build a finished track with a ghost stretch")
 
-        try select(app.buttons["tvTrackSection-Worlds"], in: app)
-        XCTAssertTrue(app.buttons["tvTrackSection-Worlds"].isSelected)
+        try select(button("Worlds", in: app), in: app)
+        XCTAssertTrue(button("Worlds", in: app).isSelected)
         try select(app.buttons["tvTrackWorld-candy"], in: app)
         try select(app.buttons["tvTrackEmptyWorld"], in: app)
         XCTAssertTrue(app.buttons["tvTrackEmptyWorld"].label.contains("On"))
         screenshot("TV10 - Choose a world and its scenery mode")
-        try select(app.buttons["tvTrackSection-Camera"], in: app)
+        try select(button("Camera", in: app), in: app)
         try select(app.buttons["tvTrackOrbitLeft"], in: app)
         try select(app.buttons["tvTrackZoomIn"], in: app)
         try select(app.buttons["tvTrackPanRight"], in: app)
         screenshot("TV11 - Look around the track with the remote")
 
-        try select(app.buttons["tvTrackSave"], in: app)
+        try select(button("Save a copy", in: app), in: app)
         try expect("Saving must report the saved track name", in: app) {
-            app.staticTexts["tvTrackStatus"].label.hasPrefix("Saved ")
+            status(prefix: "Saved ", in: app).exists
         }
-        let savedName = String(app.staticTexts["tvTrackStatus"].label.dropFirst("Saved ".count))
-        try select(app.buttons["tvTrackSection-Library"], in: app)
+        let savedName = String(status(prefix: "Saved ", in: app).label.dropFirst("Saved ".count))
+        try select(button("Library", in: app), in: app)
         let savedTrack = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'tvTrackLoad-' AND label CONTAINS %@", savedName)).firstMatch
         try require(savedTrack.exists, "The saved track must appear in the library", in: app)
         let savedID = savedTrack.identifier
@@ -150,13 +151,13 @@ final class TVRemoteUITests: XCTestCase {
         app.terminate()
         app.launchArguments = ["--trackbuilder"]
         app.launch()
-        try select(app.buttons["tvTrackSection-Library"], in: app)
+        try select(button("Library", in: app), in: app)
         try select(app.buttons[savedID], in: app)
         XCTAssertTrue(app.staticTexts["6 pieces"].exists, "Loading must restore the complete saved path")
-        XCTAssertEqual(app.staticTexts["tvTrackStatus"].label, "Loaded \(savedName)")
-        try select(app.buttons["tvTrackSection-Worlds"], in: app)
+        XCTAssertTrue(app.staticTexts["Loaded \(savedName)"].exists)
+        try select(button("Worlds", in: app), in: app)
         XCTAssertTrue(app.buttons["tvTrackEmptyWorld"].label.contains("On"), "World options must survive a cold launch")
-        try select(app.buttons["tvTrackSection-Pieces"], in: app)
+        try select(button("Pieces", in: app), in: app)
         try select(app.buttons["tvTrackPiece-1"], in: app)
         XCTAssertEqual(app.buttons["tvTrackSelectedGhost"].label, "Make solid", "The saved ghost flag must load on its original piece")
     }
@@ -165,7 +166,8 @@ final class TVRemoteUITests: XCTestCase {
         let app = launch(["--trackbuilder"])
         try select(app.buttons["tvTrackAppend-straight"], in: app)
         try select(app.buttons["tvTrackAppendPortal"], in: app)
-        XCTAssertFalse(app.buttons["tvTrackSave"].isEnabled, "A pending portal exit must block saving")
+        try require(button("Save a copy", in: app).waitForExistence(timeout: 8), "The portal editor must retain Save a copy", in: app)
+        XCTAssertFalse(button("Save a copy", in: app).isEnabled, "A pending portal exit must block saving")
         try select(app.buttons["tvTrackMoveCursor"], in: app)
         let cursor = app.buttons["tvTrackRemoteCursor"]
         try focus(cursor, in: app)
@@ -177,11 +179,11 @@ final class TVRemoteUITests: XCTestCase {
         screenshot("TV13 - Position a portal exit with the remote")
         XCUIRemote.shared.press(.select)
         try expect("Select must place the portal exit", in: app) {
-            app.staticTexts["tvTrackStatus"].label == "Portal exit placed"
+            app.staticTexts["Portal exit placed"].exists
         }
         XCTAssertTrue(app.staticTexts["4 pieces"].exists, "Portal placement must retain its paired entry and exit")
 
-        try select(app.buttons["tvTrackSection-Decorate"], in: app)
+        try select(button("Decorate", in: app), in: app)
         try select(app.buttons["tvTrackDecoration-street-straight"], in: app)
         try select(app.buttons["tvTrackMoveCursor"], in: app)
         try focus(cursor, in: app)
@@ -190,7 +192,7 @@ final class TVRemoteUITests: XCTestCase {
         XCTAssertTrue(cursor.hasFocus)
         XCUIRemote.shared.press(.select)
         try expect("The decoration must be placed, rather than only selected in the box", in: app) {
-            app.staticTexts["tvTrackStatus"].label == "Decoration placed"
+            app.staticTexts["Decoration placed"].exists
         }
         try select(app.buttons["tvTrackRotateDecoration"], in: app)
         screenshot("TV12 - Place and rotate world decorations")
@@ -205,17 +207,17 @@ final class TVRemoteUITests: XCTestCase {
         let app = launch(["--trackbuilder"])
         for _ in 0..<4 { try select(app.buttons["tvTrackAppend-straight"], in: app) }
         try select(app.buttons["tvTrackAppend-finishGate"], in: app)
-        try select(app.buttons["tvTrackRace"], in: app)
+        try select(button("Race it!", in: app), in: app)
         try expect("Race it must present the draft race without saving", timeout: 30, in: app) {
             app.buttons["race-preview-close"].exists && app.buttons["race-camera"].exists
         }
         screenshot("TV15 - Race the unsaved track")
         XCUIRemote.shared.press(.menu)
         try expect("Menu must close the preview and retain the track draft", in: app) {
-            app.buttons["tvTrackRace"].exists && app.staticTexts["6 pieces"].exists
+            button("Race it!", in: app).exists && app.staticTexts["6 pieces"].exists
         }
-        XCTAssertTrue(app.buttons["tvTrackSave"].isEnabled)
-        XCTAssertFalse(app.staticTexts["tvTrackStatus"].exists, "Previewing a track must not silently save it")
+        XCTAssertTrue(button("Save a copy", in: app).isEnabled)
+        XCTAssertFalse(status(prefix: "Saved ", in: app).exists, "Previewing a track must not silently save it")
     }
 
     func testTV06RacerWardrobeSaveAndColdReopen() throws {
@@ -236,9 +238,9 @@ final class TVRemoteUITests: XCTestCase {
         try select(button("Cap", in: app), in: app)
         XCTAssertTrue(button("Cap", in: app).isSelected)
         screenshot("TV16 - Dress and save a personal racer")
-        try select(app.buttons["tv-save-racer"], in: app)
+        try select(saveButton("Save Racer", in: app), in: app)
         try expect("Save Racer must report a successful save", in: app) {
-            app.buttons["tv-save-racer"].label.contains("Saved")
+            saveButton("Save Racer", in: app).label.contains("Saved")
         }
         XCUIRemote.shared.press(.menu)
         try expect("Menu must return the racer editor to My Racers", in: app) {
@@ -406,6 +408,14 @@ final class TVRemoteUITests: XCTestCase {
         app.buttons.matching(NSPredicate(format: "label == %@", label)).firstMatch
     }
 
+    private func saveButton(_ unsavedLabel: String, in app: XCUIApplication) -> XCUIElement {
+        app.buttons.matching(NSPredicate(format: "label == %@ OR label == 'Saved!'", unsavedLabel)).firstMatch
+    }
+
+    private func status(prefix: String, in app: XCUIApplication) -> XCUIElement {
+        app.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", prefix)).firstMatch
+    }
+
     private func identifiers(prefix: String, in app: XCUIApplication) -> Set<String> {
         Set(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH %@", prefix)).allElementsBoundByIndex.map(\.identifier))
     }
@@ -427,18 +437,24 @@ final class TVRemoteUITests: XCTestCase {
     /// Every attempt is bounded and a failure includes the route and UI tree.
     private func focus(_ target: XCUIElement, in app: XCUIApplication,
                        file: StaticString = #filePath, line: UInt = #line) throws {
+        try require(target.waitForExistence(timeout: 8),
+                    "The Siri Remote target must exist before navigation: \(target)", in: app, file: file, line: line)
         let deadline = Date().addingTimeInterval(35)
         var tried: [String: Set<Int>] = [:]
         var route: [String] = []
         var stalled = 0
+        var previousKey: String?
         for _ in 0..<90 {
-            if target.exists && target.hasFocus { return }
             if Date() > deadline { break }
+            let targetSnapshot = try target.snapshot()
+            if targetSnapshot.hasFocus { return }
             let focused = focusedControl(in: app)
-            let key = focused.map(describe) ?? "no focused button or text field"
+            let key = focused.map(describeSnapshot) ?? "no focused button or text field"
+            stalled = key == previousKey ? stalled + 1 : 0
+            if stalled >= 4 { break }
             let directions: [XCUIRemote.Button]
-            if let focused, target.exists, valid(target.frame), valid(focused.frame) {
-                directions = rankedDirections(from: focused.frame, to: target.frame)
+            if let focused, valid(targetSnapshot.frame), valid(focused.frame) {
+                directions = rankedDirections(from: focused.frame, to: targetSnapshot.frame)
             } else {
                 directions = [.right, .down, .left, .up]
             }
@@ -446,22 +462,39 @@ final class TVRemoteUITests: XCTestCase {
             guard let direction = directions.first(where: { !used.contains(Int($0.rawValue)) }) else { break }
             tried[key, default: []].insert(Int(direction.rawValue))
             route.append("\(key) -> \(direction)")
+            previousKey = key
             XCUIRemote.shared.press(direction)
             Thread.sleep(forTimeInterval: 0.12)
-            let next = focusedControl(in: app).map(describe) ?? "no focused button or text field"
-            stalled = next == key ? stalled + 1 : 0
-            if stalled >= 4 { break }
         }
         let trace = XCTAttachment(string: route.joined(separator: "\n") + "\n\n" + app.debugDescription)
         trace.name = "Siri Remote focus route and accessibility tree"
         trace.lifetime = .keepAlways
         add(trace)
-        throw failure("Could not focus \(describe(target)). Final focus: \(focusedControl(in: app).map(describe) ?? "none"). Attempted \(route.count) moves. Check directional focus sections and target visibility.", in: app, file: file, line: line)
+        throw failure("Could not focus \(describe(target)). Final focus: \(focusedControl(in: app).map(describeSnapshot) ?? "none"). Attempted \(route.count) moves. Check directional focus sections and target visibility.", in: app, file: file, line: line)
     }
 
-    private func focusedControl(in app: XCUIApplication) -> XCUIElement? {
-        (app.buttons.allElementsBoundByIndex + app.textFields.allElementsBoundByIndex)
-            .first { $0.exists && $0.hasFocus }
+    private func focusedControl(in app: XCUIApplication) -> (any XCUIElementSnapshot)? {
+        guard let tree = try? app.snapshot() else { return nil }
+        return focusedControl(in: tree)
+    }
+
+    /// snapshot() is Apple's public XCUIElementSnapshotProviding API. Its
+    /// local attribute reads share one AX request for the entire hierarchy,
+    /// so finding focus does not re-query every individual control twice.
+    private func focusedControl(in snapshot: any XCUIElementSnapshot) -> (any XCUIElementSnapshot)? {
+        if (snapshot.elementType == .button || snapshot.elementType == .textField) && snapshot.hasFocus {
+            return snapshot
+        }
+        for child in snapshot.children {
+            if let focused = focusedControl(in: child) { return focused }
+        }
+        return nil
+    }
+
+    private func describeSnapshot(_ snapshot: any XCUIElementSnapshot) -> String {
+        // An ancestor identifier can be shared by several real SwiftUI
+        // buttons. Include the label so those buttons remain distinct nodes.
+        "\(snapshot.identifier) | \(snapshot.label) at \(snapshot.frame)"
     }
 
     private func rankedDirections(from current: CGRect, to target: CGRect) -> [XCUIRemote.Button] {
