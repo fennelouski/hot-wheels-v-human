@@ -340,32 +340,6 @@ final class TVRemoteUITests: XCTestCase {
             speed.exists && (Double(speed.label.prefix { $0.isNumber || $0 == "." }) ?? 0) > 0.2
         }
         screenshot("TV20 - Chase camera and race world")
-
-        let boost = app.buttons["race-boost"].firstMatch
-        try expect("The deterministic starter race must charge its real boost", timeout: 25, in: app) {
-            boost.exists && boostPercent(boost) >= 100
-        }
-        try focus(boost, in: app)
-        XCUIRemote.shared.press(.select)
-        try expect("Select must start the actual remote boost", in: app) { boost.label == "Stop boost" }
-        let charged = boostPercent(boost)
-        try expect("The held remote boost must consume the charged meter", timeout: 3, in: app) {
-            boostPercent(boost) < charged
-        }
-        screenshot("TV23 - Deterministic starter race with real remote boost active")
-        XCTAssertTrue(boost.hasFocus)
-        XCUIRemote.shared.press(.playPause)
-        try expect("Play Pause must stop the actual remote boost", in: app) { boost.label == "Boost" }
-
-        for mode in ["all", "hideGhosts", "hideAll", "hideGhosts"] {
-            let selected = app.buttons["race-track-\(mode)"]
-            try select(selected, in: app)
-            XCTAssertTrue(selected.hasFocus, "Selecting visibility must retain native remote focus")
-            XCTAssertTrue(selected.isSelected, "The actual chosen visibility mode must stay selected")
-            for other in ["all", "hideGhosts", "hideAll"] where other != mode {
-                XCTAssertFalse(app.buttons["race-track-\(other)"].isSelected)
-            }
-        }
         try select(camera, in: app)
         XCTAssertEqual(camera.value as? String, "Driver View")
         try select(app.buttons["race-radio-jazz"], in: app)
@@ -390,11 +364,78 @@ final class TVRemoteUITests: XCTestCase {
         let rematch = app.buttons["race-rematch"]
         try expect("A real robot race must reach results", timeout: 90, in: app) { rematch.exists }
         XCTAssertTrue(app.staticTexts["Top speed"].exists, "Results must include the actual race statistics")
+        XCTAssertTrue(app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'Select' AND label CONTAINS 'REMATCH'")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'REMATCH on your iPad'")).firstMatch.exists)
         screenshot("TV22 - Robot race results")
         try select(rematch, in: app)
         try expect("Rematch must leave results and start another race", timeout: 25, in: app) {
             !rematch.exists && app.buttons["race-boost"].exists
         }
+    }
+
+    func testTV11BrightWorldCameraAndVisibilityFocus() throws {
+        let app = try launchSunnyStarterRace()
+        let camera = app.buttons["race-camera"]
+        try select(camera, in: app)
+        XCTAssertEqual(camera.value as? String, "Chase Cam")
+        settle(5)
+        screenshot("TV24 - Bright Sunny Day with focused Chase camera")
+        for mode in ["all", "hideGhosts", "hideAll", "hideGhosts"] {
+            let selected = app.buttons["race-track-\(mode)"]
+            try select(selected, in: app)
+            XCTAssertTrue(selected.hasFocus, "Selecting visibility must retain native remote focus")
+            XCTAssertTrue(selected.isSelected, "The actual chosen visibility mode must stay selected")
+            for other in ["all", "hideGhosts", "hideAll"] where other != mode {
+                XCTAssertFalse(app.buttons["race-track-\(other)"].isSelected)
+            }
+            screenshot("TV25 - Bright world focused visibility \(mode)")
+        }
+        try select(camera, in: app)
+        XCTAssertEqual(camera.value as? String, "Driver View")
+        settle(2)
+        screenshot("TV26 - Bright world focused Driver camera and visible eye states")
+    }
+
+    func testTV12SunnyStarterRemoteBoostConsumesMeter() throws {
+        let app = try launchSunnyStarterRace()
+        let camera = app.buttons["race-camera"]
+        try select(camera, in: app)
+        XCTAssertEqual(camera.value as? String, "Chase Cam")
+        settle(5)
+        let boost = app.buttons["race-boost"].firstMatch
+        try expect("The Sunny Day starter race must charge its real boost", timeout: 25, in: app) {
+            boost.exists && boostPercent(boost) >= 100
+        }
+        try focus(boost, in: app)
+        XCUIRemote.shared.press(.select)
+        try expect("Select must start the actual remote boost", in: app) { boost.label == "Stop boost" }
+        let charged = boostPercent(boost)
+        try expect("The held remote boost must consume the charged meter", timeout: 3, in: app) {
+            boostPercent(boost) < charged
+        }
+        screenshot("TV23 - Sunny Day starter race with real remote boost active")
+        XCTAssertTrue(boost.hasFocus)
+        XCUIRemote.shared.press(.playPause)
+        try expect("Play Pause must stop the actual remote boost", in: app) { boost.label == "Boost" }
+    }
+
+    private func launchSunnyStarterRace() throws -> XCUIApplication {
+        let app = launch(["--trackbuilder"])
+        try select(button("Library", in: app), in: app)
+        let preset = app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'tvTrackPreset-' AND label CONTAINS 'The Mega Mega Track'")).firstMatch
+        try select(preset, in: app)
+        XCTAssertTrue(app.staticTexts["75 pieces"].exists)
+        try select(button("Worlds", in: app), in: app)
+        try select(app.buttons["tvTrackWorld-day"], in: app)
+        XCTAssertTrue(app.buttons["tvTrackWorld-day"].isSelected)
+        let emptyWorld = app.buttons["tvTrackEmptyWorld"]
+        if emptyWorld.label.contains("On") { try select(emptyWorld, in: app) }
+        XCTAssertTrue(emptyWorld.label.contains("Off"))
+        try select(app.buttons["tvTrackRace"], in: app)
+        try expect("The ordinary Sunny Day library track must enter a real race", in: app) {
+            app.buttons["race-camera"].exists && app.buttons["race-preview-close"].exists
+        }
+        return app
     }
 
     private func settle(_ seconds: TimeInterval) {

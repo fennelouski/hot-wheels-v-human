@@ -289,6 +289,7 @@ struct ArenaView: View {
                     }
                     #if os(tvOS)
                     .buttonStyle(TVWorkshopButtonStyle(selected: coordinator.driverView))
+                    .background(.black.opacity(0.65), in: RoundedRectangle(cornerRadius: 16))
                     #else
                     .buttonStyle(.bordered)
                     .tint(.yellow)
@@ -355,6 +356,7 @@ struct TrackVisibilityPicker: View {
                 }
                 #if os(tvOS)
                 .buttonStyle(TVWorkshopButtonStyle(selected: selection == mode))
+                .background(.black.opacity(0.65), in: RoundedRectangle(cornerRadius: 16))
                 #else
                 .buttonStyle(.bordered)
                 .tint(selection == mode ? .yellow : .gray)

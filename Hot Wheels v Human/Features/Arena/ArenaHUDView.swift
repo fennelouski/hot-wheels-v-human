@@ -186,11 +186,19 @@ struct ArenaHUDView: View {
             }
             .font(.system(size: 19, design: .rounded))
             recordLine
+            #if os(tvOS)
+            Text(seriesLabel == nil
+                 ? "Select \(Image(systemName: "arrow.clockwise")) REMATCH to go again!"
+                 : "Select \(Image(systemName: "arrow.clockwise")) REMATCH for the next track!")
+                .font(.system(size: 20, weight: .bold, design: .rounded))
+                .foregroundStyle(.yellow)
+            #else
             Text(seriesLabel == nil
                  ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
                  : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
+            #endif
         }
         .padding(22)
         .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 24))
