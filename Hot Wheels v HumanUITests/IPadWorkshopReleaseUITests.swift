@@ -88,8 +88,8 @@ final class IPadWorkshopReleaseUITests: XCTestCase {
         XCTAssertTrue(size.waitForExistence(timeout: 5),
                       "Picking an actual livery must reveal its Size control")
         size.adjust(toNormalizedSliderPosition: 0.70)
-        let savedSize = try sliderPercent(size)
-        XCTAssertGreaterThan(savedSize, 55)
+        let savedSize = try sliderValue(size)
+        XCTAssertGreaterThan(savedSize, 1.2)
         try save(app)
         capture("IPAD05 - Saved hand drawn car with resized sticker and flame livery")
 
@@ -114,7 +114,7 @@ final class IPadWorkshopReleaseUITests: XCTestCase {
         XCTAssertTrue(red.isSelected, "The saved paint must survive reopening this exact car")
         try tab("Livery", in: app)
         XCTAssertTrue(size.waitForExistence(timeout: 5), "The saved livery must reopen")
-        XCTAssertEqual(try sliderPercent(size), savedSize, accuracy: 3,
+        XCTAssertEqual(try sliderValue(size), savedSize, accuracy: 0.01,
                        "The livery's real slider value must survive persistence")
         try tab("Draw", in: app)
         let reopenedCanvas = try drawingCanvas(in: app)
@@ -389,10 +389,10 @@ final class IPadWorkshopReleaseUITests: XCTestCase {
             dy: rect.minY - app.frame.minY + rect.height * y))
     }
 
-    private func sliderPercent(_ slider: XCUIElement) throws -> Double {
+    private func sliderValue(_ slider: XCUIElement) throws -> Double {
         let value = try XCTUnwrap(slider.value as? String)
-        guard value.contains("%"), let number = Double(value.filter { $0.isNumber || $0 == "." })
-        else { throw failure("The native Size slider did not expose a percentage: \(value)") }
+        guard let number = Double(value), number.isFinite
+        else { throw failure("The native Size slider did not expose its scalar value: \(value)") }
         return number
     }
 
