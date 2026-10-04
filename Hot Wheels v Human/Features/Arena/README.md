@@ -54,3 +54,9 @@ Perf budget (Apple TV 4K): ≤ 40 track pieces + 2 cars + debris ≤ 150 draw-re
 The TV has focusable boost, reaction-cam, camera, track-visibility, radio power, station and volume controls. Select or Play/Pause starts an armed boost; select again stops it. The boost also ends when its meter empties or the race screen closes. Two-player local play creates two loopback player endpoints, one car submission and controller per player, and sends both submissions before either READY message.
 
 Menu or the Close button dismisses a workshop race preview. `RaceCoordinator.stop()` cancels its event, build, countdown and snapshot work. Returning to the workshop retains the draft; reopening the preview creates a new session.
+
+### Finished-race image, 2026-10-04 candidate
+
+`RaceSession.completedResult` copies values at the normal finish transition. `ArenaSnapshotEffect` is identity post-processing with a one-shot copy of an actual final render texture. It encodes a bounded JPEG after GPU completion, away from the render callback. `RaceShareCard` and `RaceShareRenderer` prepare a PNG containing the frozen frame, real result and App Store URL. `RaceShareSheet` previews it; iPad uses ShareLink, Apple TV hands it to a nearby iPad. Failures remain explicit and retryable. Rematch invalidates pending capture callbacks so an older frame cannot overwrite a new race.
+
+Calm camera mode is a fixed track overview. Car physics continues. Decorative motion, turntable rotation and reaction animation consult the separate effects policy; tunneling visibility remains active.

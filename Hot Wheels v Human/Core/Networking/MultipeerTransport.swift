@@ -35,6 +35,7 @@ final class MultipeerTransport: NSObject, GameTransport {
     }
 
     func start(role: TransportRole) {
+        guard !HWTestSession.isActive else { return }
         stop()
         self.role = role
         let session = MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: .required)

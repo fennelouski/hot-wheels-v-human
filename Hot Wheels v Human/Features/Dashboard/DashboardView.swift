@@ -10,10 +10,16 @@ import SwiftUI
 
 struct DashboardView: View {
     let model: DashboardModel
+    @State private var sharePresentation: RaceSharePresentation?
 
     var body: some View {
         VStack(spacing: 16) {
-            if let car = model.myCar {
+            if let payload = model.sharedRace, model.myCar == nil {
+                Label(payload.result.winner.map { "\($0.carName) wins!" } ?? "Race complete", systemImage: "flag.checkered")
+                    .font(.system(.largeTitle, design: .rounded, weight: .black))
+                    .foregroundStyle(.yellow).fixedSize(horizontal: false, vertical: true)
+                shareButton
+            } else if let car = model.myCar {
                 ProgressView(value: min(max(car.progress, 0), 1))
                     .tint(.yellow)
                     .scaleEffect(y: 3)
@@ -48,6 +54,7 @@ struct DashboardView: View {
                     .tint(.yellow)
                     .foregroundStyle(.black)
                     .padding(.bottom, 12)
+                    shareButton
                 } else {
                     BoostButtonView(meter: car.boostMeter,
                                     begin: model.beginBoost,
@@ -70,6 +77,29 @@ struct DashboardView: View {
             }
         }
         .background(background.ignoresSafeArea())
+        .sheet(item: $sharePresentation) { item in
+            RaceShareSheet(payload: item.payload)
+        }
+    }
+
+    private var shareButton: some View {
+        Button {
+            if let payload = model.sharedRace {
+                sharePresentation = RaceSharePresentation(payload: payload)
+            } else { model.requestRaceShare() }
+        } label: {
+            Label(model.sharedRace == nil ? "Get Race Image" : "Share Race", systemImage: model.sharedRace == nil ? "arrow.clockwise" : "square.and.arrow.up")
+                .font(.system(.title2, design: .rounded, weight: .heavy))
+                .frame(minWidth: 260, minHeight: 72)
+        }
+        #if os(tvOS)
+        .buttonStyle(TVWorkshopButtonStyle())
+        #else
+        .buttonStyle(.borderedProminent).tint(.yellow).foregroundStyle(.black)
+        #endif
+        .accessibilityIdentifier("race-share")
+        .accessibilityValue(model.sharedRace == nil ? "Image not ready. Request again." : "Ready")
+        .task(id: model.phase) { if model.phase == .results, model.sharedRace == nil { model.requestRaceShare() } }
     }
 
     /// A moving, connection-state-driven glow before the race (matches the
@@ -119,6 +149,7 @@ struct DashboardView: View {
 /// the transport state so exactly one step is highlighted: find the TV →
 /// connect → tap READY. Failure text stays funny, not punishing (CLAUDE.md).
 private struct ConnectionLadder: View {
+    @HWReduceMotion private var reduceMotion
     let state: TransportState
     let ready: Bool
     let design: CarDesign?
@@ -163,8 +194,8 @@ private struct ConnectionLadder: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.yellow)
                 .foregroundStyle(.black)
-                .scaleEffect(awaitingTap ? 1.03 : 1)
-                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: awaitingTap)
+                .scaleEffect(awaitingTap && !reduceMotion ? 1.03 : 1)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: awaitingTap)
             } else if ready {
                 Label("You're in!", systemImage: "checkmark.circle.fill")
                     .font(.system(size: 26, weight: .heavy, design: .rounded))
@@ -264,6 +295,8 @@ struct ReactionCamButton: View {
 /// overcharge zone above it. THE button — press and HOLD to burn, the
 /// needle drops while you hold, the dial shakes and thumps as it fires.
 struct BoostButtonView: View {
+    @HWReduceMotion private var reduceMotion
+    @State private var preferences = GamePreferences.shared
     let meter: Float
     let begin: () -> Void
     let end: () -> Void
@@ -312,8 +345,8 @@ struct BoostButtonView: View {
         }
         .onDisappear { stopRemoteBoost() }
         #else
-        TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing)) { timeline in
-            let jitter = firing
+        TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing || reduceMotion)) { timeline in
+            let jitter = firing && !reduceMotion
                 ? sin(timeline.date.timeIntervalSinceReferenceDate * 47) * 2
                 : 0
             dialFace
@@ -346,8 +379,8 @@ struct BoostButtonView: View {
             pressed = false
             end()
         }
-        .task(id: firing) {
-            guard firing else { return }
+        .task(id: firing && preferences.permitsHaptics) {
+            guard firing, preferences.permitsHaptics else { return }
             while !Task.isCancelled {
                 bump += 1
                 try? await Task.sleep(for: .milliseconds(110))
@@ -356,9 +389,9 @@ struct BoostButtonView: View {
         #if !os(tvOS)
         // A thump per tick while it burns, plus one clunk the moment it arms
         // (rising edge only — the meter crosses 1 downward on every burn).
-        .sensoryFeedback(.impact(weight: .medium, intensity: 0.8), trigger: bump)
+        .sensoryFeedback(.impact(weight: .medium, intensity: 0.8), trigger: bump) { _, _ in preferences.permitsHaptics }
         .sensoryFeedback(trigger: armed) { was, now in
-            was == false && now ? .impact(weight: .heavy) : nil
+            preferences.permitsHaptics && was == false && now ? .impact(weight: .heavy) : nil
         }
         #endif
         #endif
@@ -398,8 +431,8 @@ struct BoostButtonView: View {
                 Image(systemName: firing ? "flame.fill" : (armed ? "bolt.fill" : "bolt.slash.fill"))
                     .font(.system(size: 40))
                     .foregroundStyle(armed ? .orange : .white.opacity(0.35))
-                    .scaleEffect(armed && !firing ? 1.12 : 1)
-                    .animation(armed && !firing
+                    .scaleEffect(armed && !firing && !reduceMotion ? 1.12 : 1)
+                    .animation(reduceMotion ? nil : armed && !firing
                                ? .easeInOut(duration: 0.45).repeatForever(autoreverses: true)
                                : .default,
                                value: armed)

@@ -16,9 +16,14 @@ struct ProfilePickerView: View {
     @Query(sort: \KidProfileRecord.name) private var records: [KidProfileRecord]
     @State private var creating = false
     @State private var deleteFailed = false
+    @HWReduceMotion private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    #if os(tvOS)
+    @FocusState private var playFocused: Bool
+    #endif
 
     private var lastProfileID: UUID? {
-        UserDefaults.standard.string(forKey: "lastProfileID").flatMap(UUID.init)
+        HWTestSession.defaults.string(forKey: "lastProfileID").flatMap(UUID.init)
     }
 
     // Only ever 3–6 people here, so no grid: the tiles orbit a shared center,
@@ -26,22 +31,33 @@ struct ProfilePickerView: View {
     // TimelineView drives every motion off wall-clock time — no timers, no
     // animation state to keep in sync.
     var body: some View {
-        #if os(tvOS)
-        tvBody
-        #else
-        iPadBody
-        #endif
+        NavigationStack {
+            #if os(tvOS)
+            tvBody
+            #else
+            iPadBody
+            #endif
+        }
     }
 
     private var iPadBody: some View {
         VStack(spacing: 8) {
-            Text("Who's playing?")
-                .font(.system(size: 64, weight: .heavy, design: .rounded))
-                .padding(.top, 40)
+            launchHeader
+                .padding(.horizontal, 32)
+                .padding(.top, 24)
             GeometryReader { geo in
-                TimelineView(.animation) { timeline in
-                    orbit(in: geo.size,
-                          time: timeline.date.timeIntervalSinceReferenceDate)
+                if dynamicTypeSize.isAccessibilitySize {
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 24)], spacing: 24) {
+                            ForEach(records) { profileTile($0, seed: 0, time: 0) }
+                            newProfileTile(seed: 0, time: 0)
+                        }.padding(24)
+                    }
+                } else {
+                    TimelineView(.animation(paused: reduceMotion)) { timeline in
+                        orbit(in: geo.size,
+                              time: reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate)
+                    }
                 }
             }
         }
@@ -55,13 +71,52 @@ struct ProfilePickerView: View {
         .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
     }
 
+    private var launchHeader: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            Text(AppBranding.name)
+                .font(.system(.largeTitle, design: .rounded, weight: .black))
+                .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
+            HStack(alignment: .center, spacing: 20) {
+                NavigationLink { QuickPlayView() } label: {
+                    Label("PLAY!", systemImage: "play.fill")
+                        .font(.system(.title, design: .rounded, weight: .black))
+                        .frame(maxWidth: .infinity, minHeight: 84)
+                }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle(selected: true))
+                .focused($playFocused)
+                #else
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow).foregroundStyle(.black)
+                #endif
+                .accessibilityIdentifier("launch-play")
+                NavigationLink { GameSettingsView() } label: {
+                    Label("Settings", systemImage: "slider.horizontal.3")
+                        .labelStyle(.iconOnly)
+                        .font(.system(.title2, design: .rounded, weight: .bold))
+                        .frame(width: 72, height: 72)
+                }
+                #if os(tvOS)
+                .buttonStyle(TVWorkshopButtonStyle())
+                #else
+                .buttonStyle(.bordered).tint(.white)
+                #endif
+                .accessibilityIdentifier("launch-settings")
+            }
+            Text("Who's playing?")
+                .font(.system(.title2, design: .rounded, weight: .heavy))
+                .foregroundStyle(.white.opacity(0.8))
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
     #if os(tvOS)
     /// Stable positions let a remote's directional focus stay predictable.
     private var tvBody: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 32) {
-                Text("Who's playing?")
-                    .font(.system(size: 54, weight: .heavy, design: .rounded))
+                launchHeader
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 280), spacing: 32)], spacing: 32) {
                     ForEach(records) { record in
                         VStack(spacing: 18) {
@@ -109,7 +164,8 @@ struct ProfilePickerView: View {
         .alert("Couldn't Remove Profile", isPresented: $deleteFailed) {
             Button("OK", role: .cancel) { }
         } message: { Text("Please try again. Your other profiles haven't changed.") }
-        .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
+        .onAppear { SoundBank.shared.playMusic("workshop_ambience"); playFocused = true }
+        .defaultFocus($playFocused, true)
     }
     #endif
 
@@ -168,7 +224,10 @@ struct ProfilePickerView: View {
                     record.id == lastProfileID ? .yellow : .clear, lineWidth: 6))
                 Text(record.name)
                     .font(.system(size: 28, weight: .heavy, design: .rounded))
-                    .lineLimit(1)
+                    .lineLimit(nil)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: 220)
             }
         }
         .buttonStyle(.plain)
@@ -195,7 +254,7 @@ struct ProfilePickerView: View {
         guard let profile = record.profile else { return }
         appModel.selectedProfile = profile
         appModel.selectedDriver = lastUsedCharacter(of: record)
-        UserDefaults.standard.set(record.id.uuidString, forKey: "lastProfileID")
+        HWTestSession.defaults.set(record.id.uuidString, forKey: "lastProfileID")
         SoundBank.shared.play("player_join_horn")
     }
 
@@ -231,7 +290,7 @@ struct ProfilePickerView: View {
         SoundBank.shared.play("confirm_sparkle")
         appModel.selectedProfile = profile
         appModel.selectedDriver = starter
-        UserDefaults.standard.set(profile.id.uuidString, forKey: "lastProfileID")
+        HWTestSession.defaults.set(profile.id.uuidString, forKey: "lastProfileID")
         return true
     }
 
@@ -259,7 +318,7 @@ struct ProfilePickerView: View {
             appModel.selectedProfile = nil
             appModel.selectedDriver = nil
         }
-        if lastProfileID == record.id { UserDefaults.standard.removeObject(forKey: "lastProfileID") }
+        if lastProfileID == record.id { HWTestSession.defaults.removeObject(forKey: "lastProfileID") }
         SoundBank.shared.play("piece_delete_pop")
     }
 

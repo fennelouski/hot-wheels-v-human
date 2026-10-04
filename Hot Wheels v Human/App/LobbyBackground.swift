@@ -18,11 +18,12 @@ import SwiftUI
 struct LobbyBackground: View {
     /// 0 = nobody connected/ready, 1 = every connected racer is ready to go.
     var energy: Double
+    @HWReduceMotion private var reduceMotion
 
     var body: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 12, paused: false)) { timeline in
+        TimelineView(.animation(minimumInterval: 1.0 / 12, paused: reduceMotion)) { timeline in
             let e = min(max(energy, 0), 1)
-            let t = timeline.date.timeIntervalSinceReferenceDate
+            let t = reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate
             let speed = 0.04 + e * 0.10
             ZStack {
                 floor(e)

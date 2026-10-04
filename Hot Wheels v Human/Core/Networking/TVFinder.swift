@@ -41,6 +41,7 @@ final class TVFinder: NSObject {
     @ObservationIgnored private var peers: Set<MCPeerID> = []
 
     func start() {
+        guard !HWTestSession.isActive else { return }
         guard browser == nil else { return }
         blocked = false
         let browser = MCNearbyServiceBrowser(

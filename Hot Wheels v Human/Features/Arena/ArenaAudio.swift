@@ -34,6 +34,7 @@ final class ArenaAudio {
     ///   chase cam. Its engine mixes down — see `RaceTuning.engineGainInCar`.
     func tick(session: RaceSession, station: RadioStation = .chiptune,
               radioOn: Bool = true, driverCarID: UUID? = nil) {
+        guard !HWTestSession.isActive else { return }
         inCar = driverCarID
         let phase = session.phase
         if phase != lastPhase {

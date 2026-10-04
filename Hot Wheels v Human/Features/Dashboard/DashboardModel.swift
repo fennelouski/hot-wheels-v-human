@@ -18,8 +18,12 @@ final class DashboardModel {
     private(set) var transportState: TransportState = .idle
     private(set) var rejectionReason: String?
     private(set) var lastEvent: RaceEvent?
+    private(set) var sharedRace: RaceSharePayload?
 
     private let transport: any GameTransport
+    private var eventTask: Task<Void, Never>?
+    private var started = false
+    private var lifecycleID = UUID()
 
     init(transport: any GameTransport, playerName: String) {
         self.transport = transport
@@ -32,19 +36,28 @@ final class DashboardModel {
     var phase: RacePhase { snapshot?.phase ?? .lobby }
 
     func start() {
+        guard !started else { return }
+        started = true
+        let lifecycleID = self.lifecycleID
         transport.start(role: .player)
-        Task { [weak self] in
+        eventTask = Task { [weak self] in
             guard let events = self?.transport.events else { return }
             for await event in events {
-                self?.handle(event)
+                guard !Task.isCancelled, let self, self.started, self.lifecycleID == lifecycleID else { return }
+                self.handle(event)
             }
         }
     }
 
     func stop() {
+        started = false
+        lifecycleID = UUID()
+        eventTask?.cancel()
+        eventTask = nil
         endBoost()
         setReactionCam(on: false)
         transport.stop()
+        sharedRace = nil
     }
 
     /// Whether this dashboard has readied up for the pending race.
@@ -86,9 +99,12 @@ final class DashboardModel {
     /// REMATCH = ready up again from the results screen; the host tears
     /// down and reruns the same race once everyone re-readies.
     func requestRematch() {
+        sharedRace = nil
         transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
         SoundBank.shared.play("rematch_ding")
     }
+
+    func requestRaceShare() { transport.send(.requestRaceShare, reliably: true) }
 
     /// The host's track switch, mirrored. Set locally the instant the kid
     /// taps so the button answers without a round trip, then re-synced by
@@ -135,6 +151,7 @@ final class DashboardModel {
         case .stateChanged(let state):
             transportState = state
         case .message(.raceSnapshot(let snap)):
+            if snap.phase != .results { sharedRace = nil }
             snapshot = snap
             if let mode = snap.trackVisibility { trackVisibility = mode }
         case .message(.raceEvent(let raceEvent)):
@@ -142,6 +159,9 @@ final class DashboardModel {
             if case .blueprintRejected(let reason) = raceEvent {
                 rejectionReason = reason
             }
+        case .message(.raceShare(let payload)):
+            guard payload.isValid else { return }
+            sharedRace = payload
         default:
             break
         }

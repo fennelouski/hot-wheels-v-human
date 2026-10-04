@@ -173,7 +173,13 @@ struct RootView: View {
             .animation(.easeInOut(duration: 0.3), value: tvFinder.foundTV)
             .animation(.easeInOut(duration: 0.3), value: tvFinder.blocked)
             #if os(iOS)
-            .toolbar { ToolbarItem(placement: .topBarLeading) { profileChip } }
+            .toolbar {
+                ToolbarItem(placement: .topBarLeading) { profileChip }
+                ToolbarItem(placement: .topBarTrailing) {
+                    NavigationLink { GameSettingsView() } label: { Label("Settings", systemImage: "slider.horizontal.3") }
+                        .accessibilityIdentifier("home-settings")
+                }
+            }
             #endif
         }
     }
@@ -341,8 +347,8 @@ struct RootView: View {
 struct QuickPlayView: View {
     @Environment(AppModel.self) private var appModel
     // @State so the dice roll once per visit, not on every body re-eval.
-    @State private var car = CarDesign.presets.randomElement()!
-    @State private var track = TrackBlueprint.presets.randomElement()!.blueprint
+    @State private var car = HWTestSession.isActive ? CarDesign.presets[0] : CarDesign.presets.randomElement()!
+    @State private var track = HWTestSession.isActive ? TrackBlueprint.presets[0].blueprint : TrackBlueprint.presets.randomElement()!.blueprint
 
     var body: some View {
         SoloArenaView(designs: [appModel.stampedRaceDesign(car: car)], blueprint: track,

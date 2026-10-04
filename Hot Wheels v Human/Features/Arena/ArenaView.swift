@@ -16,6 +16,7 @@ struct ArenaView: View {
     @State private var camera: EventSubscription?
     @State private var reactionFeed = ReactionFeed()
     @State private var arenaAudio = ArenaAudio()
+    @HWReduceMotion private var reduceMotion
 
     /// Does this collision hit belong to a car (its own body, a wheel, the
     /// driver) rather than to the track? Cars are the thing we're trying to
@@ -39,6 +40,8 @@ struct ArenaView: View {
         ZStack {
             RealityView { content in
                 content.camera = .virtual
+                content.renderingEffects.dynamicRange = .standard
+                content.renderingEffects.customPostProcessing = .effect(ArenaSnapshotEffect(capture: coordinator.frameCapture))
 
                 let root = Entity()
                 content.add(root)
@@ -69,7 +72,7 @@ struct ArenaView: View {
                 var blockedFor: Double = 0   // seconds of track between us and the cars
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
-                    feed.tick(session: session, dt: event.deltaTime)
+                    if GameEffectsPolicy.shared.motionEnabled { feed.tick(session: session, dt: event.deltaTime) }
 
                     // Driver's-eye view: sit where the little human sits.
                     // Rolled with the car (upVector: its own up), so a loop
@@ -79,7 +82,7 @@ struct ArenaView: View {
                         ?? session.racers.first { $0.entity?.isEnabled == true }
                     // The listener rides with the camera, so the cockpit's own
                     // engine has to duck — ArenaAudio needs to know whose.
-                    let inCar = coordinator.driverView && session.phase != .results
+                    let inCar = GameEffectsPolicy.shared.motionEnabled && coordinator.driverView && session.phase != .results
                         ? hero?.id : nil
                     audio.tick(session: session, station: coordinator.radioStation,
                                radioOn: coordinator.radioOn, driverCarID: inCar)
@@ -87,6 +90,16 @@ struct ArenaView: View {
                     // cars, because the finish is where the loser falls apart
                     // and the cockpit points the other way.
                     let atTheFlag = session.phase == .results
+                    if !GameEffectsPolicy.shared.motionEnabled {
+                        if cameraEntity.parent !== root { root.addChild(cameraEntity) }
+                        let rect = session.trackFootprint
+                        let center = SIMD3<Float>((rect?.minX ?? 0) + (rect?.maxX ?? 0), 0,
+                                                  (rect?.minZ ?? 0) + (rect?.maxZ ?? 0)) / 2
+                        let span = max((rect?.maxX ?? 2) - (rect?.minX ?? -2),
+                                       (rect?.maxZ ?? 2) - (rect?.minZ ?? -2), 3)
+                        cameraEntity.look(at: center, from: center + SIMD3<Float>(span * 0.65, span * 0.85, -span * 0.9), relativeTo: nil)
+                        return
+                    }
                     if coordinator.driverView, !atTheFlag, let car = hero?.entity,
                        let ride = car.components[CarComponent.self]?.rideHeight {
                         // BOLTED to the car, not re-aimed at it every frame:
@@ -202,6 +215,9 @@ struct ArenaView: View {
 
                 coordinator.attach(root: root)
             } update: { content in
+                if reduceMotion {
+                    for entity in content.entities { entity.stopAllAnimations(recursive: true) }
+                }
                 // Re-theme when the (next) race's track changes. Reading
                 // trackID here re-runs this closure on each new race.
                 let trackID = coordinator.session.trackID
@@ -233,11 +249,11 @@ struct ArenaView: View {
                              ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
                              : nil,
                          // Lift the race clock over the dash when it's up.
-                         bottomInset: coordinator.driverView
+                         bottomInset: (coordinator.driverView || reduceMotion)
                              && coordinator.session.phase != .results ? 110 : 0)
 
             // Driver's-seat dashboard: the radio, sitting on the hood line.
-            if coordinator.driverView, coordinator.session.phase != .results {
+            if coordinator.driverView || reduceMotion, coordinator.session.phase != .results {
                 VStack {
                     Spacer()
                     DriverDashboardView(
@@ -280,8 +296,8 @@ struct ArenaView: View {
                     Button {
                         coordinator.driverView.toggle()
                     } label: {
-                        Label(coordinator.driverView ? "Driver View" : "Chase Cam",
-                              systemImage: coordinator.driverView ? "steeringwheel" : "video.fill")
+                        Label(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam",
+                              systemImage: reduceMotion ? "camera.fill" : coordinator.driverView ? "steeringwheel" : "video.fill")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
                             .lineLimit(1)
                             .padding(.horizontal, 16)
@@ -295,7 +311,8 @@ struct ArenaView: View {
                     .tint(.yellow)
                     #endif
                     .accessibilityIdentifier("race-camera")
-                    .accessibilityValue(coordinator.driverView ? "Driver View" : "Chase Cam")
+                    .accessibilityValue(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam")
+                    .disabled(reduceMotion)
                 }
                 TrackVisibilityPicker(selection: coordinator.trackVisibility) {
                     coordinator.trackVisibility = $0
@@ -311,8 +328,8 @@ struct ArenaView: View {
                 HStack {
                     ForEach(Array(coordinator.session.racers.enumerated()), id: \.element.id) { index, racer in
                         // `--show-cams`: sim/dev arg — PiPs on without a held button.
-                        if coordinator.reactionCamsOn.contains(racer.id)
-                            || ProcessInfo.processInfo.arguments.contains("--show-cams"),
+                        if !reduceMotion && (coordinator.reactionCamsOn.contains(racer.id)
+                            || ProcessInfo.processInfo.arguments.contains("--show-cams")),
                            let director = reactionFeed.directors[racer.id] {
                             ReactionCamView(director: director, design: racer.design)
                                 .frame(maxWidth: .infinity,
@@ -329,6 +346,17 @@ struct ArenaView: View {
             }
         }
         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
+        .task(id: coordinator.session.completedResult?.id) {
+            guard coordinator.session.completedResult != nil else { coordinator.clearShare(); return }
+            // Let the real finish camera settle; this doesn't delay race input
+            // or any computer move. The copied frame remains immutable.
+            try? await Task.sleep(for: .milliseconds(600))
+            guard !Task.isCancelled else { return }
+            coordinator.captureResult(using: coordinator.frameCapture)
+        }
+        .onDisappear {
+            if !coordinator.isPresentingResultShare { coordinator.frameCapture.cancel() }
+        }
     }
 }
 

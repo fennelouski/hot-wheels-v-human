@@ -57,6 +57,7 @@ struct CockpitTuning: Equatable {
 }
 
 struct ReactionCamView: View {
+    @HWReduceMotion private var reduceMotion
     let director: ReactionDirector
     let design: CarDesign
     /// nil in the real PiP → the shipped constants for this driver's body
@@ -100,6 +101,7 @@ struct ReactionCamView: View {
                 guard let poser = try? await DriverPoser.make(
                     profile: design.driver ?? DriverProfile.presets[0]) else { return }
                 content.add(poser.bust)
+                if reduceMotion { poser.bust.stopAllAnimations(recursive: true) }
 
                 // The poser owns the camera and chases the driver's head with
                 // it every update — framing is per-rig mutable state, and it
@@ -136,11 +138,12 @@ struct ReactionCamView: View {
                 busts.poser = poser
                 self.keyLight = key
             } update: { _ in
-                poser?.apply(director.state)
+                if reduceMotion { poser?.bust.stopAllAnimations(recursive: true) }
+                else { poser?.apply(director.state) }
                 // Lean with the live car: roll into the turn, glance into it.
                 poser?.bust.orientation =
-                    simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle, axis: [0, 0, 1])
-                    * simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle * 0.5, axis: [0, 1, 0])
+                    simd_quatf(angle: (reduceMotion ? 0 : director.lean) * RaceTuning.reactionLeanAngle, axis: [0, 0, 1])
+                    * simd_quatf(angle: (reduceMotion ? 0 : director.lean) * RaceTuning.reactionLeanAngle * 0.5, axis: [0, 1, 0])
                 // Relight the face from the same source lighting the glass —
                 // boost flare, crash red, the car's own colour on the podium —
                 // washed toward white so it tints the driver instead of
@@ -163,7 +166,7 @@ struct ReactionCamView: View {
             // The car's own wheel, in front of the driver. Counter-turns:
             // lean is + for a left turn, screen-left is a negative rotation.
             SteeringWheelView(chassis: design.chassis,
-                              angle: -CGFloat(director.lean * effectiveTuning.wheelAngle),
+                              angle: reduceMotion ? 0 : -CGFloat(director.lean * effectiveTuning.wheelAngle),
                               rim: Color(hex: design.partColors?[CarPaintSlot.wheels]
                                          ?? design.paint.colorHex),
                               hub: Color(hex: design.paint.colorHex),
@@ -184,9 +187,9 @@ struct ReactionCamView: View {
                 .offset(y: 12)
         }
         // Event pops: swell on boost/celebrate, knock askew on crash.
-        .scaleEffect(director.state == .boosted || director.state == .celebrating ? 1.08 : 1)
-        .rotationEffect(.degrees(director.state == .crashed ? -7 : 0))
-        .animation(.spring(duration: 0.35, bounce: 0.5), value: director.state)
+        .scaleEffect(!reduceMotion && (director.state == .boosted || director.state == .celebrating) ? 1.08 : 1)
+        .rotationEffect(.degrees(!reduceMotion && director.state == .crashed ? -7 : 0))
+        .animation(reduceMotion ? nil : .spring(duration: 0.35, bounce: 0.5), value: director.state)
         .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
     }
 
@@ -212,6 +215,7 @@ struct ReactionCamView: View {
                   // A newer edit landed while this one loaded — let that win.
                   current.bust.components[PreviewSignature.self]?.value == signature
             else { return }
+            if !GameEffectsPolicy.shared.motionEnabled { fresh.bust.stopAllAnimations(recursive: true) }
             fresh.bust.components.set(PreviewSignature(value: signature))
             parent.addChild(fresh.bust)
             // The camera belongs to the poser, so the replacement brings its
@@ -261,6 +265,7 @@ private extension ReactionState {
 /// already cropped to a circle, and anything dark around the rim reads as a
 /// second, broken crop rather than as a car.
 private struct CarInteriorView: View {
+    @HWReduceMotion private var reduceMotion
     let chassis: ChassisClass
     let trim: Color
     let daylight: Color
@@ -269,12 +274,12 @@ private struct CarInteriorView: View {
     let tuning: CockpitTuning
 
     var body: some View {
-        TimelineView(.animation) { timeline in
+        TimelineView(.animation(paused: reduceMotion)) { timeline in
             Canvas { ctx, size in
                 let w = size.width, h = size.height
                 let sill = h * CGFloat(tuning.horizonRatio)
                 // Lean swings what's framed in the glass the other way.
-                let slide = -CGFloat(lean) * w * CGFloat(tuning.vanishShift)
+                let slide = -CGFloat(reduceMotion ? 0 : lean) * w * CGFloat(tuning.vanishShift)
 
                 // Cabin fills the whole tile — mid-toned and daylight-tinted,
                 // never near-black, so the circle's edge is the only edge.
@@ -309,7 +314,7 @@ private struct CarInteriorView: View {
                     // things pile up in the distance and snap away up close
                     // — the same depth curve the old forward road used, run
                     // the other direction.
-                    let t = timeline.date.timeIntervalSinceReferenceDate
+                    let t = reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate
                     let scroll = t * Double(0.15 + speed01 * RaceTuning.cockpitSceneryDrift)
                     let count = RaceTuning.cockpitSceneryCount
                     for i in 0..<count {

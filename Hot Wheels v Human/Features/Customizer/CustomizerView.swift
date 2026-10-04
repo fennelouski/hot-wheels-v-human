@@ -389,6 +389,7 @@ struct CarTurntableView: View {
             await Self.rebuild(turntable, design: design, refs: refs,
                                onBodyAspect: onBodyAspect)
             spin = content.subscribe(to: SceneEvents.Update.self) { event in
+                guard GameEffectsPolicy.shared.motionEnabled else { return refs.apply() }
                 // Once it's been grabbed the kid is driving: the car freezes
                 // where they caught it and the camera does the moving.
                 guard !refs.orbit.grabbed else { return refs.apply() }

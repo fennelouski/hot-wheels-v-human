@@ -53,6 +53,8 @@ final class RaceSession {
     private(set) var countdownValue = 3
     private(set) var raceClock: TimeInterval = 0
     private(set) var racers: [Racer] = []
+    private(set) var completedResult: RaceShareResult?
+    private var trackName = "My Track"
     var allDone: Bool {
         !racers.isEmpty && racers.allSatisfy { $0.finishTime != nil || $0.isOut }
     }
@@ -99,7 +101,10 @@ final class RaceSession {
     nonisolated static func drillLog(_ line: String, reset: Bool = false) {
         #if DEBUG
         print(line)
-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let directory = HWTestSession.isActive ? HWTestSession.directory
+            : FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        let url = directory
             .appendingPathComponent("drill-log.txt")
         let data = Data((line + "\n").utf8)
         if !reset, let handle = try? FileHandle(forWritingTo: url) {
@@ -139,6 +144,7 @@ final class RaceSession {
         botMayWin = Float.random(in: 0..<1, using: &aiRNG)
             < (config.aiDifficulty.flatMap { RaceTuning.aiWinChance[$0] } ?? 0)
         trackID = blueprint.trackId
+        trackName = TrackBlueprint.presets.first { $0.blueprint.trackId == blueprint.trackId }?.name ?? "My Track"
         worldTheme = blueprint.worldTheme
         scenery = blueprint.scenery ?? []
         worldEmpty = blueprint.worldEmpty ?? false
@@ -449,6 +455,8 @@ final class RaceSession {
         }
 
         if allDone {
+            completedResult = Self.freezeResult(id: runID, trackID: trackID ?? UUID(),
+                                               name: trackName, clock: raceClock, racers: racers)
             phase = .results
             RaceEventBus.shared.raceActive = false
             // The kid rule: losing is funny. Everyone who finished but
@@ -470,6 +478,13 @@ final class RaceSession {
     }
 
     /// Tear down the finished race so start() can run again (REMATCH).
+    static func freezeResult(id: UUID, trackID: UUID, name: String, clock: TimeInterval,
+                             racers: [Racer]) -> RaceShareResult {
+        RaceShareResult(id: id, trackID: trackID, trackName: name, raceClock: clock,
+            entries: racers.map { .init(id: $0.id, carName: $0.design.name,
+                finishTime: $0.finishTime, topSpeed: $0.topSpeed, crashes: $0.crashes) })
+    }
+
     func reset() {
         runID = UUID()
         countdownTask?.cancel()
@@ -480,6 +495,7 @@ final class RaceSession {
         trackEntity?.removeFromParent()
         trackEntity = nil
         racers = []
+        completedResult = nil
         lastPoses.removeAll()
         awaitingGreenFlag = false
         raceClock = 0

@@ -27,22 +27,79 @@ final class RaceCoordinator {
     private(set) var reactionCamsOn: Set<UUID> = []
     /// Ride in the driver's seat instead of the chase camera (ArenaView).
     /// Lives here so the same toggle works on the TV and in Solo Arena.
-    var driverView = true
+    var driverView = GamePreferences.shared.bool("race.driverView", fallback: true) {
+        didSet { GamePreferences.shared.set(driverView, for: "race.driverView") }
+    }
     /// Which track pieces are drawn (ArenaView's three-way switch). Ghosts
     /// hidden by default — a ghost piece you can see isn't a ghost.
-    var trackVisibility: TrackVisibility = .hideGhosts {
-        didSet { session.applyTrackVisibility(trackVisibility) }
+    var trackVisibility: TrackVisibility = TrackVisibility(rawValue: GamePreferences.shared.string("race.trackVisibility") ?? "") ?? .hideGhosts {
+        didSet {
+            session.applyTrackVisibility(trackVisibility)
+            GamePreferences.shared.set(trackVisibility.rawValue, for: "race.trackVisibility")
+        }
     }
     /// Which preset the cockpit radio is tuned to. Defaults to the chiptune
     /// station, which IS the old race track — so a kid who never touches the
     /// radio hears exactly what they heard before.
-    var radioStation: RadioStation = .chiptune
+    var radioStation: RadioStation = RadioStation(rawValue: GamePreferences.shared.string("race.radioStation") ?? "") ?? .chiptune {
+        didSet { GamePreferences.shared.set(radioStation.rawValue, for: "race.radioStation") }
+    }
     /// Radio power. Off means off — no race music either, which is the point
     /// of a switch a kid can reach.
-    var radioOn = true
+    var radioOn = GamePreferences.shared.bool("race.radioOn", fallback: true) {
+        didSet { GamePreferences.shared.set(radioOn, for: "race.radioOn") }
+    }
     /// Dash volume knob, 0…1. Mirrored into `SoundBank.musicLevel` by the
     /// dashboard; kept here so it survives a rematch like the station does.
-    var musicLevel: Double = 1
+    var musicLevel: Double = min(max(GamePreferences.shared.double("race.musicLevel", fallback: 1), 0), 1) {
+        didSet { GamePreferences.shared.set(musicLevel, for: "race.musicLevel") }
+    }
+
+    private(set) var sharePayload: RaceSharePayload?
+    /// tvOS can disappear the presenting arena while a sheet is above it.
+    /// Keep its completed session alive until the result panel is dismissed.
+    var isPresentingResultShare = false
+    let frameCapture = ArenaFrameCapture()
+    private(set) var shareError: String?
+    private(set) var shareCapturePending = false
+    private var captureNonce = UUID()
+    var needsNearbyShareHost: Bool { transport is LoopbackTransport }
+
+    func captureResult(using capture: ArenaFrameCapture) {
+        guard !shareCapturePending, let result = session.completedResult else { return }
+        captureNonce = UUID()
+        let nonce = captureNonce
+        shareCapturePending = true
+        shareError = nil
+        capture.request { [weak self] data in
+            guard let self else { return }
+            Task { @MainActor in
+                guard self.captureNonce == nonce,
+                      self.session.completedResult?.id == result.id else { return }
+                self.shareCapturePending = false
+                guard let data else { self.shareError = "The finish image wasn't ready. Try again."; return }
+                let payload = RaceSharePayload(result: result, arenaImage: data)
+                guard payload.isValid else { self.shareError = "The finish image couldn't be saved. Try again."; return }
+                self.sharePayload = payload
+                self.transport.send(.raceShare(payload), reliably: true)
+            }
+        }
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(6))
+            guard let self, captureNonce == nonce, sharePayload?.result.id != result.id else { return }
+            capture.cancel()
+            shareCapturePending = false
+            shareError = "The finish image wasn't ready. Try again."
+        }
+    }
+
+    func clearShare() {
+        frameCapture.cancel()
+        captureNonce = UUID()
+        shareCapturePending = false
+        sharePayload = nil
+        shareError = nil
+    }
 
     private let transport: any GameTransport
     private var designs: [(owner: UUID?, design: CarDesign)] = []
@@ -63,6 +120,7 @@ final class RaceCoordinator {
 
     init(transport: any GameTransport) {
         self.transport = transport
+        SoundBank.shared.musicLevel = Float(musicLevel)
         session.onEvent = { [weak self] event in
             self?.transport.send(.raceEvent(event), reliably: true)
         }
@@ -90,6 +148,7 @@ final class RaceCoordinator {
     }
 
     func stop() {
+        isPresentingResultShare = false
         isStarted = false
         lifecycleID = UUID()
         eventTask?.cancel()
@@ -99,6 +158,7 @@ final class RaceCoordinator {
         buildTask = nil
         snapshotTask = nil
         session.stop()
+        clearShare()
         arenaRoot = nil
         raceRunning = false
         players.removeAll()
@@ -130,6 +190,7 @@ final class RaceCoordinator {
     private func handle(_ message: GameMessage) {
         switch message {
         case .hello(let player, _):
+            if let sharePayload { transport.send(.raceShare(sharePayload), reliably: true) }
             guard !players.contains(where: { $0.id == player.id }) else { break }
             if raceRunning {
                 lastRejection = "Race in progress — hop in the next one!"
@@ -182,7 +243,10 @@ final class RaceCoordinator {
         case .trackVisibility(let mode):
             // The host owns it; the next snapshot tells every controller.
             trackVisibility = mode
-        case .raceEvent, .raceSnapshot:
+        case .requestRaceShare:
+            if let sharePayload { transport.send(.raceShare(sharePayload), reliably: true) }
+            else { captureResult(using: frameCapture) }
+        case .raceEvent, .raceSnapshot, .raceShare:
             break   // host-authored, never inbound
         }
     }
@@ -197,6 +261,13 @@ final class RaceCoordinator {
     /// normal per-player ready flow.
     func hostStartRace() {
         for player in players { readiness[player.id] = true }
+        startRaceIfReady()
+    }
+
+    func hostRematch() {
+        guard session.phase == .results else { return }
+        for player in players { readiness[player.id] = true }
+        rematchIfReady()
         startRaceIfReady()
     }
 
@@ -350,6 +421,7 @@ final class RaceCoordinator {
               !players.isEmpty,
               players.allSatisfy({ readiness[$0.id] == true }) else { return }
         raceIndex += 1
+        clearShare()
         session.reset()
         raceRunning = false
     }

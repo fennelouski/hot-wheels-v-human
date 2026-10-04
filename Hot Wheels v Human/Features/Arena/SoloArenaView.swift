@@ -24,7 +24,7 @@ struct SoloArenaView: View {
         ZStack(alignment: .bottomTrailing) {
             if let rig {
                 ArenaView(coordinator: rig.coordinator)
-                RaceControlsView(models: rig.dashboards)
+                RaceControlsView(models: rig.dashboards, coordinator: rig.coordinator)
             } else {
                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -58,6 +58,7 @@ struct SoloArenaView: View {
             rig = SoloRig(coordinator: coordinator, dashboards: dashboards)
         }
         .onDisappear {
+            guard rig?.coordinator.isPresentingResultShare != true else { return }
             rig?.coordinator.stop()
             for dashboard in rig?.dashboards ?? [] { dashboard.stop() }
         }
@@ -76,6 +77,7 @@ struct SoloRig {
 /// the PiPs so everything along the bottom edge lines up.
 private struct RaceControlsView: View {
     let models: [DashboardModel]
+    let coordinator: RaceCoordinator
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 12) {
@@ -91,6 +93,7 @@ private struct RaceControlsView: View {
                 .tint(.yellow)
                 .foregroundStyle(.black)
                 .accessibilityIdentifier("race-rematch")
+                RaceResultShareButton(coordinator: coordinator)
             } else {
                 ForEach(models, id: \.player.id) { model in
                     if let car = model.myCar {

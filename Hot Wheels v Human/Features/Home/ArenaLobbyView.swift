@@ -12,6 +12,7 @@
 import SwiftUI
 
 struct ArenaLobbyView: View {
+    @HWReduceMotion private var reduceMotion
     @State private var coordinator = RaceCoordinator(transport: MultipeerTransport())
 
     private var allReady: Bool {
@@ -43,10 +44,33 @@ struct ArenaLobbyView: View {
             ArenaView(coordinator: coordinator)
             if coordinator.session.phase == .lobby {
                 lobby
+            } else if coordinator.session.phase == .results {
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        VStack(spacing: 12) {
+                            Button { coordinator.hostRematch() } label: {
+                                Label(coordinator.raceCount > 1 ? "NEXT RACE!" : "REMATCH!", systemImage: "arrow.clockwise")
+                                    .font(.system(size: 30, weight: .black, design: .rounded))
+                                    .frame(minWidth: 260, minHeight: 84)
+                            }
+                            #if os(tvOS)
+                            .buttonStyle(TVWorkshopButtonStyle(selected: true))
+                            #else
+                            .buttonStyle(.borderedProminent).tint(.yellow).foregroundStyle(.black)
+                            #endif
+                            .accessibilityIdentifier("race-rematch")
+                            RaceResultShareButton(coordinator: coordinator)
+                        }
+                    }
+                }.padding(24)
             }
         }
         .onAppear { coordinator.start() }
-        .onDisappear { coordinator.stop() }
+        .onDisappear {
+            if !coordinator.isPresentingResultShare { coordinator.stop() }
+        }
         .onChange(of: coordinator.players.count) { old, new in
             if new > old { SoundBank.shared.play("player_join_horn") }
         }
@@ -93,7 +117,7 @@ struct ArenaLobbyView: View {
                 .tint(allReady ? .yellow : .white.opacity(0.22))
                 .foregroundStyle(allReady ? .black : .white)
                 .scaleEffect(allReady ? 1.04 : 1)
-                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: allReady)
+                .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: allReady)
             }
             if let rejection = coordinator.lastRejection {
                 Label(rejection, systemImage: "exclamationmark.triangle.fill")

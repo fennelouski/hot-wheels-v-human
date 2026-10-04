@@ -116,6 +116,10 @@ struct DriverPreviewView: View {
             // of the hair is finally something you can go and look at.
             var elapsed: Float = 0
             spin = content.subscribe(to: SceneEvents.Update.self) { event in
+                guard GameEffectsPolicy.shared.motionEnabled else {
+                    turntable.stopAllAnimations(recursive: true)
+                    return refs.apply()
+                }
                 guard !refs.orbit.grabbed else { return refs.apply() }
                 elapsed += Float(event.deltaTime)
                 let angle = sin(elapsed * Self.swayRate) * Self.swayAngle
@@ -136,7 +140,7 @@ struct DriverPreviewView: View {
     /// live turntable.
     @MainActor
     static func rebuild(_ turntable: Entity, driver: DriverProfile) async {
-        let signature = DriverPainter.appearanceSignature(for: driver)
+        let signature = DriverPainter.appearanceSignature(for: driver) + (GameEffectsPolicy.shared.motionEnabled ? ":moving" : ":still")
         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
         turntable.components.set(PreviewSignature(value: signature))
 
@@ -149,6 +153,9 @@ struct DriverPreviewView: View {
             if human.name == wanted {
                 await DriverPainter.apply(driver, to: human)
                 human.scale = (driver.bodyType ?? .man).scale
+                if !GameEffectsPolicy.shared.motionEnabled { human.stopAllAnimations(recursive: true) }
+                else if let idle = human.availableAnimations.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
+                    ?? human.availableAnimations.first { human.playAnimation(idle.repeat()) }
                 return
             }
             human.removeFromParent()
@@ -162,7 +169,7 @@ struct DriverPreviewView: View {
         // so the editor could be posing your character mid-sprint (or worse,
         // mid-death) while you try to fit a hat to its head.
         let clips = human.availableAnimations
-        if let idle = clips.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
+        if GameEffectsPolicy.shared.motionEnabled, let idle = clips.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
             ?? clips.first {
             human.playAnimation(idle.repeat())
         }

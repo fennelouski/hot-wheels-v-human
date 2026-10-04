@@ -28,8 +28,10 @@ enum BreakdownShow {
     }
 
     static func play(on car: ModelEntity, style: Style) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         Task { @MainActor in
             await sleep(RaceTuning.breakdownDelay)
+            guard GameEffectsPolicy.shared.motionEnabled else { return }
             switch style {
             case .wheelsOff: await wheelsOff(car)
             case .sputterFlop: await sputterFlop(car)

@@ -40,6 +40,7 @@ struct AmbientMotionSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
@@ -125,6 +126,7 @@ struct WalkerSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
@@ -178,6 +180,7 @@ struct TrafficSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         var pedestrians: [SIMD3<Float>] = []
         for walker in context.entities(matching: Self.walkers,
@@ -347,6 +350,7 @@ struct WanderSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
@@ -412,6 +416,7 @@ struct PedestrianSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
@@ -624,6 +629,7 @@ struct TrainSystem: System {
     init(scene: Scene) {}
 
     func update(context: SceneUpdateContext) {
+        guard GameEffectsPolicy.shared.motionEnabled else { return }
         let dt = Float(context.deltaTime)
         for entity in context.entities(matching: Self.query,
                                        updatingSystemWhen: .rendering) {
@@ -1206,7 +1212,7 @@ enum ArenaEnvironment {
                     direction: start.direction,
                     sideOffset: index % 2 == 0 ? -0.26 : 0.26,
                     buildings: doors, roadside: roadside, seed: seed))
-                if let animation = person.availableAnimations.first {
+                if GameEffectsPolicy.shared.motionEnabled, let animation = person.availableAnimations.first {
                     person.playAnimation(animation.repeat())
                 }
                 root.addChild(person)

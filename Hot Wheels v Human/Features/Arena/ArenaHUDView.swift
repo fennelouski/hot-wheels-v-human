@@ -71,8 +71,9 @@ struct ArenaHUDView: View {
         guard session.phase == .results,
               session.config.mode != .test,
               let trackID = session.trackID,
-              filedRace != trackID else { return }
-        filedRace = trackID
+              let resultID = session.completedResult?.id,
+              filedRace != resultID else { return }
+        filedRace = resultID
         previousBest = modelContext.bestTime(onTrack: trackID)
         for racer in session.racers {
             guard let seconds = racer.finishTime else { continue }
@@ -106,6 +107,14 @@ struct ArenaHUDView: View {
         VStack(spacing: 4) {
             Text(racer.design.name)
                 .font(.system(size: 24, weight: .heavy, design: .rounded))
+                .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: 240)
+            if racer.boosting {
+                Label("Boosting", systemImage: "flame.fill")
+                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.yellow)
+                    .accessibilityIdentifier(racer.isAI ? "race-ai-boosting" : "race-player-boosting")
+            }
             HStack(spacing: 2) {
                 if racer.livesLeft > 20 {
                     Text("∞").font(.title2)      // test mode
@@ -172,9 +181,10 @@ struct ArenaHUDView: View {
                             if racer.id == winner?.id {
                                 Image(systemName: "trophy.fill").foregroundStyle(.yellow)
                             }
-                            Text(racer.design.name).lineLimit(1)
+                            Text(racer.design.name).lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true).frame(maxWidth: 180)
                         }
-                        .fixedSize()
+                        .fixedSize(horizontal: false, vertical: true)
                         Text(racer.finishTime.map { String(format: "%.1f s", $0) } ?? "OUT")
                         Text(String(format: "%.1f m/s", racer.topSpeed))
                         if anyCrashes { Text("\(racer.crashes)") }
@@ -189,13 +199,13 @@ struct ArenaHUDView: View {
             #if os(tvOS)
             Text(seriesLabel == nil
                  ? "Select \(Image(systemName: "arrow.clockwise")) REMATCH to go again!"
-                 : "Select \(Image(systemName: "arrow.clockwise")) REMATCH for the next track!")
+                 : "Select \(Image(systemName: "arrow.clockwise")) NEXT RACE for the next track!")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
             #else
             Text(seriesLabel == nil
                  ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
-                 : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
+                 : "Press \(Image(systemName: "arrow.clockwise")) NEXT RACE for the next track!")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(.yellow)
             #endif
@@ -203,5 +213,6 @@ struct ArenaHUDView: View {
         .padding(22)
         .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 24))
         .foregroundStyle(.white)
+        .accessibilityIdentifier("race-results")
     }
 }

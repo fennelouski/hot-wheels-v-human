@@ -18,7 +18,7 @@ struct TVWorkshopButtonStyle: ButtonStyle {
         let cornerRadius: CGFloat
         @Environment(\.isFocused) private var focused
         @Environment(\.isEnabled) private var enabled
-        @Environment(\.accessibilityReduceMotion) private var reduceMotion
+        @HWReduceMotion private var reduceMotion
 
         var body: some View {
             label
@@ -93,6 +93,12 @@ struct TVWorkshopHome: View {
                         Text(AppBranding.name)
                             .font(.system(size: 50, weight: .black, design: .rounded))
                         Spacer()
+                        NavigationLink { GameSettingsView() } label: {
+                            Label("Settings", systemImage: "slider.horizontal.3")
+                                .labelStyle(.iconOnly).frame(width: 68, height: 68)
+                        }
+                        .buttonStyle(TVWorkshopButtonStyle())
+                        .accessibilityIdentifier("home-settings")
                         Button {
                             appModel.selectedProfile = nil
                             appModel.selectedDriver = nil

@@ -375,7 +375,7 @@ enum SceneryPlacer {
                 AmbientMotion.apply(to: entity, model: item.model,
                                     vary: Float(index % 7) / 7)
             }
-            if isPerson(item.model),
+            if GameEffectsPolicy.shared.motionEnabled, isPerson(item.model),
                let animation = entity.availableAnimations.first {
                 entity.playAnimation(animation.repeat())
             }

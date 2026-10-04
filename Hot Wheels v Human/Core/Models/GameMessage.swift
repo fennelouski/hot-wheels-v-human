@@ -24,6 +24,10 @@ nonisolated enum GameMessage: Codable, Equatable, Sendable {
     case matchConfig(MatchConfig)
     case readyState(playerID: UUID, ready: Bool)
     case raceEvent(RaceEvent)
+    /// Additive: old peers drop these unknown messages; both apps must be
+    /// updated to exchange the finished image. Never sent unreliably.
+    case requestRaceShare
+    case raceShare(RaceSharePayload)
     // unreliable, high-frequency
     case boost(playerID: UUID, token: UUID)
     case reactionCam(playerID: UUID, on: Bool)

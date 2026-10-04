@@ -36,6 +36,7 @@ final class SoundBank {
     /// High-frequency sounds have `_b`/`_c` siblings (SFX-SPEC variant
     /// convention) — picks randomly, never the same one back-to-back.
     func play(_ name: String) {
+        guard !HWTestSession.isActive else { return }
         let options = variants(of: name)
         guard var pick = options.randomElement() else { return }
         if options.count > 1, pick == lastVariant[name],
@@ -65,6 +66,7 @@ final class SoundBank {
     /// nothing to buzz. `#if os(iOS)`, not `canImport(UIKit)` — UIKit imports
     /// fine on tvOS and would break the TV build (CLAUDE.md).
     private func buzz(for name: String) {
+        guard GamePreferences.shared.permitsHaptics else { return }
         #if os(iOS)
         switch name {
         // Refusals: the wobble a kid hears when a piece won't go there.
@@ -103,6 +105,7 @@ final class SoundBank {
 
     /// Start a looping music track (m4a); replaces whatever was playing.
     func playMusic(_ name: String) {
+        guard !HWTestSession.isActive else { return }
         guard let url = Bundle.main.url(forResource: name, withExtension: "m4a") else { return }
         guard let player = try? AVAudioPlayer(contentsOf: url) else { return }
         music?.stop()

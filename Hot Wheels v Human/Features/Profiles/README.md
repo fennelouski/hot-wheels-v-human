@@ -95,3 +95,5 @@ profile's last-used selection are committed together.
 Selecting a racer commits the profile's last-used pointer before updating
 the active race selection. Failure retains the previous selection and
 shows a retry message; the TV detail stays open.
+
+The 2026-10-04 candidate makes profile selection optional for immediate Play. The first viewport includes Play and Settings; existing profile creation/removal and personal workshops remain. Apple TV defaults focus to Play. On iPad, larger accessibility text uses a static scrolling profile grid instead of the orbit. The animation preference and OS Reduce Motion stop profile drift and character-preview sway without disabling manual orbit controls.
