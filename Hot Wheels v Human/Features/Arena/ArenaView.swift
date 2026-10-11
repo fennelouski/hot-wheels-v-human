@@ -35,6 +35,9 @@ struct ArenaView: View {
         let racers = coordinator.session.racers
         return racers.first { !$0.isAI } ?? racers.first
     }
+    /// Apple TV remote camera peek, written by swipes and eased back to the
+    /// auto-cam each frame in the scene update (tvOS only; iPad has no remote).
+    @State private var camNudge = CameraNudge()
 
     var body: some View {
         ZStack {
@@ -76,9 +79,16 @@ struct ArenaView: View {
                 let session = coordinator.session
                 let feed = reactionFeed
                 let audio = arenaAudio
+                let nudge = camNudge
+                let coord = coordinator
                 var smoothed = SIMD3<Float>(0, 2.2, -3)
                 var loopBias: Float = 0   // 0 = chase from behind, 1 = 3/4 side (loops)
                 var blockedFor: Double = 0   // seconds of track between us and the cars
+                var idleAngle: Float = 0  // lobby attract-orbit around the empty arena
+                // Smoothed framing so a new showcase track glides in, not snaps.
+                var idleCenter = SIMD3<Float>(0, 0, 0)
+                var idleR = RaceTuning.lobbyCamRadius
+                var idleH = RaceTuning.lobbyCamHeight
                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
                     if GameEffectsPolicy.shared.motionEnabled { feed.tick(session: session, dt: event.deltaTime) }
@@ -145,7 +155,24 @@ struct ArenaView: View {
                     let positions = session.racers.compactMap {
                         $0.entity.flatMap { $0.isEnabled ? $0.position(relativeTo: nil) : nil }
                     }
-                    guard !positions.isEmpty else { return }
+                    guard !positions.isEmpty else {
+                        // No car yet: slowly circle the current showcase track
+                        // (or the default box) so the lobby has a living backdrop.
+                        idleAngle += Float(event.deltaTime) * RaceTuning.lobbyCamSpin
+                        let fp = coord.lobbyFootprint ?? RaceTuning.lobbyFootprint
+                        let center = SIMD3<Float>((fp.minX + fp.maxX) / 2, 0,
+                                                  (fp.minZ + fp.maxZ) / 2)
+                        let size = max(fp.maxX - fp.minX, fp.maxZ - fp.minZ)
+                        // Ease framing toward the current track's size/position.
+                        idleCenter += (center - idleCenter) * 0.02
+                        idleR += (max(RaceTuning.lobbyCamRadius, size * 0.9) - idleR) * 0.02
+                        idleH += (max(RaceTuning.lobbyCamHeight, size * 0.35) - idleH) * 0.02
+                        let eye = idleCenter + SIMD3<Float>(sin(idleAngle) * idleR,
+                                                            idleH, cos(idleAngle) * idleR)
+                        cameraEntity.look(at: idleCenter + [0, 0.4, 0], from: eye,
+                                          relativeTo: nil)
+                        return
+                    }
                     let mid = positions.reduce(SIMD3<Float>.zero, +) / Float(positions.count)
                     let spread = positions.map { simd_length($0 - mid) }.max() ?? 0
                     var distance = max(1.6, spread * 2.2)
@@ -169,7 +196,15 @@ struct ArenaView: View {
                     loopBias = simd_mix(loopBias, nearLoop ? 1 : 0, 0.08)
                     let behind = SIMD3<Float>(0, distance * 0.4, -distance)
                     let side = SIMD3<Float>(distance * 0.9, distance * 0.4, -distance * 0.35)
-                    var goal = mid + simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
+                    var offset = simd_mix(behind, side, SIMD3<Float>(repeating: loopBias))
+                    let yaw = nudge.yaw
+                    offset = SIMD3<Float>(
+                        offset.x * cos(yaw) - offset.z * sin(yaw),
+                        offset.y + nudge.height,
+                        offset.x * sin(yaw) + offset.z * cos(yaw))
+                    nudge.yaw *= RaceTuning.camNudgeDecay
+                    nudge.height *= RaceTuning.camNudgeDecay
+                    var goal = mid + offset
 
                     // Elevated track parks itself between the camera and the
                     // cars, and from behind a deck the race is an orange wall.
@@ -229,11 +264,12 @@ struct ArenaView: View {
                 }
                 // Re-theme when the (next) race's track changes. Reading
                 // trackID here re-runs this closure on each new race.
-                let trackID = coordinator.session.trackID
+                let trackID = coordinator.session.trackID ?? coordinator.lobbyTrackID
                 let worldTheme = coordinator.session.worldTheme
                 let scenery = coordinator.session.scenery
                 let worldEmpty = coordinator.session.worldEmpty
                 let footprint = coordinator.session.trackFootprint
+                    ?? coordinator.lobbyFootprint ?? RaceTuning.lobbyFootprint
                 guard let holder = content.entities.first?
                     .findEntity(named: "environment") else { return }
                 let wanted = ArenaEnvironment.name(for: trackID, theme: worldTheme,
@@ -355,6 +391,21 @@ struct ArenaView: View {
             }
         }
         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
+        // Siri Remote camera peek — TV only; iPad's arena keeps focus for its
+        // boost buttons. .focusable() so the arena receives swipes when no
+        // control is focused.
+        #if os(tvOS)
+        .focusable()
+        .onMoveCommand { direction in
+            switch direction {
+            case .left:  camNudge.yaw += RaceTuning.camNudgeYawStep
+            case .right: camNudge.yaw -= RaceTuning.camNudgeYawStep
+            case .up:    camNudge.height += RaceTuning.camNudgeHeightStep
+            case .down:  camNudge.height -= RaceTuning.camNudgeHeightStep
+            default: break
+            }
+        }
+        #endif
         .task(id: coordinator.session.completedResult?.id) {
             guard coordinator.session.completedResult != nil else { coordinator.clearShare(); return }
             // Let the real finish camera settle; this doesn't delay race input
@@ -422,6 +473,15 @@ extension TrackVisibility {
         case .hideAll: "Hide all track"
         }
     }
+}
+
+/// Shared between the SwiftUI remote handler (writes on swipe) and the
+/// RealityKit scene update (reads + decays each frame). Both run on the
+/// main actor. Not @Observable — nothing renders from it, the render loop
+/// polls it.
+@MainActor final class CameraNudge {
+    var yaw: Float = 0
+    var height: Float = 0
 }
 
 extension CarDesign {

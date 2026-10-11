@@ -459,6 +459,26 @@ nonisolated enum RaceTuning {
     /// cam's own drift, so getting the cars back on screen takes under half
     /// a second once the search has picked somewhere.
     static let camEscapeEase: Float = 0.12
+    /// Apple TV remote camera peek: one touchpad swipe orbits the chase cam
+    /// this many radians (~14°) or lifts/drops it this many metres. The nudge
+    /// eases back to the auto-cam by this per-frame factor (~0.3 left after a
+    /// second at 60 fps), so a swipe is a peek, not a takeover.
+    static let camNudgeYawStep: Float = 0.25
+    static let camNudgeHeightStep: Float = 0.6
+    static let camNudgeDecay: Float = 0.98
+
+    /// Lobby attract camera: with no car on the track (waiting for iPads to
+    /// join), the chase cam slowly orbits the empty themed arena so there's a
+    /// living scene behind the lobby. Slow enough (~52 s/loop) to be calm, not
+    /// dizzying. `lobbyFootprint` is a small centred box so the trackside props
+    /// (spinning coins, toy clutter) scatter around the origin the orbit circles.
+    static let lobbyCamSpin: Float = 0.12    // radians/second
+    static let lobbyCamRadius: Float = 7
+    static let lobbyCamHeight: Float = 3
+    static let lobbyFootprint = FootprintRect(minX: -3, minZ: -3, maxX: 3, maxZ: 3)
+    /// Seconds each real starter track lingers in the lobby attract parade
+    /// before the next one spawns in.
+    static let lobbyTrackDwell: Float = 9
 
     // MARK: Destruction & respawn (PRD §3.3 five-chance system)
 

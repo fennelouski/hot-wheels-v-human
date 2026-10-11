@@ -71,6 +71,12 @@ struct ArenaLobbyView: View {
         .onDisappear {
             if !coordinator.isPresentingResultShare { coordinator.stop() }
         }
+        // Siri Remote play/pause = start now, skipping the READY wait (a racer
+        // wandered off, or you just want to watch). No-ops until an iPad has
+        // sent a car, so a stray click on an empty lobby does nothing.
+        #if os(tvOS)
+        .onPlayPauseCommand { coordinator.hostStartRace() }
+        #endif
         .onChange(of: coordinator.players.count) { old, new in
             if new > old { SoundBank.shared.play("player_join_horn") }
         }
@@ -131,7 +137,11 @@ struct ArenaLobbyView: View {
         }
         .animation(.easeInOut(duration: 0.3), value: coordinator.lastRejection)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(LobbyBackground(energy: lobbyEnergy).ignoresSafeArea())
+        .background(LobbyBackground(energy: lobbyEnergy).opacity(0.35).ignoresSafeArea())
+        // Translucent scrim, not an opaque fill: the ArenaView orbiting behind
+        // the lobby shows through, while the dark wash keeps the white text
+        // readable over a bright themed sky.
+        .background(.black.opacity(0.4))
         .foregroundStyle(.white)
     }
 

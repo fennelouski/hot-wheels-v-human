@@ -117,6 +117,14 @@ final class RaceCoordinator {
     private var eventTask: Task<Void, Never>?
     private var buildTask: Task<Void, Never>?
     private var snapshotTask: Task<Void, Never>?
+    /// Lobby attract parade: cycles real starter tracks through the arena so
+    /// the TV has something to watch before any iPad joins. Torn down the
+    /// instant a real race starts. `lobbyTrackID`/`lobbyFootprint` drive the
+    /// ArenaView's sky theme and idle-camera framing for the current track.
+    private var showcaseTask: Task<Void, Never>?
+    private var showcaseTrack: Entity?
+    private(set) var lobbyTrackID: UUID?
+    private(set) var lobbyFootprint: FootprintRect?
 
     init(transport: any GameTransport) {
         self.transport = transport
@@ -130,6 +138,46 @@ final class RaceCoordinator {
     func attach(root: Entity) {
         arenaRoot = root
         startRaceIfReady()
+        startShowcase()   // no-ops if the race already started
+    }
+
+    /// Cycle real starter tracks through the arena while we wait in the lobby.
+    /// No-ops if a race is running or the parade is already going.
+    private func startShowcase() {
+        guard isStarted, showcaseTask == nil, !raceRunning, let root = arenaRoot else { return }
+        let blueprints = TrackBlueprint.presets.map(\.blueprint)
+        guard !blueprints.isEmpty else { return }
+        showcaseTask = Task { @MainActor [weak self] in
+            var i = 0
+            while !Task.isCancelled {
+                let bp = blueprints[i % blueprints.count]
+                i += 1
+                let layout = TrackLayoutSolver.solve(bp)
+                guard let track = try? await TrackSpawner.spawn(layout: layout) else {
+                    try? await Task.sleep(for: .seconds(Double(RaceTuning.lobbyTrackDwell)))
+                    continue
+                }
+                guard let self, !Task.isCancelled else { track.removeFromParent(); return }
+                self.showcaseTrack?.removeFromParent()
+                self.showcaseTrack = track
+                let rects = layout.pieces.map(\.worldFootprint)
+                self.lobbyFootprint = FootprintRect(
+                    minX: rects.map(\.minX).min() ?? -3, minZ: rects.map(\.minZ).min() ?? -3,
+                    maxX: rects.map(\.maxX).max() ?? 3, maxZ: rects.map(\.maxZ).max() ?? 3)
+                self.lobbyTrackID = bp.trackId   // set last: drives the sky-theme swap
+                root.addChild(track)
+                try? await Task.sleep(for: .seconds(Double(RaceTuning.lobbyTrackDwell)))
+            }
+        }
+    }
+
+    private func stopShowcase() {
+        showcaseTask?.cancel()
+        showcaseTask = nil
+        showcaseTrack?.removeFromParent()
+        showcaseTrack = nil
+        lobbyTrackID = nil
+        lobbyFootprint = nil
     }
 
     func start() {
@@ -137,6 +185,7 @@ final class RaceCoordinator {
         isStarted = true
         let lifecycleID = self.lifecycleID
         transport.start(role: .host)
+        startShowcase()
         eventTask = Task { [weak self] in
             guard let events = self?.transport.events else { return }
             for await event in events {
@@ -169,6 +218,7 @@ final class RaceCoordinator {
         raceIndex = 0
         reactionCamsOn.removeAll()
         lastRejection = nil
+        stopShowcase()
         transport.stop()
         transportState = .idle
     }
@@ -365,6 +415,7 @@ final class RaceCoordinator {
         }
         guard let blueprint = nextBlueprint() else { return }
         raceRunning = true
+        stopShowcase()   // clear the attract track before the real one spawns
 
         let (entries, effectiveConfig) = Self.raceEntries(
             players: players, designs: designs, config: config)
