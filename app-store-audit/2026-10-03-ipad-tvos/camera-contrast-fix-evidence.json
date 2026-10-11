@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T10:23:24.425841+00:00",
+  "revision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+  "previousRevision": "5643eca1662dfc91f39d851ca0ea2ab5a8f9ce80",
+  "changedCommittedPaths": [
+    "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+    "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests.swift",
+    "Hot Wheels v HumanUITests/TVRemoteUITests.swift"
+  ],
+  "productionChange": "tvOS-only camera and visibility controls reuse the established TVWorkshopButtonStyle; black foreground on selected yellow, white foreground on unselected dark fill, white focus ring independent of selection. iPad styling/camera implementation unchanged.",
+  "approvalEvidence": "Root independently inspected full TV21 and explicitly authorized this bounded tvOS-only fix and new selective freeze/package path. No ignore/suppression was added.",
+  "originalTVFinding": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/7770B5C3-31BA-4D4F-9DF0-35ACB7C18289.png",
+    "sha256": "b49c07a34b01d9800c15018b7d3bca6ba786491f9bc3769419aa5bcab350f585",
+    "finding": "Camera and selected visibility icon unreadable yellow on solid yellow; other visibility icons white on pale fill."
+  },
+  "iPadCameraInvestigation": {
+    "buildRecordPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-builds-ipad-settled-camera-5643eca.json",
+    "buildRecordSHA256": "cd92a6d980ff117a145c90ed392f72c7cd7bf24ace4f8040ec2ea1581338547e",
+    "targetedRunPassed": true,
+    "fullOriginalImagesViewed": 4,
+    "finding": "Ordinary deterministic starter track with five seconds rendered Chase settling shows cars/track clearly, including charged and post-hold boost frames. Driver view settles in two seconds. No production camera-framing edit justified."
+  },
+  "nativeFreezeProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-source-inputs-camera-contrast-final.json",
+  "nativeFreezeProofSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+  "finalRuntimeAndSignedPackageStatus": "Pending final-source headless iPad/tvOS verification and replacement archives",
+  "limitations": [
+    "Simulator evidence does not prove physical iPad-to-TV networking",
+    "No full accessibility certification",
+    "No visionOS work",
+    "No App Store upload or submission by this step"
+  ]
+}

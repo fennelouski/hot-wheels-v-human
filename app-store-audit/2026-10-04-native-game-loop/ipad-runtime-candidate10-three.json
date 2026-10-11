@@ -1,0 +1,53 @@
+{
+  "startedAt": "2026-10-04T10:12:57.741305+00:00",
+  "sourceProof": "native-inputs.candidate-10.json",
+  "compiledProof": "compiled-artifacts.candidate-10.json",
+  "udid": "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+  "preflightDevice": {
+    "udid": "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+    "state": "Shutdown",
+    "name": "Games Finish QA Pad 20261003",
+    "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.iPad-Pro-13-inch-M5-12GB",
+    "dataPath": "/Users/nathan/Library/Developer/CoreSimulator/Devices/025B233C-9EE8-48DD-A4E8-BB88CF93F0DE/data"
+  },
+  "appearanceBefore": {
+    "exitCode": 0,
+    "stdout": "light\n",
+    "stderr": ""
+  },
+  "enumeratedTests": [
+    "Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "Hot Wheels v HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+    "Hot Wheels v HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()"
+  ],
+  "command": [
+    "xcodebuild",
+    "test-without-building",
+    "-xctestrun",
+    "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_iphonesimulator26.5-arm64-x86_64.xctestrun",
+    "-destination",
+    "platform=iOS Simulator,id=025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+    "-parallel-testing-enabled",
+    "NO",
+    "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+    "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()",
+    "-resultBundlePath",
+    "/tmp/hwvh-game-loop-ipad-candidate10-three-20261004.xcresult"
+  ],
+  "exitCode": 65,
+  "resultBundle": "/tmp/hwvh-game-loop-ipad-candidate10-three-20261004.xcresult",
+  "log": "ipad-candidate10-three.log",
+  "logSHA256": "b9435f31cd7f47eac334676dba2fe9e205170c2bb14d2065bb711212673f7f0c",
+  "appearanceAfter": {
+    "exitCode": 0,
+    "stdout": "light\n",
+    "stderr": ""
+  },
+  "shutdownExitCode": 0,
+  "finalDeviceState": "Shutdown",
+  "normalFilesUnchanged": true,
+  "nativeAndCompiledHashesUnchanged": true,
+  "appearanceUnchanged": true,
+  "finishedAt": "2026-10-04T10:15:20.873159+00:00"
+}

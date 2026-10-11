@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+  "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+  "verifiedAtUTC": "2026-10-03T08:35:24.628495+00:00",
+  "nativeProductionInputProof": "native-production-inputs-46fc491.json",
+  "nativeProductionInputProofSHA256": "20d91c8c7b9251bf4cad5ebf5d9dfa60ad1bad2545e2c10a4c41427e9866924e",
+  "productionFilesMatch": true,
+  "builds": [
+    {
+      "platform": "tvOS",
+      "appPath": "/tmp/hwvh-release-tv-20261003/Build/Products/Release-appletvsimulator/Hot Wheels v Human.app",
+      "configuration": "Release",
+      "testability": "YES for test host only; distribution packages use NO",
+      "name": "HWvH",
+      "bundle": "com.nathanfennel.Hot-Wheels-v-Human",
+      "version": "1.0",
+      "build": "1",
+      "UIDeviceFamily": [
+        3
+      ],
+      "minimumOSVersion": "26.0",
+      "nonExemptEncryption": false,
+      "executableSHA256": "be57f7d3ce3030e808a47d859c0fa112c71a3e444809b7c46902f694fae75af8",
+      "buildLogPath": "/tmp/hwvh-final-freeze-tv-build-20261003.log",
+      "buildLogSHA256": "386d303aedad2723fe314079b07d5baa3de8a1327c9c01b49ce49a3acf013d11",
+      "buildSucceeded": true,
+      "testHarnessProofPath": "native-source-inputs-final.json",
+      "testHarnessProofSHA256": "989c9a372568084bce04e604de857dc6a24bbe4c26e446c6c5ef962de2c04e1a",
+      "testHarnessRevision": "46fc491ab25e94d21780a2b45b1c156260c16190"
+    },
+    {
+      "platform": "iPadOS",
+      "appPath": "/tmp/hwvh-release-ipad-20261003/Build/Products/Release-iphonesimulator/Hot Wheels v Human.app",
+      "configuration": "Release",
+      "testability": "YES for test host only; distribution packages use NO",
+      "name": "HWvH",
+      "bundle": "com.nathanfennel.Hot-Wheels-v-Human",
+      "version": "1.0",
+      "build": "1",
+      "UIDeviceFamily": [
+        2
+      ],
+      "minimumOSVersion": "26.0",
+      "nonExemptEncryption": false,
+      "executableSHA256": "9484a9c37537bb21be7ba86bb5e41d3a2dccc4990cae71ce01bb5380e9f1c7c6",
+      "buildLogPath": "/tmp/hwvh-ipad-slider-confirm-build-20261003.log",
+      "buildLogSHA256": "da78630c02762dc83c67040191534fd69f402e684bd97b083a39a16fe6229375",
+      "buildSucceeded": true,
+      "testHarnessProofPath": "native-test-inputs-ipad-slider-confirm.json",
+      "testHarnessProofSHA256": "c1167aa8284f5dec3cd4a4e54ed06a0cb7f61ca3cfd7bbdaa60baf22b4e02306",
+      "testHarnessRevision": "6d6ecb1986c776ea5d8bb4c8333cd49a146fd1a0"
+    }
+  ],
+  "productionArchiveEvidence": "signed-release-packages-final.json",
+  "productionArchiveEvidenceSHA256": "c8422619d4ddb06c6ae2faebecdeff007dbcadc6ab9e3b2d576a65eab3fe0627",
+  "sourceEquivalence": "828 production app/project files match the signed46fc491 freeze. iPad test-only parser correction at6d6ecb1 changes no shipped source; each capture run records its actual test harness revision separately.",
+  "historicalBuildEvidence": "native-builds.json"
+}

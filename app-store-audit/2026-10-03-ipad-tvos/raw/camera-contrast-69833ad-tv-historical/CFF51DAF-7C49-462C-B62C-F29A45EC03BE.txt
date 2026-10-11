@@ -1,0 +1,61 @@
+Attributes: Application, 0x10272b880, pid: 30675, label: 'HWvH'
+Element subtree:
+ →Application, 0x10272b880, pid: 30675, label: 'HWvH'
+    Window (Main), 0x102729a30, {{0.0, 0.0}, {1920.0, 1080.0}}
+      Other, 0x10272c260, {{0.0, 0.0}, {1920.0, 1080.0}}
+        Other, 0x10272c380, {{0.0, 0.0}, {1920.0, 1080.0}}
+          Other, 0x10272c110, {{0.0, 0.0}, {1920.0, 1080.0}}
+            Other, 0x10272a830, {{0.0, 0.0}, {1920.0, 1080.0}}
+              Other, 0x10272c4a0, {{0.0, 0.0}, {1920.0, 1080.0}}
+              StaticText, 0x10272c5c0, {{820.0, 80.0}, {56.0, 29.0}}, label: 'Tank'
+              Image, 0x10272c6e0, {{794.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272c800, {{817.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272c920, {{840.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272ca40, {{863.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272cb60, {{886.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              ProgressIndicator, 0x10272cc80, {{778.0, 132.0}, {140.0, 10.0}}, value: 100%
+                ProgressIndicator, 0x10272cda0, {{778.0, 122.0}, {140.0, 30.0}}, value: 100%
+              StaticText, 0x10272cec0, {{813.0, 146.0}, {70.0, 20.0}}, label: '2.2 m/s'
+              StaticText, 0x10272cfe0, {{1028.0, 80.0}, {88.0, 29.0}}, label: 'Zoomie'
+              Image, 0x10272d100, {{1018.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272d220, {{1041.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272d340, {{1064.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272d460, {{1087.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              Image, 0x10272d580, {{1110.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car'
+              ProgressIndicator, 0x10272d6a0, {{1002.0, 132.0}, {140.0, 10.0}}, value: 100%
+                ProgressIndicator, 0x10272d7c0, {{1002.0, 122.0}, {140.0, 30.0}}, value: 100%
+              StaticText, 0x10272d8e0, {{1037.0, 146.0}, {70.0, 20.0}}, label: '1.8 m/s'
+              Image, 0x10272da00, {{1369.0, 423.0}, {48.0, 52.0}}, identifier: 'trophy.fill', label: 'trophy.fill'
+              StaticText, 0x10272db20, {{1369.0, 423.0}, {340.0, 53.0}}, label: 'TANK WINS!'
+              StaticText, 0x10272dc40, {{1367.0, 491.0}, {32.0, 23.0}}, label: 'Car'
+              StaticText, 0x10272dd60, {{1437.0, 491.0}, {43.0, 23.0}}, label: 'Time'
+              StaticText, 0x10272de80, {{1499.0, 491.0}, {90.0, 23.0}}, label: 'Top speed'
+              StaticText, 0x10272dfa0, {{1603.0, 491.0}, {120.0, 23.0}}, label: 'Best segment'
+              Image, 0x10272e0c0, {{1351.0, 523.0}, {19.0, 21.0}}, identifier: 'trophy.fill', label: 'trophy.fill'
+              StaticText, 0x10272e1e0, {{1378.0, 522.0}, {39.0, 23.0}}, label: 'Tank'
+              StaticText, 0x10272e300, {{1431.0, 522.0}, {54.0, 23.0}}, label: '29.9 s'
+              StaticText, 0x10272e420, {{1514.0, 522.0}, {61.0, 23.0}}, label: '4.1 m/s'
+              StaticText, 0x10272e690, {{1613.0, 522.0}, {101.0, 23.0}}, label: '#27 · 0.20 s'
+              StaticText, 0x10272e7b0, {{1352.0, 553.0}, {63.0, 23.0}}, label: 'Zoomie'
+              StaticText, 0x10272e8d0, {{1432.0, 553.0}, {53.0, 23.0}}, label: '35.2 s'
+              StaticText, 0x10272e9f0, {{1512.0, 553.0}, {64.0, 23.0}}, label: '2.9 m/s'
+              StaticText, 0x10272eb10, {{1615.0, 553.0}, {97.0, 23.0}}, label: '#41 · 0.31 s'
+              Image, 0x10272ec30, {{1325.0, 590.0}, {31.0, 30.0}}, identifier: 'star.fill', label: 'Favorite'
+              StaticText, 0x10272ed50, {{1325.0, 590.0}, {424.0, 33.0}}, label: 'NEW TRACK RECORD! 29.9 s'
+              StaticText, 0x10272ee70, {{1329.0, 635.0}, {414.0, 26.0}}, label: 'Press  REMATCH on your iPad to go again!'
+              Button, 0x10272ef90, {{1584.0, 84.0}, {232.0, 60.0}}, identifier: 'race-camera', label: 'Driver View', value: Driver View
+                Image, 0x10272f0b0, {{1616.0, 102.0}, {24.0, 24.0}}, identifier: 'steeringwheel', label: 'steeringwheel'
+                StaticText, 0x10272f1d0, {{1584.0, 84.0}, {232.0, 60.0}}, label: 'Driver View'
+              Button, 0x10272f2f0, {{1534.5, 154.9}, {91.1, 62.1}}, identifier: 'race-track-all', label: 'Show all track', Focused
+              Button, 0x10272f410, {{1632.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideGhosts', label: 'Hide ghost track', Selected
+              Button, 0x10272f530, {{1728.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideAll', label: 'Hide all track'
+              Button, 0x10272f650, {{1496.0, 882.0}, {320.0, 114.0}}, identifier: 'race-rematch', label: 'REMATCH!'
+                Image, 0x10272f770, {{1555.0, 922.0}, {28.0, 34.0}}, identifier: 'arrow.clockwise', label: 'Refresh'
+                StaticText, 0x10272f890, {{1496.0, 882.0}, {320.0, 114.0}}, label: 'REMATCH!'
+Path to element:
+ →Application, 0x10272b880, pid: 30675, label: 'HWvH'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x10b332100, pid: 30675, label: 'HWvH'
+  }

@@ -1,0 +1,1 @@
+Native touch hold: 3 seconds. Boost meter before: 109.0%; after: 4.0%. Camera: Driver View.

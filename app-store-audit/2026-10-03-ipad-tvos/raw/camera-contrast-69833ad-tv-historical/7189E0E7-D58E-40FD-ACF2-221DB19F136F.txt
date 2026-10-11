@@ -1,0 +1,19 @@
+Attributes: Button, 0x101d219c0, {{inf, inf}, {0.0, 0.0}}, identifier: 'race-radio-power', label: 'Radio power', value: Off
+Element subtree:
+ →Button, 0x101d219c0, {{inf, inf}, {0.0, 0.0}}, identifier: 'race-radio-power', label: 'Radio power', value: Off
+Path to element:
+ →Button, 0x101d219c0, {{inf, inf}, {0.0, 0.0}}, identifier: 'race-radio-power', label: 'Radio power', value: Off
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x101b455d0, pid: 30675, label: 'HWvH'
+  }
+  ↪︎Find: Descendants matching type Button
+    Output: {
+      Button, 0x10262bfa0, {{1584.0, 84.0}, {232.0, 60.0}}, identifier: 'race-camera', label: 'Driver View', value: Driver View
+      Button, 0x10262c300, {{1534.5, 154.9}, {91.1, 62.1}}, identifier: 'race-track-all', label: 'Show all track', Focused
+      Button, 0x10262c420, {{1632.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideGhosts', label: 'Hide ghost track', Selected
+      Button, 0x10262c540, {{1728.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideAll', label: 'Hide all track'
+      Button, 0x10262c660, {{1496.0, 882.0}, {320.0, 114.0}}, identifier: 'race-rematch', label: 'REMATCH!'
+    }
+    ↪︎Find: Elements matching predicate '"race-radio-power" IN identifiers'

@@ -1,0 +1,42 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "modelName" : "Apple TV 4K (3rd generation) (at 1080p)",
+        "osBuildNumber" : "23L470",
+        "osVersion" : "26.5",
+        "platform" : "tvOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 0,
+      "passedTests" : 10,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "Hot Wheels v Human · Built with macOS 26.5.2",
+  "expectedFailures" : 0,
+  "failedTests" : 0,
+  "finishTime" : 1791019336.912,
+  "passedTests" : 10,
+  "result" : "Passed",
+  "skippedTests" : 0,
+  "startTime" : 1791018833.747,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+
+  ],
+  "title" : "Test - Hot Wheels v Human",
+  "topInsights" : [
+
+  ],
+  "totalTestCount" : 10
+}

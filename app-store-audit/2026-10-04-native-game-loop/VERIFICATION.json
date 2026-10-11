@@ -1,0 +1,130 @@
+{
+  "recordedAt": "2026-10-04T10:38:30.324237+00:00",
+  "status": "Native implementation and bounded QA complete; final release actions remain with root.",
+  "baseRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "heldSourceProof": "native-inputs.candidate-11.json",
+  "heldInputCount": 889,
+  "heldAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "nativeInputsMatchNow": true,
+  "versions": {
+    "iPadOS": "1.0 (1)",
+    "tvOS": "1.0 (1)"
+  },
+  "compileProof": "compiled-artifacts.candidate-11.json",
+  "compiles": [
+    {
+      "platform": "ipad",
+      "receipt": "builds/ipad-candidate-11.json",
+      "exitCode": 0
+    },
+    {
+      "platform": "tv",
+      "receipt": "builds/tv-candidate-11.json",
+      "exitCode": 0
+    }
+  ],
+  "runtime": [
+    {
+      "scope": "Final iPad launch/race/frozen export/native chooser/dismissal/rematch and AX/saved independent settings/calm controls",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "receipt": "ipad-runtime-candidate11-two.json",
+      "summary": "ipad-ui-candidate11-two-summary.json",
+      "processed": 2,
+      "passed": 2,
+      "failed": 0
+    },
+    {
+      "scope": "iPad optional profile/touch workshop; retain this one method only",
+      "sourceProof": "native-inputs.candidate-10.json",
+      "receipt": "ipad-runtime-candidate10-three.json",
+      "summary": "ipad-ui-candidate10-three-summary.json",
+      "roundProcessed": 3,
+      "roundPassed": 1,
+      "roundFailed": 2,
+      "retainedPassed": 1
+    },
+    {
+      "scope": "TV launch/race/result/upright native GPU Share/rematch",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "receipt": "tv-runtime-candidate9-one.json",
+      "summary": "tv-ui-candidate9-one-summary.json",
+      "processed": 1,
+      "passed": 1,
+      "failed": 0
+    },
+    {
+      "scope": "TV independent saved settings/calm live controls; retain this one method only",
+      "sourceProof": "native-inputs.candidate-6.json",
+      "receipt": "tv-runtime-candidate6-two.json",
+      "roundProcessed": 2,
+      "roundPassed": 1,
+      "roundFailed": 1,
+      "retainedPassed": 1
+    },
+    {
+      "scope": "TV optional profile/workshop; retain this one method only",
+      "sourceProof": "native-inputs.candidate-5.json",
+      "receipt": "tv-runtime-candidate5-round1.json",
+      "roundProcessed": 3,
+      "roundPassed": 1,
+      "roundFailed": 2,
+      "retainedPassed": 1
+    },
+    {
+      "scope": "5 new native logic/export/loopback tests and 3 existing codec tests",
+      "sourceProof": "native-inputs.candidate-5.json",
+      "receipt": "tv-runtime-candidate5-round1.json",
+      "summary": "tv-unit-candidate5-round1-summary.json",
+      "processed": 8,
+      "passed": 8,
+      "failed": 0
+    }
+  ],
+  "retainedMethodEquivalence": "source-equivalence.candidate-11.json",
+  "reviewSheet": "native-review/index.html",
+  "reviewManifest": "native-visual-review.candidate-11.json",
+  "reviewedActualImageCount": 21,
+  "rootApprovedActualImagePaths": [
+    "tv-candidate9-one-attachments/F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+    "tv-candidate9-one-attachments/FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+    "tv-candidate9-one-attachments/87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+    "tv-candidate9-one-attachments/8ECF8599-8B14-4060-B078-53C402194F2A.png",
+    "tv-candidate9-one-attachments/6C79565C-A835-4FD3-AE17-D5453293D759.png",
+    "ipad-candidate11-two-attachments/F45D2F4E-28C8-44DF-88AF-AB30EAF789BA.png",
+    "ipad-candidate11-two-attachments/648EA357-CACA-4AA1-A2EA-9974D2C22C9E.png",
+    "ipad-candidate11-two-attachments/85AE5D97-A45A-4653-977C-BB8EC94BDD4F.png",
+    "ipad-candidate11-two-attachments/FF82B43F-0D68-4A30-B36F-0459E39AF416.png",
+    "ipad-candidate11-two-attachments/969E16D8-BAC5-425C-9D2A-0AD619C6F941.png",
+    "ipad-candidate11-two-attachments/EA211BD2-007D-44EB-8D37-544C8E2EEC41.png",
+    "ipad-candidate11-two-attachments/D544F417-4C97-4DB6-A14F-080F1E06B4A5.png",
+    "ipad-candidate11-two-attachments/669C3FA3-017E-4077-B713-E98042C6CB6E.png",
+    "ipad-candidate11-two-attachments/5D1D0B0C-C628-45AC-81D3-117EF17AC627.png",
+    "ipad-candidate11-two-attachments/1B7D74C9-6732-4FD7-8ABE-23AA52642F32.png",
+    "ipad-candidate11-two-attachments/9994687A-235C-485D-803F-E966DBC5E000.png",
+    "ipad-candidate10-three-attachments/7414820E-836C-4EE8-99F9-20A635C2AFEB.png",
+    "tv-round1-attachments/9388C08D-575C-45F7-B03F-3A5FE5F9A84A.png",
+    "tv-candidate6-two-attachments/E82D7DF3-5AA8-41EE-8AE0-F17E3EAF9448.png",
+    "tv-candidate6-two-attachments/70DA8D6F-29DA-4903-97EE-1DD9C69BE33D.png",
+    "actual-native-export/ipad-candidate11-finished-race.png"
+  ],
+  "nativeExport": "actual-native-export/manifest.json",
+  "isolatedDeviceClosure": {
+    "iPad": "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE: Shutdown, original light unchanged, normal exact-bundle stores unchanged, portrait restored",
+    "tv": "BF090DFE-C6F6-4FF4-AB70-8870241B497E: Shutdown, unsupported appearance read unchanged, normal exact-bundle stores unchanged",
+    "serializedSlot": "Released to word_game_finish after final iPad Shutdown. No further builds/device actions planned."
+  },
+  "preservedFailures": [
+    "Initial actor/default-argument compile failure and unsupported CLI option zero-test failure remain in original logs.",
+    "Candidate5 TV round: 1/3; candidate6 TV round: 1/2; candidate10 iPad round: 1/3. Only their named passed methods are retained.",
+    "Candidate8 Share UI method passed but native GPU pixels were vertically inverted and rejected. candidate8-share-pixel-rejection.json remains."
+  ],
+  "limits": [
+    "Physical TV-to-iPad discovery, permission prompts, image delivery and reconnect have not been exercised across real hardware.",
+    "System share chooser opened/dismissed only; no recipient, destination or post selected.",
+    "QA suppresses actual audio/haptic hardware. These effects were not physically verified.",
+    "Largest Dynamic Type checks cover launch/settings/calm controls, not every legacy workshop, split-window size or portrait state.",
+    "Final Debug generic builds are not distribution archives or Apple processing/submission proof.",
+    "Current galleries, committed source/version choice, Release packages, live store metadata/privacy/pricing/storefronts/review are separate."
+  ],
+  "rootVisualApprovalReceipt": "root-native-visual-approval.candidate-11.json"
+}

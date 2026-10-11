@@ -1,0 +1,71 @@
+{
+  "startedAt": "2026-10-04T09:31:34.805497+00:00",
+  "sourceProof": "native-inputs.candidate-5.json",
+  "compiledProof": "compiled-artifacts.candidate-5.json",
+  "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+  "runs": [
+    {
+      "phase": "unit",
+      "command": [
+        "xcodebuild",
+        "test-without-building",
+        "-xctestrun",
+        "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+        "-destination",
+        "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "-parallel-testing-enabled",
+        "NO",
+        "-test-iterations",
+        "1",
+        "-retry-tests-on-failure",
+        "NO",
+        "-only-testing:Hot Wheels v HumanTests/GameLoopTests",
+        "-only-testing:Hot Wheels v HumanTests/CodecTests",
+        "-resultBundlePath",
+        "/tmp/hwvh-game-loop-tv-unit-20261004.xcresult"
+      ],
+      "exitCode": 64,
+      "resultBundle": "/tmp/hwvh-game-loop-tv-unit-20261004.xcresult",
+      "log": "app-store-audit/2026-10-04-native-game-loop/tv-unit-candidate5.log",
+      "logSHA256": "ce4e83dd5528a01a356303dff0386e1c1e54ed87cc496e24041a5a6cd6c3444f"
+    },
+    {
+      "phase": "ui",
+      "command": [
+        "xcodebuild",
+        "test-without-building",
+        "-xctestrun",
+        "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+        "-destination",
+        "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "-parallel-testing-enabled",
+        "NO",
+        "-test-iterations",
+        "1",
+        "-retry-tests-on-failure",
+        "NO",
+        "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests",
+        "-resultBundlePath",
+        "/tmp/hwvh-game-loop-tv-ui-20261004.xcresult"
+      ],
+      "exitCode": 64,
+      "resultBundle": "/tmp/hwvh-game-loop-tv-ui-20261004.xcresult",
+      "log": "app-store-audit/2026-10-04-native-game-loop/tv-ui-candidate5.log",
+      "logSHA256": "ce4e83dd5528a01a356303dff0386e1c1e54ed87cc496e24041a5a6cd6c3444f"
+    }
+  ],
+  "appearanceBefore": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "appearanceAfter": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "shutdownExitCode": 0,
+  "normalFilesUnchanged": true,
+  "nativeAndCompiledHashesUnchanged": true,
+  "finishedAt": "2026-10-04T09:31:51.729015+00:00"
+}

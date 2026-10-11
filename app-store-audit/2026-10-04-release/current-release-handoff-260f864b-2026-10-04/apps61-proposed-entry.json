@@ -1,0 +1,228 @@
+{
+  "app": "HWvH",
+  "apple_id": "6818777508",
+  "submission_status": "iPadOS 1.0(1) and tvOS 1.0(1) are Prepare for Submission. Both exact builds are Validated and selected. Final submission has not occurred.",
+  "supported_platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "registered_bundle_id": "com.nathanfennel.Hot-Wheels-v-Human",
+  "source": {
+    "local_path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "input_count": 889,
+    "aggregate_sha256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "version": "1.0",
+    "build": "1"
+  },
+  "release_ownership": "Root owns the current Apple listing and final release decisions. The exact current native archives, exports and uploads are complete. Watch owns the native build slot after its explicit release. Older 44d929c preparation is preserved separately as history.",
+  "remaining_blockers": [
+    "Obtain the owner fact and evidence for whether the 72 bundled ElevenLabs WAV clips were generated under a paid, non-beta plan with commercial rights. Do not affirm content rights before that evidence is resolved.",
+    "Commit and verify the corrected privacy and support pages on both Vercel and AWS from one revision. The corrected revision is pending; dc897 is historical preparation.",
+    "After the corrected policy is live, save the privacy URL and Apple TV policy text and publish the Data Not Collected privacy draft.",
+    "Root must resolve the age-rating country warning and perform the actual final Apple submission once the holds are clear. No final submission has occurred."
+  ],
+  "required_fixes": "Resolve audio commercial-rights evidence and verify the pending corrected web revision on both hosts. Then complete privacy fields and publication, reconcile the age-rating country warning and make the actual final submission. No additional native build or upload is requested.",
+  "verification_evidence": [
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/processed-builds-selected-root-receipt.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/gallery-pricing-age-root-review.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-tvos-1.0-1-final-upload-handoff.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/hwvh-current-release-handoff.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/pending-web-camera-copy-review.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/historical-apps61-44d929c.json"
+  ],
+  "live_card_check_2026_10_03_1255": {
+    "at": "2026-10-03T12:59:34.311Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "links": [
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": ""
+      },
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": "HWvH"
+      },
+      {
+        "href": "/apps/6818777508/distribution/ios/version/inflight",
+        "text": "iOS 1.0 Prepare for Submission"
+      },
+      {
+        "href": "/apps/6818777508/distribution/tvos/version/inflight",
+        "text": "tvOS 1.0 Prepare for Submission"
+      }
+    ],
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-03-1255.json",
+    "qualification": "Rendered card only. Detailed platform receipts retain authority; no public storefront, build selection or gallery accuracy assertion."
+  },
+  "live_card_disk_recovery_2026_10_03": {
+    "at": "2026-10-03T21:06:34.567Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "links": [
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": ""
+      },
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": "HWvH"
+      },
+      {
+        "href": "/apps/6818777508/distribution/ios/version/inflight",
+        "text": "iOS 1.0 Prepare for Submission"
+      },
+      {
+        "href": "/apps/6818777508/distribution/tvos/version/inflight",
+        "text": "tvOS 1.0 Prepare for Submission"
+      }
+    ],
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-disk-recovery-2026-10-03.json",
+    "qualification": "Rendered card; newer detailed platform receipt prevails. Ready for Distribution alone does not prove public storefront availability."
+  },
+  "live_card_check_2026_10_04_0647": {
+    "at": "2026-10-04T06:49:03.173Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-0647.json",
+    "qualification": "Normal rendered App Store Connect account cards. No public availability or selected build proof inferred."
+  },
+  "live_card_check_2026_10_04_0848": {
+    "at": "2026-10-04T08:51:10.980Z",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-0848.json",
+    "qualification": "Rendered private ASC cards, not public-store availability or detailed selected-build proof."
+  },
+  "live_card_check_2026_10_04_1050": {
+    "at": "2026-10-04T10:53:00.782Z",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-1050.json",
+    "qualification": "Rendered ASC cards; not exact build or public availability proof"
+  },
+  "live_card_check_2026_10_04_1251": {
+    "at": "2026-10-04T12:59:04.617003+00:00",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-1251.json",
+    "qualification": "Normal rendered ASC card; detailed submission receipts prevail. Not public storefront proof."
+  },
+  "current_release": {
+    "recorded_at": "2026-10-04T13:29:43.581789+00:00",
+    "version": "1.0",
+    "build": "1",
+    "platforms": {
+      "iPadOS": {
+        "processedBuildID": "5ce69766-a2f3-455c-8812-29a21531d207",
+        "selected": true,
+        "actualBinaryState": "Validated",
+        "uploadDateLocal": "Oct 4, 2026 at 2:53 PM",
+        "minimumOS": "26.0",
+        "deviceFamily": "iPad"
+      },
+      "tvOS": {
+        "processedBuildID": "9857351b-226e-4faa-9c73-78bc34b75216",
+        "selected": true,
+        "actualBinaryState": "Validated",
+        "uploadDateLocal": "Oct 4, 2026 at 3:12 PM",
+        "minimumOS": "26.0",
+        "deviceFamily": "Apple TV"
+      }
+    },
+    "source_commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "source_aggregate_sha256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "input_count": 889,
+    "both_selected_ids_match_genuine_delivery_uuids": true,
+    "minimum_os": "26.0",
+    "device_families": [
+      "iPad",
+      "Apple TV"
+    ],
+    "excluded_platforms": [
+      "iPhone",
+      "macOS",
+      "visionOS"
+    ],
+    "final_submission_performed": false,
+    "actual_review_state": "Prepare for Submission",
+    "public_storefront_verified": false,
+    "gallery": {
+      "iPad": {
+        "count": 10,
+        "dimensions": [
+          2752,
+          2064
+        ],
+        "persistedOrder": "01 through 10",
+        "exactDecodedPixelMatches": 10,
+        "actualCDNContactSheetsPersonallyViewed": [
+          "actual-ipad-01-05.jpg",
+          "actual-ipad-06-10.jpg"
+        ]
+      },
+      "tvOS": {
+        "count": 10,
+        "dimensions": [
+          3840,
+          2160
+        ],
+        "persistedOrder": "01 through 10",
+        "exactDecodedPixelMatches": 10,
+        "actualCDNContactSheetsPersonallyViewed": [
+          "actual-tv-01-05.jpg",
+          "actual-tv-06-10.jpg"
+        ]
+      },
+      "visualResult": "Approved. Short centered headlines, themed racing backgrounds, native heroes and outward angled supporting images. TV image 05 is the actual preview, not proof of successful physical iPad image handoff."
+    },
+    "pricing": {
+      "persistedCurrentPriceCountryCount": 175,
+      "zeroPriceCount": 175,
+      "baseCountry": "United States",
+      "appleSiliconCompatibility": false,
+      "appleVisionCompatibility": false
+    },
+    "availability": {
+      "selectedCurrentCountries": 175,
+      "checkedControlsIncludingRegionGroupsAndFuture": 181,
+      "futureCountriesEnabled": true,
+      "actualStatus175": "Available on App Release",
+      "ageQuestionnaireWarning": "Afghanistan and Morocco will not be sold due to generated age rating. Availability page still labels all175 Available on App Release; do not interpret that as proof of actual sale eligibility."
+    },
+    "age_rating": {
+      "publishedForm": "Saved",
+      "generatedRating": "13+",
+      "override": "Not Applicable",
+      "cartoonFantasyViolence": "Frequent",
+      "contests": "Frequent",
+      "rationale": "Regular toy-car crashes and exaggerated reactions occur during normal racing. Competitive racing for wins and recorded timing is a regular game activity. No real human violence, gambling, public user content, chat, ads, unrestricted browser, sexual content or medical themes were found in the frozen release."
+    },
+    "privacy": {
+      "response": "Data Not Collected",
+      "state": "Unpublished editable draft",
+      "published": false,
+      "policyURLSaved": false,
+      "appleTVPolicyTextSaved": false,
+      "requiredWebRevision": "Pending corrected commit and verified dual deployment",
+      "liveCanonicalPolicyVerifiedForCorrectedRevision": false,
+      "liveAWSPolicyVerifiedForCorrectedRevision": false
+    },
+    "content_rights": {
+      "affirmationMade": false,
+      "pendingFact": "Whether the 72 bundled ElevenLabs clips were generated under a paid, non-beta plan with commercial rights"
+    },
+    "release_caveats": [
+      "Physical Apple TV to iPad local-network discovery, permission prompts, finish-image delivery and reconnect remain unverified. Individual platform QA and TV preview images do not prove a paired physical session.",
+      "Camera-based color picking is unavailable in this release. The manual character editor remains available. Camera restoration is not part of this release handoff.",
+      "Haptic output is implemented for iOS only and depends on supported iPad hardware. Saved settings do not establish TV haptic output."
+    ],
+    "web_working_copy_review": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/pending-web-camera-copy-review.json",
+      "sha256": "4be035eb8ff9b534aa27a58d4444db6928960083ffa93568135ae95472ea3b62"
+    },
+    "historical_44d929c_entry": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/historical-apps61-44d929c.json",
+      "sha256": "eebc48573da949f01bbcd5d53ffc31976149e62da7988c0e258187803afadb1d"
+    },
+    "handoff": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/hwvh-current-release-handoff.json",
+      "sha256": "be062991b7bd77dce4a56e4a8bfcc647665922a221f8767a021fcc00246ad5f3"
+    }
+  }
+}

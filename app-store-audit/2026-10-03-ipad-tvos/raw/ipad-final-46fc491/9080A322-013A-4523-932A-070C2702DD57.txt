@@ -1,0 +1,97 @@
+Attributes: Application, 0x112c11040, pid: 31138, label: 'HWvH'
+Element subtree:
+ →Application, 0x112c11040, pid: 31138, label: 'HWvH'
+    Window (Main), 0x112c10c80, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x11422d2c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x11422fc00, {{0.0, 0.0}, {1376.0, 1032.0}}
+          Other, 0x11422cc80, {{0.0, 0.0}, {1376.0, 1032.0}}
+            Other, 0x11422cdc0, {{0.0, 0.0}, {1376.0, 1032.0}}
+              Other, 0x11422cf00, {{0.0, 0.0}, {1376.0, 1032.0}}
+                Other, 0x11422d040, {{0.0, 0.0}, {1376.0, 1032.0}}
+                  NavigationBar, 0x11422d180, {{0.0, 10.0}, {1376.0, 54.0}}, identifier: '_TtGC7SwiftUI32NavigationStackHosting'
+                    Button, 0x11422da40, {{10.0, 10.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Back'
+                  Other, 0x11422db80, {{0.0, 0.0}, {1376.0, 1032.0}}
+                    Other, 0x112da0dc0, {{0.0, 0.0}, {1376.0, 1032.0}}
+                      Other, 0x112da0f00, {{0.0, 0.0}, {1376.0, 1032.0}}
+                        Other, 0x112f6b700, {{0.0, 0.0}, {1376.0, 1032.0}}
+                          TextField, 0x112f6ae40, {{0.0, 80.0}, {1376.0, 42.5}}, placeholderValue: 'Car name', value: iPad Art C9A5806C
+                          Other, 0x112f6bd40, {{0.0, 134.5}, {1376.0, 488.5}}
+                          Button, 0x112f6be80, {{16.0, 134.5}, {127.5, 50.5}}, label: 'Undo'
+                            Image, 0x112f6b840, {{36.5, 148.5}, {21.5, 22.0}}, identifier: 'arrow.uturn.backward', label: 'Undo'
+                            StaticText, 0x112f6b980, {{36.5, 146.5}, {89.0, 26.5}}, label: 'Undo'
+                          ScrollView, 0x112f6bac0, {{16.0, 635.0}, {1344.0, 60.0}}
+                            Other, 0x112f6bc00, {{73.0, 635.0}, {1230.0, 60.0}}
+                              Button, 0x112f6a6c0, {{77.0, 635.0}, {147.0, 60.0}}, identifier: 'Body', label: 'Body'
+                                Image, 0x112f6b340, {{99.5, 652.0}, {40.0, 26.0}}, identifier: 'car.2.fill', label: 'Cars'
+                                StaticText, 0x112f6b480, {{148.5, 651.8}, {55.5, 26.5}}, label: 'Body'
+                              Button, 0x112f6b5c0, {{234.0, 635.0}, {180.0, 60.0}}, identifier: 'Chassis', label: 'Chassis'
+                                Image, 0x112f6af80, {{256.5, 655.5}, {41.0, 19.5}}, identifier: 'car.side.fill', label: 'car.side.fill'
+                                StaticText, 0x112f6b0c0, {{308.0, 651.8}, {86.0, 26.5}}, label: 'Chassis'
+                              Button, 0x112f6b200, {{424.0, 635.0}, {129.0, 60.0}}, identifier: 'Tires', label: 'Tires'
+                                Image, 0x112f69f40, {{446.0, 653.5}, {23.5, 23.5}}, identifier: 'circle.circle', label: 'circle.circle'
+                                StaticText, 0x112f6abc0, {{479.5, 651.8}, {53.5, 26.5}}, label: 'Tires'
+                              Button, 0x112f6ad00, {{563.0, 635.0}, {132.5, 60.0}}, identifier: 'Paint', label: 'Paint'
+                                Image, 0x112f6a800, {{585.0, 651.0}, {25.0, 28.0}}, identifier: 'paintbrush.fill', label: 'Format'
+                                StaticText, 0x112f6a940, {{620.0, 651.8}, {55.5, 26.5}}, label: 'Paint'
+                              Button, 0x112f6aa80, {{705.5, 635.0}, {137.5, 60.0}}, identifier: 'Livery', label: 'Livery', Selected
+                                Image, 0x112f68000, {{727.5, 652.5}, {19.5, 25.0}}, identifier: 'flame.fill', label: 'Flame'
+                                StaticText, 0x112f6a300, {{757.0, 651.8}, {66.0, 26.5}}, label: 'Livery'
+                              Button, 0x112f6a440, {{853.0, 635.0}, {164.5, 60.0}}, identifier: 'Stickers', label: 'Stickers'
+                                Image, 0x112f6a080, {{875.0, 653.5}, {23.5, 23.5}}, identifier: 'star.circle.fill', label: 'Favorite'
+                                StaticText, 0x112f6a1c0, {{908.5, 651.8}, {89.0, 26.5}}, label: 'Stickers'
+                              Button, 0x112f69b80, {{1027.5, 635.0}, {124.5, 60.0}}, identifier: 'Draw', label: 'Draw'
+                                Image, 0x112f69cc0, {{1049.5, 654.5}, {16.0, 21.0}}, identifier: 'pencil.tip', label: 'pencil.tip'
+                                StaticText, 0x112f69e00, {{1075.5, 651.8}, {56.5, 26.5}}, label: 'Draw'
+                              Button, 0x1141c0000, {{1162.0, 635.0}, {137.0, 60.0}}, identifier: 'Driver', label: 'Driver'
+                                Image, 0x1141c0140, {{1184.5, 655.0}, {18.5, 20.0}}, identifier: 'person.fill', label: 'person.fill'
+                                StaticText, 0x1141c0280, {{1213.5, 651.8}, {65.5, 26.5}}, label: 'Driver'
+                          ScrollView, 0x1141c03c0, {{0.0, 707.0}, {1376.0, 84.0}}
+                            Other, 0x1141c0500, {{294.0, 707.0}, {788.0, 84.0}}
+                              Button, 0x1141c0640, {{309.5, 706.5}, {85.0, 85.0}}, label: 'Plain'
+                                Image, 0x1141c0780, {{333.0, 721.0}, {38.0, 38.0}}, identifier: 'circle.slash', label: 'circle.slash'
+                                StaticText, 0x1141c08c0, {{334.8, 761.5}, {34.5, 18.0}}, label: 'Plain'
+                              Button, 0x1141c0a00, {{405.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c0b40, {{406.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c0c80, {{500.5, 705.5}, {87.0, 87.0}}
+                                Image, 0x1141c0dc0, {{502.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c0f00, {{597.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c1040, {{598.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c1180, {{693.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c12c0, {{694.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c1400, {{789.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c1540, {{790.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c1680, {{885.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c17c0, {{886.0, 707.0}, {84.0, 84.0}}
+                              Button, 0x1141c1900, {{981.5, 706.5}, {85.0, 85.0}}
+                                Image, 0x1141c1a40, {{982.0, 707.0}, {84.0, 84.0}}
+                          Button, 0x1141c1b80, {{280.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c1cc0, {{350.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c1e00, {{420.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c1f40, {{490.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c2080, {{560.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c21c0, {{630.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c2300, {{700.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c2440, {{770.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c2580, {{840.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c26c0, {{910.5, 812.5}, {45.0, 45.0}}
+                          Button, 0x1141c2800, {{979.0, 811.0}, {48.0, 48.0}}
+                          Button, 0x1141c2940, {{1050.5, 812.5}, {45.0, 45.0}}
+                          Slider, 0x1141c2a80, {{478.0, 879.0}, {420.0, 31.0}}, label: 'Size', value: 1.526
+                          Button, 0x1141c2bc0, {{457.5, 922.0}, {240.0, 74.0}}, label: 'Test Drive!'
+                            Image, 0x1141c2d00, {{496.5, 947.0}, {22.0, 24.5}}, identifier: 'play.fill', label: 'Play'
+                            StaticText, 0x1141c2e40, {{457.5, 922.0}, {240.0, 74.0}}, label: 'Test Drive!'
+                          Button, 0x1141c2f80, {{713.5, 922.0}, {205.0, 74.0}}, label: 'Save it!'
+                            Image, 0x1141c30c0, {{752.5, 945.0}, {24.5, 28.5}}, identifier: 'square.and.arrow.down.fill', label: 'Download'
+                            StaticText, 0x1141c3200, {{713.5, 922.0}, {205.0, 74.0}}, label: 'Save it!'
+                  Other, 0x1141c3340, {{0.0, 0.0}, {1376.0, 1032.0}}
+                    Other, 0x1141c3480, {{0.0, 0.0}, {1376.0, 1032.0}}
+    Window, 0x1141c35c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x1141c3700, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x1141c3840, {{0.0, 0.0}, {1376.0, 1032.0}}
+Path to element:
+ →Application, 0x112c11040, pid: 31138, label: 'HWvH'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x1141c3980, pid: 31138, label: 'HWvH'
+  }

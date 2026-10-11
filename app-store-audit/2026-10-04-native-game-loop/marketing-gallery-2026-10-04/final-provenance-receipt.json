@@ -1,0 +1,64 @@
+{
+  "recordedAt": "2026-10-04T11:32:00.107931+00:00",
+  "status": "Root-approved store-preparation handoff; actual live upload remains release owner task",
+  "nativeSourceUnchanged": {
+    "count": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "version": "1.0",
+    "build": "1"
+  },
+  "galleryCounts": {
+    "ipad": 10,
+    "tv": 10
+  },
+  "dimensions": {
+    "ipad": [
+      2752,
+      2064
+    ],
+    "tv": [
+      3840,
+      2160
+    ]
+  },
+  "multiSingleEachGallery": [
+    7,
+    3
+  ],
+  "fourAlternatingIdentityBackgrounds": true,
+  "genuineSourceCopies": 21,
+  "exactFullUprightHeroQC": {
+    "passed": 20,
+    "failed": 0,
+    "receipt": {
+      "path": "qc-receipt.json",
+      "sha256": "43be6fe5d377bf369b27d8959c2cce8606b2abbe032a64fe8e45e4f8b442ad84"
+    }
+  },
+  "ownerApproval": {
+    "path": "root-marketing-visual-approval.json",
+    "sha256": "12610fed6b024b2815e668163faef728fa99efb3a2457cde7411d099b9282072"
+  },
+  "manifest": {
+    "path": "manifest.json",
+    "sha256": "46210b99e17bb841ee1e5d703dc63a6b569e45adb33908e159983de7a654c266"
+  },
+  "renderProof": {
+    "path": "render-proof.json",
+    "sha256": "3a8d54430cd98b07a48ab38caef46ffba17024c43cc72dea4116b63055de39b8"
+  },
+  "artifactIndex": {
+    "path": "artifact-hashes.final.json",
+    "sha256": "02f526d0fe7eb78f8038aec57a92dfb4dc95e3728721a3ff37c1024e150060e3",
+    "aggregateSHA256": "5e7944910f15f480b74899b0de078db4fc5127b73a83b7e48432f65d790bb200",
+    "fileCount": 60
+  },
+  "originalsAndNativeInputsPreserved": true,
+  "noPhysicalLANSuccessClaim": true,
+  "limits": [
+    "Official App Store gallery metadata researched; external reference-gallery pixels could not be viewed and were not copied",
+    "Authoritative native-freeze aggregate follows stored 889-entry order; description naming sorted entries mismatch retained and disclosed",
+    "App-only shifted captures excluded; EXIF normalization happens in rendering memory only",
+    "No source, Simulator, ASC, web, deployment, commit, paid-compute or upload action performed for this leaf"
+  ]
+}

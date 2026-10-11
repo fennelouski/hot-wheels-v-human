@@ -1,0 +1,84 @@
+{
+  "recordedAtUTC": "2026-10-04T13:32:12.584563+00:00",
+  "scope": "Audit-only proposed apps[61] replacement, revised for root Apple validation and committed corrected web copy. Root review required before merge.",
+  "globalLedger": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/release-ledger.json",
+  "appsIndex": 61,
+  "expectedApp": "HWvH",
+  "expectedAppleID": "6818777508",
+  "baselineLedgerSHA256": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890",
+  "ledgerSHA256AtEnd": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890",
+  "globalLedgerBytesUnchangedDuringPreparation": true,
+  "baselineEntryCanonicalSHA256": "5eaa99ad83d8125ad79bcd3f62f684826a5c774ee561bd38f8b4faa0d96f179b",
+  "apps61UnchangedDuringPreparation": true,
+  "candidate": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/apps61-proposed-entry.json",
+    "sha256": "936859daf8546c71b7145c9c6520a54855fe6a91a3387a19955536a5546c82c5"
+  },
+  "candidateEntryCanonicalSHA256": "68f451420fbb8c68f71029d8ab40082fcdf52d6f2b584d015b4e7bdcc60efcac",
+  "handoff": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/hwvh-current-release-handoff.json",
+    "sha256": "3f8656a3e622a6ef3343ccea41d0ea23f17ca696d430a3a3bd86ec734be43208"
+  },
+  "webReview": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/committed-web-camera-copy-review.json",
+    "sha256": "c6586ee1b21b2b20e8577119dce2e932a4088c0082a8b384596c4ea91796e0a7"
+  },
+  "historicalEntry": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/historical-apps61-44d929c.json",
+    "sha256": "eebc48573da949f01bbcd5d53ffc31976149e62da7988c0e258187803afadb1d"
+  },
+  "supersededDraftPreconditions": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/ledger-candidate-preconditions.json",
+    "sha256": "8db636bbf25aa4c604e34ff2ac39db66301cc8502eb06b09f1b9783281bd53b5"
+  },
+  "humanHandoff": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/HWVH-CURRENT-RELEASE-HANDOFF.md",
+    "sha256": "d32df8076e9014311ee6289b5cd269121aadae767a355e013b68393f75763f86"
+  },
+  "latestRootProofs": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-add-for-review-validation-held.txt",
+      "sha256": "ef9136e19def866635111c97ec167937d40195c39a1bdc100af6d0e35ba23bd1"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-add-for-review-validation-held.txt",
+      "sha256": "065b1a77ec59970c13eb408e31bec9cf78e5b28f557e41a0becacfb81cf7b43e"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-1.0-1-build-selected-persisted.txt",
+      "sha256": "59aff6ca0259eccbdf582f2e4dc988592e35005abdf305985c045b85e0cb6a36"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-1.0-1-build-selected-persisted.txt",
+      "sha256": "fc0890afe12171176a359eef4ef0f1950e25e28fb29bab4d032fa065898dc942"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-camera-correction-commit-receipt.json",
+      "sha256": "2630f4aabd8a454f239f9b18d7bfabb968151b7334118e31e639a6913b642ccc"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-tv-privacy-policy.prepared.txt",
+      "sha256": "2577d019b441270234732e461c14832d6de23bbebeb3463051259158de0f1018"
+    }
+  ],
+  "rootPreconditionsBeforeMerge": [
+    "Read and approve this exact candidate.",
+    "Recheck apps[61] identity and baseline canonical entry hash. Reconcile newer root changes rather than overwriting them.",
+    "Preserve every other global ledger entry and field.",
+    "Treat 3d48db4 as committed preparation until same-revision Vercel and AWS live checks succeed.",
+    "Keep the four actual Apple validation items held until resolved; no final submission or privacy publication is inferred."
+  ],
+  "actionsPerformed": [
+    "Audit-only file and git reads",
+    "New audit-leaf receipt files written"
+  ],
+  "actionsNotPerformed": [
+    "Global ledger mutation",
+    "Native tooling, build or runtime",
+    "Browser or network requests",
+    "Deployment",
+    "Source or HTML edits",
+    "Commit or push",
+    "Apple mutation or legal answers"
+  ]
+}

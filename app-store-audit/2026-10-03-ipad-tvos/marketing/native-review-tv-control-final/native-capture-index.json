@@ -1,0 +1,370 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "nativeBuildRecordPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-builds-tv-control-final.json",
+  "nativeBuildRecordSHA256": "81ef129cccc522e253050b74e5478fff4c9c0a2cc535f1f992f33741f7c414dd",
+  "captureCount": 12,
+  "captures": [
+    {
+      "id": "tv-01",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/288EF895-2E64-4E3D-883E-59FD7264CB23.png",
+      "name": "TV21 - Driver view with the TV radio",
+      "sha256": "7ef785448892e5008bbf28d69f6b283e1da98979f47e1107e6d8a3c1c4608b5f",
+      "testIdentifier": "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "288EF895-2E64-4E3D-883E-59FD7264CB23.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV21 - Driver view with the TV radio_0_6E223BF7-788B-47BA-99A4-4ED77313645B.png",
+        "timestamp": 1791026012.113
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:13:32.113000Z"
+    },
+    {
+      "id": "tv-02",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/722EAE8E-A916-42FD-BE3C-30B8C59C4A4A.png",
+      "name": "TV20 - Chase camera and race world",
+      "sha256": "a7a2b7c4cdb58f0dcb665d6d5a6fe3cfb6b4a867f2f816338328c81b390daa90",
+      "testIdentifier": "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "722EAE8E-A916-42FD-BE3C-30B8C59C4A4A.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV20 - Chase camera and race world_0_4F88DCD0-DE16-4ABC-B1AA-5D8D0210BACA.png",
+        "timestamp": 1791026000.716
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:13:20.716000Z"
+    },
+    {
+      "id": "tv-03",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/BD80D524-2887-4B24-9A5B-6B4A1A01EB3F.png",
+      "name": "TV22 - Robot race results",
+      "sha256": "0ea9809a4291aaf5a1e2e22023b0cfb84c67c9a68d8e8b322dcaaf9f003d2a36",
+      "testIdentifier": "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "BD80D524-2887-4B24-9A5B-6B4A1A01EB3F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV22 - Robot race results_0_E3488F78-94A8-41BC-B798-AE323A9C2A09.png",
+        "timestamp": 1791026028.535
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:13:48.535000Z"
+    },
+    {
+      "id": "tv-04",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/FF372925-C1AA-4E03-B842-4118FF23A7C2.png",
+      "name": "TV26 - Bright world focused Driver camera and visible eye states",
+      "sha256": "103ba069e5c524c40ff29a8816327d80dda0093437b43d15be79c50918e3bcce",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "FF372925-C1AA-4E03-B842-4118FF23A7C2.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV26 - Bright world focused Driver camera and visible eye states_0_38DCDF9B-4BB5-4EFF-8994-97BBC0F81B4A.png",
+        "timestamp": 1791026082.734
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:42.734000Z"
+    },
+    {
+      "id": "tv-05",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/2D8E3483-3E03-4E98-B169-C5BA70F86BFA.png",
+      "name": "TV25 - Bright world focused visibility hideGhosts",
+      "sha256": "ad5709a105213b34cfdcaf85bb34aa9e75cb96a9b347590ce4e42b9a5d47e313",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "2D8E3483-3E03-4E98-B169-C5BA70F86BFA.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV25 - Bright world focused visibility hideGhosts_0_2CAC07D7-4370-459B-BE05-8F4EEB5E0A35.png",
+        "timestamp": 1791026078.704
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:38.704000Z"
+    },
+    {
+      "id": "tv-06",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/1AE14311-7A12-43AB-BCDA-B7DD734079BA.png",
+      "name": "TV25 - Bright world focused visibility hideAll",
+      "sha256": "a2f079f8a1b87074dca24881efafb43a79f44a99b33b48a554737aaa8d432fd7",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "1AE14311-7A12-43AB-BCDA-B7DD734079BA.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV25 - Bright world focused visibility hideAll_0_8CAB7978-AF21-4CDD-AE16-2027BDE8D582.png",
+        "timestamp": 1791026076.589
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:36.589000Z"
+    },
+    {
+      "id": "tv-07",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/940AE491-98AF-4242-8E80-849A9C88F702.png",
+      "name": "TV25 - Bright world focused visibility hideGhosts",
+      "sha256": "d7080b1e2fde084410a08964416725c8a50e2681660a9cf0afa43b236483e70f",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "940AE491-98AF-4242-8E80-849A9C88F702.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV25 - Bright world focused visibility hideGhosts_0_AA228DB5-E850-4F0A-AB3C-701E05E592A2.png",
+        "timestamp": 1791026074.504
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:34.504000Z"
+    },
+    {
+      "id": "tv-08",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/1E29EF48-3BF4-4376-A888-415FCA121DA1.png",
+      "name": "TV25 - Bright world focused visibility all",
+      "sha256": "ed981b62d4a4a765770899d72077bf2a4ae3df30bf75f5a9295664adaf7d57dd",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "1E29EF48-3BF4-4376-A888-415FCA121DA1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV25 - Bright world focused visibility all_0_1E7AC08B-805E-4FC7-A5EF-D623CF279029.png",
+        "timestamp": 1791026072.398
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:32.398000Z"
+    },
+    {
+      "id": "tv-09",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/54606695-3C0C-4E77-9392-618F79F16272.png",
+      "name": "TV24 - Bright Sunny Day with focused Chase camera",
+      "sha256": "12413cbc4fe09c3432b927ca8d077b8601c6ba10918b890c9c0300d298c07dd6",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "54606695-3C0C-4E77-9392-618F79F16272.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV24 - Bright Sunny Day with focused Chase camera_0_A405F178-320C-4E13-8D09-7F43951393FB.png",
+        "timestamp": 1791026069.92
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:29.920000Z"
+    },
+    {
+      "id": "tv-10",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/FB51B485-E080-4338-8F1E-7D4A7C7B4D0B.png",
+      "name": "TV27 - Sunny Day selected through the native world picker",
+      "sha256": "646d11470bd8a4a471c7e67829f8c21b4fc3cc34c0afc998b95d3cf4b7d4a02b",
+      "testIdentifier": "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "FB51B485-E080-4338-8F1E-7D4A7C7B4D0B.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV27 - Sunny Day selected through the native world picker_0_6F7E195B-17C4-42A0-A538-60A5E087F154.png",
+        "timestamp": 1791026057.903
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:14:17.903000Z"
+    },
+    {
+      "id": "tv-11",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/CEE2FA5F-89FE-4E68-B977-E8585C3FC3E1.png",
+      "name": "TV23 - Sunny Day starter race with real remote boost active",
+      "sha256": "754ee596804feb2e2a86e2617ff088bacd855a804e235913d4ec214744bd9896",
+      "testIdentifier": "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "CEE2FA5F-89FE-4E68-B977-E8585C3FC3E1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV23 - Sunny Day starter race with real remote boost active_0_6519826F-7E58-4967-806D-35B43C97E3FA.png",
+        "timestamp": 1791026129.154
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:15:29.154000Z"
+    },
+    {
+      "id": "tv-12",
+      "platform": "apple-tv",
+      "runID": "tv-control-final-targeted",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/B50F0DCD-4CD7-4D09-A417-2CC633D86787.png",
+      "name": "TV27 - Sunny Day selected through the native world picker",
+      "sha256": "774dfb486a86e9be878513c5437506484c4270c0284dd30b9d979a4f334a7147",
+      "testIdentifier": "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "B50F0DCD-4CD7-4D09-A417-2CC633D86787.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV27 - Sunny Day selected through the native world picker_0_6875FFA4-8441-41BD-8B49-EEC23E437507.png",
+        "timestamp": 1791026109.754
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+      "manifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T11:15:09.754000Z"
+    }
+  ]
+}

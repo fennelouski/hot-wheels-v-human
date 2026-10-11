@@ -1,0 +1,458 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "3041665D-9149-4F1B-86B4-C5CE3381C856.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV03 - Race with a nearby iPad_0_F5B7A0BA-2142-4CE3-A1EC-E4D9C06E8D45.png",
+        "timestamp" : 1791023461.558
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "9538661D-8ED5-4C8D-8FE8-12072A42403D.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV02 - Apple TV workshop_0_059F8C7C-EAE7-4AE1-9DBE-A7826BC314F9.png",
+        "timestamp" : 1791023453.643
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "0CE7249C-B63E-476E-AA8A-BEB46EF98B36.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV01 - Choose a local player_0_46B13EFB-CA64-420E-8087-6F284A012BA2.png",
+        "timestamp" : 1791023452.053
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "3849030B-6CE8-494E-98AA-1AF29B0146CA.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV08 - Saved car in the garage_0_AD0304F5-C2C5-4F24-AD19-5B95FEB0857F.png",
+        "timestamp" : 1791023536.186
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "FD9F5E54-F45E-4284-B8EA-9563D4B3DBD8.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV07 - Draw on the car without touch_0_2CFC3F41-388D-4C0B-A981-78A72E77826E.png",
+        "timestamp" : 1791023529.14
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "69F3F027-062D-4400-A661-1AF604C93DCB.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV06 - Place and move a sticker_0_D2ED2535-7BDB-4EB8-AA90-D9D498FBFC78.png",
+        "timestamp" : 1791023513.33
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "B793E6C6-3FE1-408E-B14C-14995DF81643.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV05 - Flame livery and its inspector_0_72E365B9-AA05-43D5-8A57-7D4F079D6303.png",
+        "timestamp" : 1791023496.368
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "5E090016-4A1B-4962-9902-361808D7B095.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV04 - Paint a car with the remote_0_144C01AF-5D81-4AFF-A4C3-F81C9AE5E47F.png",
+        "timestamp" : 1791023485.15
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "878DB019-8AED-47FC-A087-1472EFDF85BD.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV14 - Saved tracks and starter tracks_0_D155CBDD-5BFD-4C9C-A6CD-852B3D639E14.png",
+        "timestamp" : 1791023610.789
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "A1AC6804-BE8C-4DC2-A0C3-ACA5E40F923E.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV11 - Look around the track with the remote_0_1C2001C6-9357-4DA1-803F-92E65ED86B39.png",
+        "timestamp" : 1791023602.509
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "05742B17-858E-48B0-BADD-329183BCED32.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV10 - Choose a world and its scenery mode_0_3D777263-4E7E-4518-91CF-85BE23ECE913.png",
+        "timestamp" : 1791023594.139
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "D66B516F-14E7-479C-94EF-A28BD77B0807.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV09 - Build a finished track with a ghost stretch_0_660C5257-D2EB-490E-A782-C628E8CA6143.png",
+        "timestamp" : 1791023586.396
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4BC07510-C24F-41D3-B3C3-E2C0E1B2E269.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV12 - Place and rotate world decorations_0_0CCA1454-4370-4548-80A6-442B16582E0E.png",
+        "timestamp" : 1791023659.786
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "C8658E9D-ED65-4F57-ADE9-517400BAB2DC.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV13 - Position a portal exit with the remote_0_44174D32-1A20-40CC-A472-6B4EA7960647.png",
+        "timestamp" : 1791023648.092
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "3B42AAA8-88D7-4BF9-91C4-90E276072F6A.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV15 - Race the unsaved track_0_571F218D-CA88-4030-B01F-AC4F4DB6DDD5.png",
+        "timestamp" : 1791023689.179
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "31DFE4B8-112C-4604-A2D4-123220BA630F.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV16 - Dress and save a personal racer_0_F4A16105-BE20-4266-84B9-E5531CE3DC8C.png",
+        "timestamp" : 1791023719.019
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "36719E63-FDB9-4F41-8B1A-D177C10EB6CE.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV18 - Race two local players on Apple TV_0_0E27010E-B73C-4B68-A6CF-FD54FEA40876.png",
+        "timestamp" : 1791023787.338
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "FA74012D-4A56-41CD-B332-3ABD685FDE6B.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV17 - Two players build their own cars_0_095FDE7A-A161-44DA-A360-49C64C85305C.png",
+        "timestamp" : 1791023778.473
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "F52263CB-78B1-4071-99F1-64C698BFE9DB.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV19 - Siri Remote boost during a real race_0_B5DE1BC7-3864-4BD4-8761-1620E3146E62.png",
+        "timestamp" : 1791023810.951
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "CFF51DAF-7C49-462C-B62C-F29A45EC03BE.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV accessibility tree at failure_0_289C374F-AA41-461C-97B9-6DD584C9DC8A.txt",
+        "timestamp" : 1791023865.611
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "550DC7DE-9772-4174-9EE1-7AC5DE57CE50.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV failure - The Siri Remote target must exist before navigation \"race-radio-power\" Button_0_00AA341C-E115-4172-AC91-D64EB09FFD37.png",
+        "timestamp" : 1791023865.532
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4576A12F-816C-476D-934F-0A7E29810CB8.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "App UI hierarchy for com.nathanfennel_0_70879279-5F3F-4104-9BE2-91AF13805856.Hot-Wheels-v-Human",
+        "timestamp" : 1791023865.449
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4AF6A4C4-16BE-42E6-8301-7A9C1F618A6D",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.45 PM",
+        "timestamp" : 1791023865.449
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "0294FA66-1CF3-4E0B-B617-A6C66A924CC0.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_B3EAB296-292F-4E48-BBC5-B1338A201048.txt",
+        "timestamp" : 1791023865.426
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "CF9F05E2-BB69-4859-AD52-FA434082C53C",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.45 PM",
+        "timestamp" : 1791023865.426
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "F1296F43-3C13-4C23-9BB3-0279E2F78113.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_010E0F81-E510-4250-9D0E-41A1291C300B.txt",
+        "timestamp" : 1791023864.471
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "366AD0DB-ABA6-4931-BC56-620B9151E18B",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.44 PM",
+        "timestamp" : 1791023864.471
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "943547C8-82E7-497B-9780-B192D7DB72A0.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_BF6C8051-6D4B-4591-B6D3-CF2C7F5A51F8.txt",
+        "timestamp" : 1791023863.444
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "D649CFF9-3229-4A7B-A209-AB93BBC564C6",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.43 PM",
+        "timestamp" : 1791023863.444
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "7189E0E7-D58E-40FD-ACF2-221DB19F136F.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_17593EC4-CD16-4248-B8AF-8B7FCD737336.txt",
+        "timestamp" : 1791023862.452
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "27CDE1A3-2EA4-408F-8B33-A4032EE9B5FE",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.42 PM",
+        "timestamp" : 1791023862.452
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "B71DCFE1-BFD7-4AC6-96CE-DF5000DB7727.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_39E0FA18-4424-40C9-A0FE-FF6EDEA6CBA9.txt",
+        "timestamp" : 1791023861.454
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "017CCB9D-8E43-441D-9C16-04C6F850B685",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.41 PM",
+        "timestamp" : 1791023861.454
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "C1DA1F3D-B563-4474-AD59-DE4748DD7637.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_D4E27040-2A95-4FFF-8330-215D3AFACCBD.txt",
+        "timestamp" : 1791023860.454
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "23F25079-19B4-4A63-B796-4051F096995E",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.40 PM",
+        "timestamp" : 1791023860.454
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "8A2D122B-85BB-45D5-8C88-D06B59604449.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_AE76FCEE-7625-429C-B644-E1303006C4C9.txt",
+        "timestamp" : 1791023859.449
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "6558B7B0-945C-49B9-B4EF-F00A154A364F",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.39 PM",
+        "timestamp" : 1791023859.449
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "D806A667-4992-4880-A33D-1C488BE25490.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-radio-power\" Button`_0_EA0A29DA-CB25-44CC-AA4B-C5334D0B5A21.txt",
+        "timestamp" : 1791023858.451
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "B6457280-5472-4D28-A78A-733E333BF07C",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-03 at 12.37.38 PM",
+        "timestamp" : 1791023858.451
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "2D7B26A7-F625-4B50-ADC5-E780B4E48BE3.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV21 - Driver view with the TV radio_0_5E533AEA-A473-4298-AFD2-F0AEF3695FCC.png",
+        "timestamp" : 1791023853.321
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "EADCEEFD-4D85-4798-8BBA-EE200A50FE85.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV23 - Deterministic starter race with real remote boost active_0_55815A1E-F388-425B-9D58-C69AF440A89A.png",
+        "timestamp" : 1791023833.359
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4A9B0FF5-BEFF-49B9-834E-791AAF1B0571.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV20 - Chase camera and race world_0_FDF45D62-FCF9-43C0-B599-265427EB0CA5.png",
+        "timestamp" : 1791023827.809
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "D30B0715-9A4A-4214-A1EE-8446CE43BADF.mp4",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Screen Recording 2026-10-03 at 12.36.55 PM.mp4",
+        "timestamp" : 1791023815.335
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "D83F9817-26D8-4F56-B457-95527AF37452.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV22 - Robot race results_0_DAB5C32A-A64E-432F-9192-02D705C4AC9C.png",
+        "timestamp" : 1791023877.792
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV10RobotResultsAndRemoteRematch"
+  }
+]

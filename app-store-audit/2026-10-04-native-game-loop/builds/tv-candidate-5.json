@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-04T09:29:36.862029+00:00",
+  "exitCode": 0,
+  "testsExecuted": 0,
+  "sourceProof": "../native-inputs.candidate-5.json",
+  "inputAggregateSHA256": "4fdb42d196212df2ff6e18ae60159f7c4ba8f8010476d8035e90d2124a513fa7",
+  "all889InputsStillMatch": true,
+  "logSHA256": "6351fa0b034dcba8584c579b1c0d4a4a6230445f8d85e0acdd3d4465ae8014ea",
+  "status": "generic tvOS simulator build-for-testing succeeded; runtime not run"
+}

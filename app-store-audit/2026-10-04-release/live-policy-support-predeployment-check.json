@@ -1,0 +1,43 @@
+{
+  "verifiedAtUTC": "2026-10-04T12:28:44.686298+00:00",
+  "mode": "readOnly, no deploy",
+  "currentWebCommit": "dc8973ec14dc4396e58b3efa81a0392169a68708",
+  "checks": [
+    {
+      "name": "canonical-privacy",
+      "url": "https://nathanfennel.com/hwvh/privacy.html",
+      "status": 200,
+      "bytes": 3606,
+      "sha256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+      "currentCommittedPagesMatch": false,
+      "currentCommittedPagesSHA256": "dbe5c04e91065bbd0e11e4e183847795d38b2bba2d5264aa92c96a65075b0b41"
+    },
+    {
+      "name": "canonical-support",
+      "url": "https://nathanfennel.com/hwvh/support.html",
+      "status": 200,
+      "bytes": 3290,
+      "sha256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+      "currentCommittedPagesMatch": false,
+      "currentCommittedPagesSHA256": "6b826d1a866f6ed374fd1096c4ff2d7c6915151e7e02553d9aee6c3b81342236"
+    },
+    {
+      "name": "aws-privacy",
+      "url": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/privacy.html",
+      "status": 200,
+      "bytes": 3606,
+      "sha256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+      "currentCommittedPagesMatch": false,
+      "currentCommittedPagesSHA256": "dbe5c04e91065bbd0e11e4e183847795d38b2bba2d5264aa92c96a65075b0b41"
+    },
+    {
+      "name": "aws-support",
+      "url": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/support.html",
+      "status": 200,
+      "bytes": 3290,
+      "sha256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+      "currentCommittedPagesMatch": false,
+      "currentCommittedPagesSHA256": "6b826d1a866f6ed374fd1096c4ff2d7c6915151e7e02553d9aee6c3b81342236"
+    }
+  ]
+}

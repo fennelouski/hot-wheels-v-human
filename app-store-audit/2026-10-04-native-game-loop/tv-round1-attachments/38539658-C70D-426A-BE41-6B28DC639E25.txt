@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  ↪︎Find: Descendants matching type Button
+    ↪︎Find: Elements matching predicate '"race-rematch" IN identifiers'

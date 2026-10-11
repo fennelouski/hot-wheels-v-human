@@ -105,6 +105,24 @@ struct LoadedCapture {
     let encodedPixelHeight: Int
     let sourceOrientation: Int
 }
+struct CompatibleCapture: Codable {
+    var id: String
+    var platform: Platform
+    var sha256: String
+    var sourceRevision: String
+    var sourceBuildRef: String
+    var workingTreeInputsSHA256: String
+    var reviewedScope: String
+}
+struct SourceCompatibilityProof: Codable {
+    var schemaVersion: Int
+    var status: String
+    var targetRevision: String
+    var targetSourceBuildRef: String
+    var targetNativeInputsPath: String
+    var targetNativeInputsSHA256: String
+    var captures: [CompatibleCapture]
+}
 
 enum Palette: String, Codable, CaseIterable {
     case navyTrackLoops, yellowPitGrid, orangeLaunchLanes, blueToyBlocks
@@ -164,6 +182,7 @@ func validate(_ manifest: Manifest, beside base: URL, testOnly: Bool = false) th
                 "Capture records must belong to an included gallery; keep pending sources in a separate draft manifest.")
     try require(Set(manifest.captures.map(\.id)).count == manifest.captures.count, "Duplicate capture IDs.")
     var loaded: [String: LoadedCapture] = [:]
+    var effectiveInputHashes = Set<String>()
     for capture in manifest.captures {
         try require(safeID(capture.id), "Unsafe capture ID: \(capture.id).")
         try require(isHex(capture.sha256.lowercased(), length: 64), "\(capture.id): missing or invalid SHA-256.")
@@ -172,8 +191,45 @@ func validate(_ manifest: Manifest, beside base: URL, testOnly: Bool = false) th
         try require(kind == "native-screenshot" || (testOnly && kind == "test-only-solid-fixture"),
                     "\(capture.id): native capture provenance is required.")
         try require(provenance["platform"]?.string == capture.platform.rawValue, "\(capture.id): provenance platform mismatch.")
-        try require(provenance["revision"]?.string == manifest.revision, "\(capture.id): provenance revision mismatch.")
-        try require(provenance["sourceBuildRef"]?.string == manifest.sourceBuildRef, "\(capture.id): source build mismatch.")
+        let currentSource = provenance["revision"]?.string == manifest.revision
+            && provenance["sourceBuildRef"]?.string == manifest.sourceBuildRef
+        let compatibilityPath = provenance["sourceCompatibilityProofPath"]?.string
+        let compatibilityHash = provenance["sourceCompatibilityProofSHA256"]?.string
+        if !currentSource || compatibilityPath != nil || compatibilityHash != nil {
+            try require(!currentSource && !(compatibilityPath?.isEmpty ?? true)
+                        && isHex(compatibilityHash ?? "", length: 64),
+                        "\(capture.id): older captures require a paired, scoped source compatibility proof.")
+            let proofURL = resolve(compatibilityPath!, beside: base)
+            let bytes = try Data(contentsOf: proofURL)
+            try require(digest(bytes) == compatibilityHash, "\(capture.id): source compatibility proof changed.")
+            let proof = try JSONDecoder().decode(SourceCompatibilityProof.self, from: bytes)
+            try require(proof.schemaVersion == 1 && proof.status == "verified-native-source-compatibility"
+                        && proof.targetRevision == manifest.revision
+                        && proof.targetSourceBuildRef == manifest.sourceBuildRef,
+                        "\(capture.id): source compatibility proof must name this exact target release.")
+            let allowed = proof.captures.filter { $0.id == capture.id }
+            try require(allowed.count == 1, "\(capture.id): source compatibility scope does not include this capture exactly once.")
+            let record = allowed[0]
+            try require(record.platform == capture.platform && record.sha256 == capture.sha256
+                        && isHex(record.sourceRevision, length: 40)
+                        && record.sourceRevision == provenance["revision"]?.string
+                        && record.sourceBuildRef == provenance["sourceBuildRef"]?.string
+                        && record.workingTreeInputsSHA256 == provenance["workingTreeInputsSHA256"]?.string
+                        && !record.reviewedScope.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+                        "\(capture.id): compatibility scope must match original pixels, source, platform and reviewed behavior.")
+            let targetInputBytes = try Data(contentsOf: resolve(proof.targetNativeInputsPath, beside: proofURL.deletingLastPathComponent()))
+            try require(isHex(proof.targetNativeInputsSHA256, length: 64)
+                        && digest(targetInputBytes) == proof.targetNativeInputsSHA256,
+                        "\(capture.id): target frozen-input proof changed.")
+            if !testOnly {
+                let targetInputs = try JSONSerialization.jsonObject(with: targetInputBytes) as? [String: Any]
+                try require(targetInputs?["revision"] as? String == manifest.revision,
+                            "\(capture.id): target input proof must identify this release revision.")
+            }
+            effectiveInputHashes.insert(proof.targetNativeInputsSHA256)
+        } else if let hash = provenance["workingTreeInputsSHA256"]?.string {
+            effectiveInputHashes.insert(hash)
+        }
         for field in ["device", "captureMethod", "capturedAtUTC"] {
             try require(!(provenance[field]?.string?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ?? true),
                         "\(capture.id): missing nativeCapture.\(field).")
@@ -185,7 +241,11 @@ func validate(_ manifest: Manifest, beside base: URL, testOnly: Bool = false) th
             }
         }
         for (pathField, hashField) in [("workingTreeInputsPath", "workingTreeInputsSHA256"),
-                                      ("attachmentManifestPath", "attachmentManifestSHA256")] {
+                                      ("attachmentManifestPath", "attachmentManifestSHA256"),
+                                      ("testHarnessInputsPath", "testHarnessInputsSHA256"),
+                                      ("nativeBuildRecordPath", "nativeBuildRecordSHA256"),
+                                      ("testResultSummaryPath", "testResultSummarySHA256"),
+                                      ("testResultDetailsPath", "testResultDetailsSHA256")] {
             let proofPath = provenance[pathField]?.string
             let proofHash = provenance[hashField]?.string
             if proofPath != nil || proofHash != nil {
@@ -249,8 +309,8 @@ func validate(_ manifest: Manifest, beside base: URL, testOnly: Bool = false) th
                                           sourceOrientation: orientation)
     }
     if !testOnly {
-        try require(Set(manifest.captures.compactMap { $0.nativeCapture["workingTreeInputsSHA256"]?.string }).count == 1,
-                    "All marketing captures must use the same frozen native source inputs.")
+        try require(effectiveInputHashes.count == 1,
+                    "All marketing captures must match one frozen release, directly or through scoped source compatibility proof.")
     }
     for gallery in manifest.galleries {
         try require(gallery.images.count == 10, "\(gallery.platform.rawValue): exactly 10 marketing images are required.")
@@ -570,7 +630,12 @@ func writeReviewPacket(_ outputs: [OutputProof], manifest: Manifest, captures: [
             let captureIDs = output.transforms.map { $0.captureID }.joined(separator: ", ")
             let sources = output.transforms.map { transform in
                 let capture = captures[transform.captureID]!
-                return "<li><a href=\"\(escapeHTML(relativePath(capture.url, from: directory)))\">\(escapeHTML(transform.role)): \(escapeHTML(transform.captureID))</a><br><code>\(capture.metadata.sha256)</code></li>"
+                let originalRevision = capture.metadata.nativeCapture["revision"]?.string ?? "unknown"
+                let originalBuild = capture.metadata.nativeCapture["sourceBuildRef"]?.string ?? "unknown"
+                let compatibility = capture.metadata.nativeCapture["sourceCompatibilityProofPath"]?.string.map {
+                    "<br><a href=\"\(escapeHTML(relativePath(resolve($0, beside: manifestBase), from: directory)))\">Reviewed source compatibility</a>"
+                } ?? ""
+                return "<li><a href=\"\(escapeHTML(relativePath(capture.url, from: directory)))\">\(escapeHTML(transform.role)): \(escapeHTML(transform.captureID))</a><br><code>\(capture.metadata.sha256)</code><br>Actual capture revision <code>\(escapeHTML(originalRevision))</code><br>Actual capture build <code>\(escapeHTML(originalBuild))</code>\(compatibility)</li>"
             }.joined()
             return """
             <article><a href="\(escapeHTML(relative))"><img src="\(escapeHTML(relative))" alt="\(escapeHTML(output.headline))"></a>
@@ -622,7 +687,7 @@ func writeReviewPacket(_ outputs: [OutputProof], manifest: Manifest, captures: [
     article{min-width:0}img{display:block;width:100%;height:auto;border-radius:8px}small{color:#afc4dc;line-height:1.6;display:block}code{overflow-wrap:anywhere}details{margin-top:12px;font-size:14px}li{margin-bottom:12px}
     </style><main><h1>HWvH marketing review</h1>
     <p>\(outputs.count) composed JPEGs across \(manifest.galleries.count) complete ten-image galleries. Every app image comes from the capture platform shown in its gallery. Click any image for its full size.</p>
-    <p>Native base revision <code>\(escapeHTML(manifest.revision))</code><br>Build reference <code>\(escapeHTML(manifest.sourceBuildRef))</code><br>
+    <p>Target release revision <code>\(escapeHTML(manifest.revision))</code><br>Target build reference <code>\(escapeHTML(manifest.sourceBuildRef))</code><br>Actual capture revisions are recorded separately below each image.<br>
     <a href="marketing-provenance.json">Source hashes, native capture details and layout transforms</a></p>
     \(sections)</main></html>
     """
@@ -759,9 +824,50 @@ func selfTest() throws {
     try rejected({ $0.galleries[0].images[0].evidence.proofSHA256 = String(repeating: "0", count: 64) }, "changed headline proof")
     try rejected({ $0.galleries[0].images[0].evidence.sourceBuildRef = "ANOTHER BUILD" }, "headline proof build mismatch")
     try rejected({ $0.captures[0].nativeCapture = [:] }, "missing native provenance")
+    try rejected({ $0.captures[0].nativeCapture["revision"] = .string(String(repeating: "e", count: 40)) }, "older revision without scoped compatibility")
+    let compatibilityURL = directory.appendingPathComponent("test-only-source-compatibility.json")
+    let compatibleRecord = CompatibleCapture(id: captures[0].id, platform: captures[0].platform, sha256: captures[0].sha256,
+                                             sourceRevision: String(repeating: "e", count: 40), sourceBuildRef: "TEST-ONLY-PRIOR",
+                                             workingTreeInputsSHA256: digest(testProof), reviewedScope: "TEST ONLY: unchanged fixture geometry")
+    let compatibility = SourceCompatibilityProof(schemaVersion: 1, status: "verified-native-source-compatibility",
+                                                 targetRevision: revision, targetSourceBuildRef: "TEST-ONLY",
+                                                 targetNativeInputsPath: testProofURL.path, targetNativeInputsSHA256: digest(testProof),
+                                                 captures: [compatibleRecord])
+    let compatibilityBytes = try JSONEncoder().encode(compatibility)
+    try compatibilityBytes.write(to: compatibilityURL)
+    var retained = manifest
+    retained.captures[0].nativeCapture["revision"] = .string(compatibleRecord.sourceRevision)
+    retained.captures[0].nativeCapture["sourceBuildRef"] = .string(compatibleRecord.sourceBuildRef)
+    retained.captures[0].nativeCapture["workingTreeInputsPath"] = .string(testProofURL.path)
+    retained.captures[0].nativeCapture["workingTreeInputsSHA256"] = .string(digest(testProof))
+    retained.captures[0].nativeCapture["sourceCompatibilityProofPath"] = .string(compatibilityURL.path)
+    retained.captures[0].nativeCapture["sourceCompatibilityProofSHA256"] = .string(digest(compatibilityBytes))
+    _ = try validate(retained, beside: directory, testOnly: true)
+    for field in ["sourceCompatibilityProofPath", "sourceCompatibilityProofSHA256", "revision", "sourceBuildRef", "workingTreeInputsSHA256"] {
+        var invalid = retained
+        invalid.captures[0].nativeCapture[field] = .string("changed")
+        var rejectedRetained = false
+        do { _ = try validate(invalid, beside: directory, testOnly: true) } catch { rejectedRetained = true }
+        try require(rejectedRetained, "Validator did not reject changed compatibility \(field).")
+    }
     try rejected({ $0.captures[0].path = "missing.png" }, "missing source")
     try rejected({ $0.captures[0].path = "wrong-format.jpg" }, "unknown source format")
     try rejected({ $0.captures[0].sha256 = String(repeating: "0", count: 64) }, "changed source hash")
+    for (pathField, hashField) in [("testHarnessInputsPath", "testHarnessInputsSHA256"),
+                                  ("nativeBuildRecordPath", "nativeBuildRecordSHA256"),
+                                  ("testResultSummaryPath", "testResultSummarySHA256"),
+                                  ("testResultDetailsPath", "testResultDetailsSHA256")] {
+        var withProof = manifest
+        withProof.captures[0].nativeCapture[pathField] = .string(testProofURL.path)
+        withProof.captures[0].nativeCapture[hashField] = .string(digest(testProof))
+        _ = try validate(withProof, beside: directory, testOnly: true)
+        try rejected({ $0.captures[0].nativeCapture[pathField] = .string(testProofURL.path) },
+                     "unpaired \(pathField)")
+        try rejected({
+            $0.captures[0].nativeCapture[pathField] = .string(testProofURL.path)
+            $0.captures[0].nativeCapture[hashField] = .string(String(repeating: "0", count: 64))
+        }, "changed \(pathField)")
+    }
     let rotatedData = NSMutableData()
     let rotatedDestination = CGImageDestinationCreateWithData(rotatedData, "public.png" as CFString, 1, nil)!
     let padIndex = captures.firstIndex { $0.platform == .pad }!

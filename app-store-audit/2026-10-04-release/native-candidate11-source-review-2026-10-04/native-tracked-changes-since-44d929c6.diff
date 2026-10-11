@@ -1,0 +1,1415 @@
+diff --git a/Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift b/Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift
+index 7e5250e..e589a63 100644
+--- a/Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift	
++++ b/Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift	
+@@ -9,14 +9,33 @@ import SwiftData
+ @main
+ struct Hot_Wheels_v_HumanApp: App {
+     @State private var appModel = AppModel()
++    private let container: ModelContainer
++
++    init() {
++        let schema = Schema([CarDesignRecord.self, DriverProfileRecord.self,
++                             TrackBlueprintRecord.self, KidProfileRecord.self,
++                             RaceResultRecord.self])
++        let configuration: ModelConfiguration
++        if HWTestSession.isActive {
++            try? FileManager.default.createDirectory(at: HWTestSession.directory, withIntermediateDirectories: true)
++            configuration = HWTestSession.isUnitHost
++                ? ModelConfiguration(schema: schema, isStoredInMemoryOnly: true, cloudKitDatabase: .none)
++                : ModelConfiguration(schema: schema, url: HWTestSession.directory.appendingPathComponent("workshop.store"), cloudKitDatabase: .none)
++        } else {
++            configuration = ModelConfiguration(schema: schema)
++        }
++        do { container = try ModelContainer(for: schema, configurations: [configuration]) }
++        catch { fatalError("Unable to open the workshop: \(error)") }
++    }
+ 
+     var body: some Scene {
+         WindowGroup {
+-            RootView()
+-                .environment(appModel)
++            Group {
++                if HWTestSession.isUnitHost { Color.clear }
++                else { RootView().environment(appModel) }
++            }
++            .modifier(GamePresentationPolicy())
+         }
+-        .modelContainer(for: [CarDesignRecord.self, DriverProfileRecord.self,
+-                              TrackBlueprintRecord.self, KidProfileRecord.self,
+-                              RaceResultRecord.self])
++        .modelContainer(container)
+     }
+ }
+diff --git a/Hot Wheels v Human/App/LobbyBackground.swift b/Hot Wheels v Human/App/LobbyBackground.swift
+index 3b048da..7352df2 100644
+--- a/Hot Wheels v Human/App/LobbyBackground.swift	
++++ b/Hot Wheels v Human/App/LobbyBackground.swift	
+@@ -18,11 +18,12 @@ import SwiftUI
+ struct LobbyBackground: View {
+     /// 0 = nobody connected/ready, 1 = every connected racer is ready to go.
+     var energy: Double
++    @HWReduceMotion private var reduceMotion
+ 
+     var body: some View {
+-        TimelineView(.animation(minimumInterval: 1.0 / 12, paused: false)) { timeline in
++        TimelineView(.animation(minimumInterval: 1.0 / 12, paused: reduceMotion)) { timeline in
+             let e = min(max(energy, 0), 1)
+-            let t = timeline.date.timeIntervalSinceReferenceDate
++            let t = reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate
+             let speed = 0.04 + e * 0.10
+             ZStack {
+                 floor(e)
+diff --git a/Hot Wheels v Human/App/README.md b/Hot Wheels v Human/App/README.md
+index bb1dc67..51b454d 100644
+--- a/Hot Wheels v Human/App/README.md	
++++ b/Hot Wheels v Human/App/README.md	
+@@ -9,3 +9,7 @@ The iPad home retains its picture tiles and touch layout. `TVWorkshopHome` offer
+ The production display name is HWvH. Debug builds retain the development name. Existing launch arguments open individual workshops and race drills for native testing. They do not change the normal profile and home flow.
+ 
+ `AppModel.stampedRaceDesign(car:driver:)` stamps the current draft for race previews. Unsaved edits can be tested without losing the workshop when the preview closes.
++
++The 2026-10-04 game-loop candidate adds a first-viewport Play action to the optional profile picker and Settings to the picker/workshop. `GamePreferences` persists independent animation and haptic choices. `GamePresentationPolicy` combines the app choice with the read-only Reduce Motion environment and updates the thread-safe decorative RealityKit policy. Physics does not use that policy.
++
++`HWTestSession` is DEBUG-only isolation. A UUID launch argument selects a scratch SwiftData URL and preference suite, suppresses local-network discovery/advertising, sound and haptic output, and chooses existing deterministic starter content. The unit host displays an empty scene and uses memory-only data. Release launches always retain production behavior and cannot activate this fixture.
+diff --git a/Hot Wheels v Human/App/RootView.swift b/Hot Wheels v Human/App/RootView.swift
+index 5d4bbd7..68bcc48 100644
+--- a/Hot Wheels v Human/App/RootView.swift	
++++ b/Hot Wheels v Human/App/RootView.swift	
+@@ -173,7 +173,13 @@ struct RootView: View {
+             .animation(.easeInOut(duration: 0.3), value: tvFinder.foundTV)
+             .animation(.easeInOut(duration: 0.3), value: tvFinder.blocked)
+             #if os(iOS)
+-            .toolbar { ToolbarItem(placement: .topBarLeading) { profileChip } }
++            .toolbar {
++                ToolbarItem(placement: .topBarLeading) { profileChip }
++                ToolbarItem(placement: .topBarTrailing) {
++                    NavigationLink { GameSettingsView() } label: { Label("Settings", systemImage: "slider.horizontal.3") }
++                        .accessibilityIdentifier("home-settings")
++                }
++            }
+             #endif
+         }
+     }
+@@ -341,8 +347,8 @@ struct RootView: View {
+ struct QuickPlayView: View {
+     @Environment(AppModel.self) private var appModel
+     // @State so the dice roll once per visit, not on every body re-eval.
+-    @State private var car = CarDesign.presets.randomElement()!
+-    @State private var track = TrackBlueprint.presets.randomElement()!.blueprint
++    @State private var car = HWTestSession.isActive ? CarDesign.presets[0] : CarDesign.presets.randomElement()!
++    @State private var track = HWTestSession.isActive ? TrackBlueprint.presets[0].blueprint : TrackBlueprint.presets.randomElement()!.blueprint
+ 
+     var body: some View {
+         SoloArenaView(designs: [appModel.stampedRaceDesign(car: car)], blueprint: track,
+diff --git a/Hot Wheels v Human/App/SoundBank.swift b/Hot Wheels v Human/App/SoundBank.swift
+index 1fe5d29..0e2728b 100644
+--- a/Hot Wheels v Human/App/SoundBank.swift	
++++ b/Hot Wheels v Human/App/SoundBank.swift	
+@@ -36,6 +36,7 @@ final class SoundBank {
+     /// High-frequency sounds have `_b`/`_c` siblings (SFX-SPEC variant
+     /// convention) — picks randomly, never the same one back-to-back.
+     func play(_ name: String) {
++        guard !HWTestSession.isActive else { return }
+         let options = variants(of: name)
+         guard var pick = options.randomElement() else { return }
+         if options.count > 1, pick == lastVariant[name],
+@@ -65,6 +66,7 @@ final class SoundBank {
+     /// nothing to buzz. `#if os(iOS)`, not `canImport(UIKit)` — UIKit imports
+     /// fine on tvOS and would break the TV build (CLAUDE.md).
+     private func buzz(for name: String) {
++        guard GamePreferences.shared.permitsHaptics else { return }
+         #if os(iOS)
+         switch name {
+         // Refusals: the wobble a kid hears when a piece won't go there.
+@@ -103,6 +105,7 @@ final class SoundBank {
+ 
+     /// Start a looping music track (m4a); replaces whatever was playing.
+     func playMusic(_ name: String) {
++        guard !HWTestSession.isActive else { return }
+         guard let url = Bundle.main.url(forResource: name, withExtension: "m4a") else { return }
+         guard let player = try? AVAudioPlayer(contentsOf: url) else { return }
+         music?.stop()
+diff --git a/Hot Wheels v Human/App/TVWorkshopControls.swift b/Hot Wheels v Human/App/TVWorkshopControls.swift
+index d1e16cb..4e57742 100644
+--- a/Hot Wheels v Human/App/TVWorkshopControls.swift	
++++ b/Hot Wheels v Human/App/TVWorkshopControls.swift	
+@@ -18,7 +18,7 @@ struct TVWorkshopButtonStyle: ButtonStyle {
+         let cornerRadius: CGFloat
+         @Environment(\.isFocused) private var focused
+         @Environment(\.isEnabled) private var enabled
+-        @Environment(\.accessibilityReduceMotion) private var reduceMotion
++        @HWReduceMotion private var reduceMotion
+ 
+         var body: some View {
+             label
+@@ -93,6 +93,12 @@ struct TVWorkshopHome: View {
+                         Text(AppBranding.name)
+                             .font(.system(size: 50, weight: .black, design: .rounded))
+                         Spacer()
++                        NavigationLink { GameSettingsView() } label: {
++                            Label("Settings", systemImage: "slider.horizontal.3")
++                                .labelStyle(.iconOnly).frame(width: 68, height: 68)
++                        }
++                        .buttonStyle(TVWorkshopButtonStyle())
++                        .accessibilityIdentifier("home-settings")
+                         Button {
+                             appModel.selectedProfile = nil
+                             appModel.selectedDriver = nil
+diff --git a/Hot Wheels v Human/Core/Models/GameMessage.swift b/Hot Wheels v Human/Core/Models/GameMessage.swift
+index d417848..480d439 100644
+--- a/Hot Wheels v Human/Core/Models/GameMessage.swift	
++++ b/Hot Wheels v Human/Core/Models/GameMessage.swift	
+@@ -24,6 +24,10 @@ nonisolated enum GameMessage: Codable, Equatable, Sendable {
+     case matchConfig(MatchConfig)
+     case readyState(playerID: UUID, ready: Bool)
+     case raceEvent(RaceEvent)
++    /// Additive: old peers drop these unknown messages; both apps must be
++    /// updated to exchange the finished image. Never sent unreliably.
++    case requestRaceShare
++    case raceShare(RaceSharePayload)
+     // unreliable, high-frequency
+     case boost(playerID: UUID, token: UUID)
+     case reactionCam(playerID: UUID, on: Bool)
+diff --git a/Hot Wheels v Human/Core/Networking/MessageCodec.swift b/Hot Wheels v Human/Core/Networking/MessageCodec.swift
+index 0da3c93..3c3177f 100644
+--- a/Hot Wheels v Human/Core/Networking/MessageCodec.swift	
++++ b/Hot Wheels v Human/Core/Networking/MessageCodec.swift	
+@@ -17,19 +17,29 @@ nonisolated struct MessageEnvelope: Codable, Sendable {
+ /// One per transport endpoint. Not thread-safe by itself — transports own
+ /// one and touch it from their isolation only.
+ nonisolated final class MessageCodec {
++    enum PayloadError: Error { case tooLarge, invalidShare }
+     private var nextSeq: UInt32 = 0
+     private var lastSnapshotSeq: UInt32 = 0
+     private let encoder = JSONEncoder()
+     private let decoder = JSONDecoder()
+ 
+     func encode(_ message: GameMessage) throws -> Data {
++        if case .raceShare(let payload) = message, !payload.isValid { throw PayloadError.invalidShare }
+         nextSeq &+= 1
+         return try encoder.encode(MessageEnvelope(seq: nextSeq, message: message))
+     }
+ 
+     /// Returns nil for stale snapshots (newer one already seen).
+     func decode(_ data: Data) throws -> GameMessage? {
++        // Preserve existing large drawing/photo messages. The new image
++        // handoff alone is bounded before JSONDecoder expands its Base64 data.
++        if data.count > 3_000_000,
++           let envelope = try JSONSerialization.jsonObject(with: data) as? [String: Any],
++           let message = envelope["message"] as? [String: Any], message["raceShare"] != nil {
++            throw PayloadError.tooLarge
++        }
+         let envelope = try decoder.decode(MessageEnvelope.self, from: data)
++        if case .raceShare(let payload) = envelope.message, !payload.isValid { throw PayloadError.invalidShare }
+         if case .raceSnapshot = envelope.message {
+             guard envelope.seq > lastSnapshotSeq else { return nil }
+             lastSnapshotSeq = envelope.seq
+diff --git a/Hot Wheels v Human/Core/Networking/MultipeerTransport.swift b/Hot Wheels v Human/Core/Networking/MultipeerTransport.swift
+index b8099a9..aeb7e2c 100644
+--- a/Hot Wheels v Human/Core/Networking/MultipeerTransport.swift	
++++ b/Hot Wheels v Human/Core/Networking/MultipeerTransport.swift	
+@@ -35,6 +35,7 @@ final class MultipeerTransport: NSObject, GameTransport {
+     }
+ 
+     func start(role: TransportRole) {
++        guard !HWTestSession.isActive else { return }
+         stop()
+         self.role = role
+         let session = MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: .required)
+diff --git a/Hot Wheels v Human/Core/Networking/README.md b/Hot Wheels v Human/Core/Networking/README.md
+index 9dea5cd..5b3cade 100644
+--- a/Hot Wheels v Human/Core/Networking/README.md	
++++ b/Hot Wheels v Human/Core/Networking/README.md	
+@@ -14,3 +14,9 @@ Gotchas (hard-won, do not skip)
+ - Reconnect: on `.notConnected`, browser restarts and re-`hello`s; host keeps race paused ≤5 s (RaceCoordinator owns that policy, not the transport).
+ 
+ Tests: LoopbackTransport full-flow (hello→blueprint→ready→snapshot); codec seq-number dropping; dedupe.
++
++### Finished image handoff, 2026-10-04 candidate
++
++The additive reliable messages are `requestRaceShare` and `raceShare(RaceSharePayload)`. Existing race messages keep their wire shapes. Old peers drop unknown share messages; both devices need updated apps to share the image. A result image is a single bounded payload, never unreliable telemetry. Decode rejects share-image envelopes above 3 MB while preserving existing large drawing/photo messages, images above 2 MB, invalid image metadata, excessive dimensions and nonfinite result statistics.
++
++`RaceShareHandoff` opens a temporary host on the existing `hwvh-race` service only while standalone TV Share is presented. A dashboard can receive an image without inventing a car or race telemetry. Networked arenas reuse the coordinator's existing encrypted session. Closing a panel or dashboard cancels its stream consumer and releases the temporary host. Automated tests use actual codec/loopback messages; physical TV-to-iPad discovery and delivery remain a separate required check.
+diff --git a/Hot Wheels v Human/Core/Networking/TVFinder.swift b/Hot Wheels v Human/Core/Networking/TVFinder.swift
+index 1604036..b1191e3 100644
+--- a/Hot Wheels v Human/Core/Networking/TVFinder.swift	
++++ b/Hot Wheels v Human/Core/Networking/TVFinder.swift	
+@@ -41,6 +41,7 @@ final class TVFinder: NSObject {
+     @ObservationIgnored private var peers: Set<MCPeerID> = []
+ 
+     func start() {
++        guard !HWTestSession.isActive else { return }
+         guard browser == nil else { return }
+         blocked = false
+         let browser = MCNearbyServiceBrowser(
+diff --git a/Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift b/Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift
+index a639eb7..5651a49 100644
+--- a/Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift	
++++ b/Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift	
+@@ -40,6 +40,7 @@ struct AmbientMotionSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         for entity in context.entities(matching: Self.query,
+                                        updatingSystemWhen: .rendering) {
+@@ -125,6 +126,7 @@ struct WalkerSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         for entity in context.entities(matching: Self.query,
+                                        updatingSystemWhen: .rendering) {
+@@ -178,6 +180,7 @@ struct TrafficSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         var pedestrians: [SIMD3<Float>] = []
+         for walker in context.entities(matching: Self.walkers,
+@@ -347,6 +350,7 @@ struct WanderSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         for entity in context.entities(matching: Self.query,
+                                        updatingSystemWhen: .rendering) {
+@@ -412,6 +416,7 @@ struct PedestrianSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         for entity in context.entities(matching: Self.query,
+                                        updatingSystemWhen: .rendering) {
+@@ -624,6 +629,7 @@ struct TrainSystem: System {
+     init(scene: Scene) {}
+ 
+     func update(context: SceneUpdateContext) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         let dt = Float(context.deltaTime)
+         for entity in context.entities(matching: Self.query,
+                                        updatingSystemWhen: .rendering) {
+@@ -1206,7 +1212,7 @@ enum ArenaEnvironment {
+                     direction: start.direction,
+                     sideOffset: index % 2 == 0 ? -0.26 : 0.26,
+                     buildings: doors, roadside: roadside, seed: seed))
+-                if let animation = person.availableAnimations.first {
++                if GameEffectsPolicy.shared.motionEnabled, let animation = person.availableAnimations.first {
+                     person.playAnimation(animation.repeat())
+                 }
+                 root.addChild(person)
+diff --git a/Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift b/Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift
+index ceb604a..cfd563c 100644
+--- a/Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift	
++++ b/Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift	
+@@ -28,8 +28,10 @@ enum BreakdownShow {
+     }
+ 
+     static func play(on car: ModelEntity, style: Style) {
++        guard GameEffectsPolicy.shared.motionEnabled else { return }
+         Task { @MainActor in
+             await sleep(RaceTuning.breakdownDelay)
++            guard GameEffectsPolicy.shared.motionEnabled else { return }
+             switch style {
+             case .wheelsOff: await wheelsOff(car)
+             case .sputterFlop: await sputterFlop(car)
+diff --git a/Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift b/Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift
+index 199ee77..4c51aba 100644
+--- a/Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift	
++++ b/Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift	
+@@ -27,22 +27,79 @@ final class RaceCoordinator {
+     private(set) var reactionCamsOn: Set<UUID> = []
+     /// Ride in the driver's seat instead of the chase camera (ArenaView).
+     /// Lives here so the same toggle works on the TV and in Solo Arena.
+-    var driverView = true
++    var driverView = GamePreferences.shared.bool("race.driverView", fallback: true) {
++        didSet { GamePreferences.shared.set(driverView, for: "race.driverView") }
++    }
+     /// Which track pieces are drawn (ArenaView's three-way switch). Ghosts
+     /// hidden by default — a ghost piece you can see isn't a ghost.
+-    var trackVisibility: TrackVisibility = .hideGhosts {
+-        didSet { session.applyTrackVisibility(trackVisibility) }
++    var trackVisibility: TrackVisibility = TrackVisibility(rawValue: GamePreferences.shared.string("race.trackVisibility") ?? "") ?? .hideGhosts {
++        didSet {
++            session.applyTrackVisibility(trackVisibility)
++            GamePreferences.shared.set(trackVisibility.rawValue, for: "race.trackVisibility")
++        }
+     }
+     /// Which preset the cockpit radio is tuned to. Defaults to the chiptune
+     /// station, which IS the old race track — so a kid who never touches the
+     /// radio hears exactly what they heard before.
+-    var radioStation: RadioStation = .chiptune
++    var radioStation: RadioStation = RadioStation(rawValue: GamePreferences.shared.string("race.radioStation") ?? "") ?? .chiptune {
++        didSet { GamePreferences.shared.set(radioStation.rawValue, for: "race.radioStation") }
++    }
+     /// Radio power. Off means off — no race music either, which is the point
+     /// of a switch a kid can reach.
+-    var radioOn = true
++    var radioOn = GamePreferences.shared.bool("race.radioOn", fallback: true) {
++        didSet { GamePreferences.shared.set(radioOn, for: "race.radioOn") }
++    }
+     /// Dash volume knob, 0…1. Mirrored into `SoundBank.musicLevel` by the
+     /// dashboard; kept here so it survives a rematch like the station does.
+-    var musicLevel: Double = 1
++    var musicLevel: Double = min(max(GamePreferences.shared.double("race.musicLevel", fallback: 1), 0), 1) {
++        didSet { GamePreferences.shared.set(musicLevel, for: "race.musicLevel") }
++    }
++
++    private(set) var sharePayload: RaceSharePayload?
++    /// tvOS can disappear the presenting arena while a sheet is above it.
++    /// Keep its completed session alive until the result panel is dismissed.
++    var isPresentingResultShare = false
++    let frameCapture = ArenaFrameCapture()
++    private(set) var shareError: String?
++    private(set) var shareCapturePending = false
++    private var captureNonce = UUID()
++    var needsNearbyShareHost: Bool { transport is LoopbackTransport }
++
++    func captureResult(using capture: ArenaFrameCapture) {
++        guard !shareCapturePending, let result = session.completedResult else { return }
++        captureNonce = UUID()
++        let nonce = captureNonce
++        shareCapturePending = true
++        shareError = nil
++        capture.request { [weak self] data in
++            guard let self else { return }
++            Task { @MainActor in
++                guard self.captureNonce == nonce,
++                      self.session.completedResult?.id == result.id else { return }
++                self.shareCapturePending = false
++                guard let data else { self.shareError = "The finish image wasn't ready. Try again."; return }
++                let payload = RaceSharePayload(result: result, arenaImage: data)
++                guard payload.isValid else { self.shareError = "The finish image couldn't be saved. Try again."; return }
++                self.sharePayload = payload
++                self.transport.send(.raceShare(payload), reliably: true)
++            }
++        }
++        Task { @MainActor [weak self] in
++            try? await Task.sleep(for: .seconds(6))
++            guard let self, captureNonce == nonce, sharePayload?.result.id != result.id else { return }
++            capture.cancel()
++            shareCapturePending = false
++            shareError = "The finish image wasn't ready. Try again."
++        }
++    }
++
++    func clearShare() {
++        frameCapture.cancel()
++        captureNonce = UUID()
++        shareCapturePending = false
++        sharePayload = nil
++        shareError = nil
++    }
+ 
+     private let transport: any GameTransport
+     private var designs: [(owner: UUID?, design: CarDesign)] = []
+@@ -63,6 +120,7 @@ final class RaceCoordinator {
+ 
+     init(transport: any GameTransport) {
+         self.transport = transport
++        SoundBank.shared.musicLevel = Float(musicLevel)
+         session.onEvent = { [weak self] event in
+             self?.transport.send(.raceEvent(event), reliably: true)
+         }
+@@ -90,6 +148,7 @@ final class RaceCoordinator {
+     }
+ 
+     func stop() {
++        isPresentingResultShare = false
+         isStarted = false
+         lifecycleID = UUID()
+         eventTask?.cancel()
+@@ -99,6 +158,7 @@ final class RaceCoordinator {
+         buildTask = nil
+         snapshotTask = nil
+         session.stop()
++        clearShare()
+         arenaRoot = nil
+         raceRunning = false
+         players.removeAll()
+@@ -130,6 +190,7 @@ final class RaceCoordinator {
+     private func handle(_ message: GameMessage) {
+         switch message {
+         case .hello(let player, _):
++            if let sharePayload { transport.send(.raceShare(sharePayload), reliably: true) }
+             guard !players.contains(where: { $0.id == player.id }) else { break }
+             if raceRunning {
+                 lastRejection = "Race in progress — hop in the next one!"
+@@ -182,7 +243,10 @@ final class RaceCoordinator {
+         case .trackVisibility(let mode):
+             // The host owns it; the next snapshot tells every controller.
+             trackVisibility = mode
+-        case .raceEvent, .raceSnapshot:
++        case .requestRaceShare:
++            if let sharePayload { transport.send(.raceShare(sharePayload), reliably: true) }
++            else { captureResult(using: frameCapture) }
++        case .raceEvent, .raceSnapshot, .raceShare:
+             break   // host-authored, never inbound
+         }
+     }
+@@ -200,6 +264,13 @@ final class RaceCoordinator {
+         startRaceIfReady()
+     }
+ 
++    func hostRematch() {
++        guard session.phase == .results else { return }
++        for player in players { readiness[player.id] = true }
++        rematchIfReady()
++        startRaceIfReady()
++    }
++
+     /// The track racing next (draft gating tests, TV lobby).
+     var lobbyBlueprintID: UUID? { nextBlueprint()?.trackId }
+ 
+@@ -350,6 +421,7 @@ final class RaceCoordinator {
+               !players.isEmpty,
+               players.allSatisfy({ readiness[$0.id] == true }) else { return }
+         raceIndex += 1
++        clearShare()
+         session.reset()
+         raceRunning = false
+     }
+diff --git a/Hot Wheels v Human/Core/RaceCore/RaceSession.swift b/Hot Wheels v Human/Core/RaceCore/RaceSession.swift
+index 6d0a413..058bc1e 100644
+--- a/Hot Wheels v Human/Core/RaceCore/RaceSession.swift	
++++ b/Hot Wheels v Human/Core/RaceCore/RaceSession.swift	
+@@ -53,6 +53,8 @@ final class RaceSession {
+     private(set) var countdownValue = 3
+     private(set) var raceClock: TimeInterval = 0
+     private(set) var racers: [Racer] = []
++    private(set) var completedResult: RaceShareResult?
++    private var trackName = "My Track"
+     var allDone: Bool {
+         !racers.isEmpty && racers.allSatisfy { $0.finishTime != nil || $0.isOut }
+     }
+@@ -99,7 +101,10 @@ final class RaceSession {
+     nonisolated static func drillLog(_ line: String, reset: Bool = false) {
+         #if DEBUG
+         print(line)
+-        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
++        let directory = HWTestSession.isActive ? HWTestSession.directory
++            : FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
++        try? FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
++        let url = directory
+             .appendingPathComponent("drill-log.txt")
+         let data = Data((line + "\n").utf8)
+         if !reset, let handle = try? FileHandle(forWritingTo: url) {
+@@ -139,6 +144,7 @@ final class RaceSession {
+         botMayWin = Float.random(in: 0..<1, using: &aiRNG)
+             < (config.aiDifficulty.flatMap { RaceTuning.aiWinChance[$0] } ?? 0)
+         trackID = blueprint.trackId
++        trackName = TrackBlueprint.presets.first { $0.blueprint.trackId == blueprint.trackId }?.name ?? "My Track"
+         worldTheme = blueprint.worldTheme
+         scenery = blueprint.scenery ?? []
+         worldEmpty = blueprint.worldEmpty ?? false
+@@ -449,6 +455,8 @@ final class RaceSession {
+         }
+ 
+         if allDone {
++            completedResult = Self.freezeResult(id: runID, trackID: trackID ?? UUID(),
++                                               name: trackName, clock: raceClock, racers: racers)
+             phase = .results
+             RaceEventBus.shared.raceActive = false
+             // The kid rule: losing is funny. Everyone who finished but
+@@ -470,6 +478,13 @@ final class RaceSession {
+     }
+ 
+     /// Tear down the finished race so start() can run again (REMATCH).
++    static func freezeResult(id: UUID, trackID: UUID, name: String, clock: TimeInterval,
++                             racers: [Racer]) -> RaceShareResult {
++        RaceShareResult(id: id, trackID: trackID, trackName: name, raceClock: clock,
++            entries: racers.map { .init(id: $0.id, carName: $0.design.name,
++                finishTime: $0.finishTime, topSpeed: $0.topSpeed, crashes: $0.crashes) })
++    }
++
+     func reset() {
+         runID = UUID()
+         countdownTask?.cancel()
+@@ -480,6 +495,7 @@ final class RaceSession {
+         trackEntity?.removeFromParent()
+         trackEntity = nil
+         racers = []
++        completedResult = nil
+         lastPoses.removeAll()
+         awaitingGreenFlag = false
+         raceClock = 0
+diff --git a/Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift b/Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift
+index 56b20fe..e84bf9b 100644
+--- a/Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift	
++++ b/Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift	
+@@ -375,7 +375,7 @@ enum SceneryPlacer {
+                 AmbientMotion.apply(to: entity, model: item.model,
+                                     vary: Float(index % 7) / 7)
+             }
+-            if isPerson(item.model),
++            if GameEffectsPolicy.shared.motionEnabled, isPerson(item.model),
+                let animation = entity.availableAnimations.first {
+                 entity.playAnimation(animation.repeat())
+             }
+diff --git a/Hot Wheels v Human/Features/Arena/ArenaAudio.swift b/Hot Wheels v Human/Features/Arena/ArenaAudio.swift
+index 8a519de..983571a 100644
+--- a/Hot Wheels v Human/Features/Arena/ArenaAudio.swift	
++++ b/Hot Wheels v Human/Features/Arena/ArenaAudio.swift	
+@@ -34,6 +34,7 @@ final class ArenaAudio {
+     ///   chase cam. Its engine mixes down — see `RaceTuning.engineGainInCar`.
+     func tick(session: RaceSession, station: RadioStation = .chiptune,
+               radioOn: Bool = true, driverCarID: UUID? = nil) {
++        guard !HWTestSession.isActive else { return }
+         inCar = driverCarID
+         let phase = session.phase
+         if phase != lastPhase {
+diff --git a/Hot Wheels v Human/Features/Arena/ArenaHUDView.swift b/Hot Wheels v Human/Features/Arena/ArenaHUDView.swift
+index c7632b2..1a673ba 100644
+--- a/Hot Wheels v Human/Features/Arena/ArenaHUDView.swift	
++++ b/Hot Wheels v Human/Features/Arena/ArenaHUDView.swift	
+@@ -71,8 +71,9 @@ struct ArenaHUDView: View {
+         guard session.phase == .results,
+               session.config.mode != .test,
+               let trackID = session.trackID,
+-              filedRace != trackID else { return }
+-        filedRace = trackID
++              let resultID = session.completedResult?.id,
++              filedRace != resultID else { return }
++        filedRace = resultID
+         previousBest = modelContext.bestTime(onTrack: trackID)
+         for racer in session.racers {
+             guard let seconds = racer.finishTime else { continue }
+@@ -106,6 +107,14 @@ struct ArenaHUDView: View {
+         VStack(spacing: 4) {
+             Text(racer.design.name)
+                 .font(.system(size: 24, weight: .heavy, design: .rounded))
++                .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
++                .frame(maxWidth: 240)
++            if racer.boosting {
++                Label("Boosting", systemImage: "flame.fill")
++                    .font(.system(size: 16, weight: .heavy, design: .rounded))
++                    .foregroundStyle(.yellow)
++                    .accessibilityIdentifier(racer.isAI ? "race-ai-boosting" : "race-player-boosting")
++            }
+             HStack(spacing: 2) {
+                 if racer.livesLeft > 20 {
+                     Text("∞").font(.title2)      // test mode
+@@ -172,9 +181,10 @@ struct ArenaHUDView: View {
+                             if racer.id == winner?.id {
+                                 Image(systemName: "trophy.fill").foregroundStyle(.yellow)
+                             }
+-                            Text(racer.design.name).lineLimit(1)
++                            Text(racer.design.name).lineLimit(nil)
++                                .fixedSize(horizontal: false, vertical: true).frame(maxWidth: 180)
+                         }
+-                        .fixedSize()
++                        .fixedSize(horizontal: false, vertical: true)
+                         Text(racer.finishTime.map { String(format: "%.1f s", $0) } ?? "OUT")
+                         Text(String(format: "%.1f m/s", racer.topSpeed))
+                         if anyCrashes { Text("\(racer.crashes)") }
+@@ -189,13 +199,13 @@ struct ArenaHUDView: View {
+             #if os(tvOS)
+             Text(seriesLabel == nil
+                  ? "Select \(Image(systemName: "arrow.clockwise")) REMATCH to go again!"
+-                 : "Select \(Image(systemName: "arrow.clockwise")) REMATCH for the next track!")
++                 : "Select \(Image(systemName: "arrow.clockwise")) NEXT RACE for the next track!")
+                 .font(.system(size: 20, weight: .bold, design: .rounded))
+                 .foregroundStyle(.yellow)
+             #else
+             Text(seriesLabel == nil
+                  ? "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad to go again!"
+-                 : "Press \(Image(systemName: "arrow.clockwise")) REMATCH on your iPad for the next track!")
++                 : "Press \(Image(systemName: "arrow.clockwise")) NEXT RACE for the next track!")
+                 .font(.system(size: 20, weight: .bold, design: .rounded))
+                 .foregroundStyle(.yellow)
+             #endif
+@@ -203,5 +213,6 @@ struct ArenaHUDView: View {
+         .padding(22)
+         .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 24))
+         .foregroundStyle(.white)
++        .accessibilityIdentifier("race-results")
+     }
+ }
+diff --git a/Hot Wheels v Human/Features/Arena/ArenaView.swift b/Hot Wheels v Human/Features/Arena/ArenaView.swift
+index fa4bbdd..12813a5 100644
+--- a/Hot Wheels v Human/Features/Arena/ArenaView.swift	
++++ b/Hot Wheels v Human/Features/Arena/ArenaView.swift	
+@@ -16,6 +16,7 @@ struct ArenaView: View {
+     @State private var camera: EventSubscription?
+     @State private var reactionFeed = ReactionFeed()
+     @State private var arenaAudio = ArenaAudio()
++    @HWReduceMotion private var reduceMotion
+ 
+     /// Does this collision hit belong to a car (its own body, a wheel, the
+     /// driver) rather than to the track? Cars are the thing we're trying to
+@@ -39,6 +40,8 @@ struct ArenaView: View {
+         ZStack {
+             RealityView { content in
+                 content.camera = .virtual
++                content.renderingEffects.dynamicRange = .standard
++                content.renderingEffects.customPostProcessing = .effect(ArenaSnapshotEffect(capture: coordinator.frameCapture))
+ 
+                 let root = Entity()
+                 content.add(root)
+@@ -69,7 +72,7 @@ struct ArenaView: View {
+                 var blockedFor: Double = 0   // seconds of track between us and the cars
+                 cameraEntity.look(at: [0, 0, 1], from: smoothed, relativeTo: nil)
+                 camera = content.subscribe(to: SceneEvents.Update.self) { event in
+-                    feed.tick(session: session, dt: event.deltaTime)
++                    if GameEffectsPolicy.shared.motionEnabled { feed.tick(session: session, dt: event.deltaTime) }
+ 
+                     // Driver's-eye view: sit where the little human sits.
+                     // Rolled with the car (upVector: its own up), so a loop
+@@ -79,7 +82,7 @@ struct ArenaView: View {
+                         ?? session.racers.first { $0.entity?.isEnabled == true }
+                     // The listener rides with the camera, so the cockpit's own
+                     // engine has to duck — ArenaAudio needs to know whose.
+-                    let inCar = coordinator.driverView && session.phase != .results
++                    let inCar = GameEffectsPolicy.shared.motionEnabled && coordinator.driverView && session.phase != .results
+                         ? hero?.id : nil
+                     audio.tick(session: session, station: coordinator.radioStation,
+                                radioOn: coordinator.radioOn, driverCarID: inCar)
+@@ -87,6 +90,16 @@ struct ArenaView: View {
+                     // cars, because the finish is where the loser falls apart
+                     // and the cockpit points the other way.
+                     let atTheFlag = session.phase == .results
++                    if !GameEffectsPolicy.shared.motionEnabled {
++                        if cameraEntity.parent !== root { root.addChild(cameraEntity) }
++                        let rect = session.trackFootprint
++                        let center = SIMD3<Float>((rect?.minX ?? 0) + (rect?.maxX ?? 0), 0,
++                                                  (rect?.minZ ?? 0) + (rect?.maxZ ?? 0)) / 2
++                        let span = max((rect?.maxX ?? 2) - (rect?.minX ?? -2),
++                                       (rect?.maxZ ?? 2) - (rect?.minZ ?? -2), 3)
++                        cameraEntity.look(at: center, from: center + SIMD3<Float>(span * 0.65, span * 0.85, -span * 0.9), relativeTo: nil)
++                        return
++                    }
+                     if coordinator.driverView, !atTheFlag, let car = hero?.entity,
+                        let ride = car.components[CarComponent.self]?.rideHeight {
+                         // BOLTED to the car, not re-aimed at it every frame:
+@@ -202,6 +215,9 @@ struct ArenaView: View {
+ 
+                 coordinator.attach(root: root)
+             } update: { content in
++                if reduceMotion {
++                    for entity in content.entities { entity.stopAllAnimations(recursive: true) }
++                }
+                 // Re-theme when the (next) race's track changes. Reading
+                 // trackID here re-runs this closure on each new race.
+                 let trackID = coordinator.session.trackID
+@@ -233,11 +249,11 @@ struct ArenaView: View {
+                              ? "Race \(coordinator.raceNumber) of \(coordinator.raceCount)"
+                              : nil,
+                          // Lift the race clock over the dash when it's up.
+-                         bottomInset: coordinator.driverView
++                         bottomInset: (coordinator.driverView || reduceMotion)
+                              && coordinator.session.phase != .results ? 110 : 0)
+ 
+             // Driver's-seat dashboard: the radio, sitting on the hood line.
+-            if coordinator.driverView, coordinator.session.phase != .results {
++            if coordinator.driverView || reduceMotion, coordinator.session.phase != .results {
+                 VStack {
+                     Spacer()
+                     DriverDashboardView(
+@@ -280,8 +296,8 @@ struct ArenaView: View {
+                     Button {
+                         coordinator.driverView.toggle()
+                     } label: {
+-                        Label(coordinator.driverView ? "Driver View" : "Chase Cam",
+-                              systemImage: coordinator.driverView ? "steeringwheel" : "video.fill")
++                        Label(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam",
++                              systemImage: reduceMotion ? "camera.fill" : coordinator.driverView ? "steeringwheel" : "video.fill")
+                             .font(.system(size: 22, weight: .heavy, design: .rounded))
+                             .lineLimit(1)
+                             .padding(.horizontal, 16)
+@@ -295,7 +311,8 @@ struct ArenaView: View {
+                     .tint(.yellow)
+                     #endif
+                     .accessibilityIdentifier("race-camera")
+-                    .accessibilityValue(coordinator.driverView ? "Driver View" : "Chase Cam")
++                    .accessibilityValue(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam")
++                    .disabled(reduceMotion)
+                 }
+                 TrackVisibilityPicker(selection: coordinator.trackVisibility) {
+                     coordinator.trackVisibility = $0
+@@ -311,8 +328,8 @@ struct ArenaView: View {
+                 HStack {
+                     ForEach(Array(coordinator.session.racers.enumerated()), id: \.element.id) { index, racer in
+                         // `--show-cams`: sim/dev arg — PiPs on without a held button.
+-                        if coordinator.reactionCamsOn.contains(racer.id)
+-                            || ProcessInfo.processInfo.arguments.contains("--show-cams"),
++                        if !reduceMotion && (coordinator.reactionCamsOn.contains(racer.id)
++                            || ProcessInfo.processInfo.arguments.contains("--show-cams")),
+                            let director = reactionFeed.directors[racer.id] {
+                             ReactionCamView(director: director, design: racer.design)
+                                 .frame(maxWidth: .infinity,
+@@ -329,6 +346,17 @@ struct ArenaView: View {
+             }
+         }
+         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
++        .task(id: coordinator.session.completedResult?.id) {
++            guard coordinator.session.completedResult != nil else { coordinator.clearShare(); return }
++            // Let the real finish camera settle; this doesn't delay race input
++            // or any computer move. The copied frame remains immutable.
++            try? await Task.sleep(for: .milliseconds(600))
++            guard !Task.isCancelled else { return }
++            coordinator.captureResult(using: coordinator.frameCapture)
++        }
++        .onDisappear {
++            if !coordinator.isPresentingResultShare { coordinator.frameCapture.cancel() }
++        }
+     }
+ }
+ 
+diff --git a/Hot Wheels v Human/Features/Arena/README.md b/Hot Wheels v Human/Features/Arena/README.md
+index e9e573c..4b8ffe6 100644
+--- a/Hot Wheels v Human/Features/Arena/README.md	
++++ b/Hot Wheels v Human/Features/Arena/README.md	
+@@ -54,3 +54,9 @@ Perf budget (Apple TV 4K): ≤ 40 track pieces + 2 cars + debris ≤ 150 draw-re
+ The TV has focusable boost, reaction-cam, camera, track-visibility, radio power, station and volume controls. Select or Play/Pause starts an armed boost; select again stops it. The boost also ends when its meter empties or the race screen closes. Two-player local play creates two loopback player endpoints, one car submission and controller per player, and sends both submissions before either READY message.
+ 
+ Menu or the Close button dismisses a workshop race preview. `RaceCoordinator.stop()` cancels its event, build, countdown and snapshot work. Returning to the workshop retains the draft; reopening the preview creates a new session.
++
++### Finished-race image, 2026-10-04 candidate
++
++`RaceSession.completedResult` copies values at the normal finish transition. `ArenaSnapshotEffect` is identity post-processing with a one-shot copy of an actual final render texture. It encodes a bounded JPEG after GPU completion, away from the render callback. `RaceShareCard` and `RaceShareRenderer` prepare a PNG containing the frozen frame, real result and App Store URL. `RaceShareSheet` previews it; iPad uses ShareLink, Apple TV hands it to a nearby iPad. Failures remain explicit and retryable. Rematch invalidates pending capture callbacks so an older frame cannot overwrite a new race.
++
++Calm camera mode is a fixed track overview. Car physics continues. Decorative motion, turntable rotation and reaction animation consult the separate effects policy; tunneling visibility remains active.
+diff --git a/Hot Wheels v Human/Features/Arena/SoloArenaView.swift b/Hot Wheels v Human/Features/Arena/SoloArenaView.swift
+index bb57872..a1ca305 100644
+--- a/Hot Wheels v Human/Features/Arena/SoloArenaView.swift	
++++ b/Hot Wheels v Human/Features/Arena/SoloArenaView.swift	
+@@ -24,7 +24,7 @@ struct SoloArenaView: View {
+         ZStack(alignment: .bottomTrailing) {
+             if let rig {
+                 ArenaView(coordinator: rig.coordinator)
+-                RaceControlsView(models: rig.dashboards)
++                RaceControlsView(models: rig.dashboards, coordinator: rig.coordinator)
+             } else {
+                 ProgressView().frame(maxWidth: .infinity, maxHeight: .infinity)
+             }
+@@ -58,6 +58,7 @@ struct SoloArenaView: View {
+             rig = SoloRig(coordinator: coordinator, dashboards: dashboards)
+         }
+         .onDisappear {
++            guard rig?.coordinator.isPresentingResultShare != true else { return }
+             rig?.coordinator.stop()
+             for dashboard in rig?.dashboards ?? [] { dashboard.stop() }
+         }
+@@ -76,6 +77,7 @@ struct SoloRig {
+ /// the PiPs so everything along the bottom edge lines up.
+ private struct RaceControlsView: View {
+     let models: [DashboardModel]
++    let coordinator: RaceCoordinator
+ 
+     var body: some View {
+         VStack(alignment: .trailing, spacing: 12) {
+@@ -91,6 +93,7 @@ private struct RaceControlsView: View {
+                 .tint(.yellow)
+                 .foregroundStyle(.black)
+                 .accessibilityIdentifier("race-rematch")
++                RaceResultShareButton(coordinator: coordinator)
+             } else {
+                 ForEach(models, id: \.player.id) { model in
+                     if let car = model.myCar {
+diff --git a/Hot Wheels v Human/Features/Customizer/CustomizerView.swift b/Hot Wheels v Human/Features/Customizer/CustomizerView.swift
+index 88f4f0d..b2ff242 100644
+--- a/Hot Wheels v Human/Features/Customizer/CustomizerView.swift	
++++ b/Hot Wheels v Human/Features/Customizer/CustomizerView.swift	
+@@ -389,6 +389,7 @@ struct CarTurntableView: View {
+             await Self.rebuild(turntable, design: design, refs: refs,
+                                onBodyAspect: onBodyAspect)
+             spin = content.subscribe(to: SceneEvents.Update.self) { event in
++                guard GameEffectsPolicy.shared.motionEnabled else { return refs.apply() }
+                 // Once it's been grabbed the kid is driving: the car freezes
+                 // where they caught it and the camera does the moving.
+                 guard !refs.orbit.grabbed else { return refs.apply() }
+diff --git a/Hot Wheels v Human/Features/Dashboard/DashboardModel.swift b/Hot Wheels v Human/Features/Dashboard/DashboardModel.swift
+index c31cd8b..48b5c93 100644
+--- a/Hot Wheels v Human/Features/Dashboard/DashboardModel.swift	
++++ b/Hot Wheels v Human/Features/Dashboard/DashboardModel.swift	
+@@ -18,8 +18,12 @@ final class DashboardModel {
+     private(set) var transportState: TransportState = .idle
+     private(set) var rejectionReason: String?
+     private(set) var lastEvent: RaceEvent?
++    private(set) var sharedRace: RaceSharePayload?
+ 
+     private let transport: any GameTransport
++    private var eventTask: Task<Void, Never>?
++    private var started = false
++    private var lifecycleID = UUID()
+ 
+     init(transport: any GameTransport, playerName: String) {
+         self.transport = transport
+@@ -32,19 +36,28 @@ final class DashboardModel {
+     var phase: RacePhase { snapshot?.phase ?? .lobby }
+ 
+     func start() {
++        guard !started else { return }
++        started = true
++        let lifecycleID = self.lifecycleID
+         transport.start(role: .player)
+-        Task { [weak self] in
++        eventTask = Task { [weak self] in
+             guard let events = self?.transport.events else { return }
+             for await event in events {
+-                self?.handle(event)
++                guard !Task.isCancelled, let self, self.started, self.lifecycleID == lifecycleID else { return }
++                self.handle(event)
+             }
+         }
+     }
+ 
+     func stop() {
++        started = false
++        lifecycleID = UUID()
++        eventTask?.cancel()
++        eventTask = nil
+         endBoost()
+         setReactionCam(on: false)
+         transport.stop()
++        sharedRace = nil
+     }
+ 
+     /// Whether this dashboard has readied up for the pending race.
+@@ -86,10 +99,13 @@ final class DashboardModel {
+     /// REMATCH = ready up again from the results screen; the host tears
+     /// down and reruns the same race once everyone re-readies.
+     func requestRematch() {
++        sharedRace = nil
+         transport.send(.readyState(playerID: player.id, ready: true), reliably: true)
+         SoundBank.shared.play("rematch_ding")
+     }
+ 
++    func requestRaceShare() { transport.send(.requestRaceShare, reliably: true) }
++
+     /// The host's track switch, mirrored. Set locally the instant the kid
+     /// taps so the button answers without a round trip, then re-synced by
+     /// every snapshot — which is also how a flip made on the TV shows up
+@@ -135,6 +151,7 @@ final class DashboardModel {
+         case .stateChanged(let state):
+             transportState = state
+         case .message(.raceSnapshot(let snap)):
++            if snap.phase != .results { sharedRace = nil }
+             snapshot = snap
+             if let mode = snap.trackVisibility { trackVisibility = mode }
+         case .message(.raceEvent(let raceEvent)):
+@@ -142,6 +159,9 @@ final class DashboardModel {
+             if case .blueprintRejected(let reason) = raceEvent {
+                 rejectionReason = reason
+             }
++        case .message(.raceShare(let payload)):
++            guard payload.isValid else { return }
++            sharedRace = payload
+         default:
+             break
+         }
+diff --git a/Hot Wheels v Human/Features/Dashboard/DashboardView.swift b/Hot Wheels v Human/Features/Dashboard/DashboardView.swift
+index 92d6f00..51ba583 100644
+--- a/Hot Wheels v Human/Features/Dashboard/DashboardView.swift	
++++ b/Hot Wheels v Human/Features/Dashboard/DashboardView.swift	
+@@ -10,10 +10,16 @@ import SwiftUI
+ 
+ struct DashboardView: View {
+     let model: DashboardModel
++    @State private var sharePresentation: RaceSharePresentation?
+ 
+     var body: some View {
+         VStack(spacing: 16) {
+-            if let car = model.myCar {
++            if let payload = model.sharedRace, model.myCar == nil {
++                Label(payload.result.winner.map { "\($0.carName) wins!" } ?? "Race complete", systemImage: "flag.checkered")
++                    .font(.system(.largeTitle, design: .rounded, weight: .black))
++                    .foregroundStyle(.yellow).fixedSize(horizontal: false, vertical: true)
++                shareButton
++            } else if let car = model.myCar {
+                 ProgressView(value: min(max(car.progress, 0), 1))
+                     .tint(.yellow)
+                     .scaleEffect(y: 3)
+@@ -48,6 +54,7 @@ struct DashboardView: View {
+                     .tint(.yellow)
+                     .foregroundStyle(.black)
+                     .padding(.bottom, 12)
++                    shareButton
+                 } else {
+                     BoostButtonView(meter: car.boostMeter,
+                                     begin: model.beginBoost,
+@@ -70,6 +77,29 @@ struct DashboardView: View {
+             }
+         }
+         .background(background.ignoresSafeArea())
++        .sheet(item: $sharePresentation) { item in
++            RaceShareSheet(payload: item.payload)
++        }
++    }
++
++    private var shareButton: some View {
++        Button {
++            if let payload = model.sharedRace {
++                sharePresentation = RaceSharePresentation(payload: payload)
++            } else { model.requestRaceShare() }
++        } label: {
++            Label(model.sharedRace == nil ? "Get Race Image" : "Share Race", systemImage: model.sharedRace == nil ? "arrow.clockwise" : "square.and.arrow.up")
++                .font(.system(.title2, design: .rounded, weight: .heavy))
++                .frame(minWidth: 260, minHeight: 72)
++        }
++        #if os(tvOS)
++        .buttonStyle(TVWorkshopButtonStyle())
++        #else
++        .buttonStyle(.borderedProminent).tint(.yellow).foregroundStyle(.black)
++        #endif
++        .accessibilityIdentifier("race-share")
++        .accessibilityValue(model.sharedRace == nil ? "Image not ready. Request again." : "Ready")
++        .task(id: model.phase) { if model.phase == .results, model.sharedRace == nil { model.requestRaceShare() } }
+     }
+ 
+     /// A moving, connection-state-driven glow before the race (matches the
+@@ -119,6 +149,7 @@ struct DashboardView: View {
+ /// the transport state so exactly one step is highlighted: find the TV →
+ /// connect → tap READY. Failure text stays funny, not punishing (CLAUDE.md).
+ private struct ConnectionLadder: View {
++    @HWReduceMotion private var reduceMotion
+     let state: TransportState
+     let ready: Bool
+     let design: CarDesign?
+@@ -163,8 +194,8 @@ private struct ConnectionLadder: View {
+                 .buttonStyle(.borderedProminent)
+                 .tint(.yellow)
+                 .foregroundStyle(.black)
+-                .scaleEffect(awaitingTap ? 1.03 : 1)
+-                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: awaitingTap)
++                .scaleEffect(awaitingTap && !reduceMotion ? 1.03 : 1)
++                .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: awaitingTap)
+             } else if ready {
+                 Label("You're in!", systemImage: "checkmark.circle.fill")
+                     .font(.system(size: 26, weight: .heavy, design: .rounded))
+@@ -264,6 +295,8 @@ struct ReactionCamButton: View {
+ /// overcharge zone above it. THE button — press and HOLD to burn, the
+ /// needle drops while you hold, the dial shakes and thumps as it fires.
+ struct BoostButtonView: View {
++    @HWReduceMotion private var reduceMotion
++    @State private var preferences = GamePreferences.shared
+     let meter: Float
+     let begin: () -> Void
+     let end: () -> Void
+@@ -312,8 +345,8 @@ struct BoostButtonView: View {
+         }
+         .onDisappear { stopRemoteBoost() }
+         #else
+-        TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing)) { timeline in
+-            let jitter = firing
++        TimelineView(.animation(minimumInterval: firing ? 1 / 30 : 1, paused: !firing || reduceMotion)) { timeline in
++            let jitter = firing && !reduceMotion
+                 ? sin(timeline.date.timeIntervalSinceReferenceDate * 47) * 2
+                 : 0
+             dialFace
+@@ -346,8 +379,8 @@ struct BoostButtonView: View {
+             pressed = false
+             end()
+         }
+-        .task(id: firing) {
+-            guard firing else { return }
++        .task(id: firing && preferences.permitsHaptics) {
++            guard firing, preferences.permitsHaptics else { return }
+             while !Task.isCancelled {
+                 bump += 1
+                 try? await Task.sleep(for: .milliseconds(110))
+@@ -356,9 +389,9 @@ struct BoostButtonView: View {
+         #if !os(tvOS)
+         // A thump per tick while it burns, plus one clunk the moment it arms
+         // (rising edge only — the meter crosses 1 downward on every burn).
+-        .sensoryFeedback(.impact(weight: .medium, intensity: 0.8), trigger: bump)
++        .sensoryFeedback(.impact(weight: .medium, intensity: 0.8), trigger: bump) { _, _ in preferences.permitsHaptics }
+         .sensoryFeedback(trigger: armed) { was, now in
+-            was == false && now ? .impact(weight: .heavy) : nil
++            preferences.permitsHaptics && was == false && now ? .impact(weight: .heavy) : nil
+         }
+         #endif
+         #endif
+@@ -398,8 +431,8 @@ struct BoostButtonView: View {
+                 Image(systemName: firing ? "flame.fill" : (armed ? "bolt.fill" : "bolt.slash.fill"))
+                     .font(.system(size: 40))
+                     .foregroundStyle(armed ? .orange : .white.opacity(0.35))
+-                    .scaleEffect(armed && !firing ? 1.12 : 1)
+-                    .animation(armed && !firing
++                    .scaleEffect(armed && !firing && !reduceMotion ? 1.12 : 1)
++                    .animation(reduceMotion ? nil : armed && !firing
+                                ? .easeInOut(duration: 0.45).repeatForever(autoreverses: true)
+                                : .default,
+                                value: armed)
+diff --git a/Hot Wheels v Human/Features/Home/ArenaLobbyView.swift b/Hot Wheels v Human/Features/Home/ArenaLobbyView.swift
+index 98fc06e..08f0ece 100644
+--- a/Hot Wheels v Human/Features/Home/ArenaLobbyView.swift	
++++ b/Hot Wheels v Human/Features/Home/ArenaLobbyView.swift	
+@@ -12,6 +12,7 @@
+ import SwiftUI
+ 
+ struct ArenaLobbyView: View {
++    @HWReduceMotion private var reduceMotion
+     @State private var coordinator = RaceCoordinator(transport: MultipeerTransport())
+ 
+     private var allReady: Bool {
+@@ -43,10 +44,33 @@ struct ArenaLobbyView: View {
+             ArenaView(coordinator: coordinator)
+             if coordinator.session.phase == .lobby {
+                 lobby
++            } else if coordinator.session.phase == .results {
++                VStack {
++                    Spacer()
++                    HStack {
++                        Spacer()
++                        VStack(spacing: 12) {
++                            Button { coordinator.hostRematch() } label: {
++                                Label(coordinator.raceCount > 1 ? "NEXT RACE!" : "REMATCH!", systemImage: "arrow.clockwise")
++                                    .font(.system(size: 30, weight: .black, design: .rounded))
++                                    .frame(minWidth: 260, minHeight: 84)
++                            }
++                            #if os(tvOS)
++                            .buttonStyle(TVWorkshopButtonStyle(selected: true))
++                            #else
++                            .buttonStyle(.borderedProminent).tint(.yellow).foregroundStyle(.black)
++                            #endif
++                            .accessibilityIdentifier("race-rematch")
++                            RaceResultShareButton(coordinator: coordinator)
++                        }
++                    }
++                }.padding(24)
+             }
+         }
+         .onAppear { coordinator.start() }
+-        .onDisappear { coordinator.stop() }
++        .onDisappear {
++            if !coordinator.isPresentingResultShare { coordinator.stop() }
++        }
+         .onChange(of: coordinator.players.count) { old, new in
+             if new > old { SoundBank.shared.play("player_join_horn") }
+         }
+@@ -93,7 +117,7 @@ struct ArenaLobbyView: View {
+                 .tint(allReady ? .yellow : .white.opacity(0.22))
+                 .foregroundStyle(allReady ? .black : .white)
+                 .scaleEffect(allReady ? 1.04 : 1)
+-                .animation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: allReady)
++                .animation(reduceMotion ? nil : .easeInOut(duration: 0.9).repeatForever(autoreverses: true), value: allReady)
+             }
+             if let rejection = coordinator.lastRejection {
+                 Label(rejection, systemImage: "exclamationmark.triangle.fill")
+diff --git a/Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift b/Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift
+index 3dd06aa..7225891 100644
+--- a/Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift	
++++ b/Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift	
+@@ -116,6 +116,10 @@ struct DriverPreviewView: View {
+             // of the hair is finally something you can go and look at.
+             var elapsed: Float = 0
+             spin = content.subscribe(to: SceneEvents.Update.self) { event in
++                guard GameEffectsPolicy.shared.motionEnabled else {
++                    turntable.stopAllAnimations(recursive: true)
++                    return refs.apply()
++                }
+                 guard !refs.orbit.grabbed else { return refs.apply() }
+                 elapsed += Float(event.deltaTime)
+                 let angle = sin(elapsed * Self.swayRate) * Self.swayAngle
+@@ -136,7 +140,7 @@ struct DriverPreviewView: View {
+     /// live turntable.
+     @MainActor
+     static func rebuild(_ turntable: Entity, driver: DriverProfile) async {
+-        let signature = DriverPainter.appearanceSignature(for: driver)
++        let signature = DriverPainter.appearanceSignature(for: driver) + (GameEffectsPolicy.shared.motionEnabled ? ":moving" : ":still")
+         guard turntable.components[PreviewSignature.self]?.value != signature else { return }
+         turntable.components.set(PreviewSignature(value: signature))
+ 
+@@ -149,6 +153,9 @@ struct DriverPreviewView: View {
+             if human.name == wanted {
+                 await DriverPainter.apply(driver, to: human)
+                 human.scale = (driver.bodyType ?? .man).scale
++                if !GameEffectsPolicy.shared.motionEnabled { human.stopAllAnimations(recursive: true) }
++                else if let idle = human.availableAnimations.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
++                    ?? human.availableAnimations.first { human.playAnimation(idle.repeat()) }
+                 return
+             }
+             human.removeFromParent()
+@@ -162,7 +169,7 @@ struct DriverPreviewView: View {
+         // so the editor could be posing your character mid-sprint (or worse,
+         // mid-death) while you try to fit a hat to its head.
+         let clips = human.availableAnimations
+-        if let idle = clips.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
++        if GameEffectsPolicy.shared.motionEnabled, let idle = clips.first(where: { ($0.name ?? "").localizedCaseInsensitiveContains("idle") })
+             ?? clips.first {
+             human.playAnimation(idle.repeat())
+         }
+diff --git a/Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift b/Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift
+index 6e5c4c2..fd6ef8d 100644
+--- a/Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift	
++++ b/Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift	
+@@ -16,9 +16,14 @@ struct ProfilePickerView: View {
+     @Query(sort: \KidProfileRecord.name) private var records: [KidProfileRecord]
+     @State private var creating = false
+     @State private var deleteFailed = false
++    @HWReduceMotion private var reduceMotion
++    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
++    #if os(tvOS)
++    @FocusState private var playFocused: Bool
++    #endif
+ 
+     private var lastProfileID: UUID? {
+-        UserDefaults.standard.string(forKey: "lastProfileID").flatMap(UUID.init)
++        HWTestSession.defaults.string(forKey: "lastProfileID").flatMap(UUID.init)
+     }
+ 
+     // Only ever 3–6 people here, so no grid: the tiles orbit a shared center,
+@@ -26,22 +31,33 @@ struct ProfilePickerView: View {
+     // TimelineView drives every motion off wall-clock time — no timers, no
+     // animation state to keep in sync.
+     var body: some View {
+-        #if os(tvOS)
+-        tvBody
+-        #else
+-        iPadBody
+-        #endif
++        NavigationStack {
++            #if os(tvOS)
++            tvBody
++            #else
++            iPadBody
++            #endif
++        }
+     }
+ 
+     private var iPadBody: some View {
+         VStack(spacing: 8) {
+-            Text("Who's playing?")
+-                .font(.system(size: 64, weight: .heavy, design: .rounded))
+-                .padding(.top, 40)
++            launchHeader
++                .padding(.horizontal, 32)
++                .padding(.top, 24)
+             GeometryReader { geo in
+-                TimelineView(.animation) { timeline in
+-                    orbit(in: geo.size,
+-                          time: timeline.date.timeIntervalSinceReferenceDate)
++                if dynamicTypeSize.isAccessibilitySize {
++                    ScrollView {
++                        LazyVGrid(columns: [GridItem(.adaptive(minimum: 220), spacing: 24)], spacing: 24) {
++                            ForEach(records) { profileTile($0, seed: 0, time: 0) }
++                            newProfileTile(seed: 0, time: 0)
++                        }.padding(24)
++                    }
++                } else {
++                    TimelineView(.animation(paused: reduceMotion)) { timeline in
++                        orbit(in: geo.size,
++                              time: reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate)
++                    }
+                 }
+             }
+         }
+@@ -55,13 +71,52 @@ struct ProfilePickerView: View {
+         .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
+     }
+ 
++    private var launchHeader: some View {
++        VStack(alignment: .leading, spacing: 18) {
++            Text(AppBranding.name)
++                .font(.system(.largeTitle, design: .rounded, weight: .black))
++                .lineLimit(nil).fixedSize(horizontal: false, vertical: true)
++            HStack(alignment: .center, spacing: 20) {
++                NavigationLink { QuickPlayView() } label: {
++                    Label("PLAY!", systemImage: "play.fill")
++                        .font(.system(.title, design: .rounded, weight: .black))
++                        .frame(maxWidth: .infinity, minHeight: 84)
++                }
++                #if os(tvOS)
++                .buttonStyle(TVWorkshopButtonStyle(selected: true))
++                .focused($playFocused)
++                #else
++                .buttonStyle(.borderedProminent)
++                .tint(.yellow).foregroundStyle(.black)
++                #endif
++                .accessibilityIdentifier("launch-play")
++                NavigationLink { GameSettingsView() } label: {
++                    Label("Settings", systemImage: "slider.horizontal.3")
++                        .labelStyle(.iconOnly)
++                        .font(.system(.title2, design: .rounded, weight: .bold))
++                        .frame(width: 72, height: 72)
++                }
++                #if os(tvOS)
++                .buttonStyle(TVWorkshopButtonStyle())
++                #else
++                .buttonStyle(.bordered).tint(.white)
++                #endif
++                .accessibilityIdentifier("launch-settings")
++            }
++            Text("Who's playing?")
++                .font(.system(.title2, design: .rounded, weight: .heavy))
++                .foregroundStyle(.white.opacity(0.8))
++                .fixedSize(horizontal: false, vertical: true)
++        }
++        .frame(maxWidth: .infinity, alignment: .leading)
++    }
++
+     #if os(tvOS)
+     /// Stable positions let a remote's directional focus stay predictable.
+     private var tvBody: some View {
+         ScrollView {
+             VStack(alignment: .leading, spacing: 32) {
+-                Text("Who's playing?")
+-                    .font(.system(size: 54, weight: .heavy, design: .rounded))
++                launchHeader
+                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 280), spacing: 32)], spacing: 32) {
+                     ForEach(records) { record in
+                         VStack(spacing: 18) {
+@@ -109,7 +164,8 @@ struct ProfilePickerView: View {
+         .alert("Couldn't Remove Profile", isPresented: $deleteFailed) {
+             Button("OK", role: .cancel) { }
+         } message: { Text("Please try again. Your other profiles haven't changed.") }
+-        .onAppear { SoundBank.shared.playMusic("workshop_ambience") }
++        .onAppear { SoundBank.shared.playMusic("workshop_ambience"); playFocused = true }
++        .defaultFocus($playFocused, true)
+     }
+     #endif
+ 
+@@ -168,7 +224,10 @@ struct ProfilePickerView: View {
+                     record.id == lastProfileID ? .yellow : .clear, lineWidth: 6))
+                 Text(record.name)
+                     .font(.system(size: 28, weight: .heavy, design: .rounded))
+-                    .lineLimit(1)
++                    .lineLimit(nil)
++                    .multilineTextAlignment(.center)
++                    .fixedSize(horizontal: false, vertical: true)
++                    .frame(width: 220)
+             }
+         }
+         .buttonStyle(.plain)
+@@ -195,7 +254,7 @@ struct ProfilePickerView: View {
+         guard let profile = record.profile else { return }
+         appModel.selectedProfile = profile
+         appModel.selectedDriver = lastUsedCharacter(of: record)
+-        UserDefaults.standard.set(record.id.uuidString, forKey: "lastProfileID")
++        HWTestSession.defaults.set(record.id.uuidString, forKey: "lastProfileID")
+         SoundBank.shared.play("player_join_horn")
+     }
+ 
+@@ -231,7 +290,7 @@ struct ProfilePickerView: View {
+         SoundBank.shared.play("confirm_sparkle")
+         appModel.selectedProfile = profile
+         appModel.selectedDriver = starter
+-        UserDefaults.standard.set(profile.id.uuidString, forKey: "lastProfileID")
++        HWTestSession.defaults.set(profile.id.uuidString, forKey: "lastProfileID")
+         return true
+     }
+ 
+@@ -259,7 +318,7 @@ struct ProfilePickerView: View {
+             appModel.selectedProfile = nil
+             appModel.selectedDriver = nil
+         }
+-        if lastProfileID == record.id { UserDefaults.standard.removeObject(forKey: "lastProfileID") }
++        if lastProfileID == record.id { HWTestSession.defaults.removeObject(forKey: "lastProfileID") }
+         SoundBank.shared.play("piece_delete_pop")
+     }
+ 
+diff --git a/Hot Wheels v Human/Features/Profiles/README.md b/Hot Wheels v Human/Features/Profiles/README.md
+index 08ac974..9548732 100644
+--- a/Hot Wheels v Human/Features/Profiles/README.md	
++++ b/Hot Wheels v Human/Features/Profiles/README.md	
+@@ -95,3 +95,5 @@ profile's last-used selection are committed together.
+ Selecting a racer commits the profile's last-used pointer before updating
+ the active race selection. Failure retains the previous selection and
+ shows a retry message; the TV detail stays open.
++
++The 2026-10-04 candidate makes profile selection optional for immediate Play. The first viewport includes Play and Settings; existing profile creation/removal and personal workshops remain. Apple TV defaults focus to Play. On iPad, larger accessibility text uses a static scrolling profile grid instead of the orbit. The animation preference and OS Reduce Motion stop profile drift and character-preview sway without disabling manual orbit controls.
+diff --git a/Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift b/Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift
+index 7d93431..b8f69ba 100644
+--- a/Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift	
++++ b/Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift	
+@@ -57,6 +57,7 @@ struct CockpitTuning: Equatable {
+ }
+ 
+ struct ReactionCamView: View {
++    @HWReduceMotion private var reduceMotion
+     let director: ReactionDirector
+     let design: CarDesign
+     /// nil in the real PiP → the shipped constants for this driver's body
+@@ -100,6 +101,7 @@ struct ReactionCamView: View {
+                 guard let poser = try? await DriverPoser.make(
+                     profile: design.driver ?? DriverProfile.presets[0]) else { return }
+                 content.add(poser.bust)
++                if reduceMotion { poser.bust.stopAllAnimations(recursive: true) }
+ 
+                 // The poser owns the camera and chases the driver's head with
+                 // it every update — framing is per-rig mutable state, and it
+@@ -136,11 +138,12 @@ struct ReactionCamView: View {
+                 busts.poser = poser
+                 self.keyLight = key
+             } update: { _ in
+-                poser?.apply(director.state)
++                if reduceMotion { poser?.bust.stopAllAnimations(recursive: true) }
++                else { poser?.apply(director.state) }
+                 // Lean with the live car: roll into the turn, glance into it.
+                 poser?.bust.orientation =
+-                    simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle, axis: [0, 0, 1])
+-                    * simd_quatf(angle: director.lean * RaceTuning.reactionLeanAngle * 0.5, axis: [0, 1, 0])
++                    simd_quatf(angle: (reduceMotion ? 0 : director.lean) * RaceTuning.reactionLeanAngle, axis: [0, 0, 1])
++                    * simd_quatf(angle: (reduceMotion ? 0 : director.lean) * RaceTuning.reactionLeanAngle * 0.5, axis: [0, 1, 0])
+                 // Relight the face from the same source lighting the glass —
+                 // boost flare, crash red, the car's own colour on the podium —
+                 // washed toward white so it tints the driver instead of
+@@ -163,7 +166,7 @@ struct ReactionCamView: View {
+             // The car's own wheel, in front of the driver. Counter-turns:
+             // lean is + for a left turn, screen-left is a negative rotation.
+             SteeringWheelView(chassis: design.chassis,
+-                              angle: -CGFloat(director.lean * effectiveTuning.wheelAngle),
++                              angle: reduceMotion ? 0 : -CGFloat(director.lean * effectiveTuning.wheelAngle),
+                               rim: Color(hex: design.partColors?[CarPaintSlot.wheels]
+                                          ?? design.paint.colorHex),
+                               hub: Color(hex: design.paint.colorHex),
+@@ -184,9 +187,9 @@ struct ReactionCamView: View {
+                 .offset(y: 12)
+         }
+         // Event pops: swell on boost/celebrate, knock askew on crash.
+-        .scaleEffect(director.state == .boosted || director.state == .celebrating ? 1.08 : 1)
+-        .rotationEffect(.degrees(director.state == .crashed ? -7 : 0))
+-        .animation(.spring(duration: 0.35, bounce: 0.5), value: director.state)
++        .scaleEffect(!reduceMotion && (director.state == .boosted || director.state == .celebrating) ? 1.08 : 1)
++        .rotationEffect(.degrees(!reduceMotion && director.state == .crashed ? -7 : 0))
++        .animation(reduceMotion ? nil : .spring(duration: 0.35, bounce: 0.5), value: director.state)
+         .shadow(color: .black.opacity(0.4), radius: 8, y: 4)
+     }
+ 
+@@ -212,6 +215,7 @@ struct ReactionCamView: View {
+                   // A newer edit landed while this one loaded — let that win.
+                   current.bust.components[PreviewSignature.self]?.value == signature
+             else { return }
++            if !GameEffectsPolicy.shared.motionEnabled { fresh.bust.stopAllAnimations(recursive: true) }
+             fresh.bust.components.set(PreviewSignature(value: signature))
+             parent.addChild(fresh.bust)
+             // The camera belongs to the poser, so the replacement brings its
+@@ -261,6 +265,7 @@ private extension ReactionState {
+ /// already cropped to a circle, and anything dark around the rim reads as a
+ /// second, broken crop rather than as a car.
+ private struct CarInteriorView: View {
++    @HWReduceMotion private var reduceMotion
+     let chassis: ChassisClass
+     let trim: Color
+     let daylight: Color
+@@ -269,12 +274,12 @@ private struct CarInteriorView: View {
+     let tuning: CockpitTuning
+ 
+     var body: some View {
+-        TimelineView(.animation) { timeline in
++        TimelineView(.animation(paused: reduceMotion)) { timeline in
+             Canvas { ctx, size in
+                 let w = size.width, h = size.height
+                 let sill = h * CGFloat(tuning.horizonRatio)
+                 // Lean swings what's framed in the glass the other way.
+-                let slide = -CGFloat(lean) * w * CGFloat(tuning.vanishShift)
++                let slide = -CGFloat(reduceMotion ? 0 : lean) * w * CGFloat(tuning.vanishShift)
+ 
+                 // Cabin fills the whole tile — mid-toned and daylight-tinted,
+                 // never near-black, so the circle's edge is the only edge.
+@@ -309,7 +314,7 @@ private struct CarInteriorView: View {
+                     // things pile up in the distance and snap away up close
+                     // — the same depth curve the old forward road used, run
+                     // the other direction.
+-                    let t = timeline.date.timeIntervalSinceReferenceDate
++                    let t = reduceMotion ? 0 : timeline.date.timeIntervalSinceReferenceDate
+                     let scroll = t * Double(0.15 + speed01 * RaceTuning.cockpitSceneryDrift)
+                     let count = RaceTuning.cockpitSceneryCount
+                     for i in 0..<count {

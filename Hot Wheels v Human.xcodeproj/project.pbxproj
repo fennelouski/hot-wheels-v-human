@@ -333,7 +333,10 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator xros xrsimulator";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+				"TARGETED_DEVICE_FAMILY[sdk=xr*]" = 7;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=xr*]" = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -342,7 +345,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "2,3";
+				TARGETED_DEVICE_FAMILY = "2,3,7";
 				"TARGETED_DEVICE_FAMILY[sdk=iphoneos*]" = 2;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = 2;
 				"TARGETED_DEVICE_FAMILY[sdk=appletvos*]" = 3;
@@ -387,7 +390,10 @@
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "appletvos appletvsimulator iphoneos iphonesimulator xros xrsimulator";
+				XROS_DEPLOYMENT_TARGET = 26.0;
+				"TARGETED_DEVICE_FAMILY[sdk=xr*]" = 7;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=xr*]" = YES;
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -396,7 +402,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "2,3";
+				TARGETED_DEVICE_FAMILY = "2,3,7";
 				"TARGETED_DEVICE_FAMILY[sdk=iphoneos*]" = 2;
 				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = 2;
 				"TARGETED_DEVICE_FAMILY[sdk=appletvos*]" = 3;

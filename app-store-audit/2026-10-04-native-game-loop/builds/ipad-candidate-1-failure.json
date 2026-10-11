@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-10-04T09:12:07.951507+00:00",
+  "exitCode": 65,
+  "testsExecuted": 0,
+  "sourceProof": "../native-inputs.candidate-1.json",
+  "logSHA256": "cbb2183ed123c2a8a3fa49b7585fb12ae97b7cc735812b65b32348572c51f869",
+  "error": "RaceShareHandoff.swift:11: actor-isolated MultipeerTransport init used as synchronous default argument",
+  "repair": "Resolve optional injected transport inside the MainActor initializer body"
+}

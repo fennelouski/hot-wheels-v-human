@@ -30,7 +30,7 @@ Relative paths resolve beside the manifest. The platform is `ipad-13` or
 `apple-tv`. Native provenance includes:
 
 - `kind`: `native-screenshot`
-- `platform`, `revision` and `sourceBuildRef`, matching the manifest
+- `platform`, plus the actual capture `revision` and `sourceBuildRef`
 - `device`, `deviceIdentifier`, `captureMethod` and `capturedAtUTC`
 - `workingTreeInputsPath` and `workingTreeInputsSHA256`
 - `attachmentManifestPath` and `attachmentManifestSHA256`
@@ -39,7 +39,31 @@ Preserve additional build, test, device and capture fields. The compositor
 copies them into its receipt, including arrays and numbers. The input and
 attachment proofs must be actual saved files with matching SHA-256 hashes.
 Use the final native capture export and UI-test evidence as their source.
-The same working-tree inputs and native build must support every gallery.
+Normally every capture matches the manifest's frozen revision and build.
+An older capture may be retained only through an explicit, hash-bound
+`sourceCompatibilityProofPath` / `sourceCompatibilityProofSHA256` pair. That
+proof must name the exact target revision, build and saved input-proof hash,
+and individually list the retained capture's ID, platform, original pixel hash,
+actual capture revision/build, original input-proof hash and reviewed unchanged
+behavior. The validator rejects unlisted captures, mismatched fields, changed
+proofs or a different target input revision. All captures still resolve to one
+target frozen-input proof. The review packet shows actual capture revisions
+separately from the target release; it never relabels an older capture.
+
+For the bounded TV control fix, only unchanged iPad captures and unaffected TV
+workshop/library/wardrobe captures qualify. TV arena, camera, visibility, radio
+and results captures are recaptured from final source. Compatibility requires
+the reviewed tvOS-only source delta and fresh explicit platform builds; it is
+not a general permission to reuse old screenshots.
+When a test helper changes without changing shipped app inputs, record the actual
+`testHarnessRevision` and `testHarnessInputsPath` / `testHarnessInputsSHA256` for
+that run separately. Do not imply that the earlier complete app/project/test
+input list stayed unchanged. The production-only proof states its scope.
+
+Optional paired proof fields are checked when present: `testHarnessInputsPath` /
+`testHarnessInputsSHA256`, `nativeBuildRecordPath` / `nativeBuildRecordSHA256`,
+`testResultSummaryPath` / `testResultSummarySHA256`, and `testResultDetailsPath` /
+`testResultDetailsSHA256`. A missing partner or changed proof rejects export.
 
 The submitted app's name is HWvH. Capture the Release configuration when the
 name is visible. Keep build configuration and display-name verification in

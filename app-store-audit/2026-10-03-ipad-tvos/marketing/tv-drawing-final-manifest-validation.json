@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T10:00:47.082045+00:00",
+  "revision": "5643eca1662dfc91f39d851ca0ea2ab5a8f9ce80",
+  "command": [
+    "swift",
+    "tools/marketing-compose.swift",
+    "--validate",
+    "app-store-audit/2026-10-03-ipad-tvos/marketing/manifest.tv-drawing-final.json"
+  ],
+  "exitCode": 0,
+  "actualOutput": "Validated 22 native captures and 10 images; no outputs written.\n",
+  "logPath": "tv-drawing-final-manifest-validation.log",
+  "logSHA256": "109fa34fa8b8203ebc35c6c01b4d50ea6e1e522fbcd7e76f222d4dc5f098044f",
+  "manifestSHA256": "45aa45757f022c0738dde959ef6b6b1d3a7bb355e4e08024f722b2c4f81caad3",
+  "compositorSHA256": "ff55d38f408b6ff75198a6dd4e338dad25881477c0b1578f16d10cbf765c0727",
+  "status": "technical-manifest-validation-only; native camera review and gallery composition held",
+  "outputsRendered": false,
+  "independentReviewComplete": false,
+  "AppStoreUploadPerformed": false
+}

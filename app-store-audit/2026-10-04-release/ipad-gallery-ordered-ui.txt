@@ -1,0 +1,263 @@
+- banner "App Store Connect":
+  - heading "App Store Connect" [level=1]:
+    - link "App Store Connect":
+      - /url: /
+  - navigation "Global":
+    - list:
+      - link "Apps":
+        - /url: /apps
+      - link "Xcode Cloud":
+        - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/xcode-cloud
+      - link "Trends":
+        - /url: /trends
+      - link "Reports":
+        - /url: /itc/payments_and_financial_reports
+      - link "Business":
+        - /url: /business
+      - link "Users and Access":
+        - /url: /access/users
+  - button "Nathan Fennel Nathan Fennel Account name menu":
+    - generic: Nathan Fennel
+    - generic: Nathan Fennel
+- button "Apps menu, HWvH, selected":
+  - generic "HWvH":
+    - img "HWvH"
+  - generic: HWvH
+- navigation "Apps":
+  - list:
+    - link "Distribution":
+      - /url: /apps/6818777508/distribution
+    - link "Analytics":
+      - /url: /apps/6818777508/analytics
+    - link "TestFlight":
+      - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/apps/6818777508/testflight
+- main:
+  - navigation "Distribution":
+    - list:
+      - heading "iOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/ios/version/inflight
+          - text: 1.0 Prepare for Submission
+        - button "Delete iOS version 1.0":
+          - generic: Delete
+      - heading "tvOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/tvos/version/inflight
+          - text: 1.0 Prepare for Submission
+        - button "Delete tvOS version 1.0":
+          - generic: Delete
+      - button "Add Platform"
+      - separator
+      - heading "General" [level=2]
+      - list:
+        - link "App Information":
+          - /url: /apps/6818777508/distribution/info
+          - generic: App Information
+        - link "App Review":
+          - /url: /apps/6818777508/distribution/reviewsubmissions
+          - generic: App Review
+        - link "History":
+          - /url: /apps/6818777508/distribution/activity/ios/versions
+          - generic: History
+      - separator
+      - heading "App Store" [level=2]
+      - heading "Trust & Safety" [level=3]
+      - list:
+        - link "App Privacy":
+          - /url: /apps/6818777508/distribution/privacy
+          - generic: App Privacy
+        - link "App Accessibility":
+          - /url: /apps/6818777508/distribution/accessibility
+          - generic: App Accessibility
+        - link "Ratings and Reviews":
+          - /url: /apps/6818777508/distribution/ratings/ios
+          - generic: Ratings and Reviews
+      - heading "Growth & Marketing" [level=3]
+      - list:
+        - link "In-App Events":
+          - /url: /apps/6818777508/distribution/events
+          - generic: In-App Events
+        - link "Custom Product Pages":
+          - /url: /apps/6818777508/distribution/productpages
+          - generic: Custom Product Pages
+        - link "Product Page Optimization":
+          - /url: /apps/6818777508/distribution/optimization
+          - generic: Product Page Optimization
+        - link "Promo Codes":
+          - /url: /apps/6818777508/distribution/promo_codes/generate
+          - generic: Promo Codes
+        - link "Game Center":
+          - /url: /apps/6818777508/distribution/gamecenter
+          - generic: Game Center
+      - heading "Monetization" [level=3]
+      - list:
+        - link "Pricing and Availability":
+          - /url: /apps/6818777508/distribution/pricing
+          - generic: Pricing and Availability
+        - link "In-App Purchases":
+          - /url: /apps/6818777508/distribution/iaps
+          - generic: In-App Purchases
+        - link "Subscriptions":
+          - /url: /apps/6818777508/distribution/subscriptions
+          - generic: Subscriptions
+      - heading "Featuring" [level=3]
+      - list:
+        - link "Nominations":
+          - /url: /apps/6818777508/distribution/nominations
+          - generic: Nominations
+  - heading "iOS App Version 1.0" [level=2]
+  - button "Save" [disabled]
+  - button "Add for Review"
+  - separator
+  - paragraph: The assets and metadata below appear on your app’s product page, when users install your app, and will be used for web engine search results once you release your app.
+  - button "English (U.S.)":
+    - text: English (U.S.)
+  - button "?"
+  - separator
+  - heading "Previews and Screenshots" [level=3]
+  - button "More information": "?"
+  - paragraph: Adding accurate screenshots of your app on the newest devices can help you represent the app's user experience. Keep in mind that we'll use these screenshots for all display sizes and localizations. Screenshots are only required for iOS apps, and only the first 3 will be used on the app installation sheets.
+  - tablist:
+    - tab "iPhone":
+      - generic: iPhone
+    - tab "iPad" [selected]:
+      - generic: iPad
+    - tab "Apple Watch":
+      - generic: Apple Watch
+  - paragraph:
+    - link "View All Sizes in Media Manager":
+      - /url: /apps/6818777508/distribution/ios/version/inflight/media-manager/ipad
+  - alert
+  - tabpanel "iPad":
+    - generic: iPad
+    - generic: 13" Display
+    - region:
+      - tabpanel:
+        - list "App Previews from 13\" Display"
+        - list "Screenshots from 13\" Display":
+          - button "Screenshot 01-tiny-cars-big-races.png":
+          - button "Delete":
+          - button "Screenshot 02-ready-set-play.png":
+          - button "Delete":
+          - button "Screenshot 03-finish-then-go-again.png":
+          - button "Delete":
+          - button "Screenshot 04-front-row-view.png":
+          - button "Delete":
+          - button "Screenshot 05-keep-your-finish.png":
+          - button "Delete":
+          - button "Screenshot 06-workshop.png":
+          - button "Delete":
+          - button "Screenshot 07-rematch.png":
+          - button "Delete":
+          - button "Screenshot 08-your-kind-of-racing.png":
+          - button "Delete":
+          - button "Screenshot 09-whole-track.png" [active]:
+          - button "Delete":
+          - button "Screenshot 10-keep-racing.png":
+          - button "Delete":
+        - paragraph: 0 of 3 App Previews
+        - paragraph: 10 of 10 Screenshots
+        - paragraph:
+          - button "Choose File"
+        - paragraph:
+          - button "Delete All"
+  - generic: Promotional Text
+  - button "More information": "?"
+  - textbox "Promotional Text": Tiny cars, big races. Jump straight into Play, make racers and tracks your own, then finish, check the result and go for a rematch.
+  - status "Characters remaining": "39"
+  - separator
+  - generic: Description
+  - button "More information": "?"
+  - textbox "Description": HWvH brings toy-car racing and a creative workshop to iPad and Apple TV. Tap Play to start racing against a computer-driven car. Creating a player profile is optional, so you can get straight to the track. Make a racer your own, change car colors and build tracks in the workshop. Save your designs on the device for the next race. Finish a race, check the result and choose Rematch to go again. On iPad, Share exports a completed race card with the actual arena image, race results and the app link through the system share sheet. Game Feel has separate saved Animation and Haptics choices. Animation respects Reduce Motion; vibration depends on iPad hardware. No account, advertising or in-app purchases. Saved designs and preferences stay on the device; there is no automatic cloud library sync. Requires iPadOS 26 or later. A separate Apple TV version requires tvOS 26 or later.
+  - status "Characters remaining": 3,112
+  - generic: Keywords
+  - button "More information": "?"
+  - textbox "Keywords": toy,car,track,robot,physics,workshop,paint,customize,racing,lap,garage,offline
+  - status "Characters remaining": "22"
+  - generic: Support URL
+  - button "More information": "?"
+  - textbox "Support URL": https://nathanfennel.com/hwvh/support.html
+  - generic: Marketing URL
+  - button "More information": "?"
+  - textbox "Marketing URL"
+  - generic: Version
+  - button "More information": "?"
+  - textbox "Version": "1.0"
+  - generic: Copyright
+  - button "More information": "?"
+  - textbox "Copyright": 2026 Nathan Fennel
+  - status "Characters remaining": "182"
+  - generic: Routing App Coverage File
+  - button "More information": "?"
+  - button "Choose File"
+  - generic: Choose File
+  - separator
+  - button "App Clip":
+    - text: App Clip
+  - heading "iMessage App" [level=3]:
+    - button "iMessage App":
+      - text: iMessage App
+  - button "More information": "?"
+  - heading "Build" [level=3]
+  - paragraph:
+    - text: If your app uses encryption, you're required to upload export compliance documentation. You can submit this documentation before you submit your app for review in the
+    - link "App Encryption Documentation section":
+      - /url: /apps/6818777508/distribution/info
+    - text: ", or by uploading your app below."
+  - paragraph:
+    - text: Upload your builds using one of several tools.
+    - link "See Upload Tools":
+      - /url: https://developer.apple.com/help/app-store-connect/manage-builds/upload-builds
+  - checkbox "Game Center"
+  - text: Game Center
+  - separator
+  - heading "App Review Information" [level=3]
+  - generic: Sign-In Information
+  - button "More information": "?"
+  - paragraph: Provide a user name and password so we can sign in to your app. We’ll need this to complete your app review.
+  - checkbox "Sign-in required"
+  - generic: Sign-in required
+  - generic: Contact Information
+  - button "More information": "?"
+  - textbox "First name": Nathan
+  - textbox "Last name": Fennel
+  - textbox "Phone number": <redacted>
+  - textbox "Email": <redacted>
+  - generic: Notes
+  - button "More information": "?"
+  - textbox "Notes": No sign-in is needed. 1. Tap Play on the opening screen to race standalone against a computer-driven car. Creating a player profile is optional. 2. Open the Workshop to style a racer, change car paint or edit a track. Save a design to keep it on this device. 3. Let a race finish normally and inspect the result. Choose Share to see the completed race card, then open the system share sheet. The card includes the actual arena image and race results. Dismiss the chooser and choose Rematch to race again. 4. Open Settings / Game Feel. Change Animation and Haptics independently, then relaunch to check that each choice stays saved. Animation respects the device's Reduce Motion setting; vibration depends on iPad hardware. Nearby racing and TV-to-iPad image handoff require updated apps and Local Network permission on both devices. Discovery, the permission flow, image delivery and reconnect between a physical Apple TV and iPad have not yet been validated by the release owner. The optional camera-color feature is unavailable in this version; manual racer styling is available.
+  - status "Characters remaining": 2,916
+  - generic: Attachment
+  - button "More information": "?"
+  - button "Choose File (Optional)"
+  - generic: Choose File (Optional)
+  - separator
+  - heading "App Store Version Release" [level=3]
+  - paragraph: To make your app available on the App Store, you can automatically release it after it’s been approved by App Review. You can also manually release it on the App Store at a later date.
+  - radio "Manually release this version"
+  - generic: Manually release this version
+  - radio "Automatically release this version" [checked]
+  - generic: Automatically release this version
+  - radio "Automatically release this version after App Review, no earlier than"
+  - generic: Automatically release this version after App Review, no earlier than
+  - paragraph: Your local date and time.
+  - textbox "Automatically release this version after App Review, no earlier than" [disabled]: Oct 4, 2026 3:00 PM
+  - text: GMT+2
+- contentinfo:
+  - list:
+    - link "App Store Connect":
+      - /url: /apps
+  - list:
+    - listitem: Copyright © 2026 Apple Inc. All rights reserved. |
+    - link "Terms of Service":
+      - /url: /WebObjects/iTunesConnect.woa/wa/termsOfService
+    - text: "|"
+    - link "Privacy Policy":
+      - /url: https://www.apple.com/legal/privacy
+    - text: "|"
+    - link "Contact Us":
+      - /url: /contact-us
+- log
+- log: You have dropped the item. You have moved the item from position 10 to position 9

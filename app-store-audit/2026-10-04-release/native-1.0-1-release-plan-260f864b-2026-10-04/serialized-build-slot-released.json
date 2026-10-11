@@ -1,0 +1,39 @@
+{
+  "recordedAtUTC": "2026-10-04T13:15:07.639402+00:00",
+  "releasedBy": "/root/math_feedback_review",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "soleSerializedBuildOwnerReleased": true,
+  "noActiveXcodebuildVerified": true,
+  "actualArchiveLocalExportUploadCommandsComplete": true,
+  "finalReadOnlySourcePreflight": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "platforms": [
+    {
+      "platform": "ipad",
+      "uploadReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-upload-verified.json",
+      "uploadReceiptSHA256": "be1efbf1e60c92b25ff9387b5eb821b9ffb5762d03375395d7e5ffb498f4d10a",
+      "deliveryUUID": "5ce69766-a2f3-455c-8812-29a21531d207",
+      "compiledEncryptionValue": false,
+      "commandExitCode": 0,
+      "sourceAndPayloadUnchanged": true
+    },
+    {
+      "platform": "tvos",
+      "uploadReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/tvos-upload-verified.json",
+      "uploadReceiptSHA256": "2a4d397f9b6cd9d5f84071a211462034898423b8b5fe685d9e0ecc0f27ae2df4",
+      "deliveryUUID": "9857351b-226e-4faa-9c73-78bc34b75216",
+      "compiledEncryptionValue": false,
+      "commandExitCode": 0,
+      "sourceAndPayloadUnchanged": true
+    }
+  ],
+  "noFurtherNativeBuildRuntimePlanned": true,
+  "rightsSubmissionHold": "Root owns actual processed builds and content-rights declaration/submission;72ElevenLabsWAV paid-at-generation evidence still pending owner info; no rights answers made by this agent"
+}

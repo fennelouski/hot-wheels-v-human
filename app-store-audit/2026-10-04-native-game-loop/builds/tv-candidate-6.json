@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-04T09:46:52.569144+00:00",
+  "exitCode": 0,
+  "testsExecuted": 0,
+  "sourceProof": "../native-inputs.candidate-6.json",
+  "inputAggregateSHA256": "48133adf1aaadbb4c10b6019d78af0a2dc4ce3355270d665ac9392af5de2f447",
+  "all889InputsStillMatch": true,
+  "logSHA256": "0e5c8fe3a6f932b141f376ea4ded1507c27fa84c30b6e7b8dde1217926b970cf",
+  "status": "generic tvOS simulator build-for-testing succeeded; matching two failed UI rerun pending"
+}

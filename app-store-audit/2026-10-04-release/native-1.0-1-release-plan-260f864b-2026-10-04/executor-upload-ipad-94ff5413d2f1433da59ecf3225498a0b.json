@@ -1,0 +1,55 @@
+{
+  "startedAtUTC": "2026-10-04T12:51:21.929652+00:00",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "approvedPlanSHA256": "96ddeef5a126025d18555216b04f0a37a5e03262d70f32b6cad6265943b9d3d6",
+  "operation": "upload",
+  "platform": "ipad",
+  "executorSHA256": "cac09484b9f0a1e28cd552dda57b257a01f987f13f2504f864959a0fe2157340",
+  "noProductionEdits": true,
+  "noPushDeviceBrowserOrLegalActions": true,
+  "sourceBefore": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "allocation": {
+    "path": "app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/root-serialized-allocation.2026-10-04.json",
+    "sha256": "654c9a024ad12d865efd6c9a1f564f9136a266e07c38b10b9d88f894ffd3f9e1",
+    "directRootSlotAllocated": true
+  },
+  "command": [
+    "xcodebuild",
+    "-exportArchive",
+    "-archivePath",
+    "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-1.0-1.xcarchive",
+    "-exportOptionsPlist",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Upload.plist",
+    "-exportPath",
+    "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-upload",
+    "-allowProvisioningUpdates"
+  ],
+  "log": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-export-upload.log",
+  "commandStartedAtUTC": "2026-10-04T12:51:22.766569+00:00",
+  "commandExitCode": 0,
+  "commandFinishedAtUTC": "2026-10-04T12:53:04.561609+00:00",
+  "logSHA256": "b8ce72cb430c1a4d4c108db8521418946ba183d36364500f9aeb6012cc9c3078",
+  "status": "FAIL",
+  "errorType": "RuntimeError",
+  "error": "Archive bytes changed after upload",
+  "failurePreserved": true,
+  "traceback": "Traceback (most recent call last):\n  File \"/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/execute-verified-release.py\", line 282, in <module>\n    main(ARGS,attempt)\n  File \"/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/execute-verified-release.py\", line 267, in main\n    require(tree(archive)==earlier['archiveManifest'], 'Archive bytes changed after upload')\n  File \"/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/execute-verified-release.py\", line 21, in require\n    if not condition: raise RuntimeError(message)\nRuntimeError: Archive bytes changed after upload\n",
+  "sourceAfterFailure": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "finishedAtUTC": "2026-10-04T12:53:05.323789+00:00"
+}

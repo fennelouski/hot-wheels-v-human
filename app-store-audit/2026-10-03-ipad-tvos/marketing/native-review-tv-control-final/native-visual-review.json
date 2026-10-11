@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "recordedAtUTC": "2026-10-03T11:18:02.936577+00:00",
+  "reviewedOriginalCount": 12,
+  "method": "One contact sheet containing all 12 originals and full-size Race, Driver, bright Driver, Boost and results originals; no screenshot changes.",
+  "fixed": [
+    "tvOS-only camera and visibility dark backing over pale sky/cloud world; selected yellow black symbols and white focus rings retained",
+    "tvOS-only results instruction points at actual local Rematch"
+  ],
+  "suppressed": [],
+  "leftStanding": [
+    "No full accessibility certification or physical iPad/TV multiplayer acceptance is claimed",
+    "TV24 initial unrendered transition at actual race time 3.8 seconds retained as historical evidence but excluded from galleries and positive bright-world rendering proof"
+  ],
+  "excludedCaptureNames": [
+    "TV24 - Bright Sunny Day with focused Chase camera"
+  ],
+  "acceptedBrightRenderingCaptureNames": [
+    "TV25 - Bright world focused visibility all",
+    "TV25 - Bright world focused visibility hideGhosts",
+    "TV25 - Bright world focused visibility hideAll",
+    "TV26 - Bright world focused Driver camera and visible eye states",
+    "TV23 - Sunny Day starter race with real remote boost active"
+  ],
+  "galleryRaceCaptures": [
+    "TV20 - Chase camera and race world",
+    "TV21 - Driver view with the TV radio",
+    "TV23 - Sunny Day starter race with real remote boost active"
+  ],
+  "scope": "Bounded native contrast/camera/results review. Source and captures were preserved. No Impeccable rule/file ignore was added."
+}

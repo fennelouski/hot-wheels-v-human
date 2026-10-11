@@ -1,0 +1,51 @@
+diff --git a/public/hwvh/privacy.html b/public/hwvh/privacy.html
+index 248e90cb..21cc178c 100644
+--- a/public/hwvh/privacy.html
++++ b/public/hwvh/privacy.html
+@@ -15,12 +15,15 @@
+ </head>
+ <body><main>
+   <h1>HWvH privacy policy</h1>
+-  <p>Updated October 3, 2026. Developer: Nathan Fennel. This policy covers the iPad and Apple TV app.</p>
++  <p>Updated October 4, 2026. Developer: Nathan Fennel. This policy covers the iPad and Apple TV app.</p>
+   <h2>Your game stays with you</h2>
+-  <p>HWvH has no account system, advertising, analytics or developer-operated game server. We do not receive your profiles, drawings, saved designs or race history. The app keeps your player profiles, character colors, cars, tracks, world decorations and results on the device where you create them.</p>
++  <p>HWvH has no account system, advertising, analytics or developer-operated game server. We do not receive your profiles, drawings, saved designs or race results. The app keeps saved player profiles, character colors, cars, tracks and world decorations on the device where you create them. Animation and Haptics preferences are saved independently on that device. A completed race and its image are held locally for viewing and sharing.</p>
+   <h2>Nearby races</h2>
+-  <p>When you choose local multiplayer, the app connects to nearby game devices using Apple's encrypted Multipeer Connectivity framework. Other participants receive the player name and game information needed for that race, such as car and driver styles, drawing artwork, tracks, decorations, readiness, controller actions and race results. Discovery also uses a device display name. This information goes to nearby game participants, not our server.</p>
++  <p>When you choose local multiplayer, the app connects to nearby game devices using Apple's Multipeer Connectivity framework with encryption required. Other participants receive the player name and game information needed for that race, such as car and driver styles, drawing artwork, tracks, decorations, readiness, controller actions and race results. Discovery also uses a device display name. This information goes to nearby game participants, not our server.</p>
+   <p>Local network access is optional. Standalone building and racing do not require an internet account. Device-to-device games need nearby devices and local network access.</p>
++  <h2>Sharing a finished race</h2>
++  <p>A share image includes an actual frame of the finished game, the track name, car names, finish times, top speeds, crash counts and an App Store link. A nearby iPad can receive that frame and its result data over the encrypted local connection. For a standalone Apple TV race, the app starts a temporary sharing host only when you open the share panel and stops it when you close the panel. An existing multiplayer race uses its current connection.</p>
++  <p>The app holds received results in memory and clears them when the race restarts or you leave the connection. Requesting Get Race Image retries preparation for the same completed race. On iPad, preparing an image creates a PNG in the app's local cache; cached files may remain until the system clears the cache or you remove the app. The image is not automatically added to Photos or uploaded to a developer server. Share Image opens the system sharing sheet, and you choose whether and where to send it. A destination you choose has its own privacy practices, and copies you share remain with their recipients.</p>
+   <h2>Optional iPad camera</h2>
+   <p>On iPad, you can choose to take one photo to pick colors for a character. The app analyzes the image on the iPad using Apple's Vision framework. It does not save the original camera photo in your app library, add it to Photos or send it to another device. The resulting character colors can become part of your saved driver and be shared as part of a local race. You can choose colors manually instead. Apple TV does not request camera access.</p>
+   <h2>Saved items and permissions</h2>
+diff --git a/public/hwvh/support.html b/public/hwvh/support.html
+index c417c776..656b3699 100644
+--- a/public/hwvh/support.html
++++ b/public/hwvh/support.html
+@@ -15,15 +15,20 @@
+ </head>
+ <body><main>
+   <h1>HWvH support</h1>
+-  <p>Developer: Nathan Fennel. Updated October 3, 2026.</p>
+-  <h2>Build, then race</h2>
+-  <p>Pick a player, make a character, customize a car and build a track. Use the play button to try your creation. Close the preview to return to the workshop. Save profiles, characters, cars and tracks on the device where you create them.</p>
++  <p>Developer: Nathan Fennel. Updated October 4, 2026.</p>
++  <h2>Play right away</h2>
++  <p>Choose PLAY! on the opening screen to race a starter car and track against a robot. Choosing or creating a player is optional. For your own designs, pick a player, make a character, customize a car and build a track. Use the play button to try your creation, then close the preview to return to the workshop. Save profiles, characters, cars and tracks on the device where you create them.</p>
++  <h2>Rematch or share a finish</h2>
++  <p>When a race ends, choose REMATCH! to race again, or SHARE to prepare an image of the actual finished arena with the final results and an App Store link. On iPad, choose Share Image to open the system sharing sheet. Closing the sheet returns to the same finished race; starting a rematch does not change an image already prepared.</p>
++  <p>For a standalone Apple TV race, open SHARE on the TV, then Race on TV on a nearby iPad to receive the image. The temporary sharing connection is available while the TV's share panel is open. A race already using connected iPads sends the image over that race connection. On a connected iPad, Get Race Image requests the same finish again if the image is not ready; once it arrives, choose Share Race. If preparation fails, keep the finished race open and try again.</p>
+   <h2>Use the Siri Remote</h2>
+   <p>Move focus and select an action to edit tracks, decorations, car styles and characters on Apple TV. Menu returns from the current screen. A connected keyboard can help with names.</p>
+   <p>In the car's Draw section, select the pen control to switch between Pen Up and Pen Down. With the pen down, select direction buttons to draw. Lift the pen to move without making a mark. Choose an ink color and brush width, or use Eraser and Clear Drawing to remove marks.</p>
+   <h2>Race with nearby iPads</h2>
+   <p>Open local multiplayer on Apple TV, then choose Race on TV on the iPad. Allow Local Network when your device asks. Choose a car and tracks, then ready up. Keep the devices nearby on a network that allows local peer connections.</p>
+   <p>If discovery fails, check Local Network access in Settings. Guest or managed Wi-Fi networks may isolate devices. Standalone building and racing remain available without local multiplayer.</p>
++  <h2>Choose the game feel</h2>
++  <p>Open Settings from the opening screen or workshop. Animation and Haptics start on and save independently on each device. Turn Animation off for calmer world motion, buttons and cameras. The app also respects the device's Reduce Motion setting. Haptics controls tap and boost feedback on supported iPads. Race timing, physics and controls stay the same.</p>
+   <h2>The iPad camera is optional</h2>
+   <p>Take a photo only when you want the app to pick your character colors. The app analyzes the picture on the iPad and does not save it in your app library or upload it. You can always choose colors manually. Apple Pencil drawing is available on iPad; Apple TV uses its remote pen controls.</p>
+   <h2>Supported devices and saved items</h2>

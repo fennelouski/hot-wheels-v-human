@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-04T10:10:17.413662+00:00",
+  "sourceProof": "native-inputs.candidate-8.json",
+  "runtimeReceipt": "tv-runtime-candidate8-one.json",
+  "uiProcessedTests": 1,
+  "uiPassedTests": 1,
+  "pixelApproval": "rejected",
+  "observedDefect": "The actual GPU frame is vertically inverted inside an upright native share card, compared with the upright live arena. Successful element flow does not prove frame orientation.",
+  "image": "app-store-audit/2026-10-04-native-game-loop/tv-candidate8-one-attachments/B5953FD1-5704-4A1F-B0DF-E4794CBEC2A4.png",
+  "imageSHA256": "90a61727183cdd32bc51537824d0c7fa08c596f6fb892da53d536e14a826fc82",
+  "correctionScope": "Normalize Metal top-left frame coordinates to Core Image bottom-left coordinates before JPEG encoding; native source only, no evidence screenshot editing.",
+  "nextProof": "native-inputs.candidate-9.json"
+}

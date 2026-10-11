@@ -1,0 +1,3678 @@
+{
+  "startedAtUTC": "2026-10-04T13:01:42.877383+00:00",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "operation": "read-only reconciliation of already successful iPad upload",
+  "executorSHA256": "67fb5f1198c5bbe6f97761cb239179b19e74903066fd516a0c0cf8391fabda00",
+  "firstVerifierFailure": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/executor-upload-ipad-94ff5413d2f1433da59ecf3225498a0b.json",
+  "firstVerifierFailureSHA256": "084adc4aaaf09098e15aa6f9dc15b26588aba45aa7261df9ed87ea4cbb8f7ba5",
+  "actualNewXcodeCommands": 0,
+  "uploadRepeated": false,
+  "nativeSourceEdits": 0,
+  "commandExitCode": 0,
+  "sourceBefore": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "status": "PASS",
+  "sourceAfter": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "archiveUnchanged": false,
+  "archivePayloadUnchanged": true,
+  "archivePostUploadClassification": {
+    "archiveFullyByteIdentical": false,
+    "archiveAppDSYMsAndAllOtherFilesUnchanged": true,
+    "changedFiles": [
+      "Info.plist"
+    ],
+    "beforeRootInfo": {
+      "path": "Info.plist",
+      "bytes": 962,
+      "sha256": "c82d4ffc939fb08d2db406b9c7b2f6dfa4acf723ed7563f81c89c87d4b08bdb0"
+    },
+    "afterRootInfo": {
+      "path": "Info.plist",
+      "bytes": 2400,
+      "sha256": "c109414c06b2cdfc2fdda1d72a7e409a5b44eb640e2d48613ca7d3239b5d3cca"
+    },
+    "originalDecodedBaselineCapturedInitially": false,
+    "originalBytesReconstructedByRemovingDistributions": true,
+    "reconstructedOriginalSHA256": "c82d4ffc939fb08d2db406b9c7b2f6dfa4acf723ed7563f81c89c87d4b08bdb0",
+    "remainingOriginalMetadataExactByteHashVerified": true,
+    "metadataDelta": "Xcode added Distributions success history at archive root; shipped app/dSYMs/resources unchanged",
+    "distributionIdentifier": "5ce69766-a2f3-455c-8812-29a21531d207",
+    "uploadEventState": "success",
+    "uploadedBuildNumber": "1",
+    "afterManifest": {
+      "fileCount": 710,
+      "aggregateSHA256": "5ae296765d27bd418c580ebf37288cf99824fbfa0be335c612a41f7218143d8f",
+      "files": [
+        {
+          "path": "Info.plist",
+          "bytes": 2400,
+          "sha256": "c109414c06b2cdfc2fdda1d72a7e409a5b44eb640e2d48613ca7d3239b5d3cca"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/AppIcon60x60@2x.png",
+          "bytes": 4826,
+          "sha256": "983abbaad33f7a1d8e95b3aa146478104cc756c5b9f1750d5a5c0e5bd3fd2948"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/AppIcon76x76@2x~ipad.png",
+          "bytes": 5933,
+          "sha256": "5168b99d93949424fb032d3cacfbd16ae38f0f08a7ecf74ddf2b5ba6795c1980"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/Assets.car",
+          "bytes": 43128,
+          "sha256": "c5f074de1f898b24acd1736c54dda8ccf1cc489c4d28e8855c192f2219096edc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/Hot Wheels v Human",
+          "bytes": 3033584,
+          "sha256": "166f4df28dd6c9223a0d273c6731c824db535daaacdc1411350e253f5801687f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/Info.plist",
+          "bytes": 1883,
+          "sha256": "6f1d2e3c0b99c95be72f0c1cf8ea488c0af951b80a999703027d116143946342"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/PkgInfo",
+          "bytes": 8,
+          "sha256": "82502191c9484b04d685374f9879a0066069c49b8acae7a04b01d38d07e8eca0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/PrivacyInfo.xcprivacy",
+          "bytes": 598,
+          "sha256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/README.md",
+          "bytes": 6572,
+          "sha256": "44e6301f245320c26c37e5aa67641ac8bc175a35ba796a21c99d65f4a0a46fa4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/_CodeSignature/CodeResources",
+          "bytes": 162343,
+          "sha256": "b8cf502595a9a0dcb3f588e802e29cdb907a4344db626aa9f888e5f1a00a0c8b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/aid-glasses.usdz",
+          "bytes": 16495,
+          "sha256": "4ab4313f17551973da13004dc884fc25dc60c803406577461b07cd36e09e2b08"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/aid-sunglasses.usdz",
+          "bytes": 16388,
+          "sha256": "decda0821668755fd23f3dcadcb5106b3b87db85a4b527bbe96285d339bb38e3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ambulance.usdz",
+          "bytes": 143483,
+          "sha256": "e43aba292ce8b1aec30a3279d1cf7d956b38f09c09147c5437893cd69a3635ad"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/boost_ready_chime.wav",
+          "bytes": 92296,
+          "sha256": "80c34ff11bef5fe8470fe8450438f0fb8545385e404462d9d074c0e3ffd74fc5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-barrier.usdz",
+          "bytes": 19337,
+          "sha256": "9bd06d4a75d4c56feaae5512ba567138a917fb0c4e4ee568d95ccb6076fa1eec"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-cone.usdz",
+          "bytes": 19479,
+          "sha256": "5bc53c6909d8da2c246135cbc7101232f6c3554c118858fab54c72a8df11f3bc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-dumpster.usdz",
+          "bytes": 32175,
+          "sha256": "d507133416611389e33a2b2471912a162ce4bb304fa6bc697c974159f67ec8b4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-fence.usdz",
+          "bytes": 25098,
+          "sha256": "186d694f210ff1a9c00c76c2568606d172e5fe27046aedcb65dcbc85b11d3156"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-light.usdz",
+          "bytes": 25507,
+          "sha256": "e6bd650eb06a5271492ae959a8e4992b233b95707a724a2df178343f38d49566"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-lightpost.usdz",
+          "bytes": 19307,
+          "sha256": "2aa5d2d5517fde6dd32e84625f87cb0ae128389e1540937a5cc6b979dfccb895"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-pillar.usdz",
+          "bytes": 17814,
+          "sha256": "69e8cb3cdd6ef12a12679518d1be57ea974066a865dd5d7a18a04bf21b5a839d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-pole.usdz",
+          "bytes": 46515,
+          "sha256": "f4e34c723c701886ccd00d47451652a34711a641105fa39f38a36c55cb32743d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/build-sign-stop.usdz",
+          "bytes": 19157,
+          "sha256": "320fa723111a3f4216ec33facacdd499c2ecc3bfabaf606e99e957c41fda9896"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camera_shutter.wav",
+          "bytes": 46432,
+          "sha256": "4a8ffa1cf3ff5e6793a5b4b1c5840d62fdbab7dc40baf9f00497f727053d8434"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-bridge.usdz",
+          "bytes": 18534,
+          "sha256": "0d85d5002ff3b45747e8013315f7d6949589c3fe5bf96814e2b6e841a1c79d56"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-bush.usdz",
+          "bytes": 7748,
+          "sha256": "96b21a430f7f081391fb3d2c327f139e89117606f021d0048aa3dc68bf06064d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-canoe.usdz",
+          "bytes": 17989,
+          "sha256": "13b2d1b7cbb3f89a7bf825c7d55a99055efee372ff06a687d4cba311b0efbdbd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-fire-stones.usdz",
+          "bytes": 20749,
+          "sha256": "0e25482dc41f0154da666d5d0571dc678b0deaefdb35be0bac13f307279cd743"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-fire.usdz",
+          "bytes": 11323,
+          "sha256": "e8a1e2a35a95b4fcc987cd9b6a8062f30090daebca9abd9ea9d5c5356b761cba"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-rock.usdz",
+          "bytes": 9209,
+          "sha256": "8ae2b57bbfe6e85a4df9df83c246c0366f6a5e821aac9508b8c3f18216a0f6d0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-tent-closed.usdz",
+          "bytes": 18706,
+          "sha256": "20a0495748dd3225620a57015e1b8def1b905ee34fd0f8b1ce057c7072098dbf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-tent-open.usdz",
+          "bytes": 18794,
+          "sha256": "4cd26fecd5e8938b0547cac614c67184074af1f9293070d05c2ff7f898ee7838"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/camp-tent-small.usdz",
+          "bytes": 17490,
+          "sha256": "d96d7b34d36bd79cd6000d5de961351e8c19b2b185a191be5c50af2bc800c85f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-cactus-short.usdz",
+          "bytes": 10934,
+          "sha256": "7c25559ba9c53057e52add5b8626538f022b98c7b1901f3396c8d63bc00d9e7e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-cactus-tall.usdz",
+          "bytes": 11703,
+          "sha256": "3effac7e4c8b687c763f900cace62a6fbada418c020f50bbb638d525b9f784f8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-cliff-large.usdz",
+          "bytes": 5169,
+          "sha256": "2098e8ca9a600118f868678bf98e36e31cb01d1f7f7cfb01c2d859f8c3d8e6fb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-cliff.usdz",
+          "bytes": 5163,
+          "sha256": "1be6e136d74d342c89e04f006320a6f936f75ce605e22f0ed04d704387701e66"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-mesa.usdz",
+          "bytes": 7051,
+          "sha256": "cfe94e050e8d22be015560c4258fbcaab6e8ef8645a9a2aa18f79e024e3b587f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-rock-a.usdz",
+          "bytes": 9987,
+          "sha256": "4de96c3e4d09f5d17cd8258bd00d07532fdd369dd41884c651ea9967acd59309"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-rock-b.usdz",
+          "bytes": 8607,
+          "sha256": "641342b2172a1ad700f5ad6a8637708a8b3e437da90290b88ebc704699f4fc70"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/canyon-rock-c.usdz",
+          "bytes": 9468,
+          "sha256": "01974ef25345e23912467822d45782e57b529630ee712c20c4a8420a89d6067a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_crash_metal.wav",
+          "bytes": 180496,
+          "sha256": "24a56010ab9b26032b4ac483b252a00e15e217b69a15ac8e3e68ce0ef73a549c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_crash_metal_b.wav",
+          "bytes": 180496,
+          "sha256": "8a57a3ac56b6f54a443ac7b043cbc852f0b98e63d4e3f89bb5659d703955401a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_crash_metal_c.wav",
+          "bytes": 180496,
+          "sha256": "cd45f000cc4a5f006e1cd50cb3365d63fda86d0be9133609b12e37daf9f88189"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_engine_loop.wav",
+          "bytes": 886096,
+          "sha256": "0b4a91afc707688c3b77e761ce3d15ee018180fab141cf4bb79c91b1ffde4468"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_passby_whoosh.wav",
+          "bytes": 74656,
+          "sha256": "33ced2901cd7200cf4c3ef773acdcbbc78a38378a3b9c8140655abcb7cb3b68a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/car_select_vroom.wav",
+          "bytes": 92296,
+          "sha256": "bc08550e1ab68e8cba1e3b70d5509c29e06d3848ee0b7fea273252f7c3fbfbe3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-ballista.usdz",
+          "bytes": 60387,
+          "sha256": "33e4b4b9a13dcfacf802f26e9fd553e60452bcd80dc42b501c73f316222ff128"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-cart-high.usdz",
+          "bytes": 72917,
+          "sha256": "d13e5e0d90aa2b9e686351148f2d3b08edb0089335a903d9f5dd286cb9ef4b86"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-cart.usdz",
+          "bytes": 43561,
+          "sha256": "faced8f620f2d7bd3d0676da9d435a7895fc28894ced7e0544dd9f11e0ed1928"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-catapult.usdz",
+          "bytes": 77465,
+          "sha256": "0c58b8d7e4769673f98f6eb807d4508dc30b9020bc4170f69280a42cfd414a1a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-flag-wide.usdz",
+          "bytes": 29608,
+          "sha256": "5615830ce49091ab6997d3dd7dfc508f4d074f2d30dcaf3623ab45b6c4784e6a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-flag.usdz",
+          "bytes": 21548,
+          "sha256": "613f5c67de936f728122c71b9faef33698e82eb1400d91540d0876fac4957188"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-fountain.usdz",
+          "bytes": 126590,
+          "sha256": "e99a00007bfa4872d2e5d75ba710c5f1e709ecb6e05ff5dc05ac241eb377cc8d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-hedge.usdz",
+          "bytes": 21110,
+          "sha256": "8a725acea536e7b0016d969c6d93d634a7f5db715290dd6887b68d5c29004193"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-lantern.usdz",
+          "bytes": 25704,
+          "sha256": "2932f1c54a4f2ccca1f8410000311c36e726aa2fe3a2e7ca78976ac20d89e9e1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-rocks.usdz",
+          "bytes": 22135,
+          "sha256": "8d9556b2e5c81ffcdecb972a520cb7232e6e27e6c41570954e154b6a96ec550e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-siege-tower.usdz",
+          "bytes": 125184,
+          "sha256": "75f4579183f9a1466df1ea65e47e37a746bcbf85f65adc6800cc16481c456ddb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-tower.usdz",
+          "bytes": 23391,
+          "sha256": "57e57962138a6ee97afadb375da26cef7b1d10246ca68c12fe1e0e98a1e70286"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-trebuchet.usdz",
+          "bytes": 106201,
+          "sha256": "2cf521fc0de7130f2d9fe3d260728c4379b34e0309fbfe186b4a92c186436da0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/castle-tree.usdz",
+          "bytes": 27095,
+          "sha256": "585e57ae53312ceb730b21d5682419ca81b0e0f9ceb4ea36ebff0e4d187981a9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-a-bald-drive.usdz",
+          "bytes": 63607,
+          "sha256": "502c0752542b3b586f43229d4f20a459cf158eb69d710b96cced8ea2ca31d1ce"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-a-bald-idle.usdz",
+          "bytes": 68003,
+          "sha256": "29eeaeff4e8f490daf8a5c039c3c8bbdc435f400f777ca16100535b8d443c7dd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-a-drive.usdz",
+          "bytes": 77025,
+          "sha256": "90dd7daf751cca8ff55e47d5f91b44a53e7f71b1db4d4d91f997fbf9ac1ce6bb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-a-idle.usdz",
+          "bytes": 81164,
+          "sha256": "246d9b7a23aa8d60958d9ff643882b3dbf1fda904c550247930124b1766c579a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-b-bald-drive.usdz",
+          "bytes": 63542,
+          "sha256": "1c9e69c0150a55ba941de860c888759f77ad5baa85b6aec99c317e23ddbf4297"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-b-bald-idle.usdz",
+          "bytes": 67931,
+          "sha256": "77408984ac4f7523680a9c63ef56d0f9e5b930c62b1ddcfaebcb0f25ba648bb1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-b-drive.usdz",
+          "bytes": 80801,
+          "sha256": "5358c346393d702b2f87dd6feb847546b0217625a2116450fa50298f9c262f1e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-b-idle.usdz",
+          "bytes": 84932,
+          "sha256": "ebfdaeea21146c6e1d219875596aa1898494d3052235beb20243fc7c85340ac7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-c-bald-drive.usdz",
+          "bytes": 65619,
+          "sha256": "8ea630ef3f53e0dccb4eb684d414981e0eb1c2dcb6e7bd61656e4b9c2dae011a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-c-bald-idle.usdz",
+          "bytes": 69886,
+          "sha256": "ed54c97a356202f13d26615e4617842ced4d5ffe8ac00f3dc5cf9e7bee03a4e9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-c-drive.usdz",
+          "bytes": 80305,
+          "sha256": "763e544414964b2913f06b1d295165ce4177d77129b5dd4d791524b540eb2697"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-c-idle.usdz",
+          "bytes": 84561,
+          "sha256": "7a215ea87671b929f6258ed772246b27411073436df174f11b4f6a038c495d55"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-d-bald-drive.usdz",
+          "bytes": 71710,
+          "sha256": "b83e49b9d6c8e713ec137be5fd9404416933b4669094ff76ef7cadd5156f61a8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-d-bald-idle.usdz",
+          "bytes": 75977,
+          "sha256": "524b0b4d5857730d7334204e7beda89d74b2b3247fd49ba995b38cefc30bce4c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-d-drive.usdz",
+          "bytes": 85129,
+          "sha256": "dd12fb353c08d67c855a33898abdb001260fc19e4ea9e39a358acc2fd7435e64"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-d-idle.usdz",
+          "bytes": 89266,
+          "sha256": "838d4081d98d68aecb1c4d5f1df86b379de69a598edcf49475495e6b5e9a5efb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-e-bald-drive.usdz",
+          "bytes": 64487,
+          "sha256": "22b8f2653025a8bce10d811d962826a53bcb55a2a9a8e1d05c59002c1888ff9c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-e-bald-idle.usdz",
+          "bytes": 68753,
+          "sha256": "f9945035238885f9fa3c43c2eb5ee5de2188cd21cfefbef23887597772ad0883"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-e-drive.usdz",
+          "bytes": 79862,
+          "sha256": "99e7d9057ca5744330c58edd3caa34ab6a7c5354128b42820a8b6642fc53a36f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-e-idle.usdz",
+          "bytes": 84122,
+          "sha256": "e9d55f37a9922c037b12433f21f96b10a655b7e829eaf0c64793934e89d94229"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-f-bald-drive.usdz",
+          "bytes": 72579,
+          "sha256": "b5f7f9d77c85e6eb824426487617c95cfcd2cd14ff8f4240344797ae3b665431"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-f-bald-idle.usdz",
+          "bytes": 76847,
+          "sha256": "64a386184bb9d094a6f56373ef83461a343e143a014b897d9e347e1c0a554fe0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-f-drive.usdz",
+          "bytes": 84920,
+          "sha256": "8cdcb4f604436253f436f3e46c2a9e3c68f42d6cb9442821a6809361d2bd3ed2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-female-f-idle.usdz",
+          "bytes": 89179,
+          "sha256": "4198adff85e26c75f728560bb631e3bd62f88ba151fa690a75727a698f4b732a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-a-bald-drive.usdz",
+          "bytes": 71892,
+          "sha256": "1cef288aeb41cccc575117970f89d247d1401ef782c3de82789f528278f69f67"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-a-bald-idle.usdz",
+          "bytes": 76028,
+          "sha256": "1e33d898bd2a8c8841bcc8d9a348b26bd566d3a17825204862adaa2bfde4f026"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-a-drive.usdz",
+          "bytes": 78436,
+          "sha256": "a0c11746a5c89201829a029f0f6b9a610f53e4571af9800ffcdef4ae48ee48f7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-a-idle.usdz",
+          "bytes": 82566,
+          "sha256": "adcc0aa0067246be8300a4b5abe6d6d0bd200c9ae8214d518ddc246ce8e111c5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-b-bald-drive.usdz",
+          "bytes": 77186,
+          "sha256": "ab258ad48e60239be0fbfc30524f6144677365527175c7d2b39ead7d6a80f0a1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-b-bald-idle.usdz",
+          "bytes": 81323,
+          "sha256": "8b3e85b6ea743b4236740973cfd9e2055df32c72126b9364d598bced74fd828a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-b-drive.usdz",
+          "bytes": 77269,
+          "sha256": "015c1b61b5b79db6e5d5b39c2727ee6db4431d5fdf52b62d80250218c89ec253"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-b-idle.usdz",
+          "bytes": 81401,
+          "sha256": "9532425689cf193170c2f70f34aa0d9254123c9c0aae59a4c35a8203b4ec98e5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-c-bald-drive.usdz",
+          "bytes": 74929,
+          "sha256": "82f0a7520dd4155610dceb8353d84bb0840a465d6ec340d65d6518f0f9e91349"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-c-bald-idle.usdz",
+          "bytes": 79195,
+          "sha256": "d7886b17c660c688f8dae74d88cea0886f222042034590d3aabf5fe6defaddbb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-c-drive.usdz",
+          "bytes": 86251,
+          "sha256": "ef72af1fdb6b309351052ef7c9ea47146f487946e68e51e4d80941a93222a40e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-c-idle.usdz",
+          "bytes": 90513,
+          "sha256": "161bf40bfd076ba77b66d411d40bd52af7ecf962cdb441e21ac22102c85711c9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-d-bald-drive.usdz",
+          "bytes": 71045,
+          "sha256": "20f92529c334dc5d6963ce0bf4a610e614c056526bc5c52906a71b33420fb2b9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-d-bald-idle.usdz",
+          "bytes": 75185,
+          "sha256": "6ea48216b422608b948d53dbd3d7d8908e3481b989ed22d77225b6fa8c13e223"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-d-drive.usdz",
+          "bytes": 77441,
+          "sha256": "7ad269576016e35265a6fd9e9ac7a4807cf64ff6cb2b0a6422e574169d7e3c7a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-d-idle.usdz",
+          "bytes": 81579,
+          "sha256": "0ebe51e4cd23dd17de60570dcfcf8b8be3a5cbb1fb1ab3064a0e037536b324d2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-e-bald-drive.usdz",
+          "bytes": 69161,
+          "sha256": "81b9314fc6b9f294d934a45c3095a1554046e68bee8eead57b36cb24014cf439"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-e-bald-idle.usdz",
+          "bytes": 73296,
+          "sha256": "4db34090447479c94310dacb2c9af0f7986284cde6d7314a972cef41af0ede4f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-e-drive.usdz",
+          "bytes": 76619,
+          "sha256": "7db31c5887901f1036b8d16d26708f6c8818f5f4bced96a53b6ed7d4c30d2eb0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-e-idle.usdz",
+          "bytes": 80756,
+          "sha256": "5c348ec1a6492816321ea294e5c351fdaeffd3d38ab772f9ad630c5aba583548"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-f-bald-drive.usdz",
+          "bytes": 72514,
+          "sha256": "a119dde5817b42d3145ee38b08b9f948486cd0d8ff784e32174ab287914be3bb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-f-bald-idle.usdz",
+          "bytes": 76781,
+          "sha256": "5379fa3fa1a117fe859fadfb705177d422e5c81a9cc5c489e7de67f24eae6828"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-f-drive.usdz",
+          "bytes": 78373,
+          "sha256": "94e0af44f86a5c9d41d13d98f14bcbb7b098a30b5a2067776c1ff6789421f84d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/character-male-f-idle.usdz",
+          "bytes": 82505,
+          "sha256": "0d81d899f839bcb83b272f39c494edad95a1af95bd2e18087f7ee529096c1914"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/checkpoint_ding.wav",
+          "bytes": 64094,
+          "sha256": "bde740da522ac93376874151bb0b22ac4b6a0316b96839c1a4f601f9fcd67225"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/checkpoint_ding_b.wav",
+          "bytes": 64094,
+          "sha256": "b8ab5947e3bf17f2a10e3a6b672d74c7159516097fca49a29ed27ecdfbb2dc34"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-fence.usdz",
+          "bytes": 21803,
+          "sha256": "d43828d3698e0ad987bf669de43c701d61e041f4d4853edb05e51d1691af72b1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-a.usdz",
+          "bytes": 96195,
+          "sha256": "fe424c21bd5629b95f4ba6f2dd7d80b2d506e7e00b69e32cffa5738bd73c499c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-b.usdz",
+          "bytes": 135946,
+          "sha256": "f5af7ffb3e986a3959359185599a86d64f0d1aff64a2dd616dd966b38176bfbc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-c.usdz",
+          "bytes": 97443,
+          "sha256": "97a46cbbd8ca2a2d956487f96cf5fe5b94c12d71d382da62943498c5dcd29ce7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-d.usdz",
+          "bytes": 136268,
+          "sha256": "660f2c6b69ea04bd355b71bcd9d803beb833d6d3d37ca23f43d75dd9ab3b1092"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-e.usdz",
+          "bytes": 134683,
+          "sha256": "3b8eb637b10df8f9104800a7a116bf5f77604c771299a18786b106a7ef476acb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-f.usdz",
+          "bytes": 127876,
+          "sha256": "8faee49298b34cc6abaec4b507cb78f1856c4cae29073518446b8e4cd6e5df9f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-g.usdz",
+          "bytes": 90408,
+          "sha256": "8bf689ca0810c8d5144ea366c4e2e82aa39e751c869b41bcf7ebe2c51c71aa77"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-h.usdz",
+          "bytes": 68308,
+          "sha256": "b70473a49d7683341e7042059a3fd39487bbea3e0b4e1cb6815b87da69f471b6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-i.usdz",
+          "bytes": 71453,
+          "sha256": "a1d2ef90ca7a9b141863ff3e9189dc731e81a831b582b6934a6e4971b8c2fa9f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-j.usdz",
+          "bytes": 97747,
+          "sha256": "b8a25d4028e97854b48739f2a159495d348a45b6d5ecb6fe916f11754c5a6c58"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-k.usdz",
+          "bytes": 87023,
+          "sha256": "98eb0a8840f984da50d518e86fa05935874de701f3b83735ce85f4e9d291bf78"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-l.usdz",
+          "bytes": 105267,
+          "sha256": "4db4463aa7ca3938af88d664da1d0931a76a15dc6dae82b6577e3ef5f05ab1ef"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-m.usdz",
+          "bytes": 93453,
+          "sha256": "a85dac9541b7bbb994d5efe2ef726590e434e85614d9d1527c196817c108c1e5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-n.usdz",
+          "bytes": 128220,
+          "sha256": "81b4457e2e5f36e771db6bddaf458c6aaf0f025873c15160ba6ec029a8c76110"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-o.usdz",
+          "bytes": 108033,
+          "sha256": "81398eaff685d49b5ec0048b2ec8468c4043093c05dc622f938b9ba892d24020"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-p.usdz",
+          "bytes": 104262,
+          "sha256": "e1e95b4c68cf16e4355332421bd18f0b96f44e4a88dca8d6fefe294f191f8665"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-q.usdz",
+          "bytes": 95128,
+          "sha256": "5b05ad5d4c72fa28f3ae47c2aec0ae9ff686042895ae548a1862208d45b86f41"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-r.usdz",
+          "bytes": 86983,
+          "sha256": "875ac1ed842b19c8d69271fd1680e45c3b7d8ed64ea17756979d3bf767113e87"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-s.usdz",
+          "bytes": 99403,
+          "sha256": "19602d70043122210cebf4189aa1ec3a9b00b6cd33e7fe8204b31b3834e2a413"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-t.usdz",
+          "bytes": 154828,
+          "sha256": "fcb653c299174721d19f6629447c540c0b268a400da271ef35d4e310e7fdb005"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-house-u.usdz",
+          "bytes": 109539,
+          "sha256": "36a0f01b81b2cc7907bbbb3f9277438a0cb6ecc27d0f37c42e0ac0e6470f50fc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-path-long.usdz",
+          "bytes": 16290,
+          "sha256": "5325e8983191e0aad880e3a20bc8c78aff977c228de810f86a64edd7450156a6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-path-short.usdz",
+          "bytes": 16288,
+          "sha256": "83e858cacc9153489b17f4e4c1e566cbc05dd5b3dd97ff509a81044cced67416"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-planter.usdz",
+          "bytes": 30049,
+          "sha256": "2863e01c63a9a1c39caba23743822a166be61541667ec402c88ff549b08584a6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-a.usdz",
+          "bytes": 102431,
+          "sha256": "1d3a6294206438bc2eb6202b8d5f26a041decce7ea3c638ee809daacccd4395c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-b.usdz",
+          "bytes": 102095,
+          "sha256": "5e9d12be3e00a3e229592af125aa00475b598fbc7ad7ee51be7c64c31bfb3202"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-c.usdz",
+          "bytes": 97759,
+          "sha256": "1c3c1a06ec0ac092b041d648a99049e627c208859c71ea26be6a3362d43755a1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-d.usdz",
+          "bytes": 91674,
+          "sha256": "d3cc29d9366da676b64b4f663257bfd2022df523de1db91d0d753109da6e7df9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-e.usdz",
+          "bytes": 119144,
+          "sha256": "1b14a35d9721e5d9196b2e46f639c6f60ad09ce93320d40d4301b1a6e2814b74"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-f.usdz",
+          "bytes": 137282,
+          "sha256": "d07397bdff925484d782d724219055518e39a8641e359bb524f92923aafc6326"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-g.usdz",
+          "bytes": 151827,
+          "sha256": "9e726b5bd93294996ec68fd00e7a1ae2ba4d2090546b702aa013b9c08cb185b8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-h.usdz",
+          "bytes": 118705,
+          "sha256": "f10bbe9158fb945c16776976d74d90ead6af28f404535b3dcef95426abb96b5d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-i.usdz",
+          "bytes": 187875,
+          "sha256": "e7528d948ef3aa328dafea161eacab79442dee989607dd55eb9e873a5f667a95"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-j.usdz",
+          "bytes": 374826,
+          "sha256": "e00f4ee735fc4cbeedb87d654cd8b55dafeac79f326aed8dd45bea79c4c301a2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-k.usdz",
+          "bytes": 217959,
+          "sha256": "40e2aba57cedd96b644c2a770696b34e1adc07c8fda47787dc692be36aa62fa3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-l.usdz",
+          "bytes": 254762,
+          "sha256": "d38c1b0979084b94c56f61760382f1bdd038504945d594345e9dad466e07a9e5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-m.usdz",
+          "bytes": 266187,
+          "sha256": "e13edf30c3ba25dd06567b0dae6f53c26a9b94b8f0e7ea090d2052404a8d833e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-shop-n.usdz",
+          "bytes": 303626,
+          "sha256": "afb7bc7416f447344437906ba927180ee921f2a65b6d7cdb577f7db07aa56deb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-skyscraper-a.usdz",
+          "bytes": 104400,
+          "sha256": "d3bc2662239806b9c8c7d18f5d57327a3f9ba971a1021e5c94e26508c2da7a4f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-skyscraper-b.usdz",
+          "bytes": 125776,
+          "sha256": "2006f0dcabec07c5eb5492f13737e55220734dd758b6d385dcad90658f59c972"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-skyscraper-c.usdz",
+          "bytes": 134359,
+          "sha256": "10d27438f595686c824b7bf348fd9aa55da525c639a30c1957cefb048e511f5d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-skyscraper-d.usdz",
+          "bytes": 147835,
+          "sha256": "d27b154667f3b83bb5806f11525762e58b92a1ccecd99ad081f4508e121678f1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-skyscraper-e.usdz",
+          "bytes": 96202,
+          "sha256": "0279814a8c1caa9c81f17dcf9e83d5304b14632fd5ec2c257d3db1d3aa33eee8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-streetlight.usdz",
+          "bytes": 21465,
+          "sha256": "1e13273c03c308f9b3ec68ec6e8b3f513640ea1f2e45acca092d315ad89865da"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-tree-large.usdz",
+          "bytes": 18434,
+          "sha256": "0b264b57fcbcf03509806ec03ae2fb9a2687110b6f15f0b836424b73fb995cf8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/city-tree-small.usdz",
+          "bytes": 18433,
+          "sha256": "87d63d50985386fb6cf1696898bff897acd1002782ad18c9db616577e945e985"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/confirm_sparkle.wav",
+          "bytes": 74656,
+          "sha256": "d9ba2371cf1532ecc18f67e88f781915d2181b000bb3def25590e9c40a02e72b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/crowd_gasp.wav",
+          "bytes": 92296,
+          "sha256": "6cc4815e4dbda2b380cd80ecbfef184252e6c6d908f5103c96fbf9fe69c84333"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/crowd_kids_cheer.wav",
+          "bytes": 222832,
+          "sha256": "be691dbd88e1c236e92594f598b5d610c0244b6670411c07f3cb5e771b46ad5b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/crowd_ooh_wow.wav",
+          "bytes": 109936,
+          "sha256": "2eb07b86d34f17dfcc24e9101c92424c073de34ae7fac0ffc18dc8006998dc02"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/customize_confirm_pop.wav",
+          "bytes": 57016,
+          "sha256": "62c784145081ad9b5be83b6e590623c309719743bcb3c87db4749902d7118a62"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-bolt.usdz",
+          "bytes": 18474,
+          "sha256": "b1fe8d7faae343291512579baacbde8ccf6fff344a1b2f7f28963328f8136539"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-bumper.usdz",
+          "bytes": 24013,
+          "sha256": "3eaeafc7ebde3c8a4d74a404d1b0b0ca99a13e0ac51e58e456998248d2ed6e4e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-door-window.usdz",
+          "bytes": 21020,
+          "sha256": "9071d55eb2ee0ec7daf1578df22f07a0979f23d23d22fe08c4359e37fbd995e6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-door.usdz",
+          "bytes": 20565,
+          "sha256": "03bf61ecc0b097b76ab180df290aded9eba347e73955c9c948e2f53c63c58aa1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-drivetrain-axle.usdz",
+          "bytes": 29921,
+          "sha256": "9c8beb199a8238b5d15e96061a65cc9a182dc6502ebac80a0f5609584564b4f8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-drivetrain.usdz",
+          "bytes": 44728,
+          "sha256": "c9ac3132efd02a2009eaf9f2626b71e0962a2b773caba6898b6b2f7f2c25b527"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-nut.usdz",
+          "bytes": 18582,
+          "sha256": "e79661d8cd58c5cc5f42cdc86278152b4d404b0816ffefe817f931ea586b27ed"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-plate-a.usdz",
+          "bytes": 18704,
+          "sha256": "7b8d983dcbcdee00ca3a83c6d6c34d2253a40fdf2ba69978f99106aa6c6f7268"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-plate-b.usdz",
+          "bytes": 19066,
+          "sha256": "3ca0b72bdabf335269ddf8351bb0a6be61666a373ca2beb2cd7f4236313ae2f9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-plate-small-a.usdz",
+          "bytes": 17861,
+          "sha256": "828fdf0c598b57f64acbbe7966a4758852034eaddea1f3873481d65e3042d1fc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-plate-small-b.usdz",
+          "bytes": 19056,
+          "sha256": "f4212843f067a6e529eaa2f0c40b10dbec68281a5997cfbe884051f158f8050f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-spoiler-a.usdz",
+          "bytes": 19322,
+          "sha256": "329606cc958ac6e10446f5aa307ada51cf80f8bedb8e43f26f7b0186cfa5b90c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-spoiler-b.usdz",
+          "bytes": 21993,
+          "sha256": "4c0ced8962f80eac8f21d994f0c2e094a049feb66353f6ca13f822d7fa055580"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/debris-tire.usdz",
+          "bytes": 36131,
+          "sha256": "f423e240aabfe2b43388e7da588873259504e53936d211db909b1d0602326879"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/delivery.usdz",
+          "bytes": 121713,
+          "sha256": "72bc07626e58b295a2ff4f8e3afb868082c0a2c9adeabaff8999a844c9af27b9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver-boost.usdz",
+          "bytes": 173228,
+          "sha256": "e26072c890eda1ec2e8ff7d68a6c87576b258941f86daff379d7aff871488608"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver-cheer.usdz",
+          "bytes": 173228,
+          "sha256": "5358626544293102ed35d4d3aeb429be12c508c2984de91343c3a755d524584b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver-crash.usdz",
+          "bytes": 256268,
+          "sha256": "45b5c211e48a45b6da614f2c4492954e1194d5fa3a084d13eebefb55ad18ce68"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver-idle.usdz",
+          "bytes": 472171,
+          "sha256": "696b3125a40f3109cfbd9d3217075bf4f3f49d4cb41cc0473640c8deed4033ec"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver_dizzy.wav",
+          "bytes": 134632,
+          "sha256": "50ef8f27274f79eac6a1aa5215842226d80b40a78d78294fa5b11b5bb6ee1a39"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver_giggle.wav",
+          "bytes": 134632,
+          "sha256": "a6f3d2bf1c1d9f5994546da15afaa6e1057734c12444b57f2ed08eee3262ae1b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver_uh_oh.wav",
+          "bytes": 92296,
+          "sha256": "41e0ce633828fef7780aea3cd81758b1f9b76532be195703a144f19dfbc0d8de"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/driver_woohoo.wav",
+          "bytes": 109936,
+          "sha256": "f9723a901b8543982812fa1340393eec178acf34b886b39b1f21a42fc76d1b2d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/embedded.mobileprovision",
+          "bytes": 21017,
+          "sha256": "bce651b86a3deb32c2208ab3e8e8f209f64e668e7e24eb3f4fa8141530c3f608"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/engine_loop_heavy.wav",
+          "bytes": 886096,
+          "sha256": "be718f5756a745dc21565c6fdf4538fe3ed7ae1fb23e9acdff12a31b6f3a4b2f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/engine_loop_light.wav",
+          "bytes": 886096,
+          "sha256": "4196bb494489d1514c5589d91a8ff291a1822a38c928e92205ccc52825032383"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/finish_fanfare.wav",
+          "bytes": 268696,
+          "sha256": "2d0f54fd1e894d8e8855347ba1e535c7d26eddb3a70789599a28cbaf9b7b6954"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/finish_tape_snap.wav",
+          "bytes": 74656,
+          "sha256": "156a8d28805433eac5755aaff9b2d7ff4e799bf46a06b2502b725579c9314206"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/firetruck.usdz",
+          "bytes": 142362,
+          "sha256": "1a1dc3ab1b780766df8cac848621a38251475e5be8c86dc301fe8677886e4055"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-burger.usdz",
+          "bytes": 32791,
+          "sha256": "90ffb1dc6466980add9556ac17d08756902d2e51e9cfa7c6c72efaabf75eea4e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-cake.usdz",
+          "bytes": 95238,
+          "sha256": "09fdfd00bd56a56df1d6318d540dfc8d3af4bf939b601b93ea01c4a07f7578e9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-cone.usdz",
+          "bytes": 17289,
+          "sha256": "505890798b6d6e7c57d1759c16d9ecd1d9bc180ca5ceab7eb46140d75b8f37a7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-cupcake.usdz",
+          "bytes": 29781,
+          "sha256": "030177c944dff9bfc3ac1a76d00be92d3c0ccd691c355ea4e1b430bb5215131a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-donut-chocolate.usdz",
+          "bytes": 23107,
+          "sha256": "fe2218beb2da8ea5cedefe0406a91c59166f67e215c4304f6cec025a9e55caf3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-donut.usdz",
+          "bytes": 27980,
+          "sha256": "eef7cf46637cba3c5d6d4617ee25cc52e5cf3dcb59c2957ca2d695c7722cacb1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-fries.usdz",
+          "bytes": 57101,
+          "sha256": "4c2bc43be0ccd10f349baf9ac41c3904648888451e7bb98cabaf333d1aba2321"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-hotdog.usdz",
+          "bytes": 34360,
+          "sha256": "aec40aa4015a435ea336975d6ff908ee52e1e7d5d6bba01ccbbaab901ff18960"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-icecream.usdz",
+          "bytes": 20416,
+          "sha256": "5298287a7451215224249ff2c777f68be4bdc006c271333cfaeab244d5816bd0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-muffin.usdz",
+          "bytes": 20806,
+          "sha256": "646beaf2b61f18cccabfdc9448b94065a8a0f1541aa712ab267c723d63538c01"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-pancakes.usdz",
+          "bytes": 42382,
+          "sha256": "824291fe4e31c3a1a39f49eeddbe5dd473b6fc772ebfbd79c511e40821d251b5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-pizza.usdz",
+          "bytes": 99738,
+          "sha256": "30340a0454c5ef7323d9660faf4b0de173c748934188b230b61eeea7c3a24fc7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-popsicle.usdz",
+          "bytes": 19677,
+          "sha256": "7005c70b747351820620d9555ff462de838f0c36c6dc12a1b8e2cb50611b2d0c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-soda.usdz",
+          "bytes": 25581,
+          "sha256": "f6fa4e56c6a08705a441add778b887dfe15ef9c53fd8f4d4914e2d7f8f3ea356"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-sundae.usdz",
+          "bytes": 35280,
+          "sha256": "b82e075c6b3bf0ab8127f82957d4d56dda00f25e99828965c7cd84e8138c5e8f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/food-waffle.usdz",
+          "bytes": 53955,
+          "sha256": "fdaf6625df9d6f87d2489ee0c0f688ba8ec0b1b446ca9300559da68d7a42304c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/garage_door.wav",
+          "bytes": 134632,
+          "sha256": "ecddf0c428f5204db1bfbf84b2b4f6d0c75917bc75cc9c68d75ff5ea5cc5c8ea"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/garbage-truck.usdz",
+          "bytes": 167104,
+          "sha256": "06eaa527b811273d4d244ef703c30aef08fc7b6eca9bb10828d2a1c96fbb8546"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/gate-finish.usdz",
+          "bytes": 18987,
+          "sha256": "153a1168beef128fc6bf1e73299c87076d1a7ba0b0223dd8f7564994bab7a7fa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/gate.usdz",
+          "bytes": 19342,
+          "sha256": "c698101f5dbbcd3489f4bd00c6bdd89f615ef5d2b7897fa23c75e81a2fe102e0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-ball-blue.usdz",
+          "bytes": 54908,
+          "sha256": "e083f53d637532f21e92241a9c4d5c7d55a053fd450ce3a8e1f6e60e348e9b77"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-ball-red.usdz",
+          "bytes": 54909,
+          "sha256": "d4a5d475443e8c2055071c59dfb28c730014055fd6a3655315d626a5a7605e7b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-castle.usdz",
+          "bytes": 24716,
+          "sha256": "7b8855fff71d5cf071086edc50180b75e0c721c9e4a9fb2c72cf7b9b9af7360b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-diamond.usdz",
+          "bytes": 14828,
+          "sha256": "8cd6490e8d2bc2b1d5b2c240494f0a5b39092f5dae6538528f4800f71bebd83a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-flag-blue.usdz",
+          "bytes": 18520,
+          "sha256": "4d41d856761d452e71974d59ee6a8e8f2872aff3652cb7398c01c313381321d5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-flag-red.usdz",
+          "bytes": 18522,
+          "sha256": "a5414e508ea0e0644b1bf55b0030d076d20e866d1fe135e4f12801171039f02e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-gate.usdz",
+          "bytes": 22722,
+          "sha256": "4ddae626c34535e7ce5baee7f50cf7c55bb748787edc5acabf5d5e0c0b5ab4e7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-triangle.usdz",
+          "bytes": 15596,
+          "sha256": "4f07700b47a722cfc45e202ffc82f5cc4af7552053f34c36cacff3e241330dd1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/golf-windmill.usdz",
+          "bytes": 30732,
+          "sha256": "6294e9f2d9ff30ee0a4da3b94152a6edda19eaf7b31b4097a35774f555b4c145"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/grid_rev_anticipation.wav",
+          "bytes": 180496,
+          "sha256": "1c4cb29a7f93d7bc81c434cad89c843c2148306f50e4f6b99fa1df7d4a92de99"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-a.usdz",
+          "bytes": 25686,
+          "sha256": "591ef62bae16c5767a8633da63f112a03a98ba1e3eb1badb711d737ddedb84d3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-b.usdz",
+          "bytes": 29263,
+          "sha256": "329d5112dc877bda2fc9d9c4f3612b463af80ff3884b3059d1728b4a370b697d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-c.usdz",
+          "bytes": 26812,
+          "sha256": "53266f6c64a69d062e64bc3fd5624e4a0076f58fbb6887b78765f1cac33d7859"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-d.usdz",
+          "bytes": 25694,
+          "sha256": "8fb3b43e527f06d700e8398c7de26698f8305645bce9065a39c5d183543dd7e4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-e.usdz",
+          "bytes": 27635,
+          "sha256": "2db3762906dce1be8558556bb37f9eff6fbf72d41c1b5b921808f6b458e8c72e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-female-f.usdz",
+          "bytes": 24433,
+          "sha256": "0c1226d52492ce34e87020ed5d68a29b039ea9d82ae0c0496609efc3c94a9ee6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-male-a.usdz",
+          "bytes": 18621,
+          "sha256": "dd00255914c0aad141b32f71d1fb5633ca75c0b9558571d3bb4fbb0645b1ebc9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-male-c.usdz",
+          "bytes": 23776,
+          "sha256": "307b0636eff2f611ece4dfd545f3e78a28e50a28b59f203c375d6f8e44c786a9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-male-d.usdz",
+          "bytes": 18692,
+          "sha256": "ee0dd2197d83167c3707f840ef414747bb31abe1eed3cb2a63747ec80ed582e7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-male-e.usdz",
+          "bytes": 19916,
+          "sha256": "45d6eb10f0d96942109ee20852dc2814782ab042473415c90b87362c98b54105"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hair-male-f.usdz",
+          "bytes": 18238,
+          "sha256": "d7ba1d7a75f46b2bb42f0ae5ccc8373cf118a09a01af1bf8f5f410b8dd309d51"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/hatchback-sports.usdz",
+          "bytes": 110167,
+          "sha256": "b0d5e9ad1f4d6535fb368da383ceca634a1a280b9096804fd1b0d9d668bc235f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/item-banana.usdz",
+          "bytes": 23364,
+          "sha256": "00b5d142a62999850026fa7ff165f192e77f3df18c2d55a55264d1258fd37124"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/item-box.usdz",
+          "bytes": 26276,
+          "sha256": "da064068c203aa2dca81ac0b82c44072b39c615ace68d91049b35e4419b71d30"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/item-coin-gold.usdz",
+          "bytes": 18505,
+          "sha256": "fafcb1dc2b419b74ee88d95b1e11642f02efc4812bc878b144e211a50404dae2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/item-cone.usdz",
+          "bytes": 16783,
+          "sha256": "ddc153817bc42651acf9c602b2ab27b609edd71b074ef6561e9b21a2f661c585"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/kart-oobi.usdz",
+          "bytes": 167559,
+          "sha256": "30d5c85dc8c09a2813858ee4b54ecf429107a0e1ef158d9d9071a5f65ff4d38b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/kart-oodi.usdz",
+          "bytes": 154046,
+          "sha256": "3d31b43c0a3401f23b257243d1d8705d09d1753df0ed9a35b1d265604a58587a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/kart-ooli.usdz",
+          "bytes": 154130,
+          "sha256": "494b11b8874a943b885feafc0ae64afab4ad249013703e6595a57a8a779c6f9d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/kart-oopi.usdz",
+          "bytes": 155849,
+          "sha256": "c509fd7baf44ff1e1498e31ba3a198088375274ca8d3b40cb2867c784048ce71"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/kart-oozi.usdz",
+          "bytes": 157778,
+          "sha256": "10b8c3f2f7e0986e4423526ccd9dd888846919c67cfaf181cd0be39e3acba7de"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/lap_bell.wav",
+          "bytes": 92296,
+          "sha256": "e7597c48ba95607f80c071230088341b46b2ff7f697cfcf41ac784e21fdb8faa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/loop_whoosh.wav",
+          "bytes": 109936,
+          "sha256": "f57ec1ce1aec37b4e8853a72441c47b7e38be9337cb5058fe02d48f772093838"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/nice_try_kazoo.wav",
+          "bytes": 134632,
+          "sha256": "533693fc4aa3e13d52904e975bfac4ac134dd9e7bebd1975be4425af0cd99fb8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/nope_wobble.wav",
+          "bytes": 57016,
+          "sha256": "2f4f1e3637a109a142ad7a40ab585ef7134aa3d5b9b6141bca8e154248faf102"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/off_track_alarm.wav",
+          "bytes": 92296,
+          "sha256": "5766bc99efdc8f666211d98d8f1b357f9cb2af79db9bcab9e5e9dc555a007853"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/paint_spray.wav",
+          "bytes": 92296,
+          "sha256": "d66739190ad55f103546476134d0938088e03df20e643916d27f1743ce701b11"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/paint_spray_b.wav",
+          "bytes": 92296,
+          "sha256": "bc137359d634a33bd2f147e50f9261d2ef7b8f8d9d49c39ded2e5116eef840ae"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-flower-red.usdz",
+          "bytes": 8846,
+          "sha256": "87ba651cfec90b4f3be5a7767bc9aa7ab8b4a09c6cca2f76f12216d6e65ba684"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-flower-yellow.usdz",
+          "bytes": 8864,
+          "sha256": "296526a5cb7876277529068b7362f7d3a9b323765a5f6426e48954d00ba95828"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-mushroom-red.usdz",
+          "bytes": 7505,
+          "sha256": "a2925515442b24f2420a3d2ac960b30ef0994585860ed431377338f3ca2eb157"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-stump.usdz",
+          "bytes": 7300,
+          "sha256": "19a8ff5b3dc7ff64319856311418152313f9ac0417d5c51a58c8bf8a5f33e31b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-tree-default.usdz",
+          "bytes": 11412,
+          "sha256": "38af37d09c0d5b4ec1a9f5224e75b9aab8e3aba98f1a5b6a0df40d5f49031c6c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-tree-detailed.usdz",
+          "bytes": 33639,
+          "sha256": "4459c546563e7373a740579d2d4483b9258bd3b551179813e890ee3b2268734e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-tree-oak.usdz",
+          "bytes": 17138,
+          "sha256": "b97584e239088214c894b4541308c390b28afcb188c1a0ee0a841e67df5b7eb7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/park-tree-palm.usdz",
+          "bytes": 16248,
+          "sha256": "510ab677bcf003210849dee9e88496117c4a249e17eb532ab66a7553ac44932d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/person-a.usdz",
+          "bytes": 82016,
+          "sha256": "f1e0bcdd3f84114713b955251efd38aad26673318a8667ced3b4c7f63e36569c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/person-b.usdz",
+          "bytes": 96492,
+          "sha256": "5db8c8021306851b3bcf199c163ace5338b428e113638280f97999a6ae2182ad"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/person-c.usdz",
+          "bytes": 89962,
+          "sha256": "cd949feb7748c8feee4699e7ed3690ae20763bcdc4e7b866d08c60f25342b352"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/person-d.usdz",
+          "bytes": 84384,
+          "sha256": "0092b8ec6a1dc826e42fab3eefc94cf0303c9cc2d6be75b7185a4e4201c70d22"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/piece_delete_pop.wav",
+          "bytes": 57016,
+          "sha256": "95755bdccbf0356b3e41b35dcebca1bfc96236479f258e6007a5e710e899986a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/piece_delete_pop_b.wav",
+          "bytes": 57016,
+          "sha256": "1372470973a1441c59d84f90695136f787021ffd17d34b13f6796bd707613c8f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-barrel.usdz",
+          "bytes": 24031,
+          "sha256": "9735fc258f82e91fcda01846f4808e1ef62be566699dc68f07aa5c54dcd34c09"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-cannon.usdz",
+          "bytes": 30539,
+          "sha256": "08fd86dbeb3f03af5a02331b8f61223f58e1b112b224103a87a5b732a6e5b267"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-chest.usdz",
+          "bytes": 30162,
+          "sha256": "19bef0f675847d9815bbea2dc2f94be52f00ae3ddf955825ec519ae39a1b5980"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-crate.usdz",
+          "bytes": 19344,
+          "sha256": "6d8e7396b4829f252b62c61b4cd660ec7e37e4b81369c18f85d0909bf1a66e9a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-flag.usdz",
+          "bytes": 24054,
+          "sha256": "14e63aa2f3d2541186d2f8d2a2a390ac7ccb8eaa3d39ac5a2f95bd9591ecdcb7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-palm-a.usdz",
+          "bytes": 39513,
+          "sha256": "99089cffa97e78b6367d6e9e20dcbb18518404971a7a214629588c37b4ae4a5c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-palm-b.usdz",
+          "bytes": 39536,
+          "sha256": "136dd503e87018cf6e8033b7111140c7b2e401e62011e08464bef4373f8f12c6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-palm-c.usdz",
+          "bytes": 50766,
+          "sha256": "f030f779def622b7555b1dd40c625e2d3846503b03a1fae138e0f7452c3893cb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-rocks-a.usdz",
+          "bytes": 55183,
+          "sha256": "4b6e74928f6db76cadb2b008de65dc58ebcf4fd49067daaeddd8cfa9d1bbfa5d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-rocks-b.usdz",
+          "bytes": 52413,
+          "sha256": "b536e3c0be256940ea70ae074ba937a073ce34826398ae8bc42d84796da98bea"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-ship-ghost.usdz",
+          "bytes": 122964,
+          "sha256": "2afa86affab65d247dcf8e171ac307ff0b96e850faa0197aa17381001e65bc42"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-ship-large.usdz",
+          "bytes": 140148,
+          "sha256": "6b1245a6bac61c7f5c4808563457a530bf44225d8c8bb9cf836d9acde51d4dac"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-ship-medium.usdz",
+          "bytes": 133003,
+          "sha256": "dc210eb42805041d7d89c5ac139ebae612c16ae83d4819b428389b2a2c410c6f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-ship-small.usdz",
+          "bytes": 113219,
+          "sha256": "d386a248f90825a8d56e2a89b6abdaeab86862a11d9aa3bfe4f2290b305698bf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-ship-wreck.usdz",
+          "bytes": 122390,
+          "sha256": "32f03cd7cc4ee64b33ff8ca61bcf6d2691610d171bd690e1509218bc6c0d87c4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-tower-large.usdz",
+          "bytes": 56504,
+          "sha256": "83c0011ee5af6ac4f9a6cbf90375ee5f97a4b324baa4c67b5ecb4a3f72a87a00"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/pirate-tower-small.usdz",
+          "bytes": 59668,
+          "sha256": "374148049feb4bc6bd32e579db9507353feeb8ed8b77a1e7bcad1340b54a3ea8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/player_join_horn.wav",
+          "bytes": 92296,
+          "sha256": "4b7c9e07c884d66e2830fc44e2e0483a40e39c6fc711c4ee0f48dd685644855d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/police.usdz",
+          "bytes": 124428,
+          "sha256": "a9b510894e79bf5ada93bf58e25c8987de46508432fe2fc3b0b86ae2b389b127"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-banner-tower-green.usdz",
+          "bytes": 35747,
+          "sha256": "f0f1e9f66b2ae3c144278630a9fdebc81d4a964cf9b01db96b2a5318d3d03ca8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-banner-tower-red.usdz",
+          "bytes": 35743,
+          "sha256": "6b4cc4faed2bf2f95feb7c8f8a80aecc008d31d7161c136b3ef906021b8f8eb4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-billboard.usdz",
+          "bytes": 17157,
+          "sha256": "dfa41b6106f9a281afda33cc1d11ddb5e4cdda921ab7dc7faea44a0a54839cc1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-car-green.usdz",
+          "bytes": 108495,
+          "sha256": "bf1c6515b3a061ae7d4d29d0f5b9d15aeebb9fa2cf6d81e5a51e81a166749fdc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-car-red.usdz",
+          "bytes": 108495,
+          "sha256": "51a83548a01fbb080dd9d1db23aa6bcce27abbe4a7c662cbeb50cf7263eea836"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-flag-checkers.usdz",
+          "bytes": 17474,
+          "sha256": "50d1c864801d9df74aab03149e520face00ec627c291560ccfe24cb36b614f19"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-future.usdz",
+          "bytes": 107383,
+          "sha256": "3d59fd90512ca8a4cf5c0a24355e41fcddea708da3dba60be448aa05ecaace90"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-grandstand-covered.usdz",
+          "bytes": 16553,
+          "sha256": "fb9d5b311763c0a1665691762dc7c2aa9ca512757e57f40c215bfac5943491d4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-grandstand.usdz",
+          "bytes": 13663,
+          "sha256": "3eb7102d6ad230ce8cbdf90243f2410cb044a4b3306b7d6d1aa38d6f9bf2f9d3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-lightpost.usdz",
+          "bytes": 27180,
+          "sha256": "c4245785cdb822cb5d5ca5cf4a90387547133a0eabb558e3163d5b831ea0ff8a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-pits-garage.usdz",
+          "bytes": 15265,
+          "sha256": "6b6c94747ed4fbfc76db443d030182a8a576041241fb7dadd6ceb42d119beba7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-pits-office.usdz",
+          "bytes": 9822,
+          "sha256": "bd8412ee509324c8bd1e1aa76c2c44ea3d136951132c580bf65d5dc288b5b3c3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race-pylon.usdz",
+          "bytes": 10233,
+          "sha256": "afea73ebb0c89b8f43975b501bf91b7235f9a3a6de3072d71bcd7e311e3ab1a4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race.usdz",
+          "bytes": 100651,
+          "sha256": "4fdc7212e70b74f920559ecd2d93c2d7edae6d1df37cd1b438806eacc66e812b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race_countdown.wav",
+          "bytes": 311032,
+          "sha256": "3fd4b550bb61661fd7bcca96bd3b99a228106ae36b506402146c03ea6f677ff4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/race_intensity.m4a",
+          "bytes": 121760,
+          "sha256": "cf6444b4b58e1eb9dd17ce244d7df44a396ea92a70dd0aebde1d4586c54c6d5a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/radio_funk.m4a",
+          "bytes": 153761,
+          "sha256": "a864a07fbfe4e19f0f44b6f5879e906e5d69cad83426463fdf97af1a5920c022"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/radio_jazz.m4a",
+          "bytes": 122449,
+          "sha256": "ca378d641da7c1d07b5779b5dac7390239aff88ce4ac3eaf54db385b2cfcd35f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/radio_pop.m4a",
+          "bytes": 129570,
+          "sha256": "531a305529b9a369a239a47cecd3343e2081204451d3387dd52ebe4d1460f437"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/radio_rock.m4a",
+          "bytes": 142943,
+          "sha256": "ae751801fe4eb970ca94cc8b3682f8800aeea14cbe129eb80f0d4d5919e661ff"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/radio_smooth.m4a",
+          "bytes": 166308,
+          "sha256": "12849825b0f4b894c8b7b55cfc6b462b56174de0223cbc0843308a133b5ec08e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/reaction-boost.usdz",
+          "bytes": 80386,
+          "sha256": "bbe6f3bbbcd2c9ab4a844f94bd7214f96679ac10684f4567229849bc0364ec3e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/reaction-cheer.usdz",
+          "bytes": 80726,
+          "sha256": "875330666682f24f5da49cd50234025dbd92a72462a1e89ba7f11cd52d358998"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/reaction-crash.usdz",
+          "bytes": 80394,
+          "sha256": "acaa4ca5bf640929911207dd3b4309b5fe6c609e6ed322e29d90876194ad89f1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ready_bell.wav",
+          "bytes": 64094,
+          "sha256": "a24c939b0ef80f33737ac55f1699386584abd4161c4ca10efbe32e479cc08eab"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/rematch_ding.wav",
+          "bytes": 64094,
+          "sha256": "38fe0f675303a9c7461e144e25903c7bc69c75c8b4b740e1c378835519afa832"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/respawn_pop.wav",
+          "bytes": 74656,
+          "sha256": "563100e87192aa35af21b90716e59ee057c47ffa01802da4c5bcaeb1e524a8ef"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/respawn_pop_b.wav",
+          "bytes": 74656,
+          "sha256": "bf97a67f61f53f830ef19755354cd0b0d263d1cf5e03b76e0da5254db236d471"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/results_tally.wav",
+          "bytes": 180496,
+          "sha256": "ebb46b0b3bc363e51971944ffe8ec518dd0f037cc7d261e4c00994d17e1370ba"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/roster-colormap.png",
+          "bytes": 9155,
+          "sha256": "386ab0b9da4f8e683b972a0cc2dcd4e1aa0a24edfce5f49c0fb41f2731d05aa7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/screen_whoosh.wav",
+          "bytes": 57016,
+          "sha256": "59832b3460a55a227109e8d723c81c49fd463688afa7613c21ed4240bec5f3a9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/sedan-sports.usdz",
+          "bytes": 110033,
+          "sha256": "26a1352f39483b57cf964d50bb2c73a7465f3837f366d95be21c4361f32e2d2c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/sedan.usdz",
+          "bytes": 106036,
+          "sha256": "42fee217e92631013467bd585e5e8bdd62dd02fb3dca0439d1276df9e3b224de"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/shuffle_dice.wav",
+          "bytes": 92296,
+          "sha256": "2ce657e4777c7a6ba43537c0e51cfec2b7f2f0722382f29dd2da2f453e47837a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/skid_drift.wav",
+          "bytes": 92296,
+          "sha256": "daf37dd09daf43555e2ee33b62467d9406a4bfc166e977fc1a54c8371ee79d3e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-alien.usdz",
+          "bytes": 27123,
+          "sha256": "0faa60911fae800933ed81b4d67ba3b0b4b48add4bdb7364cb37951dd60aa3e3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-astronaut-a.usdz",
+          "bytes": 27754,
+          "sha256": "0c0621cb7945575b3e881a160be011f841add835e64256cef888d284372fcf46"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-astronaut-b.usdz",
+          "bytes": 28674,
+          "sha256": "5acdae68fc105523d82dfd34c2c14862687281dd19559d918a81d90ec29f19ec"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-crater-large.usdz",
+          "bytes": 7455,
+          "sha256": "8dad9fe929b721ca3391f2c2f2019abcd018c4bc7e921bde6a3ac37dd8e819ba"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-crater.usdz",
+          "bytes": 7490,
+          "sha256": "45177a960d6307a61ab99f292eba1ceb3896442e1cc517736c8a964c27f9ceaa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-crystals-a.usdz",
+          "bytes": 29818,
+          "sha256": "c33d98cae7e6908d9feeeb6a67d97a9edecd83439c3e65177369b9dcc6abcb3d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-crystals-b.usdz",
+          "bytes": 29571,
+          "sha256": "c47ddb1b347aa0026f95c612a6b7173a66bdaafa68156997bf9dfb14d3cfa135"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-dish.usdz",
+          "bytes": 16655,
+          "sha256": "2373ec7194dfb0bdd6c217018bbc77eaef8f9694344f60f1ed333fc4b5740ffe"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-meteor-detailed.usdz",
+          "bytes": 16609,
+          "sha256": "e401f4fbe150a6f54aa30778262af7625eeaa26f1f9a649bbeb9a15c2f3d82d2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-meteor.usdz",
+          "bytes": 8020,
+          "sha256": "4b8496420d3b029ea76caa99dbd86cb28340fa296e2cdec353698fac143a7116"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-racer.usdz",
+          "bytes": 23198,
+          "sha256": "a6edc99a925b426820ebc455e6c0c7b2b50b0d7a1f91ba6a50ce487bf8692fc6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-speeder-a.usdz",
+          "bytes": 23513,
+          "sha256": "53b2f3c43530545e228be5998d31163760202f3389dcaa19126f48800b950876"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-speeder-b.usdz",
+          "bytes": 22420,
+          "sha256": "0c579232007ea31e6b571781669fd1bbc29d069e7921c1c2cec010b5989d2822"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-speeder-c.usdz",
+          "bytes": 24181,
+          "sha256": "cfb394b0e747cd3d96fa23bcbd80ed49dde383e3fd0eaa29a36ccf547e35270f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/space-speeder-d.usdz",
+          "bytes": 26533,
+          "sha256": "60db71ac15d28a91bb908188ebfbf173246516f1072c3d5c22def978c8ae3b96"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/speed_boost_fire.wav",
+          "bytes": 134632,
+          "sha256": "c9384cee875a469637b17d32512d2862c50800b474e65f348475ac188e3d26cc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/speed_boost_fire_b.wav",
+          "bytes": 134632,
+          "sha256": "4d47b82e69ac6ba0f61ee4fff3c2b34f4c2803ce79c9d70ff5e3542942725351"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/speed_boost_fire_c.wav",
+          "bytes": 134632,
+          "sha256": "66d3cad9d1e77397fbfd108abd85b3b8c790bab8e8920a6e5489974dd60dc57a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-coffin.usdz",
+          "bytes": 32983,
+          "sha256": "e1ab6f6661d98e1b2b12ae37520c6292117ea9c1a1e90afd8fd79e119a826ec2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-cross-wood.usdz",
+          "bytes": 23740,
+          "sha256": "a3d6149966a26bfc29096d533e9742b6eafc87013b2addfd904cce832e8999f6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-crypt-a.usdz",
+          "bytes": 22160,
+          "sha256": "be7525d6ce3b24824839fe3159dd3778c8fa6915976633f5e7b0cb5522f85192"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-crypt.usdz",
+          "bytes": 32784,
+          "sha256": "4d4c9e0b9c2eb0f493e86b4f1b0fa427b1f841c57db34561d105616c832af811"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-ghost.usdz",
+          "bytes": 42214,
+          "sha256": "00cc72c46fb0c75103038e37524515ceaf347ee55e6be2df07854a0e0aa7da49"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-grave-bevel.usdz",
+          "bytes": 26470,
+          "sha256": "2c0acf08627205d974e12e4aea39ca87c966b7b05167afe76c61594e6b440bfd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-grave-cross.usdz",
+          "bytes": 30039,
+          "sha256": "1c088a1566052adfa87e235d3f8045ab69cbc676db07cc651118220c1c10901a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-grave-fancy.usdz",
+          "bytes": 21195,
+          "sha256": "bdf5432731d1e9df48a11ee13e05f9cb8e0e43785161b7b252938587ceabfba2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-grave-round.usdz",
+          "bytes": 26989,
+          "sha256": "5d296233407f562f52383498e7402fd46f5451fbb2a0e87cb2e1c2821c4550d5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-grave-wide.usdz",
+          "bytes": 32698,
+          "sha256": "7e5509bec3e16308eeb863ff2df30646123eae39e83772f736a97e6ca6179bd5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-lantern.usdz",
+          "bytes": 30608,
+          "sha256": "fd830f618349979dbccb56bf61af52095777cce324e49bb1f72202c3a9963c56"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-lightpost.usdz",
+          "bytes": 40077,
+          "sha256": "ede1cd665f33a5f1066654741e6b043a93d2d191af2f63f695a624db101382ce"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-pine-fall.usdz",
+          "bytes": 40254,
+          "sha256": "35fa924a30bd003065869b36982498934a567fa330288665a17c5afdb111c59e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-pine.usdz",
+          "bytes": 40295,
+          "sha256": "9e2e09f7f4805e9952ca0c2fd406c7d5ff397c2ca9e60a6d2054ad98886c5698"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-pumpkin-tall.usdz",
+          "bytes": 47881,
+          "sha256": "6a1aa23389977f26c5976a8723f899ef863e3c418a7d613b8863eeefee06b5fd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-pumpkin.usdz",
+          "bytes": 49681,
+          "sha256": "a686b4c6d4fab6225f36e7532c6942793d7e13910de4e4dff8ecfe0509908e7b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-rocks.usdz",
+          "bytes": 41442,
+          "sha256": "ff31e2acbea0b38c4ed719cafb0f4cae78efae6413f550d0250c5e65e908ac97"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-skeleton.usdz",
+          "bytes": 56778,
+          "sha256": "8390c073d8ba33acb28232236ec03ff5b7ae1e363d417350f8dd9b8ee078194a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-vampire.usdz",
+          "bytes": 88934,
+          "sha256": "eb2c079595f3be80546966d6672eacdd09dbb727c714d8a01e0e1440dfb2c2be"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/spooky-zombie.usdz",
+          "bytes": 87106,
+          "sha256": "915f88898bea079d52805096fed3a409702b1961b22d6c8363e89560ffb581f5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/start_gate_drop.wav",
+          "bytes": 74656,
+          "sha256": "21550e95a05ce557278f64bfe41cda87a3b5a6f9f05f9c553985a1ad5afb9ba3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-bend.usdz",
+          "bytes": 31633,
+          "sha256": "4da02818fda9f1d8a6829a3d2ed0ae1d40f53dd4504817c258e7964a50f69ba1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-cross.usdz",
+          "bytes": 22709,
+          "sha256": "4867ea038e5152d703e4df784d739ac4fdfabec8c3e2372ee01065d0cc10c00a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-end.usdz",
+          "bytes": 17829,
+          "sha256": "e6c085fb1f99029c514b4231d75dfcfce2ddde6502dfedb9380a69ab13688a1c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-square.usdz",
+          "bytes": 17378,
+          "sha256": "73f8f8db7c77fa5a8cf8b282ff8ebdb08e594c520907dd32a434971d8bb0346a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-straight.usdz",
+          "bytes": 18003,
+          "sha256": "b9cb5fb8f79e1decf2576c820a7f32f02b71c1485b0d80760ec9929685c57e09"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/street-tee.usdz",
+          "bytes": 20686,
+          "sha256": "b9a55b4128d126288e39992a5c24cf22bca845cfcc8948d41872040d498851be"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/stuck_wobble.wav",
+          "bytes": 109936,
+          "sha256": "864c6fa00660c61577de8ea5f6c2936bdefdebb268ad34b33130d2e68b68c4cd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports-clamp.usdz",
+          "bytes": 17061,
+          "sha256": "4429e6f6bee90ba34a2637570c76d1ba7caff44a00dddb12b99d93f378967861"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports-diagonal.usdz",
+          "bytes": 18395,
+          "sha256": "ea22614c9d2021e03754874e57f1401c5e39ae69472a571aacfbbd32e7799033"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports-wide-clamp.usdz",
+          "bytes": 17052,
+          "sha256": "3a57c238f71988edb6905b801252b875f56ed165c34ef6d052ffcab6831ae946"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports-wide-diagonal.usdz",
+          "bytes": 18386,
+          "sha256": "8f92443422a7b4730e015f9318a5119fef069e9457b04997ce8b6249f111e4fd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports-wide.usdz",
+          "bytes": 17086,
+          "sha256": "722e1cdae447ba9cb0e9a67802ccb148bc5e9c5a62c1b62fb55f92f759b3b8c4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/supports.usdz",
+          "bytes": 17099,
+          "sha256": "b0bdcc8dce12741dd4ea237ac03ec337d5eaa2fa7a3e2ce47fe1b0946e039e4f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/suv-luxury.usdz",
+          "bytes": 109449,
+          "sha256": "8e799e10c52c6540a510f8c42a19fc57239a04c479b23c767d09d31b8df7691a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/suv.usdz",
+          "bytes": 131121,
+          "sha256": "7bdb449084e265813ab0db7aaf9a722e10908f47d53536fc717bbf7db29e8273"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/taxi.usdz",
+          "bytes": 108309,
+          "sha256": "c2a0ec74c0e1f88489694e9b1ae6b00524252f427051b7444713fd311c5283c5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-ambulance.png",
+          "bytes": 15696,
+          "sha256": "1d52212c9b99c8564ec51dca74755a0761730c97d753252772d108ff8218b3b1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-barrier.png",
+          "bytes": 15805,
+          "sha256": "bee71ad5356381b62535858faec554df6784cbb2b832131dae3745f9a5d24ae1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-cone.png",
+          "bytes": 18941,
+          "sha256": "7d41cc3639123192ecdf012cee567b83aca3fee5b19633d425afaf3899f931d8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-dumpster.png",
+          "bytes": 17101,
+          "sha256": "0065d620b0e7cc80d0c28047c0478e88af21e64b7f97406a758ef0c4b05510b6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-fence.png",
+          "bytes": 8759,
+          "sha256": "0e8e88cb4e73a980d1ece2a550787878d91b263011bcb9e7580bdbbbd379292b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-light.png",
+          "bytes": 9025,
+          "sha256": "0fcebed978137886d30d53a2512a646f67798ecefa604131708b5a0f2857bbc4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-lightpost.png",
+          "bytes": 4758,
+          "sha256": "151a11029f92ddcc9508c131740fc3083f74a265d5b34cd52a4ca112cc9a93cb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-pillar.png",
+          "bytes": 5285,
+          "sha256": "969691378a88b21508ac3af42d97ce143276e90ea95756a49a977986febdbb33"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-pole.png",
+          "bytes": 11916,
+          "sha256": "ee854e8acc651bec5ea14e1f7821e8a030c739622a9660a2dca21f5076deb39b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-build-sign-stop.png",
+          "bytes": 12958,
+          "sha256": "9af0334e44428f9ad7f8c3d0802bf273c8f1f61ff30d16f267456719f1178ccb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-bridge.png",
+          "bytes": 12767,
+          "sha256": "4fca8c8a55a777d6bca882dd6348a7a3f00e6b2bd61d51d4677795374c219d5d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-bush.png",
+          "bytes": 9287,
+          "sha256": "436fb5ebda37517d26e966016e9306bba6cf732c89b7ea68ca785787d44c786f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-canoe.png",
+          "bytes": 5069,
+          "sha256": "b5a95d7c55679dcae344d974a3762f21859504c8965d0128c27198bfb0f3242a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-fire-stones.png",
+          "bytes": 8505,
+          "sha256": "e03f19d35015a3e59623cea152bd155980fd415bc84863e8e8b2184362a17584"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-fire.png",
+          "bytes": 9622,
+          "sha256": "a02bba0b40484fcada7cb72433c8d6a0c8572e9041cdd4f7118af5a5bf2eaed4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-rock.png",
+          "bytes": 6125,
+          "sha256": "b0701fefb4462fd43df46821cf08ceb4c0a5865b867c9fb0a4b03d4fa46514f7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-tent-closed.png",
+          "bytes": 10034,
+          "sha256": "b5ee9ccf01aaf36a3a026ab7c22fc73c08b655e68167aedd748f640d08d045b9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-tent-open.png",
+          "bytes": 10136,
+          "sha256": "be5aedf81e3463b9eee331cb38dcf0dfd3e9cac0b204461f32739f15867135c5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-camp-tent-small.png",
+          "bytes": 11196,
+          "sha256": "ae01838f502d9984dbdcb33ba422275199a318c9f26347c6c86aea305e4c972a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-cactus-short.png",
+          "bytes": 7573,
+          "sha256": "181e843ac71991d2da300213954e9e87d493a9993841d613ce21c7d3e1f5abf7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-cactus-tall.png",
+          "bytes": 7731,
+          "sha256": "54ddf7181fe2fab59cfc2679e7d09c3c49864342cc356e8722ec460a99900e9f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-cliff-large.png",
+          "bytes": 12077,
+          "sha256": "bf3ec044694252955b3805cea75a39c12c059b70af6523ae120f55f7f959ba69"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-cliff.png",
+          "bytes": 10085,
+          "sha256": "0964a43d2ed2434242290e007ddb31e0b898b0dbe0b9cb103baeca336adbd449"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-mesa.png",
+          "bytes": 10657,
+          "sha256": "81027cf8c5a9c29bffc56e2d89021466b911983588202a02b4137684c6d2e104"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-rock-a.png",
+          "bytes": 7203,
+          "sha256": "cb6ea39e3202532c9a1e6d078ee14e322dce1013fcafde73e48e11f095e9da60"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-rock-b.png",
+          "bytes": 7553,
+          "sha256": "8d7c676a3bd6724971d5d7462e2cbe924272ee90c7a804ebb7e826bab61a8459"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-canyon-rock-c.png",
+          "bytes": 9011,
+          "sha256": "e8d0670fcf792269c36413f0d2980a052bd4f103576acd7ae716c07c55339ab1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-ballista.png",
+          "bytes": 12247,
+          "sha256": "ea9b3f6043e5bf95a93232e44ef22881f27022a16b962a3e5b39219b0d04f4e0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-cart-high.png",
+          "bytes": 18782,
+          "sha256": "8f33bec4d0c5e94caa595ba6abfc637e876daf591fb9ad3bedd94669de81993f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-cart.png",
+          "bytes": 12514,
+          "sha256": "4cd5d47b0b2e53df94cd3e6cbe8764a2007e8c660c6af65d9954b984e6f3f7d4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-catapult.png",
+          "bytes": 18880,
+          "sha256": "2812394226be6f4244f45256d8c3185af84ecc513fb7a0b8b065a57056540bc2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-flag-wide.png",
+          "bytes": 12149,
+          "sha256": "7afd6586bcbea5d02375df8316a3ff2d466002950c09283ec0ac8c95366e5447"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-flag.png",
+          "bytes": 7495,
+          "sha256": "0e51783d92d803909a86967243ec781391817c2c1f10bbc0bc1423cef06c1094"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-fountain.png",
+          "bytes": 13981,
+          "sha256": "8f5eb75d711f3e39fa908fefe4a47e42854623b17ae8779120052c726decc986"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-hedge.png",
+          "bytes": 14554,
+          "sha256": "6f698177e45d31df8830474a6aa150a04c3a365db312a0d0a0cf62a812ece82e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-lantern.png",
+          "bytes": 4793,
+          "sha256": "8863a83818bbd80e51fdd94fc4b68753cd538653100ae12315b13265dd283077"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-rocks.png",
+          "bytes": 12018,
+          "sha256": "38422dbe386f79742e628ec1fcb289ed6eef5a9bc78a6b7b8fb6ea17acbf650d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-siege-tower.png",
+          "bytes": 16098,
+          "sha256": "f53e2e4ff095e5baa5c3c917d876df9b7a0f39380b128d7e7ad205d6f6a815f3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-tower.png",
+          "bytes": 18402,
+          "sha256": "8668bcc4789969b6b19f72f9ef3174b972175ccf1b5939664fa7971fcb0b7704"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-trebuchet.png",
+          "bytes": 23634,
+          "sha256": "6688ce38526425eb1003f7e93007cbeb0de2603f6446f55a00c1c1a7b44d201c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-castle-tree.png",
+          "bytes": 12842,
+          "sha256": "0417f37297ba5eb7a4731058983b5bf3a7558cb38c3e25b6b72f95f7fa225bba"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-fence.png",
+          "bytes": 9945,
+          "sha256": "f9b3fc2d6018eda57a51628e1c42eb2a209b229969866b7b187d67a9e894fe39"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-a.png",
+          "bytes": 18181,
+          "sha256": "6eb6d8b43cb45445fe3ee14122dab9e7a06d4db080c1172f2417bad4d91c928e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-b.png",
+          "bytes": 17893,
+          "sha256": "21b972ba665936a112c194af5fd70cfa6c0b87131061bf267adacdc47ccb85e3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-c.png",
+          "bytes": 21130,
+          "sha256": "4603288d513251afaa84ad9a92caac9ad1055a0c943dc6fd95fc65c71c5e1905"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-d.png",
+          "bytes": 18109,
+          "sha256": "d192ffd9afd22e434feecf424eecd3b8bc5b367eeaea48ee56288e1160b80277"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-e.png",
+          "bytes": 24772,
+          "sha256": "9eac170c549fbc77a5c5f63516e2617fa3470e4b3946cdd995dff41d6df346c6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-f.png",
+          "bytes": 24380,
+          "sha256": "963ac366264775711aefe164de7e0ef99b71f04c84e30e590edd96ac9fd1531c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-g.png",
+          "bytes": 16002,
+          "sha256": "c39b5e6b5b48026cb29629eb81e58369478546b4ded2d0af0fdc055d6894b701"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-h.png",
+          "bytes": 16627,
+          "sha256": "229a426bf50933b41e9c3e388bb650371a94f8a4a8ebaa29fada5229134cf4a5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-i.png",
+          "bytes": 16896,
+          "sha256": "b4665f20dbd68e769c3416f97851086acd02b0a0306efec32514b65cd3ec87e3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-j.png",
+          "bytes": 18862,
+          "sha256": "c7c5b41938a224f557e38a40aa7064902b4e162a9a62c9fd061f08068731d198"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-k.png",
+          "bytes": 21611,
+          "sha256": "9af85bc6bada39c838603f8c938911e3ceeb4f94b2a4951616c6c55d1c435973"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-l.png",
+          "bytes": 25603,
+          "sha256": "549a41015f2766720d2b1d69c0e25a664dca8e5a62708c5fe3a6b08d79ba5db8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-m.png",
+          "bytes": 18584,
+          "sha256": "67babafa22df75822a4acb50ce98f2059ffd241058f6344892515a8b23383f5d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-n.png",
+          "bytes": 17768,
+          "sha256": "7648d513c74e0cd07bcd31537457f13c6b621a0308f23850a3293613a80be2d8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-o.png",
+          "bytes": 21617,
+          "sha256": "d91bda728a68ad7ad6d7eebf09b03fa0bac8e4e842ca31d835771bb85bf0784a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-p.png",
+          "bytes": 23994,
+          "sha256": "136e9acc7bbdb1b68443be436a6e2223a708a1b8feaedc88210e77141848839e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-q.png",
+          "bytes": 20792,
+          "sha256": "dffa56221dc59f20de249aaebb4c28c59a6e7f10719ad8dbbdb3645096841983"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-r.png",
+          "bytes": 22226,
+          "sha256": "9dde56886f613a248b91db2d2a13dc20549168dfcc14d337c9c8d16c2acf2daa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-s.png",
+          "bytes": 19069,
+          "sha256": "81e8cd25a8e077f3eda2fb9fa5d06874d3d0266764211b8055e1161677c2f32f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-t.png",
+          "bytes": 25583,
+          "sha256": "4e2d152904e495dca240b5b61f6acc8975b9c31486648258a0147c1da4bdfbbf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-house-u.png",
+          "bytes": 18886,
+          "sha256": "6ce03be70610828eccd32162c5ae94e293034026e0f7e4bac6c5ef5b57e43f94"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-path-long.png",
+          "bytes": 4783,
+          "sha256": "ff9a207be1a1b1913c7e09b756af0b5cc2afd7413ca900c652d0bee43471e0e9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-path-short.png",
+          "bytes": 7728,
+          "sha256": "e717933c7339a36572500ffe70c84747c4330ba00dfefae6c5996c73cc8506fc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-planter.png",
+          "bytes": 20749,
+          "sha256": "fad0ac8312d3a4b3d375be3dfaaf675bc8342fc5e4ba0477d52c1949d91eab01"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-a.png",
+          "bytes": 21751,
+          "sha256": "84a276b80cc29baabbf3a463f9be0390c95ae027761f23658f5e234295e00169"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-b.png",
+          "bytes": 22395,
+          "sha256": "656ab244477e17cbe120da73fa48f4a732d7a4f916d534341ac2151a269fbe76"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-c.png",
+          "bytes": 22263,
+          "sha256": "d063aef12b1e5f1973010c59b2a7d433d66e5419b070d244fcbef922254e0562"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-d.png",
+          "bytes": 18992,
+          "sha256": "886a9b922480dfbec9a4264c45660a6c7f6ba9d9c04ec8de6655b074b1849890"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-e.png",
+          "bytes": 16873,
+          "sha256": "cc4e10334e32c6bfbf3b914087c528c2975a66d7f1461a4ba41d336963d90315"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-f.png",
+          "bytes": 19852,
+          "sha256": "e19d55fbb6ee756380aa0e6350fb6f06fef292f6df0abcbeab32411c5804e80d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-g.png",
+          "bytes": 19113,
+          "sha256": "fcc23dda2856466b39e71a4aae94e6a3e4b72e82da99d8b215ea55c4bed35037"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-h.png",
+          "bytes": 22666,
+          "sha256": "02337013773c217a00fca39d0c241f5acdbf92b07f2d8bafe32a313918f7a023"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-i.png",
+          "bytes": 28547,
+          "sha256": "65e2cf92eb4429594fd21b84c40c11711d6f9e35f8b5051b52961f9327e2b3c2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-j.png",
+          "bytes": 31741,
+          "sha256": "b86d2942eb3c50d44137e2d8378c6ee6000026c1dc0c6e46b9ec83e89cbc4cad"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-k.png",
+          "bytes": 19441,
+          "sha256": "371b2acc5d63ffdf241a04d574c4e606976043d3bf5a68648c4c628601d79011"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-l.png",
+          "bytes": 22209,
+          "sha256": "5bb13dc2dcc78a29a5dd72e3e399b868c024248757bb15e87e57f0204a847886"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-m.png",
+          "bytes": 16076,
+          "sha256": "c47eb02872b76d262ee6bd766880f3305a2ecd6e80fed456d6f72c1adad4c4a1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-shop-n.png",
+          "bytes": 27878,
+          "sha256": "514b1ecc752efe1b80d6a13a4cff965af8dd57c78e21c76c7c81b2e6c8c1795d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-skyscraper-a.png",
+          "bytes": 18952,
+          "sha256": "62af663a1386dd21b305cf0f6f815b97788e906633b591982441b8ef2d00c6b4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-skyscraper-b.png",
+          "bytes": 13310,
+          "sha256": "818e0907e1a47e2708be1c0a70666df1d753d1ec6595f6d68d4fc8a15831fe51"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-skyscraper-c.png",
+          "bytes": 14297,
+          "sha256": "589e8b1f484bd3bc190604b908a75f190eae49da9b991119b13d7f0e619cc508"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-skyscraper-d.png",
+          "bytes": 11590,
+          "sha256": "7f0c1de71453490896527c076302b7219e56b809d15426887a44fbd191126acc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-skyscraper-e.png",
+          "bytes": 13424,
+          "sha256": "db715bbed8b570c1b176f96efb534f0bc34dd21bd4da07e7de2ab43417014584"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-streetlight.png",
+          "bytes": 4196,
+          "sha256": "4582ebd6dfae8c68d5e859e9cec4f4cb7a95dc516d15ba29ba26414295ac0896"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-tree-large.png",
+          "bytes": 7791,
+          "sha256": "c08e9d2a17d3153a2ed57bab4266e655c4c4aaf2c7ff8cd90a71d33d06fa2de1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-city-tree-small.png",
+          "bytes": 10714,
+          "sha256": "0a7d2f073481dc0a8418dc72f97c01a427b16988e06f9ed95f12d31fcdd0592f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-delivery.png",
+          "bytes": 14292,
+          "sha256": "66768785ef9b98dde010b7df1fc24490a9548da482453755e6426f83b645c861"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-firetruck.png",
+          "bytes": 18685,
+          "sha256": "4f3b3d5d0fc03512e34b71e6e188931d9e0b9ac1be21e6b988339bd50186b0c7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-burger.png",
+          "bytes": 31486,
+          "sha256": "2c9bf539cf10ea8245dba0a9f4aafcc6958ed71b72cb2cb4c9fa41f0a7573017"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-cake.png",
+          "bytes": 21133,
+          "sha256": "d0f965743b3eecf0094f69302998d5a5782ad7648684fe5ff4fedfb36ce5e21d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-cone.png",
+          "bytes": 12999,
+          "sha256": "c12ab715050963a4be048e65f99d04943ce7adf30cbd573025a59d1cb41a0acc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-cupcake.png",
+          "bytes": 16468,
+          "sha256": "d031caf6a929c7e0e290f8f7beab15b5a01b0bf291447479e42f6b126fb12d97"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-donut-chocolate.png",
+          "bytes": 15571,
+          "sha256": "603251a8b37278af483ad793867dd40dfd5ad12aa5e501bb14ed2f321e6a2915"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-donut.png",
+          "bytes": 16431,
+          "sha256": "c895f1661e12522aff043573baf915149f1e09bd68caa5553afb04904ddd7626"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-fries.png",
+          "bytes": 16002,
+          "sha256": "265a2258575d68232aeafa005cad5a085d88acf81b725b93b787dd7f1cc35a5a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-hotdog.png",
+          "bytes": 9641,
+          "sha256": "b6f88dc78b17e96db46b5b812d01af1f86077300bd4471224d4bf0f59a47b5ff"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-icecream.png",
+          "bytes": 13117,
+          "sha256": "0042ceed014393bc19098f647871398dd7b1c4fe4c6a4f99104834c8241c5003"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-muffin.png",
+          "bytes": 20772,
+          "sha256": "ebb3717bbae44e0bde440dfbcf3a6d08dcaa02ea3137505d1f08e195ce5ee495"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-pancakes.png",
+          "bytes": 10923,
+          "sha256": "be9816accf5e9377f2612d0af732d11c404bed876db226214ca090fb4430fbaf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-pizza.png",
+          "bytes": 13758,
+          "sha256": "e287ba32eda0d40a9393f7a1f49d3bf9a4b5043c9581ea23a02cab19ccdbece4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-popsicle.png",
+          "bytes": 7014,
+          "sha256": "4445a72411fe5f622bd2061251eff1d61e74b8aeeb642181635b752486ae00eb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-soda.png",
+          "bytes": 13061,
+          "sha256": "ce28bcd344b2f367862e59c80e2142016539c579597066bd435567150b804e68"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-sundae.png",
+          "bytes": 11224,
+          "sha256": "8a456001fba5cc4419187ba38aa5659f25b512946d2e84cabc67b120e4b344c1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-food-waffle.png",
+          "bytes": 15988,
+          "sha256": "cb002446d227a4aca492756834c70f35e4b8a151f555ef4ab3d95d87d5ecc744"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-garbage-truck.png",
+          "bytes": 15670,
+          "sha256": "8a609263b9d5bfdf67ff3348aa67167bad92904302737d6e962f9fb782a4636f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-ball-blue.png",
+          "bytes": 25714,
+          "sha256": "7c2d9e732ae83341e1b608cc738c0245d86ea65339a430e2ef13e75af54e6646"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-ball-red.png",
+          "bytes": 26966,
+          "sha256": "5fb47d793c01ac6484d5c2cce9996ce0299d1af66efdb24beac803a1367ee716"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-castle.png",
+          "bytes": 17837,
+          "sha256": "1c0d2c63e5af5b7586269cc92de1aa61827a5c675c5582075f111a546030b7e5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-diamond.png",
+          "bytes": 9036,
+          "sha256": "9700c6149ade00eecfe416d36cf2dddc0d01c45f8eeddda58e483e9b60095703"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-flag-blue.png",
+          "bytes": 6609,
+          "sha256": "c33739da46cdcfdedb95b19a1bf11f65e5ad97823d18992d1040c736969f87f1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-flag-red.png",
+          "bytes": 6715,
+          "sha256": "b80ec2f5496b290952793eb7fbb0563bc79fb87311a1b57f36944d0633bfdf21"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-gate.png",
+          "bytes": 12648,
+          "sha256": "bc9686a0ea632329ff2dcdb8c1474937d790659328e114907e99b81ebd71488b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-triangle.png",
+          "bytes": 10332,
+          "sha256": "edf3e7152cbe076a45c3511071b6ffa35ddeaf6d7ba36cec6fe2e24f4bd7926e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-golf-windmill.png",
+          "bytes": 14126,
+          "sha256": "aabd3ce6de0d5f9497f0d745ea670bfa324995a6835766fce29d831693781811"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-hatchback-sports.png",
+          "bytes": 12582,
+          "sha256": "96759963c932e9977f73515bce06153326ff5b51af39c0ab52290ac7aefbb6aa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-item-banana.png",
+          "bytes": 15391,
+          "sha256": "84c9df741cf4f7400cd2e4f14afc82c450b46cbc697d437cb04bc20945bbf78d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-item-box.png",
+          "bytes": 29357,
+          "sha256": "d03e07bd21c6017fe081ee66e93f60884f61d4c4263c932618d751fbb9e3fb4f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-item-coin-gold.png",
+          "bytes": 16930,
+          "sha256": "922169de8498664692890ede1aacca3628d0c0405a8127e8f8c33a85b5873828"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-item-cone.png",
+          "bytes": 23011,
+          "sha256": "a47007145fee7a0a76b25ec84cba8be775e5916c0162cc3388232126b1332327"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-flower-red.png",
+          "bytes": 6578,
+          "sha256": "6042a93d6cfdd7e0eaf7a86b7c5952a55982889e06630a717b95211cf05cf9aa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-flower-yellow.png",
+          "bytes": 9879,
+          "sha256": "e56b42dc80b1412ac44db8605a8478eb3cb9e37d714f93e5d0a700480b22cfc9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-mushroom-red.png",
+          "bytes": 9819,
+          "sha256": "5bdf32b7a1374b9f5311d0d5648857ea1a09a27a0ca972e9b5a5258ffe715cb7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-stump.png",
+          "bytes": 9790,
+          "sha256": "309b47cf04f5c9ce04da7e4c9b30181d618db08a2e2d4e28d2be846760ade222"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-tree-default.png",
+          "bytes": 5554,
+          "sha256": "89ed1887544889fd3519065119ab20250fee86c46b3a99b0599d18bf0bf03d46"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-tree-detailed.png",
+          "bytes": 8899,
+          "sha256": "bbb909313b40241f10658ad796642c4cef28e0c3b2fb5f0ac20efeb14408e4cc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-tree-oak.png",
+          "bytes": 8098,
+          "sha256": "1fddefa6cb9a229331aee01816b0753a86538f75ccf684e29820876a0316dc01"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-park-tree-palm.png",
+          "bytes": 5981,
+          "sha256": "f2a12cae04973380d15fe294ddfff5dcc21399cf87341414d3202b7b8d5c9bbe"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-person-a.png",
+          "bytes": 4510,
+          "sha256": "6bfd914bd2be761da8a9fb994747b85b07e8dc5bfdbfaf5814e04789ed7c7acc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-person-b.png",
+          "bytes": 5338,
+          "sha256": "c8dfd045de44728a00ff1014fccd7c812ad848cef490336f3c5401f53105e075"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-person-c.png",
+          "bytes": 5142,
+          "sha256": "f6522512c722daf521d79fcdb39da9f032d5ae5712e147c1f3f3fd05467758be"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-person-d.png",
+          "bytes": 5185,
+          "sha256": "9de8348cdfd679a700559f6729bd462ac3615dc7ba7e059bb6cd2c9a4c32ca2f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-barrel.png",
+          "bytes": 21405,
+          "sha256": "af721d7d04a928a74bf3a5328eb462ee3b28feb51384d0db89f6e951c3b46d05"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-cannon.png",
+          "bytes": 14133,
+          "sha256": "003c7919738d6bb2187f471ffe8a4c678266a4c6125530d4f71c2fd01979dd38"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-chest.png",
+          "bytes": 19923,
+          "sha256": "7dd2a572c42c406502bc0e72ab5490eaf2579bba247d7652741675090baa2da4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-crate.png",
+          "bytes": 18836,
+          "sha256": "82aabd06ca2b1ef9e52fd922babc1035cf589a77d9cdb75d0035639781adf067"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-flag.png",
+          "bytes": 4600,
+          "sha256": "d5d7fd70e7a18d9d00efea529d44bd4d4ce0a1d983a25c1403da18573655ec63"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-palm-a.png",
+          "bytes": 9832,
+          "sha256": "76066ab16cc6d853e97e2d6b892bbe9037f180681c6e37e1adc79cf02f17b67f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-palm-b.png",
+          "bytes": 11547,
+          "sha256": "39e6860453c743ccd7580601a40079ca26bb09ebb2b9d6e8877243831761502d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-palm-c.png",
+          "bytes": 11118,
+          "sha256": "15c1d3e1ec9e63ddb5753ff268e554ffb617792f048807c3fef04ddfdd15b851"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-rocks-a.png",
+          "bytes": 17665,
+          "sha256": "cdb717fc887642112f9efd56c54461afca70d0b3394ffffc8a9a537b44bef00f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-rocks-b.png",
+          "bytes": 19822,
+          "sha256": "87342a62b2a4617cd7e57a46e0a06cac0ff6eddb6a14ea981208ac18903e5a09"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-ship-ghost.png",
+          "bytes": 20466,
+          "sha256": "0a9390309ecec1b86a4f8c4ca8c23afefdd09f674e6d5a9be09b5e39dc46a723"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-ship-large.png",
+          "bytes": 15492,
+          "sha256": "ba93329e65c4843753f009389ed7b1e4ece93a7c76d0489b8af61c29a22afd49"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-ship-medium.png",
+          "bytes": 19272,
+          "sha256": "6aef4115690513073568e4ec6c406bfca16422262b53dc11ba16fbd43274eec2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-ship-small.png",
+          "bytes": 15106,
+          "sha256": "15771f5d90009c18562a87bb0df2d3533a8b7f6f4721df8f63520f608777a20e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-ship-wreck.png",
+          "bytes": 13820,
+          "sha256": "9204e2e73ff3e4eb50da7bbc5cb3270cb829ed1a9e381b77dee772c32cd58130"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-tower-large.png",
+          "bytes": 10964,
+          "sha256": "6deb1a89f33e731be66dc5154eafeb2ef1914b9d1cdf173dd51f8268c9ef1d87"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-pirate-tower-small.png",
+          "bytes": 15392,
+          "sha256": "cf1c7999c198786804f0ff4c5a51c7ca15cbf134ef4be809a84dfa3b041134ac"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-police.png",
+          "bytes": 12450,
+          "sha256": "c029c15dc6dfe21c408da35d47807f4201c4d711a3dfb7f468ca0c407c7c9fd4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-banner-tower-green.png",
+          "bytes": 9169,
+          "sha256": "03ae243593792497b4af144640ae16ef1eb4efa61943a53151ed470af3d5a384"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-banner-tower-red.png",
+          "bytes": 9150,
+          "sha256": "1a4247b3566ad4bd88b16c05f253bf0fdd60dbb491b025590601abbcf72a95c2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-billboard.png",
+          "bytes": 13039,
+          "sha256": "4797cfb42ad4f033919c57540a1c3f8660b02590039908c8ef3c4d89bf2e9bfe"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-car-green.png",
+          "bytes": 11151,
+          "sha256": "ea90e05604390926be94add525defa1dec068736df27d2e61cdaf1faf163f664"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-car-red.png",
+          "bytes": 11195,
+          "sha256": "5eb436b58bea631d80c837168b8a80165711d99077efea1ece1c750bb1538ddf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-flag-checkers.png",
+          "bytes": 3868,
+          "sha256": "32fc1a6be8aff26b19ff0b6ad68b07f198f8ba0ca5789a2d44a48667952feed2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-grandstand-covered.png",
+          "bytes": 16859,
+          "sha256": "3651288e42b520fce8bcda635149a279016203942e6023cfb9d8eb74a8610fd4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-grandstand.png",
+          "bytes": 17653,
+          "sha256": "f5ace9a745e0b257119a578e6e5b7058d8c767edd76db63f86830352e88e749d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-lightpost.png",
+          "bytes": 4061,
+          "sha256": "69dbebfa286c2691636c5f8d80bb55bc681665c82620df0ef2575d9269060771"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-pits-garage.png",
+          "bytes": 15276,
+          "sha256": "140426c9b0e6335bcb0f7e0b8a8ef0d3822c8b1764d1de786e5f86f63219e6bc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-pits-office.png",
+          "bytes": 13102,
+          "sha256": "b1aab24f00024db0ab1a1fb2e3d95a46ace4d460842dbe1e29460a15e4716506"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-race-pylon.png",
+          "bytes": 15076,
+          "sha256": "2f0f0c0ca41dc4a47a3b9d48ec45b9c47f3321cec5b16473d8a6d0a832642ca0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-sedan-sports.png",
+          "bytes": 13854,
+          "sha256": "087394ba05ac06807cb5857ae1a4d6bf6773e92ea5c8c8943e7b0f9a828ade74"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-sedan.png",
+          "bytes": 14664,
+          "sha256": "49d308f5e71b516d3309d348caa621207e1cff0bcea1a7dee3abea4b69ba463a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-alien.png",
+          "bytes": 8797,
+          "sha256": "842af6b24432915fd7a3e491a3c1d9ece06b6cc65d48780061737d6330a92afa"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-astronaut-a.png",
+          "bytes": 9838,
+          "sha256": "2fe7f7642d235685038e6fb961747e83d097cdc329f4898e31016501bc89e87d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-astronaut-b.png",
+          "bytes": 9867,
+          "sha256": "028b8c05e8d4c7c647043efd65b462551b50af3a3b3db76b756100b13151c15d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-crater-large.png",
+          "bytes": 6510,
+          "sha256": "759b2c0bebaf9a82d496a59a8c93ff5467da6fbbfc1f69a525d435dba7057709"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-crater.png",
+          "bytes": 6807,
+          "sha256": "6c930cb2beb9d452c1081204f38d2451eb50b78d62930cec05b8cef3f5f7e576"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-crystals-a.png",
+          "bytes": 11698,
+          "sha256": "56bb4032157775b5d75c339b5065688838119973352843d653038b61ce7a3c27"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-crystals-b.png",
+          "bytes": 12046,
+          "sha256": "b110aa2ec257bf6eaf26a25e1e40e555399e40c1c03ea74096feeb3ce964bab1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-dish.png",
+          "bytes": 9570,
+          "sha256": "af7a8620847553b0f1a3cb62a209e44937a724e0b7312f204333fbd7e19cc2a8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-meteor-detailed.png",
+          "bytes": 11872,
+          "sha256": "91631ae0689b9fe6d7edc9c4b04b810495800008c21afa710d836aa804629ea2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-meteor.png",
+          "bytes": 10562,
+          "sha256": "080ff8ae61219004a593019e64fabcae636fe81cef85e618adcf4a2cb4aca165"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-moon.png",
+          "bytes": 615,
+          "sha256": "fc8dedcea05ef4162537fa43f470b57bab27ff2145d0a80baf5442334416e57c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-nebula-pink.png",
+          "bytes": 1589,
+          "sha256": "0cab7eaab88196c95c4d79f8edc4f82b5ffc610ded51f8cf9e276bd8df0c4fc9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-nebula-teal.png",
+          "bytes": 1577,
+          "sha256": "3a642e4d014bbd5a941734abb98db5a20baa157f42cc26844c29467964e4b471"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-planet-a.png",
+          "bytes": 623,
+          "sha256": "79c210cb0975589a9d908cccfd9cc5b566e5bd181b1474c9153f74c2bcf73ae7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-planet-b.png",
+          "bytes": 621,
+          "sha256": "9a965f00957be4692a29f7adfbc1c4059d92564281a962e2177b555cf49f1b02"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-planet-rings.png",
+          "bytes": 761,
+          "sha256": "af86871215511372b208859f2b5b654d1e076e4a91b39bda53f943ec717f7e56"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-racer.png",
+          "bytes": 8676,
+          "sha256": "9950b6b47f5f7c606598d1280e2d2894f9dfc4c455bd84bd387f2758e3fa4589"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-speeder-a.png",
+          "bytes": 9944,
+          "sha256": "462aa5d2d583bd9fe20750b28aea821ecc39b2033c88d64e60b2a597cd9b48f9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-speeder-b.png",
+          "bytes": 10688,
+          "sha256": "cabee1ee615a7c6503005a2099fdc582b640615ed3010fe96071f2391499a6d4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-speeder-c.png",
+          "bytes": 6735,
+          "sha256": "2976c20104f39f1c1b5076501606777af0922ba7baffcfb72a4dcf75f444dd4a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-space-speeder-d.png",
+          "bytes": 7504,
+          "sha256": "c0b45df00094bfede9227eb82ed3896144c38734118bdb6df0b6ac76bb6d4ed7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-coffin.png",
+          "bytes": 13852,
+          "sha256": "d4fa73cb04eafd27695475f4d1f45cae16b331b851b6773c9c0a507615e4a61e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-cross-wood.png",
+          "bytes": 10000,
+          "sha256": "e406ca90eec05f41ab9b4d7e12ba28f8caf0934538838d79c375d35870a15c65"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-crypt-a.png",
+          "bytes": 13244,
+          "sha256": "f3734a68523462fd5a048e227572feecf92abf3f88a9ae51b1d9e50ef2789f11"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-crypt.png",
+          "bytes": 18251,
+          "sha256": "8ba66df45bd54258b4d2b04afd15f1a30cd5eec6cf9335e4c713f4aee3b2c07a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-ghost.png",
+          "bytes": 17391,
+          "sha256": "70e8d25474013e4f8422865d0a5b45974c3bc31a11ecdc46868a01f688bfb0a9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-grave-bevel.png",
+          "bytes": 15126,
+          "sha256": "895c162d75d415516f9fa53e7935442adf4d511452e0c0be0b02f704a576dc4a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-grave-cross.png",
+          "bytes": 11287,
+          "sha256": "b6d4ebfc0fab42372ac8e5332d87c217fbd71cc7af0749fb6b4d487f87c66243"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-grave-fancy.png",
+          "bytes": 15151,
+          "sha256": "dda614e590161873bc7b531b007730756e6113913c854295ed46c82babf9d314"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-grave-round.png",
+          "bytes": 15704,
+          "sha256": "778fbbf51746a46af384f498d2b75a022aeadeec06976c26a43fa98e57b92e06"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-grave-wide.png",
+          "bytes": 13124,
+          "sha256": "73031911d1a1ca82bca7053d9015a9cdb34895b2b640fef6fa293a254ee61cb9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-lantern.png",
+          "bytes": 18270,
+          "sha256": "067523b5c0212af4ca0dba7ef243e480f138b1fe014dd67013d9ed157e6183cf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-lightpost.png",
+          "bytes": 7464,
+          "sha256": "8deebfd762aeba938e2a398aac3588133c877feb31fc201924a5510284b6b5ab"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-pine-fall.png",
+          "bytes": 10882,
+          "sha256": "5d6c7c32607ce5dcbee04ce4b138323141c9f0e40479f45dfc86647d8c10ba41"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-pine.png",
+          "bytes": 11492,
+          "sha256": "6bce69e580974ff845110bedf59137d3f6d30c56549e203a9b2ea3f02c757c3f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-pumpkin-tall.png",
+          "bytes": 22059,
+          "sha256": "4ed185c3ee8219ef36d52596fc6e8db0291d097df5b6e832a0441b29bcb9b8fc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-pumpkin.png",
+          "bytes": 21803,
+          "sha256": "d7c942bd6bb94c83db2230e563ed50715b22c4f337179c7bde5d2a2e2dc55967"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-rocks.png",
+          "bytes": 15466,
+          "sha256": "406540703e64751e8e559b4899c3de10d30edd25b2ff52802e8cf474c913d45c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-skeleton.png",
+          "bytes": 16095,
+          "sha256": "9329cb3e9580e7af3b6dc42074403b1fa5b7bdb7969163e9fa90293aaaf89a89"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-vampire.png",
+          "bytes": 17672,
+          "sha256": "2305c8b1af6864b2c7fc33add02998aebbac34c5b82d73f36b8bdff947011b78"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-spooky-zombie.png",
+          "bytes": 16163,
+          "sha256": "815893d3e5926fdca7bc04fa1eb52400356e22b83636381d6f2121cfad435ab9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-barrier-a.png",
+          "bytes": 14642,
+          "sha256": "258d11718ac8deef04ba8ca160cec949b83aa62a569eb7cea09a48c1ad4f371b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-barrier-b.png",
+          "bytes": 12005,
+          "sha256": "3dd503c12f7831c55225297c6db165f728a65e4d8e3690caee23a67e9af22fa8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-bend.png",
+          "bytes": 6585,
+          "sha256": "844eeea08d83c9a24d647abeab9f9d53aaa1fa2f3480a02b922aa726f69328ad"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-cross.png",
+          "bytes": 7294,
+          "sha256": "67be591a07379cf3ada51e72154a81b6c6006cad36d7bab678fdbf47874e4e94"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-end.png",
+          "bytes": 7718,
+          "sha256": "db238e1ec65673274059c6c0462800b25a7f5d45f84404a2a7209d64d3d6b8ce"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-square.png",
+          "bytes": 7758,
+          "sha256": "c24880460f13155e1452f0ec23a98b75c28a5681bc4fdb7d371f7e79341fe96e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-straight.png",
+          "bytes": 7777,
+          "sha256": "8011e56f7f56f03138976eb381aada40f2738fa8191acb1a025cc08df8aff133"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-street-tee.png",
+          "bytes": 7314,
+          "sha256": "ba1ca4abf2e3e0ad472ad0931a517d4feb2b4bfe6f480c7f53da748d8af4ef76"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-suv-luxury.png",
+          "bytes": 14385,
+          "sha256": "30e02c2089cc885096b42bd769d628c930fa76d6399f08943f3bac76b87047d2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-suv.png",
+          "bytes": 14669,
+          "sha256": "c4172ac31ca9904e475aa5bf7f4de270026761e25bf7dc066cc9d2ac7245f07f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-taxi.png",
+          "bytes": 14781,
+          "sha256": "ccd3229a7e362be19afb0bbdfe6eb8badb641cdf1efe4f058abfa3732b1a44c2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-tractor.png",
+          "bytes": 20089,
+          "sha256": "d16a13105671ee2efe4981ffaa270b9a033c0cc519fa318afea5ffbf35aed539"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-truck.png",
+          "bytes": 12598,
+          "sha256": "e5f0e04f5db12041cefda37684b61d76bc5c4ff38fa506db6b3b77c54c75ab2f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-van.png",
+          "bytes": 14684,
+          "sha256": "1ad720816197eaa53e400958c57fde14260dc1cfdb2855eeb33590a99ed9ada5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-cane-green.png",
+          "bytes": 11214,
+          "sha256": "610a96dad63b542e48514412dbb65f5227b53f91fd8bd8bafe6af37545b7a92f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-cane-red.png",
+          "bytes": 11248,
+          "sha256": "2518b17cbfa199146c41b5f5efd26c5b68dc225c9a7feb94f1d60d1eb1fe6a79"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-gingerbread-man.png",
+          "bytes": 11797,
+          "sha256": "6f1e3621f5332b0c1b8e178328d811e9f1346f7aeb1c46dcf7039d2854bdb734"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-gingerbread-woman.png",
+          "bytes": 14834,
+          "sha256": "bde317faeddef7e9be7b9ad5d988e511ef0d9776db7ecb6cfe4944320e1765e0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-lantern.png",
+          "bytes": 6416,
+          "sha256": "fe704bf9565552a2bdcf8723551af210336d09c62fa57b78b57cecf006926bed"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-nutcracker.png",
+          "bytes": 14005,
+          "sha256": "f187ad12fbe21ddb1dd95e8123aec0beec0ab125c00299b5f42d537bc518e2cb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-present-a.png",
+          "bytes": 23584,
+          "sha256": "634f5e38f6b93287a4f5a534312d30bd92589426936108ae6ab46c42e26524a5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-present-b.png",
+          "bytes": 17147,
+          "sha256": "362106c3183dc67f2a22ee7ede1cf0b444a3332608ca54781f974a2d566f7019"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-present-c.png",
+          "bytes": 24178,
+          "sha256": "c0b0575abe1ca0f05afc37937aae7a3c19b4dc45757b2336b629ba6a709cc0c8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-present-d.png",
+          "bytes": 23451,
+          "sha256": "ee3107511e74fd99045bf9d8c0188b6eaf3bf119c2b3220c19d153dcb2d9884d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-reindeer.png",
+          "bytes": 19735,
+          "sha256": "b81abb796c886b76a6790d3524a68594b166702687442c40e18f71742465d336"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-sled.png",
+          "bytes": 13619,
+          "sha256": "d3bc450f0e6da1675c580b9e9e259ca4ec9b92e2f43c6ce0f5742045f58c274c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-snow-pile.png",
+          "bytes": 10187,
+          "sha256": "477bd79bf5f4b911471d2cd9987671af9b4160145e44a2987f3a15b407c89a22"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-snowman-hat.png",
+          "bytes": 15729,
+          "sha256": "868de599aea26129947fffc25513651578b85b08cb9a34abcd292c17224d0a4b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-snowman.png",
+          "bytes": 19061,
+          "sha256": "2e21b0f5f1886859c1e314725b64f266c45cbb9ee47ae9f2e805f3cd82badf07"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-train-loco.png",
+          "bytes": 14634,
+          "sha256": "bc5d350dd7acd42ada8a5167f4c65b678af7011672e8759951ca03988d260fa1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-train-tender.png",
+          "bytes": 13507,
+          "sha256": "55b927eb930f23f1bd5207e6bd1fae8446dc801a7f0616036945f89e9e3b2143"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-train-wagon.png",
+          "bytes": 12203,
+          "sha256": "0e43ae3367f20c714dca7831342d3d558110b92a735a168854e4828b2f99bfa2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-tree-a.png",
+          "bytes": 15396,
+          "sha256": "bb644c3ad6e111390a8a0b38f833652cfca52e9e0870d5eb781faa4dcc944a25"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-tree-b.png",
+          "bytes": 15787,
+          "sha256": "c87841cd5e90ffb03da6f09a36846c9868f01fd7469d39f8501cfa1a318efc04"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-tree-c.png",
+          "bytes": 13907,
+          "sha256": "d9da8d500e4ee62ed42268c5cdb8a286efe9e72b8fe6b109e3851b4a208068ae"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-tree-decorated-snow.png",
+          "bytes": 13610,
+          "sha256": "52289af3dbdbaf12129e1f3ae7367bdb4f059432e36914c65505334b1feed035"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/thumb-winter-tree-decorated.png",
+          "bytes": 12994,
+          "sha256": "ad943d2b8ffe07bb5145921b930149c1364f6bfe2d9f8c3d879fbe642d08ec95"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tile-build-car.png",
+          "bytes": 75795,
+          "sha256": "f9d4fb6d80f8cfa607391fd13dcb948ad7f027a01ddeb6dee05a1f07c5f25a0a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tile-build-track.png",
+          "bytes": 46271,
+          "sha256": "548366882405d64425205573e9dacfe64590c3df43d2b5e0a8bf69b21b690ffc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tile-my-racers.png",
+          "bytes": 61149,
+          "sha256": "cfc2310ec3b42b35e32fee8a0324005deccad3ee75cf05915c494b3c44de340b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tile-race-robot.png",
+          "bytes": 74460,
+          "sha256": "a71a21a11507d143a2fc0131f569672e2510b46c76d8c60214fb11d094ffdcf6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tile-two-player.png",
+          "bytes": 77035,
+          "sha256": "30a26e4d4a64773ebcd53393ef70e4c60dcd1a1d194e304a1f7f7a584d975e16"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tire_bounce.wav",
+          "bytes": 74656,
+          "sha256": "11376d46772aa490bdf347a419977769ebb5a4eb7daf11ca71af4d1034b4f861"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-narrow-looping.usdz",
+          "bytes": 46186,
+          "sha256": "40f34ea0ffea4d592c1a828a47844d1d012d1ac67b00bf18a6d069bd16a0f3dc"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-cap-back.usdz",
+          "bytes": 15430,
+          "sha256": "bf3719432f2edec5559147a9b143eddb5b68f6b0de766c6fb65339de21bf670e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-cap-front.usdz",
+          "bytes": 15429,
+          "sha256": "f61c4bcfe4f71bbcd83ea87664ab7b7eeaa4c08cbe2e1c7651e30bad78fa2d8b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-corner-large-ramp.usdz",
+          "bytes": 33627,
+          "sha256": "e73e54f2f19552d50ea2c97a11fe96879a3277f65db266ba1d34e6713273a65d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-corner-large.usdz",
+          "bytes": 33508,
+          "sha256": "d1527790503ac14952bac9c250bcfd371463f61154340c5ba86423b35d923026"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-corner-small-ramp.usdz",
+          "bytes": 27292,
+          "sha256": "8d3db7f6b10886b4260e2f1e30e06b0ccf7a31b598dfbb3af5cfc9a0d607a333"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-corner-small.usdz",
+          "bytes": 27173,
+          "sha256": "66d45163f14a9dfa5c92e7ee6340b2117e1036c6b3d0361abeeb87ae739bf329"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-curve.usdz",
+          "bytes": 29292,
+          "sha256": "8576c10171317fb0d32a40464213abdd093753503b97e2836c11557107cf210d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-bend-large.usdz",
+          "bytes": 33625,
+          "sha256": "0ff1b0bfefd30c55832d2564d79c51a920c2c734b7aa16e681a77ece3c7921a9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-bend.usdz",
+          "bytes": 27172,
+          "sha256": "38a726cc7dbb57a17420d29a3fc53a6808c7d49e9f2b759a07c2049a1298b5b8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-bump-down.usdz",
+          "bytes": 29271,
+          "sha256": "2b96f9fee11f870f02c657d50daff9ac139ea8fd046f7f9d4a2fd2ef85528722"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-bump-up.usdz",
+          "bytes": 29402,
+          "sha256": "c27afafa40f4071ace4442966290f36eded7003abd87bfdf399cd8c502f6e1d9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-hill-beginning.usdz",
+          "bytes": 29393,
+          "sha256": "43e480ff6719104e2ad3f53425f162e9c9dda55e646e9a3796042bb05bcafc59"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-hill-complete-half.usdz",
+          "bytes": 29386,
+          "sha256": "5dde5ffb9de68b7e31dee8bd7f54650cd474e25e735e37bed92c870ce40feae0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-hill-complete.usdz",
+          "bytes": 29395,
+          "sha256": "302152c2f4d9ebf07a90f1cc0e22dec958e1233516802ae376521b0d17e0f1e1"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-hill-end.usdz",
+          "bytes": 29400,
+          "sha256": "85e845e20d6586057bad5f0624f78aee2abc83d697ce927e3591f58a87feac38"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-skew-left-side.usdz",
+          "bytes": 27282,
+          "sha256": "98070eb11d6306181d45c72d34ace0a4f5ff252d33146b8b324da16b73db8669"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-skew-left.usdz",
+          "bytes": 27163,
+          "sha256": "4f998dbe2cd60c754a80a46de9e46740f96c7df5fa699d52a8d7e87ec196c61f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-skew-right-side.usdz",
+          "bytes": 27283,
+          "sha256": "6aa2b8c1525f533d920a288ad04c599caf4b3b41c62936fa2281b900b1149333"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight-skew-right.usdz",
+          "bytes": 27291,
+          "sha256": "0a2faa7a37859ad4b09b944e2cb4ee752948f114d30f0a69a4234a07e1bc23cf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide-straight.usdz",
+          "bytes": 27181,
+          "sha256": "c35d0f96d3eea8b11bbb22495b328f395207e396dc2f910fdc20e1270c2e25b9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track-wide.usdz",
+          "bytes": 14433,
+          "sha256": "bc4059e42c840e597bf88b9cc598148a2d4650b781795ea1e4cfa5215b38a7da"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track_save_stamp.wav",
+          "bytes": 74656,
+          "sha256": "a12e8291c588d80558406e8a3f6e1a4e2323f41090aed64e982647041945f351"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track_snap_connect.wav",
+          "bytes": 57016,
+          "sha256": "1c2d5e2a44761056d0cf73046828085789fec97dc0c037747fadc1ef2e7852d2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track_snap_connect_b.wav",
+          "bytes": 57016,
+          "sha256": "34ef4894986675f59ebc5100b013fa4111d37acb7ca7f86a7402d429352e7ee7"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/track_snap_connect_c.wav",
+          "bytes": 57016,
+          "sha256": "70ff1e606f3920f58247e776f5ed6fb3c329696dfd99d66fb1e0ea1595d96e7e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/tractor.usdz",
+          "bytes": 157929,
+          "sha256": "14ee7a1a5bb7c38fe8895f2cb0189ba6cff782598df5c8e5aadd2f3a596680bd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/truck.usdz",
+          "bytes": 109476,
+          "sha256": "9b458d1f1eda6415bf9d34de32a8ff62b542f6515d573613ecc0d588736f5099"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ui_back.wav",
+          "bytes": 46432,
+          "sha256": "3228b947a4450aa0d2c9e77ee4a94e343f4a37979f462ca0b347ad1dc5634c3d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ui_tap.wav",
+          "bytes": 46432,
+          "sha256": "42403af34cb0c1b2b961d96c57babd80545fd4e4e48e9bd57a410b2ceb5add57"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ui_tap_b.wav",
+          "bytes": 46432,
+          "sha256": "5f4d26105553a900b37d6b7afc604d540fbb98b67d50e600f8164e70369a92e8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/ui_tap_c.wav",
+          "bytes": 46432,
+          "sha256": "c7407a0063a1837c9775924f8b61c4b0d464aba10811cc4677b3a07107e6041c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/van.usdz",
+          "bytes": 109200,
+          "sha256": "70b0438dadb25b82a8b932c523c35b286f6af9600e5da6e0ff5655d373a5915b"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-drag-racer.usdz",
+          "bytes": 91149,
+          "sha256": "4aaf1e00ebad2cfbbc0d27dc28d1601e543ed330f40fbca78fc9a10ddb8643c5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-monster-truck.usdz",
+          "bytes": 104381,
+          "sha256": "b5a6abdaf299089b177ef240395d984575f0b43a206ce00898893fbe53ad6a5a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-racer-low.usdz",
+          "bytes": 90360,
+          "sha256": "faed513cb1e9d20a01f429049970bf04d78c01cb4608b49a3e0a2ffb6ba9fa74"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-racer.usdz",
+          "bytes": 90673,
+          "sha256": "8163c701cc1f2cdef846272ae7be86bdbc9c033bfdad44152d610d3adc60b13a"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-speedster.usdz",
+          "bytes": 90124,
+          "sha256": "81fe1cce61ea17a84ff32e63985d759dc3ba0b7dc7bd256a0dcfdcf14e0b1589"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-suv.usdz",
+          "bytes": 92789,
+          "sha256": "a2303b05cbc8fd0e0060a4269556850c0eec82948694d35a8e441b76667878e2"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-truck.usdz",
+          "bytes": 90949,
+          "sha256": "0d9b5e19b4c4045f453afbbcc246fa9e2f85b97279d29ed2cd753d7f1470f484"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/vehicle-vintage-racer.usdz",
+          "bytes": 88983,
+          "sha256": "3e5d02466154c094cf3861ba6791e6d9aa3e24a076e74a0949ecec950910c5f9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_crusher_boost.wav",
+          "bytes": 126208,
+          "sha256": "1a956586dbeadd0336104ec06b9a52813ef0e6a365293d0def457f9e30b2e622"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_crusher_intro.wav",
+          "bytes": 199936,
+          "sha256": "6d8915a8e02367106b9134a64bd30c6df8807b9527cfe9bf340c2cd900674fb4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_crusher_lose.wav",
+          "bytes": 285184,
+          "sha256": "39758026119a169a31678ed299df7e656134b374a643c724c5d3147ffa786599"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_crusher_win.wav",
+          "bytes": 211456,
+          "sha256": "ceb41092299ba2101bccd881021a9c885f302ef3b15dfd24645931ba18d3f083"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_oobi_boost.wav",
+          "bytes": 135424,
+          "sha256": "309caed8df4978dba98d373e862d6f2a5ad90137a36eb8ac16cddb59f8550996"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_oobi_intro.wav",
+          "bytes": 220672,
+          "sha256": "2a4a91f65ef437221665f1873d07bbacc054f49918a05472accde95f11de5beb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_oobi_lose.wav",
+          "bytes": 227584,
+          "sha256": "d2d01e88d937aafa3f9e77af54a0ee6644c0aac3307fdac0281120c95c24fe7e"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_oobi_win.wav",
+          "bytes": 204544,
+          "sha256": "81fe787651822b918d5bf84e4cc9a84cb4c778730e3360afb878f6c48176c699"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_zapp_boost.wav",
+          "bytes": 100864,
+          "sha256": "5aaac29355c291a0e9e517a1dd731be6e56ed90b962a50f71db691f02226f6f8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_zapp_intro.wav",
+          "bytes": 211456,
+          "sha256": "faffa6fdf0015566caf6f50f029c8bb27f0af4e6859f2d3b3c927da455ffbcfb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_zapp_lose.wav",
+          "bytes": 204544,
+          "sha256": "fe5aa1757f39e80b17d605802b74f585e59da400d7d640e5fa5e565ba40ba13c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/voice_zapp_win.wav",
+          "bytes": 163072,
+          "sha256": "fa60be570aa5ea692d3c63ec50f21b06da014aef811b923a4c8a2ff38068c499"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-dark.usdz",
+          "bytes": 38712,
+          "sha256": "1c62da8f9172fd3356b16cdabc2b19c627477f80cae843f8c5884d5e7f11c54c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-default.usdz",
+          "bytes": 37852,
+          "sha256": "f376a0065625af9f8604f4ee5dcd83abfe6ed54f398592b2838dd561b8b3143f"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-large.usdz",
+          "bytes": 27986,
+          "sha256": "c492cc4d6d3b1a2fc28515bc4d96c4e086fd8ad097419314771d227a34fadfcd"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-medium.usdz",
+          "bytes": 27993,
+          "sha256": "4d998aa9e7413cecd33c254dcdb4ffadcd6514c644d8a0eda23db17961554bb0"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-racing.usdz",
+          "bytes": 38606,
+          "sha256": "6f9ae3353f89bd6f74825883ad7cb1f0c93420b713d8f0380f3d38107bad0d79"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wheel-small.usdz",
+          "bytes": 27985,
+          "sha256": "693ee32255fc31755d39999ffa1be8f35a2a97f3fd06bec7f6f5bb726fc7c5ce"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-cane-green.usdz",
+          "bytes": 21935,
+          "sha256": "5e41961adf1594ff99a8e82a96e4d2021a505318a9ed839b335e3cc0028cf05d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-cane-red.usdz",
+          "bytes": 21937,
+          "sha256": "098e7d66632f8272af20ecd983d1d6135676228b15e38dff38a1e393eb3ad7d6"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-gingerbread-man.usdz",
+          "bytes": 27026,
+          "sha256": "c709bdb1bc6ef1c0173fb286cec0837d6eaa9fb7a7ec583bc4cd58f35947aec9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-gingerbread-woman.usdz",
+          "bytes": 32076,
+          "sha256": "fce9822173707e70a61dbe4a64e3805edcc5ba8189a5b764c6287dc35d83815c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-lantern.usdz",
+          "bytes": 28800,
+          "sha256": "47fe7fb219598bbf93b1dacc42a375531dea695c9f14980a2292052017eca2eb"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-nutcracker.usdz",
+          "bytes": 74411,
+          "sha256": "4cdd066b6e5a4c3ad46a706ab664878e5e62d3b02c8de6c2e8a5989941af4e29"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-present-a.usdz",
+          "bytes": 32047,
+          "sha256": "dc7c9fa6568ab7d423e8d123b3739cda6d6ba1c370e023cfa2226d4da3de9307"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-present-b.usdz",
+          "bytes": 32036,
+          "sha256": "daae47fb8cabd1c816f1896c52afc34557eca7047547c0992b89adec4f4305af"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-present-c.usdz",
+          "bytes": 32030,
+          "sha256": "c60713575325bff4f2d1ea21133670c978596320a80ca09458e49c3b9a8b08bf"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-present-d.usdz",
+          "bytes": 32975,
+          "sha256": "465c9d44efda1d4b0fd54a4eaf33339e17a1a16a3cf5fd4f0c6f0357dd136303"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-reindeer.usdz",
+          "bytes": 80174,
+          "sha256": "d762993bcb3125780ae5c114f4881e23107e0f726c3e8a5018ea50de44b2dce9"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-sled.usdz",
+          "bytes": 33206,
+          "sha256": "9ea6c0107cc9d1c3b92cc92038a98cbd57ace7aa4bca02135335ac879a3ebac4"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-snow-pile.usdz",
+          "bytes": 25915,
+          "sha256": "cb80ddbd91f289903207f4358acf1540dc3fe22904ecda4c974244d97548a382"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-snowman-hat.usdz",
+          "bytes": 58104,
+          "sha256": "97d084446ed50a091d4a866161cc279e667d702eef39f1b2699f7389183e26c5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-snowman.usdz",
+          "bytes": 50226,
+          "sha256": "750a08e99b79e1c132e77370ee1b9850593370719df4c201798cfeb1eba0bc44"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-train-loco.usdz",
+          "bytes": 66981,
+          "sha256": "487d7ca1ebb0f54cfa051ef4e3755791fd36a3286e9f02ad7f148b8075ccc2f3"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-train-tender.usdz",
+          "bytes": 38389,
+          "sha256": "9f1e333eb9885c586a5ca1ab841b0afcd0660a1a4624a59e1ec4fa5827b73bca"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-train-wagon.usdz",
+          "bytes": 79087,
+          "sha256": "bc948991e90de0c814589c9e17a29ab658fa2f30edc340b673db97cb61225d72"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-tree-a.usdz",
+          "bytes": 43008,
+          "sha256": "58aa47632dea7a1af79eee5bf674a50c733853d2250e1136ac04ce00fb03ffd8"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-tree-b.usdz",
+          "bytes": 44153,
+          "sha256": "458ea533c0a63209972532a698a516eb6595b48a63c0242f6492013ddf54722d"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-tree-c.usdz",
+          "bytes": 33660,
+          "sha256": "b446d61ba6d9111f86fbe80a16c78e9b0eb894426a71b5a39dbf9895f052bfbe"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-tree-decorated-snow.usdz",
+          "bytes": 78661,
+          "sha256": "a050da3457a6a59bed6a7be6c18ac7fcf9a373f1734276fef5e7a66bcfbc0de5"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/winter-tree-decorated.usdz",
+          "bytes": 67947,
+          "sha256": "595d290011a9cb1e46d0d07120d8dcf05515f841ce59b6eed26061d5136c0820"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/workshop_ambience.m4a",
+          "bytes": 175243,
+          "sha256": "22fc29aec448a4890c1cb5be5308cb359bc2772dea6a6a951d1b109919702f1c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wrench_ratchet.wav",
+          "bytes": 74656,
+          "sha256": "2aec8020d5b6576b4f705c5c171170f33fd2b12b3179b914848a6de3732baa5c"
+        },
+        {
+          "path": "Products/Applications/Hot Wheels v Human.app/wrench_ratchet_b.wav",
+          "bytes": 74656,
+          "sha256": "cfed69397f68e485a9ed225cdc57487c45765d04fbefcaea24aee0d719a5d8e9"
+        },
+        {
+          "path": "dSYMs/Hot Wheels v Human.app.dSYM/Contents/Info.plist",
+          "bytes": 664,
+          "sha256": "224c6d86e46d4bdf5f3ebbac2d25b3ea6d67b8f19b3b4d91714de22377b2e318"
+        },
+        {
+          "path": "dSYMs/Hot Wheels v Human.app.dSYM/Contents/Resources/DWARF/Hot Wheels v Human",
+          "bytes": 14089620,
+          "sha256": "b05225b6f0f4db6882d7f36a220fae75bd97dd9fb9a6a63bae8178360404395b"
+        },
+        {
+          "path": "dSYMs/Hot Wheels v Human.app.dSYM/Contents/Resources/Relocations/aarch64/Hot Wheels v Human.yml",
+          "bytes": 322,
+          "sha256": "fcbd659282b1b01b43afab8803d9d1a19ec72938b2aa8a7fce2dbbb1c163dde6"
+        }
+      ]
+    }
+  },
+  "verifiedIPAAndDistributionAppUnchanged": true,
+  "originalArchiveMetadataBytesReconstructedAndSHAEqualsRecordedBaseline": true,
+  "initialDecodedArchiveRootBaselineWasNotCaptured": true,
+  "reconstructedBaselineCopy": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-archive-root-info.reconstructed-before-upload.plist",
+  "reconstructedBaselineCopySHA256": "c82d4ffc939fb08d2db406b9c7b2f6dfa4acf723ed7563f81c89c87d4b08bdb0",
+  "postUploadArchiveMetadataCopy": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-archive-root-info.after-upload.plist",
+  "postUploadArchiveMetadataCopySHA256": "c109414c06b2cdfc2fdda1d72a7e409a5b44eb640e2d48613ca7d3239b5d3cca",
+  "deliveryRecord": {
+    "deliveryUUID": "5ce69766-a2f3-455c-8812-29a21531d207",
+    "sourceLabel": "Delivery UUID in genuine ContentDelivery.log",
+    "sourceLog": "/var/folders/1_/rbnykrdx1xj_jn2cszll8rcm0000gn/T/Hot Wheels v Human_2026-10-04_14-51-23.186.xcdistributionlogs/ContentDelivery.log",
+    "sourceLogSHA256": "8149bfde531a6e0fa1d58c9bcbc9e6e74d5b31571ff7e481037ffc4225f78b46",
+    "distributionLogs": "/var/folders/1_/rbnykrdx1xj_jn2cszll8rcm0000gn/T/Hot Wheels v Human_2026-10-04_14-51-23.186.xcdistributionlogs",
+    "distributionLogFiles": [
+      {
+        "name": "ContentDelivery.log",
+        "bytes": 335067,
+        "sha256": "8149bfde531a6e0fa1d58c9bcbc9e6e74d5b31571ff7e481037ffc4225f78b46"
+      },
+      {
+        "name": "DVTITunesSoftwareService.log",
+        "bytes": 12915,
+        "sha256": "e326f523807a426a2f48ab4b48c3caf230fcda13d66c919097de5ca2505193ea"
+      },
+      {
+        "name": "IDEDistribution.critical.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "name": "IDEDistribution.standard.log",
+        "bytes": 32330,
+        "sha256": "07c8231cb857812590b34c1c870c4022045587da5fe5441202f478c74eb84733"
+      },
+      {
+        "name": "IDEDistribution.verbose.log",
+        "bytes": 54309,
+        "sha256": "85631ba78c84ec717a38212b912352d26105284c0354f7202429c1160d53884c"
+      },
+      {
+        "name": "IDEDistributionAppStoreConnect.log",
+        "bytes": 9443,
+        "sha256": "565aaaf49f01e99594ead6f3a375be02f80f3c66693cc2520b181fd46f63ebae"
+      },
+      {
+        "name": "IDEDistributionPipeline.log",
+        "bytes": 451858,
+        "sha256": "a16a6be06221cd58da4881488b39a0b3650ec0eba1671be1be5a40564fdd5862"
+      },
+      {
+        "name": "IDEDistributionProvisioning.log",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "uploadSucceededObserved": true,
+  "processingMessageObserved": true,
+  "originalUploadLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-export-upload.log",
+  "originalUploadLogSHA256": "b8ce72cb430c1a4d4c108db8521418946ba183d36364500f9aeb6012cc9c3078",
+  "submissionClaimed": false,
+  "rightsStatus": "Root separately holds final content-rights/submission declaration pending72ElevenLabs WAV generation-license evidence; upload approval remains explicit, no rights answer made here",
+  "AppleFollowUp": "Fresh processed-build/gallery selection and actual submission remain root-owned; physicalLAN/camera limitations retained",
+  "finishedAtUTC": "2026-10-04T13:01:44.314577+00:00"
+}

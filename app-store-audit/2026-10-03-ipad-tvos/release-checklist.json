@@ -1,6 +1,6 @@
 {
   "preparedAt": "2026-10-03T07:09:31.664392+00:00",
-  "status": "development and release preparation in progress",
+  "status": "Verified historical production archives/exports; TV cursor fix confirmation, replacement freeze and final release gates pending",
   "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
   "scheme": "Hot Wheels v Human",
   "team": "EJLR2RPSV2",
@@ -8,7 +8,7 @@
   "build": "1",
   "releaseDisplayName": "HWvH",
   "baselineSourceCommit": "de7eb6d276ed9f3be4c8c64f5e07da54bd0bb5f4",
-  "sourceFreezeCommit": null,
+  "sourceFreezeCommit": "9b128e92539c0475033b00222731bfef865ef6b6",
   "supportedNativePlatforms": [
     "iPadOS",
     "tvOS"
@@ -27,7 +27,8 @@
     "iPadOSFamily": 2,
     "tvOSFamily": 3,
     "minimumOS": "26.0",
-    "signedExportFamiliesVerified": false
+    "signedExportFamiliesVerified": true,
+    "signedExportEvidence": "signed-release-packages.json"
   },
   "appStoreConnect": {
     "appID": null,
@@ -52,16 +53,80 @@
     },
     "privacyLabelPublished": false,
     "cameraPermission": "iPadOS only; original camera picture analyzed in memory and not saved/transmitted",
-    "localNetwork": "Profiles/player names, vehicle/driver styles, drawing artwork, track/world configurations and race input/state exchanged with nearby game participants over Apple encrypted MCSession. No developer server."
+    "localNetwork": "Profiles/player names, vehicle/driver styles, drawing artwork, track/world configurations and race input/state exchanged with nearby game participants over Apple encrypted MCSession. No developer server.",
+    "bundledManifestVerifiedInHistoricalExports": true,
+    "bundledManifestSHA256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
   },
   "runtimeQA": {
-    "iPadOS": "pending final integrated build",
-    "tvOS": "pending final integrated build and remote focus suite",
-    "hardwareLocalMultiplayer": "pending real iPad/Apple TV reconnect verification; two Simulators cannot establish hardware networking parity"
+    "iPadOS": "pending final integrated UI, save/relaunch, race/preview/rematch checks; Release build verified and model console pass recorded separately",
+    "tvOS": "pending full Siri Remote suite and targeted cursor-focus fix confirmation; historical Release build and 14 model tests verified separately",
+    "hardwareLocalMultiplayer": "pending real iPad/Apple TV reconnect verification; two Simulators cannot establish hardware networking parity",
+    "knownIssues": [
+      {
+        "platform": "tvOS",
+        "case": "TV remote case04",
+        "problem": "Directional cursor loses focus after Left/Down in historical compiled app",
+        "releaseOwnerReportedPassingCases": [
+          "01",
+          "02",
+          "03",
+          "05"
+        ],
+        "sourceFix": "#if os(tvOS) TVTrackBuilderView header/scene/footer disabled while movingCursor",
+        "fixConfirmation": "pending targeted run against updated compiled app",
+        "packageImpact": "Historical TV export is superseded; wait for confirmed fix and new production freeze"
+      }
+    ]
   },
   "signedPackages": {
-    "iPadOS": null,
-    "tvOS": null
+    "iPadOS": {
+      "verificationStatus": "App Store distribution-signed export verified",
+      "candidateStatus": "prepared-existing-binary-unaffected-awaiting-new-global-proof",
+      "productionArchiveFreezeCommit": "9b128e92539c0475033b00222731bfef865ef6b6",
+      "sourceInputsSHA256": "f653b283ce0f950df0e5124a6c964367888c2b0578e5fb7fdcb55141c07e7835",
+      "version": "1.0",
+      "buildNumber": "1",
+      "minimumOS": "26.0",
+      "UIDeviceFamily": [
+        2
+      ],
+      "archivePath": "/tmp/hwvh-signed-release-20261003-92xr0ab0/ipad.xcarchive",
+      "IPAPath": "/tmp/hwvh-signed-release-20261003-92xr0ab0/ipad-app-store-export-auto/Hot Wheels v Human.ipa",
+      "IPASHA256": "db965bad6bfa9f2a29d82b3a018b5b06e20eb54506d3da38d9e8e879d5cfe6e6",
+      "signatureValid": true,
+      "signedByAppleDistribution": true,
+      "getTaskAllow": false,
+      "bundleAndTeamMatch": true,
+      "iconsAndPrivacyManifestVerified": true,
+      "encryptionExempt": true,
+      "automaticProvisioningExportSucceeded": true,
+      "uploadPerformed": false,
+      "evidence": "signed-release-packages.json"
+    },
+    "tvOS": {
+      "verificationStatus": "App Store distribution-signed export verified",
+      "candidateStatus": "prepared-but-superseded-pending-cursor-fix",
+      "productionArchiveFreezeCommit": "9b128e92539c0475033b00222731bfef865ef6b6",
+      "sourceInputsSHA256": "f653b283ce0f950df0e5124a6c964367888c2b0578e5fb7fdcb55141c07e7835",
+      "version": "1.0",
+      "buildNumber": "1",
+      "minimumOS": "26.0",
+      "UIDeviceFamily": [
+        3
+      ],
+      "archivePath": "/tmp/hwvh-signed-release-20261003-92xr0ab0/tvos.xcarchive",
+      "IPAPath": "/tmp/hwvh-signed-release-20261003-92xr0ab0/tvos-app-store-export-auto/Hot Wheels v Human.ipa",
+      "IPASHA256": "7768aad2bb96cc62fb2a4fdd0113e1d0439578a0657e1220c930f6929dec338e",
+      "signatureValid": true,
+      "signedByAppleDistribution": true,
+      "getTaskAllow": false,
+      "bundleAndTeamMatch": true,
+      "iconsAndPrivacyManifestVerified": true,
+      "encryptionExempt": true,
+      "automaticProvisioningExportSucceeded": true,
+      "uploadPerformed": false,
+      "evidence": "signed-release-packages.json"
+    }
   },
   "marketing": {
     "iPadGalleryImages": 0,
@@ -72,23 +137,63 @@
   "website": {
     "privacyURLProposed": "https://nathanfennel.com/hwvh/privacy.html",
     "supportURLProposed": "https://nathanfennel.com/hwvh/support.html",
-    "status": "Standalone pages prepared and committed locally; source/static/link checks passed. No push, deployment or live HWvH route verification.",
-    "dualDeploymentVerified": false,
+    "status": "Verified 76 static documents on AWS and Vercel from one committed revision; canonical HWvH privacy/support pages are live. Dynamic AWS migration remains pending.",
+    "dualDeploymentVerified": true,
     "preparedCommit": "b5a6148f09666b133b6d90155739731832671365",
     "evidence": "website-preparation.json",
     "pages": {
       "privacy.html": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
       "support.html": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288"
     },
-    "deploymentAllowlistContainsNewPages": false,
-    "pendingDeploymentPreparation": "Release owner must add hwvh/privacy.html, hwvh/support.html, how-to-adult/privacy.html and how-to-adult/support.html to scripts/deploy-app-privacy.py PAGES before future same-revision dual deployment."
+    "deploymentAllowlistContainsNewPages": true,
+    "localBrowserQAEvidence": "website-qa/browser-checks.json",
+    "allowlistRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+    "localDeploymentCheckPageCount": 76,
+    "deploymentRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+    "deploymentVerifiedAtUTC": "2026-10-03T08:31:36.683890+00:00",
+    "deploymentReceipt": "/Users/nathan/Documents/GitHub/nathanfennel.com/docs/app-policy-pages-deployment-2026-10-03.json",
+    "vercelDeploymentURL": "https://nathanfennel-4fkazzv6r-nathan-fennels-projects.vercel.app",
+    "liveHWvHRoutesVerified": true
   },
   "storeGates": [
     "Inspect existing ASC app and previously published UIDeviceFamily before upload. Apple QA1623 forbids ordinary updates removing previously supported device families.",
     "Complete actual iPad/TV UI, Siri Remote focus, editor save/relaunch, standalone race, preview close/reopen, rematch and local multiplayer checks.",
-    "Build signed iPad-only and tvOS packages from the frozen revision; inspect generated UIDeviceFamily, permissions, compiled icons and manifest.",
+    "Confirm the TV cursor-focus fix, record a new production freeze, replace the superseded TV package and bind both candidates to the new global input proof before upload; historical 9b128e9 exports are preserved.",
     "Compose and review ten genuine native screenshots for each supported gallery.",
     "Deploy and verify unlisted privacy/support routes under workspace dual-deployment policy before setting ASC URLs.",
     "Fill ASC platform metadata, free prices/all eligible countries, review contact and owner-required attestations; verify saves; submit both supported platforms only."
-  ]
+  ],
+  "updatedAtUTC": "2026-10-03T08:05:20.459189+00:00",
+  "sourceFreezeStatus": "Historical signed package freeze; later TV cursor fix requires replacement production freeze",
+  "replacementSourceFreezeCommit": null,
+  "sourceFreezeCanonicalInputsSHA256": "f653b283ce0f950df0e5124a6c964367888c2b0578e5fb7fdcb55141c07e7835",
+  "currentNativeDeltaEvidence": "native-builds.json/currentWorkingTreeDelta",
+  "productionCandidateReadyForUpload": false,
+  "modelTests": {
+    "evidence": "native-builds.json/modelTestEvidence",
+    "tvOS": {
+      "status": "structured-result-pass",
+      "passedTests": 14,
+      "summaryEvidence": "tv-model-test-summary.json"
+    },
+    "iPadOS": {
+      "status": "console-pass/result-summary-incomplete",
+      "consolePassedTests": 16,
+      "consolePassedSuites": 4,
+      "consolePassLine": "\u2714 Test run with 16 tests in 4 suites passed after 15.262 seconds.",
+      "testExecuteSucceeded": true,
+      "testExecuteResultMarker": "** TEST EXECUTE SUCCEEDED **",
+      "structuredResultSummaryComplete": false,
+      "structuredSummaryStatus": "unknown",
+      "structuredSummaryTotalTestCount": 0,
+      "summaryFailure": "mkstemp: No space left on device",
+      "summaryFailureLine": "2026-10-03 09:42:17.478 xcodebuild[7357:6179863] [MT] IDETesting: Failed to construct test run summaries and write them to the result bundle: fileSystemFailure(reason: \"mkstemp: No space left on device\")",
+      "consoleLogPath": "/tmp/hwvh-ipad-models-20261003.log",
+      "consoleLogSHA256": "be83ce4fa3b86e2388bbec0833114b84c4b9e932dd8097b6967aa8786de9e280",
+      "resultBundlePath": "/tmp/hwvh-ipad-models-20261003.xcresult",
+      "summaryEvidence": "ipad-model-test-summary.json",
+      "detailsEvidence": "ipad-model-test-details.json",
+      "interpretation": "Console establishes the 16-test/4-suite pass, but the xcresult summary is incomplete; do not label this a normal complete structured-result proof or an unknown test failure."
+    }
+  }
 }

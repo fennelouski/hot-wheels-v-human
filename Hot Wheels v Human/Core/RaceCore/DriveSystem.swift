@@ -33,7 +33,15 @@ struct DriveSystem: System {
         // would teleport a rail car metres ahead (or burn chaos mode's whole
         // recovery grace window) in one step.
         let dt = min(Float(context.deltaTime), 0.1)
-        for entity in context.entities(matching: Self.query, updatingSystemWhen: .rendering) {
+        #if os(visionOS)
+        // The table renders miniature copies. Schedule from those visible models,
+        // then advance the real simulation cars in their original metre space.
+        _ = context.entities(matching: EntityQuery(where: .has(SpatialRaceDisplayComponent.self)), updatingSystemWhen: .rendering)
+        let cars = context.scene.performQuery(Self.query)
+        #else
+        let cars = context.entities(matching: Self.query, updatingSystemWhen: .rendering)
+        #endif
+        for entity in cars {
             guard let car = entity as? ModelEntity,
                   var follow = car.components[LaneFollowComponent.self],
                   var state = car.components[CarComponent.self],

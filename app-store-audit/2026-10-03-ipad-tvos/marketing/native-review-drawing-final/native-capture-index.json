@@ -1,0 +1,2022 @@
+{
+  "schemaVersion": 1,
+  "revision": "5643eca1662dfc91f39d851ca0ea2ab5a8f9ce80",
+  "sourceBuildRef": "5643eca-Release-1.0-build1-SDK26.5",
+  "nativeInputProofSHA256": "6fc0d1b4fc8905c4f5baae608e14164005b2729163f80ba5f4cd1f7a4ac34a29",
+  "nativeBuildRecordPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-builds-drawing-final-gallery.json",
+  "nativeBuildRecordSHA256": "f8100d25ca8a21927715b1f809eb4fa21477d792151fadc5c88a3a85349060ed",
+  "captureCount": 67,
+  "captures": [
+    {
+      "id": "ipad-final-gallery-3-back-in-garage-selected",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/9F21A294-8B46-4E7F-A97D-9D58474522CB.png",
+      "name": "3-back-in-garage-selected",
+      "sha256": "1abea2f2b8ee829be75de0c56dac9b88f4762654ade96cb25b568ea670b586ec",
+      "testIdentifier": "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "9F21A294-8B46-4E7F-A97D-9D58474522CB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "3-back-in-garage-selected_0_1D7420BD-3C89-41CB-AE30-2813719C721D.png",
+        "timestamp": 1791017668.718
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:28.718000Z"
+    },
+    {
+      "id": "ipad-final-gallery-2-car-detail",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/CE5EA171-FF85-4DE7-A6D5-9B60337ECC15.png",
+      "name": "2-car-detail",
+      "sha256": "9d7b6dbc50909fc36f18d1cd60f453556ed271287bdc1d7b44af85f28e0a3564",
+      "testIdentifier": "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "CE5EA171-FF85-4DE7-A6D5-9B60337ECC15.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "2-car-detail_0_F946B45A-A12C-4CEC-AED3-C2F3CCFB209C.png",
+        "timestamp": 1791017666.688
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:26.688000Z"
+    },
+    {
+      "id": "ipad-final-gallery-1-garage-grid",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/4343BA14-1A20-4E46-9C17-791DA13FDB57.png",
+      "name": "1-garage-grid",
+      "sha256": "4c716e43caa4487ac6fd7bc48d8a832a7e2bf052bc012359c5a99cdecea4b424",
+      "testIdentifier": "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "4343BA14-1A20-4E46-9C17-791DA13FDB57.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "1-garage-grid_0_48EEE4FB-4C04-485A-B0A6-6E0435FA3BF7.png",
+        "timestamp": 1791017664.332
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:24.332000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad-reopened-red-car",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/21555817-102A-40BA-B63A-685CE37CF33E.png",
+      "name": "ipad-reopened-red-car",
+      "sha256": "27a4e22d78e0e0355c5d3e5a0478b7e023875c0edd434cb12ec0a25b834a0994",
+      "testIdentifier": "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "21555817-102A-40BA-B63A-685CE37CF33E.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "ipad-reopened-red-car_0_CE92E645-B2AB-492B-AC8B-BDDD1B6F2D14.png",
+        "timestamp": 1791017695.709
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:55.709000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad-saved-red-car",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/BEFCD1C6-47B3-4D0C-80BA-467CB099AE0B.png",
+      "name": "ipad-saved-red-car",
+      "sha256": "6d1b703e4c7b806ba8a7f698878daafd997b239e6d1e0f3db7b1881a5e192fc7",
+      "testIdentifier": "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "BEFCD1C6-47B3-4D0C-80BA-467CB099AE0B.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "ipad-saved-red-car_0_CBD77EEA-1E85-4433-83F7-0673204C8693.png",
+        "timestamp": 1791017685.871
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:45.871000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad-home",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/277E9BC5-76F0-4985-B909-20DED4E331D7.png",
+      "name": "ipad-home",
+      "sha256": "7bda0dcc4157f1cc81fa49736efbac614e65c064f96021bce1a878f8ba9b7702",
+      "testIdentifier": "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "277E9BC5-76F0-4985-B909-20DED4E331D7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "ipad-home_0_18D86278-EE7B-4ABB-B322-BD7D993E854D.png",
+        "timestamp": 1791017680.055
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:54:40.055000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad12---cold-loaded-personal-track-saved-world-and-expanded-track-map",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/AA7C8216-1DE7-4E9E-8177-C21E6056C9F0.png",
+      "name": "IPAD12 - Cold loaded personal track, saved world and expanded track map",
+      "sha256": "58eaf703f5bcbcb0a281618f574c1bb0783715d5176bede42c585ab1d6c3995f",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "AA7C8216-1DE7-4E9E-8177-C21E6056C9F0.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD12 - Cold loaded personal track, saved world and expanded track map_0_51B5D3C8-3046-413D-9B3C-DE4C63BBC6C4.png",
+        "timestamp": 1791017739.954
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:39.954000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad11---exact-newly-saved-personal-track-in-the-library",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/0AEF797E-9BAD-4F2A-B15C-F9993F55ABC6.png",
+      "name": "IPAD11 - Exact newly saved personal track in the library",
+      "sha256": "c4204db9eb60f53079e84033c64f1f214631aa04b9100bd94405204e54a15a99",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "0AEF797E-9BAD-4F2A-B15C-F9993F55ABC6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD11 - Exact newly saved personal track in the library_0_16EE5088-8324-4282-882C-8F84C20808C6.png",
+        "timestamp": 1791017727.481
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:27.481000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad10---personal-finishable-track-saved-through-the-native-action",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/1D765104-4CA6-4B09-9CDC-708AECEEAA53.png",
+      "name": "IPAD10 - Personal finishable track saved through the native action",
+      "sha256": "500b72f5fd86f0b5820a20b1dd2793946b116ef0c89f1308a1d2efa96a7b8b84",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "1D765104-4CA6-4B09-9CDC-708AECEEAA53.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD10 - Personal finishable track saved through the native action_0_42D260F9-788A-41BB-A459-7B2D4F99C827.png",
+        "timestamp": 1791017724.749
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:24.749000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad09---six-real-track-pieces-and-the-selected-candy-world",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/03ED7D26-CBC3-4883-946C-69254305223F.png",
+      "name": "IPAD09 - Six real track pieces and the selected Candy world",
+      "sha256": "efaa73981c66dffb16b06cee7593965fdc2a5542b77ed732c8859e12e3794651",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "03ED7D26-CBC3-4883-946C-69254305223F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD09 - Six real track pieces and the selected Candy world_0_79179609-1FB2-4651-8FF6-A3C32E438A5C.png",
+        "timestamp": 1791017722.069
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:22.069000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad08---fresh-native-track-builder-and-personal-library",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/E3EF9EEF-7AAD-4471-9DDD-6CC6AA0A4EB0.png",
+      "name": "IPAD08 - Fresh native track builder and personal library",
+      "sha256": "e8303973e5f9e6d6b4e1c0041ca13c19d0e0176ed4a2d05c2dfa810dee64e1ea",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "E3EF9EEF-7AAD-4471-9DDD-6CC6AA0A4EB0.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD08 - Fresh native track builder and personal library_0_FF606AC6-65D8-4F26-8028-B7118F482562.png",
+        "timestamp": 1791017702.868
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:02.868000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad15---active-race-after-a-real-charged-boost-hold",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/523DDD1E-13B1-495E-A8B1-AD233FDBDFE7.png",
+      "name": "IPAD15 - Active race after a real charged boost hold",
+      "sha256": "bdd545180c00438f0c3f0d35867afff047654e398b865216a39a66dd157340d7",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "523DDD1E-13B1-495E-A8B1-AD233FDBDFE7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD15 - Active race after a real charged boost hold_0_53986F2F-77D6-44B7-8104-BE9B62BDB07B.png",
+        "timestamp": 1791017761.37
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:01.370000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad14---active-driver-view-with-the-dashboard-radio",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/EB83FBBF-31CE-42CF-AF94-0C8F8C6C5819.png",
+      "name": "IPAD14 - Active Driver View with the dashboard radio",
+      "sha256": "b5e413f96f80de570f4e6b71564cd5f7fffbcde75d6cf6b8d7d129d38ce295c1",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "EB83FBBF-31CE-42CF-AF94-0C8F8C6C5819.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD14 - Active Driver View with the dashboard radio_0_3636A519-C9AC-4B50-893A-67F519E221DC.png",
+        "timestamp": 1791017757.157
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:57.157000Z"
+    },
+    {
+      "id": "ipad-final-gallery-ipad13---loaded-moving-race-in-chase-cam",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/A8BCEF8D-B6A5-4F81-9D68-2EE7C73AD1D8.png",
+      "name": "IPAD13 - Loaded moving race in Chase Cam",
+      "sha256": "f57dabdc9101df89f020d647417e151ad7fda18cf44e054ad899d9f98ac58f80",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "A8BCEF8D-B6A5-4F81-9D68-2EE7C73AD1D8.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD13 - Loaded moving race in Chase Cam_0_8FD28F5D-3742-47CC-AC48-6F4C33F5A7FE.png",
+        "timestamp": 1791017756.569
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:55:56.569000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-driver",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/DF149A0E-85B6-42CB-8274-935FE6B8FE77.png",
+      "name": "car-Driver",
+      "sha256": "7eebf7b518faf5f90051969e6e47d65dd77a6c21382a7956717c7876ae1e5afd",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "DF149A0E-85B6-42CB-8274-935FE6B8FE77.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Driver_0_BCB24012-C5CE-49AC-9C97-10B63EE7C2D0.png",
+        "timestamp": 1791017778.278
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:18.278000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-draw",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/45453E4E-C973-444A-869F-861531D3921F.png",
+      "name": "car-Draw",
+      "sha256": "c8796f1c843755e03c58e92226d957548f0818e62d2a91e62a22970f106e244a",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "45453E4E-C973-444A-869F-861531D3921F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Draw_0_83B09DA0-2AFE-4F66-A629-4EAD321779C7.png",
+        "timestamp": 1791017776.115
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:16.115000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-stickers",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/462489F1-2651-441B-8196-79FA088C419B.png",
+      "name": "car-Stickers",
+      "sha256": "ce277fb478aa2cb1788227d987ce86cf167203d6b320e17432119b26caac0448",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "462489F1-2651-441B-8196-79FA088C419B.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Stickers_0_E92445F7-2894-4459-8A88-6A5898D6C2ED.png",
+        "timestamp": 1791017773.888
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:13.888000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-livery",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/D1B4E0CF-6DB6-4D73-BC60-6712937C74F1.png",
+      "name": "car-Livery",
+      "sha256": "0de36c6b6052dec064ec0fee3f93db53c90ef12ee0d636a515be20e9c7c63a6e",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "D1B4E0CF-6DB6-4D73-BC60-6712937C74F1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Livery_0_AFAAA05B-0F84-46EA-962F-28CFBA002C5A.png",
+        "timestamp": 1791017772.103
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:12.103000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-paint",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/6C9FF99B-AB54-4B58-B04E-618A68B5D1FE.png",
+      "name": "car-Paint",
+      "sha256": "aa763b7fc15fea23c0d6498fe223d4a2e9d9fd9ccc9361db7fbf22a441fb9df7",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "6C9FF99B-AB54-4B58-B04E-618A68B5D1FE.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Paint_0_EF6E2413-24E5-491E-998E-C3E5A3F6589A.png",
+        "timestamp": 1791017770.095
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:10.095000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-tires",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/A02F665A-7F6D-41BA-AF2E-93AA201B82AF.png",
+      "name": "car-Tires",
+      "sha256": "416635ab0493e0cc0b5c0dfef9a9797e4ffa8845eb566656cecf222b4c8545ad",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "A02F665A-7F6D-41BA-AF2E-93AA201B82AF.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Tires_0_4278B226-8D7B-4F64-959D-F7185B5BBEBC.png",
+        "timestamp": 1791017768.337
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:08.337000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-chassis",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/2033A8A3-19B2-49C6-9B62-438C45E0D286.png",
+      "name": "car-Chassis",
+      "sha256": "bfd52a185ebc1414c411a1bf8558ecc5b0099aac374775b613cfe91e63812a2a",
+      "testIdentifier": "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "2033A8A3-19B2-49C6-9B62-438C45E0D286.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-Chassis_0_24C09E5D-979B-470F-9251-BD0E6C729309.png",
+        "timestamp": 1791017766.576
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:06.576000Z"
+    },
+    {
+      "id": "ipad-final-gallery-character-extras",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/57CF4F59-FDB2-480C-965E-928FCF0D6E79.png",
+      "name": "character-Extras",
+      "sha256": "d629d07e7cae9589820728fd4d15fb024d098484ec8168cd9ac42bf3ba429ce0",
+      "testIdentifier": "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "57CF4F59-FDB2-480C-965E-928FCF0D6E79.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "character-Extras_0_35D5200F-8CB3-443F-B887-C5C42CAC7CFD.png",
+        "timestamp": 1791017789.958
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:29.958000Z"
+    },
+    {
+      "id": "ipad-final-gallery-character-clothes",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/B36DFB5B-9E3A-4A28-91B9-CF57EE9430E5.png",
+      "name": "character-Clothes",
+      "sha256": "d5db08ff310f2fe1640db96c41d8efe9ee874e932338a7e95ee8df831497dd3f",
+      "testIdentifier": "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "B36DFB5B-9E3A-4A28-91B9-CF57EE9430E5.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "character-Clothes_0_B3248547-F910-4E25-99DF-316B1EA5D32C.png",
+        "timestamp": 1791017788.019
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:28.019000Z"
+    },
+    {
+      "id": "ipad-final-gallery-character-hair",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/E8383931-2033-4C31-AEAC-80D2F044C343.png",
+      "name": "character-Hair",
+      "sha256": "7ea147ab3b8f41f841df95163e8c681ab1a0de6a8de8571c20db238dd303684b",
+      "testIdentifier": "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "E8383931-2033-4C31-AEAC-80D2F044C343.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "character-Hair_0_F42583F3-1E3F-46BD-9AE7-FE47CF5F6C61.png",
+        "timestamp": 1791017786.007
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:26.007000Z"
+    },
+    {
+      "id": "ipad-final-gallery-character-face",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/075A3396-D61E-4867-9B36-11200D75FAC1.png",
+      "name": "character-Face",
+      "sha256": "4cb711e20b902a05878709ef2907042374c9e799bae20895e112539e98b3f4fb",
+      "testIdentifier": "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "075A3396-D61E-4867-9B36-11200D75FAC1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "character-Face_0_0957ABDC-F284-458F-8470-2508BE0C3EE2.png",
+        "timestamp": 1791017784.096
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:24.096000Z"
+    },
+    {
+      "id": "ipad-final-gallery-racer-5-back-in-wardrobe",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/57353A25-C2D1-4687-ADF3-638A37150D41.png",
+      "name": "racer-5-back-in-wardrobe",
+      "sha256": "354640c4eaa499492532aef3902f738bb9411a1559bd2256e30de195b77c1a6d",
+      "testIdentifier": "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "57353A25-C2D1-4687-ADF3-638A37150D41.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "racer-5-back-in-wardrobe_0_08026CF8-8353-4160-A900-DCFEB98D099A.png",
+        "timestamp": 1791017828.614
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:08.614000Z"
+    },
+    {
+      "id": "ipad-final-gallery-racer-4-racing",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/F9343F34-263A-44B8-9AF4-28D6C8EC8D39.png",
+      "name": "racer-4-racing",
+      "sha256": "980f0f25b035e3f494c4c258aa53543bcff116c00001b0748329b8321d8c82ca",
+      "testIdentifier": "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "F9343F34-263A-44B8-9AF4-28D6C8EC8D39.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "racer-4-racing_0_C6D9C547-7720-4008-A275-D9631C3C2916.png",
+        "timestamp": 1791017826.741
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:06.741000Z"
+    },
+    {
+      "id": "ipad-final-gallery-racer-3-pip-after-bun",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/5F15C257-435F-4C17-868C-886D964CBED9.png",
+      "name": "racer-3-pip-after-bun",
+      "sha256": "b85486e7e8d93fc4c3ee81c3d5f3017e4f070b2aedba6e423001d8a2d0f5f5a6",
+      "testIdentifier": "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "5F15C257-435F-4C17-868C-886D964CBED9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "racer-3-pip-after-bun_0_FDE2DD0D-5162-4C2C-B7C8-CDBDE590AC65.png",
+        "timestamp": 1791017821.02
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:01.020000Z"
+    },
+    {
+      "id": "ipad-final-gallery-racer-2-pip-after-bald",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/96DB5C0E-4DAA-4212-A567-672EE1F3D67E.png",
+      "name": "racer-2-pip-after-bald",
+      "sha256": "13f81b8e7db038ba3f89ec9c375d6c5dc54ff18aacd0cc2f0868e8aa81903768",
+      "testIdentifier": "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "96DB5C0E-4DAA-4212-A567-672EE1F3D67E.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "racer-2-pip-after-bald_0_DDC94ADF-9B2A-41B4-8475-8A3AB923193E.png",
+        "timestamp": 1791017816.188
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:56.188000Z"
+    },
+    {
+      "id": "ipad-final-gallery-racer-1-pip-loaded",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/9DAFE573-082B-4A01-B1EA-BE0E8B0D96B1.png",
+      "name": "racer-1-pip-loaded",
+      "sha256": "32df12f9fa2b34b2f72503b9b1c57171ec84d57c5389a7e72e6a1b18efc2b783",
+      "testIdentifier": "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "9DAFE573-082B-4A01-B1EA-BE0E8B0D96B1.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "racer-1-pip-loaded_0_C2627FD5-3899-49CB-A6A3-77E6EBE18F6D.png",
+        "timestamp": 1791017808.875
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:56:48.875000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-3-back-in-shop",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/257472FB-DD27-454C-AD07-F624F9E51382.png",
+      "name": "car-3-back-in-shop",
+      "sha256": "0bcafe26eaa8a78ab272b691a501144e4d858dea55e7574ffd353c30a7bd0b75",
+      "testIdentifier": "WorkshopTryItUITests/testCustomizerTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "257472FB-DD27-454C-AD07-F624F9E51382.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-3-back-in-shop_0_DD5BC891-9443-481E-894F-C4A3EEBF4FDC.png",
+        "timestamp": 1791017840.398
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:20.398000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-2-racing",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/B0E65C81-53AB-4361-B543-84386014EF51.png",
+      "name": "car-2-racing",
+      "sha256": "90fe0cfc5f5167e7876e4809e88a91b2419610d60c407cae0331e20a9335daa2",
+      "testIdentifier": "WorkshopTryItUITests/testCustomizerTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "B0E65C81-53AB-4361-B543-84386014EF51.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-2-racing_0_37D49A6A-A3B4-427D-9645-A35272A81D5F.png",
+        "timestamp": 1791017838.515
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:18.515000Z"
+    },
+    {
+      "id": "ipad-final-gallery-car-1-chassis-changed",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/55C55CFF-774C-4446-B99F-EA3017B99147.png",
+      "name": "car-1-chassis-changed",
+      "sha256": "2aff7415570a60b7f5832160549fdaeefcd76a19ed43a6acb0920819f7d18894",
+      "testIdentifier": "WorkshopTryItUITests/testCustomizerTestDrive()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "55C55CFF-774C-4446-B99F-EA3017B99147.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "car-1-chassis-changed_0_2D47A19D-419F-4834-9306-F69ED1568C72.png",
+        "timestamp": 1791017836.504
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:16.504000Z"
+    },
+    {
+      "id": "ipad-final-gallery-track-3-back-on-workbench",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/69B33CEC-F1E2-4EDB-ADD6-E2D49D19AA01.png",
+      "name": "track-3-back-on-workbench",
+      "sha256": "3b68e641cce9091d57aeffef71a83393221e3ff6711f4b542ba8aaa0e1729bec",
+      "testIdentifier": "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "69B33CEC-F1E2-4EDB-ADD6-E2D49D19AA01.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "track-3-back-on-workbench_0_029234F1-310B-410C-8CE3-0D04E4441BD0.png",
+        "timestamp": 1791017850.535
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:30.535000Z"
+    },
+    {
+      "id": "ipad-final-gallery-track-2-racing",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/D38B65EF-2CD6-49DE-A105-4F5A2D9CE925.png",
+      "name": "track-2-racing",
+      "sha256": "980f0f25b035e3f494c4c258aa53543bcff116c00001b0748329b8321d8c82ca",
+      "testIdentifier": "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "D38B65EF-2CD6-49DE-A105-4F5A2D9CE925.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "track-2-racing_0_B9B3F806-D9D4-43C3-A390-7631B1B8EA2E.png",
+        "timestamp": 1791017848.472
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:28.472000Z"
+    },
+    {
+      "id": "ipad-final-gallery-track-1-loaded",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/C1E6D3BC-D67F-4D05-BC1B-3A19BBAA5FD9.png",
+      "name": "track-1-loaded",
+      "sha256": "250d07d986de57796407ef063c71246b370b88fe6dd3fa9407468ccd3f849f1f",
+      "testIdentifier": "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "C1E6D3BC-D67F-4D05-BC1B-3A19BBAA5FD9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "track-1-loaded_0_A25632AD-95FB-4EB7-A86C-33BDF0098F96.png",
+        "timestamp": 1791017846.373
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:26.373000Z"
+    },
+    {
+      "id": "ipad-final-gallery-world-speedway",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/0700CD86-22DD-4395-AFCD-85290D75CEC7.png",
+      "name": "world-Speedway",
+      "sha256": "d4ef4fa9a6d8e157ff32cd32952ffed15604fabae57caa8bf22be16f2b91fdbc",
+      "testIdentifier": "WorldPickerUITests/testPickWorldsAndScreenshot()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "0700CD86-22DD-4395-AFCD-85290D75CEC7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "world-Speedway_0_09986BBC-6263-4935-A80D-1B255DD3E397.png",
+        "timestamp": 1791017868.566
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:48.566000Z"
+    },
+    {
+      "id": "ipad-final-gallery-world-big-city",
+      "platform": "ipad-13",
+      "runID": "ipad-final-gallery",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/C78F4CB1-FD10-4E1C-9B1D-19D5130D22AD.png",
+      "name": "world-Big City",
+      "sha256": "7fec18ce36d2972a81c3c766129765497885cb451c0ebb0d67dc48a0e9acb530",
+      "testIdentifier": "WorldPickerUITests/testPickWorldsAndScreenshot()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "C78F4CB1-FD10-4E1C-9B1D-19D5130D22AD.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "world-Big City_0_4FB4A860-0234-455E-8374-9FE81EDFFE49.png",
+        "timestamp": 1791017863.741
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-final-gallery/manifest.json",
+      "manifestSHA256": "1fd566f4030bbb2ca36d37fbfd683d1002fdd05847cb87f252a96910cc052d1c",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:57:43.741000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad07---persisted-drawing-restored-through-the-native-undo-control",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/2CAEBA56-D57E-4ACA-8490-2D627419DB84.png",
+      "name": "IPAD07 - Persisted drawing restored through the native Undo control",
+      "sha256": "b62ffe89d01c38b6c4470f52adf431edbb27510f8685d9ec0fe8a65f3d43ad62",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "2CAEBA56-D57E-4ACA-8490-2D627419DB84.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD07 - Persisted drawing restored through the native Undo control_0_8693653D-78F2-4F69-A041-52856E36C20C.png",
+        "timestamp": 1791017392.366
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:49:52.366000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad06---cold-reopened-strokes-and-sticker-in-the-editable-drawing-pad",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/36DA8968-7AED-4047-B08C-F714E0D368C7.png",
+      "name": "IPAD06 - Cold reopened strokes and sticker in the editable drawing pad",
+      "sha256": "cf60c33cb94ef9a6733e2efd11f8ee8bf07cdc43bc978d6431c37507aa20f306",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "36DA8968-7AED-4047-B08C-F714E0D368C7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD06 - Cold reopened strokes and sticker in the editable drawing pad_0_61EC3AAA-3106-4458-B380-FEDD7B155415.png",
+        "timestamp": 1791017288.102
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:48:08.102000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad05---saved-hand-drawn-car-with-resized-sticker-and-flame-livery",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/3420800C-059F-4E00-AD25-C0CF946F8EB7.png",
+      "name": "IPAD05 - Saved hand drawn car with resized sticker and flame livery",
+      "sha256": "1f833ac48c7493196e99ab1cb6abc42ffeb842dbfdd4cd676c38bb2161fe4aef",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "3420800C-059F-4E00-AD25-C0CF946F8EB7.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD05 - Saved hand drawn car with resized sticker and flame livery_0_B5BAF9B1-308F-4552-93B9-BC9D14EF780A.png",
+        "timestamp": 1791017247.253
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:47:27.253000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad04---real-sticker-resize-on-the-3d-car",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/E3C68D5E-75D5-4581-BF1E-16AA0F601FE0.png",
+      "name": "IPAD04 - Real sticker resize on the 3D car",
+      "sha256": "fffe17fbb5cc959d48e8a7dc0f03b9b1ae2798d86490695fa0b27cda323b15df",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "E3C68D5E-75D5-4581-BF1E-16AA0F601FE0.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD04 - Real sticker resize on the 3D car_0_88968B1A-55E1-43A1-ACAB-5BF79196EDDA.png",
+        "timestamp": 1791017236.33
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:47:16.330000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad03---a-star-sticker-placed-with-native-touch-input",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/2BB12019-4E04-4D8B-A9CE-C7E037B196E2.png",
+      "name": "IPAD03 - A star sticker placed with native touch input",
+      "sha256": "1a16dcdf8bf796e6496d3f7f3e61be4e540fed9a7519d733e2dbe648156d7f98",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "2BB12019-4E04-4D8B-A9CE-C7E037B196E2.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD03 - A star sticker placed with native touch input_0_EA1B5184-B12A-48F2-840D-53CCBEFA0D5D.png",
+        "timestamp": 1791017226.332
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:47:06.332000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad02---actual-finger-strokes-on-the-car-drawing-canvas",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/916CBFFC-DD7E-42BD-A263-A4720E257181.png",
+      "name": "IPAD02 - Actual finger strokes on the car drawing canvas",
+      "sha256": "41d615482010bc8026e7294ca061bc8743b09fd08724c7c1f5b193bf96485a24",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "916CBFFC-DD7E-42BD-A263-A4720E257181.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD02 - Actual finger strokes on the car drawing canvas_0_EBD29C22-7560-4015-BF4B-E04D44BE0E9D.png",
+        "timestamp": 1791017218.319
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:46:58.319000Z"
+    },
+    {
+      "id": "ipad-drawing-restore-ipad01---garage-before-the-native-drawing-workflow",
+      "platform": "ipad-13",
+      "runID": "ipad-drawing-restore",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/179F6D68-6FD4-496C-90A1-32F0D6800986.png",
+      "name": "IPAD01 - Garage before the native drawing workflow",
+      "sha256": "e1c3d98a5fd5f089756d6836376e89ae7115dace1a09ad4c358dbce92e01f8b4",
+      "testIdentifier": "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName": "HWvH QA iPad 20261003",
+        "exportedFileName": "179F6D68-6FD4-496C-90A1-32F0D6800986.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "IPAD01 - Garage before the native drawing workflow_0_2F935535-AC97-48B7-B0A7-512CACF00317.png",
+        "timestamp": 1791017200.883
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-drawing-restore-confirm/manifest.json",
+      "manifestSHA256": "1b5e16187e630bbed9ed17d4ac0761563e14f52bcbf38a9af76ee549cf49b9aa",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "orientedDimensions": [
+        2752,
+        2064
+      ],
+      "sourceOrientation": 8,
+      "capturedAtUTC": "2026-10-03T08:46:40.883000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv03---race-with-a-nearby-ipad",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/238C122D-AEDE-4497-8567-A5725A6EEFBE.png",
+      "name": "TV03 - Race with a nearby iPad",
+      "sha256": "4f6d661e0a0096117469084c7f8fba4b908df0fad903137710c1d69926689670",
+      "testIdentifier": "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "238C122D-AEDE-4497-8567-A5725A6EEFBE.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV03 - Race with a nearby iPad_0_43FE4B0C-7B08-41F4-A546-BDB8FB60A620.png",
+        "timestamp": 1791018851.029
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:14:11.029000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv02---apple-tv-workshop",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/15779275-F20C-44A2-B43E-C39EED545612.png",
+      "name": "TV02 - Apple TV workshop",
+      "sha256": "ceb52e466f02201b30f7222ebc57526d0b953e351fd7783b3e6fb5bb93f8508d",
+      "testIdentifier": "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "15779275-F20C-44A2-B43E-C39EED545612.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV02 - Apple TV workshop_0_3626370E-178D-4793-B4EF-2F37A4C3571C.png",
+        "timestamp": 1791018844.353
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:14:04.353000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv01---choose-a-local-player",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/5F2D8893-427F-4F1C-91A8-DC1FA4FBAA29.png",
+      "name": "TV01 - Choose a local player",
+      "sha256": "84fa0695e7b036a8ee65e03094848b3b7b1a1c8a6af2111a96dbdb72e01baafd",
+      "testIdentifier": "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "5F2D8893-427F-4F1C-91A8-DC1FA4FBAA29.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV01 - Choose a local player_0_537FE617-CFA9-4162-A1E3-9BB109B7ABA8.png",
+        "timestamp": 1791018842.931
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:14:02.931000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv08---saved-car-in-the-garage",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/8B1087A1-E42E-4080-9BEC-51089FC98DE9.png",
+      "name": "TV08 - Saved car in the garage",
+      "sha256": "8a9e630623eed00c415daac347db4ec081b0ba5532dd38308f844cb7f1cf8793",
+      "testIdentifier": "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "8B1087A1-E42E-4080-9BEC-51089FC98DE9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV08 - Saved car in the garage_0_B26B9745-5B93-40BE-89C4-19CE2FDDE7BE.png",
+        "timestamp": 1791018926.627
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:15:26.627000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv07---draw-on-the-car-without-touch",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/CF2A97F2-68B3-45F7-A53C-DBFE08A295EF.png",
+      "name": "TV07 - Draw on the car without touch",
+      "sha256": "efdb73d9c4e521441533719223d9e85b3b538973a64e50a690339b5d359e1e8b",
+      "testIdentifier": "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "CF2A97F2-68B3-45F7-A53C-DBFE08A295EF.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV07 - Draw on the car without touch_0_0E22D652-56E6-4654-8754-7CC6B9D00761.png",
+        "timestamp": 1791018919.663
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:15:19.663000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv06---place-and-move-a-sticker",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/912847A7-D94E-4240-8561-74A93F2443B9.png",
+      "name": "TV06 - Place and move a sticker",
+      "sha256": "db4f878ddc92de2cfb99fdabbfb6a837f85b0a5dd8026a18b20a598e77895af4",
+      "testIdentifier": "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "912847A7-D94E-4240-8561-74A93F2443B9.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV06 - Place and move a sticker_0_5BCF0481-A305-4180-8963-A4FFE2441F43.png",
+        "timestamp": 1791018905.164
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:15:05.164000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv05---flame-livery-and-its-inspector",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/2B661E7B-768E-4D64-96AA-E6DAC64B0223.png",
+      "name": "TV05 - Flame livery and its inspector",
+      "sha256": "195013806cd87b6f5916378db258585a6dd0946507803e88bb33591098fec74f",
+      "testIdentifier": "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "2B661E7B-768E-4D64-96AA-E6DAC64B0223.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV05 - Flame livery and its inspector_0_0C37B8C0-17EC-4E11-8944-1B2A2751DD0F.png",
+        "timestamp": 1791018885.936
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:14:45.936000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv04---paint-a-car-with-the-remote",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/E290171B-20FB-4557-B546-44B6BF0F8362.png",
+      "name": "TV04 - Paint a car with the remote",
+      "sha256": "4959e49cf06cdc37c145cb227d07e131e1dac808e08e27b4ba11c1f52507992d",
+      "testIdentifier": "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "E290171B-20FB-4557-B546-44B6BF0F8362.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV04 - Paint a car with the remote_0_35A49111-37E1-4EA5-A9B8-66F5C2168437.png",
+        "timestamp": 1791018874.514
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:14:34.514000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv14---saved-tracks-and-starter-tracks",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/5DFC05DE-261A-4F31-9059-846BE3AA3C91.png",
+      "name": "TV14 - Saved tracks and starter tracks",
+      "sha256": "69a7fd0ecae76ad09c3dfbbd00c31565ff540b039831ae3283eeb63f94b146e1",
+      "testIdentifier": "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "5DFC05DE-261A-4F31-9059-846BE3AA3C91.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV14 - Saved tracks and starter tracks_0_63B72AC9-022E-4BF7-BAC5-A35694AB3273.png",
+        "timestamp": 1791019023.605
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:17:03.605000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv11---look-around-the-track-with-the-remote",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/D0425A76-57E9-4671-B791-942891A6FF45.png",
+      "name": "TV11 - Look around the track with the remote",
+      "sha256": "fda110cfa9ca2f08dd7dfe87fee0236882de8ce8f877122c92a1b8214ed40940",
+      "testIdentifier": "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "D0425A76-57E9-4671-B791-942891A6FF45.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV11 - Look around the track with the remote_0_253A259D-67C4-4ACC-A5CD-ACA5AE08B1D8.png",
+        "timestamp": 1791019013.649
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:16:53.649000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv10---choose-a-world-and-its-scenery-mode",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/DE9602EB-ECD3-4233-8071-AF12C6F7D97D.png",
+      "name": "TV10 - Choose a world and its scenery mode",
+      "sha256": "483fe186bb51240ee0669411987c34a03c57aad20b853b86aead687acf3a8458",
+      "testIdentifier": "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "DE9602EB-ECD3-4233-8071-AF12C6F7D97D.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV10 - Choose a world and its scenery mode_0_48D8B506-CB54-4298-BC2C-984F2DB9F9FC.png",
+        "timestamp": 1791019005.135
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:16:45.135000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv09---build-a-finished-track-with-a-ghost-stretch",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/697DE3B4-6B51-4E64-9CF8-FFB4CC86B852.png",
+      "name": "TV09 - Build a finished track with a ghost stretch",
+      "sha256": "ebcfdd5bb9e36ea3384b79334f0c809cac45e1325f20722046b185a1d60eacff",
+      "testIdentifier": "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "697DE3B4-6B51-4E64-9CF8-FFB4CC86B852.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV09 - Build a finished track with a ghost stretch_0_9130574C-722B-46E6-8923-C113D8EB1D48.png",
+        "timestamp": 1791018997.312
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:16:37.312000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv12---place-and-rotate-world-decorations",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/42882803-DF36-4425-99C9-C59EB0E82094.png",
+      "name": "TV12 - Place and rotate world decorations",
+      "sha256": "e9fc6c8f3e1bb6435bb934b68eb75085fd9cbcaad68668c4fd5fd80fbbf3b7c2",
+      "testIdentifier": "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "42882803-DF36-4425-99C9-C59EB0E82094.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV12 - Place and rotate world decorations_0_7E79CD5F-416C-499B-9ED5-67C71890337B.png",
+        "timestamp": 1791019087.629
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:18:07.629000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv13---position-a-portal-exit-with-the-remote",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/60F9BC62-4DE3-4A4E-B706-7F184B0886C6.png",
+      "name": "TV13 - Position a portal exit with the remote",
+      "sha256": "86ef6665650471052f89c523a40296909258ae7e228a4e80d536afb7cec3b98d",
+      "testIdentifier": "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "60F9BC62-4DE3-4A4E-B706-7F184B0886C6.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV13 - Position a portal exit with the remote_0_327D6F70-AB8B-4BBA-98BC-02B1F788C555.png",
+        "timestamp": 1791019073.064
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:17:53.064000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv15---race-the-unsaved-track",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/CD21BD9B-12A0-4AB6-A31C-48D08106D3CE.png",
+      "name": "TV15 - Race the unsaved track",
+      "sha256": "17e7d6554ac8544f689c592997f7bd766427ac15d853008c4ca89decb6a11e78",
+      "testIdentifier": "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "CD21BD9B-12A0-4AB6-A31C-48D08106D3CE.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV15 - Race the unsaved track_0_339D7161-2843-49BA-AFF8-AABCAE3373EF.png",
+        "timestamp": 1791019148.775
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:19:08.775000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv16---dress-and-save-a-personal-racer",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/4808DCDE-9037-40D5-B75E-BEEEE233C8AB.png",
+      "name": "TV16 - Dress and save a personal racer",
+      "sha256": "fee60c3656dabafcfc01088fa9aa012c0cc8a787424b2ca8459f9e35dc014e1c",
+      "testIdentifier": "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "4808DCDE-9037-40D5-B75E-BEEEE233C8AB.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV16 - Dress and save a personal racer_0_D982BCCC-6143-4F2A-833F-430BC6D02FEA.png",
+        "timestamp": 1791019185.249
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:19:45.249000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv18---race-two-local-players-on-apple-tv",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/AE71D7B9-B1DE-4132-BE4E-40F9DA978000.png",
+      "name": "TV18 - Race two local players on Apple TV",
+      "sha256": "7a106859364be9647f54eb9d8f787028b5c241ec8e7f81ab636491878366045b",
+      "testIdentifier": "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "AE71D7B9-B1DE-4132-BE4E-40F9DA978000.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV18 - Race two local players on Apple TV_0_6FF3E678-F8DA-45C4-A494-90364A96D46D.png",
+        "timestamp": 1791019257.998
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:20:57.998000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv17---two-players-build-their-own-cars",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/7F2F3AB1-B6CD-4FEA-BE42-B383DE6CE948.png",
+      "name": "TV17 - Two players build their own cars",
+      "sha256": "2dd8c784e491ca1dae6cafc9d016889d23b6b94c883759ad8a96e4555ae1be78",
+      "testIdentifier": "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "7F2F3AB1-B6CD-4FEA-BE42-B383DE6CE948.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV17 - Two players build their own cars_0_953CACFD-4CD3-43AC-A660-4FFC611CCC46.png",
+        "timestamp": 1791019248.728
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:20:48.728000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv19---siri-remote-boost-during-a-real-race",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/6BC6021B-5A45-4FDB-92EE-2255DA60F75A.png",
+      "name": "TV19 - Siri Remote boost during a real race",
+      "sha256": "88d2e8897ae2369fb95da8bdaecd7a9151ee1f6d86bf7d2a2184578d879a62ff",
+      "testIdentifier": "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "6BC6021B-5A45-4FDB-92EE-2255DA60F75A.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV19 - Siri Remote boost during a real race_0_E8042791-94D9-454F-80C3-AE1152ACDD18.png",
+        "timestamp": 1791019287.627
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:21:27.627000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv21---driver-view-with-the-tv-radio",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/7770B5C3-31BA-4D4F-9DF0-35ACB7C18289.png",
+      "name": "TV21 - Driver view with the TV radio",
+      "sha256": "b49c07a34b01d9800c15018b7d3bca6ba786491f9bc3769419aa5bcab350f585",
+      "testIdentifier": "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "7770B5C3-31BA-4D4F-9DF0-35ACB7C18289.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV21 - Driver view with the TV radio_0_A48D0CDA-FB4E-42F7-B35B-50D01C1EDD95.png",
+        "timestamp": 1791019311.805
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:21:51.805000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv20---chase-camera-and-race-world",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/51B450E6-748F-402B-B624-9814A24A1168.png",
+      "name": "TV20 - Chase camera and race world",
+      "sha256": "105e8caa252ea03d29d253a3287b104de9607d28445bc122e2dfce28131ffa26",
+      "testIdentifier": "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "51B450E6-748F-402B-B624-9814A24A1168.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV20 - Chase camera and race world_0_21E41534-9283-4907-B148-948357CE225D.png",
+        "timestamp": 1791019302.12
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:21:42.120000Z"
+    },
+    {
+      "id": "tv-remote-ui-tv22---robot-race-results",
+      "platform": "apple-tv",
+      "runID": "tv-remote-ui",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/87BA903D-C002-486A-B0F2-C0CC5223C31F.png",
+      "name": "TV22 - Robot race results",
+      "sha256": "aa442fced8e4d848209259a63ae3dd528390657d71c981715b093b58e4045edc",
+      "testIdentifier": "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+      "attachment": {
+        "configurationName": "Test Scheme Action",
+        "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName": "HWvH QA TV 20261003",
+        "exportedFileName": "87BA903D-C002-486A-B0F2-C0CC5223C31F.png",
+        "isAssociatedWithFailure": false,
+        "suggestedHumanReadableName": "TV22 - Robot race results_0_F492AFB0-F1FB-4A6E-903E-3DC0E520E1DD.png",
+        "timestamp": 1791019332.51
+      },
+      "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-drawing-final-remote/manifest.json",
+      "manifestSHA256": "03da62b4f2e714dd5241274b73ab594533db432578863f50e14fd089c8afd841",
+      "encodedDimensions": [
+        1920,
+        1080
+      ],
+      "orientedDimensions": [
+        1920,
+        1080
+      ],
+      "sourceOrientation": 1,
+      "capturedAtUTC": "2026-10-03T09:22:12.510000Z"
+    }
+  ],
+  "scope": "Only untouched PNG screenshots from final 5643 iPad gallery/drawing restore and TVRemote UI results; derived contact sheets normalize EXIF read-only."
+}

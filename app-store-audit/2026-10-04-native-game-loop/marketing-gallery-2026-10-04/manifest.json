@@ -1,0 +1,982 @@
+{
+  "schemaVersion": 1,
+  "preparedAt": "2026-10-04T11:16:09.952274+00:00",
+  "status": "20compositions individually reviewed and root approved for store preparation; live upload review pending",
+  "name": "Hot Wheels vs Humans",
+  "locale": "en-US",
+  "nativeVersion": "1.0",
+  "nativeBuild": "1",
+  "sourceFreeze": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+    "sha256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "inputCount": 889
+  },
+  "ownerNativeApproval": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/root-native-visual-approval.candidate-11.json",
+    "sha256": "82116b98ea6b4055c49606ed3d1026e6c121827636ac87a87e6f1c1760c78527"
+  },
+  "sourceEquivalence": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json",
+    "sha256": "2ea1319cb22053a1cc99020634284ee5fa2e06609219b6c94d988fc73a77a7e2"
+  },
+  "platforms": {
+    "ipad": {
+      "width": 2752,
+      "height": 2064,
+      "galleryCount": 10
+    },
+    "tv": {
+      "width": 3840,
+      "height": 2160,
+      "galleryCount": 10
+    }
+  },
+  "captures": {
+    "tv-rematch": {
+      "platform": "tv",
+      "state": "05 - Rematch begins another race",
+      "path": "native-sources/F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+      "sha256": "bc1aa12ba4779933bf357f023c4b80d60c4ec27fe77f3c331ae5a6fb0336a51d",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-rematch",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-share": {
+      "platform": "tv",
+      "state": "04 - Frozen race image and result",
+      "path": "native-sources/FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+      "sha256": "c9738d96ebe91d7e5a1ef07d1fda7cb22e1a6074ae81b3f4f93815dfeab1576d",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-share",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-result": {
+      "platform": "tv",
+      "state": "03 - Actual finish and race statistics",
+      "path": "native-sources/87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+      "sha256": "c12a7754bae14c0708c617ecc05d873b7a98e4de4d418635010b77a15eca5d82",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-result",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-race": {
+      "platform": "tv",
+      "state": "02 - Real standalone race",
+      "path": "native-sources/8ECF8599-8B14-4060-B078-53C402194F2A.png",
+      "sha256": "1768e5f76d8cbb238cb71440317f6f1da1661fa2b2ca6cfae88ab556ea77e7f9",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-race",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/8ECF8599-8B14-4060-B078-53C402194F2A.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-launch": {
+      "platform": "tv",
+      "state": "01 - First launch with visible Play",
+      "path": "native-sources/6C79565C-A835-4FD3-AE17-D5453293D759.png",
+      "sha256": "a16d019a907f28520f5d64ca12feef8bb8b5c123b96ae3a4375b167dfe3806d9",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-launch",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/6C79565C-A835-4FD3-AE17-D5453293D759.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-rematch": {
+      "platform": "ipad",
+      "state": "05 - Rematch begins another race",
+      "path": "native-sources/F45D2F4E-28C8-44DF-88AF-AB30EAF789BA.png",
+      "sha256": "8cdc38624cc8cc808546938b57294ee65460c42e0f4cda822d7d00535f9bd72a",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-rematch",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/F45D2F4E-28C8-44DF-88AF-AB30EAF789BA.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-share-dismissed": {
+      "platform": "ipad",
+      "state": "04c - Same frozen result after chooser dismissal",
+      "path": "native-sources/648EA357-CACA-4AA1-A2EA-9974D2C22C9E.png",
+      "sha256": "46da7334d43b54be07db9f757e0efe570446b3401a727e1843ba3bfe35216d01",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-share-dismissed",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/648EA357-CACA-4AA1-A2EA-9974D2C22C9E.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-chooser": {
+      "platform": "ipad",
+      "state": "04b - Native image share chooser",
+      "path": "native-sources/85AE5D97-A45A-4653-977C-BB8EC94BDD4F.png",
+      "sha256": "13fa1422f5867f5f96e8afb30d34f4eb78410ad0c669f1c45a5bed6d3ff76383",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-chooser",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/85AE5D97-A45A-4653-977C-BB8EC94BDD4F.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-share": {
+      "platform": "ipad",
+      "state": "04 - Frozen race image and result",
+      "path": "native-sources/FF82B43F-0D68-4A30-B36F-0459E39AF416.png",
+      "sha256": "ccd28f4a1631b9d0bfedccc321c3e8510f78622129d7548743ea1f4c84bc1692",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-share",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/FF82B43F-0D68-4A30-B36F-0459E39AF416.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-result": {
+      "platform": "ipad",
+      "state": "03 - Actual finish and race statistics",
+      "path": "native-sources/969E16D8-BAC5-425C-9D2A-0AD619C6F941.png",
+      "sha256": "90deeade846315f1676e0c9e7df1d1acd81e247230fc3856eb030ec3542331b2",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-result",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/969E16D8-BAC5-425C-9D2A-0AD619C6F941.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-race": {
+      "platform": "ipad",
+      "state": "02 - Real standalone race",
+      "path": "native-sources/EA211BD2-007D-44EB-8D37-544C8E2EEC41.png",
+      "sha256": "f1b6c6f31520d9f972f74923f09685867fba9b6eccc0ac09565d13ff42fdf6b8",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-race",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/EA211BD2-007D-44EB-8D37-544C8E2EEC41.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-launch": {
+      "platform": "ipad",
+      "state": "01 - First launch with visible Play",
+      "path": "native-sources/D544F417-4C97-4DB6-A14F-080F1E06B4A5.png",
+      "sha256": "56076897617f2272854a69e6aae558ac0e9fdc9fd8faac2426dc455bcd1562b4",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-launch",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/D544F417-4C97-4DB6-A14F-080F1E06B4A5.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-calm": {
+      "platform": "ipad",
+      "state": "09 - Calm camera with live race controls",
+      "path": "native-sources/669C3FA3-017E-4077-B713-E98042C6CB6E.png",
+      "sha256": "98f2fb49dd4f5407116dfc8cb78efdc82193829a15af97d52a54c20eddd9cf51",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-calm",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/669C3FA3-017E-4077-B713-E98042C6CB6E.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-settings": {
+      "platform": "ipad",
+      "state": "08 - Saved choices after relaunch",
+      "path": "native-sources/5D1D0B0C-C628-45AC-81D3-117EF17AC627.png",
+      "sha256": "9667e7feaa24b83b36926c85c63f49227c50f9f481f1a95285fdbf88e1b9f7c5",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-settings",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/5D1D0B0C-C628-45AC-81D3-117EF17AC627.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-settings-pressed-excluded": {
+      "platform": "ipad",
+      "state": "07 - Independent animation and haptic settings",
+      "path": "native-sources/1B7D74C9-6732-4FD7-8ABE-23AA52642F32.png",
+      "sha256": "e20494637d93dce556cbef31024bfe9e213ab548bd60f228142b40f236cce9c7",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "QA only: current press/transition opacity remains visible immediately after tapping; stable saved-choice screenshot08 is preferred for visual review. No layout defect inferred.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-settings-pressed-excluded",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/1B7D74C9-6732-4FD7-8ABE-23AA52642F32.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": false,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-ax-launch-excluded": {
+      "platform": "ipad",
+      "state": "06 - Largest text launch actions",
+      "path": "native-sources/9994687A-235C-485D-803F-E966DBC5E000.png",
+      "sha256": "da8f8c31973a194cee81e0e5e90ccce652e26562902d037035cf445d9bdb140e",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "Reviewed native pixels; full actual source unchanged.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-ax-launch-excluded",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate11-two-attachments/9994687A-235C-485D-803F-E966DBC5E000.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": false,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-workshop": {
+      "platform": "ipad",
+      "state": "10 - Optional player and touch workshop",
+      "path": "native-sources/7414820E-836C-4EE8-99F9-20A635C2AFEB.png",
+      "sha256": "c98d844a568af88350004a350c19133bbb6550e67c36bbd79e87d712309fcace",
+      "sourceProof": "native-inputs.candidate-10.json",
+      "runtimeReceipt": "ipad-runtime-candidate10-three.json",
+      "testIdentifier": "GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()",
+      "nativePixelReview": "Reviewed actual native pixels; retained passed method with narrow source-equivalence.candidate-11.json scope. Other failed methods in its round remain failed.",
+      "encodedWidth": 2064,
+      "encodedHeight": 2752,
+      "orientation": 8,
+      "displayedWidth": 2752,
+      "displayedHeight": 2064,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-workshop",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-candidate10-three-attachments/7414820E-836C-4EE8-99F9-20A635C2AFEB.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "renderedUprightSize": [
+        2752,
+        2064
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-workshop": {
+      "platform": "tv",
+      "state": "10 - TV workshop actual red paint",
+      "path": "native-sources/9388C08D-575C-45F7-B03F-3A5FE5F9A84A.png",
+      "sha256": "f9887d4b0418faf41b4048a224cafe077437015c7277924a46d44d7a33303221",
+      "sourceProof": "native-inputs.candidate-5.json",
+      "runtimeReceipt": "tv-runtime-candidate5-round1.json",
+      "testIdentifier": "GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()",
+      "nativePixelReview": "Reviewed actual native pixels; retained passed method with narrow source-equivalence.candidate-11.json scope. Other failed methods in its round remain failed.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-workshop",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-round1-attachments/9388C08D-575C-45F7-B03F-3A5FE5F9A84A.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-settings": {
+      "platform": "tv",
+      "state": "07 - TV independent saved Off settings",
+      "path": "native-sources/E82D7DF3-5AA8-41EE-8AE0-F17E3EAF9448.png",
+      "sha256": "12533bc9fdba1c4675dfcd1d17a363fc0626d012a42a6dee1a5126c89dad79bd",
+      "sourceProof": "native-inputs.candidate-6.json",
+      "runtimeReceipt": "tv-runtime-candidate6-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "Reviewed actual native pixels; retained passed method with narrow source-equivalence.candidate-11.json scope. Other failed methods in its round remain failed.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-settings",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate6-two-attachments/E82D7DF3-5AA8-41EE-8AE0-F17E3EAF9448.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "tv-calm": {
+      "platform": "tv",
+      "state": "09 - TV calm camera with live controls",
+      "path": "native-sources/70DA8D6F-29DA-4903-97EE-1DD9C69BE33D.png",
+      "sha256": "bc3e690aef6927d35679c077bf59ecf11cf428b5c1207ae0ccd70eba129a3630",
+      "sourceProof": "native-inputs.candidate-6.json",
+      "runtimeReceipt": "tv-runtime-candidate6-two.json",
+      "testIdentifier": "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+      "nativePixelReview": "Reviewed actual native pixels; retained passed method with narrow source-equivalence.candidate-11.json scope. Other failed methods in its round remain failed.",
+      "encodedWidth": 3840,
+      "encodedHeight": 2160,
+      "orientation": 1,
+      "displayedWidth": 3840,
+      "displayedHeight": 2160,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "tv-calm",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/tv-candidate6-two-attachments/70DA8D6F-29DA-4903-97EE-1DD9C69BE33D.png",
+      "kind": "full-device-native-screenshot",
+      "encodedSize": [
+        3840,
+        2160
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        3840,
+        2160
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    },
+    "ipad-native-export": {
+      "platform": "ipad",
+      "state": "Actual 1200-wide native finished race export",
+      "path": "native-sources/ipad-candidate11-finished-race.png",
+      "sha256": "f66a7ce24b87ac9ba57410664c5f3e5cf06eeaee9669aee809a8e906d5108ca1",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json",
+      "nativePixelReview": "Reviewed upright genuine frame, actual result stats and app URL; original native export bytes unchanged.",
+      "encodedWidth": 1200,
+      "encodedHeight": 1444,
+      "orientation": 1,
+      "displayedWidth": 1200,
+      "displayedHeight": 1444,
+      "rootVisualApproval": "approved scoped actual pixels; exclusions in root-native-visual-approval.candidate-11.json",
+      "id": "ipad-native-export",
+      "nativeOriginalPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/actual-native-export/ipad-candidate11-finished-race.png",
+      "kind": "genuine-native-export",
+      "encodedSize": [
+        1200,
+        1444
+      ],
+      "exifOrientation": 1,
+      "renderedUprightSize": [
+        1200,
+        1444
+      ],
+      "nativeVersion": "1.0",
+      "nativeBuild": "1",
+      "rootApproved": true,
+      "marketingEligible": true,
+      "normalization": "ImageOps.exif_transpose in render memory only; source bytes unchanged",
+      "equivalenceReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json"
+    }
+  },
+  "scenes": [
+    {
+      "ordinal": 1,
+      "id": "tiny-cars-big-races",
+      "headlines": {
+        "ipad": "Tiny cars. Big races.",
+        "tv": "Tiny cars. Big races."
+      },
+      "captureCount": 3,
+      "background": "asphalt",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-race",
+          "left": "ipad-workshop",
+          "right": "ipad-result"
+        },
+        "tv": {
+          "hero": "tv-race",
+          "left": "tv-workshop",
+          "right": "tv-result"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Real native countdown, finished-race stats and workshop navigation"
+    },
+    {
+      "ordinal": 2,
+      "id": "ready-set-play",
+      "headlines": {
+        "ipad": "Ready. Set. Play.",
+        "tv": "Ready. Set. Play."
+      },
+      "captureCount": 2,
+      "background": "track-yellow",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-launch",
+          "right": "ipad-race"
+        },
+        "tv": {
+          "hero": "tv-launch",
+          "right": "tv-race"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual first-viewport Play"
+    },
+    {
+      "ordinal": 3,
+      "id": "finish-then-go-again",
+      "headlines": {
+        "ipad": "Finish. Then go again.",
+        "tv": "Finish. Then go again."
+      },
+      "captureCount": 3,
+      "background": "pit-red",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-result",
+          "left": "ipad-rematch",
+          "right": "ipad-race"
+        },
+        "tv": {
+          "hero": "tv-result",
+          "left": "tv-rematch",
+          "right": "tv-race"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual winner and immediate Rematch"
+    },
+    {
+      "ordinal": 4,
+      "id": "front-row-view",
+      "headlines": {
+        "ipad": "Get a front-row view.",
+        "tv": "Get a front-row view."
+      },
+      "captureCount": 1,
+      "background": "steel-blue",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-race"
+        },
+        "tv": {
+          "hero": "tv-race"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual live Driver View controls"
+    },
+    {
+      "ordinal": 5,
+      "id": "keep-your-finish",
+      "headlines": {
+        "ipad": "Share your finish.",
+        "tv": "Keep your finish."
+      },
+      "captureCount": 2,
+      "background": "asphalt",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-native-export",
+          "left": "ipad-share"
+        },
+        "tv": {
+          "hero": "tv-share",
+          "left": "tv-result"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "iPad genuine frozen PNG/system chooser; TV frozen native preview only, no claim of physical transfer"
+    },
+    {
+      "ordinal": 6,
+      "id": "workshop",
+      "headlines": {
+        "ipad": "Explore the workshop.",
+        "tv": "Paint it your way."
+      },
+      "captureCount": 3,
+      "background": "track-yellow",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-workshop",
+          "left": "ipad-launch",
+          "right": "ipad-race"
+        },
+        "tv": {
+          "hero": "tv-workshop",
+          "left": "tv-launch",
+          "right": "tv-race"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual iPad workshop entry; actual TV red paint state"
+    },
+    {
+      "ordinal": 7,
+      "id": "rematch",
+      "headlines": {
+        "ipad": "Go for a rematch.",
+        "tv": "Go for a rematch."
+      },
+      "captureCount": 1,
+      "background": "pit-red",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-rematch"
+        },
+        "tv": {
+          "hero": "tv-rematch"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual Rematch creates next countdown"
+    },
+    {
+      "ordinal": 8,
+      "id": "your-kind-of-racing",
+      "headlines": {
+        "ipad": "Your kind of racing.",
+        "tv": "Your kind of racing."
+      },
+      "captureCount": 2,
+      "background": "steel-blue",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-settings",
+          "right": "ipad-calm"
+        },
+        "tv": {
+          "hero": "tv-settings",
+          "right": "tv-calm"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual saved independent Off choices and calm camera; hardware feel unverified"
+    },
+    {
+      "ordinal": 9,
+      "id": "whole-track",
+      "headlines": {
+        "ipad": "See the whole track.",
+        "tv": "See the whole track."
+      },
+      "captureCount": 1,
+      "background": "asphalt",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-calm"
+        },
+        "tv": {
+          "hero": "tv-calm"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Actual calm overview camera"
+    },
+    {
+      "ordinal": 10,
+      "id": "keep-racing",
+      "headlines": {
+        "ipad": "One more race?",
+        "tv": "One more race?"
+      },
+      "captureCount": 3,
+      "background": "track-yellow",
+      "captures": {
+        "ipad": {
+          "hero": "ipad-rematch",
+          "left": "ipad-result",
+          "right": "ipad-launch"
+        },
+        "tv": {
+          "hero": "tv-rematch",
+          "left": "tv-result",
+          "right": "tv-launch"
+        }
+      },
+      "panoramaPartner": null,
+      "claimScope": "Genuine result, Rematch and first-viewport launch"
+    }
+  ],
+  "composition": "Centered upright hero; supporting left negative and right positive visual rotation; preserve all native hero pixels; original EXIF untouched",
+  "limits": [
+    "No physical nearby LAN/discovery/delivery/reconnect claim",
+    "Hardware audio/haptics suppressed in QA",
+    "Native largest-text/pressed-transition captures excluded from marketing",
+    "Historical native captures retained only within source-equivalence/root approved scope",
+    "Store upload/final release owner approval pending"
+  ]
+}

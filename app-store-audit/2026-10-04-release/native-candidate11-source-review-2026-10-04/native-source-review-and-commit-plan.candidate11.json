@@ -1,0 +1,711 @@
+{
+  "recordedAtUTC": "2026-10-04T11:36:04.756463+00:00",
+  "scope": "Independent bounded read-only native source/code/tests/document review and explicit local commit plan; no source changes, staging, commit, build/device/browser/upload/deploy",
+  "repository": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+  "candidate": 11,
+  "baseRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "HEAD": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "version": "1.0",
+  "build": "1",
+  "platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "inputFreeze": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+  "inputFreezeSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+  "inputCount": 889,
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "allInputBytesMatchBeforeAndAfterReview": true,
+  "aggregateRecipeReconciliation": "The actual digest uses entries in the recorded array order: path+NUL+sha256+LF. The existing metadata describes sorted entries, but this array is grouped rather than globally lexicographically sorted. Preserve original receipt and use recorded order; independently reproduced7377115b... without changing any input. Global resort would produce5768cd8d... and is not this freeze recipe.",
+  "projectMetadataUnchanged": true,
+  "projectSHA256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756",
+  "versionDecisionAuthority": "Direct root fresh ASC TestFlight No Builds and explicit retain1.0(1); no version/project change selected",
+  "selectedPathCount": 40,
+  "trackedModifiedCount": 29,
+  "newUntrackedCount": 11,
+  "newNativeSourceCount": 8,
+  "newTestCount": 2,
+  "newDesignDocumentCount": 1,
+  "categoryCounts": {
+    "nativeProduction": 33,
+    "tests": 2,
+    "documentation": 5
+  },
+  "groups": {
+    "nativeProduction": [
+      "Hot Wheels v Human/App/GamePreferences.swift",
+      "Hot Wheels v Human/App/GameSettingsView.swift",
+      "Hot Wheels v Human/App/HWTestSession.swift",
+      "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+      "Hot Wheels v Human/App/LobbyBackground.swift",
+      "Hot Wheels v Human/App/RootView.swift",
+      "Hot Wheels v Human/App/SoundBank.swift",
+      "Hot Wheels v Human/App/TVWorkshopControls.swift",
+      "Hot Wheels v Human/Core/Models/GameMessage.swift",
+      "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+      "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "Hot Wheels v Human/Core/Networking/TVFinder.swift",
+      "Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift",
+      "Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift",
+      "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaAudio.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "Hot Wheels v Human/Features/Customizer/CustomizerView.swift",
+      "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+      "Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift",
+      "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift"
+    ],
+    "tests": [
+      "Hot Wheels v HumanTests/GameLoopTests.swift",
+      "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+    ],
+    "documentation": [
+      "DESIGN.md",
+      "Hot Wheels v Human/App/README.md",
+      "Hot Wheels v Human/Core/Networking/README.md",
+      "Hot Wheels v Human/Features/Arena/README.md",
+      "Hot Wheels v Human/Features/Profiles/README.md"
+    ]
+  },
+  "files": [
+    {
+      "path": "DESIGN.md",
+      "state": "new-untracked",
+      "category": "documentation",
+      "currentSHA256": "93bbe86d5edfaa87f659f9ec803364345b1d48f5b225a1300cc4d9811687b0b1",
+      "includedIn889InputFreeze": false,
+      "lineCount": 195
+    },
+    {
+      "path": "Hot Wheels v Human/App/GamePreferences.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "0bf4a219aed5d436cc0b8a17b0317a9e3ee2f56f7829d9cf7d9ee84d51e285e7",
+      "includedIn889InputFreeze": true,
+      "lineCount": 48
+    },
+    {
+      "path": "Hot Wheels v Human/App/GameSettingsView.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "6584b1928633aabb1dc3b20922b4682933e775cf968d15b5c1422a9e4bfde147",
+      "includedIn889InputFreeze": true,
+      "lineCount": 59
+    },
+    {
+      "path": "Hot Wheels v Human/App/HWTestSession.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "0fa9b32d435e004747320e1a304fde2d237a0b34b4ed70459c7b5f260c788898",
+      "includedIn889InputFreeze": true,
+      "lineCount": 29
+    },
+    {
+      "path": "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "98737e583973f876ca82bc7023ba88ce71e5e52bd61319160672de8081eb22ee",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "c265b5c8ef44e7b771c68af93f84fd352689f7c1fde07735d454d9d64f4fbb98",
+      "insertions": 24,
+      "deletions": 5
+    },
+    {
+      "path": "Hot Wheels v Human/App/LobbyBackground.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "d850988a4d21e7a1f4fbb3525458444acc600afa030aa724f0cb7792f1cc2a34",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "01acf9b228291990629d494a8d94ea46cc589c728753a1317998c03acf58ffe3",
+      "insertions": 3,
+      "deletions": 2
+    },
+    {
+      "path": "Hot Wheels v Human/App/README.md",
+      "state": "modified",
+      "category": "documentation",
+      "currentSHA256": "3e3631fffe909537a847d712805058b5735f746691810b6a462bfb6ac8f151b6",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "13272e4c5dcfc1ed0730e06ff2d17f3bd04840bce8f66aad8599a4b08f605124",
+      "insertions": 4,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/App/RootView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "62ab11622d382b8de5e97fd38c470cb4bebdf88df6c2ff12f55635281af376cf",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "c7dee7c1e2cfab97c344f18359cf6d2ce3edc58b50a320393e3ac63d8a2fa341",
+      "insertions": 9,
+      "deletions": 3
+    },
+    {
+      "path": "Hot Wheels v Human/App/SoundBank.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "6b65d3d98d78a5f7f80b2cd2ee35422d3e929fe6d9130cf829b0307ed203eafe",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "c14e9f619795a089c051f0b5efa2663223f423d41148c052986c6a07678b5ade",
+      "insertions": 3,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/App/TVWorkshopControls.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "bd49b47c264ec4b546d9afd96112cf0358d5d734a12e840011439ec7e440170c",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "6da9b628b7e475813ae05ef8e22dfb811aae81f1c6f1730d9931aa8e5f763ed8",
+      "insertions": 7,
+      "deletions": 1
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/GameMessage.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "8db3db8fffbfebccc8fc5183c1cc5881a8bd1083acacbaae07615347eabeeee1",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "b142ecd86075c81eef8108997bfcb9dd94414e00aa82ef380137c84b234633b0",
+      "insertions": 4,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "d8f287b3aa707411481e913d6a8f687ac5c1d6e357e2b42463d61f27d738b03d",
+      "includedIn889InputFreeze": true,
+      "lineCount": 58
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "becd6d84bc3d8c157d6d34eede8f331ce6ae086240aabadb9a21410987a12463",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "c31a6c0cc90ec88083ed3931695aef79ce4a8a5359ba127427cf222b95c23f40",
+      "insertions": 10,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "ec7bfb03bdd365a87cb0b0b0f844740b02c259e86a014ea0110b0d519ea98695",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "8e479a47592943399ff7abb15ad08f747c62c53999f0cf0d53e67f88bfa04e87",
+      "insertions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/README.md",
+      "state": "modified",
+      "category": "documentation",
+      "currentSHA256": "0733df4b7421eaa3e13ad2945079fcc2c744f3302f6a7a99b970c2e3ac83df86",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "a1e2ecfa2b70dde08a11acc83a6603b677c03d2c495efd53a82b9d3f8fe70283",
+      "insertions": 6,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "19beaabcbe76166993d6f66af4b56350f4430613bc8fbedd1c448483dd341a33",
+      "includedIn889InputFreeze": true,
+      "lineCount": 30
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/TVFinder.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "aa068228a25b0621549fbc45b9b41ef31ec6a11407e4589c6c88a02944999aa6",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "7def21cf58bd30d7e77f00813a4d566e1391aa3a3db61708ee4ea8610a35d008",
+      "insertions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "48861f712bf1389c16232be03f6240f4a99db05d9f54d7c1c058b5b2364db29a",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "be59c2fc4f53545c6edb0cd9e01d5e571bfee7b12193ac6145bc94883b66d3c4",
+      "insertions": 7,
+      "deletions": 1
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "feb33a07b2809ea61c74f269dad80d8721bd2a130d46270926f68dfcc9fa18cf",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "0533225269de6fb1dbc4b162d8ca2a8aa555fb3fcc213139ca2952191d894f5c",
+      "insertions": 2,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "b4a8e74ba197bdd5364c8b4d5c37724ac234122615aeae2b2df7b3e5bd78d0cf",
+      "includedIn889InputFreeze": true,
+      "lineCount": 13
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "5db19008e59b0aa84ca7dfbdac4e5af2c8468781c11a52382687f9f89abdd8cc",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "1bcb3f5a484fb77d707d19c7498cd4693a236629112c81fd204d5ee75a9d6599",
+      "insertions": 79,
+      "deletions": 7
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "5e0b1698d7e8103bdca0b2a8e7c49252a087963c8d3361863678d61e28fb5664",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "2ea523b95d157e4b6bc601e09440b25d542c18ed2e0f56648d29826592775eec",
+      "insertions": 17,
+      "deletions": 1
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "32416c35e8869ed9e1f86a585800d5123582bc9bc10c29f5b8c681439b69f6d6",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "20de56257ba46efda3b6ef5a02f8fbe8c9473e47e34fc6963fd6861d578c74dd",
+      "insertions": 1,
+      "deletions": 1
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaAudio.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "5df805ce34630f46f1fb9e818ebb5e2bf62586e58454f3548fb951579e4fbbd0",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "5000cdae38718a1065ea7e5edfe1fadf4c2200d8e8bbbd840a520b1f8935029e",
+      "insertions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "f6711457d1b8eddc1559682f6749b317b99d926b4a7f69b8db153c3e40793bfd",
+      "includedIn889InputFreeze": true,
+      "lineCount": 86
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "39ec652dfb4ad68afb364a3363d658b6fdb13b2f364dca4ae4ac3f2e16095b13",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "f1ad705976ced9708a6369efbdd6fb57084ce2ccf615ca699ac979e7b7a4eeb1",
+      "insertions": 17,
+      "deletions": 6
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "d9c142c26b00174e8fe4c276b1a205888f938d41788ed6bde0aa5ee627d2b9f9",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "718613d93db67d413841ee88d25b57b366f0bd2cf6b8c5659f8250dbecadaf7f",
+      "insertions": 37,
+      "deletions": 9
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/README.md",
+      "state": "modified",
+      "category": "documentation",
+      "currentSHA256": "bc2efc19a6522f6cc3c227657fb3eb9784e97945898f3d48cf872a9638cf6982",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "b05a858ff5406f4c63ac95d5e0af943181ea0b3be012cec07924102a7693e0cd",
+      "insertions": 6,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "state": "new-untracked",
+      "category": "nativeProduction",
+      "currentSHA256": "41c34a4fbff79ef51a05b2c8a157fd415faf7527544e411d160ebebed76aeefc",
+      "includedIn889InputFreeze": true,
+      "lineCount": 209
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "97ca24b79b03ac3387e29bd6c390dcbb8b85936f733e76faae71676c204179fd",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "3da8be324bac47c3bf0382ca1117be05e84a84c385cee2428b7068ae47cfc927",
+      "insertions": 4,
+      "deletions": 1
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CustomizerView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "8ec6dd7e62bc6dacbfeb49681b06a02ba4d4c422dbb0842900d0d06f184e5d05",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "843b834721a36bb9c16147dd5f2b7c871a01bcbd723b4f6ed340c880cf848027",
+      "insertions": 1,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "ed232796f042023cbeb47affac51a55a15d49d089bb1d887f8a4335db21d731e",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "8331007dd0d39423469e7459e883885e726157cfc386699c59cc7a9b6a03f249",
+      "insertions": 22,
+      "deletions": 2
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "8119becff9d350c856a219bb4dc635d36c0e509af44cb69ff338cd0e6c394ab2",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "f05e3fdcd0773f42e8611324e6b3e216edda2b68ae2e8f2e9d66ca436710871e",
+      "insertions": 44,
+      "deletions": 11
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "af7740a5448d139eefd900de26960c6c033e64c738939cd48516460604d172e4",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "ace8c0e95da331eac0668092c4a77e0c66e6117968305b6f6744b3e1879e8264",
+      "insertions": 26,
+      "deletions": 2
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "7f6d933c375635d394a5efab0a8c9479ad5042352878267267849b8818216d21",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "34c8d71c656eb4912ece1dc7ca353c253f9247c4364b36f9aeca1b56ac60121c",
+      "insertions": 9,
+      "deletions": 2
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "25ac596b5ce90da222d9bc104f20b293a9f8e8969a99a2b4ae9ced7a3f41cfc3",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "88e5cb2c739decb68f5035c60f5e27375009758107444d6e2d69f7c1d7177928",
+      "insertions": 78,
+      "deletions": 19
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/README.md",
+      "state": "modified",
+      "category": "documentation",
+      "currentSHA256": "44e6301f245320c26c37e5aa67641ac8bc175a35ba796a21c99d65f4a0a46fa4",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "06ec09c70169107fd3c7e51d0545d0adf0adbc48fb2883beeb9505c608c88578",
+      "insertions": 2,
+      "deletions": 0
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift",
+      "state": "modified",
+      "category": "nativeProduction",
+      "currentSHA256": "add40446d12aab248ff609d3c24ba5b025dbc330172f0cf8dbe5510b4796214d",
+      "includedIn889InputFreeze": true,
+      "baseSHA256": "b1a0afdd026fd6dc0943dd00a6a6adfbe65437c98e9e99f16e81c0e594d77d30",
+      "insertions": 15,
+      "deletions": 10
+    },
+    {
+      "path": "Hot Wheels v HumanTests/GameLoopTests.swift",
+      "state": "new-untracked",
+      "category": "tests",
+      "currentSHA256": "9b2794f3fdad4d2f022c7828017fe1ae43a37ca0fb8f65819e181d81331edfa3",
+      "includedIn889InputFreeze": true,
+      "lineCount": 125
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/GameLoopUITests.swift",
+      "state": "new-untracked",
+      "category": "tests",
+      "currentSHA256": "8e1421f9380e50a4cd70fb5b067137b00a1f4d41630804dd1f0ee282d799d3fe",
+      "includedIn889InputFreeze": true,
+      "lineCount": 234
+    }
+  ],
+  "standardsSources": [
+    "/Users/nathan/Documents/GitHub/AGENTS.md",
+    "/Users/nathan/Documents/GitHub/app-design-guidelines.md",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/CLAUDE.md",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Documents/BUILD-ORDER.md",
+    "SwiftUI expert local guidance"
+  ],
+  "codeReview": [
+    {
+      "area": "Launch/native identity",
+      "verdict": "Source implements first-viewport Play before optional local profile selection, default TV remote focus, retained workshop destinations and starter real medium robot race; iPad accessibility uses stable grid. Existing navy/yellow/rounded native identity and models preserved.",
+      "paths": [
+        "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+        "Hot Wheels v Human/App/RootView.swift",
+        "Hot Wheels v Human/App/TVWorkshopControls.swift"
+      ]
+    },
+    {
+      "area": "Genuine finish/replay/history",
+      "verdict": "Normal allDone transition freezes value-only run/track/name/time/speed/crash entries. Rematch/reset clears the previous payload and invalidates capture nonce, while history filing now keys the race result ID so same-track rematches can persist separately. Host next-race uses the existing series lifecycle.",
+      "paths": [
+        "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+        "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+        "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+        "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift"
+      ]
+    },
+    {
+      "area": "Native share and lifecycle",
+      "verdict": "Actual RealityKit frame copied once per pending capture after GPU completion; whole-frame vertical normalization corrects Metal/Core Image orientation. Immutable frame/statistics render to PNG with verified numeric App Store link; native iPad ShareLink, separate explicit TV nearby panel, retry failure and rematch availability. Result-ID nonce rejects stale callbacks; six-second capture timeout is bounded; item presentation owns frozen payload and avoids TV cover teardown.",
+      "paths": [
+        "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+        "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+        "Hot Wheels v Human/Core/Models/RaceShareResult.swift"
+      ]
+    },
+    {
+      "area": "Local network handoff",
+      "verdict": "New reliable request/result messages remain outside ten-Hz snapshots. Encoded/decoded actual image validity and limits preserve existing drawing/photo wire data. Temporary standalone TV advertiser starts only on explicit Share, closes with sheet; existing connected races reuse encrypted Multipeer transport. Dashboard event task has start/stop/lifecycle cancellation and clears stale shares on rematch/new race. Loopback verifies bytes; physical LAN is still a separate gap.",
+      "paths": [
+        "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+        "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+        "Hot Wheels v Human/Core/Models/GameMessage.swift",
+        "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+        "Hot Wheels v Human/Features/Dashboard/DashboardView.swift"
+      ]
+    },
+    {
+      "area": "Saved preferences/calm presentation",
+      "verdict": "Absent animation/haptics keys default true, explicit false survives fresh store/cold launch independently. Existing camera/track/radio/station/volume choices now persist. System Reduce Motion always wins; decorative systems, profile/preview drift, reaction clips and jitter stop, static camera keeps genuine physics and boost controls active. No physical haptic feel claim on TV or Simulator.",
+      "paths": [
+        "Hot Wheels v Human/App/GamePreferences.swift",
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift"
+      ]
+    },
+    {
+      "area": "Computer move contract",
+      "verdict": "This continuous physics race has no discrete turns to delay or lock. Actual robot movement/boost remains live; existing boostMinDuration0.5s exceeds350ms and existing boost holds/meter/rules remain unchanged. The new Boosting indicator labels the actual racer state. Do not introduce a turn-speed preference or input lock that would change this game purpose.",
+      "paths": [
+        "Hot Wheels v Human/Core/RaceCore/RaceTuning.swift",
+        "Hot Wheels v Human/Core/RaceCore/DriveSystem.swift",
+        "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift"
+      ]
+    },
+    {
+      "area": "DEBUG isolation",
+      "verdict": "Valid UUID argument or actual injected DEBUG unit host selects private preferences and SwiftData; blank memory-only unit scene, deterministic existing starter content, network advertising/browsing/audio/haptics disabled. Release branch returns nil and retains production stores/services. Current exact normal-store before/after and shutdown proofs remain actual historical receipts, no device operation performed by this review.",
+      "paths": [
+        "Hot Wheels v Human/App/HWTestSession.swift",
+        "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+        "Hot Wheels v Human/App/SoundBank.swift",
+        "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+        "Hot Wheels v Human/Core/Networking/TVFinder.swift"
+      ]
+    }
+  ],
+  "materialCodeBlockersFoundInReviewedDiff": [],
+  "releaseLimits": [
+    {
+      "severity": "remaining validation",
+      "area": "Physical nearby sharing",
+      "detail": "Source/loopback/TV panel pixels do not prove actual TV-to-iPad discovery, local-network permission, encrypted image delivery and reconnect on real devices. Existing docs already require this check. Both current apps must be installed for the additive share messages. Keep these claims explicitly unverified until root-authorized paired-device QA."
+    },
+    {
+      "severity": "remaining validation",
+      "area": "Native scope and hardware",
+      "detail": "Largest text covers launch/settings/calm controls; not every legacy workshop, narrow/split/portrait layout. Actual audio and haptic hardware are suppressed in QA. No broader verification inferred."
+    },
+    {
+      "severity": "remaining release work",
+      "area": "Distribution",
+      "detail": "Fresh Apple proofs show No Builds and iOS/tvOS1.0 Prepare for Submission. Superseded October3 signed packages are historical, not this candidate. Matching current Release archives, signatures, upload/processing/build selection, actual uploaded galleries and actual submission remain root work."
+    }
+  ],
+  "documentationNotes": [
+    {
+      "severity": "nonblocking wording",
+      "path": "DESIGN.md",
+      "line": 191,
+      "detail": "The wording sent reliably once is tighter than implementation: RaceShareHandoff sends the same frozen payload on peerConnected, hello and explicit request/retry. Prefer reliable bounded handoff on connection/request, separate from telemetry. No app change is proposed by this read-only review."
+    },
+    {
+      "severity": "nonblocking dependency reference",
+      "path": "DESIGN.md",
+      "line": 65,
+      "detail": "DESIGN references .impeccable/design.json, which is currently outside the explicit40-path native commit selection. It is not an app runtime/build dependency. Root can retain the historical reference, remove it, or separately approve the design artifact; this plan does not silently add it."
+    }
+  ],
+  "testEvidence": {
+    "newMeaningfulUnits": 5,
+    "existingCodecUnits": 3,
+    "actualRetainedUnitResult": "8/8 candidate5; current retained equivalence receipt preserves original source/build proof",
+    "newUIFile": "Three bounded methods; current candidate11 iPad launch/finish/share/chooser/rematch and independent settings methods2/2 PASS; optional iPad candidate10 method and three TV methods retain their individually passed older source mappings",
+    "rootNativeVisualApproval": "21 actual native images and five sheets already approved by root; this review reads the receipt and does not claim a new pixel inspection",
+    "noTestsRunByThisReview": true,
+    "failureReceiptsPreserved": true
+  },
+  "evidence": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/VERIFICATION.json",
+      "sha256": "613989c6e21ee89ca160e57aeb242626fc31d4cd6ab311b1db0a75b4a777e397"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/source-equivalence.candidate-11.json",
+      "sha256": "2ea1319cb22053a1cc99020634284ee5fa2e06609219b6c94d988fc73a77a7e2"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/compiled-artifacts.candidate-11.json",
+      "sha256": "cc0d017507369195224ce664fb879fbd0f5340c6f5b516169795f98dcb518cf9"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/root-native-visual-approval.candidate-11.json",
+      "sha256": "82116b98ea6b4055c49606ed3d1026e6c121827636ac87a87e6f1c1760c78527"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/release-preflight.candidate-11.json",
+      "sha256": "c00638966737b66d3515070787aec2e72a24e7b972336fb5ce6e184e586f2043"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-runtime-candidate11-two.json",
+      "sha256": "9b0c2282ec565b3f324c84eaedea95ba008efa8e20bd386075195190602a4cc2"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/ipad-ui-candidate11-two-summary.json",
+      "sha256": "09771a0309ef43587d62379343335eb0454af7b4c5fdf6557889cdbe5613cf56"
+    }
+  ],
+  "freshRootAppleProofs": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-testflight.txt",
+      "sha256": "59827e543f92b967010ad3001ba8febb85137888a8e002ac2f36b072712c8a6c",
+      "observedMarkers": [
+        "No Builds"
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-ios-distribution.txt",
+      "sha256": "83a93a579b41fe64e01c02841d2eeba478ad31e81276d334dd406f74d5acad3a",
+      "observedMarkers": [
+        "Prepare for Submission",
+        "1.0"
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-tvos-distribution.txt",
+      "sha256": "c893c95c1fe389c97ccf9f46d470aa1175c07970b29acf6cb27f5cf37075d5c2",
+      "observedMarkers": [
+        "Prepare for Submission",
+        "1.0"
+      ]
+    }
+  ],
+  "gitDiffCheck": "PASS",
+  "trackedPatch": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/native-tracked-changes-since-44d929c6.diff",
+  "trackedPatchSHA256": "16e639b5c4c8f8e442033f25105e444e5b277effbd9b75dee9e9cdeb55a8e3a6",
+  "trackedPatchIncludesNewFiles": false,
+  "stagePlanOnly": {
+    "requires": "Direct root local-commit approval after this review; no stage command executed",
+    "gitAddArgv": [
+      "git",
+      "add",
+      "--",
+      "DESIGN.md",
+      "Hot Wheels v Human/App/GamePreferences.swift",
+      "Hot Wheels v Human/App/GameSettingsView.swift",
+      "Hot Wheels v Human/App/HWTestSession.swift",
+      "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+      "Hot Wheels v Human/App/LobbyBackground.swift",
+      "Hot Wheels v Human/App/README.md",
+      "Hot Wheels v Human/App/RootView.swift",
+      "Hot Wheels v Human/App/SoundBank.swift",
+      "Hot Wheels v Human/App/TVWorkshopControls.swift",
+      "Hot Wheels v Human/Core/Models/GameMessage.swift",
+      "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+      "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "Hot Wheels v Human/Core/Networking/README.md",
+      "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "Hot Wheels v Human/Core/Networking/TVFinder.swift",
+      "Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift",
+      "Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift",
+      "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaAudio.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+      "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "Hot Wheels v Human/Features/Arena/README.md",
+      "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "Hot Wheels v Human/Features/Customizer/CustomizerView.swift",
+      "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+      "Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift",
+      "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "Hot Wheels v Human/Features/Profiles/README.md",
+      "Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift",
+      "Hot Wheels v HumanTests/GameLoopTests.swift",
+      "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+    ],
+    "proposedCommitSubject": "P7: refine native race launch, sharing and feedback",
+    "commitPreconditions": [
+      "Index empty",
+      "HEAD44d929c6 unchanged",
+      "All40 selected file hashes match this receipt",
+      "All889 native inputs match recorded freeze and recorded-order aggregate",
+      "No outside audit/tool/design files included",
+      "Commit exact40 paths only; verify committed blobs/current bytes unchanged; no Git push"
+    ],
+    "afterCommit": "Associate actual new commit with unchanged889-input freeze; preserve old input and failure receipts; no build/runtime/release without separate root allocation"
+  },
+  "outsideSelection": {
+    "entryCount": 937,
+    "topLevelCounts": {
+      "app-store-audit": 933,
+      "tools": 2,
+      ".impeccable": 2
+    },
+    "treatment": "Preserve untouched; all writes by this review are confined to this new audit leaf. Older modified audit records, tools and .impeccable remain outside native commit selection."
+  },
+  "indexRemainsEmpty": true,
+  "sourceFilesEdited": false,
+  "stagingCommitBuildDeviceBrowserUploadOrDeploymentPerformed": false
+}

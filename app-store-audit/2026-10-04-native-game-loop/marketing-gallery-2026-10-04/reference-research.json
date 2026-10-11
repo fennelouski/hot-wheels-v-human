@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-10-04T11:16:09.952274+00:00",
+  "primaryOfficialPages": [
+    {
+      "url": "https://apps.apple.com/us/app/hot-wheels-unlimited/id1523486249?platform=ipad",
+      "read": "Officialpage andHTMLgallery metadata; gallery containslandscapeiPadlaunch/racing assets",
+      "assetExample": "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/2b/d3/fc/2bd3fcd2-81dd-81b4-7b46-887205e8b426/HW_Screenshots_iPad-Launch.jpg/1286x964bb-60.jpg"
+    },
+    {
+      "url": "https://apps.apple.com/us/app/mini-motor-racing/id426860241?platform=ipad",
+      "read": "Officialpage, supportediPad andnativegallery markers"
+    }
+  ],
+  "referenceImageInspection": "Not established: webAppleCDNimageopens inaccessible; hiddenIABnotavailable",
+  "externalAssetsCopiedIntoMarketing": false,
+  "userExampleAndLocalSourceInspection": "Actual local approvednativePad/TVroot sheets visually inspected before design"
+}

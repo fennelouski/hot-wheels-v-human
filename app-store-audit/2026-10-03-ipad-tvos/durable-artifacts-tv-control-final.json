@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "buildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "recordedAtUTC": "2026-10-03T11:31:35.197041+00:00",
+  "status": "Copied durable signed artifacts rehashed and signatures reverified; no upload performed",
+  "artifactRoot": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c",
+  "sourceTemporaryRootPreserved": "/tmp/hwvh-tv-control-signed-final-20261003-park5brc",
+  "fullCopiedSignedRootFileCount": 2880,
+  "fullCopiedSignedRootContentsSHA256": "2debbf8eba9dda2490e800c6c91d9d58a2e0d75458b016fc8bb70a621db50b03",
+  "allCopiedSignedRootFileBytesMatchOriginal": true,
+  "packageVerificationRecordPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/signed-release-packages-tv-control-final.json",
+  "packageVerificationRecordSHA256": "a8dd934df41abb92dbf8b60e457c1c859a21d8d5ce2351f75e6594a6ad8a3a7f",
+  "durablePackageVerificationRecordPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed-release-packages-tv-control-final.json",
+  "durableNativeInputProofPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/native-source-inputs-tv-control-final.json",
+  "durableNativeInputProofSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "appStoreConnectRecord": {
+    "appID": "6818777508",
+    "name": "HWvH",
+    "SKU": "hwvh-ipad-tvos-2026",
+    "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+    "platforms": [
+      "iOS",
+      "tvOS"
+    ],
+    "version": "1.0",
+    "state": "Prepare for Submission on both platforms",
+    "priorPublishedDeviceFamiliesOrBuilds": false,
+    "source": "Root authenticated App Store Connect search/New App creation and version inspection; receipt delivered directly by parent",
+    "privateOriginalScreenshotPath": "/tmp/hwvh-asc-record-created.png",
+    "privateDurableScreenshotPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/app-store-connect/record-created-6818777508.png",
+    "privateScreenshotSHA256": "daa71789ad2d2aa405b8055bec46ab4f5ec7e4e263e3974716ec10d28dbb3a9a"
+  },
+  "archives": [
+    {
+      "platform": "iPadOS",
+      "originalArchivePath": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/ipad.xcarchive",
+      "durableArchivePath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/ipad.xcarchive",
+      "archiveContentsSHA256": "8357849a97c4072ba7e2c3905106b79d3d06a0a4460335fc2957d6c41f939f67",
+      "archiveFileCount": 710,
+      "originalIPAPath": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/ipad-app-store-export/Hot Wheels v Human.ipa",
+      "durableIPAPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/ipad-app-store-export/Hot Wheels v Human.ipa",
+      "IPASHA256": "2a2224f93509362b8552784bdb131d79fe8edb30b9012ab10d7c2fef0fe37328",
+      "IPABytes": 23845194,
+      "copiedArchiveAndIPAVerified": true,
+      "durableArchiveAndDistributionSignaturesStrictlyReverified": true
+    },
+    {
+      "platform": "tvOS",
+      "originalArchivePath": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/tvos.xcarchive",
+      "durableArchivePath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/tvos.xcarchive",
+      "archiveContentsSHA256": "c0f04d48a19e430966e64132ac58c6d823526654165f363f8f38cc7fd8f2754e",
+      "archiveFileCount": 709,
+      "originalIPAPath": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/tvos-app-store-export/Hot Wheels v Human.ipa",
+      "durableIPAPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/tvos-app-store-export/Hot Wheels v Human.ipa",
+      "IPASHA256": "6f767271c88fe537184f5005e1f0c82ec5c0798395569fb3930b99d50a9fa5f1",
+      "IPABytes": 23972484,
+      "copiedArchiveAndIPAVerified": true,
+      "durableArchiveAndDistributionSignaturesStrictlyReverified": true
+    }
+  ],
+  "uploadPerformed": false
+}

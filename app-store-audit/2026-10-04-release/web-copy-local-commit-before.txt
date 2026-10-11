@@ -1,0 +1,2 @@
+M public/hwvh/privacy.html
+ M public/hwvh/support.html

@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-03T08:07:40Z",
+  "title": "Design System: HWvH",
+  "extensions": {
+    "colorMeta": {
+      "workshop-navy": {
+        "role": "neutral",
+        "displayName": "Workshop Navy",
+        "tonalRamp": [
+          "oklch(15% 0.03020 276.37)",
+          "oklch(26.4% 0.03020 276.37)",
+          "oklch(37.9% 0.03020 276.37)",
+          "oklch(49.3% 0.03020 276.37)",
+          "oklch(60.7% 0.03020 276.37)",
+          "oklch(72.1% 0.03020 276.37)",
+          "oklch(83.6% 0.03020 276.37)",
+          "oklch(95% 0.03020 276.37)"
+        ],
+        "tonalRampPurpose": "Synthesized documentation-viewer strip only; no native runtime tonal scale is declared. Transparency is not represented in the strip."
+      },
+      "race-backdrop": {
+        "role": "neutral",
+        "displayName": "Race Backdrop",
+        "tonalRamp": [
+          "oklch(15% 0.02602 275.07)",
+          "oklch(26.4% 0.02602 275.07)",
+          "oklch(37.9% 0.02602 275.07)",
+          "oklch(49.3% 0.02602 275.07)",
+          "oklch(60.7% 0.02602 275.07)",
+          "oklch(72.1% 0.02602 275.07)",
+          "oklch(83.6% 0.02602 275.07)",
+          "oklch(95% 0.02602 275.07)"
+        ],
+        "tonalRampPurpose": "Synthesized documentation-viewer strip only; no native runtime tonal scale is declared. Transparency is not represented in the strip."
+      },
+      "content-white": {
+        "role": "neutral",
+        "displayName": "Content White",
+        "tonalRamp": [
+          "oklch(15% 0 0.00)",
+          "oklch(26.4% 0 0.00)",
+          "oklch(37.9% 0 0.00)",
+          "oklch(49.3% 0 0.00)",
+          "oklch(60.7% 0 0.00)",
+          "oklch(72.1% 0 0.00)",
+          "oklch(83.6% 0 0.00)",
+          "oklch(95% 0 0.00)"
+        ],
+        "tonalRampPurpose": "Synthesized documentation-viewer strip only; no native runtime tonal scale is declared. Transparency is not represented in the strip."
+      },
+      "selected-ink": {
+        "role": "neutral",
+        "displayName": "Selected Ink",
+        "tonalRamp": [
+          "oklch(15% 0 0.00)",
+          "oklch(26.4% 0 0.00)",
+          "oklch(37.9% 0 0.00)",
+          "oklch(49.3% 0 0.00)",
+          "oklch(60.7% 0 0.00)",
+          "oklch(72.1% 0 0.00)",
+          "oklch(83.6% 0 0.00)",
+          "oklch(95% 0 0.00)"
+        ],
+        "tonalRampPurpose": "Synthesized documentation-viewer strip only; no native runtime tonal scale is declared. Transparency is not represented in the strip."
+      },
+      "control-surface": {
+        "role": "neutral",
+        "displayName": "Control Surface",
+        "tonalRamp": [
+          "oklch(15% 0 0.00)",
+          "oklch(26.4% 0 0.00)",
+          "oklch(37.9% 0 0.00)",
+          "oklch(49.3% 0 0.00)",
+          "oklch(60.7% 0 0.00)",
+          "oklch(72.1% 0 0.00)",
+          "oklch(83.6% 0 0.00)",
+          "oklch(95% 0 0.00)"
+        ],
+        "tonalRampPurpose": "Synthesized documentation-viewer strip only; no native runtime tonal scale is declared. Transparency is not represented in the strip."
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Rounded identity",
+        "purpose": "Native home identity and profile gate. Point sizes/weights are recorded in DESIGN.md rather than asserted as portable CSS typography."
+      },
+      "title": {
+        "displayName": "Rounded workshop title",
+        "purpose": "Creation names and active tool headings."
+      },
+      "label": {
+        "displayName": "Rounded control label",
+        "purpose": "Readable TV action and section labels."
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "remote-focus",
+        "value": "ease-out; 0.16 seconds; scale 1.035",
+        "purpose": "Observed TVWorkshopButtonStyle focus response; native Reduce Motion disables animation and scale."
+      },
+      {
+        "name": "remote-press",
+        "value": "ease-out; 0.10 seconds; scale 0.98",
+        "purpose": "Observed TVWorkshopButtonStyle press response; native Reduce Motion disables animation and scale."
+      }
+    ],
+    "breakpoints": [],
+    "native": {
+      "sourceAuthority": "Reviewed production revision 9b128e92539c0475033b00222731bfef865ef6b6; later TV cursor-focus correction and replacement freeze/proof pending.",
+      "platforms": [
+        "iPadOS",
+        "tvOS"
+      ],
+      "pointMetrics": {
+        "minimumRemoteTarget": 60,
+        "focusStroke": 4,
+        "buttonRadius": 16,
+        "chipRadius": 30,
+        "racePillRadius": 32,
+        "colorControlRadius": 40,
+        "trackSceneRadius": 20
+      },
+      "semanticColors": {
+        "workshop-yellow": {
+          "source": "SwiftUI.Color.yellow",
+          "role": "primary",
+          "purpose": "Selection and primary action; native-resolved, not replaced with a car-paint hex token.",
+          "documentationPreview": "CSS yellow is only a viewer approximation, not the normative native color."
+        }
+      },
+      "previewPolicy": "All component snippets below are documentation-only translations. Native system text fields, navigation, keyboard, 3D content, accessibility and TV focus must be inspected in the app. These snippets are not captures or acceptance evidence.",
+      "cursorCorrection": "Intended focus isolation disables header/scene/footer during Move with Remote; left/down, Select placement and Menu/Back exit still require native verification.",
+      "visualAcceptance": "pending"
+    }
+  },
+  "components": [
+    {
+      "name": "Selected Workshop Action",
+      "kind": "button",
+      "refersTo": "workshop-selected",
+      "description": "Yellow selection remains after focus moves. CSS yellow is a viewer approximation of the native semantic color.",
+      "html": "<button class=\"ds-selected-action\">Save Car</button>",
+      "css": ".ds-selected-action{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);color:black;background:yellow;transition:transform .16s ease-out}.ds-selected-action:hover,.ds-selected-action:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-selected-action:active{transform:scale(.98)}.ds-selected-action:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-selected-action{transition:none}.ds-selected-action:hover,.ds-selected-action:focus-visible,.ds-selected-action:active{transform:none}}"
+    },
+    {
+      "name": "Workshop Action",
+      "kind": "button",
+      "refersTo": "workshop-action",
+      "description": "Secondary action using the shared 60-point TV control style; hover is a desktop-viewer proxy for remote focus.",
+      "html": "<button class=\"ds-workshop-action\">Test Drive</button>",
+      "css": ".ds-workshop-action{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);transition:transform .16s ease-out}.ds-workshop-action:hover,.ds-workshop-action:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-workshop-action:active{transform:scale(.98)}.ds-workshop-action:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-workshop-action{transition:none}.ds-workshop-action:hover,.ds-workshop-action:focus-visible,.ds-workshop-action:active{transform:none}}"
+    },
+    {
+      "name": "Tool Chip",
+      "kind": "chip",
+      "refersTo": "workshop-chip",
+      "description": "Rounded selected section control; native focus and selection are distinct.",
+      "html": "<button class=\"ds-tool-chip\" aria-pressed=\"true\">Paint</button>",
+      "css": ".ds-tool-chip{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);border-radius:30px;color:black;background:yellow;transition:transform .16s ease-out}.ds-tool-chip:hover,.ds-tool-chip:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-tool-chip:active{transform:scale(.98)}.ds-tool-chip:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-tool-chip{transition:none}.ds-tool-chip:hover,.ds-tool-chip:focus-visible,.ds-tool-chip:active{transform:none}}"
+    },
+    {
+      "name": "Creation Name",
+      "kind": "input",
+      "refersTo": "creation-name",
+      "description": "Illustrative name field at the observed call-site size. Native TextField appearance/keyboard are system-owned, so this sample does not prescribe a custom field frame.",
+      "html": "<label class=\"ds-name-label\">Car name<input class=\"ds-name-input\" value=\"My Car\"></label>",
+      "css": ".ds-name-label{display:grid;gap:12px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;color:white}.ds-name-input{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:38px;font-weight:800;text-align:center;color:white;background:transparent;border:0;padding:14px;min-height:60px}.ds-name-input:hover,.ds-name-input:focus-visible{outline:4px solid white;outline-offset:-4px}.ds-name-input:active{opacity:.9}"
+    },
+    {
+      "name": "Workshop Sections",
+      "kind": "nav",
+      "refersTo": "workshop-chip",
+      "description": "A compact documentation sample of a native tool shelf; actual native scrolling/focus remains authoritative.",
+      "html": "<nav class=\"ds-sections\" aria-label=\"Car tools\"><button class=\"ds-section\">Body</button><button class=\"ds-section ds-section-selected\" aria-current=\"page\">Paint</button><button class=\"ds-section\">Stickers</button></nav>",
+      "css": ".ds-sections{display:flex;gap:16px;flex-wrap:wrap}.ds-section{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);border-radius:30px;transition:transform .16s ease-out}.ds-section:hover,.ds-section:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-section:active{transform:scale(.98)}.ds-section:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-section{transition:none}.ds-section:hover,.ds-section:focus-visible,.ds-section:active{transform:none}}.ds-section-selected{background:yellow;color:black}"
+    },
+    {
+      "name": "Home Destination",
+      "kind": "card",
+      "refersTo": "home-destination",
+      "description": "Destination container with the actual artwork intentionally omitted. No native art or UI capture is reconstructed by this sample.",
+      "html": "<button class=\"ds-home-tile\"><span class=\"ds-art-space\">Native tile art belongs here</span><span class=\"ds-tile-title\">Build a Car</span></button>",
+      "css": ".ds-home-tile{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);display:grid;gap:12px;min-height:222px;padding:24px;text-align:center;transition:transform .16s ease-out}.ds-home-tile:hover,.ds-home-tile:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-home-tile:active{transform:scale(.98)}.ds-home-tile:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-home-tile{transition:none}.ds-home-tile:hover,.ds-home-tile:focus-visible,.ds-home-tile:active{transform:none}}.ds-art-space{display:flex;align-items:center;justify-content:center;height:120px;font-size:14px;font-weight:400;opacity:.6}.ds-tile-title{font-size:28px;font-weight:800}"
+    },
+    {
+      "name": "Named Adjustment",
+      "kind": "custom",
+      "description": "Native source translated for documentation only; CSS pixels mirror native point numerals without proving native rendering or input.",
+      "html": "<div class=\"ds-adjustment\"><div class=\"ds-adjustment-name\">Pattern Size</div><div class=\"ds-adjustment-tools\"><button class=\"ds-adjust-button\" aria-label=\"Decrease pattern size\">−</button><output class=\"ds-adjustment-value\">1.0×</output><button class=\"ds-adjust-button\" aria-label=\"Increase pattern size\">+</button></div></div>",
+      "css": ".ds-adjustment{display:grid;gap:14px;color:white;font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif}.ds-adjustment-name{font-size:24px;font-weight:700}.ds-adjustment-tools{display:flex;align-items:center;gap:16px}.ds-adjustment-value{font-size:22px;min-width:64px;text-align:center}.ds-adjust-button{font-family:\"SF Pro Rounded\",-apple-system,BlinkMacSystemFont,sans-serif;font-size:22px;font-weight:700;min-width:60px;min-height:60px;padding:0 14px;border:0;border-radius:16px;color:white;background:rgba(255,255,255,.10);transition:transform .16s ease-out}.ds-adjust-button:hover,.ds-adjust-button:focus-visible{outline:4px solid white;outline-offset:-4px;transform:scale(1.035)}.ds-adjust-button:active{transform:scale(.98)}.ds-adjust-button:disabled{opacity:.4}@media(prefers-reduced-motion:reduce){.ds-adjust-button{transition:none}.ds-adjust-button:hover,.ds-adjust-button:focus-visible,.ds-adjust-button:active{transform:none}}",
+      "refersTo": "workshop-action"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Toy Workshop",
+    "overview": "HWvH puts the child's creation at the center of the work: a real car, racer or track preview stays beside the tools that change it. The rounded type, navy workbench and yellow selections make the controls feel like parts of the same toy. Short labels and native SF Symbols explain actions without filling the bench with instructions.\n\nThe iPad design remains the visual authority for touch workflows. Apple TV gives the same workshop capabilities explicit remote controls, larger targets and visible focus. It uses shared designs, track models and race scenes rather than a separate catalogue of TV-only content. Platform layouts differ where the input requires it.",
+    "keyCharacteristics": [
+      "A persistent creation preview beside the active tool shelf.",
+      "Rounded system type, readable labels and native symbols.",
+      "Yellow selection and a separate white remote focus ring.",
+      "Native navigation, scrolling, text entry, alerts and race presentation.",
+      "A playful 3D world with calm, predictable workshop controls."
+    ],
+    "rules": [
+      {
+        "name": "The Focus and Selection Rule",
+        "body": "A chosen item remains yellow when remote focus moves away. A white outline identifies the control that Select will activate. Labels, symbols and selected accessibility traits accompany color where implemented; color alone must not explain an action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Readable Tool Rule",
+        "body": "Keep the selected section, object name and next action clear before adding explanatory text. Necessary failure, permission and destructive-action messages remain explicit.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Container Rule",
+        "body": "Give each action one visible hit container. The selected fill and focus outline belong to that container; they must not look like a smaller button inside another button.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "Do keep the live creation preview beside the active tools on wide workspaces.",
+      "Do retain yellow selection when the white remote focus ring moves elsewhere.",
+      "Do preserve at least 60 pt remote control targets and explicit equivalents for touch gestures.",
+      "Do use native navigation, scrolling, text entry, alerts and meaningful action names.",
+      "Do retain drafts across section changes and announce save success only after persistence succeeds.",
+      "Do preserve the iPad design and use each platform's genuine frozen-build captures for its marketing gallery."
+    ],
+    "donts": [
+      "Don't turn paint or world colors into navigation-state colors.",
+      "Don't add nested visible button containers or hover-dependent TV actions.",
+      "Don't replace real creation previews or native marketing captures with invented UI artwork.",
+      "Don't treat build success, model tests or documentation previews as native visual acceptance.",
+      "Don't claim device multiplayer parity, final galleries or store submission without corresponding evidence.",
+      "Don't include private App Review contact details in committed design or audit documents."
+    ]
+  }
+}

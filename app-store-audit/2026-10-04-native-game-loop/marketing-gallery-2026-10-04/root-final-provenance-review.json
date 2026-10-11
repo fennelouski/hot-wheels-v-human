@@ -1,0 +1,21 @@
+{
+  "recordedAtUTC": "2026-10-04T11:34:56.933823+00:00",
+  "reviewer": "Root release owner",
+  "viewedFourNamedSheets": true,
+  "compositionObservations": "All20 have centered readable short headlines, full upright native heroes, outward fanned supporting captures, deliberate alternating racing colors; iPad05 actual final race PNG and native share UI, TV05 actual TV preview only.",
+  "approvedForStorePreparation": true,
+  "sourceAggregate": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "all24OwnerApprovedImageAndSheetHashesReverified": true,
+  "artifactReceipts": {
+    "qc-receipt.json": "43be6fe5d377bf369b27d8959c2cce8606b2abbe032a64fe8e45e4f8b442ad84",
+    "final-provenance-receipt.json": "6938c0e031b761749fd0e9eab8dbb3e2d518c14945fcafe657d107f80cb4f5fb",
+    "manifest.json": "46210b99e17bb841ee1e5d703dc63a6b569e45adb33908e159983de7a654c266",
+    "artifact-hashes.final.json": "02f526d0fe7eb78f8038aec57a92dfb4dc95e3728721a3ff37c1024e150060e3"
+  },
+  "notClaimed": [
+    "20fullsizeindividualimages viewed by root; agent did this and root reviewed sheets",
+    "Actual ASC uploaded galleries",
+    "Physical local network pairing",
+    "Hardware feedback feel"
+  ]
+}

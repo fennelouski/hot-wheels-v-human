@@ -1,0 +1,18 @@
+{
+  "status": "Artifact geometry assertion caught added bezel bottom edge before completing render",
+  "nativeChanges": false,
+  "deviceActions": [],
+  "case": "ipad/front-row-view",
+  "bounds": [
+    308,
+    444,
+    2135,
+    1612
+  ],
+  "canvas": [
+    2752,
+    2064
+  ],
+  "heroNativePixelsPreserved": true,
+  "correction": "Reduce single hero width to account for full outer bezel; move TV multi hero upward slightly so its entire bezel fits"
+}

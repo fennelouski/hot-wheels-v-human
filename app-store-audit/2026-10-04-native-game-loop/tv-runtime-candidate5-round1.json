@@ -1,0 +1,63 @@
+{
+  "startedAt": "2026-10-04T09:32:37.226796+00:00",
+  "sourceProof": "native-inputs.candidate-5.json",
+  "compiledProof": "compiled-artifacts.candidate-5.json",
+  "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+  "runs": [
+    {
+      "phase": "unit",
+      "command": [
+        "xcodebuild",
+        "test-without-building",
+        "-xctestrun",
+        "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+        "-destination",
+        "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "-parallel-testing-enabled",
+        "NO",
+        "-only-testing:Hot Wheels v HumanTests/GameLoopTests",
+        "-only-testing:Hot Wheels v HumanTests/CodecTests",
+        "-resultBundlePath",
+        "/tmp/hwvh-game-loop-tv-unit-candidate5-round1-20261004.xcresult"
+      ],
+      "exitCode": 0,
+      "resultBundle": "/tmp/hwvh-game-loop-tv-unit-candidate5-round1-20261004.xcresult",
+      "log": "app-store-audit/2026-10-04-native-game-loop/tv-unit-candidate5-round1.log",
+      "logSHA256": "744c2f436129fef37a14ec8b96ca37c2a8b72cec4bac38ba6bac498295410510"
+    },
+    {
+      "phase": "ui",
+      "command": [
+        "xcodebuild",
+        "test-without-building",
+        "-xctestrun",
+        "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+        "-destination",
+        "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "-parallel-testing-enabled",
+        "NO",
+        "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests",
+        "-resultBundlePath",
+        "/tmp/hwvh-game-loop-tv-ui-candidate5-round1-20261004.xcresult"
+      ],
+      "exitCode": 65,
+      "resultBundle": "/tmp/hwvh-game-loop-tv-ui-candidate5-round1-20261004.xcresult",
+      "log": "app-store-audit/2026-10-04-native-game-loop/tv-ui-candidate5-round1.log",
+      "logSHA256": "54341654947ad39a2ea348c25f73403e5e62ec8769e0d2d35f217c2e4ab0a860"
+    }
+  ],
+  "appearanceBefore": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "appearanceAfter": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "shutdownExitCode": 0,
+  "normalFilesUnchanged": true,
+  "nativeAndCompiledHashesUnchanged": true,
+  "finishedAt": "2026-10-04T09:35:02.726537+00:00"
+}

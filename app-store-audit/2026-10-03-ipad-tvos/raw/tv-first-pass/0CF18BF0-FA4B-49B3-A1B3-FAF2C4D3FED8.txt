@@ -1,0 +1,89 @@
+Attributes: Application, 0x112e35ed0, pid: 8835, label: 'HWvH'
+Element subtree:
+ →Application, 0x112e35ed0, pid: 8835, label: 'HWvH'
+    Window (Main), 0x112e35ab0, {{0.0, 0.0}, {1920.0, 1080.0}}
+      Other, 0x112e3fa00, {{0.0, 0.0}, {1920.0, 1080.0}}
+        Other, 0x112e36b70, {{0.0, 0.0}, {1920.0, 1080.0}}
+          Other, 0x112e36ed0, {{0.0, 0.0}, {1920.0, 1080.0}}
+            Other, 0x112e35270, {{0.0, 0.0}, {1920.0, 1080.0}}
+              Other, 0x112e35690, {{0.0, 0.0}, {1920.0, 1080.0}}
+                Other, 0x112e36c90, {{0.0, 0.0}, {1920.0, 1080.0}}
+                  Other, 0x112e36db0, {{0.0, 0.0}, {1920.0, 1080.0}}
+                    Other, 0x112e22030, {{0.0, 0.0}, {1920.0, 1080.0}}
+                      Other, 0x112e22150, {{0.0, 0.0}, {1920.0, 1080.0}}
+                        TextField, 0x112e22270, {{112.0, 95.6}, {728.0, 72.8}}, identifier: 'tv-character-editor', placeholderValue: 'Racer name', value: Juno
+                        Button, 0x112e22390, {{854.0, 102.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Random Racer Name'
+                        Other, 0x112e224b0, {{116.0, 188.0}, {826.0, 562.0}}, identifier: 'tv-character-editor'
+                        Button, 0x112e225d0, {{332.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Look Left'
+                        Button, 0x112e1b7a0, {{434.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Look Right'
+                        Button, 0x112e1b8c0, {{536.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Look Above'
+                        Button, 0x112e1b9e0, {{638.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Look Below'
+                        Button, 0x112e1bb00, {{383.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Zoom Out'
+                        Button, 0x112e1bc20, {{485.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Zoom In'
+                        Button, 0x112e1bd40, {{587.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-character-editor', label: 'Reset View'
+                        Button, 0x112e1be60, {{259.0, 924.0}, {132.0, 60.0}}, identifier: 'tv-character-editor', label: 'Undo'
+                          Image, 0x112e1bf80, {{276.0, 943.0}, {22.0, 22.0}}, identifier: 'arrow.uturn.backward', label: 'Undo'
+                          StaticText, 0x112e1c0a0, {{259.0, 924.0}, {132.0, 60.0}}, label: 'Undo'
+                        Button, 0x112e22f50, {{411.0, 924.0}, {172.0, 60.0}}, identifier: 'tv-character-editor', label: 'Test Drive'
+                          Image, 0x112e23070, {{428.0, 944.0}, {18.0, 20.0}}, identifier: 'play.fill', label: 'Play'
+                          StaticText, 0x112e23190, {{411.0, 924.0}, {172.0, 60.0}}, label: 'Test Drive'
+                        Button, 0x112e232b0, {{603.0, 924.0}, {196.0, 60.0}}, identifier: 'tv-character-editor', label: 'Save Racer'
+                          Image, 0x112e233d0, {{620.0, 941.0}, {26.0, 26.0}}, identifier: 'tray.and.arrow.down.fill', label: 'Inbox'
+                          StaticText, 0x112e234f0, {{603.0, 924.0}, {196.0, 60.0}}, label: 'Save Racer'
+                        ScrollView, 0x112e23610, {{978.0, 96.0}, {826.0, 60.0}}, identifier: 'tv-character-editor'
+                          Other, 0x112e25e70, {{1029.0, 96.0}, {724.0, 60.0}}
+                            Button, 0x112e25f90, {{1033.0, 96.0}, {156.0, 60.0}}, identifier: 'tv-racer-tab-face', label: 'Face'
+                              Image, 0x112e260b0, {{1069.0, 114.0}, {24.0, 24.0}}, identifier: 'face.smiling', label: 'face.smiling'
+                              StaticText, 0x112e261d0, {{1103.0, 113.0}, {52.0, 27.0}}, label: 'Face'
+                            Button, 0x112e262f0, {{1199.0, 96.0}, {153.0, 60.0}}, identifier: 'tv-racer-tab-hair', label: 'Hair'
+                              Image, 0x112e26410, {{1235.0, 112.0}, {28.0, 28.0}}, identifier: 'comb.fill', label: 'comb.fill'
+                              StaticText, 0x112e26530, {{1273.0, 113.0}, {45.0, 27.0}}, label: 'Hair'
+                            Button, 0x112e26650, {{1362.0, 96.0}, {196.0, 60.0}}, identifier: 'tv-racer-tab-clothes', label: 'Clothes'
+                              Image, 0x112e26770, {{1399.0, 113.0}, {31.0, 26.0}}, identifier: 'tshirt.fill', label: 'tshirt.fill'
+                              StaticText, 0x112e26890, {{1440.0, 113.0}, {84.0, 27.0}}, label: 'Clothes'
+                            Button, 0x112e269b0, {{1568.0, 96.0}, {181.0, 60.0}}, identifier: 'tv-racer-tab-extras', label: 'Extras', Selected
+                              Image, 0x112e26ad0, {{1605.0, 114.0}, {30.0, 24.0}}, identifier: 'crown.fill', label: 'crown.fill'
+                              StaticText, 0x112e26bf0, {{1646.0, 113.0}, {69.0, 27.0}}, label: 'Extras'
+                        ScrollView, 0x112e26d10, {{978.0, 176.0}, {826.0, 808.0}}, identifier: 'tv-character-editor'
+                          Other, 0x112e26e30, {{978.0, 176.0}, {826.0, 677.0}}
+                            StaticText, 0x112e26f50, {{998.0, 196.0}, {111.0, 43.0}}, label: 'Extras'
+                            StaticText, 0x112e27070, {{998.0, 267.0}, {46.0, 32.0}}, label: 'Hat'
+                            Other, 0x112e27190, {{998.0, 315.0}, {786.0, 146.0}}
+                              Button, 0x112e272b0, {{998.0, 315.0}, {183.0, 64.0}}, label: 'None'
+                              Button, 0x112e273d0, {{1199.0, 315.0}, {183.0, 64.0}}, label: 'Helmet'
+                              Button, 0x112e274f0, {{1400.0, 315.0}, {183.0, 64.0}}, label: 'Cap', Selected
+                                StaticText, 0x112e406a0, {{1400.0, 315.0}, {183.0, 64.0}}, label: 'Cap'
+                                Image, 0x112e407c0, {{1509.0, 336.0}, {23.0, 22.0}}, identifier: 'checkmark', label: 'Selected', Selected
+                              Button, 0x112e408e0, {{1601.0, 315.0}, {183.0, 64.0}}, label: 'Crown'
+                              Button, 0x112e40a00, {{998.0, 397.0}, {183.0, 64.0}}, label: 'Music'
+                              Button, 0x112e40b20, {{1199.0, 397.0}, {183.0, 64.0}}, label: 'Police'
+                            StaticText, 0x112e40c40, {{998.0, 489.0}, {120.0, 32.0}}, label: 'Hat Color'
+                            Other, 0x112e40d60, {{996.0, 537.0}, {790.0, 74.0}}
+                              Button, 0x112e40e80, {{996.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Yellow'
+                              Button, 0x112e40fa0, {{1096.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Red'
+                              Button, 0x112e410c0, {{1197.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Orange'
+                              Button, 0x112e411e0, {{1297.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Blue'
+                              Button, 0x112e41300, {{1397.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Green'
+                              Button, 0x112e41420, {{1497.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, Purple'
+                              Button, 0x1126a60b0, {{1598.0, 537.0}, {88.0, 74.0}}, label: 'Hat Color, White'
+                              Button, 0x1126a2e10, {{1698.0, 537.0}, {88.0, 74.0}}, identifier: 'checkmark', label: 'Hat Color, Black', Selected
+                            StaticText, 0x11269c1d0, {{998.0, 639.0}, {101.0, 32.0}}, label: 'Glasses'
+                            Other, 0x11268b3b0, {{998.0, 685.9}, {789.2, 147.1}}
+                              Button, 0x112696c70, {{998.0, 687.0}, {183.0, 64.0}}, label: 'Round', Selected
+                                StaticText, 0x11269e960, {{1032.0, 705.0}, {76.0, 29.0}}, label: 'Round'
+                                Image, 0x11266edb0, {{1121.0, 708.0}, {23.0, 22.0}}, identifier: 'checkmark', label: 'Selected', Selected
+                              Button, 0x1126bb6f0, {{1199.0, 687.0}, {183.0, 64.0}}, label: 'Square'
+                              Button, 0x1126a3650, {{1400.0, 687.0}, {183.0, 64.0}}, label: 'Sporty Shades'
+                              Button, 0x112698cd0, {{1597.8, 685.9}, {189.4, 66.2}}, label: 'Round Shades', Focused
+                              Button, 0x1126af040, {{998.0, 769.0}, {183.0, 64.0}}, label: 'Square Shades'
+                          Other, 0x1126c06f0, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                            Other, 0x1126bd290, {{1798.0, 1076.0}, {3.0, 25.0}}
+                          Other, 0x1126bd3b0, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                            Other, 0x1126bd4d0, {{1798.0, 1076.0}, {3.0, 25.0}}
+Path to element:
+ →Application, 0x112e35ed0, pid: 8835, label: 'HWvH'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x1129a1fd0, pid: 8835, label: 'HWvH'
+  }

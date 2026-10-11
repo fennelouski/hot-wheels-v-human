@@ -1,0 +1,4709 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T11:42:16.943225+00:00",
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "scope": "Read-only inventory and documented provenance of bundled radio/music, WAV effects/voices and USDZ models. No asset edits or generation. This is factual evidence, not an acceptance of App Store rights declarations.",
+  "nativeInputProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-source-inputs-tv-control-final.json",
+  "nativeInputProofSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "all864NativeInputHashesUnchanged": true,
+  "counts": {
+    "ElevenLabs-TTS": 12,
+    "ElevenLabs-generated-SFX": 60,
+    "converted-third-party-CC0-model": 368,
+    "original-procedural-music": 7
+  },
+  "all447AudioAndModelFilesMatchBothSignedArchives": true,
+  "assets": [
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/boost_ready_chime.wav",
+      "sha256": "80c34ff11bef5fe8470fe8450438f0fb8545385e404462d9d074c0e3ffd74fc5",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/camera_shutter.wav",
+      "sha256": "4a8ffa1cf3ff5e6793a5b4b1c5840d62fdbab7dc40baf9f00497f727053d8434",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 46432,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal.wav",
+      "sha256": "24a56010ab9b26032b4ac483b252a00e15e217b69a15ac8e3e68ce0ef73a549c",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 180496,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal_b.wav",
+      "sha256": "8a57a3ac56b6f54a443ac7b043cbc852f0b98e63d4e3f89bb5659d703955401a",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 180496,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal_c.wav",
+      "sha256": "cd45f000cc4a5f006e1cd50cb3365d63fda86d0be9133609b12e37daf9f88189",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 180496,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_engine_loop.wav",
+      "sha256": "0b4a91afc707688c3b77e761ce3d15ee018180fab141cf4bb79c91b1ffde4468",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 886096,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_passby_whoosh.wav",
+      "sha256": "33ced2901cd7200cf4c3ef773acdcbbc78a38378a3b9c8140655abcb7cb3b68a",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_select_vroom.wav",
+      "sha256": "bc08550e1ab68e8cba1e3b70d5509c29e06d3848ee0b7fea273252f7c3fbfbe3",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/checkpoint_ding.wav",
+      "sha256": "bde740da522ac93376874151bb0b22ac4b6a0316b96839c1a4f601f9fcd67225",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 64094,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/checkpoint_ding_b.wav",
+      "sha256": "b8ab5947e3bf17f2a10e3a6b672d74c7159516097fca49a29ed27ecdfbb2dc34",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 64094,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/confirm_sparkle.wav",
+      "sha256": "d9ba2371cf1532ecc18f67e88f781915d2181b000bb3def25590e9c40a02e72b",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_gasp.wav",
+      "sha256": "6cc4815e4dbda2b380cd80ecbfef184252e6c6d908f5103c96fbf9fe69c84333",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_kids_cheer.wav",
+      "sha256": "be691dbd88e1c236e92594f598b5d610c0244b6670411c07f3cb5e771b46ad5b",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 222832,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_ooh_wow.wav",
+      "sha256": "2eb07b86d34f17dfcc24e9101c92424c073de34ae7fac0ffc18dc8006998dc02",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 109936,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/customize_confirm_pop.wav",
+      "sha256": "62c784145081ad9b5be83b6e590623c309719743bcb3c87db4749902d7118a62",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_dizzy.wav",
+      "sha256": "50ef8f27274f79eac6a1aa5215842226d80b40a78d78294fa5b11b5bb6ee1a39",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_giggle.wav",
+      "sha256": "a6f3d2bf1c1d9f5994546da15afaa6e1057734c12444b57f2ed08eee3262ae1b",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_uh_oh.wav",
+      "sha256": "41e0ce633828fef7780aea3cd81758b1f9b76532be195703a144f19dfbc0d8de",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_woohoo.wav",
+      "sha256": "f9723a901b8543982812fa1340393eec178acf34b886b39b1f21a42fc76d1b2d",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 109936,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/engine_loop_heavy.wav",
+      "sha256": "be718f5756a745dc21565c6fdf4538fe3ed7ae1fb23e9acdff12a31b6f3a4b2f",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 886096,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/engine_loop_light.wav",
+      "sha256": "4196bb494489d1514c5589d91a8ff291a1822a38c928e92205ccc52825032383",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 886096,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/finish_fanfare.wav",
+      "sha256": "2d0f54fd1e894d8e8855347ba1e535c7d26eddb3a70789599a28cbaf9b7b6954",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 268696,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/finish_tape_snap.wav",
+      "sha256": "156a8d28805433eac5755aaff9b2d7ff4e799bf46a06b2502b725579c9314206",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/garage_door.wav",
+      "sha256": "ecddf0c428f5204db1bfbf84b2b4f6d0c75917bc75cc9c68d75ff5ea5cc5c8ea",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/grid_rev_anticipation.wav",
+      "sha256": "1c4cb29a7f93d7bc81c434cad89c843c2148306f50e4f6b99fa1df7d4a92de99",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 180496,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/lap_bell.wav",
+      "sha256": "e7597c48ba95607f80c071230088341b46b2ff7f697cfcf41ac784e21fdb8faa",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/loop_whoosh.wav",
+      "sha256": "f57ec1ce1aec37b4e8853a72441c47b7e38be9337cb5058fe02d48f772093838",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 109936,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/nice_try_kazoo.wav",
+      "sha256": "533693fc4aa3e13d52904e975bfac4ac134dd9e7bebd1975be4425af0cd99fb8",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/nope_wobble.wav",
+      "sha256": "2f4f1e3637a109a142ad7a40ab585ef7134aa3d5b9b6141bca8e154248faf102",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/off_track_alarm.wav",
+      "sha256": "5766bc99efdc8f666211d98d8f1b357f9cb2af79db9bcab9e5e9dc555a007853",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/paint_spray.wav",
+      "sha256": "d66739190ad55f103546476134d0938088e03df20e643916d27f1743ce701b11",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/paint_spray_b.wav",
+      "sha256": "bc137359d634a33bd2f147e50f9261d2ef7b8f8d9d49c39ded2e5116eef840ae",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/piece_delete_pop.wav",
+      "sha256": "95755bdccbf0356b3e41b35dcebca1bfc96236479f258e6007a5e710e899986a",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/piece_delete_pop_b.wav",
+      "sha256": "1372470973a1441c59d84f90695136f787021ffd17d34b13f6796bd707613c8f",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/player_join_horn.wav",
+      "sha256": "4b7c9e07c884d66e2830fc44e2e0483a40e39c6fc711c4ee0f48dd685644855d",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/race_countdown.wav",
+      "sha256": "3fd4b550bb61661fd7bcca96bd3b99a228106ae36b506402146c03ea6f677ff4",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 311032,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/race_intensity.m4a",
+      "sha256": "cf6444b4b58e1eb9dd17ce244d7df44a396ea92a70dd0aebde1d4586c54c6d5a",
+      "category": "original-procedural-music",
+      "bytes": 121760,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_funk.m4a",
+      "sha256": "a864a07fbfe4e19f0f44b6f5879e906e5d69cad83426463fdf97af1a5920c022",
+      "category": "original-procedural-music",
+      "bytes": 153761,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_jazz.m4a",
+      "sha256": "ca378d641da7c1d07b5779b5dac7390239aff88ce4ac3eaf54db385b2cfcd35f",
+      "category": "original-procedural-music",
+      "bytes": 122449,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_pop.m4a",
+      "sha256": "531a305529b9a369a239a47cecd3343e2081204451d3387dd52ebe4d1460f437",
+      "category": "original-procedural-music",
+      "bytes": 129570,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_rock.m4a",
+      "sha256": "ae751801fe4eb970ca94cc8b3682f8800aeea14cbe129eb80f0d4d5919e661ff",
+      "category": "original-procedural-music",
+      "bytes": 142943,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_smooth.m4a",
+      "sha256": "12849825b0f4b894c8b7b55cfc6b462b56174de0223cbc0843308a133b5ec08e",
+      "category": "original-procedural-music",
+      "bytes": 166308,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ready_bell.wav",
+      "sha256": "a24c939b0ef80f33737ac55f1699386584abd4161c4ca10efbe32e479cc08eab",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 64094,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/rematch_ding.wav",
+      "sha256": "38fe0f675303a9c7461e144e25903c7bc69c75c8b4b740e1c378835519afa832",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 64094,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/respawn_pop.wav",
+      "sha256": "563100e87192aa35af21b90716e59ee057c47ffa01802da4c5bcaeb1e524a8ef",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/respawn_pop_b.wav",
+      "sha256": "bf97a67f61f53f830ef19755354cd0b0d263d1cf5e03b76e0da5254db236d471",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/results_tally.wav",
+      "sha256": "ebb46b0b3bc363e51971944ffe8ec518dd0f037cc7d261e4c00994d17e1370ba",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 180496,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/screen_whoosh.wav",
+      "sha256": "59832b3460a55a227109e8d723c81c49fd463688afa7613c21ed4240bec5f3a9",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/shuffle_dice.wav",
+      "sha256": "2ce657e4777c7a6ba43537c0e51cfec2b7f2f0722382f29dd2da2f453e47837a",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/skid_drift.wav",
+      "sha256": "daf37dd09daf43555e2ee33b62467d9406a4bfc166e977fc1a54c8371ee79d3e",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 92296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire.wav",
+      "sha256": "c9384cee875a469637b17d32512d2862c50800b474e65f348475ac188e3d26cc",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire_b.wav",
+      "sha256": "4d47b82e69ac6ba0f61ee4fff3c2b34f4c2803ce79c9d70ff5e3542942725351",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire_c.wav",
+      "sha256": "66d3cad9d1e77397fbfd108abd85b3b8c790bab8e8920a6e5489974dd60dc57a",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 134632,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/start_gate_drop.wav",
+      "sha256": "21550e95a05ce557278f64bfe41cda87a3b5a6f9f05f9c553985a1ad5afb9ba3",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/stuck_wobble.wav",
+      "sha256": "864c6fa00660c61577de8ea5f6c2936bdefdebb268ad34b33130d2e68b68c4cd",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 109936,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/tire_bounce.wav",
+      "sha256": "11376d46772aa490bdf347a419977769ebb5a4eb7daf11ca71af4d1034b4f861",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_save_stamp.wav",
+      "sha256": "a12e8291c588d80558406e8a3f6e1a4e2323f41090aed64e982647041945f351",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect.wav",
+      "sha256": "1c2d5e2a44761056d0cf73046828085789fec97dc0c037747fadc1ef2e7852d2",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect_b.wav",
+      "sha256": "34ef4894986675f59ebc5100b013fa4111d37acb7ca7f86a7402d429352e7ee7",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect_c.wav",
+      "sha256": "70ff1e606f3920f58247e776f5ed6fb3c329696dfd99d66fb1e0ea1595d96e7e",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 57016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_back.wav",
+      "sha256": "3228b947a4450aa0d2c9e77ee4a94e343f4a37979f462ca0b347ad1dc5634c3d",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 46432,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap.wav",
+      "sha256": "42403af34cb0c1b2b961d96c57babd80545fd4e4e48e9bd57a410b2ceb5add57",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 46432,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap_b.wav",
+      "sha256": "5f4d26105553a900b37d6b7afc604d540fbb98b67d50e600f8164e70369a92e8",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 46432,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap_c.wav",
+      "sha256": "c7407a0063a1837c9775924f8b61c4b0d464aba10811cc4677b3a07107e6041c",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 46432,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_boost.wav",
+      "sha256": "1a956586dbeadd0336104ec06b9a52813ef0e6a365293d0def457f9e30b2e622",
+      "category": "ElevenLabs-TTS",
+      "bytes": 126208,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_intro.wav",
+      "sha256": "6d8915a8e02367106b9134a64bd30c6df8807b9527cfe9bf340c2cd900674fb4",
+      "category": "ElevenLabs-TTS",
+      "bytes": 199936,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_lose.wav",
+      "sha256": "39758026119a169a31678ed299df7e656134b374a643c724c5d3147ffa786599",
+      "category": "ElevenLabs-TTS",
+      "bytes": 285184,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_win.wav",
+      "sha256": "ceb41092299ba2101bccd881021a9c885f302ef3b15dfd24645931ba18d3f083",
+      "category": "ElevenLabs-TTS",
+      "bytes": 211456,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_boost.wav",
+      "sha256": "309caed8df4978dba98d373e862d6f2a5ad90137a36eb8ac16cddb59f8550996",
+      "category": "ElevenLabs-TTS",
+      "bytes": 135424,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_intro.wav",
+      "sha256": "2a4a91f65ef437221665f1873d07bbacc054f49918a05472accde95f11de5beb",
+      "category": "ElevenLabs-TTS",
+      "bytes": 220672,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_lose.wav",
+      "sha256": "d2d01e88d937aafa3f9e77af54a0ee6644c0aac3307fdac0281120c95c24fe7e",
+      "category": "ElevenLabs-TTS",
+      "bytes": 227584,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_win.wav",
+      "sha256": "81fe787651822b918d5bf84e4cc9a84cb4c778730e3360afb878f6c48176c699",
+      "category": "ElevenLabs-TTS",
+      "bytes": 204544,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_boost.wav",
+      "sha256": "5aaac29355c291a0e9e517a1dd731be6e56ed90b962a50f71db691f02226f6f8",
+      "category": "ElevenLabs-TTS",
+      "bytes": 100864,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_intro.wav",
+      "sha256": "faffa6fdf0015566caf6f50f029c8bb27f0af4e6859f2d3b3c927da455ffbcfb",
+      "category": "ElevenLabs-TTS",
+      "bytes": 211456,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_lose.wav",
+      "sha256": "fe5aa1757f39e80b17d605802b74f585e59da400d7d640e5fa5e565ba40ba13c",
+      "category": "ElevenLabs-TTS",
+      "bytes": 204544,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_win.wav",
+      "sha256": "fa60be570aa5ea692d3c63ec50f21b06da014aef811b923a4c8a2ff38068c499",
+      "category": "ElevenLabs-TTS",
+      "bytes": 163072,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/workshop_ambience.m4a",
+      "sha256": "22fc29aec448a4890c1cb5be5308cb359bc2772dea6a6a951d1b109919702f1c",
+      "category": "original-procedural-music",
+      "bytes": 175243,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/wrench_ratchet.wav",
+      "sha256": "2aec8020d5b6576b4f705c5c171170f33fd2b12b3179b914848a6de3732baa5c",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/wrench_ratchet_b.wav",
+      "sha256": "cfed69397f68e485a9ed225cdc57487c45765d04fbefcaea24aee0d719a5d8e9",
+      "category": "ElevenLabs-generated-SFX",
+      "bytes": 74656,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/aid-glasses.usdz",
+      "sha256": "4ab4313f17551973da13004dc884fc25dc60c803406577461b07cd36e09e2b08",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16495,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/aid-sunglasses.usdz",
+      "sha256": "decda0821668755fd23f3dcadcb5106b3b87db85a4b527bbe96285d339bb38e3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16388,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/ambulance.usdz",
+      "sha256": "e43aba292ce8b1aec30a3279d1cf7d956b38f09c09147c5437893cd69a3635ad",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 143483,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-barrier.usdz",
+      "sha256": "9bd06d4a75d4c56feaae5512ba567138a917fb0c4e4ee568d95ccb6076fa1eec",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19337,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-cone.usdz",
+      "sha256": "5bc53c6909d8da2c246135cbc7101232f6c3554c118858fab54c72a8df11f3bc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19479,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-dumpster.usdz",
+      "sha256": "d507133416611389e33a2b2471912a162ce4bb304fa6bc697c974159f67ec8b4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32175,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-fence.usdz",
+      "sha256": "186d694f210ff1a9c00c76c2568606d172e5fe27046aedcb65dcbc85b11d3156",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25098,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-light.usdz",
+      "sha256": "e6bd650eb06a5271492ae959a8e4992b233b95707a724a2df178343f38d49566",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25507,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-lightpost.usdz",
+      "sha256": "2aa5d2d5517fde6dd32e84625f87cb0ae128389e1540937a5cc6b979dfccb895",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19307,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-pillar.usdz",
+      "sha256": "69e8cb3cdd6ef12a12679518d1be57ea974066a865dd5d7a18a04bf21b5a839d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17814,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-pole.usdz",
+      "sha256": "f4e34c723c701886ccd00d47451652a34711a641105fa39f38a36c55cb32743d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 46515,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-sign-stop.usdz",
+      "sha256": "320fa723111a3f4216ec33facacdd499c2ecc3bfabaf606e99e957c41fda9896",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19157,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-bridge.usdz",
+      "sha256": "0d85d5002ff3b45747e8013315f7d6949589c3fe5bf96814e2b6e841a1c79d56",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18534,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-bush.usdz",
+      "sha256": "96b21a430f7f081391fb3d2c327f139e89117606f021d0048aa3dc68bf06064d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7748,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-canoe.usdz",
+      "sha256": "13b2d1b7cbb3f89a7bf825c7d55a99055efee372ff06a687d4cba311b0efbdbd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17989,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-fire-stones.usdz",
+      "sha256": "0e25482dc41f0154da666d5d0571dc678b0deaefdb35be0bac13f307279cd743",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 20749,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-fire.usdz",
+      "sha256": "e8a1e2a35a95b4fcc987cd9b6a8062f30090daebca9abd9ea9d5c5356b761cba",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 11323,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-rock.usdz",
+      "sha256": "8ae2b57bbfe6e85a4df9df83c246c0366f6a5e821aac9508b8c3f18216a0f6d0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 9209,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-closed.usdz",
+      "sha256": "20a0495748dd3225620a57015e1b8def1b905ee34fd0f8b1ce057c7072098dbf",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18706,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-open.usdz",
+      "sha256": "4cd26fecd5e8938b0547cac614c67184074af1f9293070d05c2ff7f898ee7838",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18794,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-small.usdz",
+      "sha256": "d96d7b34d36bd79cd6000d5de961351e8c19b2b185a191be5c50af2bc800c85f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17490,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cactus-short.usdz",
+      "sha256": "7c25559ba9c53057e52add5b8626538f022b98c7b1901f3396c8d63bc00d9e7e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 10934,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cactus-tall.usdz",
+      "sha256": "3effac7e4c8b687c763f900cace62a6fbada418c020f50bbb638d525b9f784f8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 11703,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cliff-large.usdz",
+      "sha256": "2098e8ca9a600118f868678bf98e36e31cb01d1f7f7cfb01c2d859f8c3d8e6fb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 5169,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cliff.usdz",
+      "sha256": "1be6e136d74d342c89e04f006320a6f936f75ce605e22f0ed04d704387701e66",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 5163,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-mesa.usdz",
+      "sha256": "cfe94e050e8d22be015560c4258fbcaab6e8ef8645a9a2aa18f79e024e3b587f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7051,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-a.usdz",
+      "sha256": "4de96c3e4d09f5d17cd8258bd00d07532fdd369dd41884c651ea9967acd59309",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 9987,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-b.usdz",
+      "sha256": "641342b2172a1ad700f5ad6a8637708a8b3e437da90290b88ebc704699f4fc70",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 8607,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-c.usdz",
+      "sha256": "01974ef25345e23912467822d45782e57b529630ee712c20c4a8420a89d6067a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 9468,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-ballista.usdz",
+      "sha256": "33e4b4b9a13dcfacf802f26e9fd553e60452bcd80dc42b501c73f316222ff128",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 60387,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-cart-high.usdz",
+      "sha256": "d13e5e0d90aa2b9e686351148f2d3b08edb0089335a903d9f5dd286cb9ef4b86",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 72917,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-cart.usdz",
+      "sha256": "faced8f620f2d7bd3d0676da9d435a7895fc28894ced7e0544dd9f11e0ed1928",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 43561,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-catapult.usdz",
+      "sha256": "0c58b8d7e4769673f98f6eb807d4508dc30b9020bc4170f69280a42cfd414a1a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 77465,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-flag-wide.usdz",
+      "sha256": "5615830ce49091ab6997d3dd7dfc508f4d074f2d30dcaf3623ab45b6c4784e6a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29608,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-flag.usdz",
+      "sha256": "613f5c67de936f728122c71b9faef33698e82eb1400d91540d0876fac4957188",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21548,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-fountain.usdz",
+      "sha256": "e99a00007bfa4872d2e5d75ba710c5f1e709ecb6e05ff5dc05ac241eb377cc8d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 126590,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-hedge.usdz",
+      "sha256": "8a725acea536e7b0016d969c6d93d634a7f5db715290dd6887b68d5c29004193",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21110,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-lantern.usdz",
+      "sha256": "2932f1c54a4f2ccca1f8410000311c36e726aa2fe3a2e7ca78976ac20d89e9e1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25704,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-rocks.usdz",
+      "sha256": "8d9556b2e5c81ffcdecb972a520cb7232e6e27e6c41570954e154b6a96ec550e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 22135,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-siege-tower.usdz",
+      "sha256": "75f4579183f9a1466df1ea65e47e37a746bcbf85f65adc6800cc16481c456ddb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 125184,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-tower.usdz",
+      "sha256": "57e57962138a6ee97afadb375da26cef7b1d10246ca68c12fe1e0e98a1e70286",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23391,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-trebuchet.usdz",
+      "sha256": "2cf521fc0de7130f2d9fe3d260728c4379b34e0309fbfe186b4a92c186436da0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 106201,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-tree.usdz",
+      "sha256": "585e57ae53312ceb730b21d5682419ca81b0e0f9ceb4ea36ebff0e4d187981a9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27095,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-bald-drive.usdz",
+      "sha256": "502c0752542b3b586f43229d4f20a459cf158eb69d710b96cced8ea2ca31d1ce",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 63607,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-bald-idle.usdz",
+      "sha256": "29eeaeff4e8f490daf8a5c039c3c8bbdc435f400f777ca16100535b8d443c7dd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 68003,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-drive.usdz",
+      "sha256": "90dd7daf751cca8ff55e47d5f91b44a53e7f71b1db4d4d91f997fbf9ac1ce6bb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 77025,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-idle.usdz",
+      "sha256": "246d9b7a23aa8d60958d9ff643882b3dbf1fda904c550247930124b1766c579a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 81164,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-bald-drive.usdz",
+      "sha256": "1c9e69c0150a55ba941de860c888759f77ad5baa85b6aec99c317e23ddbf4297",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 63542,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-bald-idle.usdz",
+      "sha256": "77408984ac4f7523680a9c63ef56d0f9e5b930c62b1ddcfaebcb0f25ba648bb1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 67931,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-drive.usdz",
+      "sha256": "5358c346393d702b2f87dd6feb847546b0217625a2116450fa50298f9c262f1e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80801,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-idle.usdz",
+      "sha256": "ebfdaeea21146c6e1d219875596aa1898494d3052235beb20243fc7c85340ac7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 84932,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-bald-drive.usdz",
+      "sha256": "8ea630ef3f53e0dccb4eb684d414981e0eb1c2dcb6e7bd61656e4b9c2dae011a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 65619,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-bald-idle.usdz",
+      "sha256": "ed54c97a356202f13d26615e4617842ced4d5ffe8ac00f3dc5cf9e7bee03a4e9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 69886,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-drive.usdz",
+      "sha256": "763e544414964b2913f06b1d295165ce4177d77129b5dd4d791524b540eb2697",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80305,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-idle.usdz",
+      "sha256": "7a215ea87671b929f6258ed772246b27411073436df174f11b4f6a038c495d55",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 84561,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-bald-drive.usdz",
+      "sha256": "b83e49b9d6c8e713ec137be5fd9404416933b4669094ff76ef7cadd5156f61a8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 71710,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-bald-idle.usdz",
+      "sha256": "524b0b4d5857730d7334204e7beda89d74b2b3247fd49ba995b38cefc30bce4c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 75977,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-drive.usdz",
+      "sha256": "dd12fb353c08d67c855a33898abdb001260fc19e4ea9e39a358acc2fd7435e64",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 85129,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-idle.usdz",
+      "sha256": "838d4081d98d68aecb1c4d5f1df86b379de69a598edcf49475495e6b5e9a5efb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 89266,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-bald-drive.usdz",
+      "sha256": "22b8f2653025a8bce10d811d962826a53bcb55a2a9a8e1d05c59002c1888ff9c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 64487,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-bald-idle.usdz",
+      "sha256": "f9945035238885f9fa3c43c2eb5ee5de2188cd21cfefbef23887597772ad0883",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 68753,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-drive.usdz",
+      "sha256": "99e7d9057ca5744330c58edd3caa34ab6a7c5354128b42820a8b6642fc53a36f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 79862,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-idle.usdz",
+      "sha256": "e9d55f37a9922c037b12433f21f96b10a655b7e829eaf0c64793934e89d94229",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 84122,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-bald-drive.usdz",
+      "sha256": "b5f7f9d77c85e6eb824426487617c95cfcd2cd14ff8f4240344797ae3b665431",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 72579,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-bald-idle.usdz",
+      "sha256": "64a386184bb9d094a6f56373ef83461a343e143a014b897d9e347e1c0a554fe0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 76847,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-drive.usdz",
+      "sha256": "8cdcb4f604436253f436f3e46c2a9e3c68f42d6cb9442821a6809361d2bd3ed2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 84920,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-idle.usdz",
+      "sha256": "4198adff85e26c75f728560bb631e3bd62f88ba151fa690a75727a698f4b732a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 89179,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-bald-drive.usdz",
+      "sha256": "1cef288aeb41cccc575117970f89d247d1401ef782c3de82789f528278f69f67",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 71892,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-bald-idle.usdz",
+      "sha256": "1e33d898bd2a8c8841bcc8d9a348b26bd566d3a17825204862adaa2bfde4f026",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 76028,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-drive.usdz",
+      "sha256": "a0c11746a5c89201829a029f0f6b9a610f53e4571af9800ffcdef4ae48ee48f7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 78436,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-idle.usdz",
+      "sha256": "adcc0aa0067246be8300a4b5abe6d6d0bd200c9ae8214d518ddc246ce8e111c5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 82566,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-bald-drive.usdz",
+      "sha256": "ab258ad48e60239be0fbfc30524f6144677365527175c7d2b39ead7d6a80f0a1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 77186,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-bald-idle.usdz",
+      "sha256": "8b3e85b6ea743b4236740973cfd9e2055df32c72126b9364d598bced74fd828a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 81323,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-drive.usdz",
+      "sha256": "015c1b61b5b79db6e5d5b39c2727ee6db4431d5fdf52b62d80250218c89ec253",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 77269,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-idle.usdz",
+      "sha256": "9532425689cf193170c2f70f34aa0d9254123c9c0aae59a4c35a8203b4ec98e5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 81401,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-bald-drive.usdz",
+      "sha256": "82f0a7520dd4155610dceb8353d84bb0840a465d6ec340d65d6518f0f9e91349",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 74929,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-bald-idle.usdz",
+      "sha256": "d7886b17c660c688f8dae74d88cea0886f222042034590d3aabf5fe6defaddbb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 79195,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-drive.usdz",
+      "sha256": "ef72af1fdb6b309351052ef7c9ea47146f487946e68e51e4d80941a93222a40e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 86251,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-idle.usdz",
+      "sha256": "161bf40bfd076ba77b66d411d40bd52af7ecf962cdb441e21ac22102c85711c9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90513,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-bald-drive.usdz",
+      "sha256": "20f92529c334dc5d6963ce0bf4a610e614c056526bc5c52906a71b33420fb2b9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 71045,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-bald-idle.usdz",
+      "sha256": "6ea48216b422608b948d53dbd3d7d8908e3481b989ed22d77225b6fa8c13e223",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 75185,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-drive.usdz",
+      "sha256": "7ad269576016e35265a6fd9e9ac7a4807cf64ff6cb2b0a6422e574169d7e3c7a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 77441,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-idle.usdz",
+      "sha256": "0ebe51e4cd23dd17de60570dcfcf8b8be3a5cbb1fb1ab3064a0e037536b324d2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 81579,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-bald-drive.usdz",
+      "sha256": "81b9314fc6b9f294d934a45c3095a1554046e68bee8eead57b36cb24014cf439",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 69161,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-bald-idle.usdz",
+      "sha256": "4db34090447479c94310dacb2c9af0f7986284cde6d7314a972cef41af0ede4f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 73296,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-drive.usdz",
+      "sha256": "7db31c5887901f1036b8d16d26708f6c8818f5f4bced96a53b6ed7d4c30d2eb0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 76619,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-idle.usdz",
+      "sha256": "5c348ec1a6492816321ea294e5c351fdaeffd3d38ab772f9ad630c5aba583548",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80756,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-bald-drive.usdz",
+      "sha256": "a119dde5817b42d3145ee38b08b9f948486cd0d8ff784e32174ab287914be3bb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 72514,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-bald-idle.usdz",
+      "sha256": "5379fa3fa1a117fe859fadfb705177d422e5c81a9cc5c489e7de67f24eae6828",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 76781,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-drive.usdz",
+      "sha256": "94e0af44f86a5c9d41d13d98f14bcbb7b098a30b5a2067776c1ff6789421f84d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 78373,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-idle.usdz",
+      "sha256": "0d81d899f839bcb83b272f39c494edad95a1af95bd2e18087f7ee529096c1914",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 82505,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-fence.usdz",
+      "sha256": "d43828d3698e0ad987bf669de43c701d61e041f4d4853edb05e51d1691af72b1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21803,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-a.usdz",
+      "sha256": "fe424c21bd5629b95f4ba6f2dd7d80b2d506e7e00b69e32cffa5738bd73c499c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 96195,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-b.usdz",
+      "sha256": "f5af7ffb3e986a3959359185599a86d64f0d1aff64a2dd616dd966b38176bfbc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 135946,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-c.usdz",
+      "sha256": "97a46cbbd8ca2a2d956487f96cf5fe5b94c12d71d382da62943498c5dcd29ce7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 97443,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-d.usdz",
+      "sha256": "660f2c6b69ea04bd355b71bcd9d803beb833d6d3d37ca23f43d75dd9ab3b1092",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 136268,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-e.usdz",
+      "sha256": "3b8eb637b10df8f9104800a7a116bf5f77604c771299a18786b106a7ef476acb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 134683,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-f.usdz",
+      "sha256": "8faee49298b34cc6abaec4b507cb78f1856c4cae29073518446b8e4cd6e5df9f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 127876,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-g.usdz",
+      "sha256": "8bf689ca0810c8d5144ea366c4e2e82aa39e751c869b41bcf7ebe2c51c71aa77",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90408,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-h.usdz",
+      "sha256": "b70473a49d7683341e7042059a3fd39487bbea3e0b4e1cb6815b87da69f471b6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 68308,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-i.usdz",
+      "sha256": "a1d2ef90ca7a9b141863ff3e9189dc731e81a831b582b6934a6e4971b8c2fa9f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 71453,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-j.usdz",
+      "sha256": "b8a25d4028e97854b48739f2a159495d348a45b6d5ecb6fe916f11754c5a6c58",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 97747,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-k.usdz",
+      "sha256": "98eb0a8840f984da50d518e86fa05935874de701f3b83735ce85f4e9d291bf78",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 87023,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-l.usdz",
+      "sha256": "4db4463aa7ca3938af88d664da1d0931a76a15dc6dae82b6577e3ef5f05ab1ef",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 105267,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-m.usdz",
+      "sha256": "a85dac9541b7bbb994d5efe2ef726590e434e85614d9d1527c196817c108c1e5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 93453,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-n.usdz",
+      "sha256": "81b4457e2e5f36e771db6bddaf458c6aaf0f025873c15160ba6ec029a8c76110",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 128220,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-o.usdz",
+      "sha256": "81398eaff685d49b5ec0048b2ec8468c4043093c05dc622f938b9ba892d24020",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 108033,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-p.usdz",
+      "sha256": "e1e95b4c68cf16e4355332421bd18f0b96f44e4a88dca8d6fefe294f191f8665",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 104262,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-q.usdz",
+      "sha256": "5b05ad5d4c72fa28f3ae47c2aec0ae9ff686042895ae548a1862208d45b86f41",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 95128,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-r.usdz",
+      "sha256": "875ac1ed842b19c8d69271fd1680e45c3b7d8ed64ea17756979d3bf767113e87",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 86983,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-s.usdz",
+      "sha256": "19602d70043122210cebf4189aa1ec3a9b00b6cd33e7fe8204b31b3834e2a413",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 99403,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-t.usdz",
+      "sha256": "fcb653c299174721d19f6629447c540c0b268a400da271ef35d4e310e7fdb005",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 154828,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-u.usdz",
+      "sha256": "36a0f01b81b2cc7907bbbb3f9277438a0cb6ecc27d0f37c42e0ac0e6470f50fc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 109539,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-path-long.usdz",
+      "sha256": "5325e8983191e0aad880e3a20bc8c78aff977c228de810f86a64edd7450156a6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16290,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-path-short.usdz",
+      "sha256": "83e858cacc9153489b17f4e4c1e566cbc05dd5b3dd97ff509a81044cced67416",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16288,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-planter.usdz",
+      "sha256": "2863e01c63a9a1c39caba23743822a166be61541667ec402c88ff549b08584a6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30049,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-a.usdz",
+      "sha256": "1d3a6294206438bc2eb6202b8d5f26a041decce7ea3c638ee809daacccd4395c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 102431,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-b.usdz",
+      "sha256": "5e9d12be3e00a3e229592af125aa00475b598fbc7ad7ee51be7c64c31bfb3202",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 102095,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-c.usdz",
+      "sha256": "1c3c1a06ec0ac092b041d648a99049e627c208859c71ea26be6a3362d43755a1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 97759,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-d.usdz",
+      "sha256": "d3cc29d9366da676b64b4f663257bfd2022df523de1db91d0d753109da6e7df9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 91674,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-e.usdz",
+      "sha256": "1b14a35d9721e5d9196b2e46f639c6f60ad09ce93320d40d4301b1a6e2814b74",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 119144,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-f.usdz",
+      "sha256": "d07397bdff925484d782d724219055518e39a8641e359bb524f92923aafc6326",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 137282,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-g.usdz",
+      "sha256": "9e726b5bd93294996ec68fd00e7a1ae2ba4d2090546b702aa013b9c08cb185b8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 151827,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-h.usdz",
+      "sha256": "f10bbe9158fb945c16776976d74d90ead6af28f404535b3dcef95426abb96b5d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 118705,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-i.usdz",
+      "sha256": "e7528d948ef3aa328dafea161eacab79442dee989607dd55eb9e873a5f667a95",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 187875,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-j.usdz",
+      "sha256": "e00f4ee735fc4cbeedb87d654cd8b55dafeac79f326aed8dd45bea79c4c301a2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 374826,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-k.usdz",
+      "sha256": "40e2aba57cedd96b644c2a770696b34e1adc07c8fda47787dc692be36aa62fa3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 217959,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-l.usdz",
+      "sha256": "d38c1b0979084b94c56f61760382f1bdd038504945d594345e9dad466e07a9e5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 254762,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-m.usdz",
+      "sha256": "e13edf30c3ba25dd06567b0dae6f53c26a9b94b8f0e7ea090d2052404a8d833e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 266187,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-n.usdz",
+      "sha256": "afb7bc7416f447344437906ba927180ee921f2a65b6d7cdb577f7db07aa56deb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 303626,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-a.usdz",
+      "sha256": "d3bc2662239806b9c8c7d18f5d57327a3f9ba971a1021e5c94e26508c2da7a4f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 104400,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-b.usdz",
+      "sha256": "2006f0dcabec07c5eb5492f13737e55220734dd758b6d385dcad90658f59c972",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 125776,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-c.usdz",
+      "sha256": "10d27438f595686c824b7bf348fd9aa55da525c639a30c1957cefb048e511f5d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 134359,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-d.usdz",
+      "sha256": "d27b154667f3b83bb5806f11525762e58b92a1ccecd99ad081f4508e121678f1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 147835,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-e.usdz",
+      "sha256": "0279814a8c1caa9c81f17dcf9e83d5304b14632fd5ec2c257d3db1d3aa33eee8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 96202,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-streetlight.usdz",
+      "sha256": "1e13273c03c308f9b3ec68ec6e8b3f513640ea1f2e45acca092d315ad89865da",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21465,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-tree-large.usdz",
+      "sha256": "0b264b57fcbcf03509806ec03ae2fb9a2687110b6f15f0b836424b73fb995cf8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18434,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-tree-small.usdz",
+      "sha256": "87d63d50985386fb6cf1696898bff897acd1002782ad18c9db616577e945e985",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18433,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-bolt.usdz",
+      "sha256": "b1fe8d7faae343291512579baacbde8ccf6fff344a1b2f7f28963328f8136539",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18474,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-bumper.usdz",
+      "sha256": "3eaeafc7ebde3c8a4d74a404d1b0b0ca99a13e0ac51e58e456998248d2ed6e4e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24013,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-door-window.usdz",
+      "sha256": "9071d55eb2ee0ec7daf1578df22f07a0979f23d23d22fe08c4359e37fbd995e6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21020,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-door.usdz",
+      "sha256": "03bf61ecc0b097b76ab180df290aded9eba347e73955c9c948e2f53c63c58aa1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 20565,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-drivetrain-axle.usdz",
+      "sha256": "9c8beb199a8238b5d15e96061a65cc9a182dc6502ebac80a0f5609584564b4f8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29921,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-drivetrain.usdz",
+      "sha256": "c9ac3132efd02a2009eaf9f2626b71e0962a2b773caba6898b6b2f7f2c25b527",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 44728,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-nut.usdz",
+      "sha256": "e79661d8cd58c5cc5f42cdc86278152b4d404b0816ffefe817f931ea586b27ed",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18582,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-a.usdz",
+      "sha256": "7b8d983dcbcdee00ca3a83c6d6c34d2253a40fdf2ba69978f99106aa6c6f7268",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18704,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-b.usdz",
+      "sha256": "3ca0b72bdabf335269ddf8351bb0a6be61666a373ca2beb2cd7f4236313ae2f9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19066,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-small-a.usdz",
+      "sha256": "828fdf0c598b57f64acbbe7966a4758852034eaddea1f3873481d65e3042d1fc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17861,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-small-b.usdz",
+      "sha256": "f4212843f067a6e529eaa2f0c40b10dbec68281a5997cfbe884051f158f8050f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19056,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-spoiler-a.usdz",
+      "sha256": "329606cc958ac6e10446f5aa307ada51cf80f8bedb8e43f26f7b0186cfa5b90c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19322,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-spoiler-b.usdz",
+      "sha256": "4c0ced8962f80eac8f21d994f0c2e094a049feb66353f6ca13f822d7fa055580",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21993,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-tire.usdz",
+      "sha256": "f423e240aabfe2b43388e7da588873259504e53936d211db909b1d0602326879",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 36131,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/delivery.usdz",
+      "sha256": "72bc07626e58b295a2ff4f8e3afb868082c0a2c9adeabaff8999a844c9af27b9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 121713,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-boost.usdz",
+      "sha256": "e26072c890eda1ec2e8ff7d68a6c87576b258941f86daff379d7aff871488608",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 173228,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-cheer.usdz",
+      "sha256": "5358626544293102ed35d4d3aeb429be12c508c2984de91343c3a755d524584b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 173228,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-crash.usdz",
+      "sha256": "45b5c211e48a45b6da614f2c4492954e1194d5fa3a084d13eebefb55ad18ce68",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 256268,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-idle.usdz",
+      "sha256": "696b3125a40f3109cfbd9d3217075bf4f3f49d4cb41cc0473640c8deed4033ec",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 472171,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/firetruck.usdz",
+      "sha256": "1a1dc3ab1b780766df8cac848621a38251475e5be8c86dc301fe8677886e4055",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 142362,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-burger.usdz",
+      "sha256": "90ffb1dc6466980add9556ac17d08756902d2e51e9cfa7c6c72efaabf75eea4e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32791,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cake.usdz",
+      "sha256": "09fdfd00bd56a56df1d6318d540dfc8d3af4bf939b601b93ea01c4a07f7578e9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 95238,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cone.usdz",
+      "sha256": "505890798b6d6e7c57d1759c16d9ecd1d9bc180ca5ceab7eb46140d75b8f37a7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17289,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cupcake.usdz",
+      "sha256": "030177c944dff9bfc3ac1a76d00be92d3c0ccd691c355ea4e1b430bb5215131a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29781,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-donut-chocolate.usdz",
+      "sha256": "fe2218beb2da8ea5cedefe0406a91c59166f67e215c4304f6cec025a9e55caf3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23107,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-donut.usdz",
+      "sha256": "eef7cf46637cba3c5d6d4617ee25cc52e5cf3dcb59c2957ca2d695c7722cacb1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27980,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-fries.usdz",
+      "sha256": "4c2bc43be0ccd10f349baf9ac41c3904648888451e7bb98cabaf333d1aba2321",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 57101,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-hotdog.usdz",
+      "sha256": "aec40aa4015a435ea336975d6ff908ee52e1e7d5d6bba01ccbbaab901ff18960",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 34360,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-icecream.usdz",
+      "sha256": "5298287a7451215224249ff2c777f68be4bdc006c271333cfaeab244d5816bd0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 20416,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-muffin.usdz",
+      "sha256": "646beaf2b61f18cccabfdc9448b94065a8a0f1541aa712ab267c723d63538c01",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 20806,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-pancakes.usdz",
+      "sha256": "824291fe4e31c3a1a39f49eeddbe5dd473b6fc772ebfbd79c511e40821d251b5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 42382,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-pizza.usdz",
+      "sha256": "30340a0454c5ef7323d9660faf4b0de173c748934188b230b61eeea7c3a24fc7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 99738,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-popsicle.usdz",
+      "sha256": "7005c70b747351820620d9555ff462de838f0c36c6dc12a1b8e2cb50611b2d0c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19677,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-soda.usdz",
+      "sha256": "f6fa4e56c6a08705a441add778b887dfe15ef9c53fd8f4d4914e2d7f8f3ea356",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25581,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-sundae.usdz",
+      "sha256": "b82e075c6b3bf0ab8127f82957d4d56dda00f25e99828965c7cd84e8138c5e8f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 35280,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-waffle.usdz",
+      "sha256": "fdaf6625df9d6f87d2489ee0c0f688ba8ec0b1b446ca9300559da68d7a42304c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 53955,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/garbage-truck.usdz",
+      "sha256": "06eaa527b811273d4d244ef703c30aef08fc7b6eca9bb10828d2a1c96fbb8546",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 167104,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/gate-finish.usdz",
+      "sha256": "153a1168beef128fc6bf1e73299c87076d1a7ba0b0223dd8f7564994bab7a7fa",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18987,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/gate.usdz",
+      "sha256": "c698101f5dbbcd3489f4bd00c6bdd89f615ef5d2b7897fa23c75e81a2fe102e0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19342,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-ball-blue.usdz",
+      "sha256": "e083f53d637532f21e92241a9c4d5c7d55a053fd450ce3a8e1f6e60e348e9b77",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 54908,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-ball-red.usdz",
+      "sha256": "d4a5d475443e8c2055071c59dfb28c730014055fd6a3655315d626a5a7605e7b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 54909,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-castle.usdz",
+      "sha256": "7b8855fff71d5cf071086edc50180b75e0c721c9e4a9fb2c72cf7b9b9af7360b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24716,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-diamond.usdz",
+      "sha256": "8cd6490e8d2bc2b1d5b2c240494f0a5b39092f5dae6538528f4800f71bebd83a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 14828,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-flag-blue.usdz",
+      "sha256": "4d41d856761d452e71974d59ee6a8e8f2872aff3652cb7398c01c313381321d5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18520,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-flag-red.usdz",
+      "sha256": "a5414e508ea0e0644b1bf55b0030d076d20e866d1fe135e4f12801171039f02e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18522,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-gate.usdz",
+      "sha256": "4ddae626c34535e7ce5baee7f50cf7c55bb748787edc5acabf5d5e0c0b5ab4e7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 22722,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-triangle.usdz",
+      "sha256": "4f07700b47a722cfc45e202ffc82f5cc4af7552053f34c36cacff3e241330dd1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 15596,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-windmill.usdz",
+      "sha256": "6294e9f2d9ff30ee0a4da3b94152a6edda19eaf7b31b4097a35774f555b4c145",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30732,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-a.usdz",
+      "sha256": "591ef62bae16c5767a8633da63f112a03a98ba1e3eb1badb711d737ddedb84d3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25686,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-b.usdz",
+      "sha256": "329d5112dc877bda2fc9d9c4f3612b463af80ff3884b3059d1728b4a370b697d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29263,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-c.usdz",
+      "sha256": "53266f6c64a69d062e64bc3fd5624e4a0076f58fbb6887b78765f1cac33d7859",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 26812,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-d.usdz",
+      "sha256": "8fb3b43e527f06d700e8398c7de26698f8305645bce9065a39c5d183543dd7e4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25694,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-e.usdz",
+      "sha256": "2db3762906dce1be8558556bb37f9eff6fbf72d41c1b5b921808f6b458e8c72e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27635,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-f.usdz",
+      "sha256": "0c1226d52492ce34e87020ed5d68a29b039ea9d82ae0c0496609efc3c94a9ee6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24433,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-a.usdz",
+      "sha256": "dd00255914c0aad141b32f71d1fb5633ca75c0b9558571d3bb4fbb0645b1ebc9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18621,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-c.usdz",
+      "sha256": "307b0636eff2f611ece4dfd545f3e78a28e50a28b59f203c375d6f8e44c786a9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23776,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-d.usdz",
+      "sha256": "ee0dd2197d83167c3707f840ef414747bb31abe1eed3cb2a63747ec80ed582e7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18692,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-e.usdz",
+      "sha256": "45d6eb10f0d96942109ee20852dc2814782ab042473415c90b87362c98b54105",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19916,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-f.usdz",
+      "sha256": "d7ba1d7a75f46b2bb42f0ae5ccc8373cf118a09a01af1bf8f5f410b8dd309d51",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18238,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hatchback-sports.usdz",
+      "sha256": "b0d5e9ad1f4d6535fb368da383ceca634a1a280b9096804fd1b0d9d668bc235f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 110167,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-banana.usdz",
+      "sha256": "00b5d142a62999850026fa7ff165f192e77f3df18c2d55a55264d1258fd37124",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23364,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-box.usdz",
+      "sha256": "da064068c203aa2dca81ac0b82c44072b39c615ace68d91049b35e4419b71d30",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 26276,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-coin-gold.usdz",
+      "sha256": "fafcb1dc2b419b74ee88d95b1e11642f02efc4812bc878b144e211a50404dae2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18505,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-cone.usdz",
+      "sha256": "ddc153817bc42651acf9c602b2ab27b609edd71b074ef6561e9b21a2f661c585",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16783,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oobi.usdz",
+      "sha256": "30d5c85dc8c09a2813858ee4b54ecf429107a0e1ef158d9d9071a5f65ff4d38b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 167559,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oodi.usdz",
+      "sha256": "3d31b43c0a3401f23b257243d1d8705d09d1753df0ed9a35b1d265604a58587a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 154046,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-ooli.usdz",
+      "sha256": "494b11b8874a943b885feafc0ae64afab4ad249013703e6595a57a8a779c6f9d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 154130,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oopi.usdz",
+      "sha256": "c509fd7baf44ff1e1498e31ba3a198088375274ca8d3b40cb2867c784048ce71",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 155849,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oozi.usdz",
+      "sha256": "10b8c3f2f7e0986e4423526ccd9dd888846919c67cfaf181cd0be39e3acba7de",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 157778,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-flower-red.usdz",
+      "sha256": "87ba651cfec90b4f3be5a7767bc9aa7ab8b4a09c6cca2f76f12216d6e65ba684",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 8846,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-flower-yellow.usdz",
+      "sha256": "296526a5cb7876277529068b7362f7d3a9b323765a5f6426e48954d00ba95828",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 8864,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-mushroom-red.usdz",
+      "sha256": "a2925515442b24f2420a3d2ac960b30ef0994585860ed431377338f3ca2eb157",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7505,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-stump.usdz",
+      "sha256": "19a8ff5b3dc7ff64319856311418152313f9ac0417d5c51a58c8bf8a5f33e31b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7300,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-default.usdz",
+      "sha256": "38af37d09c0d5b4ec1a9f5224e75b9aab8e3aba98f1a5b6a0df40d5f49031c6c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 11412,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-detailed.usdz",
+      "sha256": "4459c546563e7373a740579d2d4483b9258bd3b551179813e890ee3b2268734e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33639,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-oak.usdz",
+      "sha256": "b97584e239088214c894b4541308c390b28afcb188c1a0ee0a841e67df5b7eb7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17138,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-palm.usdz",
+      "sha256": "510ab677bcf003210849dee9e88496117c4a249e17eb532ab66a7553ac44932d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16248,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-a.usdz",
+      "sha256": "f1e0bcdd3f84114713b955251efd38aad26673318a8667ced3b4c7f63e36569c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 82016,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-b.usdz",
+      "sha256": "5db8c8021306851b3bcf199c163ace5338b428e113638280f97999a6ae2182ad",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 96492,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-c.usdz",
+      "sha256": "cd949feb7748c8feee4699e7ed3690ae20763bcdc4e7b866d08c60f25342b352",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 89962,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-d.usdz",
+      "sha256": "0092b8ec6a1dc826e42fab3eefc94cf0303c9cc2d6be75b7185a4e4201c70d22",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 84384,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-barrel.usdz",
+      "sha256": "9735fc258f82e91fcda01846f4808e1ef62be566699dc68f07aa5c54dcd34c09",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24031,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-cannon.usdz",
+      "sha256": "08fd86dbeb3f03af5a02331b8f61223f58e1b112b224103a87a5b732a6e5b267",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30539,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-chest.usdz",
+      "sha256": "19bef0f675847d9815bbea2dc2f94be52f00ae3ddf955825ec519ae39a1b5980",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30162,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-crate.usdz",
+      "sha256": "6d8e7396b4829f252b62c61b4cd660ec7e37e4b81369c18f85d0909bf1a66e9a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 19344,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-flag.usdz",
+      "sha256": "14e63aa2f3d2541186d2f8d2a2a390ac7ccb8eaa3d39ac5a2f95bd9591ecdcb7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24054,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-a.usdz",
+      "sha256": "99089cffa97e78b6367d6e9e20dcbb18518404971a7a214629588c37b4ae4a5c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 39513,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-b.usdz",
+      "sha256": "136dd503e87018cf6e8033b7111140c7b2e401e62011e08464bef4373f8f12c6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 39536,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-c.usdz",
+      "sha256": "f030f779def622b7555b1dd40c625e2d3846503b03a1fae138e0f7452c3893cb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 50766,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-rocks-a.usdz",
+      "sha256": "4b6e74928f6db76cadb2b008de65dc58ebcf4fd49067daaeddd8cfa9d1bbfa5d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 55183,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-rocks-b.usdz",
+      "sha256": "b536e3c0be256940ea70ae074ba937a073ce34826398ae8bc42d84796da98bea",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 52413,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-ghost.usdz",
+      "sha256": "2afa86affab65d247dcf8e171ac307ff0b96e850faa0197aa17381001e65bc42",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 122964,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-large.usdz",
+      "sha256": "6b1245a6bac61c7f5c4808563457a530bf44225d8c8bb9cf836d9acde51d4dac",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 140148,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-medium.usdz",
+      "sha256": "dc210eb42805041d7d89c5ac139ebae612c16ae83d4819b428389b2a2c410c6f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 133003,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-small.usdz",
+      "sha256": "d386a248f90825a8d56e2a89b6abdaeab86862a11d9aa3bfe4f2290b305698bf",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 113219,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-wreck.usdz",
+      "sha256": "32f03cd7cc4ee64b33ff8ca61bcf6d2691610d171bd690e1509218bc6c0d87c4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 122390,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-tower-large.usdz",
+      "sha256": "83c0011ee5af6ac4f9a6cbf90375ee5f97a4b324baa4c67b5ecb4a3f72a87a00",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 56504,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-tower-small.usdz",
+      "sha256": "374148049feb4bc6bd32e579db9507353feeb8ed8b77a1e7bcad1340b54a3ea8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 59668,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/police.usdz",
+      "sha256": "a9b510894e79bf5ada93bf58e25c8987de46508432fe2fc3b0b86ae2b389b127",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 124428,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-banner-tower-green.usdz",
+      "sha256": "f0f1e9f66b2ae3c144278630a9fdebc81d4a964cf9b01db96b2a5318d3d03ca8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 35747,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-banner-tower-red.usdz",
+      "sha256": "6b4cc4faed2bf2f95feb7c8f8a80aecc008d31d7161c136b3ef906021b8f8eb4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 35743,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-billboard.usdz",
+      "sha256": "dfa41b6106f9a281afda33cc1d11ddb5e4cdda921ab7dc7faea44a0a54839cc1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17157,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-car-green.usdz",
+      "sha256": "bf1c6515b3a061ae7d4d29d0f5b9d15aeebb9fa2cf6d81e5a51e81a166749fdc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 108495,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-car-red.usdz",
+      "sha256": "51a83548a01fbb080dd9d1db23aa6bcce27abbe4a7c662cbeb50cf7263eea836",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 108495,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-flag-checkers.usdz",
+      "sha256": "50d1c864801d9df74aab03149e520face00ec627c291560ccfe24cb36b614f19",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17474,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-future.usdz",
+      "sha256": "3d59fd90512ca8a4cf5c0a24355e41fcddea708da3dba60be448aa05ecaace90",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 107383,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-grandstand-covered.usdz",
+      "sha256": "fb9d5b311763c0a1665691762dc7c2aa9ca512757e57f40c215bfac5943491d4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16553,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-grandstand.usdz",
+      "sha256": "3eb7102d6ad230ce8cbdf90243f2410cb044a4b3306b7d6d1aa38d6f9bf2f9d3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 13663,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-lightpost.usdz",
+      "sha256": "c4245785cdb822cb5d5ca5cf4a90387547133a0eabb558e3163d5b831ea0ff8a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27180,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pits-garage.usdz",
+      "sha256": "6b6c94747ed4fbfc76db443d030182a8a576041241fb7dadd6ceb42d119beba7",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 15265,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pits-office.usdz",
+      "sha256": "bd8412ee509324c8bd1e1aa76c2c44ea3d136951132c580bf65d5dc288b5b3c3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 9822,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pylon.usdz",
+      "sha256": "afea73ebb0c89b8f43975b501bf91b7235f9a3a6de3072d71bcd7e311e3ab1a4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 10233,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race.usdz",
+      "sha256": "4fdc7212e70b74f920559ecd2d93c2d7edae6d1df37cd1b438806eacc66e812b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 100651,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-boost.usdz",
+      "sha256": "bbe6f3bbbcd2c9ab4a844f94bd7214f96679ac10684f4567229849bc0364ec3e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80386,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-cheer.usdz",
+      "sha256": "875330666682f24f5da49cd50234025dbd92a72462a1e89ba7f11cd52d358998",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80726,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-crash.usdz",
+      "sha256": "acaa4ca5bf640929911207dd3b4309b5fe6c609e6ed322e29d90876194ad89f1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80394,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/sedan-sports.usdz",
+      "sha256": "26a1352f39483b57cf964d50bb2c73a7465f3837f366d95be21c4361f32e2d2c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 110033,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/sedan.usdz",
+      "sha256": "42fee217e92631013467bd585e5e8bdd62dd02fb3dca0439d1276df9e3b224de",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 106036,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-alien.usdz",
+      "sha256": "0faa60911fae800933ed81b4d67ba3b0b4b48add4bdb7364cb37951dd60aa3e3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27123,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-astronaut-a.usdz",
+      "sha256": "0c0621cb7945575b3e881a160be011f841add835e64256cef888d284372fcf46",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27754,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-astronaut-b.usdz",
+      "sha256": "5acdae68fc105523d82dfd34c2c14862687281dd19559d918a81d90ec29f19ec",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 28674,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crater-large.usdz",
+      "sha256": "8dad9fe929b721ca3391f2c2f2019abcd018c4bc7e921bde6a3ac37dd8e819ba",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7455,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crater.usdz",
+      "sha256": "45177a960d6307a61ab99f292eba1ceb3896442e1cc517736c8a964c27f9ceaa",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 7490,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crystals-a.usdz",
+      "sha256": "c33d98cae7e6908d9feeeb6a67d97a9edecd83439c3e65177369b9dcc6abcb3d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29818,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crystals-b.usdz",
+      "sha256": "c47ddb1b347aa0026f95c612a6b7173a66bdaafa68156997bf9dfb14d3cfa135",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29571,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-dish.usdz",
+      "sha256": "2373ec7194dfb0bdd6c217018bbc77eaef8f9694344f60f1ed333fc4b5740ffe",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16655,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-meteor-detailed.usdz",
+      "sha256": "e401f4fbe150a6f54aa30778262af7625eeaa26f1f9a649bbeb9a15c2f3d82d2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 16609,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-meteor.usdz",
+      "sha256": "4b8496420d3b029ea76caa99dbd86cb28340fa296e2cdec353698fac143a7116",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 8020,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-racer.usdz",
+      "sha256": "a6edc99a925b426820ebc455e6c0c7b2b50b0d7a1f91ba6a50ce487bf8692fc6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23198,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-a.usdz",
+      "sha256": "53b2f3c43530545e228be5998d31163760202f3389dcaa19126f48800b950876",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23513,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-b.usdz",
+      "sha256": "0c579232007ea31e6b571781669fd1bbc29d069e7921c1c2cec010b5989d2822",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 22420,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-c.usdz",
+      "sha256": "cfb394b0e747cd3d96fa23bcbd80ed49dde383e3fd0eaa29a36ccf547e35270f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 24181,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-d.usdz",
+      "sha256": "60db71ac15d28a91bb908188ebfbf173246516f1072c3d5c22def978c8ae3b96",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 26533,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-coffin.usdz",
+      "sha256": "e1ab6f6661d98e1b2b12ae37520c6292117ea9c1a1e90afd8fd79e119a826ec2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32983,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-cross-wood.usdz",
+      "sha256": "a3d6149966a26bfc29096d533e9742b6eafc87013b2addfd904cce832e8999f6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 23740,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-crypt-a.usdz",
+      "sha256": "be7525d6ce3b24824839fe3159dd3778c8fa6915976633f5e7b0cb5522f85192",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 22160,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-crypt.usdz",
+      "sha256": "4d4c9e0b9c2eb0f493e86b4f1b0fa427b1f841c57db34561d105616c832af811",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32784,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-ghost.usdz",
+      "sha256": "00cc72c46fb0c75103038e37524515ceaf347ee55e6be2df07854a0e0aa7da49",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 42214,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-bevel.usdz",
+      "sha256": "2c0acf08627205d974e12e4aea39ca87c966b7b05167afe76c61594e6b440bfd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 26470,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-cross.usdz",
+      "sha256": "1c088a1566052adfa87e235d3f8045ab69cbc676db07cc651118220c1c10901a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30039,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-fancy.usdz",
+      "sha256": "bdf5432731d1e9df48a11ee13e05f9cb8e0e43785161b7b252938587ceabfba2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21195,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-round.usdz",
+      "sha256": "5d296233407f562f52383498e7402fd46f5451fbb2a0e87cb2e1c2821c4550d5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 26989,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-wide.usdz",
+      "sha256": "7e5509bec3e16308eeb863ff2df30646123eae39e83772f736a97e6ca6179bd5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32698,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-lantern.usdz",
+      "sha256": "fd830f618349979dbccb56bf61af52095777cce324e49bb1f72202c3a9963c56",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 30608,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-lightpost.usdz",
+      "sha256": "ede1cd665f33a5f1066654741e6b043a93d2d191af2f63f695a624db101382ce",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 40077,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pine-fall.usdz",
+      "sha256": "35fa924a30bd003065869b36982498934a567fa330288665a17c5afdb111c59e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 40254,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pine.usdz",
+      "sha256": "9e2e09f7f4805e9952ca0c2fd406c7d5ff397c2ca9e60a6d2054ad98886c5698",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 40295,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pumpkin-tall.usdz",
+      "sha256": "6a1aa23389977f26c5976a8723f899ef863e3c418a7d613b8863eeefee06b5fd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 47881,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pumpkin.usdz",
+      "sha256": "a686b4c6d4fab6225f36e7532c6942793d7e13910de4e4dff8ecfe0509908e7b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 49681,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-rocks.usdz",
+      "sha256": "ff31e2acbea0b38c4ed719cafb0f4cae78efae6413f550d0250c5e65e908ac97",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 41442,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-skeleton.usdz",
+      "sha256": "8390c073d8ba33acb28232236ec03ff5b7ae1e363d417350f8dd9b8ee078194a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 56778,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-vampire.usdz",
+      "sha256": "eb2c079595f3be80546966d6672eacdd09dbb727c714d8a01e0e1440dfb2c2be",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 88934,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-zombie.usdz",
+      "sha256": "915f88898bea079d52805096fed3a409702b1961b22d6c8363e89560ffb581f5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 87106,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-bend.usdz",
+      "sha256": "4da02818fda9f1d8a6829a3d2ed0ae1d40f53dd4504817c258e7964a50f69ba1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 31633,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-cross.usdz",
+      "sha256": "4867ea038e5152d703e4df784d739ac4fdfabec8c3e2372ee01065d0cc10c00a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 22709,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-end.usdz",
+      "sha256": "e6c085fb1f99029c514b4231d75dfcfce2ddde6502dfedb9380a69ab13688a1c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17829,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-square.usdz",
+      "sha256": "73f8f8db7c77fa5a8cf8b282ff8ebdb08e594c520907dd32a434971d8bb0346a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17378,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-straight.usdz",
+      "sha256": "b9cb5fb8f79e1decf2576c820a7f32f02b71c1485b0d80760ec9929685c57e09",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18003,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-tee.usdz",
+      "sha256": "b9a55b4128d126288e39992a5c24cf22bca845cfcc8948d41872040d498851be",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 20686,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-clamp.usdz",
+      "sha256": "4429e6f6bee90ba34a2637570c76d1ba7caff44a00dddb12b99d93f378967861",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17061,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-diagonal.usdz",
+      "sha256": "ea22614c9d2021e03754874e57f1401c5e39ae69472a571aacfbbd32e7799033",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18395,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide-clamp.usdz",
+      "sha256": "3a57c238f71988edb6905b801252b875f56ed165c34ef6d052ffcab6831ae946",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17052,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide-diagonal.usdz",
+      "sha256": "8f92443422a7b4730e015f9318a5119fef069e9457b04997ce8b6249f111e4fd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 18386,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide.usdz",
+      "sha256": "722e1cdae447ba9cb0e9a67802ccb148bc5e9c5a62c1b62fb55f92f759b3b8c4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17086,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports.usdz",
+      "sha256": "b0bdcc8dce12741dd4ea237ac03ec337d5eaa2fa7a3e2ce47fe1b0946e039e4f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 17099,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/suv-luxury.usdz",
+      "sha256": "8e799e10c52c6540a510f8c42a19fc57239a04c479b23c767d09d31b8df7691a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 109449,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/suv.usdz",
+      "sha256": "7bdb449084e265813ab0db7aaf9a722e10908f47d53536fc717bbf7db29e8273",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 131121,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/taxi.usdz",
+      "sha256": "c2a0ec74c0e1f88489694e9b1ae6b00524252f427051b7444713fd311c5283c5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 108309,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-narrow-looping.usdz",
+      "sha256": "40f34ea0ffea4d592c1a828a47844d1d012d1ac67b00bf18a6d069bd16a0f3dc",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 46186,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-cap-back.usdz",
+      "sha256": "bf3719432f2edec5559147a9b143eddb5b68f6b0de766c6fb65339de21bf670e",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 15430,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-cap-front.usdz",
+      "sha256": "f61c4bcfe4f71bbcd83ea87664ab7b7eeaa4c08cbe2e1c7651e30bad78fa2d8b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 15429,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-large-ramp.usdz",
+      "sha256": "e73e54f2f19552d50ea2c97a11fe96879a3277f65db266ba1d34e6713273a65d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33627,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-large.usdz",
+      "sha256": "d1527790503ac14952bac9c250bcfd371463f61154340c5ba86423b35d923026",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33508,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-small-ramp.usdz",
+      "sha256": "8d3db7f6b10886b4260e2f1e30e06b0ccf7a31b598dfbb3af5cfc9a0d607a333",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27292,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-small.usdz",
+      "sha256": "66d45163f14a9dfa5c92e7ee6340b2117e1036c6b3d0361abeeb87ae739bf329",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27173,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-curve.usdz",
+      "sha256": "8576c10171317fb0d32a40464213abdd093753503b97e2836c11557107cf210d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29292,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bend-large.usdz",
+      "sha256": "0ff1b0bfefd30c55832d2564d79c51a920c2c734b7aa16e681a77ece3c7921a9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33625,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bend.usdz",
+      "sha256": "38a726cc7dbb57a17420d29a3fc53a6808c7d49e9f2b759a07c2049a1298b5b8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27172,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bump-down.usdz",
+      "sha256": "2b96f9fee11f870f02c657d50daff9ac139ea8fd046f7f9d4a2fd2ef85528722",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29271,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bump-up.usdz",
+      "sha256": "c27afafa40f4071ace4442966290f36eded7003abd87bfdf399cd8c502f6e1d9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29402,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-beginning.usdz",
+      "sha256": "43e480ff6719104e2ad3f53425f162e9c9dda55e646e9a3796042bb05bcafc59",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29393,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-complete-half.usdz",
+      "sha256": "5dde5ffb9de68b7e31dee8bd7f54650cd474e25e735e37bed92c870ce40feae0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29386,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-complete.usdz",
+      "sha256": "302152c2f4d9ebf07a90f1cc0e22dec958e1233516802ae376521b0d17e0f1e1",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29395,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-end.usdz",
+      "sha256": "85e845e20d6586057bad5f0624f78aee2abc83d697ce927e3591f58a87feac38",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 29400,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-left-side.usdz",
+      "sha256": "98070eb11d6306181d45c72d34ace0a4f5ff252d33146b8b324da16b73db8669",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27282,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-left.usdz",
+      "sha256": "4f998dbe2cd60c754a80a46de9e46740f96c7df5fa699d52a8d7e87ec196c61f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27163,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-right-side.usdz",
+      "sha256": "6aa2b8c1525f533d920a288ad04c599caf4b3b41c62936fa2281b900b1149333",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27283,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-right.usdz",
+      "sha256": "0a2faa7a37859ad4b09b944e2cb4ee752948f114d30f0a69a4234a07e1bc23cf",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27291,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight.usdz",
+      "sha256": "c35d0f96d3eea8b11bbb22495b328f395207e396dc2f910fdc20e1270c2e25b9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27181,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide.usdz",
+      "sha256": "bc4059e42c840e597bf88b9cc598148a2d4650b781795ea1e4cfa5215b38a7da",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 14433,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/tractor.usdz",
+      "sha256": "14ee7a1a5bb7c38fe8895f2cb0189ba6cff782598df5c8e5aadd2f3a596680bd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 157929,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/truck.usdz",
+      "sha256": "9b458d1f1eda6415bf9d34de32a8ff62b542f6515d573613ecc0d588736f5099",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 109476,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/van.usdz",
+      "sha256": "70b0438dadb25b82a8b932c523c35b286f6af9600e5da6e0ff5655d373a5915b",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 109200,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-drag-racer.usdz",
+      "sha256": "4aaf1e00ebad2cfbbc0d27dc28d1601e543ed330f40fbca78fc9a10ddb8643c5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 91149,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-monster-truck.usdz",
+      "sha256": "b5a6abdaf299089b177ef240395d984575f0b43a206ce00898893fbe53ad6a5a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 104381,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-racer-low.usdz",
+      "sha256": "faed513cb1e9d20a01f429049970bf04d78c01cb4608b49a3e0a2ffb6ba9fa74",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90360,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-racer.usdz",
+      "sha256": "8163c701cc1f2cdef846272ae7be86bdbc9c033bfdad44152d610d3adc60b13a",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90673,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-speedster.usdz",
+      "sha256": "81fe1cce61ea17a84ff32e63985d759dc3ba0b7dc7bd256a0dcfdcf14e0b1589",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90124,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-suv.usdz",
+      "sha256": "a2303b05cbc8fd0e0060a4269556850c0eec82948694d35a8e441b76667878e2",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 92789,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-truck.usdz",
+      "sha256": "0d9b5e19b4c4045f453afbbcc246fa9e2f85b97279d29ed2cd753d7f1470f484",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 90949,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-vintage-racer.usdz",
+      "sha256": "3e5d02466154c094cf3861ba6791e6d9aa3e24a076e74a0949ecec950910c5f9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 88983,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-dark.usdz",
+      "sha256": "1c62da8f9172fd3356b16cdabc2b19c627477f80cae843f8c5884d5e7f11c54c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 38712,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-default.usdz",
+      "sha256": "f376a0065625af9f8604f4ee5dcd83abfe6ed54f398592b2838dd561b8b3143f",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 37852,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-large.usdz",
+      "sha256": "c492cc4d6d3b1a2fc28515bc4d96c4e086fd8ad097419314771d227a34fadfcd",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27986,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-medium.usdz",
+      "sha256": "4d998aa9e7413cecd33c254dcdb4ffadcd6514c644d8a0eda23db17961554bb0",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27993,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-racing.usdz",
+      "sha256": "6f9ae3353f89bd6f74825883ad7cb1f0c93420b713d8f0380f3d38107bad0d79",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 38606,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-small.usdz",
+      "sha256": "693ee32255fc31755d39999ffa1be8f35a2a97f3fd06bec7f6f5bb726fc7c5ce",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27985,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-cane-green.usdz",
+      "sha256": "5e41961adf1594ff99a8e82a96e4d2021a505318a9ed839b335e3cc0028cf05d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21935,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-cane-red.usdz",
+      "sha256": "098e7d66632f8272af20ecd983d1d6135676228b15e38dff38a1e393eb3ad7d6",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 21937,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-gingerbread-man.usdz",
+      "sha256": "c709bdb1bc6ef1c0173fb286cec0837d6eaa9fb7a7ec583bc4cd58f35947aec9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 27026,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-gingerbread-woman.usdz",
+      "sha256": "fce9822173707e70a61dbe4a64e3805edcc5ba8189a5b764c6287dc35d83815c",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32076,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-lantern.usdz",
+      "sha256": "47fe7fb219598bbf93b1dacc42a375531dea695c9f14980a2292052017eca2eb",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 28800,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-nutcracker.usdz",
+      "sha256": "4cdd066b6e5a4c3ad46a706ab664878e5e62d3b02c8de6c2e8a5989941af4e29",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 74411,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-a.usdz",
+      "sha256": "dc7c9fa6568ab7d423e8d123b3739cda6d6ba1c370e023cfa2226d4da3de9307",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32047,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-b.usdz",
+      "sha256": "daae47fb8cabd1c816f1896c52afc34557eca7047547c0992b89adec4f4305af",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32036,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-c.usdz",
+      "sha256": "c60713575325bff4f2d1ea21133670c978596320a80ca09458e49c3b9a8b08bf",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32030,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-d.usdz",
+      "sha256": "465c9d44efda1d4b0fd54a4eaf33339e17a1a16a3cf5fd4f0c6f0357dd136303",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 32975,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-reindeer.usdz",
+      "sha256": "d762993bcb3125780ae5c114f4881e23107e0f726c3e8a5018ea50de44b2dce9",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 80174,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-sled.usdz",
+      "sha256": "9ea6c0107cc9d1c3b92cc92038a98cbd57ace7aa4bca02135335ac879a3ebac4",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33206,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snow-pile.usdz",
+      "sha256": "cb80ddbd91f289903207f4358acf1540dc3fe22904ecda4c974244d97548a382",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 25915,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snowman-hat.usdz",
+      "sha256": "97d084446ed50a091d4a866161cc279e667d702eef39f1b2699f7389183e26c5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 58104,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snowman.usdz",
+      "sha256": "750a08e99b79e1c132e77370ee1b9850593370719df4c201798cfeb1eba0bc44",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 50226,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-loco.usdz",
+      "sha256": "487d7ca1ebb0f54cfa051ef4e3755791fd36a3286e9f02ad7f148b8075ccc2f3",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 66981,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-tender.usdz",
+      "sha256": "9f1e333eb9885c586a5ca1ab841b0afcd0660a1a4624a59e1ec4fa5827b73bca",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 38389,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-wagon.usdz",
+      "sha256": "bc948991e90de0c814589c9e17a29ab658fa2f30edc340b673db97cb61225d72",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 79087,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-a.usdz",
+      "sha256": "58aa47632dea7a1af79eee5bf674a50c733853d2250e1136ac04ce00fb03ffd8",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 43008,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-b.usdz",
+      "sha256": "458ea533c0a63209972532a698a516eb6595b48a63c0242f6492013ddf54722d",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 44153,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-c.usdz",
+      "sha256": "b446d61ba6d9111f86fbe80a16c78e9b0eb894426a71b5a39dbf9895f052bfbe",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 33660,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-decorated-snow.usdz",
+      "sha256": "a050da3457a6a59bed6a7be6c18ac7fcf9a373f1734276fef5e7a66bcfbc0de5",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 78661,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-decorated.usdz",
+      "sha256": "595d290011a9cb1e46d0d07120d8dcf05515f841ce59b6eed26061d5136c0820",
+      "category": "converted-third-party-CC0-model",
+      "bytes": 67947,
+      "signedArchiveByteMatches": {
+        "ipad": true,
+        "tvos": true
+      }
+    }
+  ],
+  "includedModelLicenses": [
+    {
+      "path": "Graphics/3DModels/Source/kenney_car-kit/License.txt",
+      "sha256": "c33b7f6453d134deae7b1b8493717d9ccfa754c25ab97f6de89b88f8fda19b00",
+      "pack": "kenney_car-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_castle-kit/License.txt",
+      "sha256": "aac944f18106b3a3e29c6fdeec02523d4cab4c735abc01f5a8fa88a79ae173ef",
+      "pack": "kenney_castle-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_city-kit-commercial/License.txt",
+      "sha256": "c38cee408d022e57e44e49f1cd655c2fe0dc881a07b881276b795215cdc0de69",
+      "pack": "kenney_city-kit-commercial",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_city-kit-roads/License.txt",
+      "sha256": "87b9404aef5dff6162ae1e53a27bc6427fe1cdd2e2dd5ec05fdd25f17da10498",
+      "pack": "kenney_city-kit-roads",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_city-kit-suburban/License.txt",
+      "sha256": "d778fa769a89a7d9f167bc337fdf8fc2144e47d9abb0c35eb6ad897c0ee24d0a",
+      "pack": "kenney_city-kit-suburban",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_fantasy-town-kit/License.txt",
+      "sha256": "fb8e4817197ef9f62215e95b4451a0f09c769c8e03e416e3a2ce108dfa6117e4",
+      "pack": "kenney_fantasy-town-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_food-kit/License.txt",
+      "sha256": "32a081c2035dd4db47d850c83244da048165f0e53d71c076b76c1afc0590bc7f",
+      "pack": "kenney_food-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_graveyard-kit/License.txt",
+      "sha256": "a48e274258386c6bcb5302f17eaab40304cd805cc68be2754e2452179418c70e",
+      "pack": "kenney_graveyard-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_holiday-kit/License.txt",
+      "sha256": "6010f677d95f3ab7935faf873d8f4eb96ad1e5f02fd0e4659c9d92852b768d6a",
+      "pack": "kenney_holiday-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_mini-characters/License.txt",
+      "sha256": "28358ae5accc85b572eb42507956afc8beae05acb4648bb9026a5714d421b785",
+      "pack": "kenney_mini-characters",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_minigolf-kit/License.txt",
+      "sha256": "1921de0377e3912e14fd2b9c76f92c530bd63794caabc3e411b97672d5a3951c",
+      "pack": "kenney_minigolf-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_nature-kit/License.txt",
+      "sha256": "cb96b75e3560ac78d7a53ce6f083f4cdb5c53faea6141b62d63458dcfe1e4b9d",
+      "pack": "kenney_nature-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_pirate-kit/License.txt",
+      "sha256": "5e99246a5a65fa3420a1a1c7a8616f096202c78866f73d7aacfe73c0aab0ca36",
+      "pack": "kenney_pirate-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_racing-kit/License.txt",
+      "sha256": "905627df4313a9eb7fa9337129e572979ef51cc3857c8d2942e57ae84736096c",
+      "pack": "kenney_racing-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_space-kit/License.txt",
+      "sha256": "bd4e050e69d41351282c4d53f943cd4d80a80b968593e60653ba5292637941b7",
+      "pack": "kenney_space-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/kenney_toy-car-kit/License.txt",
+      "sha256": "2406ba62730af7633689439c1e3e913b93e54eada8e73da415003a2bb96b099e",
+      "pack": "kenney_toy-car-kit",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    },
+    {
+      "path": "Graphics/3DModels/Source/quaternius_animated_human/License.txt",
+      "sha256": "e83a9e5b832cfbb2269fe5fca24e323e3d394fd986833f191d05791f53e94c2e",
+      "pack": "quaternius_animated_human",
+      "license": "CC0 1.0",
+      "includedLicenseExplicitlyNamesCC0": true
+    }
+  ],
+  "sourceRecords": [
+    {
+      "path": "Audio/README.md",
+      "sha256": "243d964e8f8b8ba2eca0a37b2bba1e36002be78ceed5f517de43dc937cfdf0c3"
+    },
+    {
+      "path": "Audio/SFX-SPEC.md",
+      "sha256": "52ed3b3438c42db6639318e4f6eeb04e0d8d5bb145ccdabd4e286bf55d5d7f3d"
+    },
+    {
+      "path": "Graphics/README.md",
+      "sha256": "1ff9a6e53c2d8e4aa564462ba21833d061099d63f477534154f6f0db68550c96"
+    },
+    {
+      "path": "Graphics/ART-SPEC.md",
+      "sha256": "28987498d740efc830401cb49d35232ec0d057b65430612a94e292ab883a0fd8"
+    },
+    {
+      "path": "tools/generate_placeholder_music.py",
+      "sha256": "db2e2675a81e8a4b70a02fd59691932e5208b28b3d84bf2dc10cfbe231498262"
+    },
+    {
+      "path": "tools/generate_sfx.sh",
+      "sha256": "8a7f3aeeb6de920a36d76327a8a268f0f0b6b7997c54a1014493672f2b7e7c78"
+    },
+    {
+      "path": "tools/generate_voices.sh",
+      "sha256": "b63a94ae8e1ebbcfa703d43e78d71aca0edceb1c099f7255270b09e4432b71b0"
+    },
+    {
+      "path": "tools/render_tile_art.py",
+      "sha256": "a60275d7c047ecbdf989cfa410e0ecd2b2ae15aa89d70aaedb4e2830aeeb200f"
+    },
+    {
+      "path": "tools/convert_glb_to_usdz.py",
+      "sha256": "44231dceb112d711a66aa8761c0b4e6c594569304e807d541969a086ba41bfed"
+    },
+    {
+      "path": "tools/convert_driver_rig.py",
+      "sha256": "480660036aed20e7f2a41825f873a65e1c915a8ee3a85818993017de90ad132f"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RadioStation.swift",
+      "sha256": "728c2befc02dddeea9cc62b7a38b119fbf244c773ff9283b62d9693da4048a54"
+    }
+  ],
+  "primaryWebSourcesChecked20261003": [
+    {
+      "title": "Kenney Toy Car Kit",
+      "url": "https://kenney.nl/assets/toy-car-kit",
+      "verifiedFact": "The primary pack page explicitly lists CC0."
+    },
+    {
+      "title": "Kenney Mini Characters",
+      "url": "https://kenney.nl/assets/mini-characters",
+      "verifiedFact": "The primary pack page explicitly lists CC0."
+    },
+    {
+      "title": "Fertile Soil modular racetrack",
+      "url": "https://opengameart.org/content/modular-racetrack-3d-models",
+      "verifiedFact": "The author publication identifies Keith at Fertile Soil Productions and CC0."
+    },
+    {
+      "title": "Quaternius Animated Human",
+      "url": "https://opengameart.org/content/animated-human-low-poly",
+      "verifiedFact": "The author publication identifies Quaternius and CC0."
+    },
+    {
+      "title": "CC0 deed",
+      "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "verifiedFact": "The primary deed permits copying, modifying and distributing for commercial purposes; it does not grant trademark or publicity rights."
+    },
+    {
+      "title": "ElevenLabs content licensing",
+      "url": "https://help.elevenlabs.io/hc/en-us/articles/13313564601361-Can-I-publish-the-content-I-generate-on-the-platform",
+      "verifiedFact": "Commercial rights require a paid subscription when the content was generated, subject to terms and non-Beta service use. Free-plan generation has no commercial license."
+    }
+  ],
+  "findings": {
+    "music": "All seven M4A tracks are documented as original stdlib synthesis in the dated 2026-08-24 Audio README music status, RadioStation and generator. Kevin MacLeod/OpenGameArt music rows are retained fallback plans, not evidence that those tracks were bundled. No generator or asset modification was performed.",
+    "SFX": "All 60 non-voice WAV basenames have prompts in SFX-SPEC; the repository identifies ElevenLabs generation. The dated July 18 log covers an older 34-file subset, not a verified date for the full current 60 effects.",
+    "voices": "All 12 voice WAVs have exact authored lines and standard Jessica, Laura or Brian voice selections in SFX-SPEC and generate_voices.sh. They are generated TTS, not user voice cloning.",
+    "models": "368 converted USDZ files exactly match both final signed archives. Graphics README records Kenney packs, Quaternius and optional Fertile Soil racetrack source. Seventeen included source-pack license files explicitly name CC0; Fertile Soil primary publication also lists CC0. This review did not regenerate every model or establish individual conversion history for all 368 files.",
+    "generatedBackgroundArt": "Higgsfield art spec is a candidate plan with an empty generation log and no Graphics/Generated directory. It is not evidence of shipped AI background art. Home tile art is documented as Blender renders of the actual CC0 source GLBs.",
+    "creditClaim": "Graphics README says creators are credited in an About screen, but a native source search did not locate that screen. Attribution is not required by these CC0 documents, so this historical documentation claim is not used as release evidence."
+  },
+  "unresolved": [
+    {
+      "category": "ElevenLabs commercial-rights evidence",
+      "affectedFileCount": 72,
+      "status": "Repository does not record the paid subscription/plan in effect when these effects and voices were generated, nor service Beta status. Do not infer rights from the existence of an API key or from a currently active subscription. Owner evidence is required before affirming this generated-audio content-rights claim.",
+      "source": "Audio/SFX-SPEC.md Regeneration & licensing asks that plan/date be recorded; actual dated generation note omits the plan."
+    }
+  ],
+  "nativeAgeContentObservations": {
+    "voices": "Twelve scripted short robot-racer catchphrases in SFX-SPEC. No explicit language, sexual content or real-person impersonation in those written lines. No independent full audio audition claimed.",
+    "effects": "Prompts describe cartoon toy crashes, cheers, gentle UI sounds and engines. These are not news, third-party songs, advertisements or user-generated online media.",
+    "gameplay": "Toy racing includes cartoon collisions, scattered vehicle parts and playful driver reactions. This is an observation for the release owner, not an automated age-rating decision."
+  },
+  "appStoreConnectContentRightsOrAgeFieldsChanged": false
+}

@@ -1,0 +1,4 @@
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  ↪︎Find: Descendants matching type Image
+    ↪︎Find: Elements matching predicate '"race-share-image" IN identifiers'

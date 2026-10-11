@@ -1,0 +1,78 @@
+Application, 0x10371c3c0, pid: 36528, label: 'Hot Wheels vs Humans' <App element pid: 36528>
+  Window (Main), 0x10371fdd0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4357971024.4>
+    Other, 0x103726340, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4361048608.5>
+      Other, 0x10372c210, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4361051712.6>
+        Other, 0x10371cd90, {{-1920.0, -1080.0}, {5760.0, 3240.0}}, identifier: 'PopoverDismissRegion' <AX element pid: 36528, elementOrHash.elementID: 4358030736.121>
+        Other, 0x103710d10, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4355856320.7>
+          Other, 0x103729e00, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4355851488.8>
+            Other, 0x10372ea60, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4361077792.9>
+              Other, 0x10372eb80, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4387538272.10>
+                Other, 0x10372eca0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4387261088.11>
+                  Other, 0x10372edc0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4353745264.29>
+                    Other, 0x10372eee0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4358427424.30>
+                      Other, 0x10372f000, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4356964176.31>
+                      StaticText, 0x10372f120, {{742.0, 80.0}, {112.5, 29.0}}, label: 'Fire Chief' <AX element pid: 36528, elementOrHash.elementID: 4357075504.65>
+                      Image, 0x10372f240, {{747.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4357138624.66>
+                      Image, 0x10372f360, {{768.5, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4357139440.67>
+                      Image, 0x10372f480, {{790.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4357140256.68>
+                      Image, 0x10372f5a0, {{811.5, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4357141072.69>
+                      Image, 0x10372f6c0, {{833.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4357141888.70>
+                      ProgressIndicator, 0x10372f7e0, {{728.0, 132.0}, {140.0, 10.0}}, value: 100% <AX element pid: 36528, elementOrHash.elementID: 4357143520.71>
+                        ProgressIndicator, 0x10372f900, {{728.0, 122.0}, {140.0, 30.0}}, value: 100% <AX element pid: 36528, elementOrHash.elementID: 4356451648.83>
+                      StaticText, 0x10372fa20, {{763.5, 146.0}, {69.5, 19.5}}, label: '2.2 m/s' <AX element pid: 36528, elementOrHash.elementID: 4357144800.72>
+                      StaticText, 0x10372fb40, {{1092.0, 80.0}, {60.5, 29.0}}, label: 'Zapp' <AX element pid: 36528, elementOrHash.elementID: 4358431136.73>
+                      Image, 0x10372fc60, {{1071.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4358428880.74>
+                      Image, 0x10372fd80, {{1092.5, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4358535680.75>
+                      Image, 0x10372fea0, {{1114.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4358458480.76>
+                      Image, 0x10372ffc0, {{1135.5, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4358534416.77>
+                      Image, 0x1037300e0, {{1157.0, 114.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4358518608.78>
+                      ProgressIndicator, 0x103730200, {{1052.0, 132.0}, {140.0, 10.0}}, value: 100% <AX element pid: 36528, elementOrHash.elementID: 4358521456.79>
+                        ProgressIndicator, 0x103730320, {{1052.0, 122.0}, {140.0, 30.0}}, value: 100% <AX element pid: 36528, elementOrHash.elementID: 5726329632.84>
+                      StaticText, 0x103730440, {{1087.5, 146.0}, {69.5, 19.5}}, label: '1.7 m/s' <AX element pid: 36528, elementOrHash.elementID: 4358522384.80>
+                      Image, 0x103730560, {{1310.5, 423.5}, {48.0, 51.5}}, identifier: 'race-results', label: 'trophy.fill' <AX element pid: 36528, elementOrHash.elementID: 4356933344.93>
+                      StaticText, 0x103730680, {{1310.5, 423.0}, {456.5, 53.0}}, identifier: 'race-results', label: 'FIRE CHIEF WINS!' <AX element pid: 36528, elementOrHash.elementID: 4356929760.94>
+                      StaticText, 0x1037307a0, {{1373.0, 491.0}, {31.5, 23.0}}, identifier: 'race-results', label: 'Car' <AX element pid: 36528, elementOrHash.elementID: 4356912160.95>
+                      StaticText, 0x1037308c0, {{1474.5, 491.0}, {43.0, 23.0}}, identifier: 'race-results', label: 'Time' <AX element pid: 36528, elementOrHash.elementID: 4356895696.96>
+                      StaticText, 0x1037309e0, {{1531.5, 491.0}, {90.0, 23.0}}, identifier: 'race-results', label: 'Top speed' <AX element pid: 36528, elementOrHash.elementID: 4356958160.97>
+                      StaticText, 0x103730b00, {{1635.5, 491.0}, {120.0, 23.0}}, identifier: 'race-results', label: 'Best segment' <AX element pid: 36528, elementOrHash.elementID: 4356856640.98>
+                      Image, 0x103730c20, {{1319.0, 523.5}, {18.5, 20.5}}, identifier: 'race-results', label: 'trophy.fill' <AX element pid: 36528, elementOrHash.elementID: 4356956432.99>
+                      StaticText, 0x103730d40, {{1363.5, 522.0}, {79.5, 23.0}}, identifier: 'race-results', label: 'Fire Chief' <AX element pid: 36528, elementOrHash.elementID: 4356935744.100>
+                      StaticText, 0x103730e60, {{1476.5, 522.0}, {39.0, 23.0}}, identifier: 'race-results', label: '7.3 s' <AX element pid: 36528, elementOrHash.elementID: 4356930496.101>
+                      StaticText, 0x103730f80, {{1544.5, 522.0}, {64.0, 23.0}}, identifier: 'race-results', label: '3.0 m/s' <AX element pid: 36528, elementOrHash.elementID: 4356912896.102>
+                      StaticText, 0x1037311f0, {{1650.5, 522.0}, {90.0, 23.0}}, identifier: 'race-results', label: '#2 · 0.20 s' <AX element pid: 36528, elementOrHash.elementID: 4357016688.103>
+                      StaticText, 0x103731310, {{1366.5, 553.5}, {44.0, 23.0}}, identifier: 'race-results', label: 'Zapp' <AX element pid: 36528, elementOrHash.elementID: 4357026544.104>
+                      StaticText, 0x1037314f0, {{1475.0, 553.5}, {42.0, 23.0}}, identifier: 'race-results', label: '8.0 s' <AX element pid: 36528, elementOrHash.elementID: 4357027008.105>
+                      StaticText, 0x103731610, {{1544.5, 553.5}, {64.0, 23.0}}, identifier: 'race-results', label: '2.9 m/s' <AX element pid: 36528, elementOrHash.elementID: 4357038848.106>
+                      StaticText, 0x103731730, {{1650.5, 553.5}, {90.0, 23.0}}, identifier: 'race-results', label: '#2 · 0.23 s' <AX element pid: 36528, elementOrHash.elementID: 4357035088.107>
+                      Image, 0x103731850, {{1336.0, 591.0}, {31.0, 29.5}}, identifier: 'race-results', label: 'Favorite' <AX element pid: 36528, elementOrHash.elementID: 4357035552.108>
+                      StaticText, 0x103731970, {{1336.0, 590.5}, {402.5, 31.5}}, identifier: 'race-results', label: 'NEW TRACK RECORD! 7.3 s' <AX element pid: 36528, elementOrHash.elementID: 4357037040.109>
+                      StaticText, 0x103731a90, {{1386.0, 635.0}, {300.5, 26.0}}, identifier: 'race-results', label: 'Select  REMATCH to go again!' <AX element pid: 36528, elementOrHash.elementID: 4357037504.110>
+                      Button, 0x103731bb0, {{1585.0, 84.0}, {231.0, 60.0}}, identifier: 'race-camera', label: 'Driver View', value: Driver View <AX element pid: 36528, elementOrHash.elementID: 4358407584.46>
+                        Image, 0x103731cd0, {{1617.0, 102.5}, {23.5, 23.5}}, identifier: 'steeringwheel', label: 'steeringwheel' <AX element pid: 36528, elementOrHash.elementID: 4358406000.62>
+                        StaticText, 0x103731df0, {{1585.0, 84.0}, {231.0, 60.0}}, label: 'Driver View' <AX element pid: 36528, elementOrHash.elementID: 4358408256.63>
+                      Button, 0x103731f10, {{1536.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-all', label: 'Show all track' <AX element pid: 36528, elementOrHash.elementID: 4358410320.47>
+                      Button, 0x103732030, {{1632.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideGhosts', label: 'Hide ghost track', Selected <AX element pid: 36528, elementOrHash.elementID: 4358418320.48>
+                      Button, 0x103732150, {{1728.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideAll', label: 'Hide all track' <AX element pid: 36528, elementOrHash.elementID: 4358423264.49>
+                      Button, 0x103732270, {{1496.0, 804.0}, {320.0, 114.0}}, identifier: 'race-rematch', label: 'REMATCH!' <AX element pid: 36528, elementOrHash.elementID: 5726424384.111>
+                        Image, 0x103732390, {{1555.5, 843.5}, {27.5, 33.5}}, identifier: 'arrow.clockwise', label: 'Refresh' <AX element pid: 36528, elementOrHash.elementID: 4353777728.113>
+                        StaticText, 0x1037324b0, {{1496.0, 804.0}, {320.0, 114.0}}, label: 'REMATCH!' <AX element pid: 36528, elementOrHash.elementID: 4354266752.114>
+                      Button, 0x1037325d0, {{1528.0, 930.0}, {288.0, 66.0}}, identifier: 'race-share', label: 'SHARE' <AX element pid: 36528, elementOrHash.elementID: 5726364464.112>
+                        Image, 0x1037326f0, {{1609.5, 948.0}, {22.5, 30.5}}, identifier: 'square.and.arrow.up', label: 'Share' <AX element pid: 36528, elementOrHash.elementID: 5726364000.115>
+                        StaticText, 0x103732810, {{1528.0, 930.0}, {288.0, 66.0}}, label: 'SHARE' <AX element pid: 36528, elementOrHash.elementID: 5726365136.116>
+    Other, 0x103732b30, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 36528, elementOrHash.elementID: 4358031952.118>
+      Other, 0x103732c50, {{-1920.0, -1080.0}, {5760.0, 3240.0}}, identifier: 'PopoverDismissRegion' <AX element pid: 36528, elementOrHash.elementID: 4358011664.119>
+      Other, 0x103732d70, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4360064736.120>
+        Other, 0x103732e90, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4360238832.122>
+          Other, 0x103732fb0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4360497024.124>
+            Other, 0x1037330d0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357396896.126>
+              Other, 0x1037331f0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4388597632.128>
+                StaticText, 0x103733310, {{309.8, 456.0}, {1300.5, 68.5}}, label: 'The race restarted before the finish image was ready.' <AX element pid: 36528, elementOrHash.elementID: 4388649008.131>
+                Button, 0x103733430, {{891.8, 544.5}, {136.5, 74.0}}, label: 'Done', Focused <AX element pid: 36528, elementOrHash.elementID: 4388603616.117>
+        Other, 0x103733550, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357484032.123>
+          Other, 0x103733670, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357485808.125>
+            Other, 0x103733790, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357502816.127>
+              Other, 0x1037338b0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357501488.129>
+                Other, 0x1037339d0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357503680.132>
+                  Other, 0x103733af0, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357505056.134>
+              Other, 0x103733c10, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357506448.130>
+                Other, 0x103733d30, {{277.8, 419.0}, {1364.5, 232.5}} <AX element pid: 36528, elementOrHash.elementID: 4357509648.133>

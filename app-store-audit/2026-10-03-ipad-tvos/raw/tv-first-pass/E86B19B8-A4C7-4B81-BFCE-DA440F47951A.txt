@@ -1,0 +1,107 @@
+Attributes: Application, 0x112166b50, pid: 6708, label: 'HWvH'
+Element subtree:
+ →Application, 0x112166b50, pid: 6708, label: 'HWvH'
+    Window (Main), 0x10fe8da40, {{0.0, 0.0}, {1920.0, 1080.0}}
+      Other, 0x10fe7fa80, {{0.0, 0.0}, {1920.0, 1080.0}}
+        Other, 0x10fe59370, {{0.0, 0.0}, {1920.0, 1080.0}}
+          Other, 0x10fe27a90, {{0.0, 0.0}, {1920.0, 1080.0}}
+            Other, 0x10fe835b0, {{0.0, 0.0}, {1920.0, 1080.0}}
+              Other, 0x10f22b5c0, {{0.0, 0.0}, {1920.0, 1080.0}}
+                Other, 0x10f2335f0, {{0.0, 0.0}, {1920.0, 1080.0}}
+                  Other, 0x10f2323d0, {{0.0, 0.0}, {1920.0, 1080.0}}
+                    Other, 0x10f2324f0, {{0.0, 0.0}, {1920.0, 1080.0}}
+                      Other, 0x10f232610, {{0.0, 0.0}, {1920.0, 1080.0}}
+                        TextField, 0x10f232730, {{112.0, 95.7}, {834.0, 72.7}}, identifier: 'tv-customizer', placeholderValue: 'Car name', value: Cosmic Falcon
+                        Other, 0x10f232850, {{116.0, 188.0}, {826.0, 562.0}}, identifier: 'tv-customizer'
+                        Button, 0x10f232970, {{332.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Look Left'
+                        Button, 0x111a5dc50, {{434.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Look Right'
+                        Button, 0x111a58a70, {{536.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Look Above'
+                        Button, 0x111a535b0, {{638.0, 770.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Look Below'
+                        Button, 0x111a5df90, {{383.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Zoom Out'
+                        Button, 0x111a5a2f0, {{485.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Zoom In'
+                        Button, 0x111a2e440, {{587.0, 844.0}, {88.0, 60.0}}, identifier: 'tv-customizer', label: 'Reset View'
+                        Button, 0x111a1c8e0, {{271.0, 924.0}, {132.0, 60.0}}, identifier: 'tv-customizer', label: 'Undo'
+                          Image, 0x111a468a0, {{288.0, 943.0}, {22.0, 22.0}}, identifier: 'arrow.uturn.backward', label: 'Undo'
+                          StaticText, 0x111a4d0f0, {{271.0, 924.0}, {132.0, 60.0}}, label: 'Undo'
+                        Button, 0x111a1f570, {{423.0, 924.0}, {172.0, 60.0}}, identifier: 'tv-customizer', label: 'Test Drive'
+                          Image, 0x111a2f7c0, {{440.0, 944.0}, {18.0, 20.0}}, identifier: 'play.fill', label: 'Play'
+                          StaticText, 0x111a278a0, {{423.0, 924.0}, {172.0, 60.0}}, label: 'Test Drive'
+                        Button, 0x111a42330, {{615.0, 924.0}, {173.0, 60.0}}, identifier: 'tv-customizer', label: 'Save Car'
+                          Image, 0x111a21e30, {{632.0, 941.0}, {26.0, 26.0}}, identifier: 'tray.and.arrow.down.fill', label: 'Inbox'
+                          StaticText, 0x111a2f3a0, {{615.0, 924.0}, {173.0, 60.0}}, label: 'Save Car'
+                        ScrollView, 0x111a2b120, {{978.0, 96.0}, {826.0, 60.0}}, identifier: 'tv-customizer'
+                          Other, 0x111a44bb0, {{978.0, 96.0}, {1461.0, 60.0}}
+                            Button, 0x111a35f60, {{982.0, 96.0}, {176.0, 60.0}}, identifier: 'tv-car-tab-body', label: 'Body'
+                              Image, 0x111a2e860, {{1019.0, 113.0}, {40.0, 26.0}}, identifier: 'car.2.fill', label: 'Cars'
+                              StaticText, 0x111a59430, {{1068.0, 113.0}, {56.0, 27.0}}, label: 'Body'
+                            Button, 0x111a59010, {{1168.0, 96.0}, {209.0, 60.0}}, identifier: 'tv-car-tab-chassis', label: 'Chassis'
+                              Image, 0x111a30460, {{1205.0, 116.0}, {41.0, 20.0}}, identifier: 'car.side.fill', label: 'car.side.fill'
+                              StaticText, 0x111a2ec80, {{1257.0, 113.0}, {86.0, 27.0}}, label: 'Chassis'
+                            Button, 0x111a5ebe0, {{1387.0, 96.0}, {158.0, 60.0}}, identifier: 'tv-car-tab-tires', label: 'Tires'
+                              Image, 0x111a5ed00, {{1423.0, 114.0}, {24.0, 24.0}}, identifier: 'circle.circle', label: 'circle.circle'
+                              StaticText, 0x111a5ee20, {{1457.0, 113.0}, {54.0, 27.0}}, label: 'Tires'
+                            Button, 0x111a5ef40, {{1555.0, 96.0}, {161.0, 60.0}}, identifier: 'tv-car-tab-paint', label: 'Paint', Selected
+                              Image, 0x111a5f060, {{1591.0, 112.0}, {25.0, 28.0}}, identifier: 'paintbrush.fill', label: 'Format'
+                              StaticText, 0x111a5f180, {{1626.0, 113.0}, {56.0, 27.0}}, label: 'Paint'
+                            Button, 0x111a5f2a0, {{1726.0, 96.0}, {166.0, 60.0}}, identifier: 'tv-car-tab-livery', label: 'Livery'
+                              Image, 0x111a5f3c0, {{1762.0, 114.0}, {20.0, 25.0}}, identifier: 'flame.fill', label: 'Flame'
+                              StaticText, 0x111a5f4e0, {{1792.0, 113.0}, {66.0, 27.0}}, label: 'Livery'
+                            Button, 0x10f232a90, {{1902.0, 96.0}, {193.0, 60.0}}, identifier: 'tv-car-tab-stickers', label: 'Stickers'
+                              Image, 0x10f232bb0, {{1938.0, 114.0}, {24.0, 24.0}}, identifier: 'star.circle.fill', label: 'Favorite'
+                              StaticText, 0x10f232cd0, {{1972.0, 113.0}, {89.0, 27.0}}, label: 'Stickers'
+                            Button, 0x10f232df0, {{2105.0, 96.0}, {153.0, 60.0}}, identifier: 'tv-car-tab-draw', label: 'Draw'
+                              Image, 0x11216c800, {{2141.0, 116.0}, {16.0, 21.0}}, identifier: 'pencil.tip', label: 'pencil.tip'
+                              StaticText, 0x10a74ad30, {{2167.0, 113.0}, {57.0, 27.0}}, label: 'Draw'
+                            Button, 0x10a74b9d0, {{2268.0, 96.0}, {167.0, 60.0}}, identifier: 'tv-car-tab-driver', label: 'Driver'
+                              Image, 0x10a74baf0, {{2305.0, 116.0}, {19.0, 20.0}}, identifier: 'person.fill', label: 'person.fill'
+                              StaticText, 0x10a74bc10, {{2335.0, 113.0}, {66.0, 27.0}}, label: 'Driver'
+                        ScrollView, 0x10a74bd30, {{978.0, 176.0}, {826.0, 808.0}}, identifier: 'tv-customizer'
+                          Other, 0x10a74be50, {{978.0, 176.0}, {826.0, 495.0}}
+                            StaticText, 0x10a74bf70, {{998.0, 196.0}, {90.0, 43.0}}, label: 'Paint'
+                            ScrollView, 0x10a74c090, {{998.0, 263.0}, {786.0, 60.0}}
+                              Other, 0x10a74c1b0, {{1200.0, 263.0}, {382.0, 60.0}}
+                                Button, 0x10a74c2d0, {{1204.0, 263.0}, {179.0, 60.0}}, identifier: 'Body', label: 'Body', Selected
+                                  Image, 0x10a74c3f0, {{1241.0, 283.0}, {41.0, 20.0}}, identifier: 'car.side.fill', label: 'car.side.fill'
+                                  StaticText, 0x11225b9f0, {{1293.0, 280.0}, {56.0, 27.0}}, label: 'Body'
+                                Button, 0x11225de30, {{1393.0, 263.0}, {185.0, 60.0}}, identifier: 'Wheels', label: 'Wheels'
+                                  Image, 0x11225cb50, {{1429.0, 281.0}, {24.0, 24.0}}, identifier: 'circle.circle.fill', label: 'circle.circle.fill'
+                                  StaticText, 0x11225c730, {{1463.0, 280.0}, {81.0, 27.0}}, label: 'Wheels'
+                            StaticText, 0x11225da10, {{998.0, 351.0}, {69.0, 32.0}}, label: 'Color'
+                            Other, 0x112262680, {{996.0, 397.7}, {790.0, 165.3}}
+                              Button, 0x11225e690, {{996.0, 399.0}, {88.0, 74.0}}, identifier: 'checkmark', label: 'Color, Red', Selected
+                              Button, 0x11225e7b0, {{1096.0, 399.0}, {88.0, 74.0}}, label: 'Color, Orange'
+                              Button, 0x11225e8d0, {{1197.0, 399.0}, {88.0, 74.0}}, label: 'Color, Yellow'
+                              Button, 0x11225e9f0, {{1297.0, 399.0}, {88.0, 74.0}}, label: 'Color, Green'
+                              Button, 0x11225eb10, {{1397.0, 399.0}, {88.0, 74.0}}, label: 'Color, Teal'
+                              Button, 0x11225fe90, {{1495.5, 397.7}, {91.1, 76.6}}, label: 'Color, Blue', Focused
+                              Button, 0x11225ffb0, {{1598.0, 399.0}, {88.0, 74.0}}, label: 'Color, Indigo'
+                              Button, 0x11206cf70, {{1698.0, 399.0}, {88.0, 74.0}}, label: 'Color, Purple'
+                              Button, 0x11206ec30, {{996.0, 489.0}, {88.0, 74.0}}, label: 'Color, Pink'
+                              Button, 0x112007140, {{1096.0, 489.0}, {88.0, 74.0}}, label: 'Color, Brown'
+                              Button, 0x11202f970, {{1197.0, 489.0}, {88.0, 74.0}}, label: 'Color, White'
+                              Button, 0x1120631c0, {{1297.0, 489.0}, {88.0, 74.0}}, label: 'Color, Black'
+                            ScrollView, 0x1120068e0, {{998.0, 591.0}, {786.0, 60.0}}
+                              Other, 0x112015b70, {{1011.0, 591.0}, {760.0, 60.0}}
+                                Button, 0x1120336e0, {{1015.0, 591.0}, {188.0, 60.0}}, identifier: 'Metallic', label: 'Metallic', Selected
+                                  Image, 0x11203c560, {{1051.0, 608.0}, {22.0, 26.0}}, identifier: 'sparkles', label: 'Sparkle'
+                                  StaticText, 0x1120238e0, {{1083.0, 608.0}, {86.0, 27.0}}, label: 'Metallic'
+                                Button, 0x112028240, {{1213.0, 591.0}, {181.0, 60.0}}, identifier: 'Glossy', label: 'Glossy'
+                                  Image, 0x112042a40, {{1249.0, 608.0}, {27.0, 26.0}}, identifier: 'sun.max.fill', label: 'Brightness Higher'
+                                  StaticText, 0x112014000, {{1286.0, 608.0}, {74.0, 27.0}}, label: 'Glossy'
+                                Button, 0x1120329e0, {{1404.0, 591.0}, {166.0, 60.0}}, identifier: 'Matte', label: 'Matte'
+                                  Image, 0x112067ff0, {{1441.0, 611.0}, {21.0, 21.0}}, identifier: 'square.fill', label: 'Square'
+                                  StaticText, 0x112009a90, {{1473.0, 608.0}, {63.0, 27.0}}, label: 'Matte'
+                                Button, 0x112068410, {{1580.0, 591.0}, {187.0, 60.0}}, identifier: 'Sparkle', label: 'Sparkle'
+                                  Image, 0x11206efb0, {{1616.0, 609.0}, {24.0, 24.0}}, identifier: 'sparkle', label: 'sparkle'
+                                  StaticText, 0x11206f0d0, {{1650.0, 608.0}, {83.0, 27.0}}, label: 'Sparkle'
+                          Other, 0x11206f1f0, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                            Other, 0x11206f310, {{1798.0, 1076.0}, {3.0, 25.0}}
+                          Other, 0x11206f430, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                            Other, 0x11206f550, {{1798.0, 1076.0}, {3.0, 25.0}}
+Path to element:
+ →Application, 0x112166b50, pid: 6708, label: 'HWvH'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x1121650f0, pid: 6708, label: 'HWvH'
+  }

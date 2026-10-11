@@ -1,0 +1,95 @@
+{
+  "app": "HWvH",
+  "apple_id": "6818777508",
+  "submission_status": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+  "supported_platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "registered_bundle_id": "com.nathanfennel.Hot-Wheels-v-Human",
+  "source": {
+    "local_path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+    "commit": "44d929c6f1d54d6063270fb18e023a25062da2f2"
+  },
+  "release_ownership": "Independent Prepare apps for store submission worker created this record and prepared durable packages. Preserve its active preparation; root has not uploaded or changed this listing.",
+  "remaining_blockers": [
+    "Independent worker final release review/upload authorization gate and processing/selection; exact final native capture/marketing, hardware multiplayer, metadata/privacy/rights/commercial preflight and actual submission require completion or reconciliation. Prepared artifacts are not submission proof."
+  ],
+  "required_fixes": "Reconcile latest tv-control-final native/signed/input/marketing receipts and independent worker readiness before any root upload or listing changes. Do not rebuild or submit unsupported device families.",
+  "verification_evidence": [
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/upload-plan-tv-control-final.json",
+    "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/durable-artifacts-tv-control-final.json"
+  ],
+  "live_card_check_2026_10_03_1255": {
+    "at": "2026-10-03T12:59:34.311Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "links": [
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": ""
+      },
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": "HWvH"
+      },
+      {
+        "href": "/apps/6818777508/distribution/ios/version/inflight",
+        "text": "iOS 1.0 Prepare for Submission"
+      },
+      {
+        "href": "/apps/6818777508/distribution/tvos/version/inflight",
+        "text": "tvOS 1.0 Prepare for Submission"
+      }
+    ],
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-03-1255.json",
+    "qualification": "Rendered card only. Detailed platform receipts retain authority; no public storefront, build selection or gallery accuracy assertion."
+  },
+  "live_card_disk_recovery_2026_10_03": {
+    "at": "2026-10-03T21:06:34.567Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "links": [
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": ""
+      },
+      {
+        "href": "/apps/6818777508/distribution",
+        "text": "HWvH"
+      },
+      {
+        "href": "/apps/6818777508/distribution/ios/version/inflight",
+        "text": "iOS 1.0 Prepare for Submission"
+      },
+      {
+        "href": "/apps/6818777508/distribution/tvos/version/inflight",
+        "text": "tvOS 1.0 Prepare for Submission"
+      }
+    ],
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-disk-recovery-2026-10-03.json",
+    "qualification": "Rendered card; newer detailed platform receipt prevails. Ready for Distribution alone does not prove public storefront availability."
+  },
+  "live_card_check_2026_10_04_0647": {
+    "at": "2026-10-04T06:49:03.173Z",
+    "card_text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-0647.json",
+    "qualification": "Normal rendered App Store Connect account cards. No public availability or selected build proof inferred."
+  },
+  "live_card_check_2026_10_04_0848": {
+    "at": "2026-10-04T08:51:10.980Z",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-0848.json",
+    "qualification": "Rendered private ASC cards, not public-store availability or detailed selected-build proof."
+  },
+  "live_card_check_2026_10_04_1050": {
+    "at": "2026-10-04T10:53:00.782Z",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-1050.json",
+    "qualification": "Rendered ASC cards; not exact build or public availability proof"
+  },
+  "live_card_check_2026_10_04_1251": {
+    "at": "2026-10-04T12:59:04.617003+00:00",
+    "text": "HWvH\n\niOS 1.0 Prepare for Submission\n\ntvOS 1.0 Prepare for Submission",
+    "receipt": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/goal-release-2026-10-02/live-account-cards-2026-10-04-1251.json",
+    "qualification": "Normal rendered ASC card; detailed submission receipts prevail. Not public storefront proof."
+  }
+}

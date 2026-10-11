@@ -1,0 +1,61 @@
+{
+  "devicesAndConfigurations" : [
+    {
+      "device" : {
+        "architecture" : "arm64",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "modelName" : "Apple TV 4K (3rd generation) (at 1080p)",
+        "osBuildNumber" : "23L470",
+        "osVersion" : "26.5",
+        "platform" : "tvOS Simulator"
+      },
+      "expectedFailures" : 0,
+      "failedTests" : 2,
+      "passedTests" : 16,
+      "skippedTests" : 0,
+      "testPlanConfiguration" : {
+        "configurationId" : "1",
+        "configurationName" : "Test Scheme Action"
+      }
+    }
+  ],
+  "environmentDescription" : "Hot Wheels v Human · Built with macOS 26.5.2",
+  "expectedFailures" : 0,
+  "failedTests" : 2,
+  "finishTime" : 1791025301.986,
+  "passedTests" : 16,
+  "result" : "Failed",
+  "skippedTests" : 0,
+  "startTime" : 1791025167.212,
+  "statistics" : [
+
+  ],
+  "testFailures" : [
+    {
+      "failureText" : "XCTAssertTrue failed",
+      "targetName" : "Hot Wheels v HumanUITests",
+      "testIdentifier" : 17,
+      "testIdentifierString" : "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus",
+      "testName" : "testTV11BrightWorldCameraAndVisibilityFocus()"
+    },
+    {
+      "failureText" : "XCTAssertTrue failed",
+      "targetName" : "Hot Wheels v HumanUITests",
+      "testIdentifier" : 18,
+      "testIdentifierString" : "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()",
+      "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter",
+      "testName" : "testTV12SunnyStarterRemoteBoostConsumesMeter()"
+    }
+  ],
+  "title" : "Test - Hot Wheels v Human",
+  "topInsights" : [
+    {
+      "category" : "Longest Test Runs",
+      "impact" : "91% of duration",
+      "text" : "1 longest test run with outlier durations exceeding 4.09s (three standard deviations)"
+    }
+  ],
+  "totalTestCount" : 18
+}

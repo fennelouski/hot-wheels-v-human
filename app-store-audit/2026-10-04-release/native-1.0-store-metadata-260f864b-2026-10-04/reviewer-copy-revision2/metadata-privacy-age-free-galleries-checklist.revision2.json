@@ -1,0 +1,547 @@
+{
+  "recordedAtUTC": "2026-10-04T12:29:38.882501+00:00",
+  "scope": "Audit-only reviewer-note and platform haptic-copy correction; original draft preserved",
+  "status": "Revised copy for root final field review; no native/Apple/build action",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "version": "1.0",
+  "build": "1",
+  "inputCount": 889,
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "sourceUnchanged": true,
+  "indexEmpty": true,
+  "sourceFreeze": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+  "sourceFreezeSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+  "standingAuthorization": "/Users/nathan/Documents/GitHub/app-release-audit/apple-review-standing-authorization.md",
+  "standingAuthorizationSHA256": "c2a7df95ed6762dd1fa4d2879ade973484e255353520f459656ed47f8b6ebdc4",
+  "standingAuthorizationAppliesToAccurateOrdinaryPrivacyMetadataFreeAvailabilityGalleryUploadAndSubmission": true,
+  "platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "locale": "en-US",
+  "identity": {
+    "appID": "6818777508",
+    "appName": "HWvH",
+    "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+    "subtitleDraft": "Build tracks. Race your way.",
+    "categoryDraft": "Games; Racing and Simulation where supported",
+    "copyrightDraft": "2026 Nathan Fennel"
+  },
+  "copy": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/description.en-US.ipad.txt",
+      "sha256": "6467fb890c926ac5fb3b8c16517ab4b74ef4dae28d54c666933ccf6aa7c56bd8",
+      "charactersExcludingFinalNewline": 888,
+      "characterLimitFromKnownASCFields": 4000,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/description.en-US.ipad.txt",
+      "previousSHA256": "c1142c3d76f6049e2d4b8f45a8aa4cf2a9c7b457ef94f7cc43d2496f67119215",
+      "changedFromFirstDraft": true
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/description.en-US.tvos.txt",
+      "sha256": "538f1b9cb869290c5ead3a124b28b49141f25504b835eccba9f767434622f0f2",
+      "charactersExcludingFinalNewline": 828,
+      "characterLimitFromKnownASCFields": 4000,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/description.en-US.tvos.txt",
+      "previousSHA256": "94022fedcc7e216af0fd86137df62b838de5faa1fec0f346b529f080c3ca4558",
+      "changedFromFirstDraft": true
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/promotional-text.en-US.txt",
+      "sha256": "e4a091637a7852b09678fd1538afc189cae31e970b0952e9222797ea2e259b4c",
+      "charactersExcludingFinalNewline": 131,
+      "characterLimitFromKnownASCFields": 170,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/promotional-text.en-US.txt",
+      "previousSHA256": "e4a091637a7852b09678fd1538afc189cae31e970b0952e9222797ea2e259b4c",
+      "changedFromFirstDraft": false
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/keywords.en-US.txt",
+      "sha256": "fb4c2b68c684d2a91bbc5d98628636ea3dd9552d4fd269cd513a960180abaf28",
+      "charactersExcludingFinalNewline": 78,
+      "characterLimitFromKnownASCFields": 100,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/keywords.en-US.txt",
+      "previousSHA256": "fb4c2b68c684d2a91bbc5d98628636ea3dd9552d4fd269cd513a960180abaf28",
+      "changedFromFirstDraft": false
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/subtitle.en-US.txt",
+      "sha256": "71860203574083a2a68eb9f68ae5e12f2cf0e9f435b63301cd3c51308935ccad",
+      "charactersExcludingFinalNewline": 28,
+      "characterLimitFromKnownASCFields": 30,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/subtitle.en-US.txt",
+      "previousSHA256": "71860203574083a2a68eb9f68ae5e12f2cf0e9f435b63301cd3c51308935ccad",
+      "changedFromFirstDraft": false
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/review-notes.en-US.ipad.txt",
+      "sha256": "8723d88b12b1f547527ce6b6c3766d6e94c2f18f5825775275926f0ff5ffa48a",
+      "charactersExcludingFinalNewline": 1084,
+      "characterLimitFromKnownASCFields": 4000,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/review-notes.en-US.ipad.txt",
+      "previousSHA256": "42e7df4d32e35b696e5cff41011f636f8c1b53dd8d96e9e5452ccc9891b2f0a7",
+      "changedFromFirstDraft": true
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/reviewer-copy-revision2/review-notes.en-US.tvos.txt",
+      "sha256": "fcf463c439c04ec199708bb17b1fe7cc6d47f601d21bfe4d8712b86f669b311b",
+      "charactersExcludingFinalNewline": 1083,
+      "characterLimitFromKnownASCFields": 4000,
+      "withinLimit": true,
+      "supersedes": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/review-notes.en-US.tvos.txt",
+      "previousSHA256": "299116b32ae9f553430861b614bcf724e098e2acaf6d234b55fcc6955091f550",
+      "changedFromFirstDraft": true
+    }
+  ],
+  "worksheets": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/PRIVACY-WORKSHEET.md",
+      "sha256": "6813b9b81dd6391d231ca6e11869b6bc92594ebfedd6d55b7be48a7803af2d77"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/AGE-CONTENT-WORKSHEET.md",
+      "sha256": "5b824094ddc6d32ef95dee72d667aa7b18d7e2373667dd08958b92b340f91fc6"
+    }
+  ],
+  "rootChecklist": [
+    {
+      "group": "Identity",
+      "field": "App/name/platforms",
+      "target": "Existing app6818777508, nameHWvH, bundlecom.nathanfennel.Hot-Wheels-v-Human, iPadOS+tvOS only; versions1.0/build1",
+      "known": "Fresh root records identify HWvH and both1.0 Prepare for Submission; whole TestFlight No Builds",
+      "action": "Preserve existing app ID/bundle/SKU; verify exact newly processed platform builds before selection. Do not add iPhone/Mac/Vision or create a replacement listing."
+    },
+    {
+      "group": "Metadata",
+      "field": "Locale/name/subtitle/category",
+      "target": "English(U.S.); retainHWvH; proposed subtitle Build tracks. Race your way.; primary Games, proposed Racing+Simulation genres",
+      "known": "en-US version page visible; App Information/category/subtitle fields not read now",
+      "action": "Check actual existing App Information, preserve valid identity/locale, apply concise accurate subtitle/category where supported. No unsupported localization claim."
+    },
+    {
+      "group": "Metadata",
+      "field": "Description/promotional text/keywords",
+      "target": "Use exact platform description and common promotional-text/keywords files; each checked against known limits",
+      "known": "Fresh root version pages show empty description/promo/keywords fields",
+      "action": "Save both platform records, read back exact content and remaining-character status. TV copy promises preview, not physical transfer."
+    },
+    {
+      "group": "Metadata",
+      "field": "URLs/copyright",
+      "target": "Privacy https://nathanfennel.com/hwvh/privacy.html; support https://nathanfennel.com/hwvh/support.html; copyright2026 Nathan Fennel",
+      "known": "Historical website deployment only; no fresh live check performed here",
+      "action": "Root verifies current public200/privacy/support accuracy, then saves correct fields. Marketing URL optional; leave absent unless actual page is verified. Follow dual-deployment policy for any web correction."
+    },
+    {
+      "group": "Privacy",
+      "field": "App Privacy",
+      "target": "Proposed Data Not Collected from reviewed native data flow and manifest; no tracking",
+      "known": "Source-backed worksheet only; no current published Apple label inspected",
+      "action": "Review actual Apple data question, publish accurate responses under standing authorization, verify resulting label/privacy URL. Do not describe local data or user-chosen nearby/system export as developer backend collection."
+    },
+    {
+      "group": "Age",
+      "field": "Age rating/content descriptors",
+      "target": "Actual generated Apple rating from truthful current questionnaire; toy crash/breakdown and local editable content facts in worksheet",
+      "known": "Current answers/rating unknown",
+      "action": "Complete/read back actual questionnaire, including regional fields; do not force4+ or blindly None for all toy violence/user content. No automatic Kids-category claim."
+    },
+    {
+      "group": "Price",
+      "field": "Base price/IAP/subscriptions",
+      "target": "Free,0.00 equivalent in every eligible storefront; no first-party IAP/subscription mechanic",
+      "known": "Current live price/offer list not inspected",
+      "action": "Choose free base price and verify complete price schedule/availability; record exact saved price and genuine controls. Do not create paid offers."
+    },
+    {
+      "group": "Countries",
+      "field": "Availability",
+      "target": "All supported/eligible countries and regions allowed by Apple/account",
+      "known": "Current availability and count unknown",
+      "action": "Select maximum supported availability, save, inspect actual selected count/list and record any genuine regional restriction. Never substitute a guessed total or claim every country if Apple excludes some."
+    },
+    {
+      "group": "Gallery",
+      "field": "iPad screenshots",
+      "target": "10 approved RGB PNGs2752x2064 in numeric01\u201310 order, actual iPad native source only",
+      "known": "Root approved4sheets/20compositions; hashes and dimensions reverified by this preparation",
+      "action": "Navigate actual iPad media category/accepted display size; do not upload to the default iPhone tab. Upload exact10, wait processing, verify uploaded order/pixels/crops and count10/10. No iPhone gallery or raw-UI substitution."
+    },
+    {
+      "group": "Gallery",
+      "field": "Apple TV screenshots",
+      "target": "10 approved RGB PNGs3840x2160 in numeric01\u201310 order, actual TV native source only",
+      "known": "Fresh TV page allows1920x1080 or3840x2160 and0/10screenshots; root approved exact files",
+      "action": "Upload exact10, wait processing and verify actual uploaded order/pixels/crops/count10/10. TV05 is preview only, not a physical handoff claim."
+    },
+    {
+      "group": "Review",
+      "field": "Sign-in/contact/notes",
+      "target": "Sign-in required Off; no credentials; existing private user-approved review contact; exact per-platform notes files",
+      "known": "Fresh root platform snapshots show Sign-in required checked and blank credential/contact fields; private contact file has nonemptyphone/email and draft name fields",
+      "action": "Uncheck sign-in on both, preserve blank credentials, use existing private contact values directly without echoing, verify correct actual first/last names, save notes with explicit physicalLAN caveat and parked camera."
+    },
+    {
+      "group": "Build",
+      "field": "Archive/export/encryption/Game Center",
+      "target": "Exact260f864b1.0(1) generic Release archives iPadfamily2/TVfamily3 and verified App Store exports; actual compiled encryption false inspected before upload",
+      "known": "Approved release plan96ddee and executor prepared, still queued; no matching Release package yet",
+      "action": "Await direct root serialized allocation. Run exact approved checks/upload. Freshly verify processing/selectedbuild1 on each platform. Do not enable Game Center from an empty checkbox; current source has no enabled Game Center entitlement."
+    },
+    {
+      "group": "Evidence",
+      "field": "Nearby hardware and camera",
+      "target": "Standalone native loops actually tested; physical TV\u2194Pad LAN discovery/permission/image delivery/reconnect unverified; camera-color entry parked/unavailable",
+      "known": "Explicit source/docs and retained runtime scope",
+      "action": "Keep physical LAN unverified in release-owner decision/review notes. Do not promise camera capture or claim nearby transfer passed. No new hardware/network/camera QA is authorized by this task."
+    },
+    {
+      "group": "Submission",
+      "field": "Actual final review state",
+      "target": "Save accurate completed fields, uploaded galleries, processed build selection and Add for Review/final Submit for Review under existing standing authorization",
+      "known": "Current1.0 Prepare for Submission is not submitted; no Apple change performed here",
+      "action": "Root completes actual final review transition only after required checks, reads back genuine Waiting for Review/In Review or review-submission status for both platform items and records proof. Do not request duplicate ordinary publication approval."
+    }
+  ],
+  "galleryManifest": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/manifest.json",
+  "galleryManifestSHA256": "46210b99e17bb841ee1e5d703dc63a6b569e45adb33908e159983de7a654c266",
+  "rootMarketingApproval": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/root-marketing-visual-approval.json",
+  "rootMarketingApprovalSHA256": "12610fed6b024b2815e668163faef728fa99efb3a2457cde7411d099b9282072",
+  "rootFinalProvenanceReview": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/root-final-provenance-review.json",
+  "rootFinalProvenanceReviewSHA256": "2acc9f17a4de52dd73f05729832e357d1342f80f4e308974b6047bc6aca4caa7",
+  "approvedImages": [
+    {
+      "platform": "ipad",
+      "ordinal": 1,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/01-tiny-cars-big-races.png",
+      "sha256": "61262cab8f86f35fa70677640beac762d78762a15a1a47a652053b2256527071",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 2,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/02-ready-set-play.png",
+      "sha256": "149fadef90652474e44090018c17418b63727e3ca7145b185a4c4e345103df15",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 3,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/03-finish-then-go-again.png",
+      "sha256": "f981d8b14821639fab44f2f1244c823154e424899837da92ae1c5bb35a3b5da7",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 4,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/04-front-row-view.png",
+      "sha256": "2b561bd05b521b50f6db051fd74aef02a9cebedcad1c56b8e9405336d7e1943a",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 5,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/05-keep-your-finish.png",
+      "sha256": "fc03f160e66df3c4d3a6cfca20dd83517c7d0245ad41bbd0e8765e4b5456990b",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 6,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/06-workshop.png",
+      "sha256": "b985063178064de5ef0064473c22a404a56affab5fe56a1746b9a768195dbebf",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 7,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/07-rematch.png",
+      "sha256": "da428ab538817a2bdd20931f4aaac23eaa22cba26850aec40a20f9936d3dad5b",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 8,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/08-your-kind-of-racing.png",
+      "sha256": "9f7c63bb8407285d2a4ec1218c318c582cc3a8d26e810eeb153a2027a5613fe7",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 9,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/09-whole-track.png",
+      "sha256": "d89092c301b8c15e8f14adcfdc200ac39ce3ab44c0fd9329ecb5cd42af9ee8f3",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "ipad",
+      "ordinal": 10,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/ipad/10-keep-racing.png",
+      "sha256": "3f48e02d6b13aa6185c6066f1afee3a02c5f4d558367b299a5695085185526ac",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 1,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/01-tiny-cars-big-races.png",
+      "sha256": "153c9d80069f74dd0bd92d9409ef371956083c9580828aa32b7950eb6ef52f07",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 2,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/02-ready-set-play.png",
+      "sha256": "225b77c4a462ecf50d19d0ade2f4c675285e57bd1ad3815887e4cddd23c3d1af",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 3,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/03-finish-then-go-again.png",
+      "sha256": "8a878038a861d9c8c79bbdc62090cf503286615143b2db042327396bfae26447",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 4,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/04-front-row-view.png",
+      "sha256": "179fd95602c49ed8ab221f857e41e5ec403fb3a9de42f34505d32eca45d294e3",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 5,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/05-keep-your-finish.png",
+      "sha256": "5e6625b343c82a9f273a994e00b9ee120679f27a73fc078a447e41b67c0ff647",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 6,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/06-workshop.png",
+      "sha256": "97a036deed18f5fd476ba518d1110cfc20e04420eb7a916dafdfb4abc8df9743",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 7,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/07-rematch.png",
+      "sha256": "dd2c654ddb63c0959f4053582e5dd2fd07515fa9ba02edf724200e7d854005cc",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 8,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/08-your-kind-of-racing.png",
+      "sha256": "7e6d775044728a771f57bcf0322e52c2561a2dd837b1eb16b5b0dc0b5feff744",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 9,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/09-whole-track.png",
+      "sha256": "04221bcd64431f80861c185a33c6c34905ff65c1610540350ce21d38774a63cf",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    },
+    {
+      "platform": "tv",
+      "ordinal": 10,
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/exports/tv/10-keep-racing.png",
+      "sha256": "2ea2f26a6625ebae0e490ef3323c9e7dfe922cfa636bb054d1542a8658f97b4e",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "format": "PNG",
+      "mode": "RGB"
+    }
+  ],
+  "galleryHashAndDimensionChecks": "PASS; exact20 approved files and4 approved sheets unchanged",
+  "galleryUploadState": "Not uploaded/inspected in ASC by this task",
+  "reviewContact": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/review-contact.private.json",
+    "sha256": "e032981b3a1bae426daf6c71487e47c901807f962c17c74f8e96b58e0b2808bf",
+    "contentsPrinted": false,
+    "use": "Existing phone/email values; draft first/last names require root confirmation against actual controls, not a new user permission flow"
+  },
+  "rootExecutionPlan": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-tvos-1.0-1-release-plan.260f864b.json",
+  "rootExecutionPlanSHA256": "96ddeef5a126025d18555216b04f0a37a5e03262d70f32b6cad6265943b9d3d6",
+  "buildSlotStatus": "Not allocated; HowToAdult owned slot when task assigned",
+  "releaseCaveats": [
+    "PhysicalTV-to-iPad LAN discovery/permission/encrypted image delivery/reconnect unverified, no public success promise",
+    "Optional camera-color capture parked/unavailable/unfinished; excluded from public copy",
+    "Actual hardware feedback feel and full legacy/portrait/split workshop coverage beyond retained narrow QA",
+    "Live current privacy/support pages, exact Apple privacy/age/freecountry controls and uploaded galleries remain root checks"
+  ],
+  "evidence": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/app-release-audit/apple-review-standing-authorization.md",
+      "sha256": "c2a7df95ed6762dd1fa4d2879ade973484e255353520f459656ed47f8b6ebdc4"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+      "sha256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/root-marketing-visual-approval.json",
+      "sha256": "12610fed6b024b2815e668163faef728fa99efb3a2457cde7411d099b9282072"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/root-final-provenance-review.json",
+      "sha256": "2acc9f17a4de52dd73f05729832e357d1342f80f4e308974b6047bc6aca4caa7"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/marketing-gallery-2026-10-04/manifest.json",
+      "sha256": "46210b99e17bb841ee1e5d703dc63a6b569e45adb33908e159983de7a654c266"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Features/Profiles/CharacterEditorView.swift",
+      "sha256": "e3ea316aff4e5e2c334ebdd57aa0db73d778cac99b12256d8d0ac7d6b699629c"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Features/Profiles/README.md",
+      "sha256": "44e6301f245320c26c37e5aa67641ac8bc175a35ba796a21c99d65f4a0a46fa4"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "sha256": "feb33a07b2809ea61c74f269dad80d8721bd2a130d46270926f68dfcc9fa18cf"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Core/Networking/README.md",
+      "sha256": "0733df4b7421eaa3e13ad2945079fcc2c744f3302f6a7a99b970c2e3ac83df86"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/PrivacyInfo.xcprivacy",
+      "sha256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-testflight.txt",
+      "sha256": "59827e543f92b967010ad3001ba8febb85137888a8e002ac2f36b072712c8a6c"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-ios-distribution.txt",
+      "sha256": "83a93a579b41fe64e01c02841d2eeba478ad31e81276d334dd406f74d5acad3a"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-tvos-distribution.txt",
+      "sha256": "c893c95c1fe389c97ccf9f46d470aa1175c07970b29acf6cb27f5cf37075d5c2"
+    }
+  ],
+  "buildBootArchiveExportUploadBrowserAppleMutationDeploymentPushOrProductionEditActions": 0,
+  "revision": 2,
+  "supersededDraft": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-store-metadata-260f864b-2026-10-04/metadata-privacy-age-free-galleries-checklist.json",
+  "supersededDraftSHA256": "3dae6eb387aa8c9e19bebfa6cf9a64fed3c99273a503b56ec5e8c2ae22f38023",
+  "reviewNotesPolicy": "Concise actual native reviewer steps only; internal field/pipeline/contact/automated-QA material removed. Explicit paired-device LAN gap and unavailable camera retained.",
+  "hapticsCopyCorrection": {
+    "source": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/App/SoundBank.swift",
+    "sourceSHA256": "6b65d3d98d78a5f7f80b2cd2ee35422d3e929fe6d9130cf829b0307ed203eafe",
+    "sourceObservation": "UIFeedbackGenerator buzz is guarded #if os(iOS); no TV controller/Core Haptics implementation",
+    "tvPublicDescription": "Saved Animation and Reduce Motion only; no TV haptics promise",
+    "ipadPublicDescription": "Separate persisted Haptics choice stated; vibration depends on hardware, with no guaranteed output claim",
+    "tvReviewNotes": "Animation only",
+    "nativeSettingsSourceEdited": false
+  },
+  "rootExecutionPlanUnchanged": true,
+  "browserAppleBuildDeviceUploadDeployPushOrNativeSourceActions": 0
+}

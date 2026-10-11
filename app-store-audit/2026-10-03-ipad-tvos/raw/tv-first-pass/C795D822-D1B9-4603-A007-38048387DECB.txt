@@ -1,0 +1,118 @@
+tvTrackAppend-finishGate at (1481.4525146484375, 649.8800048828125, 328.094970703125, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackAppend-finishGate at (1481.4525146484375, 649.8800048828125, 328.094970703125, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-0 at (1141.6075439453125, 306.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-0 at (1141.6075439453125, 306.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-1 at (1141.6075439453125, 394.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-1 at (1141.6075439453125, 394.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-2 at (1141.6075439453125, 482.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-2 at (1141.6075439453125, 482.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-3 at (1141.6075439453125, 570.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-3 at (1141.6075439453125, 570.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-4 at (1141.6075439453125, 658.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-4 at (1141.6075439453125, 658.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackPiece-5 at (1141.6075439453125, 746.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackPiece-5 at (1141.6075439453125, 746.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackSelectedGhost at (1141.6075439453125, 834.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackSelectedGhost at (1141.6075439453125, 834.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackBuilder at (1246.8399658203125, 930.8800048828125, 364.320068359375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackBuilder at (1621.657470703125, 930.8800048828125, 197.68505859375, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackBuilder at (1621.657470703125, 930.8800048828125, 197.68505859375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackBuilder at (1621.657470703125, 930.8800048828125, 197.68505859375, 66.239990234375) -> XCUIRemoteButton(rawValue: 2)
+tvTrackBuilder at (1246.8399658203125, 930.8800048828125, 364.320068359375, 66.239990234375) -> XCUIRemoteButton(rawValue: 1)
+tvTrackBuilder at (1246.8399658203125, 930.8800048828125, 364.320068359375, 66.239990234375) -> XCUIRemoteButton(rawValue: 2)
+tvTrackBuilder at (842.8400268554688, 930.8800048828125, 364.32000732421875, 66.239990234375) -> XCUIRemoteButton(rawValue: 3)
+tvTrackBuilder at (1246.8399658203125, 930.8800048828125, 364.320068359375, 66.239990234375) -> XCUIRemoteButton(rawValue: 0)
+tvTrackSelectedGhost at (1141.6075439453125, 834.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 2)
+tvTrackSelectedGhost at (1141.6075439453125, 834.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 0)
+tvTrackPiece-5 at (1141.6075439453125, 746.8800048828125, 673.784912109375, 66.239990234375) -> XCUIRemoteButton(rawValue: 2)
+
+Attributes: Application, 0x11225a6f0, pid: 8150, label: 'HWvH'
+Element subtree:
+ →Application, 0x11225a6f0, pid: 8150, label: 'HWvH'
+    Window (Main), 0x112243f50, {{0.0, 0.0}, {1920.0, 1080.0}}
+      Other, 0x11223ead0, {{0.0, 0.0}, {1920.0, 1080.0}}
+        Other, 0x1118499c0, {{0.0, 0.0}, {1920.0, 1080.0}}
+          Other, 0x111852f90, {{0.0, 0.0}, {1920.0, 1080.0}}
+            Other, 0x11184fb80, {{0.0, 0.0}, {1920.0, 1080.0}}
+              Image, 0x111845720, {{108.0, 94.0}, {46.0, 44.0}}, identifier: 'tvTrackBuilder', label: 'wrench.and.screwdriver.fill'
+              StaticText, 0x111845300, {{108.0, 94.0}, {298.0, 44.0}}, identifier: 'tvTrackBuilder', label: 'Track Builder'
+              StaticText, 0x111852970, {{430.0, 102.0}, {96.0, 29.0}}, identifier: 'tvTrackBuilder', label: '6 pieces'
+              Button, 0x111846f50, {{798.0, 84.0}, {177.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Pieces', Selected
+                Image, 0x111846b30, {{828.0, 103.0}, {28.0, 27.0}}, identifier: 'wrench.and.screwdriver.fill', label: 'wrench.and.screwdriver.fill'
+                StaticText, 0x111857ef0, {{798.0, 84.0}, {177.0, 64.0}}, label: 'Pieces'
+              Button, 0x11184e5c0, {{999.0, 84.0}, {200.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Decorate'
+                Image, 0x11184e6e0, {{1029.0, 102.0}, {25.0, 28.0}}, identifier: 'paintbrush.fill', label: 'Format'
+                StaticText, 0x11184e800, {{999.0, 84.0}, {200.0, 64.0}}, label: 'Decorate'
+              Button, 0x11184e920, {{1223.0, 84.0}, {176.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Worlds'
+                Image, 0x111841b20, {{1253.0, 105.0}, {23.0, 23.0}}, identifier: 'globe.americas.fill', label: 'globe.americas.fill'
+                StaticText, 0x111841c40, {{1223.0, 84.0}, {176.0, 64.0}}, label: 'Worlds'
+              Button, 0x111841d60, {{1423.0, 84.0}, {185.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Camera'
+                Image, 0x111841e80, {{1454.0, 105.0}, {22.0, 22.0}}, identifier: 'viewfinder', label: 'Scan'
+                StaticText, 0x111841fa0, {{1423.0, 84.0}, {185.0, 64.0}}, label: 'Camera'
+              Button, 0x1118420c0, {{1632.0, 84.0}, {184.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Library'
+                Image, 0x1118421e0, {{1663.0, 104.0}, {29.0, 25.0}}, identifier: 'books.vertical.fill', label: 'Bookshelf'
+                StaticText, 0x111842300, {{1632.0, 84.0}, {184.0, 64.0}}, label: 'Library'
+              Other, 0x111842420, {{104.0, 168.0}, {1013.0, 744.0}}, identifier: 'tvTrackBuilder'
+              Button, 0x111842540, {{849.0, 184.0}, {252.0, 156.0}}, identifier: 'tvTrackBuilder', label: 'Enlarge map'
+                Image, 0x111842660, {{896.0, 306.0}, {22.0, 20.0}}, identifier: 'map.fill', label: 'Show Map'
+                StaticText, 0x111842780, {{849.0, 184.0}, {252.0, 156.0}}, label: 'Enlarge map'
+              ScrollView, 0x1118428a0, {{1141.0, 168.0}, {675.0, 744.0}}, identifier: 'tvTrackBuilder'
+                Other, 0x1118429c0, {{1141.0, -457.0}, {675.0, 1369.0}}
+                  StaticText, 0x111842ae0, {{1153.0, -445.0}, {243.0, 39.0}}, label: 'Snap on a piece'
+                  Button, 0x111842c00, {{1153.0, -382.0}, {651.0, 64.0}}, identifier: 'tvTrackGhostMode', label: 'Ghost pieces: Off'
+                    Image, 0x111842d20, {{1185.0, -361.0}, {23.0, 23.0}}, identifier: 'circle.dashed', label: 'Circular Selection'
+                    StaticText, 0x111842e40, {{1153.0, -382.0}, {651.0, 64.0}}, label: 'Ghost pieces: Off'
+                  Other, 0x111842f60, {{1153.0, 106.0}, {318.0, 64.0}}
+                    Button, 0x111843080, {{1153.0, 106.0}, {318.0, 64.0}}, identifier: 'tvTrackAppendPortal', label: 'Portal', Disabled
+                      Image, 0x1118431a0, {{1185.0, 126.0}, {25.0, 25.0}}, identifier: 'circle.circle', label: 'circle.circle', Disabled
+                      StaticText, 0x1118432c0, {{1153.0, 106.0}, {318.0, 64.0}}, label: 'Portal', Disabled
+                  StaticText, 0x1118433e0, {{1153.0, 194.0}, {344.0, 27.0}}, label: 'Finish placed. Undo it to add more.'
+                  StaticText, 0x111843500, {{1153.0, 245.0}, {314.0, 39.0}}, label: 'Pieces on your track'
+                  Button, 0x111843620, {{1153.0, 308.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-0', label: '1. Start'
+                    Image, 0x111843740, {{1186.0, 329.0}, {20.0, 22.0}}, identifier: 'flag.fill', label: 'Flag'
+                    StaticText, 0x111843860, {{1220.0, 327.0}, {72.0, 27.0}}, label: '1. Start'
+                  Button, 0x111843980, {{1153.0, 396.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-1', label: '2. Straight'
+                    Image, 0x111843aa0, {{1186.0, 418.0}, {18.0, 21.0}}, identifier: 'arrow.up', label: 'Up'
+                    StaticText, 0x111843bc0, {{1219.0, 415.0}, {107.0, 27.0}}, label: '2. Straight'
+                  Button, 0x111843ce0, {{1153.0, 484.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-2', label: '3. Straight'
+                    Image, 0x111843e00, {{1186.0, 506.0}, {18.0, 21.0}}, identifier: 'arrow.up', label: 'Up'
+                    StaticText, 0x111843f20, {{1219.0, 503.0}, {108.0, 27.0}}, label: '3. Straight'
+                  Button, 0x111844040, {{1153.0, 572.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-3', label: '4. Straight'
+                    Image, 0x111844160, {{1186.0, 594.0}, {18.0, 21.0}}, identifier: 'arrow.up', label: 'Up'
+                    StaticText, 0x11183dd10, {{1219.0, 591.0}, {108.0, 27.0}}, label: '4. Straight'
+                  Button, 0x11183de30, {{1153.0, 660.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-4', label: '5. Straight'
+                    Image, 0x11183df50, {{1186.0, 682.0}, {18.0, 21.0}}, identifier: 'arrow.up', label: 'Up'
+                    StaticText, 0x11183e070, {{1219.0, 679.0}, {108.0, 27.0}}, label: '5. Straight'
+                  Button, 0x11183e190, {{1141.6, 746.9}, {673.8, 66.2}}, identifier: 'tvTrackPiece-5', label: '6. Finish', Focused, Selected
+                    Image, 0x11183e2b0, {{1175.8, 768.6}, {20.7, 22.8}}, identifier: 'flag.checkered', label: 'flag.checkered'
+                    StaticText, 0x11183e3d0, {{1211.0, 766.5}, {89.0, 27.9}}, label: '6. Finish'
+                    Image, 0x11183e4f0, {{1760.5, 769.7}, {20.7, 20.7}}, identifier: 'checkmark', label: 'Selected', Selected
+                  Button, 0x11183e610, {{1153.0, 836.0}, {651.0, 64.0}}, identifier: 'tvTrackSelectedGhost', label: 'Make ghost'
+                    Image, 0x11183e730, {{1185.0, 856.0}, {25.0, 25.0}}, identifier: 'circle.dashed', label: 'Circular Selection'
+                    StaticText, 0x11183e850, {{1153.0, 836.0}, {651.0, 64.0}}, label: 'Make ghost'
+                Other, 0x11183e970, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                  Other, 0x11183ea90, {{1810.0, 508.0}, {3.0, 401.0}}
+                Other, 0x11183ebb0, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0%
+                  Other, 0x11183ecd0, {{1810.0, 508.0}, {3.0, 401.0}}
+              Button, 0x11183edf0, {{104.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Undo'
+                Image, 0x11183ef10, {{137.0, 952.0}, {23.0, 24.0}}, identifier: 'arrow.uturn.backward', label: 'Undo'
+                StaticText, 0x11183f030, {{104.0, 932.0}, {352.0, 64.0}}, label: 'Undo'
+              Button, 0x11183f150, {{476.0, 932.0}, {353.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Clear'
+                Image, 0x11183f270, {{508.0, 950.0}, {24.0, 28.0}}, identifier: 'trash', label: 'Trash'
+                StaticText, 0x11183f390, {{476.0, 932.0}, {353.0, 64.0}}, label: 'Clear'
+              Button, 0x11183f4b0, {{849.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Shuffle'
+                Image, 0x11183f5d0, {{882.0, 950.0}, {29.0, 29.0}}, identifier: 'dice.fill', label: 'dice.fill'
+                StaticText, 0x11183f6f0, {{849.0, 932.0}, {352.0, 64.0}}, label: 'Shuffle'
+              Button, 0x11183f810, {{1253.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Save a copy'
+                Image, 0x11183f930, {{1287.0, 951.0}, {18.0, 27.0}}, identifier: 'bookmark.fill', label: 'Bookmark'
+                StaticText, 0x11183fa50, {{1253.0, 932.0}, {352.0, 64.0}}, label: 'Save a copy'
+              Button, 0x11183fb70, {{1625.0, 932.0}, {191.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Race it!'
+                Image, 0x11183fc90, {{1662.0, 953.0}, {20.0, 22.0}}, identifier: 'flag.checkered', label: 'flag.checkered'
+                StaticText, 0x11183fdb0, {{1625.0, 932.0}, {191.0, 64.0}}, label: 'Race it!'
+Path to element:
+ →Application, 0x11225a6f0, pid: 8150, label: 'HWvH'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x11223cdf0, pid: 8150, label: 'HWvH'
+  }

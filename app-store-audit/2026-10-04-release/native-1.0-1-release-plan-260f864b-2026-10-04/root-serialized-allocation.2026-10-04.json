@@ -1,0 +1,18 @@
+{
+  "allocatedBy": "/root",
+  "serializedSlotAllocated": true,
+  "allocatedAtUTC": "2026-10-04T12:44:45.790592+00:00",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "releasePlanSHA256": "96ddeef5a126025d18555216b04f0a37a5e03262d70f32b6cad6265943b9d3d6",
+  "allowedOperations": [
+    "archive",
+    "local-export",
+    "upload"
+  ],
+  "allowedPlatforms": [
+    "ipad",
+    "tvos"
+  ],
+  "authorization": "Direct root NEW_TASK explicitly allocates sole native owner after Watch12:39:28UTC and Adult phaseC release. Execute generic Release iPad then tvOS serial jobs2, exact signature/resources/distribution checks and conditional existing-account upload manageVersion=false. No native simulator/runtime/GUI/Vision/web/keys/Apple selection/submission.",
+  "releaseCondition": "Sole owner until child explicit release; stop for conflicting xcodebuild; preserve all failures"
+}

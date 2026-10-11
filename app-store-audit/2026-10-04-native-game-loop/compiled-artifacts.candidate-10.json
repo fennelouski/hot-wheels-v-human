@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-10-04T10:12:13.166129+00:00",
+  "sourceAggregateSHA256": "e4378706151e17a8a7637705afd7680ed25d7187b06050a4102110aa1fd2bc7a",
+  "platforms": [
+    {
+      "platform": "ipad",
+      "version": "1.0",
+      "build": "1",
+      "deviceFamilies": [
+        2
+      ],
+      "artifacts": [
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v Human.app/Hot Wheels v Human",
+          "bytes": 73120,
+          "sha256": "16baf149961d59a9c6e253af8effbdd372b5de3992dd4390f05c3717e5e173a3"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v Human.app/Hot Wheels v Human.debug.dylib",
+          "bytes": 35397680,
+          "sha256": "6da635f4e4b76400a9a2e8b8b89ee9ef31df12c619513e5c7ccd58e3bc0f8744"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v Human.app/Info.plist",
+          "bytes": 1881,
+          "sha256": "abe3bcd27a87113ad45f5d2778b6e2d32cca72ddea63d28ed544c8dd48d19f05"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Hot Wheels v HumanTests",
+          "bytes": 14071080,
+          "sha256": "d6adb1b801fec97873f0c65e55e442f404218df0084e0398927c3de7ebc23d48"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Info.plist",
+          "bytes": 763,
+          "sha256": "41254472f879d287242862aa0f8be9ac3e3b0a22d4bfee83d128ced95246cc8c"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Hot Wheels v HumanUITests",
+          "bytes": 1740600,
+          "sha256": "5de760c0703ef0e481365f51f5da48df12d44412631d17a65701f720a53b614f"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Info.plist",
+          "bytes": 795,
+          "sha256": "83b0daac31778e37ee5446e5902c53eec7456cf05c37fd5c24b5de987ee171eb"
+        },
+        {
+          "path": "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_iphonesimulator26.5-arm64-x86_64.xctestrun",
+          "bytes": 20645,
+          "sha256": "8215b91ee3906b90276be26a8d62e35fbe8f0ad1150c2737a45a15eae671a103"
+        }
+      ]
+    }
+  ],
+  "productionEquivalentTo": "compiled-artifacts.candidate-9.json",
+  "changedCompiledArtifacts": [
+    "/tmp/hwvh-game-loop-ipad-20261004/Build/Products/Debug-iphonesimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Hot Wheels v HumanUITests"
+  ],
+  "retainedTVProof": "compiled-artifacts.candidate-9.json; actual production source and products unchanged; TV Share test already executed on candidate9"
+}

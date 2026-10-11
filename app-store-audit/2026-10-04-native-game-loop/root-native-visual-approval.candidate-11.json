@@ -1,0 +1,170 @@
+{
+  "recordedAt": "2026-10-04T10:39:04.640370+00:00",
+  "approvingOwner": "Root, explicit message after viewing five sheets plus the four individual share/export captures.",
+  "sourceProof": "native-inputs.candidate-11.json",
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "scope": "21 actual native images. First-viewport Play, true finish/upright share/Rematch, real native chooser/dismissal/same frozen result, saved independent settings, calm controls and retained workshop methods with bounded source equivalence.",
+  "actualImageCount": 21,
+  "actualNativeImages": [
+    {
+      "path": "tv-candidate9-one-attachments/F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+      "sha256": "bc1aa12ba4779933bf357f023c4b80d60c4ec27fe77f3c331ae5a6fb0336a51d",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json"
+    },
+    {
+      "path": "tv-candidate9-one-attachments/FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+      "sha256": "c9738d96ebe91d7e5a1ef07d1fda7cb22e1a6074ae81b3f4f93815dfeab1576d",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json"
+    },
+    {
+      "path": "tv-candidate9-one-attachments/87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+      "sha256": "c12a7754bae14c0708c617ecc05d873b7a98e4de4d418635010b77a15eca5d82",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json"
+    },
+    {
+      "path": "tv-candidate9-one-attachments/8ECF8599-8B14-4060-B078-53C402194F2A.png",
+      "sha256": "1768e5f76d8cbb238cb71440317f6f1da1661fa2b2ca6cfae88ab556ea77e7f9",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json"
+    },
+    {
+      "path": "tv-candidate9-one-attachments/6C79565C-A835-4FD3-AE17-D5453293D759.png",
+      "sha256": "a16d019a907f28520f5d64ca12feef8bb8b5c123b96ae3a4375b167dfe3806d9",
+      "sourceProof": "native-inputs.candidate-9.json",
+      "runtimeReceipt": "tv-runtime-candidate9-one.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/F45D2F4E-28C8-44DF-88AF-AB30EAF789BA.png",
+      "sha256": "8cdc38624cc8cc808546938b57294ee65460c42e0f4cda822d7d00535f9bd72a",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/648EA357-CACA-4AA1-A2EA-9974D2C22C9E.png",
+      "sha256": "46da7334d43b54be07db9f757e0efe570446b3401a727e1843ba3bfe35216d01",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/85AE5D97-A45A-4653-977C-BB8EC94BDD4F.png",
+      "sha256": "13fa1422f5867f5f96e8afb30d34f4eb78410ad0c669f1c45a5bed6d3ff76383",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/FF82B43F-0D68-4A30-B36F-0459E39AF416.png",
+      "sha256": "ccd28f4a1631b9d0bfedccc321c3e8510f78622129d7548743ea1f4c84bc1692",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/969E16D8-BAC5-425C-9D2A-0AD619C6F941.png",
+      "sha256": "90deeade846315f1676e0c9e7df1d1acd81e247230fc3856eb030ec3542331b2",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/EA211BD2-007D-44EB-8D37-544C8E2EEC41.png",
+      "sha256": "f1b6c6f31520d9f972f74923f09685867fba9b6eccc0ac09565d13ff42fdf6b8",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/D544F417-4C97-4DB6-A14F-080F1E06B4A5.png",
+      "sha256": "56076897617f2272854a69e6aae558ac0e9fdc9fd8faac2426dc455bcd1562b4",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/669C3FA3-017E-4077-B713-E98042C6CB6E.png",
+      "sha256": "98f2fb49dd4f5407116dfc8cb78efdc82193829a15af97d52a54c20eddd9cf51",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/5D1D0B0C-C628-45AC-81D3-117EF17AC627.png",
+      "sha256": "9667e7feaa24b83b36926c85c63f49227c50f9f481f1a95285fdbf88e1b9f7c5",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/1B7D74C9-6732-4FD7-8ABE-23AA52642F32.png",
+      "sha256": "e20494637d93dce556cbef31024bfe9e213ab548bd60f228142b40f236cce9c7",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate11-two-attachments/9994687A-235C-485D-803F-E966DBC5E000.png",
+      "sha256": "da8f8c31973a194cee81e0e5e90ccce652e26562902d037035cf445d9bdb140e",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    },
+    {
+      "path": "ipad-candidate10-three-attachments/7414820E-836C-4EE8-99F9-20A635C2AFEB.png",
+      "sha256": "c98d844a568af88350004a350c19133bbb6550e67c36bbd79e87d712309fcace",
+      "sourceProof": "native-inputs.candidate-10.json",
+      "runtimeReceipt": "ipad-runtime-candidate10-three.json"
+    },
+    {
+      "path": "tv-round1-attachments/9388C08D-575C-45F7-B03F-3A5FE5F9A84A.png",
+      "sha256": "f9887d4b0418faf41b4048a224cafe077437015c7277924a46d44d7a33303221",
+      "sourceProof": "native-inputs.candidate-5.json",
+      "runtimeReceipt": "tv-runtime-candidate5-round1.json"
+    },
+    {
+      "path": "tv-candidate6-two-attachments/E82D7DF3-5AA8-41EE-8AE0-F17E3EAF9448.png",
+      "sha256": "12533bc9fdba1c4675dfcd1d17a363fc0626d012a42a6dee1a5126c89dad79bd",
+      "sourceProof": "native-inputs.candidate-6.json",
+      "runtimeReceipt": "tv-runtime-candidate6-two.json"
+    },
+    {
+      "path": "tv-candidate6-two-attachments/70DA8D6F-29DA-4903-97EE-1DD9C69BE33D.png",
+      "sha256": "bc3e690aef6927d35679c077bf59ecf11cf428b5c1207ae0ccd70eba129a3630",
+      "sourceProof": "native-inputs.candidate-6.json",
+      "runtimeReceipt": "tv-runtime-candidate6-two.json"
+    },
+    {
+      "path": "actual-native-export/ipad-candidate11-finished-race.png",
+      "sha256": "f66a7ce24b87ac9ba57410664c5f3e5cf06eeaee9669aee809a8e906d5108ca1",
+      "sourceProof": "native-inputs.candidate-11.json",
+      "runtimeReceipt": "ipad-runtime-candidate11-two.json"
+    }
+  ],
+  "reviewedRootSheets": [
+    {
+      "path": "native-review/root-sheets/tv-01-04.jpg",
+      "sha256": "e43cb39a22bbda028e4630459b1d6b5bd85d508c7f875e2d014f144c4e1d165b",
+      "bytes": 302910
+    },
+    {
+      "path": "native-review/root-sheets/tv-05-08.jpg",
+      "sha256": "6150b55686fe5283e4982bd6f725e52e8a9220b57c2b009bb7ac5a8b8d48d3b1",
+      "bytes": 281869
+    },
+    {
+      "path": "native-review/root-sheets/ipad-01-04.jpg",
+      "sha256": "a00700985c4b20a14e17f064748f00cf9eee331a456a107c5a3b7023c277b555",
+      "bytes": 342085
+    },
+    {
+      "path": "native-review/root-sheets/ipad-05-08.jpg",
+      "sha256": "e4a2f22c874dd8bf4c4fe56f35ecd0e4fae8ede5457abe97bd378c7170e4487f",
+      "bytes": 346186
+    },
+    {
+      "path": "native-review/root-sheets/ipad-09-12.jpg",
+      "sha256": "050592e8993df7d431c6db11e67c175ea292ae2f68a3a1144f37c87d524b03ea",
+      "bytes": 331044
+    }
+  ],
+  "excluded": [
+    "Physical nearby-LAN discovery/permission/delivery/reconnect",
+    "Actual hardware haptic feel and audio output",
+    "Other untested legacy workshop operations",
+    "Full release/archive/Apple processing/submission approval"
+  ],
+  "nativeImagesChanged": false
+}

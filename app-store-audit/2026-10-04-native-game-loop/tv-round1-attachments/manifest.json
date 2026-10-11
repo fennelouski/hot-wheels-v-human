@@ -1,0 +1,425 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "92E37CEE-595E-4AF2-942C-CEF54100A71B.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "App UI hierarchy for com.nathanfennel_0_F52795C2-D043-49FC-AB6A-9876DE2DD8A3.Hot-Wheels-v-Human",
+        "timestamp" : 1791106424.67
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "48844AD6-14CF-4264-AB2A-801876CA52AA",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "UI Snapshot 2026-10-04 at 11.33.44 AM",
+        "timestamp" : 1791106424.67
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "BFB69176-91C9-44C9-905A-85FE39474814.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_93826C68-86FF-4DEA-8E8E-11089237D0B6.txt",
+        "timestamp" : 1791106424.633
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "8E380288-7D37-45E6-80C3-74A98E012E12.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_7F244B03-779A-430E-AB32-AEFBD7FCD966.txt",
+        "timestamp" : 1791106423.634
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "1E2A30E3-705D-45F2-A293-7449BA4239E6.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_37F23C09-D029-4CEB-A754-1036D45A8BF4.txt",
+        "timestamp" : 1791106422.642
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "C71186C9-A5EE-477E-A4BC-93CE50ABC405.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_F912D8D3-E6BC-4410-BB41-27CCB5E7B9CA.txt",
+        "timestamp" : 1791106421.641
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "35A50908-BAAC-4508-AE8E-DE9189BF749B.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_1C5C7107-E895-4736-BCF5-53CE5F13A485.txt",
+        "timestamp" : 1791106420.638
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "0E97712A-6FEC-47F2-A2C6-97CEBEAACD92.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_25963811-E0A7-4895-88E4-3EEE63E58466.txt",
+        "timestamp" : 1791106419.641
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "D3CC55FA-5601-4E91-B9AB-04C61F591E4E.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_7BCB10F1-FFEA-4C5E-957C-FFA7F1E5F4A0.txt",
+        "timestamp" : 1791106418.635
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "670F4675-5F5C-49CB-8ED7-E8CF16186F3E.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_B30CCD40-3478-4FD3-B3AD-D40160649174.txt",
+        "timestamp" : 1791106417.637
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "9EF3154A-3B1F-4410-9BEA-01942173846B.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_F58D0C62-4B68-4E81-A56B-2855EA27F9DD.txt",
+        "timestamp" : 1791106416.641
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "31EA8741-718A-4EF4-B271-E9843E048448.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_CD006A73-3846-4D9A-BE5A-ABE646DC0B24.txt",
+        "timestamp" : 1791106415.644
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "D4FD4C1B-1710-4733-A892-8E62485BAD24.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_4DD72374-EB8C-45FD-A2D2-01088A14C35E.txt",
+        "timestamp" : 1791106414.634
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "90383E98-995A-40D8-B1E1-79ABFE168134.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_4C869BF2-F2F0-4AC1-97E3-1F004AFDAE53.txt",
+        "timestamp" : 1791106413.634
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "124884A8-EC35-4A78-94A0-1973A5CD48F1.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_63EF508C-4AD5-4BD0-A11D-280A9CD3C20E.txt",
+        "timestamp" : 1791106412.641
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "1FC367AC-3068-45E5-BE7E-C2F348919AA7.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_D4B46CD6-371C-449C-9EB0-1318BCE1AAAB.txt",
+        "timestamp" : 1791106411.632
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "DF354EEA-E147-4990-B346-A790FFD99B06.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_443A62BB-3B23-4189-AAA6-DF9533DD4F69.txt",
+        "timestamp" : 1791106410.641
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "FA8F04F3-7A8F-41B3-BDA5-02B92AFB4676.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_7D967CC0-40B7-470E-8714-7DC77417BCD2.txt",
+        "timestamp" : 1791106409.639
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "7913A54D-1A88-4E98-8782-B2EDDB689D84.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_6BD9BEFD-2379-4DAB-BF5D-1E559037F18E.txt",
+        "timestamp" : 1791106408.632
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "BB53FE1D-9548-4EC8-821E-AB732D2B5861.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_0B364C91-F5D2-4201-BBF1-E412A4E36A5D.txt",
+        "timestamp" : 1791106407.64
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "E9257C0E-CD0E-4FE3-9F40-7D78355127B4.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_BAB35E80-55FC-4808-9D08-058C3D76E2A1.txt",
+        "timestamp" : 1791106406.639
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "984B4B14-9813-4F5A-9CBC-6BB0504433F6.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-share-image\" Image`_0_FD4AB8F8-8C5A-4CC4-8395-DA9DA559F93E.txt",
+        "timestamp" : 1791106405.634
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "CB1E50B6-AAA8-47EF-A3F5-6DF20D11A1BC.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "03 - Actual finish and race statistics_0_B813295B-D23E-4517-A335-1AE4D3100CC5.png",
+        "timestamp" : 1791106402.62
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "CE4E9C7F-3A0B-42D8-84E6-2F75F7E49290.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_FDD8DBD7-EF7C-41E4-9B65-9EF1A3A3C6AF.txt",
+        "timestamp" : 1791106401.343
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "0A94CE8E-B1F7-4CA2-ABC4-5017C3289259.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_FEE6943A-D353-4FB7-BADA-D85198CC4CDE.txt",
+        "timestamp" : 1791106400.337
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "1BDA5186-83F6-4586-B3D1-10B7E5A10593.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_10383414-C2BC-408A-A752-D787F6DB5D72.txt",
+        "timestamp" : 1791106399.343
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "FB8ADF21-6FB8-49A9-BD12-2471173627D4.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_6DA3E022-C08A-4629-8F2B-D8707A6A18E3.txt",
+        "timestamp" : 1791106398.338
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "41A0F928-9BE6-4463-BA51-B2C3798070ED.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_B5E220B4-0D98-4D26-90F9-CB8B74DB0F54.txt",
+        "timestamp" : 1791106397.344
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "DB91D2E2-583F-400A-86FE-98527DE1312D.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_E389504F-8430-44CC-B1F7-F641FC07052B.txt",
+        "timestamp" : 1791106396.343
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "CAAE3F69-6653-42CD-846E-97E314EBAB69.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_13AFDB15-D2D8-4448-BA43-DC23EB405721.txt",
+        "timestamp" : 1791106395.337
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "87A15387-0280-4AD8-A784-4C10EAF2BAFF.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_A6EE09D9-A3AD-4771-9FAF-5E0E2B1C23F8.txt",
+        "timestamp" : 1791106394.341
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "CE0B88B2-1F85-4BBC-8490-0EE0762D4A8B.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_D30E138E-7495-445C-86CF-985768E37096.txt",
+        "timestamp" : 1791106393.338
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "3927092D-7CBF-44C9-9CEE-9FDB19D1BAD8.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_C91A3701-9619-4BC7-826E-E06D125B578B.txt",
+        "timestamp" : 1791106392.335
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "B61D7A03-F4D5-472B-A16A-8E40DFB2CE5A.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_81CAA507-7143-46FB-AE9A-618949ACE669.txt",
+        "timestamp" : 1791106391.332
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "369FEE90-2828-4FC2-A807-9DB22055F196.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_C55554EC-3B62-45A9-B5E1-1638A894CB09.txt",
+        "timestamp" : 1791106390.314
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "0B5F20F9-7662-4748-8942-7D65E1DC99D7.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_8292FF5E-EBCE-4CA7-9BF3-FFA6EAD6FCCF.txt",
+        "timestamp" : 1791106389.777
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "38539658-C70D-426A-BE41-6B28DC639E25.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_A2341F97-4892-4246-8E18-A1B019206CC1.txt",
+        "timestamp" : 1791106388.342
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "98774C5F-7277-4CAC-BD2D-6F0612D01E99.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "02 - Real standalone race_0_D36CFFA3-F3E4-49F2-B9FD-115040AF4EFB.png",
+        "timestamp" : 1791106387.28
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "E5E87D6A-77B4-49BE-87C2-7290ECCC621B.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "01 - First launch with visible Play_0_DE2A5E37-833F-468B-959B-7E88045D7358.png",
+        "timestamp" : 1791106384.043
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "71FFC1F5-FCFB-4550-BA61-CB290B684912.mp4",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Screen Recording 2026-10-04 at 11.32.59 AM.mp4",
+        "timestamp" : 1791106379.654
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "08AA5501-CC17-414E-B9D4-C62BEA751171.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "08 - Saved choices after relaunch_0_39827BA8-E65D-4541-9370-8F041B91B7EC.png",
+        "timestamp" : 1791106441.5
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "86062FAC-56DD-4D52-9CE0-ED8C607B0E34.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "07 - Independent animation and haptic settings_0_4B773E55-B48A-4802-A6A2-EF3229B2A279.png",
+        "timestamp" : 1791106436.325
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "646922F8-3379-4D45-AA4A-176C01B51E30.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "06 - Largest text launch actions_0_31E9ECBA-1E59-488E-B20C-651D6E0BFE38.png",
+        "timestamp" : 1791106430.532
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "FF13FC4E-7E69-49EF-B659-BDD87AD44D9D.mp4",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Screen Recording 2026-10-04 at 11.33.45 AM.mp4",
+        "timestamp" : 1791106425.951
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "9388C08D-575C-45F7-B03F-3A5FE5F9A84A.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "10 - TV workshop still edits the actual car_0_969DFA8C-BE14-471D-80C4-F7DB66C55995.png",
+        "timestamp" : 1791106474.542
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop"
+  }
+]

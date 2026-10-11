@@ -1,7 +1,7 @@
 {
   "verifiedAt": "2026-10-03T07:28:09.224275+00:00",
   "mode": "local-static-preparation",
-  "status": "HTML/source/link checks passed; no browser visual verification or deployment performed",
+  "status": "76 committed static pages verified on AWS and Vercel; HWvH canonical URLs verified; dynamic AWS migration remains pending",
   "siteRevision": "b5a6148f09666b133b6d90155739731832671365",
   "pages": [
     {
@@ -38,16 +38,79 @@
   "unlisted": "No nav, search or sitemap entries added; noindex/nofollow/noarchive in both standalone pages.",
   "typography": "Same system font, 68ch body width, 1.05rem body, 1.5rem h2 and 2rem-to-2.35rem h1 as existing How to Adult pages. HWvH navy/yellow accents.",
   "deployment": {
-    "attempted": false,
-    "liveHWvHRoutesVerified": false,
+    "mode": "parallel-static-app-policies",
+    "attempted": true,
     "commandRead": "npm exec --yes --package=node@22 -- python3 scripts/deploy-app-privacy.py",
-    "commandExecuted": false,
-    "pending": "Add hwvh and how-to-adult routes to verified explicit PAGES allowlist before future dual deployment; AWS login confirmation still pending."
+    "commandExecuted": true,
+    "exitCode": 0,
+    "revision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+    "sameRevisionVerifiedOnBothHosts": true,
+    "AWSVerifiedPages": 76,
+    "VercelVerifiedPages": 76,
+    "liveHWvHRoutesVerified": true,
+    "canonicalHWvHChecks": [
+      {
+        "host": "aws",
+        "page": "hwvh/privacy.html",
+        "canonicalURL": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/privacy.html",
+        "status": 200,
+        "contentType": "text/html",
+        "sha256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+        "matchesCommittedBytes": true,
+        "server": "AmazonS3",
+        "objectGitRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b"
+      },
+      {
+        "host": "vercel",
+        "page": "hwvh/privacy.html",
+        "canonicalURL": "https://nathanfennel.com/hwvh/privacy.html",
+        "status": 200,
+        "contentType": "text/html",
+        "sha256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+        "matchesCommittedBytes": true,
+        "server": "Vercel",
+        "vercelHeaderPresent": true
+      },
+      {
+        "host": "aws",
+        "page": "hwvh/support.html",
+        "canonicalURL": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/support.html",
+        "status": 200,
+        "contentType": "text/html",
+        "sha256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+        "matchesCommittedBytes": true,
+        "server": "AmazonS3",
+        "objectGitRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b"
+      },
+      {
+        "host": "vercel",
+        "page": "hwvh/support.html",
+        "canonicalURL": "https://nathanfennel.com/hwvh/support.html",
+        "status": 200,
+        "contentType": "text/html",
+        "sha256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+        "matchesCommittedBytes": true,
+        "server": "Vercel",
+        "vercelHeaderPresent": true
+      }
+    ],
+    "vercelDeploymentURL": "https://nathanfennel-4fkazzv6r-nathan-fennels-projects.vercel.app",
+    "vercelDeploymentGitSHA": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+    "protectedEnvironmentGitFallbackUsed": true,
+    "localBuildUnavailableReason": "Vercel production pull contains [SENSITIVE] placeholders; existing script requested the existing Vercel Git build instead of guessing protected configuration.",
+    "siteReceipt": "/Users/nathan/Documents/GitHub/nathanfennel.com/docs/app-policy-pages-deployment-2026-10-03.json",
+    "siteReceiptSHA256": "61cd562c864eef930d253829ca947d4d538e1aa7c5baadeafb00aa8563e0bafc",
+    "fullSiteAwsMigration": "pending",
+    "cutoverCompletedAt": null,
+    "dnsOrBackgroundJobOwnershipChanged": false
   },
   "committedFilesOnly": [
     "public/hwvh/privacy.html",
     "public/hwvh/support.html"
   ],
-  "pushed": false,
-  "otherChatDesignArtifacts": "Existing untracked nathanfennel.com/.impeccable/ preserved and excluded from commit."
+  "pushed": true,
+  "otherChatDesignArtifacts": "Existing untracked nathanfennel.com/.impeccable/ preserved and excluded from commit.",
+  "initialPreparationSiteRevision": "b5a6148f09666b133b6d90155739731832671365",
+  "deployedRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+  "verifiedAtUTC": "2026-10-03T08:31:36.683890+00:00"
 }

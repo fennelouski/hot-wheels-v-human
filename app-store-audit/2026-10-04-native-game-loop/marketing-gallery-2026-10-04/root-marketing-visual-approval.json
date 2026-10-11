@@ -1,0 +1,108 @@
+{
+  "recordedAt": "2026-10-04T11:27:54.103396+00:00",
+  "owner": "Root release owner",
+  "approvalEvidence": "Explicit2026-10-04message after viewing all4HWsheets:20compositions approved forstorepreparation pendingfinalprovenance/hashreceipt",
+  "sourceAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "images": [
+    {
+      "path": "exports/ipad/01-tiny-cars-big-races.png",
+      "sha256": "61262cab8f86f35fa70677640beac762d78762a15a1a47a652053b2256527071"
+    },
+    {
+      "path": "exports/ipad/02-ready-set-play.png",
+      "sha256": "149fadef90652474e44090018c17418b63727e3ca7145b185a4c4e345103df15"
+    },
+    {
+      "path": "exports/ipad/03-finish-then-go-again.png",
+      "sha256": "f981d8b14821639fab44f2f1244c823154e424899837da92ae1c5bb35a3b5da7"
+    },
+    {
+      "path": "exports/ipad/04-front-row-view.png",
+      "sha256": "2b561bd05b521b50f6db051fd74aef02a9cebedcad1c56b8e9405336d7e1943a"
+    },
+    {
+      "path": "exports/ipad/05-keep-your-finish.png",
+      "sha256": "fc03f160e66df3c4d3a6cfca20dd83517c7d0245ad41bbd0e8765e4b5456990b"
+    },
+    {
+      "path": "exports/ipad/06-workshop.png",
+      "sha256": "b985063178064de5ef0064473c22a404a56affab5fe56a1746b9a768195dbebf"
+    },
+    {
+      "path": "exports/ipad/07-rematch.png",
+      "sha256": "da428ab538817a2bdd20931f4aaac23eaa22cba26850aec40a20f9936d3dad5b"
+    },
+    {
+      "path": "exports/ipad/08-your-kind-of-racing.png",
+      "sha256": "9f7c63bb8407285d2a4ec1218c318c582cc3a8d26e810eeb153a2027a5613fe7"
+    },
+    {
+      "path": "exports/ipad/09-whole-track.png",
+      "sha256": "d89092c301b8c15e8f14adcfdc200ac39ce3ab44c0fd9329ecb5cd42af9ee8f3"
+    },
+    {
+      "path": "exports/ipad/10-keep-racing.png",
+      "sha256": "3f48e02d6b13aa6185c6066f1afee3a02c5f4d558367b299a5695085185526ac"
+    },
+    {
+      "path": "exports/tv/01-tiny-cars-big-races.png",
+      "sha256": "153c9d80069f74dd0bd92d9409ef371956083c9580828aa32b7950eb6ef52f07"
+    },
+    {
+      "path": "exports/tv/02-ready-set-play.png",
+      "sha256": "225b77c4a462ecf50d19d0ade2f4c675285e57bd1ad3815887e4cddd23c3d1af"
+    },
+    {
+      "path": "exports/tv/03-finish-then-go-again.png",
+      "sha256": "8a878038a861d9c8c79bbdc62090cf503286615143b2db042327396bfae26447"
+    },
+    {
+      "path": "exports/tv/04-front-row-view.png",
+      "sha256": "179fd95602c49ed8ab221f857e41e5ec403fb3a9de42f34505d32eca45d294e3"
+    },
+    {
+      "path": "exports/tv/05-keep-your-finish.png",
+      "sha256": "5e6625b343c82a9f273a994e00b9ee120679f27a73fc078a447e41b67c0ff647"
+    },
+    {
+      "path": "exports/tv/06-workshop.png",
+      "sha256": "97a036deed18f5fd476ba518d1110cfc20e04420eb7a916dafdfb4abc8df9743"
+    },
+    {
+      "path": "exports/tv/07-rematch.png",
+      "sha256": "dd2c654ddb63c0959f4053582e5dd2fd07515fa9ba02edf724200e7d854005cc"
+    },
+    {
+      "path": "exports/tv/08-your-kind-of-racing.png",
+      "sha256": "7e6d775044728a771f57bcf0322e52c2561a2dd837b1eb16b5b0dc0b5feff744"
+    },
+    {
+      "path": "exports/tv/09-whole-track.png",
+      "sha256": "04221bcd64431f80861c185a33c6c34905ff65c1610540350ce21d38774a63cf"
+    },
+    {
+      "path": "exports/tv/10-keep-racing.png",
+      "sha256": "2ea2f26a6625ebae0e490ef3323c9e7dfe922cfa636bb054d1542a8658f97b4e"
+    }
+  ],
+  "sheets": [
+    {
+      "path": "root-review/ipad-01-05.jpg",
+      "sha256": "2576eb7203d12af83e09c803c34c72703fb4314e3d76bea13b7c3a5704c868b8"
+    },
+    {
+      "path": "root-review/ipad-06-10.jpg",
+      "sha256": "996e98bb560cc705d9e7286b1c1f788bcaca1fb4a57553e748dcc82b89a0740c"
+    },
+    {
+      "path": "root-review/tv-01-05.jpg",
+      "sha256": "d0db3d8df383be3f15762c014eae7b8b89a2265168f48655f3f8fd43b341e854"
+    },
+    {
+      "path": "root-review/tv-06-10.jpg",
+      "sha256": "d04542410f99113417232a016e929ddbba342abd944e644a85f7e7de38e7f686"
+    }
+  ],
+  "status": "Scoped visual approval for20marketingcompositions; noASCupload/archive/submission proof",
+  "nativeSourceImagesChanged": false
+}

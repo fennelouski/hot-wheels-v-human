@@ -1,0 +1,1 @@
+Existing native launch route: --preset-track 6. Starter blueprint: The Mega Mega Track, 75 pieces. Chase camera render settling: 5 seconds. Driver render settling: 2 seconds. Native boost touch hold: 3 seconds. Meter before: 102.0%; after: 7.0%. Final camera: Driver View. No production source edits or screenshot transformations.

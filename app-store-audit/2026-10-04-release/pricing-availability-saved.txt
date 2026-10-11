@@ -1,0 +1,946 @@
+- banner "App Store Connect":
+  - heading "App Store Connect" [level=1]:
+    - link "App Store Connect":
+      - /url: /
+  - navigation "Global":
+    - list:
+      - link "Apps":
+        - /url: /apps
+      - link "Xcode Cloud":
+        - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/xcode-cloud
+      - link "Trends":
+        - /url: /trends
+      - link "Reports":
+        - /url: /itc/payments_and_financial_reports
+      - link "Business":
+        - /url: /business
+      - link "Users and Access":
+        - /url: /access/users
+  - button "Nathan Fennel Nathan Fennel Account name menu":
+    - generic: Nathan Fennel
+    - generic: Nathan Fennel
+- button "Apps menu, HWvH, selected":
+  - generic "HWvH":
+    - img "HWvH"
+  - generic: HWvH
+- navigation "Apps":
+  - list:
+    - link "Distribution":
+      - /url: /apps/6818777508/distribution
+    - link "Analytics":
+      - /url: /apps/6818777508/analytics
+    - link "TestFlight":
+      - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/apps/6818777508/testflight
+- main:
+  - link "Pricing and Availability":
+    - /url: /apps/6818777508/distribution/pricing
+    - text: Pricing and Availability
+  - heading "App Availability" [level=2]
+  - heading "Pre-Orders" [level=3]
+  - paragraph:
+    - text: Once your app is released, customers will be notified, and your app will automatically download to their device. Paid customers won't be charged until the day the app is released.
+    - link "Learn More":
+      - /url: https://developer.apple.com/app-store/pre-orders/
+  - button "Set Up Pre-Order"
+  - heading "Availability (175 Countries or Regions)" [level=3]
+  - button "Filtered by Countries or Regions, showing All Countries or Regions":
+    - text: All Countries or Regions
+  - paragraph: You can determine where your app will be available to purchase or download. You can deselect countries or regions where you don't want your app for sale and select them again at any time. Changes will appear on the App Store within 24 hours.
+  - button "Manage Availability"
+  - table:
+    - rowgroup:
+      - row "Countries or Regions Status":
+        - columnheader "Countries or Regions":
+          - generic: Countries or Regions
+        - columnheader "Status":
+          - generic: Status
+    - rowgroup:
+      - row "Afghanistan Available on App Release":
+        - cell "Afghanistan":
+          - generic: Afghanistan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Albania Available on App Release":
+        - cell "Albania":
+          - generic: Albania
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Algeria Available on App Release":
+        - cell "Algeria":
+          - generic: Algeria
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Angola Available on App Release":
+        - cell "Angola":
+          - generic: Angola
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Anguilla Available on App Release":
+        - cell "Anguilla":
+          - generic: Anguilla
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Antigua and Barbuda Available on App Release":
+        - cell "Antigua and Barbuda":
+          - generic: Antigua and Barbuda
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Argentina Available on App Release":
+        - cell "Argentina":
+          - generic: Argentina
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Armenia Available on App Release":
+        - cell "Armenia":
+          - generic: Armenia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Australia Available on App Release":
+        - cell "Australia":
+          - generic: Australia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Austria Available on App Release":
+        - cell "Austria":
+          - generic: Austria
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Azerbaijan Available on App Release":
+        - cell "Azerbaijan":
+          - generic: Azerbaijan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bahamas Available on App Release":
+        - cell "Bahamas":
+          - generic: Bahamas
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bahrain Available on App Release":
+        - cell "Bahrain":
+          - generic: Bahrain
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Barbados Available on App Release":
+        - cell "Barbados":
+          - generic: Barbados
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Belarus Available on App Release":
+        - cell "Belarus":
+          - generic: Belarus
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Belgium Available on App Release":
+        - cell "Belgium":
+          - generic: Belgium
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Belize Available on App Release":
+        - cell "Belize":
+          - generic: Belize
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Benin Available on App Release":
+        - cell "Benin":
+          - generic: Benin
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bermuda Available on App Release":
+        - cell "Bermuda":
+          - generic: Bermuda
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bhutan Available on App Release":
+        - cell "Bhutan":
+          - generic: Bhutan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bolivia Available on App Release":
+        - cell "Bolivia":
+          - generic: Bolivia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bosnia and Herzegovina Available on App Release":
+        - cell "Bosnia and Herzegovina":
+          - generic: Bosnia and Herzegovina
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Botswana Available on App Release":
+        - cell "Botswana":
+          - generic: Botswana
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Brazil Available on App Release":
+        - cell "Brazil":
+          - generic: Brazil
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "British Virgin Islands Available on App Release":
+        - cell "British Virgin Islands":
+          - generic: British Virgin Islands
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Brunei Available on App Release":
+        - cell "Brunei":
+          - generic: Brunei
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Bulgaria Available on App Release":
+        - cell "Bulgaria":
+          - generic: Bulgaria
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Burkina Faso Available on App Release":
+        - cell "Burkina Faso":
+          - generic: Burkina Faso
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Cambodia Available on App Release":
+        - cell "Cambodia":
+          - generic: Cambodia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Cameroon Available on App Release":
+        - cell "Cameroon":
+          - generic: Cameroon
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Canada Available on App Release":
+        - cell "Canada":
+          - generic: Canada
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Cape Verde Available on App Release":
+        - cell "Cape Verde":
+          - generic: Cape Verde
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Cayman Islands Available on App Release":
+        - cell "Cayman Islands":
+          - generic: Cayman Islands
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Chad Available on App Release":
+        - cell "Chad":
+          - generic: Chad
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Chile Available on App Release":
+        - cell "Chile":
+          - generic: Chile
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "China mainland Available on App Release":
+        - cell "China mainland":
+          - generic: China mainland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Colombia Available on App Release":
+        - cell "Colombia":
+          - generic: Colombia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Congo, Democratic Republic of the Available on App Release":
+        - cell "Congo, Democratic Republic of the":
+          - generic: Congo, Democratic Republic of the
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Congo, Republic of the Available on App Release":
+        - cell "Congo, Republic of the":
+          - generic: Congo, Republic of the
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Costa Rica Available on App Release":
+        - cell "Costa Rica":
+          - generic: Costa Rica
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Côte d’Ivoire Available on App Release":
+        - cell "Côte d’Ivoire":
+          - generic: Côte d’Ivoire
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Croatia Available on App Release":
+        - cell "Croatia":
+          - generic: Croatia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Cyprus Available on App Release":
+        - cell "Cyprus":
+          - generic: Cyprus
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Czech Republic Available on App Release":
+        - cell "Czech Republic":
+          - generic: Czech Republic
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Denmark Available on App Release":
+        - cell "Denmark":
+          - generic: Denmark
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Dominica Available on App Release":
+        - cell "Dominica":
+          - generic: Dominica
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Dominican Republic Available on App Release":
+        - cell "Dominican Republic":
+          - generic: Dominican Republic
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Ecuador Available on App Release":
+        - cell "Ecuador":
+          - generic: Ecuador
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Egypt Available on App Release":
+        - cell "Egypt":
+          - generic: Egypt
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "El Salvador Available on App Release":
+        - cell "El Salvador":
+          - generic: El Salvador
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Estonia Available on App Release":
+        - cell "Estonia":
+          - generic: Estonia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Eswatini Available on App Release":
+        - cell "Eswatini":
+          - generic: Eswatini
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Fiji Available on App Release":
+        - cell "Fiji":
+          - generic: Fiji
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Finland Available on App Release":
+        - cell "Finland":
+          - generic: Finland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "France Available on App Release":
+        - cell "France":
+          - generic: France
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Gabon Available on App Release":
+        - cell "Gabon":
+          - generic: Gabon
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Gambia Available on App Release":
+        - cell "Gambia":
+          - generic: Gambia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Georgia Available on App Release":
+        - cell "Georgia":
+          - generic: Georgia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Germany Available on App Release":
+        - cell "Germany":
+          - generic: Germany
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Ghana Available on App Release":
+        - cell "Ghana":
+          - generic: Ghana
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Greece Available on App Release":
+        - cell "Greece":
+          - generic: Greece
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Grenada Available on App Release":
+        - cell "Grenada":
+          - generic: Grenada
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Guatemala Available on App Release":
+        - cell "Guatemala":
+          - generic: Guatemala
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Guinea-Bissau Available on App Release":
+        - cell "Guinea-Bissau":
+          - generic: Guinea-Bissau
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Guyana Available on App Release":
+        - cell "Guyana":
+          - generic: Guyana
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Honduras Available on App Release":
+        - cell "Honduras":
+          - generic: Honduras
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Hong Kong Available on App Release":
+        - cell "Hong Kong":
+          - generic: Hong Kong
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Hungary Available on App Release":
+        - cell "Hungary":
+          - generic: Hungary
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Iceland Available on App Release":
+        - cell "Iceland":
+          - generic: Iceland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "India Available on App Release":
+        - cell "India":
+          - generic: India
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Indonesia Available on App Release":
+        - cell "Indonesia":
+          - generic: Indonesia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Iraq Available on App Release":
+        - cell "Iraq":
+          - generic: Iraq
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Ireland Available on App Release":
+        - cell "Ireland":
+          - generic: Ireland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Israel Available on App Release":
+        - cell "Israel":
+          - generic: Israel
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Italy Available on App Release":
+        - cell "Italy":
+          - generic: Italy
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Jamaica Available on App Release":
+        - cell "Jamaica":
+          - generic: Jamaica
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Japan Available on App Release":
+        - cell "Japan":
+          - generic: Japan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Jordan Available on App Release":
+        - cell "Jordan":
+          - generic: Jordan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Kazakhstan Available on App Release":
+        - cell "Kazakhstan":
+          - generic: Kazakhstan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Kenya Available on App Release":
+        - cell "Kenya":
+          - generic: Kenya
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Korea, Republic of Available on App Release":
+        - cell "Korea, Republic of":
+          - generic: Korea, Republic of
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Kosovo Available on App Release":
+        - cell "Kosovo":
+          - generic: Kosovo
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Kuwait Available on App Release":
+        - cell "Kuwait":
+          - generic: Kuwait
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Kyrgyzstan Available on App Release":
+        - cell "Kyrgyzstan":
+          - generic: Kyrgyzstan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Laos Available on App Release":
+        - cell "Laos":
+          - generic: Laos
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Latvia Available on App Release":
+        - cell "Latvia":
+          - generic: Latvia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Lebanon Available on App Release":
+        - cell "Lebanon":
+          - generic: Lebanon
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Liberia Available on App Release":
+        - cell "Liberia":
+          - generic: Liberia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Libya Available on App Release":
+        - cell "Libya":
+          - generic: Libya
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Lithuania Available on App Release":
+        - cell "Lithuania":
+          - generic: Lithuania
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Luxembourg Available on App Release":
+        - cell "Luxembourg":
+          - generic: Luxembourg
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Macau Available on App Release":
+        - cell "Macau":
+          - generic: Macau
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Madagascar Available on App Release":
+        - cell "Madagascar":
+          - generic: Madagascar
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Malawi Available on App Release":
+        - cell "Malawi":
+          - generic: Malawi
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Malaysia Available on App Release":
+        - cell "Malaysia":
+          - generic: Malaysia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Maldives Available on App Release":
+        - cell "Maldives":
+          - generic: Maldives
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mali Available on App Release":
+        - cell "Mali":
+          - generic: Mali
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Malta Available on App Release":
+        - cell "Malta":
+          - generic: Malta
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mauritania Available on App Release":
+        - cell "Mauritania":
+          - generic: Mauritania
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mauritius Available on App Release":
+        - cell "Mauritius":
+          - generic: Mauritius
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mexico Available on App Release":
+        - cell "Mexico":
+          - generic: Mexico
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Micronesia Available on App Release":
+        - cell "Micronesia":
+          - generic: Micronesia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Moldova Available on App Release":
+        - cell "Moldova":
+          - generic: Moldova
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mongolia Available on App Release":
+        - cell "Mongolia":
+          - generic: Mongolia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Montenegro Available on App Release":
+        - cell "Montenegro":
+          - generic: Montenegro
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Montserrat Available on App Release":
+        - cell "Montserrat":
+          - generic: Montserrat
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Morocco Available on App Release":
+        - cell "Morocco":
+          - generic: Morocco
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Mozambique Available on App Release":
+        - cell "Mozambique":
+          - generic: Mozambique
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Myanmar Available on App Release":
+        - cell "Myanmar":
+          - generic: Myanmar
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Namibia Available on App Release":
+        - cell "Namibia":
+          - generic: Namibia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Nauru Available on App Release":
+        - cell "Nauru":
+          - generic: Nauru
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Nepal Available on App Release":
+        - cell "Nepal":
+          - generic: Nepal
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Netherlands Available on App Release":
+        - cell "Netherlands":
+          - generic: Netherlands
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "New Zealand Available on App Release":
+        - cell "New Zealand":
+          - generic: New Zealand
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Nicaragua Available on App Release":
+        - cell "Nicaragua":
+          - generic: Nicaragua
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Niger Available on App Release":
+        - cell "Niger":
+          - generic: Niger
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Nigeria Available on App Release":
+        - cell "Nigeria":
+          - generic: Nigeria
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "North Macedonia Available on App Release":
+        - cell "North Macedonia":
+          - generic: North Macedonia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Norway Available on App Release":
+        - cell "Norway":
+          - generic: Norway
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Oman Available on App Release":
+        - cell "Oman":
+          - generic: Oman
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Pakistan Available on App Release":
+        - cell "Pakistan":
+          - generic: Pakistan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Palau Available on App Release":
+        - cell "Palau":
+          - generic: Palau
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Panama Available on App Release":
+        - cell "Panama":
+          - generic: Panama
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Papua New Guinea Available on App Release":
+        - cell "Papua New Guinea":
+          - generic: Papua New Guinea
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Paraguay Available on App Release":
+        - cell "Paraguay":
+          - generic: Paraguay
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Peru Available on App Release":
+        - cell "Peru":
+          - generic: Peru
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Philippines Available on App Release":
+        - cell "Philippines":
+          - generic: Philippines
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Poland Available on App Release":
+        - cell "Poland":
+          - generic: Poland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Portugal Available on App Release":
+        - cell "Portugal":
+          - generic: Portugal
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Qatar Available on App Release":
+        - cell "Qatar":
+          - generic: Qatar
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Romania Available on App Release":
+        - cell "Romania":
+          - generic: Romania
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Russia Available on App Release":
+        - cell "Russia":
+          - generic: Russia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Rwanda Available on App Release":
+        - cell "Rwanda":
+          - generic: Rwanda
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "São Tomé and Príncipe Available on App Release":
+        - cell "São Tomé and Príncipe":
+          - generic: São Tomé and Príncipe
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Saudi Arabia Available on App Release":
+        - cell "Saudi Arabia":
+          - generic: Saudi Arabia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Senegal Available on App Release":
+        - cell "Senegal":
+          - generic: Senegal
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Serbia Available on App Release":
+        - cell "Serbia":
+          - generic: Serbia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Seychelles Available on App Release":
+        - cell "Seychelles":
+          - generic: Seychelles
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Sierra Leone Available on App Release":
+        - cell "Sierra Leone":
+          - generic: Sierra Leone
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Singapore Available on App Release":
+        - cell "Singapore":
+          - generic: Singapore
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Slovakia Available on App Release":
+        - cell "Slovakia":
+          - generic: Slovakia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Slovenia Available on App Release":
+        - cell "Slovenia":
+          - generic: Slovenia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Solomon Islands Available on App Release":
+        - cell "Solomon Islands":
+          - generic: Solomon Islands
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "South Africa Available on App Release":
+        - cell "South Africa":
+          - generic: South Africa
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Spain Available on App Release":
+        - cell "Spain":
+          - generic: Spain
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Sri Lanka Available on App Release":
+        - cell "Sri Lanka":
+          - generic: Sri Lanka
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "St. Kitts and Nevis Available on App Release":
+        - cell "St. Kitts and Nevis":
+          - generic: St. Kitts and Nevis
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "St. Lucia Available on App Release":
+        - cell "St. Lucia":
+          - generic: St. Lucia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "St. Vincent and the Grenadines Available on App Release":
+        - cell "St. Vincent and the Grenadines":
+          - generic: St. Vincent and the Grenadines
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Suriname Available on App Release":
+        - cell "Suriname":
+          - generic: Suriname
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Sweden Available on App Release":
+        - cell "Sweden":
+          - generic: Sweden
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Switzerland Available on App Release":
+        - cell "Switzerland":
+          - generic: Switzerland
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Taiwan Available on App Release":
+        - cell "Taiwan":
+          - generic: Taiwan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Tajikistan Available on App Release":
+        - cell "Tajikistan":
+          - generic: Tajikistan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Tanzania Available on App Release":
+        - cell "Tanzania":
+          - generic: Tanzania
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Thailand Available on App Release":
+        - cell "Thailand":
+          - generic: Thailand
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Tonga Available on App Release":
+        - cell "Tonga":
+          - generic: Tonga
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Trinidad and Tobago Available on App Release":
+        - cell "Trinidad and Tobago":
+          - generic: Trinidad and Tobago
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Tunisia Available on App Release":
+        - cell "Tunisia":
+          - generic: Tunisia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Türkiye Available on App Release":
+        - cell "Türkiye":
+          - generic: Türkiye
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Turkmenistan Available on App Release":
+        - cell "Turkmenistan":
+          - generic: Turkmenistan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Turks and Caicos Islands Available on App Release":
+        - cell "Turks and Caicos Islands":
+          - generic: Turks and Caicos Islands
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Uganda Available on App Release":
+        - cell "Uganda":
+          - generic: Uganda
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Ukraine Available on App Release":
+        - cell "Ukraine":
+          - generic: Ukraine
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "United Arab Emirates Available on App Release":
+        - cell "United Arab Emirates":
+          - generic: United Arab Emirates
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "United Kingdom Available on App Release":
+        - cell "United Kingdom":
+          - generic: United Kingdom
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "United States Available on App Release":
+        - cell "United States":
+          - generic: United States
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Uruguay Available on App Release":
+        - cell "Uruguay":
+          - generic: Uruguay
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Uzbekistan Available on App Release":
+        - cell "Uzbekistan":
+          - generic: Uzbekistan
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Vanuatu Available on App Release":
+        - cell "Vanuatu":
+          - generic: Vanuatu
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Venezuela Available on App Release":
+        - cell "Venezuela":
+          - generic: Venezuela
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Vietnam Available on App Release":
+        - cell "Vietnam":
+          - generic: Vietnam
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Yemen Available on App Release":
+        - cell "Yemen":
+          - generic: Yemen
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Zambia Available on App Release":
+        - cell "Zambia":
+          - generic: Zambia
+        - cell "Available on App Release":
+          - generic: Available on App Release
+      - row "Zimbabwe Available on App Release":
+        - cell "Zimbabwe":
+          - generic: Zimbabwe
+        - cell "Available on App Release":
+          - generic: Available on App Release
+- contentinfo:
+  - list:
+    - link "App Store Connect":
+      - /url: /apps
+  - list:
+    - listitem: Copyright © 2026 Apple Inc. All rights reserved. |
+    - link "Terms of Service":
+      - /url: /WebObjects/iTunesConnect.woa/wa/termsOfService
+    - text: "|"
+    - link "Privacy Policy":
+      - /url: https://www.apple.com/legal/privacy
+    - text: "|"
+    - link "Contact Us":
+      - /url: /contact-us

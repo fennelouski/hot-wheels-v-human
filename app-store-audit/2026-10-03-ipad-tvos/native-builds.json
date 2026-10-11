@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "9b128e92539c0475033b00222731bfef865ef6b6",
+  "sourceBuildRef": "9b128e9-Release-1.0-build1-SDK26.5",
+  "verifiedAtUTC": "2026-10-03T07:39:20.656174+00:00",
+  "nativeInputProof": "native-source-inputs.json",
+  "nativeInputProofSHA256": "1f9701dd7d14cac7a67e32f85390c380bb78a7c8898b8831a10327535822edfe",
+  "builds": [
+    {
+      "platform": "tvOS",
+      "appPath": "/tmp/hwvh-release-tv-20261003/Build/Products/Release-appletvsimulator/Hot Wheels v Human.app",
+      "configuration": "Release",
+      "testability": "YES only for test host",
+      "name": "HWvH",
+      "bundle": "com.nathanfennel.Hot-Wheels-v-Human",
+      "version": "1.0",
+      "build": "1",
+      "UIDeviceFamily": [
+        3
+      ],
+      "minimumOSVersion": "26.0",
+      "nonExemptEncryption": false,
+      "executableSHA256": "e7dddc9bbb959e55df5a5a33602ecbb1757da3a5f90349fdc40cc9f82d901420",
+      "buildLogPath": "/tmp/hwvh-final-tv-build-20261003.log",
+      "buildLogSHA256": "02774e237b6e7083ff851379ee04fdfdc9d865779bcc33a04c7d1b40b9126384",
+      "buildSucceeded": true
+    },
+    {
+      "platform": "iPadOS",
+      "appPath": "/tmp/hwvh-release-ipad-20261003/Build/Products/Release-iphonesimulator/Hot Wheels v Human.app",
+      "configuration": "Release",
+      "testability": "YES only for test host",
+      "name": "HWvH",
+      "bundle": "com.nathanfennel.Hot-Wheels-v-Human",
+      "version": "1.0",
+      "build": "1",
+      "UIDeviceFamily": [
+        2
+      ],
+      "minimumOSVersion": "26.0",
+      "nonExemptEncryption": false,
+      "executableSHA256": "b64d2d9a0798d6524182585c18abf06e187ab1d149c18eeba126abd79573eb48",
+      "buildLogPath": "/tmp/hwvh-final-ipad-build-20261003.log",
+      "buildLogSHA256": "86f166ded6384c3514076b24d2800a7aca1902290eabba8afd099829df1f66cd",
+      "buildSucceeded": true
+    }
+  ],
+  "productionArchiveEvidence": "signed-release-packages.json",
+  "productionArchiveFreezeCommit": "9b128e92539c0475033b00222731bfef865ef6b6",
+  "currentWorkingTreeDelta": {
+    "observedAtUTC": "2026-10-03T08:05:20.459189+00:00",
+    "productionArchiveFreezeCommit": "9b128e92539c0475033b00222731bfef865ef6b6",
+    "currentHEAD": "9b128e92539c0475033b00222731bfef865ef6b6",
+    "recordedManifestInputCount": 863,
+    "unchangedManifestInputCount": 861,
+    "wholeRecordedManifestStillMatchesWorkingTree": false,
+    "observedWorkingTreeCanonicalInputsSHA256": "652e6ccdb7e754e20daa0b797a9b57474cbb528ceb31e1cba0d9fed4d3de9b6b",
+    "changes": [
+      {
+        "path": "Hot Wheels v Human/Features/TrackBuilder/TVTrackBuilderView.swift",
+        "frozenSHA256": "e9d44e97a2f7072d53a31bab02af4ccc64b6f5d7fc71ed9c477e52e210d3a953",
+        "observedSHA256": "7b8d5bce6d5b5b0b608401f9a9ca73102ef5a009995ab4677e5d0ee93861fcc9",
+        "scope": "production source",
+        "platformGuard": "Entire file is #if os(tvOS)",
+        "purpose": "Disable header, scene and footer while movingCursor to retain Place Here directional focus until Select/Menu",
+        "runtimeConfirmation": "pending release-owner targeted case04 rerun"
+      },
+      {
+        "path": "Hot Wheels v HumanUITests/TVRemoteUITests.swift",
+        "frozenSHA256": "af526e373acdda5384747a043656a836ced92f04d426552b0ffbd784ff00dd82",
+        "observedSHA256": "c3495123643801c91b96e43f73b3a48dd56cbf22b8fc89a541ad97ff9157a55a",
+        "scope": "UI-test harness only",
+        "purpose": "Use actual button/status labels and one public accessibility snapshot per remote focus step; no product behavior change",
+        "helperBuildLogPath": "/tmp/hwvh-tv-test-helper-build-20261003.log",
+        "helperBuildLogSHA256": "a0c47855277ed4d0756c95f234ae7a7d82c7e7eda2da476bae294e917bcb3330"
+      }
+    ],
+    "nextProductionFreezeCommit": null,
+    "note": "Historical simulator builds and signed packages above retain the original freeze. Later UI-test and tvOS-only production changes are separate; new production freeze and TV package are pending cursor-focus confirmation."
+  },
+  "modelTestEvidence": {
+    "tvOS": {
+      "status": "structured-result-pass",
+      "passedTests": 14,
+      "failedTests": 0,
+      "summaryEvidence": "tv-model-test-summary.json",
+      "detailsEvidence": "tv-model-test-details.json"
+    },
+    "iPadOS": {
+      "status": "console-pass/result-summary-incomplete",
+      "consolePassedTests": 16,
+      "consolePassedSuites": 4,
+      "consolePassLine": "\u2714 Test run with 16 tests in 4 suites passed after 15.262 seconds.",
+      "testExecuteSucceeded": true,
+      "testExecuteResultMarker": "** TEST EXECUTE SUCCEEDED **",
+      "structuredResultSummaryComplete": false,
+      "structuredSummaryStatus": "unknown",
+      "structuredSummaryTotalTestCount": 0,
+      "summaryFailure": "mkstemp: No space left on device",
+      "summaryFailureLine": "2026-10-03 09:42:17.478 xcodebuild[7357:6179863] [MT] IDETesting: Failed to construct test run summaries and write them to the result bundle: fileSystemFailure(reason: \"mkstemp: No space left on device\")",
+      "consoleLogPath": "/tmp/hwvh-ipad-models-20261003.log",
+      "consoleLogSHA256": "be83ce4fa3b86e2388bbec0833114b84c4b9e932dd8097b6967aa8786de9e280",
+      "resultBundlePath": "/tmp/hwvh-ipad-models-20261003.xcresult",
+      "summaryEvidence": "ipad-model-test-summary.json",
+      "detailsEvidence": "ipad-model-test-details.json",
+      "interpretation": "Console establishes the 16-test/4-suite pass, but the xcresult summary is incomplete; do not label this a normal complete structured-result proof or an unknown test failure."
+    }
+  }
+}

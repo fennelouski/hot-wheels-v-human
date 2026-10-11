@@ -1,0 +1,915 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T08:32:03.293975+00:00",
+  "status": "Replacement final Release archives and App Store distribution-signed iPadOS/tvOS IPA exports verified. No upload performed.",
+  "revision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+  "buildRef": "46fc491-Release-1.0-build1-SDK26.5",
+  "nativeInputs": {
+    "inputCount": 864,
+    "canonicalInputsSHA256": "bc80a47a2c83b46b8b7990b7822bae3a74c33170fd000506e96889ed8fd14067",
+    "allHashesMatchBeforeAndAfter": true,
+    "independentlyRecomputedAfter": true,
+    "exactNativeInputFileSetUnchanged": true,
+    "proofFileSHA256": "989c9a372568084bce04e604de857dc6a24bbe4c26e446c6c5ef962de2c04e1a",
+    "proofPath": "app-store-audit/2026-10-03-ipad-tvos/native-source-inputs-final.json"
+  },
+  "sourceBefore": {
+    "verifiedAtUTC": "2026-10-03T08:22:43.843179+00:00",
+    "revision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+    "inputCount": 864,
+    "allRecordedNativeInputHashesMatch": true,
+    "independentlyRecomputedCanonicalInputsSHA256": "bc80a47a2c83b46b8b7990b7822bae3a74c33170fd000506e96889ed8fd14067",
+    "proofFileSHA256": "989c9a372568084bce04e604de857dc6a24bbe4c26e446c6c5ef962de2c04e1a"
+  },
+  "sourceAfter": {
+    "verifiedAtUTC": "2026-10-03T08:32:03.293975+00:00",
+    "revision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+    "inputCount": 864,
+    "allRecordedNativeInputHashesMatch": true,
+    "independentlyRecomputedCanonicalInputsSHA256": "bc80a47a2c83b46b8b7990b7822bae3a74c33170fd000506e96889ed8fd14067",
+    "canonicalDigestMatchesBefore": true,
+    "proofFileUnchanged": true,
+    "exactNativeInputFileSetUnchanged": true
+  },
+  "buildMachine": "Current owned Mac, Xcode 26.6 (17F113)",
+  "archiveConfiguration": "Release",
+  "archiveCompilerJobs": 2,
+  "productionTestabilityDefault": "NO",
+  "testabilityCommandLineOverrideUsed": false,
+  "APIAuthenticationUsed": false,
+  "accountUIUsed": false,
+  "uploadPerformed": false,
+  "visionOSBuildOrRunPerformed": false,
+  "macOSBuildOrRunPerformed": false,
+  "SimulatorBootPerformed": false,
+  "nativeSourceModified": false,
+  "versionsModified": false,
+  "projectIdentityModified": false,
+  "temporaryArtifactRoot": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70",
+  "exportOptionsReusedFromVerifiedCandidate": true,
+  "exportOptionsSourcePath": "/tmp/hwvh-signed-release-20261003-92xr0ab0/ExportOptions.plist",
+  "exportOptionsSHA256": "89d43371c1aa86303104532d17b5a27a5f238b505e338baf2cb6ba22a4149704",
+  "historicalCandidateRecordPreserved": "app-store-audit/2026-10-03-ipad-tvos/signed-release-packages.json",
+  "historicalCandidateArtifactsPreserved": true,
+  "automaticProvisioningAuthorization": "Parent authorizes one scoped automatic provisioning export per platform for replacement packages of the existing frozen bundle/team using existing Xcode credentials. No account UI, credential entry, manual certificate/profile creation or revocation, or upload is authorized by this packaging task.",
+  "automaticProvisioningRequested": true,
+  "existingXcodeAccountAuthenticationUsed": true,
+  "manualCertificateProfileCreationOrRevocationRequested": false,
+  "archives": [
+    {
+      "platform": "iPadOS",
+      "sourceRevision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+      "sourceInputsSHA256": "bc80a47a2c83b46b8b7990b7822bae3a74c33170fd000506e96889ed8fd14067",
+      "archivePath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcarchive",
+      "archiveSucceeded": true,
+      "archiveExitCode": 0,
+      "archiveStartedAtUTC": "2026-10-03T08:23:19.766970+00:00",
+      "archiveFinishedAtUTC": "2026-10-03T08:24:02.036131+00:00",
+      "archiveCommandAtExecution": [
+        "xcodebuild",
+        "-project",
+        "Hot Wheels v Human.xcodeproj",
+        "-scheme",
+        "Hot Wheels v Human",
+        "-configuration",
+        "Release",
+        "-destination",
+        "generic/platform=iOS",
+        "-archivePath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcarchive",
+        "-derivedDataPath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/derived-ipad",
+        "-resultBundlePath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-archive.xcresult",
+        "-jobs",
+        "2",
+        "archive"
+      ],
+      "localArchiveLogPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-archive.log",
+      "archiveLogSHA256": "cfae92a336c74151ab6cda3bb9aebe5f962abbc6588ca01928589111dc1ba0b1",
+      "archiveFileCount": 710,
+      "archiveContentsSHA256": "262b348232d526d6ba2aea4dada9458711caad388467c7ce11cca4d0c558ddcf",
+      "archiveContentsUnchangedAfterExport": true,
+      "archiveInspection": {
+        "verifiedAtUTC": "2026-10-03T08:32:02.471708+00:00",
+        "appPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcarchive/Products/Applications/Hot Wheels v Human.app",
+        "signatureValid": true,
+        "signatureVerificationCommand": [
+          "codesign",
+          "--verify",
+          "--deep",
+          "--strict",
+          "--verbose=2",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcarchive/Products/Applications/Hot Wheels v Human.app"
+        ],
+        "signingIdentityClass": "Apple Development",
+        "signatureAppleRootAuthorityPresent": true,
+        "CodeDirectoryHash": "f5f5cc206147bcc81fbc2a241e6356ffc5abb10a",
+        "signatureHashType": "sha256 size=32",
+        "isDistributionSigned": false,
+        "signedTeamMatchesFrozenProject": true,
+        "entitlementKeys": [
+          "application-identifier",
+          "com.apple.developer.team-identifier",
+          "get-task-allow"
+        ],
+        "entitlementsEncodedSHA256": "2b416408da61ce59fba9f52db121b56a12e7f90e5881e7204ccaa0f5a2e5dc91",
+        "entitlementGetTaskAllow": true,
+        "entitlementApplicationIdentifierMatches": true,
+        "provisioningTeamMatchesFrozenProject": true,
+        "profileApplicationIdentifierMatchesFrozenProject": true,
+        "profileApplicationIdentifierHasWildcard": true,
+        "profileSHA256": "bce651b86a3deb32c2208ab3e8e8f209f64e668e7e24eb3f4fa8141530c3f608",
+        "profilePlatform": [
+          "iOS",
+          "xrOS",
+          "visionOS"
+        ],
+        "profileExpirationUTC": "2027-09-25T17:22:03+00:00",
+        "profileGetTaskAllow": true,
+        "profileProvisionedDevicesPresent": true,
+        "profileProvisionsAllDevices": false,
+        "UIDeviceFamily": [
+          2
+        ],
+        "displayName": "HWvH",
+        "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+        "version": "1.0",
+        "buildNumber": "1",
+        "minimumOS": "26.0",
+        "supportedPlatforms": [
+          "iPhoneOS"
+        ],
+        "platformName": "iphoneos",
+        "SDKName": "iphoneos26.5",
+        "SDKBuild": "23F81a",
+        "executableArchitectures": "arm64",
+        "executableSHA256": "a6ecfda5d05118c488b4936b001dda87a024f32b2628158002064dfec963100f",
+        "InfoPlistSHA256": "6f1d2e3c0b99c95be72f0c1cf8ea488c0af951b80a999703027d116143946342",
+        "ITSAppUsesNonExemptEncryption": false,
+        "cameraPurposePresent": true,
+        "localNetworkPurposePresent": true,
+        "bonjourServiceUnchanged": true,
+        "privacyManifest": {
+          "NSPrivacyTracking": false,
+          "NSPrivacyTrackingDomains": [],
+          "NSPrivacyCollectedDataTypes": [],
+          "NSPrivacyAccessedAPITypes": [
+            {
+              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+              "NSPrivacyAccessedAPITypeReasons": [
+                "CA92.1"
+              ]
+            }
+          ]
+        },
+        "privacyManifestSHA256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12",
+        "compiledIconRenditions": [
+          {
+            "Name": "AppIcon",
+            "AssetType": "Icon Image",
+            "Idiom": "pad",
+            "PixelWidth": 1024,
+            "PixelHeight": 1024,
+            "Opaque": true
+          },
+          {
+            "Name": "AppIcon",
+            "AssetType": "MultiSized Image",
+            "Idiom": "pad"
+          }
+        ],
+        "compiledIconPNGs": [
+          {
+            "filename": "AppIcon60x60@2x.png",
+            "width": 120,
+            "height": 120,
+            "sha256": "983abbaad33f7a1d8e95b3aa146478104cc756c5b9f1750d5a5c0e5bd3fd2948",
+            "dimensionInspection": "sips native optimized PNG decoding"
+          },
+          {
+            "filename": "AppIcon76x76@2x~ipad.png",
+            "width": 152,
+            "height": 152,
+            "sha256": "5168b99d93949424fb032d3cacfbd16ae38f0f08a7ecf74ddf2b5ba6795c1980",
+            "dimensionInspection": "sips native optimized PNG decoding"
+          }
+        ],
+        "AssetsCAR_SHA256": "c5f074de1f898b24acd1736c54dda8ccf1cc489c4d28e8855c192f2219096edc",
+        "uploadPerformed": false
+      },
+      "productionBuildSettings": {
+        "CONFIGURATION": "Release",
+        "ENABLE_TESTABILITY": "NO",
+        "TARGETED_DEVICE_FAMILY": "2",
+        "MARKETING_VERSION": "1.0",
+        "CURRENT_PROJECT_VERSION": "1",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "IPHONEOS_DEPLOYMENT_TARGET": "26.0",
+        "SDK_NAME": "iphoneos26.5",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "unsupportedNativePlatformsExcluded": true
+      },
+      "archiveLogHasEnableTesting": false,
+      "dSYMPresent": true,
+      "appStoreExport": {
+        "succeeded": true,
+        "exitCode": 0,
+        "method": "app-store-connect",
+        "destination": "export",
+        "manageAppVersionAndBuildNumber": false,
+        "allowProvisioningUpdates": true,
+        "commandAtExecution": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcarchive",
+          "-exportPath",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-app-store-export",
+          "-exportOptionsPlist",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ExportOptions.plist",
+          "-allowProvisioningUpdates"
+        ],
+        "exactResultMarkers": [
+          "** EXPORT SUCCEEDED **"
+        ],
+        "startedAtUTC": "2026-10-03T08:26:53.184169+00:00",
+        "finishedAtUTC": "2026-10-03T08:27:09.098525+00:00",
+        "IPAProduced": true,
+        "uploadRequested": false,
+        "logPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-export.log",
+        "logSHA256": "895b92dc8dc77bd7937ae47d28efae0c7e52cf75b18ddf5fc7239f6c99a8b781",
+        "localDistributionLogsPaths": [
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad.xcdistributionlogs"
+        ],
+        "exportOptionsSHA256": "89d43371c1aa86303104532d17b5a27a5f238b505e338baf2cb6ba22a4149704"
+      },
+      "distributionPackage": {
+        "verifiedAtUTC": "2026-10-03T08:32:02.683201+00:00",
+        "appPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-distribution-inspection/Payload/Hot Wheels v Human.app",
+        "signatureValid": true,
+        "signatureVerificationCommand": [
+          "codesign",
+          "--verify",
+          "--deep",
+          "--strict",
+          "--verbose=2",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-distribution-inspection/Payload/Hot Wheels v Human.app"
+        ],
+        "signingIdentityClass": "Apple Distribution",
+        "signatureAppleRootAuthorityPresent": true,
+        "CodeDirectoryHash": "b8a1f6a85b515c3434a2499519c2cd5d5c4c1fca",
+        "signatureHashType": "sha256 size=32",
+        "isDistributionSigned": true,
+        "signedTeamMatchesFrozenProject": true,
+        "entitlementKeys": [
+          "application-identifier",
+          "beta-reports-active",
+          "com.apple.developer.team-identifier",
+          "get-task-allow"
+        ],
+        "entitlementsEncodedSHA256": "081249c56a66c074a1de14cb44bc0188e3912911905095a8fffea805ea7c7eb4",
+        "entitlementGetTaskAllow": false,
+        "entitlementApplicationIdentifierMatches": true,
+        "provisioningTeamMatchesFrozenProject": true,
+        "profileApplicationIdentifierMatchesFrozenProject": true,
+        "profileApplicationIdentifierHasWildcard": false,
+        "profileSHA256": "85095748a79fc20366014190a807a7ec8594a663a31515e4ec720ceb032a2e0f",
+        "profilePlatform": [
+          "iOS",
+          "xrOS",
+          "visionOS"
+        ],
+        "profileExpirationUTC": "2027-06-10T13:08:25+00:00",
+        "profileGetTaskAllow": false,
+        "profileProvisionedDevicesPresent": false,
+        "profileProvisionsAllDevices": false,
+        "UIDeviceFamily": [
+          2
+        ],
+        "displayName": "HWvH",
+        "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+        "version": "1.0",
+        "buildNumber": "1",
+        "minimumOS": "26.0",
+        "supportedPlatforms": [
+          "iPhoneOS"
+        ],
+        "platformName": "iphoneos",
+        "SDKName": "iphoneos26.5",
+        "SDKBuild": "23F81a",
+        "executableArchitectures": "arm64",
+        "executableSHA256": "b221aed83ebaf6f96e35a7bfd2543ddd11388f9a10a4fe7a0177b34eb1e42473",
+        "InfoPlistSHA256": "1efd80547cef7be3f539c54956ab46c454e992bc748b835108550d3460b970bc",
+        "ITSAppUsesNonExemptEncryption": false,
+        "cameraPurposePresent": true,
+        "localNetworkPurposePresent": true,
+        "bonjourServiceUnchanged": true,
+        "privacyManifest": {
+          "NSPrivacyTracking": false,
+          "NSPrivacyTrackingDomains": [],
+          "NSPrivacyCollectedDataTypes": [],
+          "NSPrivacyAccessedAPITypes": [
+            {
+              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+              "NSPrivacyAccessedAPITypeReasons": [
+                "CA92.1"
+              ]
+            }
+          ]
+        },
+        "privacyManifestSHA256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12",
+        "compiledIconRenditions": [
+          {
+            "Name": "AppIcon",
+            "AssetType": "Icon Image",
+            "Idiom": "pad",
+            "PixelWidth": 1024,
+            "PixelHeight": 1024,
+            "Opaque": true
+          },
+          {
+            "Name": "AppIcon",
+            "AssetType": "MultiSized Image",
+            "Idiom": "pad"
+          }
+        ],
+        "compiledIconPNGs": [
+          {
+            "filename": "AppIcon60x60@2x.png",
+            "width": 120,
+            "height": 120,
+            "sha256": "983abbaad33f7a1d8e95b3aa146478104cc756c5b9f1750d5a5c0e5bd3fd2948",
+            "dimensionInspection": "sips native optimized PNG decoding"
+          },
+          {
+            "filename": "AppIcon76x76@2x~ipad.png",
+            "width": 152,
+            "height": 152,
+            "sha256": "5168b99d93949424fb032d3cacfbd16ae38f0f08a7ecf74ddf2b5ba6795c1980",
+            "dimensionInspection": "sips native optimized PNG decoding"
+          }
+        ],
+        "AssetsCAR_SHA256": "c5f074de1f898b24acd1736c54dda8ccf1cc489c4d28e8855c192f2219096edc",
+        "uploadPerformed": false,
+        "IPAPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-app-store-export/Hot Wheels v Human.ipa",
+        "IPASHA256": "b4223dd3a82a37e9adcc3a225e97a6241e6e81369c787f178dd34859704f0573",
+        "IPABytes": 23844447,
+        "extractionCommand": [
+          "ditto",
+          "-x",
+          "-k",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-app-store-export/Hot Wheels v Human.ipa",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ipad-distribution-inspection"
+        ]
+      },
+      "ownedTemporaryDerivedDataRemovedAfterVerification": true
+    },
+    {
+      "platform": "tvOS",
+      "sourceRevision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+      "sourceInputsSHA256": "bc80a47a2c83b46b8b7990b7822bae3a74c33170fd000506e96889ed8fd14067",
+      "archivePath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcarchive",
+      "archiveSucceeded": true,
+      "archiveExitCode": 0,
+      "archiveStartedAtUTC": "2026-10-03T08:28:17.422722+00:00",
+      "archiveFinishedAtUTC": "2026-10-03T08:28:55.397444+00:00",
+      "archiveCommandAtExecution": [
+        "xcodebuild",
+        "-project",
+        "Hot Wheels v Human.xcodeproj",
+        "-scheme",
+        "Hot Wheels v Human",
+        "-configuration",
+        "Release",
+        "-destination",
+        "generic/platform=tvOS",
+        "-archivePath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcarchive",
+        "-derivedDataPath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/derived-tvos",
+        "-resultBundlePath",
+        "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-archive.xcresult",
+        "-jobs",
+        "2",
+        "archive"
+      ],
+      "localArchiveLogPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-archive.log",
+      "archiveLogSHA256": "acbc97a4bbed7083de3e800173b5f103ed66d270d2eb2820f2b76290c1d72260",
+      "archiveFileCount": 709,
+      "archiveContentsSHA256": "29ed8d8859fdde254d389b6c15123f362152138da2fe22fefef1031dc19782a9",
+      "archiveContentsUnchangedAfterExport": true,
+      "archiveInspection": {
+        "verifiedAtUTC": "2026-10-03T08:32:02.976659+00:00",
+        "appPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcarchive/Products/Applications/Hot Wheels v Human.app",
+        "signatureValid": true,
+        "signatureVerificationCommand": [
+          "codesign",
+          "--verify",
+          "--deep",
+          "--strict",
+          "--verbose=2",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcarchive/Products/Applications/Hot Wheels v Human.app"
+        ],
+        "signingIdentityClass": "Apple Development",
+        "signatureAppleRootAuthorityPresent": true,
+        "CodeDirectoryHash": "bad80f7d22351b8ff6cc2ee45fd026303865ef20",
+        "signatureHashType": "sha256 size=32",
+        "isDistributionSigned": false,
+        "signedTeamMatchesFrozenProject": true,
+        "entitlementKeys": [
+          "application-identifier",
+          "com.apple.developer.team-identifier",
+          "get-task-allow"
+        ],
+        "entitlementsEncodedSHA256": "2b416408da61ce59fba9f52db121b56a12e7f90e5881e7204ccaa0f5a2e5dc91",
+        "entitlementGetTaskAllow": true,
+        "entitlementApplicationIdentifierMatches": true,
+        "provisioningTeamMatchesFrozenProject": true,
+        "profileApplicationIdentifierMatchesFrozenProject": true,
+        "profileApplicationIdentifierHasWildcard": true,
+        "profileSHA256": "f1e67e6c91e0319675d496bf691e7f9912dbc074684b7c52481ad8cbe4fbb3d1",
+        "profilePlatform": [
+          "tvOS"
+        ],
+        "profileExpirationUTC": "2027-09-29T05:55:51+00:00",
+        "profileGetTaskAllow": true,
+        "profileProvisionedDevicesPresent": true,
+        "profileProvisionsAllDevices": false,
+        "UIDeviceFamily": [
+          3
+        ],
+        "displayName": "HWvH",
+        "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+        "version": "1.0",
+        "buildNumber": "1",
+        "minimumOS": "26.0",
+        "supportedPlatforms": [
+          "AppleTVOS"
+        ],
+        "platformName": "appletvos",
+        "SDKName": "appletvos26.5",
+        "SDKBuild": "23L470",
+        "executableArchitectures": "arm64",
+        "executableSHA256": "dfac41cdedd65d7bf78b414727e4c280ccfcf1f2f5779ee2a74e2664cd4e6174",
+        "InfoPlistSHA256": "a26a14422083ee66c1154bce4bd764cd1994fe5d841c0b79c02e746567ef6b87",
+        "ITSAppUsesNonExemptEncryption": false,
+        "cameraPurposePresent": false,
+        "localNetworkPurposePresent": true,
+        "bonjourServiceUnchanged": true,
+        "privacyManifest": {
+          "NSPrivacyTracking": false,
+          "NSPrivacyTrackingDomains": [],
+          "NSPrivacyCollectedDataTypes": [],
+          "NSPrivacyAccessedAPITypes": [
+            {
+              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+              "NSPrivacyAccessedAPITypeReasons": [
+                "CA92.1"
+              ]
+            }
+          ]
+        },
+        "privacyManifestSHA256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12",
+        "compiledIconRenditions": [
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 480,
+            "PixelHeight": 320,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1360,
+            "PixelHeight": 848,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 960,
+            "PixelHeight": 640,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon - App Store/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon - App Store/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 1920,
+            "PixelHeight": 720,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 3840,
+            "PixelHeight": 1440,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image Wide",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 2320,
+            "PixelHeight": 720,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image Wide",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 4640,
+            "PixelHeight": 1440,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "ImageStack",
+            "Idiom": "universal",
+            "LayerCount": 2,
+            "CanvasWidth": 400,
+            "CanvasHeight": 240
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "ImageStack",
+            "Idiom": "marketing",
+            "LayerCount": 2,
+            "CanvasWidth": 1280,
+            "CanvasHeight": 768
+          }
+        ],
+        "compiledIconPNGs": [],
+        "AssetsCAR_SHA256": "60d7e173f9672c068498d8d402e0856dd6397c0cd67046f8399b9a67c046a6c3",
+        "uploadPerformed": false
+      },
+      "productionBuildSettings": {
+        "CONFIGURATION": "Release",
+        "ENABLE_TESTABILITY": "NO",
+        "TARGETED_DEVICE_FAMILY": "3",
+        "MARKETING_VERSION": "1.0",
+        "CURRENT_PROJECT_VERSION": "1",
+        "INFOPLIST_KEY_CFBundleDisplayName": "HWvH",
+        "SUPPORTED_PLATFORMS": "appletvos appletvsimulator iphoneos iphonesimulator",
+        "TVOS_DEPLOYMENT_TARGET": "26.0",
+        "SDK_NAME": "appletvos26.5",
+        "SUPPORTS_MACCATALYST": "NO",
+        "SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD": "NO",
+        "unsupportedNativePlatformsExcluded": true
+      },
+      "archiveLogHasEnableTesting": false,
+      "dSYMPresent": true,
+      "appStoreExport": {
+        "succeeded": true,
+        "exitCode": 0,
+        "method": "app-store-connect",
+        "destination": "export",
+        "manageAppVersionAndBuildNumber": false,
+        "allowProvisioningUpdates": true,
+        "commandAtExecution": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcarchive",
+          "-exportPath",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-app-store-export",
+          "-exportOptionsPlist",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/ExportOptions.plist",
+          "-allowProvisioningUpdates"
+        ],
+        "exactResultMarkers": [
+          "** EXPORT SUCCEEDED **"
+        ],
+        "startedAtUTC": "2026-10-03T08:29:20.832733+00:00",
+        "finishedAtUTC": "2026-10-03T08:29:36.231815+00:00",
+        "IPAProduced": true,
+        "uploadRequested": false,
+        "logPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-export.log",
+        "logSHA256": "f3e90efa3ceec84bf4aa67af9277744f01ee65bd9fe298d96b06684bce58f3ea",
+        "localDistributionLogsPaths": [
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos.xcdistributionlogs"
+        ],
+        "exportOptionsSHA256": "89d43371c1aa86303104532d17b5a27a5f238b505e338baf2cb6ba22a4149704"
+      },
+      "distributionPackage": {
+        "verifiedAtUTC": "2026-10-03T08:32:03.208874+00:00",
+        "appPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-distribution-inspection/Payload/Hot Wheels v Human.app",
+        "signatureValid": true,
+        "signatureVerificationCommand": [
+          "codesign",
+          "--verify",
+          "--deep",
+          "--strict",
+          "--verbose=2",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-distribution-inspection/Payload/Hot Wheels v Human.app"
+        ],
+        "signingIdentityClass": "Apple Distribution",
+        "signatureAppleRootAuthorityPresent": true,
+        "CodeDirectoryHash": "e039e9226f6d0dab6ead107ab2f093843601b86a",
+        "signatureHashType": "sha256 size=32",
+        "isDistributionSigned": true,
+        "signedTeamMatchesFrozenProject": true,
+        "entitlementKeys": [
+          "application-identifier",
+          "beta-reports-active",
+          "com.apple.developer.team-identifier",
+          "get-task-allow"
+        ],
+        "entitlementsEncodedSHA256": "081249c56a66c074a1de14cb44bc0188e3912911905095a8fffea805ea7c7eb4",
+        "entitlementGetTaskAllow": false,
+        "entitlementApplicationIdentifierMatches": true,
+        "provisioningTeamMatchesFrozenProject": true,
+        "profileApplicationIdentifierMatchesFrozenProject": true,
+        "profileApplicationIdentifierHasWildcard": false,
+        "profileSHA256": "98774bf5ffbf31570dda994456c01b7b58a0751e068a07838c140ff5fcf27175",
+        "profilePlatform": [
+          "tvOS"
+        ],
+        "profileExpirationUTC": "2027-06-10T13:08:25+00:00",
+        "profileGetTaskAllow": false,
+        "profileProvisionedDevicesPresent": false,
+        "profileProvisionsAllDevices": false,
+        "UIDeviceFamily": [
+          3
+        ],
+        "displayName": "HWvH",
+        "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+        "version": "1.0",
+        "buildNumber": "1",
+        "minimumOS": "26.0",
+        "supportedPlatforms": [
+          "AppleTVOS"
+        ],
+        "platformName": "appletvos",
+        "SDKName": "appletvos26.5",
+        "SDKBuild": "23L470",
+        "executableArchitectures": "arm64",
+        "executableSHA256": "6d90cbfda1bc278dc001d2038f3ed3a2d999de4de56f811816aee8b6197768cc",
+        "InfoPlistSHA256": "36e0e803bf33d1e5b00a67333ddc09e0601d243e8bdd0b7fb1f6c0c46f014be5",
+        "ITSAppUsesNonExemptEncryption": false,
+        "cameraPurposePresent": false,
+        "localNetworkPurposePresent": true,
+        "bonjourServiceUnchanged": true,
+        "privacyManifest": {
+          "NSPrivacyTracking": false,
+          "NSPrivacyTrackingDomains": [],
+          "NSPrivacyCollectedDataTypes": [],
+          "NSPrivacyAccessedAPITypes": [
+            {
+              "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+              "NSPrivacyAccessedAPITypeReasons": [
+                "CA92.1"
+              ]
+            }
+          ]
+        },
+        "privacyManifestSHA256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12",
+        "compiledIconRenditions": [
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 480,
+            "PixelHeight": 320,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1360,
+            "PixelHeight": 848,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 960,
+            "PixelHeight": 640,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon - App Store/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon - App Store/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "marketing",
+            "PixelWidth": 1280,
+            "PixelHeight": 768,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon/Layer 1/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": false
+          },
+          {
+            "Name": "App Icon/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 400,
+            "PixelHeight": 240,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon/Layer 2/Content",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 800,
+            "PixelHeight": 480,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 1920,
+            "PixelHeight": 720,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 3840,
+            "PixelHeight": 1440,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image Wide",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 2320,
+            "PixelHeight": 720,
+            "Opaque": true
+          },
+          {
+            "Name": "Top Shelf Image Wide",
+            "AssetType": "Image",
+            "Idiom": "tv",
+            "PixelWidth": 4640,
+            "PixelHeight": 1440,
+            "Opaque": true
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "ImageStack",
+            "Idiom": "universal",
+            "LayerCount": 2,
+            "CanvasWidth": 400,
+            "CanvasHeight": 240
+          },
+          {
+            "Name": "App Icon",
+            "AssetType": "ImageStack",
+            "Idiom": "marketing",
+            "LayerCount": 2,
+            "CanvasWidth": 1280,
+            "CanvasHeight": 768
+          }
+        ],
+        "compiledIconPNGs": [],
+        "AssetsCAR_SHA256": "60d7e173f9672c068498d8d402e0856dd6397c0cd67046f8399b9a67c046a6c3",
+        "uploadPerformed": false,
+        "IPAPath": "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-app-store-export/Hot Wheels v Human.ipa",
+        "IPASHA256": "8929abe5b90f12980f0a4e922fa885e1be5a98a5bd17ace5e2c8a183a31399d6",
+        "IPABytes": 23972566,
+        "extractionCommand": [
+          "ditto",
+          "-x",
+          "-k",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-app-store-export/Hot Wheels v Human.ipa",
+          "/tmp/hwvh-final-signed-release-20261003-kpwhsx70/tvos-distribution-inspection"
+        ]
+      },
+      "ownedTemporaryDerivedDataRemovedAfterVerification": true
+    }
+  ],
+  "iconDimensionInspection": "Native sips decoding handles Apple optimized PNGs; compiled icon inventories come from assetutil on the actual signed bundles.",
+  "nextGate": "Root-owned final runtime QA and authenticated App Store Connect prior device-family/build history inspection before an authorized upload/submission. Neither replacement IPA has been uploaded.",
+  "freeBytesAfter": 6316511232
+}

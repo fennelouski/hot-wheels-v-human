@@ -1,0 +1,40 @@
+{
+  "startedAt": "2026-10-04T09:59:34.965671+00:00",
+  "sourceProof": "native-inputs.candidate-8.json",
+  "compiledProof": "compiled-artifacts.candidate-8.json",
+  "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+  "appearanceBefore": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "enumeratedTests": [
+    "Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()"
+  ],
+  "exitCode": 0,
+  "command": [
+    "xcodebuild",
+    "test-without-building",
+    "-xctestrun",
+    "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+    "-destination",
+    "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+    "-parallel-testing-enabled",
+    "NO",
+    "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "-resultBundlePath",
+    "/tmp/hwvh-game-loop-tv-ui-candidate8-one-20261004.xcresult"
+  ],
+  "resultBundle": "/tmp/hwvh-game-loop-tv-ui-candidate8-one-20261004.xcresult",
+  "log": "app-store-audit/2026-10-04-native-game-loop/tv-ui-candidate8-one.log",
+  "logSHA256": "56ed1d46c2d04cd45da614ed9e4ca83cb3f0ea64a965c50021a2df02e17e594b",
+  "appearanceAfter": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "shutdownExitCode": 0,
+  "normalFilesUnchanged": true,
+  "nativeAndCompiledHashesUnchanged": true,
+  "finishedAt": "2026-10-04T10:00:30.314531+00:00"
+}

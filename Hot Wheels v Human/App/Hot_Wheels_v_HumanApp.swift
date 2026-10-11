@@ -32,10 +32,29 @@ struct Hot_Wheels_v_HumanApp: App {
         WindowGroup {
             Group {
                 if HWTestSession.isUnitHost { Color.clear }
-                else { RootView().environment(appModel) }
+                else {
+                    #if os(visionOS)
+                    SpatialWorkshopView().environment(appModel)
+                    #else
+                    RootView().environment(appModel)
+                    #endif
+                }
             }
             .modifier(GamePresentationPolicy())
         }
         .modelContainer(container)
+        #if os(visionOS)
+        .defaultSize(width: 1060, height: 780)
+        .windowResizability(.contentMinSize)
+        #endif
+        #if os(visionOS)
+        // A single race owns the existing physics event bus and debris pool.
+        Window("Race table", id: "hw-spatial-race") {
+            SpatialRaceTable().environment(appModel).modelContainer(container)
+                .modifier(GamePresentationPolicy())
+        }
+        .windowStyle(.volumetric)
+        .defaultSize(width: 1.4, height: 0.9, depth: 1.4, in: .meters)
+        #endif
     }
 }

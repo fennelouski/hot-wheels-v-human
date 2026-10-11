@@ -1,0 +1,486 @@
+- banner "App Store Connect":
+  - heading "App Store Connect" [level=1]:
+    - link "App Store Connect":
+      - /url: /
+  - navigation "Global":
+    - list:
+      - link "Apps":
+        - /url: /apps
+      - link "Xcode Cloud":
+        - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/xcode-cloud
+      - link "Trends":
+        - /url: /trends
+      - link "Reports":
+        - /url: /itc/payments_and_financial_reports
+      - link "Business":
+        - /url: /business
+      - link "Users and Access":
+        - /url: /access/users
+  - button "Nathan Fennel Nathan Fennel Account name menu":
+    - generic: Nathan Fennel
+    - generic: Nathan Fennel
+- button "Apps menu, HWvH, selected":
+  - generic "HWvH":
+    - img "HWvH"
+  - generic: HWvH
+- navigation "Apps":
+  - list:
+    - link "Distribution":
+      - /url: /apps/6818777508/distribution
+    - link "Analytics":
+      - /url: /apps/6818777508/analytics
+    - link "TestFlight":
+      - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/apps/6818777508/testflight
+- main:
+  - navigation "Distribution":
+    - list:
+      - heading "iOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/ios/version/inflight
+          - text: 1.0 Prepare for Submission
+        - button "Delete iOS version 1.0":
+          - generic: Delete
+      - heading "tvOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/tvos/version/inflight
+          - text: 1.0 Prepare for Submission
+        - button "Delete tvOS version 1.0":
+          - generic: Delete
+      - button "Add Platform"
+      - separator
+      - heading "General" [level=2]
+      - list:
+        - link "App Information":
+          - /url: /apps/6818777508/distribution/info
+          - generic: App Information
+        - link "App Review":
+          - /url: /apps/6818777508/distribution/reviewsubmissions
+          - generic: App Review
+        - link "History":
+          - /url: /apps/6818777508/distribution/activity/ios/versions
+          - generic: History
+      - separator
+      - heading "App Store" [level=2]
+      - heading "Trust & Safety" [level=3]
+      - list:
+        - link "App Privacy":
+          - /url: /apps/6818777508/distribution/privacy
+          - generic: App Privacy
+        - link "App Accessibility":
+          - /url: /apps/6818777508/distribution/accessibility
+          - generic: App Accessibility
+        - link "Ratings and Reviews":
+          - /url: /apps/6818777508/distribution/ratings/ios
+          - generic: Ratings and Reviews
+      - heading "Growth & Marketing" [level=3]
+      - list:
+        - link "In-App Events":
+          - /url: /apps/6818777508/distribution/events
+          - generic: In-App Events
+        - link "Custom Product Pages":
+          - /url: /apps/6818777508/distribution/productpages
+          - generic: Custom Product Pages
+        - link "Product Page Optimization":
+          - /url: /apps/6818777508/distribution/optimization
+          - generic: Product Page Optimization
+        - link "Promo Codes":
+          - /url: /apps/6818777508/distribution/promo_codes/generate
+          - generic: Promo Codes
+        - link "Game Center":
+          - /url: /apps/6818777508/distribution/gamecenter
+          - generic: Game Center
+      - heading "Monetization" [level=3]
+      - list:
+        - link "Pricing and Availability":
+          - /url: /apps/6818777508/distribution/pricing
+          - generic: Pricing and Availability
+        - link "In-App Purchases":
+          - /url: /apps/6818777508/distribution/iaps
+          - generic: In-App Purchases
+        - link "Subscriptions":
+          - /url: /apps/6818777508/distribution/subscriptions
+          - generic: Subscriptions
+      - heading "Featuring" [level=3]
+      - list:
+        - link "Nominations":
+          - /url: /apps/6818777508/distribution/nominations
+          - generic: Nominations
+  - generic: 
+  - heading "App Information" [level=2]
+  - paragraph: This information is used for all platforms of this app. Any changes will be released with your next app version.
+  - button "Save"
+  - generic: 
+  - heading "Localizable Information" [level=3]
+  - button "English (U.S.)":
+    - text: English (U.S.)
+  - button "?"
+  - generic: Name
+  - button "More information": "?"
+  - textbox "Name": HWvH
+  - status "Characters remaining": "26"
+  - generic: Subtitle
+  - button "More information": "?"
+  - textbox "Subtitle": Build tracks. Race your way.
+  - status "Characters remaining": "2"
+  - heading "General Information" [level=3]
+  - generic: Bundle ID
+  - button "More information": "?"
+  - combobox "Bundle ID":
+    - option "Alphabetical List of Notes - com.nathanfennel.atoz"
+    - option "AYSA Watch - com.nathanfennel.Are-You-Still-There.Watch"
+    - option "AYSA Widget - com.nathanfennel.Are-You-Still-There.Widget"
+    - option "Golfmoji Scorecard Live Activity Widget - com.nathanfennel.Emoji-Golf-Scorecard.ScorecardLiveActivityWidget"
+    - option "Here I Learn - com.nathanfennel.HereILearn"
+    - option "PantryPages Share Extension - com.nathanfennel.PantryPages.ShareExtension"
+    - option "ProFoot - ProFoot"
+    - option "Rememorize - com.nathanfennel.rememorize"
+    - option "Restaurant Reminder iOS Widget - com.fennel.RestaurantReminder.widget"
+    - option "Restaurant Reminder Mac Widget - com.fennel.RestaurantReminder.mac-widget"
+    - option "Smart Word Game - com.nathanfennel.Word-Game"
+    - option "StandupStash Watch - com.nathanfennel.StandupStash.watchkitapp"
+    - option "Subwoofer Calculator - com.nathanfennel.Subwoofer-Calculator"
+    - option "ThoughtFlow - co.thought-flow.Thought-Flow"
+    - option "XC com fennel AlphaBetTyper - com.fennel.AlphaBetTyper"
+    - option "XC com fennel AlphaBetTyperUITests - com.fennel.AlphaBetTyperUITests"
+    - option "XC com fennel AutoLayoutHelper - com.fennel.AutoLayoutHelper"
+    - option "XC com fennel AutoLayoutHelperUITests - com.fennel.AutoLayoutHelperUITests"
+    - option "XC com fennel Black-Hole - com.fennel.Black-Hole"
+    - option "XC com fennel Cryptogram - com.fennel.Cryptogram"
+    - option "XC com fennel Fishbowl-Head - com.fennel.Fishbowl-Head"
+    - option "XC com fennel GCP-Proxy-API-Demo - com.fennel.GCP-Proxy-API-Demo"
+    - option "XC com fennel Giant-Text Giant-Text-Widget - com.fennel.Giant-Text.Giant-Text-Widget"
+    - option "XC com fennel GiantTextDisplay Giant-Text-Widget - com.fennel.GiantTextDisplay.Giant-Text-Widget"
+    - option "XC com fennel QR-Fusiokn - com.fennel.QR-Fusiokn"
+    - option "XC com fennel ShowMenu - com.fennel.ShowMenu"
+    - option "XC com fennel ShowMenuUITests - com.fennel.ShowMenuUITests"
+    - option "XC com fennel Smart-Script-Writer Watch - com.fennel.Smart-Script-Writer.Watch"
+    - option "XC com fennel Story-Imaginator - com.fennel.Story-Imaginator"
+    - option "XC com fennel Weather-Graphics-Playground - com.fennel.Weather-Graphics-Playground"
+    - option "XC com nathanfennel - com.nathanfennel"
+    - option "XC com nathanfennel Attunetion IntentionWidget - com.nathanfennel.Attunetion.IntentionWidget"
+    - option "XC com nathanfennel BackgroundClock - com.nathanfennel.BackgroundClock"
+    - option "XC com nathanfennel BoardBooksLocal - com.nathanfennel.BoardBooksLocal"
+    - option "XC com nathanfennel CardOnCue - com.nathanfennel.CardOnCue"
+    - option "XC com nathanfennel Colors - com.nathanfennel.Colors"
+    - option "XC com nathanfennel ColorsUITests - com.nathanfennel.ColorsUITests"
+    - option "XC com nathanfennel Dadventures watchkitapp - com.nathanfennel.Dadventures.watchkitapp"
+    - option "XC com nathanfennel Dadventures widgets - com.nathanfennel.Dadventures.widgets"
+    - option "XC com nathanfennel Daily-Intentions IntentionWidget - com.nathanfennel.Daily-Intentions.IntentionWidget"
+    - option "XC com nathanfennel DataMirror - com.nathanfennel.DataMirror"
+    - option "XC com nathanfennel Degrouper - com.nathanfennel.Degrouper"
+    - option "XC com nathanfennel DegrouperLocal - com.nathanfennel.DegrouperLocal"
+    - option "XC com nathanfennel DegrouperUITests - com.nathanfennel.DegrouperUITests"
+    - option "XC com nathanfennel Emoji-Golf-Scorecard watchkitapp - com.nathanfennel.Emoji-Golf-Scorecard.watchkitapp"
+    - option "XC com nathanfennel Fonsters - com.nathanfennel.Fonsters"
+    - option "XC com nathanfennel Fonsters watchkitapp - com.nathanfennel.Fonsters.watchkitapp"
+    - option "XC com nathanfennel Full-Screen-Text - com.nathanfennel.Full-Screen-Text"
+    - option "XC com nathanfennel Game-Toolkit Widgets - com.nathanfennel.Game-Toolkit.Widgets"
+    - option "XC com nathanfennel GigLog - maccatalyst.com.nathanfennel.GigLog"
+    - option "XC com nathanfennel Happy-App - com.nathanfennel.Happy-App"
+    - option "XC com nathanfennel Hot-Wheels-v-Human - com.nathanfennel.Hot-Wheels-v-Human" [selected]
+    - option "XC com nathanfennel Hyperlink-Notebook ShareExtension - com.nathanfennel.Hyperlink-Notebook.ShareExtension"
+    - option "XC com nathanfennel If-This-Then-Lunch watchkitapp watchkitextension - com.nathanfennel.If-This-Then-Lunch.watchkitapp.watchkitextension"
+    - option "XC com nathanfennel iOS-11-by-Examples - com.nathanfennel.iOS-11-by-Examples"
+    - option "XC com nathanfennel iOS-11-by-Examples MessagesFilter - com.nathanfennel.iOS-11-by-Examples.MessagesFilter"
+    - option "XC com nathanfennel ios8sampler - com.nathanfennel.ios8sampler"
+    - option "XC com nathanfennel iPad - com.nathanfennel.iPad"
+    - option "XC com nathanfennel MyLife - com.nathanfennel.MyLife"
+    - option "XC com nathanfennel MyLife ShareExtension - com.nathanfennel.MyLife.ShareExtension"
+    - option "XC com nathanfennel MyLife Widget - com.nathanfennel.MyLife.Widget"
+    - option "XC com nathanfennel NeverNote watchkitapp - com.nathanfennel.NeverNote.watchkitapp"
+    - option "XC com nathanfennel NeverNote watchkitapp NeverNoteWatchWidget - com.nathanfennel.NeverNote.watchkitapp.NeverNoteWatchWidget"
+    - option "XC com nathanfennel Parenting - com.nathanfennel.Parenting"
+    - option "XC com nathanfennel ParentingiPad - com.nathanfennel.ParentingiPad"
+    - option "XC com nathanfennel Photographer-Lighting-Diagrams - com.nathanfennel.Photographer-Lighting-Diagrams"
+    - option "XC com nathanfennel PictureGrid - com.nathanfennel.PictureGrid"
+    - option "XC com nathanfennel pregnancy - com.nathanfennel.pregnancy"
+    - option "XC com nathanfennel Promptly Watch - com.nathanfennel.Promptly.Watch"
+    - option "XC com nathanfennel Quick-FFT - com.nathanfennel.Quick-FFT"
+    - option "XC com nathanfennel RacetoDogMountain messages - com.nathanfennel.RacetoDogMountain.messages"
+    - option "XC com nathanfennel RacetoDogMountain watchkitapp - com.nathanfennel.RacetoDogMountain.watchkitapp"
+    - option "XC com nathanfennel Straight-Up-Browser - com.nathanfennel.Straight-Up-Browser"
+    - option "XC com nathanfennel Straight-Up-Browser share - com.nathanfennel.Straight-Up-Browser.share"
+    - option "XC com nathanfennel TidyTasker TidyTaskerWidget - com.nathanfennel.TidyTasker.TidyTaskerWidget"
+    - option "XC com nathanfennel Tight-Rope-Car - com.nathanfennel.Tight-Rope-Car"
+    - option "XC com nathanfennel TimeZoneConverter - com.nathanfennel.TimeZoneConverter"
+    - option "XC com nathanfennel TimeZoneConverterUITests - com.nathanfennel.TimeZoneConverterUITests"
+    - option "XC com nathanfennel White-Screen - com.nathanfennel.White-Screen"
+    - option "XC com nathanfennel Xatacomb - com.nathanfennel.Xatacomb"
+    - option "XC com nathanfennel Xatacomb macOS - com.nathanfennel.Xatacomb.macOS"
+    - option "XC com nathanfennel Xatacomb-macOS - com.nathanfennel.Xatacomb-macOS"
+    - option "XC com ujet ios ExampleApp - com.ujet.ios.ExampleApp"
+    - option "Xcode iOS App ID com hai fennel nathan Alphabetical-List-Utility - com.hai.fennel.nathan.Alphabetical-List-Utility"
+    - option "Xcode iOS App ID com nathanfennel HKWPlayer - com.nathanfennel.HKWPlayer"
+    - option "Xcode iOS App ID com nathanfennel KHWPlayer - com.nathanfennel.KHWPlayer"
+    - option "You Are Not Here - com.nathanfennel.YouArentHere"
+  - generic: SKU
+  - button "More information": "?"
+  - paragraph: hwvh-ipad-tvos-2026
+  - generic: Apple ID
+  - button "More information": "?"
+  - paragraph: "6818777508"
+  - generic: Content Rights
+  - button "More information": "?"
+  - button "Edit"
+  - paragraph:
+    - button "Set Up Content Rights Information"
+  - generic: License Agreement
+  - button "More information": "?"
+  - button "Edit"
+  - paragraph:
+    - link "Apple’s Standard License Agreement":
+      - /url: http://www.apple.com/legal/itunes/appstore/dev/stdeula
+  - generic: Primary Language
+  - button "More information": "?"
+  - paragraph: English (U.S.)
+  - generic: Category
+  - button "More information": "?"
+  - combobox "Category":
+    - option "Primary"
+    - option "Books"
+    - option "Business"
+    - option "Developer Tools"
+    - option "Education"
+    - option "Entertainment"
+    - option "Finance"
+    - option "Food & Drink"
+    - option "Games" [selected]
+    - option "Graphics & Design"
+    - option "Health & Fitness"
+    - option "Lifestyle"
+    - option "Magazines & Newspapers"
+    - option "Medical"
+    - option "Music"
+    - option "Navigation"
+    - option "News"
+    - option "Photo & Video"
+    - option "Productivity"
+    - option "Reference"
+    - option "Shopping"
+    - option "Social Networking"
+    - option "Sports"
+    - option "Stickers"
+    - option "Travel"
+    - option "Utilities"
+    - option "Weather"
+  - combobox:
+    - option "Subcategory (optional)"
+    - option "Action"
+    - option "Adventure"
+    - option "Board"
+    - option "Card"
+    - option "Casino"
+    - option "Casual"
+    - option "Family"
+    - option "Music"
+    - option "Puzzle"
+    - option "Racing" [selected]
+    - option "Roleplaying"
+    - option "Simulation"
+    - option "Sports"
+    - option "Strategy"
+    - option "Trivia"
+    - option "Word"
+  - combobox:
+    - option "Subcategory (optional)"
+    - option "Action"
+    - option "Adventure"
+    - option "Board"
+    - option "Card"
+    - option "Casino"
+    - option "Casual"
+    - option "Family"
+    - option "Music"
+    - option "Puzzle"
+    - option "Roleplaying"
+    - option "Simulation" [selected]
+    - option "Sports"
+    - option "Strategy"
+    - option "Trivia"
+    - option "Word"
+  - combobox:
+    - option "Secondary (optional)" [selected]
+    - option "Books"
+    - option "Business"
+    - option "Developer Tools"
+    - option "Education"
+    - option "Entertainment"
+    - option "Finance"
+    - option "Food & Drink"
+    - option "Graphics & Design"
+    - option "Health & Fitness"
+    - option "Lifestyle"
+    - option "Magazines & Newspapers"
+    - option "Medical"
+    - option "Music"
+    - option "Navigation"
+    - option "News"
+    - option "Photo & Video"
+    - option "Productivity"
+    - option "Reference"
+    - option "Shopping"
+    - option "Social Networking"
+    - option "Sports"
+    - option "Stickers"
+    - option "Travel"
+    - option "Utilities"
+    - option "Weather"
+  - separator
+  - heading "Age Ratings" [level=3]
+  - paragraph:
+    - text: Age ratings help users better understand if your app contains any objectionable content. To determine your app's age rating, you'll be asked the availability or frequency of certain features and types of content within your app. Based on your responses, an age rating will be assigned for each country or region based on their age suitability standards. The assigned age rating will appear on each country or region's App Store and be the same across all platforms in that country or region.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/reference/age-ratings-values-and-definitions
+  - button "Set Up Age Ratings"
+  - separator
+  - heading "Learn More About Age Ratings" [level=3]
+  - paragraph: To learn more about and view examples of the features and content used to determine age ratings, select a category below.
+  - paragraph: In-App Controls
+  - paragraph: Parental Controls, Age Assurance
+  - paragraph: Capabilities
+  - paragraph: Unrestricted Web Access, User-Generated Content, Social Media, Social Media Disabled for Users Under 13, Messaging and Chat, Advertising
+  - paragraph: Mature Themes
+  - paragraph: Profanity or Crude Humor, Horror/Fear Themes, Alcohol, Tobacco, or Drug Use or References
+  - paragraph: Medical or Wellness
+  - paragraph: Medical or Treatment Information, Health or Wellness Topics
+  - paragraph: Sexuality or Nudity
+  - paragraph: Mature or Suggestive Themes, Sexual Content or Nudity, Graphic Sexual Content and Nudity
+  - paragraph: Violence
+  - paragraph: Cartoon or Fantasy Violence, Realistic Violence, Prolonged Graphic or Sadistic Realistic Violence, Guns or Other Weapons
+  - paragraph: Chance-Based Activities
+  - paragraph: Gambling, Simulated Gambling, Contests, Loot Boxes
+  - separator
+  - heading "App Encryption Documentation" [level=3]
+  - button "Upload":
+  - paragraph:
+    - text: Specify your use of encryption in Xcode by adding the
+    - strong: App Uses Non-Exempt Encryption
+    - text: key to your app's Info.plist file with a Boolean value that indicates whether your app uses encryption.
+    - link "Learn More":
+      - /url: https://developer.apple.com/documentation/security/complying_with_encryption_export_regulations
+  - paragraph: "You're required to provide documentation if your app contains any of the following:"
+  - list:
+    - listitem: Encryption algorithms that are proprietary or not accepted as standard by international standard bodies (IEEE, IETF, ITU, etc.)
+    - listitem: Standard encryption algorithms instead of, or in addition to, using or accessing the encryption within Apple's operating system
+  - paragraph: You can provide your documentation before you submit a build.
+  - button "Upload"
+  - heading "App Store Regulations & Permits" [level=3]
+  - heading "Digital Services Act" [level=6]
+  - paragraph:
+    - text: This developer has identified itself as a non-trader for this app. In order to update your app level trader status, you need to complete compliance requirements.
+    - link "Get Started":
+      - /url: /business?collectContactInfo=true
+  - heading "Vietnam Game License" [level=3]
+  - paragraph:
+    - text: If your game is available on the App Store in Vietnam, you can add a game license as required by Vietnamese regulators.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/reference/app-information
+  - button "Add"
+  - heading "Regulated Medical Devices" [level=6]
+  - paragraph:
+    - text: If your app is in the Medical or Health and Fitness categories, or if you selected “frequent” for “Medical or Treatment Information” in the App Store Connect age rating questionnaire, you need to declare whether it functions as a regulated medical device to keep distributing on the App Store in certain regions.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/manage-app-information/declare-regulated-medical-device-status
+  - paragraph:
+    - button "Declare Regulated Medical Device"
+  - separator
+  - heading "App Store Server Notifications" [level=3]
+  - paragraph:
+    - text: App Store server notifications provide information about key events related to your in-app purchases. To test notifications before implementing them in production, you can set up a separate sandbox server URL.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/configure-in-app-purchase-settings/enter-server-urls-for-app-store-server-notifications
+  - generic: Production Server URL
+  - paragraph:
+    - button "Set Up URL"
+  - generic: Sandbox Server URL
+  - paragraph:
+    - button "Set Up URL"
+  - heading "App-Specific Shared Secret" [level=3]
+  - paragraph: The app-specific shared secret is a unique code to receive receipts for only this app’s auto-renewable subscriptions. You may want to use an app-specific shared secret if you’re transferring this app to another developer, or if you want to keep your primary shared secret private.
+  - paragraph:
+    - button "Manage"
+  - separator
+  - heading "Additional Information" [level=3]
+  - paragraph:
+    - button "View on App Store"
+  - paragraph:
+    - button "Edit User Access"
+  - paragraph:
+    - button "Remove App"
+- 'dialog "Age Ratings Step 4: Sexuality or Nudity"':
+  - document:
+    - 'heading "Age Ratings Step 4: Sexuality or Nudity" [level=2]':
+      - text: Age Ratings
+      - list:
+        - generic: Step 1
+        - generic: Step 2
+        - generic: Step 3
+        - generic: "Step 4: Sexuality or Nudity"
+        - generic: Step 5
+        - generic: Step 6
+        - generic: Step 7
+    - paragraph: Select the frequency at which each type of content occurs in your app based on the definitions below. If you have in-app controls, consider what a user who has those turned on will encounter while using your app.
+    - list:
+      - listitem: "Infrequent: Users will rarely encounter this content in your app."
+      - listitem: "Frequent: Users will regularly encounter this content in your app."
+    - table:
+      - rowgroup:
+        - row "Sexuality or Nudity None Infrequent Frequent":
+          - columnheader "Sexuality or Nudity":
+            - text: Sexuality or Nudity
+          - columnheader "None"
+          - columnheader "Infrequent"
+          - columnheader "Frequent"
+      - rowgroup:
+        - row "Mature or Suggestive Themes More information Content that implies or indirectly references sexual or mature topics without being explicit or topics for older audiences due to the complex, intense, or sensitive nature, which may deal with real-world issues or content unsuitable for children.":
+          - cell "Mature or Suggestive Themes More information Content that implies or indirectly references sexual or mature topics without being explicit or topics for older audiences due to the complex, intense, or sensitive nature, which may deal with real-world issues or content unsuitable for children.":
+            - paragraph: Mature or Suggestive Themes
+            - button "More information": "?"
+            - paragraph: Content that implies or indirectly references sexual or mature topics without being explicit or topics for older audiences due to the complex, intense, or sensitive nature, which may deal with real-world issues or content unsuitable for children.
+          - cell:
+            - radio [checked]
+          - cell:
+            - radio
+          - cell:
+            - radio
+        - row "Sexual Content or Nudity More information Non-explicit depictions of sexual behavior, including brief or partial nudity.":
+          - cell "Sexual Content or Nudity More information Non-explicit depictions of sexual behavior, including brief or partial nudity.":
+            - paragraph: Sexual Content or Nudity
+            - button "More information": "?"
+            - paragraph: Non-explicit depictions of sexual behavior, including brief or partial nudity.
+          - cell:
+            - radio [checked]
+          - cell:
+            - radio
+          - cell:
+            - radio
+        - row "Graphic Sexual Content and Nudity More information Explicit, detailed depictions of sexual activity or nudity.":
+          - cell "Graphic Sexual Content and Nudity More information Explicit, detailed depictions of sexual activity or nudity.":
+            - paragraph: Graphic Sexual Content and Nudity
+            - button "More information": "?"
+            - paragraph: Explicit, detailed depictions of sexual activity or nudity.
+          - cell:
+            - radio [checked] [active]
+          - cell:
+            - radio
+          - cell:
+            - radio
+    - button "Back"
+    - button "Cancel"
+    - button "Next"
+- contentinfo:
+  - list:
+    - link "App Store Connect":
+      - /url: /apps
+  - list:
+    - listitem: Copyright © 2026 Apple Inc. All rights reserved. |
+    - link "Terms of Service":
+      - /url: /WebObjects/iTunesConnect.woa/wa/termsOfService
+    - text: "|"
+    - link "Privacy Policy":
+      - /url: https://www.apple.com/legal/privacy
+    - text: "|"
+    - link "Contact Us":
+      - /url: /contact-us

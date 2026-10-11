@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-04T10:12:41.913521+00:00",
+  "reviewer": "portable_marketing",
+  "sourceProof": "native-inputs.candidate-9.json",
+  "runtimeReceipt": "tv-runtime-candidate9-one.json",
+  "states": [
+    {
+      "state": "05 - Rematch begins another race",
+      "path": "app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+      "sha256": "bc1aa12ba4779933bf357f023c4b80d60c4ec27fe77f3c331ae5a6fb0336a51d",
+      "review": "reviewed actual native pixels; first-viewport Play, settled countdown, legal finish, upright genuine GPU/result share, or actual rematch according to state"
+    },
+    {
+      "state": "04 - Frozen race image and result",
+      "path": "app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+      "sha256": "c9738d96ebe91d7e5a1ef07d1fda7cb22e1a6074ae81b3f4f93815dfeab1576d",
+      "review": "reviewed actual native pixels; first-viewport Play, settled countdown, legal finish, upright genuine GPU/result share, or actual rematch according to state"
+    },
+    {
+      "state": "03 - Actual finish and race statistics",
+      "path": "app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+      "sha256": "c12a7754bae14c0708c617ecc05d873b7a98e4de4d418635010b77a15eca5d82",
+      "review": "reviewed actual native pixels; first-viewport Play, settled countdown, legal finish, upright genuine GPU/result share, or actual rematch according to state"
+    },
+    {
+      "state": "02 - Real standalone race",
+      "path": "app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/8ECF8599-8B14-4060-B078-53C402194F2A.png",
+      "sha256": "1768e5f76d8cbb238cb71440317f6f1da1661fa2b2ca6cfae88ab556ea77e7f9",
+      "review": "reviewed actual native pixels; first-viewport Play, settled countdown, legal finish, upright genuine GPU/result share, or actual rematch according to state"
+    },
+    {
+      "state": "01 - First launch with visible Play",
+      "path": "app-store-audit/2026-10-04-native-game-loop/tv-candidate9-one-attachments/6C79565C-A835-4FD3-AE17-D5453293D759.png",
+      "sha256": "a16d019a907f28520f5d64ca12feef8bb8b5c123b96ae3a4375b167dfe3806d9",
+      "review": "reviewed actual native pixels; first-viewport Play, settled countdown, legal finish, upright genuine GPU/result share, or actual rematch according to state"
+    }
+  ],
+  "limitations": [
+    "This is native QA evidence, not composed marketing images.",
+    "Host is private DEBUG test session; no external audio, haptics, services or accounts.",
+    "Actual physical TV to iPad local-network handoff remains manual; native handoff prompt plus retained codec/loopback unit coverage are distinct evidence."
+  ],
+  "rootVisualApproval": "pending"
+}

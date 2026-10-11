@@ -1,0 +1,122 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "F45D2F4E-28C8-44DF-88AF-AB30EAF789BA.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "05 - Rematch begins another race_0_C5566742-3A08-464E-BDB3-39ADEA7F7A95.png",
+        "timestamp" : 1791109354.511
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "648EA357-CACA-4AA1-A2EA-9974D2C22C9E.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04c - Same frozen result after chooser dismissal_0_5F4F728D-CC5B-497D-A80A-49E02C51DE8A.png",
+        "timestamp" : 1791109350.643
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "36D62358-5CA3-47E5-98F3-3B5802351766.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Native share chooser accessibility_0_4A3DB740-068D-4760-A772-C969B6582021.txt",
+        "timestamp" : 1791109348.858
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "85AE5D97-A45A-4653-977C-BB8EC94BDD4F.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04b - Native image share chooser_0_466F7E87-BD5A-475C-977B-FC282850592D.png",
+        "timestamp" : 1791109348.541
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "FF82B43F-0D68-4A30-B36F-0459E39AF416.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04 - Frozen race image and result_0_213A1E8B-FC84-4338-AF85-4FA9B09E74A9.png",
+        "timestamp" : 1791109345.568
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "969E16D8-BAC5-425C-9D2A-0AD619C6F941.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "03 - Actual finish and race statistics_0_54D21CDE-9F4D-4306-9F76-6A0996D60C4A.png",
+        "timestamp" : 1791109341.441
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "EA211BD2-007D-44EB-8D37-544C8E2EEC41.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "02 - Real standalone race_0_14134CDC-491A-46B1-9B7E-7A8563969A7F.png",
+        "timestamp" : 1791109331.178
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "D544F417-4C97-4DB6-A14F-080F1E06B4A5.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "01 - First launch with visible Play_0_3972D847-597A-4328-AD07-B58B8ED7A97B.png",
+        "timestamp" : 1791109326.669
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "669C3FA3-017E-4077-B713-E98042C6CB6E.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "09 - Calm camera with live race controls_0_DC550E26-D5A3-468B-BEC4-5C163C68683F.png",
+        "timestamp" : 1791109384.85
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "5D1D0B0C-C628-45AC-81D3-117EF17AC627.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "08 - Saved choices after relaunch_0_2D690FDD-42A4-4922-BE19-D2C2EB2C67C8.png",
+        "timestamp" : 1791109379.495
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "1B7D74C9-6732-4FD7-8ABE-23AA52642F32.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "07 - Independent animation and haptic settings_0_E4F730FE-BEF9-41E7-BD4F-FC98C4210D67.png",
+        "timestamp" : 1791109367.597
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "9994687A-235C-485D-803F-E966DBC5E000.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "06 - Largest text launch actions_0_E1E27E2B-5FB0-45E5-834C-FF6688E31F9D.png",
+        "timestamp" : 1791109360.789
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay"
+  }
+]

@@ -1,0 +1,194 @@
+Attributes: Application, 0x113165680, pid: 50556, label: 'Hot Wheels vs Humans'
+Element subtree:
+ →Application, 0x113165680, pid: 50556, label: 'Hot Wheels vs Humans'
+    Window (Main), 0x1131657c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x113165900, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x113165a40, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x113165b80, {{0.0, 0.0}, {1376.0, 1032.0}}
+          Other, 0x113165cc0, {{0.0, 0.0}, {1376.0, 1032.0}}
+            Other, 0x113165e00, {{-1376.0, -1032.0}, {4128.0, 3096.0}}, identifier: 'PopoverDismissRegion', label: 'dismiss popup'
+            Other, 0x113165f40, {{0.0, 0.0}, {1376.0, 1032.0}}
+              Other, 0x113166080, {{0.0, 0.0}, {1376.0, 1032.0}}
+                Other, 0x1131661c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+                  NavigationBar, 0x113166300, {{0.0, 10.0}, {1376.0, 54.0}}, identifier: '_TtGC7SwiftUI29PresentationHosting'
+                    Button, 0x113166440, {{10.0, 10.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Back'
+                  Other, 0x113166580, {{0.0, 0.0}, {1376.0, 1032.0}}
+                    Other, 0x1131666c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+                      Other, 0x113166800, {{0.0, 0.0}, {1376.0, 1032.0}}
+                        Other, 0x113166940, {{0.0, 0.0}, {1376.0, 1032.0}}
+                          Other, 0x113166a80, {{0.0, 0.0}, {1376.0, 1032.0}}
+                          StaticText, 0x113166bc0, {{495.8, 84.0}, {112.5, 29.0}}, label: 'Fire Chief'
+                          Image, 0x113166d00, {{501.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113166e40, {{522.5, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113166f80, {{544.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x1131670c0, {{565.5, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113167200, {{587.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          ProgressIndicator, 0x113167340, {{482.0, 136.0}, {140.0, 4.0}}, value: 100%
+                            ProgressIndicator, 0x113167480, {{482.0, 126.0}, {140.0, 24.0}}, value: 100%
+                          StaticText, 0x1131675c0, {{517.2, 144.0}, {69.5, 19.5}}, label: '2.2 m/s'
+                          StaticText, 0x113167700, {{793.8, 84.0}, {60.5, 29.0}}, label: 'Zapp'
+                          Image, 0x113167840, {{773.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113167980, {{794.5, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113167ac0, {{816.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113167c00, {{837.5, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          Image, 0x113167d40, {{859.0, 118.0}, {16.5, 13.0}}, identifier: 'car.fill', label: 'Car'
+                          ProgressIndicator, 0x113167e80, {{754.0, 136.0}, {140.0, 4.0}}, value: 100%
+                            ProgressIndicator, 0x11316e440, {{754.0, 126.0}, {140.0, 24.0}}, value: 100%
+                          StaticText, 0x11316e300, {{789.2, 144.0}, {69.5, 19.5}}, label: '2.2 m/s'
+                          Image, 0x1131b4000, {{852.5, 421.5}, {48.0, 51.5}}, identifier: 'race-results', label: 'trophy.fill'
+                          StaticText, 0x1131b4140, {{852.5, 420.8}, {444.5, 53.0}}, identifier: 'race-results', label: 'FIRE CHIEF WINS!'
+                          StaticText, 0x1131b4280, {{908.8, 488.8}, {31.5, 23.0}}, identifier: 'race-results', label: 'Car'
+                          StaticText, 0x1131b43c0, {{1010.3, 488.8}, {43.0, 23.0}}, identifier: 'race-results', label: 'Time'
+                          StaticText, 0x1131b4500, {{1067.3, 488.8}, {90.0, 23.0}}, identifier: 'race-results', label: 'Top speed'
+                          StaticText, 0x1131b4640, {{1171.3, 488.8}, {120.0, 23.0}}, identifier: 'race-results', label: 'Best segment'
+                          Image, 0x1131b4780, {{855.0, 521.5}, {18.5, 20.5}}, identifier: 'race-results', label: 'trophy.fill'
+                          StaticText, 0x1131b48c0, {{899.5, 520.0}, {79.5, 23.0}}, identifier: 'race-results', label: 'Fire Chief'
+                          StaticText, 0x1131b4a00, {{1012.1, 520.0}, {39.5, 23.0}}, identifier: 'race-results', label: '7.4 s'
+                          StaticText, 0x1131b4b40, {{1082.3, 520.0}, {60.0, 23.0}}, identifier: 'race-results', label: '3.1 m/s'
+                          StaticText, 0x1131b4c80, {{1182.1, 520.0}, {98.5, 23.0}}, identifier: 'race-results', label: '#16 · 0.27 s'
+                          StaticText, 0x1131b4dc0, {{902.5, 551.2}, {44.0, 23.0}}, identifier: 'race-results', label: 'Zapp'
+                          StaticText, 0x1131b4f00, {{1012.1, 551.2}, {39.5, 23.0}}, identifier: 'race-results', label: '7.6 s'
+                          StaticText, 0x1131b5040, {{1080.3, 551.2}, {64.0, 23.0}}, identifier: 'race-results', label: '3.0 m/s'
+                          StaticText, 0x1131b5180, {{1186.1, 551.2}, {90.5, 23.0}}, identifier: 'race-results', label: '#8 · 0.28 s'
+                          Image, 0x1131b52c0, {{877.5, 589.0}, {31.0, 29.5}}, identifier: 'race-results', label: 'Favorite'
+                          StaticText, 0x1131b5400, {{877.5, 588.7}, {391.8, 31.5}}, identifier: 'race-results', label: 'NEW TRACK RECORD! 7.4 s'
+                          StaticText, 0x1131b5540, {{865.5, 632.8}, {413.0, 26.0}}, identifier: 'race-results', label: 'Press  REMATCH on your iPad to go again!'
+                          Button, 0x1131b5680, {{1137.0, 88.0}, {215.0, 74.0}}, identifier: 'race-camera', label: 'Driver View', value: Driver View
+                            Image, 0x1131b57c0, {{1167.0, 113.5}, {23.5, 23.5}}, identifier: 'steeringwheel', label: 'steeringwheel'
+                            StaticText, 0x1131b5900, {{1137.0, 88.0}, {215.0, 74.0}}, label: 'Driver View'
+                          Button, 0x1131b5a40, {{1084.0, 174.0}, {84.0, 74.0}}, identifier: 'race-track-all', label: 'Show all track'
+                          Button, 0x1131b5b80, {{1176.0, 174.0}, {84.0, 74.0}}, identifier: 'race-track-hideGhosts', label: 'Hide ghost track', Selected
+                          Button, 0x1131b5cc0, {{1268.0, 174.0}, {84.0, 74.0}}, identifier: 'race-track-hideAll', label: 'Hide all track'
+                          Button, 0x1131b5e00, {{1068.0, 798.0}, {284.0, 98.0}}, identifier: 'race-rematch', label: 'REMATCH!'
+                            Image, 0x1131b5f40, {{1111.5, 829.5}, {27.5, 33.5}}, identifier: 'arrow.clockwise', label: 'Refresh'
+                            StaticText, 0x1131b6080, {{1068.0, 798.0}, {284.0, 98.0}}, label: 'REMATCH!'
+                          Button, 0x1131b61c0, {{1068.0, 908.0}, {284.0, 80.0}}, identifier: 'race-share', label: 'SHARE', value: Ready
+                            Image, 0x1131b6300, {{1153.5, 933.0}, {22.5, 30.5}}, identifier: 'square.and.arrow.up', label: 'Share'
+                            StaticText, 0x1131b6440, {{1068.0, 908.0}, {284.0, 80.0}}, label: 'SHARE'
+                  Other, 0x1131b6580, {{0.0, 0.0}, {1376.0, 1032.0}}
+                    Other, 0x1131b66c0, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x1131b6800, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x1131b6940, {{-1376.0, -1032.0}, {4128.0, 3096.0}}, identifier: 'PopoverDismissRegion', label: 'dismiss popup'
+        Other, 0x1131b6a80, {{398.0, 186.0}, {580.0, 650.0}}
+          Image, 0x1131b6bc0, {{248.0, 36.0}, {880.0, 950.0}}
+          Other, 0x1131b6d00, {{398.0, 186.0}, {580.0, 650.0}}
+            Other, 0x1131b6e40, {{398.0, 186.0}, {580.0, 650.0}}
+              Other, 0x1131b6f80, {{398.0, 186.0}, {580.0, 650.0}}
+                Other, 0x1131b70c0, {{398.0, 186.0}, {580.0, 650.0}}
+                  Other, 0x1131b7200, {{398.0, 186.0}, {580.0, 650.0}}
+                    Other, 0x1131b7340, {{398.0, 186.0}, {580.0, 650.0}}
+                      Image, 0x1131b7480, {{432.5, 234.0}, {21.0, 28.5}}, identifier: 'square.and.arrow.up', label: 'Share'
+                      StaticText, 0x1131b75c0, {{432.5, 234.0}, {209.0, 28.8}}, label: 'Share This Race'
+                      Button, 0x1131b7700, {{881.5, 231.0}, {64.5, 34.5}}, identifier: 'race-share-close', label: 'Done'
+                      Image, 0x1131b7840, {{522.0, 298.0}, {332.0, 400.0}}, identifier: 'race-share-image', label: 'Finished race image with results'
+                      Button, 0x1131b7980, {{546.0, 718.0}, {284.0, 86.0}}, identifier: 'race-share-system', label: 'Share Image'
+                        Image, 0x1131b7ac0, {{606.5, 747.0}, {21.0, 28.0}}, identifier: 'square.and.arrow.up', label: 'Share'
+                        StaticText, 0x1131b7c00, {{546.0, 718.0}, {284.0, 86.0}}, label: 'Share Image'
+      Other, 0x1131b7d40, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x1131b7e80, {{0.0, 0.0}, {1376.0, 1032.0}}, identifier: 'PopoverDismissRegion', label: 'dismiss popup'
+        Popover, 0x1131bc000, {{501.0, 346.0}, {375.0, 372.0}}
+          Image, 0x1131bc140, {{351.0, 196.0}, {675.0, 659.0}}
+          Other, 0x1131bc280, {{501.0, 346.0}, {375.0, 372.0}}
+            Other, 0x1131bc3c0, {{501.0, 346.0}, {375.0, 372.0}}
+              Other, 0x1131bc500, {{501.0, 346.0}, {375.0, 372.0}}
+                Other, 0x1131bc640, {{501.0, 346.0}, {375.0, 372.0}}
+                  Other, 0x1131bc780, {{501.0, 346.0}, {375.0, 372.0}}
+                    Other, 0x1131bc8c0, {{501.0, 346.0}, {375.0, 372.0}}
+                      Other, 0x1131bca00, {{501.0, 346.0}, {0.0, 0.0}}
+                        Other, 0x1131bcb40, {{501.0, 346.0}, {375.0, 372.0}}
+                          Other, 0x1131bcc80, {{501.0, 346.0}, {375.0, 372.0}}
+                            Other, 0x1131bcdc0, {{501.0, 346.0}, {375.0, 372.0}}
+                              Other, 0x1131bcf00, {{501.0, 346.0}, {375.0, 372.0}}
+            Other, 0x1131bd040, {{501.0, 346.0}, {375.0, 372.0}}
+              Other, 0x1131bd180, {{501.0, 346.0}, {375.0, 372.0}}, identifier: 'ActivityListView'
+                Other, 0x1131bd2c0, {{501.0, 346.0}, {375.0, 372.0}}, identifier: 'ShareSheet.RemoteContainerView'
+                  Other, 0x1131bd400, {{501.0, 346.0}, {375.0, 372.0}}
+                    Other, 0x1131bd540, {{501.0, 346.0}, {375.0, 372.0}}
+                      Other, 0x1131bd680, {{501.0, 346.0}, {375.0, 372.0}}
+                        Other, 0x1131bd7c0, {{501.0, 346.0}, {375.0, 372.0}}
+                          Other, 0x1131bd900, {{501.0, 346.0}, {375.0, 372.0}}
+                            Other, 0x1131bda40, {{501.0, 346.0}, {375.0, 372.0}}
+                              Other, 0x1131bdb80, {{501.0, 346.0}, {375.0, 372.0}}
+                                Other, 0x1131bdcc0, {{501.0, 346.0}, {375.0, 372.0}}
+                                  Other, 0x1131bde00, {{501.0, 346.0}, {375.0, 372.0}}
+                                    Other, 0x1131bdf40, {{501.0, 346.0}, {375.0, 372.0}}
+                                      NavigationBar, 0x1131be080, {{501.0, 356.0}, {375.0, 96.5}}, identifier: 'Finished race'
+                                        Image, 0x1131be1c0, {{527.5, 372.5}, {64.0, 64.0}}
+                                        StaticText, 0x1131be300, {{606.5, 395.5}, {243.0, 18.0}}, label: 'Finished race'
+                                      Other, 0x1131be440, {{501.0, 346.0}, {375.0, 372.0}}
+                                        Other, 0x1131be580, {{501.0, 346.0}, {375.0, 372.0}}
+                                          Other, 0x1131be6c0, {{501.0, 346.0}, {375.0, 372.0}}, identifier: 'shareSheet.activity.contentView'
+                                            CollectionView, 0x1131be800, {{501.0, 346.0}, {375.0, 372.0}}, identifier: 'activityCollectionView'
+                                              Other, 0x1131be940, {{501.0, 346.0}, {375.0, 372.0}}
+                                                Other, 0x1131bea80, {{501.0, 346.0}, {375.0, 161.3}}
+                                              Other, 0x1131bebc0, {{501.0, 346.0}, {375.0, 372.0}}
+                                              ScrollView, 0x1131bed00, {{519.0, 452.5}, {339.0, 118.0}}
+                                                Cell, 0x1131bee40, {{519.0, 452.5}, {82.0, 117.5}}, identifier: 'shareCell', label: 'Reminders'
+                                                  Other, 0x1131bef80, {{519.0, 452.5}, {82.0, 117.5}}
+                                                    Other, 0x1131bf0c0, {{519.0, 539.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131bf200, {{519.0, 539.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'Reminders'
+                                                      StaticText, 0x1131bf340, {{519.0, 539.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131bf480, {{519.0, 539.5}, {82.0, 14.5}}
+                                                    Image, 0x1131bf5c0, {{528.5, 468.5}, {63.0, 63.0}}, identifier: 'activityImageView'
+                                                Cell, 0x1131bf700, {{604.5, 452.5}, {82.0, 117.5}}, identifier: 'shareCell', label: 'Preview'
+                                                  Other, 0x1131bf840, {{604.5, 452.5}, {82.0, 117.5}}
+                                                    Other, 0x1131bf980, {{604.5, 539.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131bfac0, {{604.5, 539.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'Preview'
+                                                      StaticText, 0x1131bfc00, {{604.5, 539.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131bfd40, {{604.5, 539.5}, {82.0, 14.5}}
+                                                    Image, 0x1131bfe80, {{614.0, 468.5}, {63.0, 63.0}}, identifier: 'activityImageView'
+                                                Cell, 0x1131e4000, {{690.0, 452.5}, {82.0, 117.5}}, identifier: 'shareCell', label: 'More'
+                                                  Other, 0x1131e4140, {{690.0, 452.5}, {82.0, 117.5}}
+                                                    Other, 0x1131e4280, {{690.0, 539.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131e43c0, {{690.0, 539.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'More'
+                                                      StaticText, 0x1131e4500, {{690.0, 539.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131e4640, {{690.0, 539.5}, {82.0, 14.5}}
+                                                    Image, 0x1131e4780, {{699.5, 468.5}, {63.0, 63.0}}, identifier: 'activityImageView'
+                                              ScrollView, 0x1131e48c0, {{519.0, 571.5}, {339.0, 133.5}}
+                                                Cell, 0x1131e4a00, {{519.0, 571.5}, {82.0, 133.5}}, identifier: 'actionGroupCell', label: 'Copy'
+                                                  Other, 0x1131e4b40, {{519.0, 571.5}, {82.0, 133.5}}
+                                                    Other, 0x1131e4c80, {{519.0, 658.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131e4dc0, {{519.0, 658.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'Copy'
+                                                      StaticText, 0x1131e4f00, {{519.0, 658.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131e5040, {{519.0, 658.5}, {82.0, 14.5}}
+                                                    Other, 0x1131e5180, {{527.5, 587.5}, {65.0, 65.0}}
+                                                    Image, 0x1131e52c0, {{544.0, 602.0}, {32.0, 36.0}}, identifier: 'activityImageView', label: 'copy'
+                                                Cell, 0x1131e5400, {{604.5, 571.5}, {82.0, 133.5}}, identifier: 'actionGroupCell', label: 'Assign to Contact'
+                                                  Other, 0x1131e5540, {{604.5, 571.5}, {82.0, 133.5}}
+                                                    Other, 0x1131e5680, {{604.5, 658.5}, {82.0, 30.5}}
+                                                      StaticText, 0x1131e57c0, {{604.5, 658.5}, {82.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Assign to Contact'
+                                                      StaticText, 0x1131e5900, {{604.5, 658.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131e5a40, {{604.5, 658.5}, {82.0, 30.5}}
+                                                    Other, 0x1131e5b80, {{613.0, 587.5}, {65.0, 65.0}}
+                                                    Image, 0x1131e5cc0, {{629.5, 605.0}, {32.0, 30.0}}, identifier: 'activityImageView', label: 'account'
+                                                Cell, 0x1131e5e00, {{690.0, 571.5}, {82.0, 133.5}}, identifier: 'actionGroupCell', label: 'Print'
+                                                  Other, 0x1131e5f40, {{690.0, 571.5}, {82.0, 133.5}}
+                                                    Other, 0x1131e6080, {{690.0, 658.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131e61c0, {{690.0, 658.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'Print'
+                                                      StaticText, 0x1131e6300, {{690.0, 658.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131e6440, {{690.0, 658.5}, {82.0, 14.5}}
+                                                    Other, 0x1131e6580, {{698.5, 587.5}, {65.0, 65.0}}
+                                                    Image, 0x1131e66c0, {{715.0, 604.5}, {32.0, 31.5}}, identifier: 'activityImageView', label: 'print'
+                                                Cell, 0x1131e6800, {{775.5, 571.5}, {82.0, 133.5}}, identifier: 'actionGroupCell', label: 'Save to Files'
+                                                  Other, 0x1131e6940, {{775.5, 571.5}, {82.0, 133.5}}
+                                                    Other, 0x1131e6a80, {{775.5, 658.5}, {82.0, 14.5}}
+                                                      StaticText, 0x1131e6bc0, {{775.5, 658.5}, {82.0, 14.5}}, identifier: 'cellTitleLabel', label: 'Save to Files'
+                                                      StaticText, 0x1131e6d00, {{775.5, 658.5}, {33.0, 30.5}}, identifier: 'cellTitleLabel', label: 'Apple Inc'
+                                                      Other, 0x1131e6e40, {{775.5, 658.5}, {82.0, 14.5}}
+                                                    Other, 0x1131e6f80, {{784.0, 587.5}, {65.0, 65.0}}
+                                                    Image, 0x1131e70c0, {{795.0, 598.5}, {43.0, 43.0}}, identifier: 'activityImageView'
+                                              Other, 0x1131e7200, {{527.5, 570.5}, {322.0, 1.0}}, identifier: 'collectionView.footerView'
+                                            Other, 0x1131e7340, {{527.5, 452.5}, {322.0, 1.0}}
+                                      Other, 0x1131e7480, {{501.0, 346.0}, {375.0, 372.0}}
+                                        Other, 0x1131e75c0, {{501.0, 346.0}, {375.0, 372.0}}
+                      Other, 0x1131e7700, {{0.0, 0.0}, {0.0, 0.0}}
+    Window, 0x1131e7840, {{0.0, 0.0}, {1376.0, 1032.0}}
+      Other, 0x1131e7980, {{0.0, 0.0}, {1376.0, 1032.0}}
+        Other, 0x1131e7ac0, {{0.0, 0.0}, {1376.0, 1032.0}}
+Path to element:
+ →Application, 0x113165680, pid: 50556, label: 'Hot Wheels vs Humans'
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  Output: {
+    Application, 0x1131e7c00, pid: 50556, label: 'Hot Wheels vs Humans'
+  }

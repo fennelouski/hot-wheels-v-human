@@ -1,0 +1,13 @@
+HWvH1.0(1) supports iPadOS and tvOS only. There is no login, registration, purchase or developer-operated gameplay backend. Sign-in required should be unchecked. No review username or password is needed.
+
+Start with the prominent Play control on the initial screen; creating a local player is optional. This starts a real standalone race with a computer-driven opponent. Let the race finish normally, inspect the result and choose Rematch to start another race. Saved local designs and preferences are device-specific, with no automatic cloud sync.
+
+Open Settings / Game feel. Animation and Haptics start enabled, have separate saved choices, and retain an explicit Off after relaunch. The system Reduce Motion setting also produces the calm presentation. Haptic output depends on the device; automated QA suppressed hardware effects and does not claim their physical feel.
+
+The optional camera-color entry is parked and unavailable in the current editor because that flow is unfinished. Manual racer styling is available. There is no camera feature claim in the listing. The iPad bundle retains its camera purpose text; Apple TV has no camera permission.
+
+Nearby racing and result-image handoff use the existing local Multipeer Connectivity implementation, not a cloud service. Both updated apps and Local Network permission are needed. Physical Apple TV-to-iPad discovery, permission handling, image delivery and reconnect have not been verified on a real paired-device setup. Simulator/loopback evidence is not paired hardware proof; this remains an explicit release caveat. The standalone race/result/rematch paths were actually tested on both supported platforms.
+
+Only the iPad family2 and TV family3 packages are intended. There is no iPhone, Mac, Catalyst or Vision release. Use the existing private App Review contact record; its contact values are not duplicated here.
+
+On iPad, use touch. After a normal finish, choose Share, inspect the frozen actual race card, open the native system chooser and dismiss it without posting. Then choose Rematch. This chooser/rematch loop passed actual native QA. The image contains the genuine completed arena frame and result values; it is not a simulated final result or replay GIF.

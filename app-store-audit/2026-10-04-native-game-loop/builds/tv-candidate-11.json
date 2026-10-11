@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-10-04T10:19:48.265164+00:00",
+  "finishedAt": "2026-10-04T10:19:53.376453+00:00",
+  "command": [
+    "xcodebuild",
+    "-project",
+    "Hot Wheels v Human.xcodeproj",
+    "-scheme",
+    "Hot Wheels v Human",
+    "-configuration",
+    "Debug",
+    "-destination",
+    "generic/platform=tvOS Simulator",
+    "-derivedDataPath",
+    "/tmp/hwvh-game-loop-tv-20261004",
+    "-jobs",
+    "2",
+    "CODE_SIGNING_ALLOWED=NO",
+    "build-for-testing"
+  ],
+  "exitCode": 0,
+  "sourceProof": "../native-inputs.candidate-11.json",
+  "sourceAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "nativeInputsUnchanged": true,
+  "log": "tv-candidate-11.log",
+  "logSHA256": "3180e928105c2bce0d03765cd1829cbd4209c016b91362b55198102605148139"
+}

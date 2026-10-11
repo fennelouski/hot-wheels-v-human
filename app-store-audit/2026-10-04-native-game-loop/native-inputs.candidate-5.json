@@ -1,0 +1,4471 @@
+{
+  "recordedAt": "2026-10-04T09:22:37.194756+00:00",
+  "baseRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "status": "held candidate, compile/runtime not yet verified",
+  "scope": "iPad and tvOS only; no version/project/platform changes",
+  "aggregateSHA256": "4fdb42d196212df2ff6e18ae60159f7c4ba8f8010476d8035e90d2124a513fa7",
+  "inputCount": 889,
+  "inputs": [
+    {
+      "path": "Hot Wheels v Human/App/AppModel.swift",
+      "bytes": 1999,
+      "sha256": "7ad4e33745715a5a4dc6fc3c9e9eeb2d1331b4b0bc5860f1536a3d6451ec853d"
+    },
+    {
+      "path": "Hot Wheels v Human/App/ChipRow.swift",
+      "bytes": 2292,
+      "sha256": "1d6ad56004834c5d886f0b550f31eaaf7bd8dde33cf4ea3e3c63548579f48657"
+    },
+    {
+      "path": "Hot Wheels v Human/App/GamePreferences.swift",
+      "bytes": 2346,
+      "sha256": "0bf4a219aed5d436cc0b8a17b0317a9e3ee2f56f7829d9cf7d9ee84d51e285e7"
+    },
+    {
+      "path": "Hot Wheels v Human/App/GameSettingsView.swift",
+      "bytes": 3086,
+      "sha256": "144945e8f0f2b7de8746b0ca50caddd3f56075d97e033d29fd567c64242ced28"
+    },
+    {
+      "path": "Hot Wheels v Human/App/HWTestSession.swift",
+      "bytes": 1351,
+      "sha256": "0fa9b32d435e004747320e1a304fde2d237a0b34b4ed70459c7b5f260c788898"
+    },
+    {
+      "path": "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+      "bytes": 1515,
+      "sha256": "98737e583973f876ca82bc7023ba88ce71e5e52bd61319160672de8081eb22ee"
+    },
+    {
+      "path": "Hot Wheels v Human/App/LobbyBackground.swift",
+      "bytes": 2428,
+      "sha256": "d850988a4d21e7a1f4fbb3525458444acc600afa030aa724f0cb7792f1cc2a34"
+    },
+    {
+      "path": "Hot Wheels v Human/App/Platform.swift",
+      "bytes": 916,
+      "sha256": "f35122ebee2231454826984dbc3cde27f9b465df3f7fa8540c54e174ec08e1c3"
+    },
+    {
+      "path": "Hot Wheels v Human/App/PlatformShims.swift",
+      "bytes": 2698,
+      "sha256": "6e05483504bb83f058dac473955627f9dfd94f3366a1475f641ac4beab8ea862"
+    },
+    {
+      "path": "Hot Wheels v Human/App/README.md",
+      "bytes": 1998,
+      "sha256": "3e3631fffe909537a847d712805058b5735f746691810b6a462bfb6ac8f151b6"
+    },
+    {
+      "path": "Hot Wheels v Human/App/RootView.swift",
+      "bytes": 18376,
+      "sha256": "62ab11622d382b8de5e97fd38c470cb4bebdf88df6c2ff12f55635281af376cf"
+    },
+    {
+      "path": "Hot Wheels v Human/App/SoundBank.swift",
+      "bytes": 5367,
+      "sha256": "6b65d3d98d78a5f7f80b2cd2ee35422d3e929fe6d9130cf829b0307ed203eafe"
+    },
+    {
+      "path": "Hot Wheels v Human/App/TVWorkshopControls.swift",
+      "bytes": 7685,
+      "sha256": "bd49b47c264ec4b546d9afd96112cf0358d5d734a12e840011439ec7e440170c"
+    },
+    {
+      "path": "Hot Wheels v Human/App/TurntableOrbit.swift",
+      "bytes": 4606,
+      "sha256": "252cebef32663c1edc42a6d64d11804b3753b43786fda32e3dca45a20cc1e802"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AccentColor.colorset/Contents.json",
+      "bytes": 123,
+      "sha256": "9af65086fa30b49252fae1a1225731691de794f7775af74d71befeb507d12b7c"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "bytes": 1418,
+      "sha256": "aa69e27a83fce76ea210190e5b1f3e57cfeae18a65aa90eeeb0b3059a294f61d"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.appiconset/icon-ios-1024.png",
+      "bytes": 47515,
+      "sha256": "c9169cf2f8994684a40abd12883e761082bddf10fa4100cb837a8f2a862564fd"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Contents.json",
+      "bytes": 168,
+      "sha256": "3ef1c15a82a1456f9214ae3c6de60522d8ff73107b30fb86cd969a12ca3e24c3"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 1.imagestacklayer/Content.imageset/Contents.json",
+      "bytes": 143,
+      "sha256": "93f844a4cb21eedfb8acc3ca477e632da4d46ab787614fcf328e7e9c2d17c126"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-appstore.png",
+      "bytes": 44803,
+      "sha256": "1826c28b21e0942fbef556b8206886e946cc4767ae85d630ba136deafaf59319"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 1.imagestacklayer/Contents.json",
+      "bytes": 51,
+      "sha256": "80b0b2e5ce5f42d06c9cea0234147e7f2bea58ef205c47ce3a82f0abe4b64465"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 2.imagestacklayer/Content.imageset/Contents.json",
+      "bytes": 138,
+      "sha256": "796d517ca36bc42bb93d66e0fc74dc23d476532a34c1c5b845569e9a5715f1e2"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-appstore.png",
+      "bytes": 18966,
+      "sha256": "22c36954c66c44dc9e73f62439a436c84db328d42300ec7bd7bb0c4a9d0396cb"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 2.imagestacklayer/Contents.json",
+      "bytes": 51,
+      "sha256": "80b0b2e5ce5f42d06c9cea0234147e7f2bea58ef205c47ce3a82f0abe4b64465"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Contents.json",
+      "bytes": 168,
+      "sha256": "3ef1c15a82a1456f9214ae3c6de60522d8ff73107b30fb86cd969a12ca3e24c3"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/Contents.json",
+      "bytes": 223,
+      "sha256": "aa98bbdac454e0b62af699d1f30a35c0f6449a13478771f3dda11df9587a9881"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small.png",
+      "bytes": 9498,
+      "sha256": "86f84a18abad28e157ed1f7f687c85147cc6187bd7e88418dd499bbed4b82f9d"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small@2x.png",
+      "bytes": 22768,
+      "sha256": "97df3722510db4216d397d30eb372ecdb5aa1379a8ebb52fe8a893ff005a82f7"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Contents.json",
+      "bytes": 51,
+      "sha256": "80b0b2e5ce5f42d06c9cea0234147e7f2bea58ef205c47ce3a82f0abe4b64465"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/Contents.json",
+      "bytes": 213,
+      "sha256": "4cf3506fd9e7eb47d2fd8067c99e1a98db11c7ab5bd3e0cc95db49d4ceb14a71"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small.png",
+      "bytes": 2335,
+      "sha256": "7c2cb94a74deb01feba7712e6843d8492b36d7df819da356830e732da11620ef"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small@2x.png",
+      "bytes": 7868,
+      "sha256": "55ff19ceca866bbbfe4d650ef918fe3ea2c7202a5e3d98b5a67bd53de8874021"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Contents.json",
+      "bytes": 51,
+      "sha256": "80b0b2e5ce5f42d06c9cea0234147e7f2bea58ef205c47ce3a82f0abe4b64465"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Contents.json",
+      "bytes": 653,
+      "sha256": "15125aaf88c02066b7cc43e88cf3913329c4c4d9a2b2dd873bec971b85526636"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/Contents.json",
+      "bytes": 223,
+      "sha256": "0151bf18a865c05565fa88cc2a4fbf5e3e13dc463a518ddbc9fbfc5dc83da3b2"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide.png",
+      "bytes": 53613,
+      "sha256": "b70693e3919966af1a0d0380a148cfac6eace5445065ebff568182059fde8764"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide@2x.png",
+      "bytes": 165801,
+      "sha256": "91394a8eb82c2c9f951eb4646429dee85f5788739df61a6d36be932e71412901"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/Contents.json",
+      "bytes": 213,
+      "sha256": "e34f1ecfd6b4e1700eb6c6f55680caa9f313347db05e61bf35fddbe610b9f622"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf.png",
+      "bytes": 48401,
+      "sha256": "5522a7ff6f1256588d06809d0554d5e4afaaee26c0299499f49b516f2b6c9cbf"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf@2x.png",
+      "bytes": 145771,
+      "sha256": "da16f28f048cb58f3c56b5c4f0748acefcd1142bba5348ad7fd7501f8e57e881"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/Contents.json",
+      "bytes": 63,
+      "sha256": "0fd49ba3c3585c709678e0046a821c3c60685ec7063720d30d3a3448be3a208b"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/CarDesign.swift",
+      "bytes": 5084,
+      "sha256": "b39f8adf5370d611e290a29d6df30756828e7cf7f985a5f96f6e20210c8ce67c"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/DriverPalette.swift",
+      "bytes": 4004,
+      "sha256": "3186e7b566533e93ab18e95a986a548e2963c47bfcd8dfbf576f9bdb0b4106ee"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/DriverProfile.swift",
+      "bytes": 11526,
+      "sha256": "1287a5ecfcbd26d6e9abce221c53fc5947aff04ff080664e26783b13c5e60df2"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/GameMessage.swift",
+      "bytes": 2066,
+      "sha256": "8db3db8fffbfebccc8fc5183c1cc5881a8bd1083acacbaae07615347eabeeee1"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/KidProfile.swift",
+      "bytes": 369,
+      "sha256": "5c65a50162d93fafdf0df034f9aa18c50f550a73b50657dd071235c922d38687"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/MatchConfig.swift",
+      "bytes": 702,
+      "sha256": "a62fd0993576f524a3f90b32ac6dee1fabd7331d4c51cefcc38b3e450fdd4795"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/PlayerInfo.swift",
+      "bytes": 352,
+      "sha256": "44e62a119787ccf6c6b1d63936c2373e3567ea16a343e04d44efb3efacbadafd"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/README.md",
+      "bytes": 2723,
+      "sha256": "8cedcd754465ec28efad5d00620a002d0e793804655b48de09a258ddc6e29a18"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "bytes": 2599,
+      "sha256": "d8f287b3aa707411481e913d6a8f687ac5c1d6e357e2b42463d61f27d738b03d"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RaceState.swift",
+      "bytes": 1654,
+      "sha256": "f3bde7c292fe50f3b47fc71c08ddb98b78cd85e60f59b8a2f5e2c3155e57b7be"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RadioStation.swift",
+      "bytes": 1376,
+      "sha256": "728c2befc02dddeea9cc62b7a38b119fbf244c773ff9283b62d9693da4048a54"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RosterColormap.swift",
+      "bytes": 9952,
+      "sha256": "5b981661c61047e5518d15162287929c7dcad1e40dbb7dd520e79535131080c1"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/StarterPresets.swift",
+      "bytes": 19145,
+      "sha256": "9335a521e2011a56760b6a1b49cd88d2dfa6685a1c5cb3ac6de8e676506ca279"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/SwiftDataRecords.swift",
+      "bytes": 4744,
+      "sha256": "9994fef552688eaf6e30ae633642f43e4a32e6350b08fcdc610058ff10a357d6"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/TrackBlueprint.swift",
+      "bytes": 2652,
+      "sha256": "46e21ea34fb1e108b3950c08b2316c7e2aad90dbfa8bfe9b92c2dcf55bdce649"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/GameTransport.swift",
+      "bytes": 1186,
+      "sha256": "4aca1c22a82ba40518bdcbc6c337d96c4275c95fcefc0f6b913cbde3d4078ac3"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/LoopbackTransport.swift",
+      "bytes": 2654,
+      "sha256": "8adaaa768aefdc66518b04baa78d1493c03650f207b148aac82dfadcf815393c"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+      "bytes": 2311,
+      "sha256": "becd6d84bc3d8c157d6d34eede8f331ce6ae086240aabadb9a21410987a12463"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "bytes": 6509,
+      "sha256": "ec7bfb03bdd365a87cb0b0b0f844740b02c259e86a014ea0110b0d519ea98695"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/README.md",
+      "bytes": 2954,
+      "sha256": "0733df4b7421eaa3e13ad2945079fcc2c744f3302f6a7a99b970c2e3ac83df86"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "bytes": 1274,
+      "sha256": "19beaabcbe76166993d6f66af4b56350f4430613bc8fbedd1c448483dd341a33"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/TVFinder.swift",
+      "bytes": 3365,
+      "sha256": "aa068228a25b0621549fbc45b9b41ef31ec6a11407e4589c6c88a02944999aa6"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/README.md",
+      "bytes": 916,
+      "sha256": "316d638c82742c91a925b62981f079979bda197301868deb82dce844bb49f69e"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/AIBoostPolicy.swift",
+      "bytes": 4892,
+      "sha256": "57022031f5e88f6faba9600c0b43e9f15fc5b3d0f863349b2f686de2ce132922"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift",
+      "bytes": 83851,
+      "sha256": "48861f712bf1389c16232be03f6240f4a99db05d9f54d7c1c058b5b2364db29a"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "bytes": 4391,
+      "sha256": "feb33a07b2809ea61c74f269dad80d8721bd2a130d46270926f68dfcc9fa18cf"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/CarFactory.swift",
+      "bytes": 13893,
+      "sha256": "626b4a7280db4540805fe98fcb48faeeef7aa160df29fd985a05cf13620a9be0"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/DriveSystem.swift",
+      "bytes": 24929,
+      "sha256": "2e3cf1d1334a6909e13f6cc4dfe31c7e073384c3950391cda2a9d3d295272023"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/DriverDressUp.swift",
+      "bytes": 14922,
+      "sha256": "610a3619cfe1373b201c21aec00086ea87532b5f9e13abac48d0b6859f87e1c7"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/DriverPainter.swift",
+      "bytes": 11088,
+      "sha256": "921ad0346aa8d175d49ff9f4557827305964abf5767ceba4fcb2fd835d76164c"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift",
+      "bytes": 532,
+      "sha256": "b4a8e74ba197bdd5364c8b4d5c37724ac234122615aeae2b2df7b3e5bd78d0cf"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/OverlayComposer.swift",
+      "bytes": 13641,
+      "sha256": "1fd980828a1e92082794e54e710112028e119c63c2d16d7f21b66a1c43fdafed"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/PaintShell.swift",
+      "bytes": 10308,
+      "sha256": "9f4427946ab305d467518e59c4a2e850c2bd1185fcdbcd40cd8be138493cd35d"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/README.md",
+      "bytes": 9716,
+      "sha256": "79897a860c75a8b57f1d5f301d26e3c9919e0dc92eb2905addbbb748614c8598"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "bytes": 18660,
+      "sha256": "7cccbf4ad22c7f16586e4d225e24b16850b37bb75833148d3520bf58ef8d028e"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceRulesSystem.swift",
+      "bytes": 13211,
+      "sha256": "428e4f121ad5bb7cbe25d4de761ef7347fece8cd6a39d2a9fd382b58dd3e953c"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "bytes": 26722,
+      "sha256": "5e0b1698d7e8103bdca0b2a8e7c49252a087963c8d3361863678d61e28fb5664"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceTuning.swift",
+      "bytes": 41146,
+      "sha256": "e2e6849e9d5a223a9b7d555169783d79f230d03fdc276366fc703ea5488e3b58"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/AssetStore.swift",
+      "bytes": 695,
+      "sha256": "7371afe67be0a1045d0c29c79f05f875588f2c2437ebc6d9b0f6f5934b226f64"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/BlueprintValidator.swift",
+      "bytes": 4958,
+      "sha256": "b3fd73ad5e6940a370e6d1436f630d115af7234e6ef4b1275d7333fa8890e9cf"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/PieceCatalog.swift",
+      "bytes": 24156,
+      "sha256": "7a43c15c579148e9e904157616806ac621696290a3b7aa520f84bc742c15fa1a"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/PieceType.swift",
+      "bytes": 643,
+      "sha256": "16862f61dd6ac47ede5d06de4c004646ccc48432409496f0604a936d8313b471"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/README.md",
+      "bytes": 9359,
+      "sha256": "1035c6b0060858feb91e60c76b221db788b476dfa9788f72baea374d39c274ce"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/RandomTrackGenerator.swift",
+      "bytes": 2347,
+      "sha256": "0c7354ec56bc416bfcd1384fab28cce327f4d64ae4d3c54c9b6c61c6a56d9d72"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift",
+      "bytes": 18755,
+      "sha256": "32416c35e8869ed9e1f86a585800d5123582bc9bc10c29f5b8c681439b69f6d6"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/TrackLayoutSolver.swift",
+      "bytes": 14011,
+      "sha256": "fbfca9c62af97b11f8ae38a8a34bf6c97d72de67c3d819b05b4030900bd00d23"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/TrackSpawner.swift",
+      "bytes": 16575,
+      "sha256": "4075a370bf98d14408cf775e39801ce11d0185e1f8dc80b332f7c784f1e760dc"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/TunnelDressing.swift",
+      "bytes": 15617,
+      "sha256": "71ce4e35e54f18e853114257c0297a19f3115335162d7a662aa146d06d220dcf"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaAudio.swift",
+      "bytes": 7004,
+      "sha256": "5df805ce34630f46f1fb9e818ebb5e2bf62586e58454f3548fb951579e4fbbd0"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "bytes": 4136,
+      "sha256": "fdea132df614744e53e49786ce0ca1c09ad3105d66fdd7c32730a6392e5b3b74"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+      "bytes": 9704,
+      "sha256": "39ec652dfb4ad68afb364a3363d658b6fdb13b2f364dca4ae4ac3f2e16095b13"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "bytes": 22779,
+      "sha256": "960a067e99c1303c340168c552547734ca93e617bff0a2025d12673fc5da2a28"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/DashStyle.swift",
+      "bytes": 3407,
+      "sha256": "638144134434620fcfabe38ce4e79aa8df221194429598aa9e2ed3912ee9c0e2"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/DriverDashboardView.swift",
+      "bytes": 19901,
+      "sha256": "03a4346de944452e9f7ae5251acc36130b2a5b31db822fdd867965c263bbdefb"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/README.md",
+      "bytes": 15420,
+      "sha256": "bc2efc19a6522f6cc3c227657fb3eb9784e97945898f3d48cf872a9638cf6982"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "bytes": 9475,
+      "sha256": "e8634f2603240563557976fba2ce3ea467e6624ed21c3d422929447936149633"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "bytes": 8914,
+      "sha256": "28db091bfd9bba2a3993bd350250d5d9d4bb991fed5249407669f0663558c4d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/TestModeView.swift",
+      "bytes": 3089,
+      "sha256": "6366474b185144ff86fb808a2bec700600aef07f5fef8357ed86f1922f54f29e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CarDrawingSession.swift",
+      "bytes": 2466,
+      "sha256": "81e1e059b5ef2ac0de6144e19256513100bfbf641e1555473260bb02284e2491"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/ChassisPicker.swift",
+      "bytes": 5468,
+      "sha256": "e61e7d02902a19072188989e8de41c9e7090a8f18f05fcd89de1eeff881e7162"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CustomizerModel.swift",
+      "bytes": 6159,
+      "sha256": "567144bcb5868fc86d15e08900993532c67c9ea637d85609c78461b1b0e9b148"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CustomizerSplitView.swift",
+      "bytes": 646,
+      "sha256": "6c36b76ac3256d62a03d60acbac630dca3730fcd643d8cb5d764ff8b1d64dc2c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CustomizerView.swift",
+      "bytes": 20479,
+      "sha256": "8ec6dd7e62bc6dacbfeb49681b06a02ba4d4c422dbb0842900d0d06f184e5d05"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/DrawingPadView.swift",
+      "bytes": 13177,
+      "sha256": "c2d357c6cd187242990426603cd2f530e64a2c017a61097b021dc3eee0020ce3"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/GarageView.swift",
+      "bytes": 17620,
+      "sha256": "600d22d2d8149c93fc8dab97779709c57ce25e5ac1702aefa69be91d3f4a786e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/LiveryShopView.swift",
+      "bytes": 4285,
+      "sha256": "0151346fe8808c01d0a456a5e0e71c9b16b7fa67d75f2de3924e4d1adb6da2ae"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/PaintShopView.swift",
+      "bytes": 4712,
+      "sha256": "0e27c44ed879251b097c37aa3144c668ce609bbceea43cb1ed92cb1bd8ae9d11"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/README.md",
+      "bytes": 8863,
+      "sha256": "def372438711301cb57f1866dfedead23629a6a2bfe1ddbc5b698682dadda72c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/StickerShopView.swift",
+      "bytes": 3733,
+      "sha256": "6d3fc5daafaa68d62980c2814c0b4fbba489b40fca7b63d1ba65f16a16b7ffd3"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/TVCustomizerView.swift",
+      "bytes": 10387,
+      "sha256": "8b94c63fe4533130cbe9c65ff11ca920f471d518cc67529fecd4f48484895d94"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/TVPaintTools.swift",
+      "bytes": 14970,
+      "sha256": "061f2f6c6c9850a293d9f1c2bc7b91e8ada52fee6e13a32b3451c7c354124a25"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/TVTwoPlayerCustomizerView.swift",
+      "bytes": 3109,
+      "sha256": "584e2da02ffa1986af734859ead9ae2ca686a936d30870b5c7a378d9830c226b"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/TirePicker.swift",
+      "bytes": 2399,
+      "sha256": "e54c31d48ce5f4788194f9471634cfacb814d83c3a25f466ca844b9bf1517e9f"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "bytes": 6277,
+      "sha256": "ed232796f042023cbeb47affac51a55a15d49d089bb1d887f8a4335db21d731e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "bytes": 20352,
+      "sha256": "47c5d2ecbab53686a71d634d1a45af01407718b1b8f556466d1698ddb1e1f375"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/README.md",
+      "bytes": 2982,
+      "sha256": "ca71aa88bc38bdd4e167149799bfd368a4d9b47617927d881eb4b86f37b46eb5"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/RaceOnTVView.swift",
+      "bytes": 3021,
+      "sha256": "72321de0374484d433ef0acfc40b0a7cd223f4beb4a2bbe89ec73e620bb3f263"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/RaceSetupView.swift",
+      "bytes": 12289,
+      "sha256": "f4bdf9c336997777ac8832b334249c6aaf32d216c1bd486474d788504f195b42"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+      "bytes": 10811,
+      "sha256": "15f31e0f4f47b7db58e97ae1b7e280c93affb6996f1c00d3f6eb46bbd902abf4"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Home/README.md",
+      "bytes": 2408,
+      "sha256": "88d66d5ed6e5b2044433c0404e44e6090821682198bd67f0a0c4f2b8f837afda"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/CharacterEditorModel.swift",
+      "bytes": 3724,
+      "sha256": "98c60938acdf1f2cd0a25a892f582eca69d59c1bf419ce584d2c3b8b413eeb85"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/CharacterEditorView.swift",
+      "bytes": 20910,
+      "sha256": "e3ea316aff4e5e2c334ebdd57aa0db73d778cac99b12256d8d0ac7d6b699629c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/CharacterSelectView.swift",
+      "bytes": 9366,
+      "sha256": "d32234cea0e92e9a66493a7fcd38717c9955facf1bd01b300c4361af991cc61f"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift",
+      "bytes": 8436,
+      "sha256": "7f6d933c375635d394a5efab0a8c9479ad5042352878267267849b8818216d21"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/DriverThumbnail.swift",
+      "bytes": 6472,
+      "sha256": "da2e952f8f49fedccb4820154ee1272fcc2e58b905eb80b05499a90e3f7cd147"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/LookalikeAnalyzer.swift",
+      "bytes": 6973,
+      "sha256": "02dfd6f418b5b7010656b0bff08e5e45bb1b1b78c525d4a8107b74a2140f8341"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/LookalikeView.swift",
+      "bytes": 7113,
+      "sha256": "44fa9d0302990c961bb6af3068386f9fc52a4499882f3fecd1e66bd694c9f3c3"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "bytes": 19074,
+      "sha256": "25ac596b5ce90da222d9bc104f20b293a9f8e8969a99a2b4ae9ced7a3f41cfc3"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/README.md",
+      "bytes": 6572,
+      "sha256": "44e6301f245320c26c37e5aa67641ac8bc175a35ba796a21c99d65f4a0a46fa4"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/TVCharacterDetailView.swift",
+      "bytes": 4555,
+      "sha256": "f41a298471c07486c76922b5a752994bed6b18d005d8b743eeadcc795c5a8625"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/TVCharacterEditorView.swift",
+      "bytes": 9662,
+      "sha256": "9587fb96238afa852b24fb59cdeeca09b191c4eda9f7cb450fa3dbd6c64c6bf5"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/WardrobePreviewGrid.swift",
+      "bytes": 4930,
+      "sha256": "c15973031598c631e91ef36bc68eefc7552e45a5a37b1c7ab5bfc371ca9c7443"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/README.md",
+      "bytes": 822,
+      "sha256": "32052d7991e67e2a65343ed6a726c1d9c7a6dbb6636af54febc1d4a4832415e1"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/DriverPoser.swift",
+      "bytes": 13996,
+      "sha256": "92450a655a8e285a3cb2704ca9326db4c0f983e01bb4ea879c953dc16224608e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/FaceDecals.swift",
+      "bytes": 6719,
+      "sha256": "c8abc2304fb59c04413c96d1f016917c58c5c91818da2848ae1ca414d18a42a7"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/PiPTunerView.swift",
+      "bytes": 10876,
+      "sha256": "b180fe119fb128836ec9b9da8316e2a079054afbe186e0e0faa56715c47f1464"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/README.md",
+      "bytes": 7972,
+      "sha256": "8da6d07792008a5640c63dfbc7cd0b176d3733902193b05616ba04bd49c8775e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionBenchGrid.swift",
+      "bytes": 3378,
+      "sha256": "43b90e7e7f5d85cf842a38e9f475657375d4af693d90b3ee99a522006e85aaf0"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift",
+      "bytes": 25210,
+      "sha256": "add40446d12aab248ff609d3c24ba5b025dbc330172f0cf8dbe5510b4796214d"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionDirector.swift",
+      "bytes": 2486,
+      "sha256": "cedb7dec5ae130ffc3c3dc6a8057668ec361cd607f0913f5df9fdbc3ed31ed1c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionFeed.swift",
+      "bytes": 2781,
+      "sha256": "d8ad47364d980f94fd87c967f78f5637cb2923daaec0af59622c941d271c940a"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/README.md",
+      "bytes": 9523,
+      "sha256": "e478ecff2bdf60f28052b291d73bbbc7f0e056eea9d678f3782e7a71817a4f20"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TVTrackBuilderView.swift",
+      "bytes": 30890,
+      "sha256": "de871c58377f9eace1cb87bdea430aeb97fb4fc1d786bd7ec3fd9c5137630a13"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TVTrackControls.swift",
+      "bytes": 3352,
+      "sha256": "2daf2acc5ea7a43e69c5708e9ae9c8ccd90e1e6482caa47b5d4678775503adfc"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TrackBuilder3DView.swift",
+      "bytes": 19126,
+      "sha256": "17e4901646dfadf3daaa99ba780b002db5ac7e6a0b92261ec63fdafe2b42e83b"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TrackBuilderModel.swift",
+      "bytes": 14484,
+      "sha256": "f874161266bac17e78289977d536b1f99c3e3fefe20bf4e8ad7c8f1c8a01df29"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TrackBuilderView.swift",
+      "bytes": 21892,
+      "sha256": "6feda9c904fe3511d702166958afb24a69a98fede91450b163ee7aa54c09d22d"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/TrackBuilder/TrackCanvasView.swift",
+      "bytes": 5151,
+      "sha256": "72f2c156e09dbea8a5f6a6733787cba0d6993688ddc6b37150a7e36774912e15"
+    },
+    {
+      "path": "Hot Wheels v Human/Hot_Wheels_v_Human.entitlements",
+      "bytes": 181,
+      "sha256": "97704a8960b4facceef54397a08fb5d0a456247c3627359215aa2a27df22656c"
+    },
+    {
+      "path": "Hot Wheels v Human/Info.plist",
+      "bytes": 584,
+      "sha256": "82e977ed552ec3138185acfab74e8aa05dbf814e541abd737c609dcfa7583851"
+    },
+    {
+      "path": "Hot Wheels v Human/PrivacyInfo.xcprivacy",
+      "bytes": 598,
+      "sha256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/boost_ready_chime.wav",
+      "bytes": 92296,
+      "sha256": "80c34ff11bef5fe8470fe8450438f0fb8545385e404462d9d074c0e3ffd74fc5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/camera_shutter.wav",
+      "bytes": 46432,
+      "sha256": "4a8ffa1cf3ff5e6793a5b4b1c5840d62fdbab7dc40baf9f00497f727053d8434"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal.wav",
+      "bytes": 180496,
+      "sha256": "24a56010ab9b26032b4ac483b252a00e15e217b69a15ac8e3e68ce0ef73a549c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal_b.wav",
+      "bytes": 180496,
+      "sha256": "8a57a3ac56b6f54a443ac7b043cbc852f0b98e63d4e3f89bb5659d703955401a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_crash_metal_c.wav",
+      "bytes": 180496,
+      "sha256": "cd45f000cc4a5f006e1cd50cb3365d63fda86d0be9133609b12e37daf9f88189"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_engine_loop.wav",
+      "bytes": 886096,
+      "sha256": "0b4a91afc707688c3b77e761ce3d15ee018180fab141cf4bb79c91b1ffde4468"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_passby_whoosh.wav",
+      "bytes": 74656,
+      "sha256": "33ced2901cd7200cf4c3ef773acdcbbc78a38378a3b9c8140655abcb7cb3b68a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/car_select_vroom.wav",
+      "bytes": 92296,
+      "sha256": "bc08550e1ab68e8cba1e3b70d5509c29e06d3848ee0b7fea273252f7c3fbfbe3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/checkpoint_ding.wav",
+      "bytes": 64094,
+      "sha256": "bde740da522ac93376874151bb0b22ac4b6a0316b96839c1a4f601f9fcd67225"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/checkpoint_ding_b.wav",
+      "bytes": 64094,
+      "sha256": "b8ab5947e3bf17f2a10e3a6b672d74c7159516097fca49a29ed27ecdfbb2dc34"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/confirm_sparkle.wav",
+      "bytes": 74656,
+      "sha256": "d9ba2371cf1532ecc18f67e88f781915d2181b000bb3def25590e9c40a02e72b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_gasp.wav",
+      "bytes": 92296,
+      "sha256": "6cc4815e4dbda2b380cd80ecbfef184252e6c6d908f5103c96fbf9fe69c84333"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_kids_cheer.wav",
+      "bytes": 222832,
+      "sha256": "be691dbd88e1c236e92594f598b5d610c0244b6670411c07f3cb5e771b46ad5b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/crowd_ooh_wow.wav",
+      "bytes": 109936,
+      "sha256": "2eb07b86d34f17dfcc24e9101c92424c073de34ae7fac0ffc18dc8006998dc02"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/customize_confirm_pop.wav",
+      "bytes": 57016,
+      "sha256": "62c784145081ad9b5be83b6e590623c309719743bcb3c87db4749902d7118a62"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_dizzy.wav",
+      "bytes": 134632,
+      "sha256": "50ef8f27274f79eac6a1aa5215842226d80b40a78d78294fa5b11b5bb6ee1a39"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_giggle.wav",
+      "bytes": 134632,
+      "sha256": "a6f3d2bf1c1d9f5994546da15afaa6e1057734c12444b57f2ed08eee3262ae1b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_uh_oh.wav",
+      "bytes": 92296,
+      "sha256": "41e0ce633828fef7780aea3cd81758b1f9b76532be195703a144f19dfbc0d8de"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/driver_woohoo.wav",
+      "bytes": 109936,
+      "sha256": "f9723a901b8543982812fa1340393eec178acf34b886b39b1f21a42fc76d1b2d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/engine_loop_heavy.wav",
+      "bytes": 886096,
+      "sha256": "be718f5756a745dc21565c6fdf4538fe3ed7ae1fb23e9acdff12a31b6f3a4b2f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/engine_loop_light.wav",
+      "bytes": 886096,
+      "sha256": "4196bb494489d1514c5589d91a8ff291a1822a38c928e92205ccc52825032383"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/finish_fanfare.wav",
+      "bytes": 268696,
+      "sha256": "2d0f54fd1e894d8e8855347ba1e535c7d26eddb3a70789599a28cbaf9b7b6954"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/finish_tape_snap.wav",
+      "bytes": 74656,
+      "sha256": "156a8d28805433eac5755aaff9b2d7ff4e799bf46a06b2502b725579c9314206"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/garage_door.wav",
+      "bytes": 134632,
+      "sha256": "ecddf0c428f5204db1bfbf84b2b4f6d0c75917bc75cc9c68d75ff5ea5cc5c8ea"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/grid_rev_anticipation.wav",
+      "bytes": 180496,
+      "sha256": "1c4cb29a7f93d7bc81c434cad89c843c2148306f50e4f6b99fa1df7d4a92de99"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/lap_bell.wav",
+      "bytes": 92296,
+      "sha256": "e7597c48ba95607f80c071230088341b46b2ff7f697cfcf41ac784e21fdb8faa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/loop_whoosh.wav",
+      "bytes": 109936,
+      "sha256": "f57ec1ce1aec37b4e8853a72441c47b7e38be9337cb5058fe02d48f772093838"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/nice_try_kazoo.wav",
+      "bytes": 134632,
+      "sha256": "533693fc4aa3e13d52904e975bfac4ac134dd9e7bebd1975be4425af0cd99fb8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/nope_wobble.wav",
+      "bytes": 57016,
+      "sha256": "2f4f1e3637a109a142ad7a40ab585ef7134aa3d5b9b6141bca8e154248faf102"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/off_track_alarm.wav",
+      "bytes": 92296,
+      "sha256": "5766bc99efdc8f666211d98d8f1b357f9cb2af79db9bcab9e5e9dc555a007853"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/paint_spray.wav",
+      "bytes": 92296,
+      "sha256": "d66739190ad55f103546476134d0938088e03df20e643916d27f1743ce701b11"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/paint_spray_b.wav",
+      "bytes": 92296,
+      "sha256": "bc137359d634a33bd2f147e50f9261d2ef7b8f8d9d49c39ded2e5116eef840ae"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/piece_delete_pop.wav",
+      "bytes": 57016,
+      "sha256": "95755bdccbf0356b3e41b35dcebca1bfc96236479f258e6007a5e710e899986a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/piece_delete_pop_b.wav",
+      "bytes": 57016,
+      "sha256": "1372470973a1441c59d84f90695136f787021ffd17d34b13f6796bd707613c8f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/player_join_horn.wav",
+      "bytes": 92296,
+      "sha256": "4b7c9e07c884d66e2830fc44e2e0483a40e39c6fc711c4ee0f48dd685644855d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/race_countdown.wav",
+      "bytes": 311032,
+      "sha256": "3fd4b550bb61661fd7bcca96bd3b99a228106ae36b506402146c03ea6f677ff4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/race_intensity.m4a",
+      "bytes": 121760,
+      "sha256": "cf6444b4b58e1eb9dd17ce244d7df44a396ea92a70dd0aebde1d4586c54c6d5a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_funk.m4a",
+      "bytes": 153761,
+      "sha256": "a864a07fbfe4e19f0f44b6f5879e906e5d69cad83426463fdf97af1a5920c022"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_jazz.m4a",
+      "bytes": 122449,
+      "sha256": "ca378d641da7c1d07b5779b5dac7390239aff88ce4ac3eaf54db385b2cfcd35f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_pop.m4a",
+      "bytes": 129570,
+      "sha256": "531a305529b9a369a239a47cecd3343e2081204451d3387dd52ebe4d1460f437"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_rock.m4a",
+      "bytes": 142943,
+      "sha256": "ae751801fe4eb970ca94cc8b3682f8800aeea14cbe129eb80f0d4d5919e661ff"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/radio_smooth.m4a",
+      "bytes": 166308,
+      "sha256": "12849825b0f4b894c8b7b55cfc6b462b56174de0223cbc0843308a133b5ec08e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ready_bell.wav",
+      "bytes": 64094,
+      "sha256": "a24c939b0ef80f33737ac55f1699386584abd4161c4ca10efbe32e479cc08eab"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/rematch_ding.wav",
+      "bytes": 64094,
+      "sha256": "38fe0f675303a9c7461e144e25903c7bc69c75c8b4b740e1c378835519afa832"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/respawn_pop.wav",
+      "bytes": 74656,
+      "sha256": "563100e87192aa35af21b90716e59ee057c47ffa01802da4c5bcaeb1e524a8ef"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/respawn_pop_b.wav",
+      "bytes": 74656,
+      "sha256": "bf97a67f61f53f830ef19755354cd0b0d263d1cf5e03b76e0da5254db236d471"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/results_tally.wav",
+      "bytes": 180496,
+      "sha256": "ebb46b0b3bc363e51971944ffe8ec518dd0f037cc7d261e4c00994d17e1370ba"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/screen_whoosh.wav",
+      "bytes": 57016,
+      "sha256": "59832b3460a55a227109e8d723c81c49fd463688afa7613c21ed4240bec5f3a9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/shuffle_dice.wav",
+      "bytes": 92296,
+      "sha256": "2ce657e4777c7a6ba43537c0e51cfec2b7f2f0722382f29dd2da2f453e47837a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/skid_drift.wav",
+      "bytes": 92296,
+      "sha256": "daf37dd09daf43555e2ee33b62467d9406a4bfc166e977fc1a54c8371ee79d3e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire.wav",
+      "bytes": 134632,
+      "sha256": "c9384cee875a469637b17d32512d2862c50800b474e65f348475ac188e3d26cc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire_b.wav",
+      "bytes": 134632,
+      "sha256": "4d47b82e69ac6ba0f61ee4fff3c2b34f4c2803ce79c9d70ff5e3542942725351"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/speed_boost_fire_c.wav",
+      "bytes": 134632,
+      "sha256": "66d3cad9d1e77397fbfd108abd85b3b8c790bab8e8920a6e5489974dd60dc57a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/start_gate_drop.wav",
+      "bytes": 74656,
+      "sha256": "21550e95a05ce557278f64bfe41cda87a3b5a6f9f05f9c553985a1ad5afb9ba3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/stuck_wobble.wav",
+      "bytes": 109936,
+      "sha256": "864c6fa00660c61577de8ea5f6c2936bdefdebb268ad34b33130d2e68b68c4cd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/tire_bounce.wav",
+      "bytes": 74656,
+      "sha256": "11376d46772aa490bdf347a419977769ebb5a4eb7daf11ca71af4d1034b4f861"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_save_stamp.wav",
+      "bytes": 74656,
+      "sha256": "a12e8291c588d80558406e8a3f6e1a4e2323f41090aed64e982647041945f351"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect.wav",
+      "bytes": 57016,
+      "sha256": "1c2d5e2a44761056d0cf73046828085789fec97dc0c037747fadc1ef2e7852d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect_b.wav",
+      "bytes": 57016,
+      "sha256": "34ef4894986675f59ebc5100b013fa4111d37acb7ca7f86a7402d429352e7ee7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/track_snap_connect_c.wav",
+      "bytes": 57016,
+      "sha256": "70ff1e606f3920f58247e776f5ed6fb3c329696dfd99d66fb1e0ea1595d96e7e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_back.wav",
+      "bytes": 46432,
+      "sha256": "3228b947a4450aa0d2c9e77ee4a94e343f4a37979f462ca0b347ad1dc5634c3d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap.wav",
+      "bytes": 46432,
+      "sha256": "42403af34cb0c1b2b961d96c57babd80545fd4e4e48e9bd57a410b2ceb5add57"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap_b.wav",
+      "bytes": 46432,
+      "sha256": "5f4d26105553a900b37d6b7afc604d540fbb98b67d50e600f8164e70369a92e8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/ui_tap_c.wav",
+      "bytes": 46432,
+      "sha256": "c7407a0063a1837c9775924f8b61c4b0d464aba10811cc4677b3a07107e6041c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_boost.wav",
+      "bytes": 126208,
+      "sha256": "1a956586dbeadd0336104ec06b9a52813ef0e6a365293d0def457f9e30b2e622"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_intro.wav",
+      "bytes": 199936,
+      "sha256": "6d8915a8e02367106b9134a64bd30c6df8807b9527cfe9bf340c2cd900674fb4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_lose.wav",
+      "bytes": 285184,
+      "sha256": "39758026119a169a31678ed299df7e656134b374a643c724c5d3147ffa786599"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_crusher_win.wav",
+      "bytes": 211456,
+      "sha256": "ceb41092299ba2101bccd881021a9c885f302ef3b15dfd24645931ba18d3f083"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_boost.wav",
+      "bytes": 135424,
+      "sha256": "309caed8df4978dba98d373e862d6f2a5ad90137a36eb8ac16cddb59f8550996"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_intro.wav",
+      "bytes": 220672,
+      "sha256": "2a4a91f65ef437221665f1873d07bbacc054f49918a05472accde95f11de5beb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_lose.wav",
+      "bytes": 227584,
+      "sha256": "d2d01e88d937aafa3f9e77af54a0ee6644c0aac3307fdac0281120c95c24fe7e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_oobi_win.wav",
+      "bytes": 204544,
+      "sha256": "81fe787651822b918d5bf84e4cc9a84cb4c778730e3360afb878f6c48176c699"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_boost.wav",
+      "bytes": 100864,
+      "sha256": "5aaac29355c291a0e9e517a1dd731be6e56ed90b962a50f71db691f02226f6f8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_intro.wav",
+      "bytes": 211456,
+      "sha256": "faffa6fdf0015566caf6f50f029c8bb27f0af4e6859f2d3b3c927da455ffbcfb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_lose.wav",
+      "bytes": 204544,
+      "sha256": "fe5aa1757f39e80b17d605802b74f585e59da400d7d640e5fa5e565ba40ba13c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/voice_zapp_win.wav",
+      "bytes": 163072,
+      "sha256": "fa60be570aa5ea692d3c63ec50f21b06da014aef811b923a4c8a2ff38068c499"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/workshop_ambience.m4a",
+      "bytes": 175243,
+      "sha256": "22fc29aec448a4890c1cb5be5308cb359bc2772dea6a6a951d1b109919702f1c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/wrench_ratchet.wav",
+      "bytes": 74656,
+      "sha256": "2aec8020d5b6576b4f705c5c171170f33fd2b12b3179b914848a6de3732baa5c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Audio/wrench_ratchet_b.wav",
+      "bytes": 74656,
+      "sha256": "cfed69397f68e485a9ed225cdc57487c45765d04fbefcaea24aee0d719a5d8e9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/aid-glasses.usdz",
+      "bytes": 16495,
+      "sha256": "4ab4313f17551973da13004dc884fc25dc60c803406577461b07cd36e09e2b08"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/aid-sunglasses.usdz",
+      "bytes": 16388,
+      "sha256": "decda0821668755fd23f3dcadcb5106b3b87db85a4b527bbe96285d339bb38e3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/ambulance.usdz",
+      "bytes": 143483,
+      "sha256": "e43aba292ce8b1aec30a3279d1cf7d956b38f09c09147c5437893cd69a3635ad"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-barrier.usdz",
+      "bytes": 19337,
+      "sha256": "9bd06d4a75d4c56feaae5512ba567138a917fb0c4e4ee568d95ccb6076fa1eec"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-cone.usdz",
+      "bytes": 19479,
+      "sha256": "5bc53c6909d8da2c246135cbc7101232f6c3554c118858fab54c72a8df11f3bc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-dumpster.usdz",
+      "bytes": 32175,
+      "sha256": "d507133416611389e33a2b2471912a162ce4bb304fa6bc697c974159f67ec8b4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-fence.usdz",
+      "bytes": 25098,
+      "sha256": "186d694f210ff1a9c00c76c2568606d172e5fe27046aedcb65dcbc85b11d3156"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-light.usdz",
+      "bytes": 25507,
+      "sha256": "e6bd650eb06a5271492ae959a8e4992b233b95707a724a2df178343f38d49566"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-lightpost.usdz",
+      "bytes": 19307,
+      "sha256": "2aa5d2d5517fde6dd32e84625f87cb0ae128389e1540937a5cc6b979dfccb895"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-pillar.usdz",
+      "bytes": 17814,
+      "sha256": "69e8cb3cdd6ef12a12679518d1be57ea974066a865dd5d7a18a04bf21b5a839d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-pole.usdz",
+      "bytes": 46515,
+      "sha256": "f4e34c723c701886ccd00d47451652a34711a641105fa39f38a36c55cb32743d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/build-sign-stop.usdz",
+      "bytes": 19157,
+      "sha256": "320fa723111a3f4216ec33facacdd499c2ecc3bfabaf606e99e957c41fda9896"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-bridge.usdz",
+      "bytes": 18534,
+      "sha256": "0d85d5002ff3b45747e8013315f7d6949589c3fe5bf96814e2b6e841a1c79d56"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-bush.usdz",
+      "bytes": 7748,
+      "sha256": "96b21a430f7f081391fb3d2c327f139e89117606f021d0048aa3dc68bf06064d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-canoe.usdz",
+      "bytes": 17989,
+      "sha256": "13b2d1b7cbb3f89a7bf825c7d55a99055efee372ff06a687d4cba311b0efbdbd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-fire-stones.usdz",
+      "bytes": 20749,
+      "sha256": "0e25482dc41f0154da666d5d0571dc678b0deaefdb35be0bac13f307279cd743"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-fire.usdz",
+      "bytes": 11323,
+      "sha256": "e8a1e2a35a95b4fcc987cd9b6a8062f30090daebca9abd9ea9d5c5356b761cba"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-rock.usdz",
+      "bytes": 9209,
+      "sha256": "8ae2b57bbfe6e85a4df9df83c246c0366f6a5e821aac9508b8c3f18216a0f6d0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-closed.usdz",
+      "bytes": 18706,
+      "sha256": "20a0495748dd3225620a57015e1b8def1b905ee34fd0f8b1ce057c7072098dbf"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-open.usdz",
+      "bytes": 18794,
+      "sha256": "4cd26fecd5e8938b0547cac614c67184074af1f9293070d05c2ff7f898ee7838"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/camp-tent-small.usdz",
+      "bytes": 17490,
+      "sha256": "d96d7b34d36bd79cd6000d5de961351e8c19b2b185a191be5c50af2bc800c85f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cactus-short.usdz",
+      "bytes": 10934,
+      "sha256": "7c25559ba9c53057e52add5b8626538f022b98c7b1901f3396c8d63bc00d9e7e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cactus-tall.usdz",
+      "bytes": 11703,
+      "sha256": "3effac7e4c8b687c763f900cace62a6fbada418c020f50bbb638d525b9f784f8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cliff-large.usdz",
+      "bytes": 5169,
+      "sha256": "2098e8ca9a600118f868678bf98e36e31cb01d1f7f7cfb01c2d859f8c3d8e6fb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-cliff.usdz",
+      "bytes": 5163,
+      "sha256": "1be6e136d74d342c89e04f006320a6f936f75ce605e22f0ed04d704387701e66"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-mesa.usdz",
+      "bytes": 7051,
+      "sha256": "cfe94e050e8d22be015560c4258fbcaab6e8ef8645a9a2aa18f79e024e3b587f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-a.usdz",
+      "bytes": 9987,
+      "sha256": "4de96c3e4d09f5d17cd8258bd00d07532fdd369dd41884c651ea9967acd59309"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-b.usdz",
+      "bytes": 8607,
+      "sha256": "641342b2172a1ad700f5ad6a8637708a8b3e437da90290b88ebc704699f4fc70"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/canyon-rock-c.usdz",
+      "bytes": 9468,
+      "sha256": "01974ef25345e23912467822d45782e57b529630ee712c20c4a8420a89d6067a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-ballista.usdz",
+      "bytes": 60387,
+      "sha256": "33e4b4b9a13dcfacf802f26e9fd553e60452bcd80dc42b501c73f316222ff128"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-cart-high.usdz",
+      "bytes": 72917,
+      "sha256": "d13e5e0d90aa2b9e686351148f2d3b08edb0089335a903d9f5dd286cb9ef4b86"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-cart.usdz",
+      "bytes": 43561,
+      "sha256": "faced8f620f2d7bd3d0676da9d435a7895fc28894ced7e0544dd9f11e0ed1928"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-catapult.usdz",
+      "bytes": 77465,
+      "sha256": "0c58b8d7e4769673f98f6eb807d4508dc30b9020bc4170f69280a42cfd414a1a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-flag-wide.usdz",
+      "bytes": 29608,
+      "sha256": "5615830ce49091ab6997d3dd7dfc508f4d074f2d30dcaf3623ab45b6c4784e6a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-flag.usdz",
+      "bytes": 21548,
+      "sha256": "613f5c67de936f728122c71b9faef33698e82eb1400d91540d0876fac4957188"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-fountain.usdz",
+      "bytes": 126590,
+      "sha256": "e99a00007bfa4872d2e5d75ba710c5f1e709ecb6e05ff5dc05ac241eb377cc8d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-hedge.usdz",
+      "bytes": 21110,
+      "sha256": "8a725acea536e7b0016d969c6d93d634a7f5db715290dd6887b68d5c29004193"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-lantern.usdz",
+      "bytes": 25704,
+      "sha256": "2932f1c54a4f2ccca1f8410000311c36e726aa2fe3a2e7ca78976ac20d89e9e1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-rocks.usdz",
+      "bytes": 22135,
+      "sha256": "8d9556b2e5c81ffcdecb972a520cb7232e6e27e6c41570954e154b6a96ec550e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-siege-tower.usdz",
+      "bytes": 125184,
+      "sha256": "75f4579183f9a1466df1ea65e47e37a746bcbf85f65adc6800cc16481c456ddb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-tower.usdz",
+      "bytes": 23391,
+      "sha256": "57e57962138a6ee97afadb375da26cef7b1d10246ca68c12fe1e0e98a1e70286"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-trebuchet.usdz",
+      "bytes": 106201,
+      "sha256": "2cf521fc0de7130f2d9fe3d260728c4379b34e0309fbfe186b4a92c186436da0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/castle-tree.usdz",
+      "bytes": 27095,
+      "sha256": "585e57ae53312ceb730b21d5682419ca81b0e0f9ceb4ea36ebff0e4d187981a9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-bald-drive.usdz",
+      "bytes": 63607,
+      "sha256": "502c0752542b3b586f43229d4f20a459cf158eb69d710b96cced8ea2ca31d1ce"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-bald-idle.usdz",
+      "bytes": 68003,
+      "sha256": "29eeaeff4e8f490daf8a5c039c3c8bbdc435f400f777ca16100535b8d443c7dd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-drive.usdz",
+      "bytes": 77025,
+      "sha256": "90dd7daf751cca8ff55e47d5f91b44a53e7f71b1db4d4d91f997fbf9ac1ce6bb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-a-idle.usdz",
+      "bytes": 81164,
+      "sha256": "246d9b7a23aa8d60958d9ff643882b3dbf1fda904c550247930124b1766c579a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-bald-drive.usdz",
+      "bytes": 63542,
+      "sha256": "1c9e69c0150a55ba941de860c888759f77ad5baa85b6aec99c317e23ddbf4297"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-bald-idle.usdz",
+      "bytes": 67931,
+      "sha256": "77408984ac4f7523680a9c63ef56d0f9e5b930c62b1ddcfaebcb0f25ba648bb1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-drive.usdz",
+      "bytes": 80801,
+      "sha256": "5358c346393d702b2f87dd6feb847546b0217625a2116450fa50298f9c262f1e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-b-idle.usdz",
+      "bytes": 84932,
+      "sha256": "ebfdaeea21146c6e1d219875596aa1898494d3052235beb20243fc7c85340ac7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-bald-drive.usdz",
+      "bytes": 65619,
+      "sha256": "8ea630ef3f53e0dccb4eb684d414981e0eb1c2dcb6e7bd61656e4b9c2dae011a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-bald-idle.usdz",
+      "bytes": 69886,
+      "sha256": "ed54c97a356202f13d26615e4617842ced4d5ffe8ac00f3dc5cf9e7bee03a4e9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-drive.usdz",
+      "bytes": 80305,
+      "sha256": "763e544414964b2913f06b1d295165ce4177d77129b5dd4d791524b540eb2697"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-c-idle.usdz",
+      "bytes": 84561,
+      "sha256": "7a215ea87671b929f6258ed772246b27411073436df174f11b4f6a038c495d55"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-bald-drive.usdz",
+      "bytes": 71710,
+      "sha256": "b83e49b9d6c8e713ec137be5fd9404416933b4669094ff76ef7cadd5156f61a8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-bald-idle.usdz",
+      "bytes": 75977,
+      "sha256": "524b0b4d5857730d7334204e7beda89d74b2b3247fd49ba995b38cefc30bce4c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-drive.usdz",
+      "bytes": 85129,
+      "sha256": "dd12fb353c08d67c855a33898abdb001260fc19e4ea9e39a358acc2fd7435e64"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-d-idle.usdz",
+      "bytes": 89266,
+      "sha256": "838d4081d98d68aecb1c4d5f1df86b379de69a598edcf49475495e6b5e9a5efb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-bald-drive.usdz",
+      "bytes": 64487,
+      "sha256": "22b8f2653025a8bce10d811d962826a53bcb55a2a9a8e1d05c59002c1888ff9c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-bald-idle.usdz",
+      "bytes": 68753,
+      "sha256": "f9945035238885f9fa3c43c2eb5ee5de2188cd21cfefbef23887597772ad0883"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-drive.usdz",
+      "bytes": 79862,
+      "sha256": "99e7d9057ca5744330c58edd3caa34ab6a7c5354128b42820a8b6642fc53a36f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-e-idle.usdz",
+      "bytes": 84122,
+      "sha256": "e9d55f37a9922c037b12433f21f96b10a655b7e829eaf0c64793934e89d94229"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-bald-drive.usdz",
+      "bytes": 72579,
+      "sha256": "b5f7f9d77c85e6eb824426487617c95cfcd2cd14ff8f4240344797ae3b665431"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-bald-idle.usdz",
+      "bytes": 76847,
+      "sha256": "64a386184bb9d094a6f56373ef83461a343e143a014b897d9e347e1c0a554fe0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-drive.usdz",
+      "bytes": 84920,
+      "sha256": "8cdcb4f604436253f436f3e46c2a9e3c68f42d6cb9442821a6809361d2bd3ed2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-female-f-idle.usdz",
+      "bytes": 89179,
+      "sha256": "4198adff85e26c75f728560bb631e3bd62f88ba151fa690a75727a698f4b732a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-bald-drive.usdz",
+      "bytes": 71892,
+      "sha256": "1cef288aeb41cccc575117970f89d247d1401ef782c3de82789f528278f69f67"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-bald-idle.usdz",
+      "bytes": 76028,
+      "sha256": "1e33d898bd2a8c8841bcc8d9a348b26bd566d3a17825204862adaa2bfde4f026"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-drive.usdz",
+      "bytes": 78436,
+      "sha256": "a0c11746a5c89201829a029f0f6b9a610f53e4571af9800ffcdef4ae48ee48f7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-a-idle.usdz",
+      "bytes": 82566,
+      "sha256": "adcc0aa0067246be8300a4b5abe6d6d0bd200c9ae8214d518ddc246ce8e111c5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-bald-drive.usdz",
+      "bytes": 77186,
+      "sha256": "ab258ad48e60239be0fbfc30524f6144677365527175c7d2b39ead7d6a80f0a1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-bald-idle.usdz",
+      "bytes": 81323,
+      "sha256": "8b3e85b6ea743b4236740973cfd9e2055df32c72126b9364d598bced74fd828a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-drive.usdz",
+      "bytes": 77269,
+      "sha256": "015c1b61b5b79db6e5d5b39c2727ee6db4431d5fdf52b62d80250218c89ec253"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-b-idle.usdz",
+      "bytes": 81401,
+      "sha256": "9532425689cf193170c2f70f34aa0d9254123c9c0aae59a4c35a8203b4ec98e5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-bald-drive.usdz",
+      "bytes": 74929,
+      "sha256": "82f0a7520dd4155610dceb8353d84bb0840a465d6ec340d65d6518f0f9e91349"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-bald-idle.usdz",
+      "bytes": 79195,
+      "sha256": "d7886b17c660c688f8dae74d88cea0886f222042034590d3aabf5fe6defaddbb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-drive.usdz",
+      "bytes": 86251,
+      "sha256": "ef72af1fdb6b309351052ef7c9ea47146f487946e68e51e4d80941a93222a40e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-c-idle.usdz",
+      "bytes": 90513,
+      "sha256": "161bf40bfd076ba77b66d411d40bd52af7ecf962cdb441e21ac22102c85711c9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-bald-drive.usdz",
+      "bytes": 71045,
+      "sha256": "20f92529c334dc5d6963ce0bf4a610e614c056526bc5c52906a71b33420fb2b9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-bald-idle.usdz",
+      "bytes": 75185,
+      "sha256": "6ea48216b422608b948d53dbd3d7d8908e3481b989ed22d77225b6fa8c13e223"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-drive.usdz",
+      "bytes": 77441,
+      "sha256": "7ad269576016e35265a6fd9e9ac7a4807cf64ff6cb2b0a6422e574169d7e3c7a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-d-idle.usdz",
+      "bytes": 81579,
+      "sha256": "0ebe51e4cd23dd17de60570dcfcf8b8be3a5cbb1fb1ab3064a0e037536b324d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-bald-drive.usdz",
+      "bytes": 69161,
+      "sha256": "81b9314fc6b9f294d934a45c3095a1554046e68bee8eead57b36cb24014cf439"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-bald-idle.usdz",
+      "bytes": 73296,
+      "sha256": "4db34090447479c94310dacb2c9af0f7986284cde6d7314a972cef41af0ede4f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-drive.usdz",
+      "bytes": 76619,
+      "sha256": "7db31c5887901f1036b8d16d26708f6c8818f5f4bced96a53b6ed7d4c30d2eb0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-e-idle.usdz",
+      "bytes": 80756,
+      "sha256": "5c348ec1a6492816321ea294e5c351fdaeffd3d38ab772f9ad630c5aba583548"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-bald-drive.usdz",
+      "bytes": 72514,
+      "sha256": "a119dde5817b42d3145ee38b08b9f948486cd0d8ff784e32174ab287914be3bb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-bald-idle.usdz",
+      "bytes": 76781,
+      "sha256": "5379fa3fa1a117fe859fadfb705177d422e5c81a9cc5c489e7de67f24eae6828"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-drive.usdz",
+      "bytes": 78373,
+      "sha256": "94e0af44f86a5c9d41d13d98f14bcbb7b098a30b5a2067776c1ff6789421f84d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/character-male-f-idle.usdz",
+      "bytes": 82505,
+      "sha256": "0d81d899f839bcb83b272f39c494edad95a1af95bd2e18087f7ee529096c1914"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-fence.usdz",
+      "bytes": 21803,
+      "sha256": "d43828d3698e0ad987bf669de43c701d61e041f4d4853edb05e51d1691af72b1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-a.usdz",
+      "bytes": 96195,
+      "sha256": "fe424c21bd5629b95f4ba6f2dd7d80b2d506e7e00b69e32cffa5738bd73c499c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-b.usdz",
+      "bytes": 135946,
+      "sha256": "f5af7ffb3e986a3959359185599a86d64f0d1aff64a2dd616dd966b38176bfbc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-c.usdz",
+      "bytes": 97443,
+      "sha256": "97a46cbbd8ca2a2d956487f96cf5fe5b94c12d71d382da62943498c5dcd29ce7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-d.usdz",
+      "bytes": 136268,
+      "sha256": "660f2c6b69ea04bd355b71bcd9d803beb833d6d3d37ca23f43d75dd9ab3b1092"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-e.usdz",
+      "bytes": 134683,
+      "sha256": "3b8eb637b10df8f9104800a7a116bf5f77604c771299a18786b106a7ef476acb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-f.usdz",
+      "bytes": 127876,
+      "sha256": "8faee49298b34cc6abaec4b507cb78f1856c4cae29073518446b8e4cd6e5df9f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-g.usdz",
+      "bytes": 90408,
+      "sha256": "8bf689ca0810c8d5144ea366c4e2e82aa39e751c869b41bcf7ebe2c51c71aa77"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-h.usdz",
+      "bytes": 68308,
+      "sha256": "b70473a49d7683341e7042059a3fd39487bbea3e0b4e1cb6815b87da69f471b6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-i.usdz",
+      "bytes": 71453,
+      "sha256": "a1d2ef90ca7a9b141863ff3e9189dc731e81a831b582b6934a6e4971b8c2fa9f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-j.usdz",
+      "bytes": 97747,
+      "sha256": "b8a25d4028e97854b48739f2a159495d348a45b6d5ecb6fe916f11754c5a6c58"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-k.usdz",
+      "bytes": 87023,
+      "sha256": "98eb0a8840f984da50d518e86fa05935874de701f3b83735ce85f4e9d291bf78"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-l.usdz",
+      "bytes": 105267,
+      "sha256": "4db4463aa7ca3938af88d664da1d0931a76a15dc6dae82b6577e3ef5f05ab1ef"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-m.usdz",
+      "bytes": 93453,
+      "sha256": "a85dac9541b7bbb994d5efe2ef726590e434e85614d9d1527c196817c108c1e5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-n.usdz",
+      "bytes": 128220,
+      "sha256": "81b4457e2e5f36e771db6bddaf458c6aaf0f025873c15160ba6ec029a8c76110"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-o.usdz",
+      "bytes": 108033,
+      "sha256": "81398eaff685d49b5ec0048b2ec8468c4043093c05dc622f938b9ba892d24020"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-p.usdz",
+      "bytes": 104262,
+      "sha256": "e1e95b4c68cf16e4355332421bd18f0b96f44e4a88dca8d6fefe294f191f8665"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-q.usdz",
+      "bytes": 95128,
+      "sha256": "5b05ad5d4c72fa28f3ae47c2aec0ae9ff686042895ae548a1862208d45b86f41"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-r.usdz",
+      "bytes": 86983,
+      "sha256": "875ac1ed842b19c8d69271fd1680e45c3b7d8ed64ea17756979d3bf767113e87"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-s.usdz",
+      "bytes": 99403,
+      "sha256": "19602d70043122210cebf4189aa1ec3a9b00b6cd33e7fe8204b31b3834e2a413"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-t.usdz",
+      "bytes": 154828,
+      "sha256": "fcb653c299174721d19f6629447c540c0b268a400da271ef35d4e310e7fdb005"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-house-u.usdz",
+      "bytes": 109539,
+      "sha256": "36a0f01b81b2cc7907bbbb3f9277438a0cb6ecc27d0f37c42e0ac0e6470f50fc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-path-long.usdz",
+      "bytes": 16290,
+      "sha256": "5325e8983191e0aad880e3a20bc8c78aff977c228de810f86a64edd7450156a6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-path-short.usdz",
+      "bytes": 16288,
+      "sha256": "83e858cacc9153489b17f4e4c1e566cbc05dd5b3dd97ff509a81044cced67416"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-planter.usdz",
+      "bytes": 30049,
+      "sha256": "2863e01c63a9a1c39caba23743822a166be61541667ec402c88ff549b08584a6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-a.usdz",
+      "bytes": 102431,
+      "sha256": "1d3a6294206438bc2eb6202b8d5f26a041decce7ea3c638ee809daacccd4395c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-b.usdz",
+      "bytes": 102095,
+      "sha256": "5e9d12be3e00a3e229592af125aa00475b598fbc7ad7ee51be7c64c31bfb3202"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-c.usdz",
+      "bytes": 97759,
+      "sha256": "1c3c1a06ec0ac092b041d648a99049e627c208859c71ea26be6a3362d43755a1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-d.usdz",
+      "bytes": 91674,
+      "sha256": "d3cc29d9366da676b64b4f663257bfd2022df523de1db91d0d753109da6e7df9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-e.usdz",
+      "bytes": 119144,
+      "sha256": "1b14a35d9721e5d9196b2e46f639c6f60ad09ce93320d40d4301b1a6e2814b74"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-f.usdz",
+      "bytes": 137282,
+      "sha256": "d07397bdff925484d782d724219055518e39a8641e359bb524f92923aafc6326"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-g.usdz",
+      "bytes": 151827,
+      "sha256": "9e726b5bd93294996ec68fd00e7a1ae2ba4d2090546b702aa013b9c08cb185b8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-h.usdz",
+      "bytes": 118705,
+      "sha256": "f10bbe9158fb945c16776976d74d90ead6af28f404535b3dcef95426abb96b5d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-i.usdz",
+      "bytes": 187875,
+      "sha256": "e7528d948ef3aa328dafea161eacab79442dee989607dd55eb9e873a5f667a95"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-j.usdz",
+      "bytes": 374826,
+      "sha256": "e00f4ee735fc4cbeedb87d654cd8b55dafeac79f326aed8dd45bea79c4c301a2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-k.usdz",
+      "bytes": 217959,
+      "sha256": "40e2aba57cedd96b644c2a770696b34e1adc07c8fda47787dc692be36aa62fa3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-l.usdz",
+      "bytes": 254762,
+      "sha256": "d38c1b0979084b94c56f61760382f1bdd038504945d594345e9dad466e07a9e5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-m.usdz",
+      "bytes": 266187,
+      "sha256": "e13edf30c3ba25dd06567b0dae6f53c26a9b94b8f0e7ea090d2052404a8d833e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-shop-n.usdz",
+      "bytes": 303626,
+      "sha256": "afb7bc7416f447344437906ba927180ee921f2a65b6d7cdb577f7db07aa56deb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-a.usdz",
+      "bytes": 104400,
+      "sha256": "d3bc2662239806b9c8c7d18f5d57327a3f9ba971a1021e5c94e26508c2da7a4f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-b.usdz",
+      "bytes": 125776,
+      "sha256": "2006f0dcabec07c5eb5492f13737e55220734dd758b6d385dcad90658f59c972"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-c.usdz",
+      "bytes": 134359,
+      "sha256": "10d27438f595686c824b7bf348fd9aa55da525c639a30c1957cefb048e511f5d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-d.usdz",
+      "bytes": 147835,
+      "sha256": "d27b154667f3b83bb5806f11525762e58b92a1ccecd99ad081f4508e121678f1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-skyscraper-e.usdz",
+      "bytes": 96202,
+      "sha256": "0279814a8c1caa9c81f17dcf9e83d5304b14632fd5ec2c257d3db1d3aa33eee8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-streetlight.usdz",
+      "bytes": 21465,
+      "sha256": "1e13273c03c308f9b3ec68ec6e8b3f513640ea1f2e45acca092d315ad89865da"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-tree-large.usdz",
+      "bytes": 18434,
+      "sha256": "0b264b57fcbcf03509806ec03ae2fb9a2687110b6f15f0b836424b73fb995cf8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/city-tree-small.usdz",
+      "bytes": 18433,
+      "sha256": "87d63d50985386fb6cf1696898bff897acd1002782ad18c9db616577e945e985"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-bolt.usdz",
+      "bytes": 18474,
+      "sha256": "b1fe8d7faae343291512579baacbde8ccf6fff344a1b2f7f28963328f8136539"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-bumper.usdz",
+      "bytes": 24013,
+      "sha256": "3eaeafc7ebde3c8a4d74a404d1b0b0ca99a13e0ac51e58e456998248d2ed6e4e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-door-window.usdz",
+      "bytes": 21020,
+      "sha256": "9071d55eb2ee0ec7daf1578df22f07a0979f23d23d22fe08c4359e37fbd995e6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-door.usdz",
+      "bytes": 20565,
+      "sha256": "03bf61ecc0b097b76ab180df290aded9eba347e73955c9c948e2f53c63c58aa1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-drivetrain-axle.usdz",
+      "bytes": 29921,
+      "sha256": "9c8beb199a8238b5d15e96061a65cc9a182dc6502ebac80a0f5609584564b4f8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-drivetrain.usdz",
+      "bytes": 44728,
+      "sha256": "c9ac3132efd02a2009eaf9f2626b71e0962a2b773caba6898b6b2f7f2c25b527"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-nut.usdz",
+      "bytes": 18582,
+      "sha256": "e79661d8cd58c5cc5f42cdc86278152b4d404b0816ffefe817f931ea586b27ed"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-a.usdz",
+      "bytes": 18704,
+      "sha256": "7b8d983dcbcdee00ca3a83c6d6c34d2253a40fdf2ba69978f99106aa6c6f7268"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-b.usdz",
+      "bytes": 19066,
+      "sha256": "3ca0b72bdabf335269ddf8351bb0a6be61666a373ca2beb2cd7f4236313ae2f9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-small-a.usdz",
+      "bytes": 17861,
+      "sha256": "828fdf0c598b57f64acbbe7966a4758852034eaddea1f3873481d65e3042d1fc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-plate-small-b.usdz",
+      "bytes": 19056,
+      "sha256": "f4212843f067a6e529eaa2f0c40b10dbec68281a5997cfbe884051f158f8050f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-spoiler-a.usdz",
+      "bytes": 19322,
+      "sha256": "329606cc958ac6e10446f5aa307ada51cf80f8bedb8e43f26f7b0186cfa5b90c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-spoiler-b.usdz",
+      "bytes": 21993,
+      "sha256": "4c0ced8962f80eac8f21d994f0c2e094a049feb66353f6ca13f822d7fa055580"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/debris-tire.usdz",
+      "bytes": 36131,
+      "sha256": "f423e240aabfe2b43388e7da588873259504e53936d211db909b1d0602326879"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/delivery.usdz",
+      "bytes": 121713,
+      "sha256": "72bc07626e58b295a2ff4f8e3afb868082c0a2c9adeabaff8999a844c9af27b9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-boost.usdz",
+      "bytes": 173228,
+      "sha256": "e26072c890eda1ec2e8ff7d68a6c87576b258941f86daff379d7aff871488608"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-cheer.usdz",
+      "bytes": 173228,
+      "sha256": "5358626544293102ed35d4d3aeb429be12c508c2984de91343c3a755d524584b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-crash.usdz",
+      "bytes": 256268,
+      "sha256": "45b5c211e48a45b6da614f2c4492954e1194d5fa3a084d13eebefb55ad18ce68"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/driver-idle.usdz",
+      "bytes": 472171,
+      "sha256": "696b3125a40f3109cfbd9d3217075bf4f3f49d4cb41cc0473640c8deed4033ec"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/firetruck.usdz",
+      "bytes": 142362,
+      "sha256": "1a1dc3ab1b780766df8cac848621a38251475e5be8c86dc301fe8677886e4055"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-burger.usdz",
+      "bytes": 32791,
+      "sha256": "90ffb1dc6466980add9556ac17d08756902d2e51e9cfa7c6c72efaabf75eea4e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cake.usdz",
+      "bytes": 95238,
+      "sha256": "09fdfd00bd56a56df1d6318d540dfc8d3af4bf939b601b93ea01c4a07f7578e9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cone.usdz",
+      "bytes": 17289,
+      "sha256": "505890798b6d6e7c57d1759c16d9ecd1d9bc180ca5ceab7eb46140d75b8f37a7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-cupcake.usdz",
+      "bytes": 29781,
+      "sha256": "030177c944dff9bfc3ac1a76d00be92d3c0ccd691c355ea4e1b430bb5215131a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-donut-chocolate.usdz",
+      "bytes": 23107,
+      "sha256": "fe2218beb2da8ea5cedefe0406a91c59166f67e215c4304f6cec025a9e55caf3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-donut.usdz",
+      "bytes": 27980,
+      "sha256": "eef7cf46637cba3c5d6d4617ee25cc52e5cf3dcb59c2957ca2d695c7722cacb1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-fries.usdz",
+      "bytes": 57101,
+      "sha256": "4c2bc43be0ccd10f349baf9ac41c3904648888451e7bb98cabaf333d1aba2321"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-hotdog.usdz",
+      "bytes": 34360,
+      "sha256": "aec40aa4015a435ea336975d6ff908ee52e1e7d5d6bba01ccbbaab901ff18960"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-icecream.usdz",
+      "bytes": 20416,
+      "sha256": "5298287a7451215224249ff2c777f68be4bdc006c271333cfaeab244d5816bd0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-muffin.usdz",
+      "bytes": 20806,
+      "sha256": "646beaf2b61f18cccabfdc9448b94065a8a0f1541aa712ab267c723d63538c01"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-pancakes.usdz",
+      "bytes": 42382,
+      "sha256": "824291fe4e31c3a1a39f49eeddbe5dd473b6fc772ebfbd79c511e40821d251b5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-pizza.usdz",
+      "bytes": 99738,
+      "sha256": "30340a0454c5ef7323d9660faf4b0de173c748934188b230b61eeea7c3a24fc7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-popsicle.usdz",
+      "bytes": 19677,
+      "sha256": "7005c70b747351820620d9555ff462de838f0c36c6dc12a1b8e2cb50611b2d0c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-soda.usdz",
+      "bytes": 25581,
+      "sha256": "f6fa4e56c6a08705a441add778b887dfe15ef9c53fd8f4d4914e2d7f8f3ea356"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-sundae.usdz",
+      "bytes": 35280,
+      "sha256": "b82e075c6b3bf0ab8127f82957d4d56dda00f25e99828965c7cd84e8138c5e8f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/food-waffle.usdz",
+      "bytes": 53955,
+      "sha256": "fdaf6625df9d6f87d2489ee0c0f688ba8ec0b1b446ca9300559da68d7a42304c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/garbage-truck.usdz",
+      "bytes": 167104,
+      "sha256": "06eaa527b811273d4d244ef703c30aef08fc7b6eca9bb10828d2a1c96fbb8546"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/gate-finish.usdz",
+      "bytes": 18987,
+      "sha256": "153a1168beef128fc6bf1e73299c87076d1a7ba0b0223dd8f7564994bab7a7fa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/gate.usdz",
+      "bytes": 19342,
+      "sha256": "c698101f5dbbcd3489f4bd00c6bdd89f615ef5d2b7897fa23c75e81a2fe102e0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-ball-blue.usdz",
+      "bytes": 54908,
+      "sha256": "e083f53d637532f21e92241a9c4d5c7d55a053fd450ce3a8e1f6e60e348e9b77"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-ball-red.usdz",
+      "bytes": 54909,
+      "sha256": "d4a5d475443e8c2055071c59dfb28c730014055fd6a3655315d626a5a7605e7b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-castle.usdz",
+      "bytes": 24716,
+      "sha256": "7b8855fff71d5cf071086edc50180b75e0c721c9e4a9fb2c72cf7b9b9af7360b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-diamond.usdz",
+      "bytes": 14828,
+      "sha256": "8cd6490e8d2bc2b1d5b2c240494f0a5b39092f5dae6538528f4800f71bebd83a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-flag-blue.usdz",
+      "bytes": 18520,
+      "sha256": "4d41d856761d452e71974d59ee6a8e8f2872aff3652cb7398c01c313381321d5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-flag-red.usdz",
+      "bytes": 18522,
+      "sha256": "a5414e508ea0e0644b1bf55b0030d076d20e866d1fe135e4f12801171039f02e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-gate.usdz",
+      "bytes": 22722,
+      "sha256": "4ddae626c34535e7ce5baee7f50cf7c55bb748787edc5acabf5d5e0c0b5ab4e7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-triangle.usdz",
+      "bytes": 15596,
+      "sha256": "4f07700b47a722cfc45e202ffc82f5cc4af7552053f34c36cacff3e241330dd1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/golf-windmill.usdz",
+      "bytes": 30732,
+      "sha256": "6294e9f2d9ff30ee0a4da3b94152a6edda19eaf7b31b4097a35774f555b4c145"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-a.usdz",
+      "bytes": 25686,
+      "sha256": "591ef62bae16c5767a8633da63f112a03a98ba1e3eb1badb711d737ddedb84d3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-b.usdz",
+      "bytes": 29263,
+      "sha256": "329d5112dc877bda2fc9d9c4f3612b463af80ff3884b3059d1728b4a370b697d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-c.usdz",
+      "bytes": 26812,
+      "sha256": "53266f6c64a69d062e64bc3fd5624e4a0076f58fbb6887b78765f1cac33d7859"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-d.usdz",
+      "bytes": 25694,
+      "sha256": "8fb3b43e527f06d700e8398c7de26698f8305645bce9065a39c5d183543dd7e4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-e.usdz",
+      "bytes": 27635,
+      "sha256": "2db3762906dce1be8558556bb37f9eff6fbf72d41c1b5b921808f6b458e8c72e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-female-f.usdz",
+      "bytes": 24433,
+      "sha256": "0c1226d52492ce34e87020ed5d68a29b039ea9d82ae0c0496609efc3c94a9ee6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-a.usdz",
+      "bytes": 18621,
+      "sha256": "dd00255914c0aad141b32f71d1fb5633ca75c0b9558571d3bb4fbb0645b1ebc9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-c.usdz",
+      "bytes": 23776,
+      "sha256": "307b0636eff2f611ece4dfd545f3e78a28e50a28b59f203c375d6f8e44c786a9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-d.usdz",
+      "bytes": 18692,
+      "sha256": "ee0dd2197d83167c3707f840ef414747bb31abe1eed3cb2a63747ec80ed582e7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-e.usdz",
+      "bytes": 19916,
+      "sha256": "45d6eb10f0d96942109ee20852dc2814782ab042473415c90b87362c98b54105"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hair-male-f.usdz",
+      "bytes": 18238,
+      "sha256": "d7ba1d7a75f46b2bb42f0ae5ccc8373cf118a09a01af1bf8f5f410b8dd309d51"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/hatchback-sports.usdz",
+      "bytes": 110167,
+      "sha256": "b0d5e9ad1f4d6535fb368da383ceca634a1a280b9096804fd1b0d9d668bc235f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-banana.usdz",
+      "bytes": 23364,
+      "sha256": "00b5d142a62999850026fa7ff165f192e77f3df18c2d55a55264d1258fd37124"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-box.usdz",
+      "bytes": 26276,
+      "sha256": "da064068c203aa2dca81ac0b82c44072b39c615ace68d91049b35e4419b71d30"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-coin-gold.usdz",
+      "bytes": 18505,
+      "sha256": "fafcb1dc2b419b74ee88d95b1e11642f02efc4812bc878b144e211a50404dae2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/item-cone.usdz",
+      "bytes": 16783,
+      "sha256": "ddc153817bc42651acf9c602b2ab27b609edd71b074ef6561e9b21a2f661c585"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oobi.usdz",
+      "bytes": 167559,
+      "sha256": "30d5c85dc8c09a2813858ee4b54ecf429107a0e1ef158d9d9071a5f65ff4d38b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oodi.usdz",
+      "bytes": 154046,
+      "sha256": "3d31b43c0a3401f23b257243d1d8705d09d1753df0ed9a35b1d265604a58587a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-ooli.usdz",
+      "bytes": 154130,
+      "sha256": "494b11b8874a943b885feafc0ae64afab4ad249013703e6595a57a8a779c6f9d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oopi.usdz",
+      "bytes": 155849,
+      "sha256": "c509fd7baf44ff1e1498e31ba3a198088375274ca8d3b40cb2867c784048ce71"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/kart-oozi.usdz",
+      "bytes": 157778,
+      "sha256": "10b8c3f2f7e0986e4423526ccd9dd888846919c67cfaf181cd0be39e3acba7de"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-flower-red.usdz",
+      "bytes": 8846,
+      "sha256": "87ba651cfec90b4f3be5a7767bc9aa7ab8b4a09c6cca2f76f12216d6e65ba684"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-flower-yellow.usdz",
+      "bytes": 8864,
+      "sha256": "296526a5cb7876277529068b7362f7d3a9b323765a5f6426e48954d00ba95828"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-mushroom-red.usdz",
+      "bytes": 7505,
+      "sha256": "a2925515442b24f2420a3d2ac960b30ef0994585860ed431377338f3ca2eb157"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-stump.usdz",
+      "bytes": 7300,
+      "sha256": "19a8ff5b3dc7ff64319856311418152313f9ac0417d5c51a58c8bf8a5f33e31b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-default.usdz",
+      "bytes": 11412,
+      "sha256": "38af37d09c0d5b4ec1a9f5224e75b9aab8e3aba98f1a5b6a0df40d5f49031c6c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-detailed.usdz",
+      "bytes": 33639,
+      "sha256": "4459c546563e7373a740579d2d4483b9258bd3b551179813e890ee3b2268734e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-oak.usdz",
+      "bytes": 17138,
+      "sha256": "b97584e239088214c894b4541308c390b28afcb188c1a0ee0a841e67df5b7eb7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/park-tree-palm.usdz",
+      "bytes": 16248,
+      "sha256": "510ab677bcf003210849dee9e88496117c4a249e17eb532ab66a7553ac44932d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-a.usdz",
+      "bytes": 82016,
+      "sha256": "f1e0bcdd3f84114713b955251efd38aad26673318a8667ced3b4c7f63e36569c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-b.usdz",
+      "bytes": 96492,
+      "sha256": "5db8c8021306851b3bcf199c163ace5338b428e113638280f97999a6ae2182ad"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-c.usdz",
+      "bytes": 89962,
+      "sha256": "cd949feb7748c8feee4699e7ed3690ae20763bcdc4e7b866d08c60f25342b352"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/person-d.usdz",
+      "bytes": 84384,
+      "sha256": "0092b8ec6a1dc826e42fab3eefc94cf0303c9cc2d6be75b7185a4e4201c70d22"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-barrel.usdz",
+      "bytes": 24031,
+      "sha256": "9735fc258f82e91fcda01846f4808e1ef62be566699dc68f07aa5c54dcd34c09"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-cannon.usdz",
+      "bytes": 30539,
+      "sha256": "08fd86dbeb3f03af5a02331b8f61223f58e1b112b224103a87a5b732a6e5b267"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-chest.usdz",
+      "bytes": 30162,
+      "sha256": "19bef0f675847d9815bbea2dc2f94be52f00ae3ddf955825ec519ae39a1b5980"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-crate.usdz",
+      "bytes": 19344,
+      "sha256": "6d8e7396b4829f252b62c61b4cd660ec7e37e4b81369c18f85d0909bf1a66e9a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-flag.usdz",
+      "bytes": 24054,
+      "sha256": "14e63aa2f3d2541186d2f8d2a2a390ac7ccb8eaa3d39ac5a2f95bd9591ecdcb7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-a.usdz",
+      "bytes": 39513,
+      "sha256": "99089cffa97e78b6367d6e9e20dcbb18518404971a7a214629588c37b4ae4a5c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-b.usdz",
+      "bytes": 39536,
+      "sha256": "136dd503e87018cf6e8033b7111140c7b2e401e62011e08464bef4373f8f12c6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-palm-c.usdz",
+      "bytes": 50766,
+      "sha256": "f030f779def622b7555b1dd40c625e2d3846503b03a1fae138e0f7452c3893cb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-rocks-a.usdz",
+      "bytes": 55183,
+      "sha256": "4b6e74928f6db76cadb2b008de65dc58ebcf4fd49067daaeddd8cfa9d1bbfa5d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-rocks-b.usdz",
+      "bytes": 52413,
+      "sha256": "b536e3c0be256940ea70ae074ba937a073ce34826398ae8bc42d84796da98bea"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-ghost.usdz",
+      "bytes": 122964,
+      "sha256": "2afa86affab65d247dcf8e171ac307ff0b96e850faa0197aa17381001e65bc42"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-large.usdz",
+      "bytes": 140148,
+      "sha256": "6b1245a6bac61c7f5c4808563457a530bf44225d8c8bb9cf836d9acde51d4dac"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-medium.usdz",
+      "bytes": 133003,
+      "sha256": "dc210eb42805041d7d89c5ac139ebae612c16ae83d4819b428389b2a2c410c6f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-small.usdz",
+      "bytes": 113219,
+      "sha256": "d386a248f90825a8d56e2a89b6abdaeab86862a11d9aa3bfe4f2290b305698bf"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-ship-wreck.usdz",
+      "bytes": 122390,
+      "sha256": "32f03cd7cc4ee64b33ff8ca61bcf6d2691610d171bd690e1509218bc6c0d87c4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-tower-large.usdz",
+      "bytes": 56504,
+      "sha256": "83c0011ee5af6ac4f9a6cbf90375ee5f97a4b324baa4c67b5ecb4a3f72a87a00"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/pirate-tower-small.usdz",
+      "bytes": 59668,
+      "sha256": "374148049feb4bc6bd32e579db9507353feeb8ed8b77a1e7bcad1340b54a3ea8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/police.usdz",
+      "bytes": 124428,
+      "sha256": "a9b510894e79bf5ada93bf58e25c8987de46508432fe2fc3b0b86ae2b389b127"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-banner-tower-green.usdz",
+      "bytes": 35747,
+      "sha256": "f0f1e9f66b2ae3c144278630a9fdebc81d4a964cf9b01db96b2a5318d3d03ca8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-banner-tower-red.usdz",
+      "bytes": 35743,
+      "sha256": "6b4cc4faed2bf2f95feb7c8f8a80aecc008d31d7161c136b3ef906021b8f8eb4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-billboard.usdz",
+      "bytes": 17157,
+      "sha256": "dfa41b6106f9a281afda33cc1d11ddb5e4cdda921ab7dc7faea44a0a54839cc1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-car-green.usdz",
+      "bytes": 108495,
+      "sha256": "bf1c6515b3a061ae7d4d29d0f5b9d15aeebb9fa2cf6d81e5a51e81a166749fdc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-car-red.usdz",
+      "bytes": 108495,
+      "sha256": "51a83548a01fbb080dd9d1db23aa6bcce27abbe4a7c662cbeb50cf7263eea836"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-flag-checkers.usdz",
+      "bytes": 17474,
+      "sha256": "50d1c864801d9df74aab03149e520face00ec627c291560ccfe24cb36b614f19"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-future.usdz",
+      "bytes": 107383,
+      "sha256": "3d59fd90512ca8a4cf5c0a24355e41fcddea708da3dba60be448aa05ecaace90"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-grandstand-covered.usdz",
+      "bytes": 16553,
+      "sha256": "fb9d5b311763c0a1665691762dc7c2aa9ca512757e57f40c215bfac5943491d4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-grandstand.usdz",
+      "bytes": 13663,
+      "sha256": "3eb7102d6ad230ce8cbdf90243f2410cb044a4b3306b7d6d1aa38d6f9bf2f9d3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-lightpost.usdz",
+      "bytes": 27180,
+      "sha256": "c4245785cdb822cb5d5ca5cf4a90387547133a0eabb558e3163d5b831ea0ff8a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pits-garage.usdz",
+      "bytes": 15265,
+      "sha256": "6b6c94747ed4fbfc76db443d030182a8a576041241fb7dadd6ceb42d119beba7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pits-office.usdz",
+      "bytes": 9822,
+      "sha256": "bd8412ee509324c8bd1e1aa76c2c44ea3d136951132c580bf65d5dc288b5b3c3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race-pylon.usdz",
+      "bytes": 10233,
+      "sha256": "afea73ebb0c89b8f43975b501bf91b7235f9a3a6de3072d71bcd7e311e3ab1a4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/race.usdz",
+      "bytes": 100651,
+      "sha256": "4fdc7212e70b74f920559ecd2d93c2d7edae6d1df37cd1b438806eacc66e812b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-boost.usdz",
+      "bytes": 80386,
+      "sha256": "bbe6f3bbbcd2c9ab4a844f94bd7214f96679ac10684f4567229849bc0364ec3e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-cheer.usdz",
+      "bytes": 80726,
+      "sha256": "875330666682f24f5da49cd50234025dbd92a72462a1e89ba7f11cd52d358998"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/reaction-crash.usdz",
+      "bytes": 80394,
+      "sha256": "acaa4ca5bf640929911207dd3b4309b5fe6c609e6ed322e29d90876194ad89f1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/sedan-sports.usdz",
+      "bytes": 110033,
+      "sha256": "26a1352f39483b57cf964d50bb2c73a7465f3837f366d95be21c4361f32e2d2c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/sedan.usdz",
+      "bytes": 106036,
+      "sha256": "42fee217e92631013467bd585e5e8bdd62dd02fb3dca0439d1276df9e3b224de"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-alien.usdz",
+      "bytes": 27123,
+      "sha256": "0faa60911fae800933ed81b4d67ba3b0b4b48add4bdb7364cb37951dd60aa3e3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-astronaut-a.usdz",
+      "bytes": 27754,
+      "sha256": "0c0621cb7945575b3e881a160be011f841add835e64256cef888d284372fcf46"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-astronaut-b.usdz",
+      "bytes": 28674,
+      "sha256": "5acdae68fc105523d82dfd34c2c14862687281dd19559d918a81d90ec29f19ec"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crater-large.usdz",
+      "bytes": 7455,
+      "sha256": "8dad9fe929b721ca3391f2c2f2019abcd018c4bc7e921bde6a3ac37dd8e819ba"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crater.usdz",
+      "bytes": 7490,
+      "sha256": "45177a960d6307a61ab99f292eba1ceb3896442e1cc517736c8a964c27f9ceaa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crystals-a.usdz",
+      "bytes": 29818,
+      "sha256": "c33d98cae7e6908d9feeeb6a67d97a9edecd83439c3e65177369b9dcc6abcb3d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-crystals-b.usdz",
+      "bytes": 29571,
+      "sha256": "c47ddb1b347aa0026f95c612a6b7173a66bdaafa68156997bf9dfb14d3cfa135"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-dish.usdz",
+      "bytes": 16655,
+      "sha256": "2373ec7194dfb0bdd6c217018bbc77eaef8f9694344f60f1ed333fc4b5740ffe"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-meteor-detailed.usdz",
+      "bytes": 16609,
+      "sha256": "e401f4fbe150a6f54aa30778262af7625eeaa26f1f9a649bbeb9a15c2f3d82d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-meteor.usdz",
+      "bytes": 8020,
+      "sha256": "4b8496420d3b029ea76caa99dbd86cb28340fa296e2cdec353698fac143a7116"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-racer.usdz",
+      "bytes": 23198,
+      "sha256": "a6edc99a925b426820ebc455e6c0c7b2b50b0d7a1f91ba6a50ce487bf8692fc6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-a.usdz",
+      "bytes": 23513,
+      "sha256": "53b2f3c43530545e228be5998d31163760202f3389dcaa19126f48800b950876"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-b.usdz",
+      "bytes": 22420,
+      "sha256": "0c579232007ea31e6b571781669fd1bbc29d069e7921c1c2cec010b5989d2822"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-c.usdz",
+      "bytes": 24181,
+      "sha256": "cfb394b0e747cd3d96fa23bcbd80ed49dde383e3fd0eaa29a36ccf547e35270f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/space-speeder-d.usdz",
+      "bytes": 26533,
+      "sha256": "60db71ac15d28a91bb908188ebfbf173246516f1072c3d5c22def978c8ae3b96"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-coffin.usdz",
+      "bytes": 32983,
+      "sha256": "e1ab6f6661d98e1b2b12ae37520c6292117ea9c1a1e90afd8fd79e119a826ec2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-cross-wood.usdz",
+      "bytes": 23740,
+      "sha256": "a3d6149966a26bfc29096d533e9742b6eafc87013b2addfd904cce832e8999f6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-crypt-a.usdz",
+      "bytes": 22160,
+      "sha256": "be7525d6ce3b24824839fe3159dd3778c8fa6915976633f5e7b0cb5522f85192"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-crypt.usdz",
+      "bytes": 32784,
+      "sha256": "4d4c9e0b9c2eb0f493e86b4f1b0fa427b1f841c57db34561d105616c832af811"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-ghost.usdz",
+      "bytes": 42214,
+      "sha256": "00cc72c46fb0c75103038e37524515ceaf347ee55e6be2df07854a0e0aa7da49"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-bevel.usdz",
+      "bytes": 26470,
+      "sha256": "2c0acf08627205d974e12e4aea39ca87c966b7b05167afe76c61594e6b440bfd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-cross.usdz",
+      "bytes": 30039,
+      "sha256": "1c088a1566052adfa87e235d3f8045ab69cbc676db07cc651118220c1c10901a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-fancy.usdz",
+      "bytes": 21195,
+      "sha256": "bdf5432731d1e9df48a11ee13e05f9cb8e0e43785161b7b252938587ceabfba2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-round.usdz",
+      "bytes": 26989,
+      "sha256": "5d296233407f562f52383498e7402fd46f5451fbb2a0e87cb2e1c2821c4550d5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-grave-wide.usdz",
+      "bytes": 32698,
+      "sha256": "7e5509bec3e16308eeb863ff2df30646123eae39e83772f736a97e6ca6179bd5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-lantern.usdz",
+      "bytes": 30608,
+      "sha256": "fd830f618349979dbccb56bf61af52095777cce324e49bb1f72202c3a9963c56"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-lightpost.usdz",
+      "bytes": 40077,
+      "sha256": "ede1cd665f33a5f1066654741e6b043a93d2d191af2f63f695a624db101382ce"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pine-fall.usdz",
+      "bytes": 40254,
+      "sha256": "35fa924a30bd003065869b36982498934a567fa330288665a17c5afdb111c59e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pine.usdz",
+      "bytes": 40295,
+      "sha256": "9e2e09f7f4805e9952ca0c2fd406c7d5ff397c2ca9e60a6d2054ad98886c5698"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pumpkin-tall.usdz",
+      "bytes": 47881,
+      "sha256": "6a1aa23389977f26c5976a8723f899ef863e3c418a7d613b8863eeefee06b5fd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-pumpkin.usdz",
+      "bytes": 49681,
+      "sha256": "a686b4c6d4fab6225f36e7532c6942793d7e13910de4e4dff8ecfe0509908e7b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-rocks.usdz",
+      "bytes": 41442,
+      "sha256": "ff31e2acbea0b38c4ed719cafb0f4cae78efae6413f550d0250c5e65e908ac97"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-skeleton.usdz",
+      "bytes": 56778,
+      "sha256": "8390c073d8ba33acb28232236ec03ff5b7ae1e363d417350f8dd9b8ee078194a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-vampire.usdz",
+      "bytes": 88934,
+      "sha256": "eb2c079595f3be80546966d6672eacdd09dbb727c714d8a01e0e1440dfb2c2be"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/spooky-zombie.usdz",
+      "bytes": 87106,
+      "sha256": "915f88898bea079d52805096fed3a409702b1961b22d6c8363e89560ffb581f5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-bend.usdz",
+      "bytes": 31633,
+      "sha256": "4da02818fda9f1d8a6829a3d2ed0ae1d40f53dd4504817c258e7964a50f69ba1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-cross.usdz",
+      "bytes": 22709,
+      "sha256": "4867ea038e5152d703e4df784d739ac4fdfabec8c3e2372ee01065d0cc10c00a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-end.usdz",
+      "bytes": 17829,
+      "sha256": "e6c085fb1f99029c514b4231d75dfcfce2ddde6502dfedb9380a69ab13688a1c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-square.usdz",
+      "bytes": 17378,
+      "sha256": "73f8f8db7c77fa5a8cf8b282ff8ebdb08e594c520907dd32a434971d8bb0346a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-straight.usdz",
+      "bytes": 18003,
+      "sha256": "b9cb5fb8f79e1decf2576c820a7f32f02b71c1485b0d80760ec9929685c57e09"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/street-tee.usdz",
+      "bytes": 20686,
+      "sha256": "b9a55b4128d126288e39992a5c24cf22bca845cfcc8948d41872040d498851be"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-clamp.usdz",
+      "bytes": 17061,
+      "sha256": "4429e6f6bee90ba34a2637570c76d1ba7caff44a00dddb12b99d93f378967861"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-diagonal.usdz",
+      "bytes": 18395,
+      "sha256": "ea22614c9d2021e03754874e57f1401c5e39ae69472a571aacfbbd32e7799033"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide-clamp.usdz",
+      "bytes": 17052,
+      "sha256": "3a57c238f71988edb6905b801252b875f56ed165c34ef6d052ffcab6831ae946"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide-diagonal.usdz",
+      "bytes": 18386,
+      "sha256": "8f92443422a7b4730e015f9318a5119fef069e9457b04997ce8b6249f111e4fd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports-wide.usdz",
+      "bytes": 17086,
+      "sha256": "722e1cdae447ba9cb0e9a67802ccb148bc5e9c5a62c1b62fb55f92f759b3b8c4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/supports.usdz",
+      "bytes": 17099,
+      "sha256": "b0bdcc8dce12741dd4ea237ac03ec337d5eaa2fa7a3e2ce47fe1b0946e039e4f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/suv-luxury.usdz",
+      "bytes": 109449,
+      "sha256": "8e799e10c52c6540a510f8c42a19fc57239a04c479b23c767d09d31b8df7691a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/suv.usdz",
+      "bytes": 131121,
+      "sha256": "7bdb449084e265813ab0db7aaf9a722e10908f47d53536fc717bbf7db29e8273"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/taxi.usdz",
+      "bytes": 108309,
+      "sha256": "c2a0ec74c0e1f88489694e9b1ae6b00524252f427051b7444713fd311c5283c5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-narrow-looping.usdz",
+      "bytes": 46186,
+      "sha256": "40f34ea0ffea4d592c1a828a47844d1d012d1ac67b00bf18a6d069bd16a0f3dc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-cap-back.usdz",
+      "bytes": 15430,
+      "sha256": "bf3719432f2edec5559147a9b143eddb5b68f6b0de766c6fb65339de21bf670e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-cap-front.usdz",
+      "bytes": 15429,
+      "sha256": "f61c4bcfe4f71bbcd83ea87664ab7b7eeaa4c08cbe2e1c7651e30bad78fa2d8b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-large-ramp.usdz",
+      "bytes": 33627,
+      "sha256": "e73e54f2f19552d50ea2c97a11fe96879a3277f65db266ba1d34e6713273a65d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-large.usdz",
+      "bytes": 33508,
+      "sha256": "d1527790503ac14952bac9c250bcfd371463f61154340c5ba86423b35d923026"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-small-ramp.usdz",
+      "bytes": 27292,
+      "sha256": "8d3db7f6b10886b4260e2f1e30e06b0ccf7a31b598dfbb3af5cfc9a0d607a333"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-corner-small.usdz",
+      "bytes": 27173,
+      "sha256": "66d45163f14a9dfa5c92e7ee6340b2117e1036c6b3d0361abeeb87ae739bf329"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-curve.usdz",
+      "bytes": 29292,
+      "sha256": "8576c10171317fb0d32a40464213abdd093753503b97e2836c11557107cf210d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bend-large.usdz",
+      "bytes": 33625,
+      "sha256": "0ff1b0bfefd30c55832d2564d79c51a920c2c734b7aa16e681a77ece3c7921a9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bend.usdz",
+      "bytes": 27172,
+      "sha256": "38a726cc7dbb57a17420d29a3fc53a6808c7d49e9f2b759a07c2049a1298b5b8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bump-down.usdz",
+      "bytes": 29271,
+      "sha256": "2b96f9fee11f870f02c657d50daff9ac139ea8fd046f7f9d4a2fd2ef85528722"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-bump-up.usdz",
+      "bytes": 29402,
+      "sha256": "c27afafa40f4071ace4442966290f36eded7003abd87bfdf399cd8c502f6e1d9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-beginning.usdz",
+      "bytes": 29393,
+      "sha256": "43e480ff6719104e2ad3f53425f162e9c9dda55e646e9a3796042bb05bcafc59"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-complete-half.usdz",
+      "bytes": 29386,
+      "sha256": "5dde5ffb9de68b7e31dee8bd7f54650cd474e25e735e37bed92c870ce40feae0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-complete.usdz",
+      "bytes": 29395,
+      "sha256": "302152c2f4d9ebf07a90f1cc0e22dec958e1233516802ae376521b0d17e0f1e1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-hill-end.usdz",
+      "bytes": 29400,
+      "sha256": "85e845e20d6586057bad5f0624f78aee2abc83d697ce927e3591f58a87feac38"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-left-side.usdz",
+      "bytes": 27282,
+      "sha256": "98070eb11d6306181d45c72d34ace0a4f5ff252d33146b8b324da16b73db8669"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-left.usdz",
+      "bytes": 27163,
+      "sha256": "4f998dbe2cd60c754a80a46de9e46740f96c7df5fa699d52a8d7e87ec196c61f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-right-side.usdz",
+      "bytes": 27283,
+      "sha256": "6aa2b8c1525f533d920a288ad04c599caf4b3b41c62936fa2281b900b1149333"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight-skew-right.usdz",
+      "bytes": 27291,
+      "sha256": "0a2faa7a37859ad4b09b944e2cb4ee752948f114d30f0a69a4234a07e1bc23cf"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide-straight.usdz",
+      "bytes": 27181,
+      "sha256": "c35d0f96d3eea8b11bbb22495b328f395207e396dc2f910fdc20e1270c2e25b9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/track-wide.usdz",
+      "bytes": 14433,
+      "sha256": "bc4059e42c840e597bf88b9cc598148a2d4650b781795ea1e4cfa5215b38a7da"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/tractor.usdz",
+      "bytes": 157929,
+      "sha256": "14ee7a1a5bb7c38fe8895f2cb0189ba6cff782598df5c8e5aadd2f3a596680bd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/truck.usdz",
+      "bytes": 109476,
+      "sha256": "9b458d1f1eda6415bf9d34de32a8ff62b542f6515d573613ecc0d588736f5099"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/van.usdz",
+      "bytes": 109200,
+      "sha256": "70b0438dadb25b82a8b932c523c35b286f6af9600e5da6e0ff5655d373a5915b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-drag-racer.usdz",
+      "bytes": 91149,
+      "sha256": "4aaf1e00ebad2cfbbc0d27dc28d1601e543ed330f40fbca78fc9a10ddb8643c5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-monster-truck.usdz",
+      "bytes": 104381,
+      "sha256": "b5a6abdaf299089b177ef240395d984575f0b43a206ce00898893fbe53ad6a5a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-racer-low.usdz",
+      "bytes": 90360,
+      "sha256": "faed513cb1e9d20a01f429049970bf04d78c01cb4608b49a3e0a2ffb6ba9fa74"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-racer.usdz",
+      "bytes": 90673,
+      "sha256": "8163c701cc1f2cdef846272ae7be86bdbc9c033bfdad44152d610d3adc60b13a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-speedster.usdz",
+      "bytes": 90124,
+      "sha256": "81fe1cce61ea17a84ff32e63985d759dc3ba0b7dc7bd256a0dcfdcf14e0b1589"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-suv.usdz",
+      "bytes": 92789,
+      "sha256": "a2303b05cbc8fd0e0060a4269556850c0eec82948694d35a8e441b76667878e2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-truck.usdz",
+      "bytes": 90949,
+      "sha256": "0d9b5e19b4c4045f453afbbcc246fa9e2f85b97279d29ed2cd753d7f1470f484"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/vehicle-vintage-racer.usdz",
+      "bytes": 88983,
+      "sha256": "3e5d02466154c094cf3861ba6791e6d9aa3e24a076e74a0949ecec950910c5f9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-dark.usdz",
+      "bytes": 38712,
+      "sha256": "1c62da8f9172fd3356b16cdabc2b19c627477f80cae843f8c5884d5e7f11c54c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-default.usdz",
+      "bytes": 37852,
+      "sha256": "f376a0065625af9f8604f4ee5dcd83abfe6ed54f398592b2838dd561b8b3143f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-large.usdz",
+      "bytes": 27986,
+      "sha256": "c492cc4d6d3b1a2fc28515bc4d96c4e086fd8ad097419314771d227a34fadfcd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-medium.usdz",
+      "bytes": 27993,
+      "sha256": "4d998aa9e7413cecd33c254dcdb4ffadcd6514c644d8a0eda23db17961554bb0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-racing.usdz",
+      "bytes": 38606,
+      "sha256": "6f9ae3353f89bd6f74825883ad7cb1f0c93420b713d8f0380f3d38107bad0d79"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/wheel-small.usdz",
+      "bytes": 27985,
+      "sha256": "693ee32255fc31755d39999ffa1be8f35a2a97f3fd06bec7f6f5bb726fc7c5ce"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-cane-green.usdz",
+      "bytes": 21935,
+      "sha256": "5e41961adf1594ff99a8e82a96e4d2021a505318a9ed839b335e3cc0028cf05d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-cane-red.usdz",
+      "bytes": 21937,
+      "sha256": "098e7d66632f8272af20ecd983d1d6135676228b15e38dff38a1e393eb3ad7d6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-gingerbread-man.usdz",
+      "bytes": 27026,
+      "sha256": "c709bdb1bc6ef1c0173fb286cec0837d6eaa9fb7a7ec583bc4cd58f35947aec9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-gingerbread-woman.usdz",
+      "bytes": 32076,
+      "sha256": "fce9822173707e70a61dbe4a64e3805edcc5ba8189a5b764c6287dc35d83815c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-lantern.usdz",
+      "bytes": 28800,
+      "sha256": "47fe7fb219598bbf93b1dacc42a375531dea695c9f14980a2292052017eca2eb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-nutcracker.usdz",
+      "bytes": 74411,
+      "sha256": "4cdd066b6e5a4c3ad46a706ab664878e5e62d3b02c8de6c2e8a5989941af4e29"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-a.usdz",
+      "bytes": 32047,
+      "sha256": "dc7c9fa6568ab7d423e8d123b3739cda6d6ba1c370e023cfa2226d4da3de9307"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-b.usdz",
+      "bytes": 32036,
+      "sha256": "daae47fb8cabd1c816f1896c52afc34557eca7047547c0992b89adec4f4305af"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-c.usdz",
+      "bytes": 32030,
+      "sha256": "c60713575325bff4f2d1ea21133670c978596320a80ca09458e49c3b9a8b08bf"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-present-d.usdz",
+      "bytes": 32975,
+      "sha256": "465c9d44efda1d4b0fd54a4eaf33339e17a1a16a3cf5fd4f0c6f0357dd136303"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-reindeer.usdz",
+      "bytes": 80174,
+      "sha256": "d762993bcb3125780ae5c114f4881e23107e0f726c3e8a5018ea50de44b2dce9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-sled.usdz",
+      "bytes": 33206,
+      "sha256": "9ea6c0107cc9d1c3b92cc92038a98cbd57ace7aa4bca02135335ac879a3ebac4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snow-pile.usdz",
+      "bytes": 25915,
+      "sha256": "cb80ddbd91f289903207f4358acf1540dc3fe22904ecda4c974244d97548a382"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snowman-hat.usdz",
+      "bytes": 58104,
+      "sha256": "97d084446ed50a091d4a866161cc279e667d702eef39f1b2699f7389183e26c5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-snowman.usdz",
+      "bytes": 50226,
+      "sha256": "750a08e99b79e1c132e77370ee1b9850593370719df4c201798cfeb1eba0bc44"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-loco.usdz",
+      "bytes": 66981,
+      "sha256": "487d7ca1ebb0f54cfa051ef4e3755791fd36a3286e9f02ad7f148b8075ccc2f3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-tender.usdz",
+      "bytes": 38389,
+      "sha256": "9f1e333eb9885c586a5ca1ab841b0afcd0660a1a4624a59e1ec4fa5827b73bca"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-train-wagon.usdz",
+      "bytes": 79087,
+      "sha256": "bc948991e90de0c814589c9e17a29ab658fa2f30edc340b673db97cb61225d72"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-a.usdz",
+      "bytes": 43008,
+      "sha256": "58aa47632dea7a1af79eee5bf674a50c733853d2250e1136ac04ce00fb03ffd8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-b.usdz",
+      "bytes": 44153,
+      "sha256": "458ea533c0a63209972532a698a516eb6595b48a63c0242f6492013ddf54722d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-c.usdz",
+      "bytes": 33660,
+      "sha256": "b446d61ba6d9111f86fbe80a16c78e9b0eb894426a71b5a39dbf9895f052bfbe"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-decorated-snow.usdz",
+      "bytes": 78661,
+      "sha256": "a050da3457a6a59bed6a7be6c18ac7fcf9a373f1734276fef5e7a66bcfbc0de5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Models3D/winter-tree-decorated.usdz",
+      "bytes": 67947,
+      "sha256": "595d290011a9cb1e46d0d07120d8dcf05515f841ce59b6eed26061d5136c0820"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/README.md",
+      "bytes": 741,
+      "sha256": "d16ea2ff8f3d85991510d16190f584fd337c2aa0eef49ae152f51386b62a9066"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Textures/roster-colormap.png",
+      "bytes": 8706,
+      "sha256": "0d4947d34ff32acf4a359c7f22ca784e057e7e72f622170a9a77b6fc88fdb70e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-ambulance.png",
+      "bytes": 21740,
+      "sha256": "a63f4d4e247e942159bd161c6fe80da8736d43db99c57d9e7717168228a5042c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-barrier.png",
+      "bytes": 20356,
+      "sha256": "33239254034b53698198f5c45a4e86914a97c9d2a473c4d5e35e250148a3a33d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-cone.png",
+      "bytes": 21578,
+      "sha256": "0b3671aa83d672171fcd50a690d92b513d4b3a0145972b8ec066601956e6775f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-dumpster.png",
+      "bytes": 19916,
+      "sha256": "00abb831ed4041690f8ab588c41fdc9e30fe312bb69772fa98fee4ab95257ad2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-fence.png",
+      "bytes": 15068,
+      "sha256": "c3537909eaa148ca8620d1fd9fdf9152b0c095ba3764d7704d9072e87807d8e0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-light.png",
+      "bytes": 16046,
+      "sha256": "f9970bfd491c1ffa53333e28bceae74358c0bf055d3ce9556f8d44240d37320d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-lightpost.png",
+      "bytes": 12101,
+      "sha256": "ef2e0730340a45ab3f869e9651b4873d54cde5d28f8336548e8d01b2bb27058f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-pillar.png",
+      "bytes": 12620,
+      "sha256": "707c1466e4a8e81d566b1efc2afd29bab378685fc4d503562a77e1a8d108828d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-pole.png",
+      "bytes": 18586,
+      "sha256": "eb17fba84814d538fe8f0438c75eae8fa7f7477cc60c3d21f8f41cb617765c31"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-build-sign-stop.png",
+      "bytes": 20210,
+      "sha256": "a3495f63d1476818e9136a859b4e8c30bb4af22b24ebe40b943af3115c8c655f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-bridge.png",
+      "bytes": 22499,
+      "sha256": "a1d11b9ab8f2f9e80d83fcf831cdc4faf2a7042832786fcc886c7b11dced6e3b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-bush.png",
+      "bytes": 17741,
+      "sha256": "59acb93779eacf07155339125a9e85caa050375a8f3c3f48fef6684b85c5532d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-canoe.png",
+      "bytes": 11577,
+      "sha256": "471743a7663c5f8fd90751043a97d874acf31aa025c75a2e17bfd8a0c4139230"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-fire-stones.png",
+      "bytes": 15789,
+      "sha256": "98672d32e186959ea7383e2590a7e7cfdee8cbfbcc4cdc4ba4c37ccd5c6fe4e9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-fire.png",
+      "bytes": 17605,
+      "sha256": "3fd14693d26f0a757282290ee69abe588cd6bb44c061c5886dfc344979e76156"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-rock.png",
+      "bytes": 13759,
+      "sha256": "47c55f93ed3e320f70de8b1027c0528da4b94ddc275f473e058bd638dd3a6109"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-tent-closed.png",
+      "bytes": 20128,
+      "sha256": "52e93016b5ae6b62284ce40183b4c3558d6f55a96ff90a85482f5b5fc49a3615"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-tent-open.png",
+      "bytes": 20194,
+      "sha256": "522eeeab121b694e33ca2a811506e0ff0e69f8d1953eae4de94e4d1acd9f16eb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-camp-tent-small.png",
+      "bytes": 21995,
+      "sha256": "84d633ea317941ba8574aa8683f25f18e67b1d9a61919e4c375655917625629d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-cactus-short.png",
+      "bytes": 16186,
+      "sha256": "b6b545eedd6705b72495f86e5238f72d8554db6966455c329204f19991f350e8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-cactus-tall.png",
+      "bytes": 15659,
+      "sha256": "d300afcdf4bd55d052f361ee8ff1910000cd87f0e064aaba5321bec37b093f33"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-cliff-large.png",
+      "bytes": 23309,
+      "sha256": "65a8d06857994749765d6cb16e345ef3f8adc59b0cd9d83e5dc461d928fe4982"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-cliff.png",
+      "bytes": 21061,
+      "sha256": "08f419590ec35505271058c33806bf7334f7551822704d93e07639deeee550f7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-mesa.png",
+      "bytes": 21695,
+      "sha256": "c00cb6eefea0a54cc7e1a32ee3b8024f615552709a769d9d8426e3dd100f435f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-rock-a.png",
+      "bytes": 15104,
+      "sha256": "2f3e1b537172898b5b5d1516ddfe763a208b8e84714a81b9951e950829fc920c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-rock-b.png",
+      "bytes": 15306,
+      "sha256": "8a2a91d5f826aa1a619a8b1e36262947a67c464e086a67efb35d855d91c9d6a4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-canyon-rock-c.png",
+      "bytes": 16940,
+      "sha256": "46f2e64624865dacf2f1077fc6fe3dd22914b6ca36b4a225ff33c4c8c6f25ae9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-ballista.png",
+      "bytes": 18503,
+      "sha256": "b195ff1039f749ece6ea0379ccdc451bb91787dd856b0ac687912dc7b8a43c20"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-cart-high.png",
+      "bytes": 22961,
+      "sha256": "bc02f5727900270c5b989a62433a1da20b51d6f184e21c058fc17c94f54794cd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-cart.png",
+      "bytes": 19110,
+      "sha256": "26c23b390bcec3c58d407b9fb1ff0e8b1c6eca25db78cc987c70541a5bd54dce"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-catapult.png",
+      "bytes": 25472,
+      "sha256": "f0ea9e5e4dc3f4f170db0f47be93b80f1f9d9fe062d4fc74fe3e6556d6c50391"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-flag-wide.png",
+      "bytes": 17893,
+      "sha256": "7d8185d7782bf2b5b92826dd6a0c591fea8d6614e4684148182444cf34151777"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-flag.png",
+      "bytes": 14268,
+      "sha256": "e39adf7552fcc165bba17ad81a8c86c936cef6da529dc68ca20e14573c244e54"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-fountain.png",
+      "bytes": 18210,
+      "sha256": "e430772bbc2275caf21350720f9bc1989c7002e9f505f8e65eaee15ea5a58011"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-hedge.png",
+      "bytes": 20553,
+      "sha256": "21bd8faee7a27cd212ec7d0a300e036f46bf79570bb9417866da238ea215f165"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-lantern.png",
+      "bytes": 12042,
+      "sha256": "2ebc9f4077b632529d65ee07d284883e7589b501a57d1bac24ae0c4e4d8e63e4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-rocks.png",
+      "bytes": 16978,
+      "sha256": "a2ef945bf7ae5e24c5122e6d9ad12b4f3727c9e195f6e09b756b7b468e3f472e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-siege-tower.png",
+      "bytes": 23612,
+      "sha256": "4022c74e3f3592385aa96c43a2102d74e773c5a1bc86178cf0ffab465148a86b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-tower.png",
+      "bytes": 27954,
+      "sha256": "52362b06ec1b3e0132350b7520aaa74c4d28a08d58166d55cca22b60b8e58173"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-trebuchet.png",
+      "bytes": 30273,
+      "sha256": "058fe624bec327648be1388e8649a16a32f682c49e4ac4817404760989489c47"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-castle-tree.png",
+      "bytes": 17083,
+      "sha256": "fbc7f8a08938ffc9a7e9d40fb3b309959cd0956e21d7be98f15dc5fe3001f17b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-fence.png",
+      "bytes": 17552,
+      "sha256": "ca87218858cbb3734796b1179c8b2682b337350c470fd5b83d8c15df5ec4aa9c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-a.png",
+      "bytes": 26009,
+      "sha256": "1f50e870de4041ba6d3030d86b304b2988f1a1c749be2321e585eba2c33b1ab3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-b.png",
+      "bytes": 24980,
+      "sha256": "5e8e39f42c1bb24f7d38903bea8e394c211a0ed8f5e53c5818f826b86b405410"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-c.png",
+      "bytes": 28446,
+      "sha256": "54e303a26ca71e422c75a025f6ad7b5ddcbbd6f803e8aa744a0f6af0b86dfab2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-d.png",
+      "bytes": 25264,
+      "sha256": "d1bbfd866ce220c85a7553386758cdbed9e9d0b85b8d78995efb1e179d6b9643"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-e.png",
+      "bytes": 32513,
+      "sha256": "b8ab70f0d2ec5566c2098d3355c6b896d339a9cec9140b87ebb4c271fe70a7b5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-f.png",
+      "bytes": 32054,
+      "sha256": "2a1f545a76792d06296f324f798faabafb3b359d9437efc43a9a2d80b8ec6a87"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-g.png",
+      "bytes": 23213,
+      "sha256": "9d85674ab0a0be46935a41d2f2c932a406f5f0bc9206792d76d63fa392bd8d33"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-h.png",
+      "bytes": 23727,
+      "sha256": "cf12508b921431e2b8fade6ab4ed4ae130b0f0317bd4bad3d77d3d6c81cfa631"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-i.png",
+      "bytes": 23816,
+      "sha256": "e803755d1f079d618ed5c76202c247f40e2629b19531132d85f7b038fa646235"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-j.png",
+      "bytes": 26003,
+      "sha256": "cca0267f7e8172af1c49ca1bff58d83fb9bce3bb1ebfd4ab25fa179ec33d3832"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-k.png",
+      "bytes": 30015,
+      "sha256": "385736f5a70ea1493db8a775479a98cae3afd7e4e36902fbe37e46a98ce665e6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-l.png",
+      "bytes": 32595,
+      "sha256": "92f77f8b02ab4db9cdcf2b40772ae8b455e2deada3a7e7468cfcee0d4aab3efb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-m.png",
+      "bytes": 25939,
+      "sha256": "1a36e22748b99504c6371019e296d390b316ddb9afb7a4a982a62ce7d1e0ffd0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-n.png",
+      "bytes": 24982,
+      "sha256": "8b6c34e68fa92f110a5199caa8a8071c72ccf0f4a9e05c9b6438f66120fec28d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-o.png",
+      "bytes": 29483,
+      "sha256": "d95fa461a681e734fda8d7b69415b44dc8024315073e847f3fc14471322bd881"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-p.png",
+      "bytes": 30685,
+      "sha256": "147fe3c77e8707db59887851692e1f7a25dacc522153893d079fe78d7e1e5d61"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-q.png",
+      "bytes": 27389,
+      "sha256": "ecd716d13738626d9c65fe12512ec219d3409cbcb1eb1086dc9d1b2dafe8bb04"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-r.png",
+      "bytes": 30187,
+      "sha256": "99529ac284c64fe3f2733349cd9e19dbcc86386580e9543fd93ba1017611417e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-s.png",
+      "bytes": 26959,
+      "sha256": "c214f9ff2e3fd7c6689e9c78b2bdf10909e7412d4ad5ebf2dfcb0ac1d1cb6561"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-t.png",
+      "bytes": 33000,
+      "sha256": "5d4f00d91b189fced7cf21d9e7a425362e2f7b7767a23459eb3c179ce9753bc4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-house-u.png",
+      "bytes": 26857,
+      "sha256": "4c7261f932773566e07443339d1c7046fb635bde0cf9612df2e55e1cdf121829"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-path-long.png",
+      "bytes": 12025,
+      "sha256": "9f92d192c0afd7f5a701eb5c1c6ac42188a9270d19186217235bdfd9cd3ec4db"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-path-short.png",
+      "bytes": 15708,
+      "sha256": "4fa6290dce8996ac440b7e3bcf728160a5f11f88af0aa22746a3e2535d6e5648"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-planter.png",
+      "bytes": 22324,
+      "sha256": "d4a3308238f172470e8c190765b6247a7b1959b6164ae8f7bc2e6b7ae94e7ec9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-a.png",
+      "bytes": 28155,
+      "sha256": "c8b826b3ec068e2fc75e6daf022a203ab3cfbd22d42cc42ce3d45111433873ca"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-b.png",
+      "bytes": 28454,
+      "sha256": "6bb988224e68d5a9668c2962a97bd091da158f220fac72622ac3a97ba6d19f74"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-c.png",
+      "bytes": 28537,
+      "sha256": "95c0f35dc74004fb58b813ce8c2a3089f7ba691aef337c5c4bbc811100a0fe63"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-d.png",
+      "bytes": 25612,
+      "sha256": "9c9d68d7ad7be6c65e0dbe9d87da2870d5140935a192736556a0105e9a6de5b0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-e.png",
+      "bytes": 23971,
+      "sha256": "d57cd96ae60919eb038e954fc20276ad33c7adaeeff0d366ed6f796a99abaa33"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-f.png",
+      "bytes": 26565,
+      "sha256": "a4065f6ddd9f6a2a444195d2a3750099d0dcc6b9b7a252a239a017ba8adefda2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-g.png",
+      "bytes": 25772,
+      "sha256": "1eb3887eb4bd86ad9bfb1b4273d110590b685b8959cb6f94ed78f048f97ddab7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-h.png",
+      "bytes": 28454,
+      "sha256": "7dbb31c255688cbe41f6dafac9cc75759e30b33660e1ead95cdfca202207e510"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-i.png",
+      "bytes": 34684,
+      "sha256": "35bac82c2784b8c081707e3058b6f8e6ab3003e883f77ad132eabcdcc3be28b5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-j.png",
+      "bytes": 35924,
+      "sha256": "eecf4db9d4df497a8a98738270d266c962b23d6337b13027a5d738257a62ef58"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-k.png",
+      "bytes": 26370,
+      "sha256": "f66c62cdc2d1f82ec51bd91c18d5d4ed2bdb78394b8a01bc37446ce131ca514b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-l.png",
+      "bytes": 29214,
+      "sha256": "3f7b2f574d1be00c5bbc535643dfff3958d449856eb9d2eec5d888ffd0bdfbc2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-m.png",
+      "bytes": 23422,
+      "sha256": "807ef1833fa53f67f3f74744e8300d7eec5d8c1be5c025c153cc3084e595f192"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-shop-n.png",
+      "bytes": 34789,
+      "sha256": "3e096703a6b63d80c88a928b178a454f0337501ea078d3c314bd3d133da834c3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-skyscraper-a.png",
+      "bytes": 24869,
+      "sha256": "fa2d577536b8a8cf5469bed9c4efd3dc3ac4f0dae82fb7331b659314119d33d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-skyscraper-b.png",
+      "bytes": 20163,
+      "sha256": "ab4a7dadc67859232cce6ce129e7f9743511834bf4b12c72faaab3e2807ae046"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-skyscraper-c.png",
+      "bytes": 21167,
+      "sha256": "35f9c45fd2bc7b5b121fad331dc279267b4bef69085f84556c3b491140a3cb6c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-skyscraper-d.png",
+      "bytes": 19013,
+      "sha256": "021113b1a777c6a6b60e553176e96467ab49e4f22a854acedc9623a980ba5f0c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-skyscraper-e.png",
+      "bytes": 18550,
+      "sha256": "3cd1724cadde29aeaf0436382f7a98c6cc633abab31c199b47ed119e4134c3b3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-streetlight.png",
+      "bytes": 11751,
+      "sha256": "2efdc10e75788b913790f05f8b42935179b05597b931138613b3328ddd1c7aec"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-tree-large.png",
+      "bytes": 13498,
+      "sha256": "9a6cb151521bbe0bde431827769724065307e1ec3d97d7c7d156f2b099ae035d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-city-tree-small.png",
+      "bytes": 15263,
+      "sha256": "985bd33fec71c0b3db90a9ce150f8076979513e21ce526855b5e39f1b63872aa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-delivery.png",
+      "bytes": 19884,
+      "sha256": "cd0a8f84457b1713d0fc58ef6d6c8f592e3191270a6342169e2ed3e405d20237"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-firetruck.png",
+      "bytes": 23434,
+      "sha256": "55e8af6b0f6d51c33be757627762b71976082c97cb0e3f01484f632ccf37d273"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-burger.png",
+      "bytes": 28718,
+      "sha256": "a00a42307d01aa3a33c666a71cc72626cc845cad6024b838207b4db00d0b5091"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-cake.png",
+      "bytes": 24684,
+      "sha256": "4f9af2e0ea79b6e76379b3da9770b75a5696d643c629515f6958eaf1c1cfd96d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-cone.png",
+      "bytes": 18188,
+      "sha256": "501c8b7e397e9d9e796a276824d01dff63ff9de9e165507d1784df27d268f54e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-cupcake.png",
+      "bytes": 21067,
+      "sha256": "27863ca1eb950fb9b07e2c5cdd52f50846da36371ffe076c2bf543abc0322d96"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-donut-chocolate.png",
+      "bytes": 17170,
+      "sha256": "d53f96606adf0739bb655e889d1047a5654918aaf22d86dc8d9a85fae1036dc0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-donut.png",
+      "bytes": 18416,
+      "sha256": "ea4c6372693bce6d31c10dfdd102c94b753fd4243d835d92c93aa4c7f3177d78"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-fries.png",
+      "bytes": 22106,
+      "sha256": "243d6fd22b3d65604bd326795975c77c0e1d4db6fc27d1717df446412f16b751"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-hotdog.png",
+      "bytes": 14221,
+      "sha256": "887afc15ccb6062afb3c9ccf5d06272b25914347c4095fcf6662b1188ac9d293"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-icecream.png",
+      "bytes": 16626,
+      "sha256": "4d61a970294f7ca41963104a745072e6c4df0867163afffe42372ce833c201bd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-muffin.png",
+      "bytes": 21441,
+      "sha256": "2e927803ec7f0f3c0d3d7500ff8b7206327d870eaa0b759d5e27c9036f6a0a90"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-pancakes.png",
+      "bytes": 16394,
+      "sha256": "4b8ba59d5321884541aa3db1ea9f624114fccefccd85cbf7187b85c22aa46765"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-pizza.png",
+      "bytes": 19197,
+      "sha256": "528195c3b759b9a38251f360a8d5d8fdc3596cf36371c2dc445f0e095e2db01b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-popsicle.png",
+      "bytes": 14538,
+      "sha256": "8c161e94d13b8eba0fd1011606fd893a72b2aa841be50b03635dba72c575fb20"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-soda.png",
+      "bytes": 17788,
+      "sha256": "fec3453d7e3945a63ad1f0282d4c8642df8ac9cf835352a64fafad25b9190e17"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-sundae.png",
+      "bytes": 16952,
+      "sha256": "53413cf9721125a934ac4cc1992a170fe492069904aa32906e67a62466ae70f6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-food-waffle.png",
+      "bytes": 20985,
+      "sha256": "0a310753eac10e6a8140f656c109e84063ac09718e94f784133d4d7956fe4d1d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-garbage-truck.png",
+      "bytes": 21415,
+      "sha256": "87fed2f2f14ee5d179d8b96c424c359bd3edb14dd31a45a89839be403a3be925"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-ball-blue.png",
+      "bytes": 23750,
+      "sha256": "7b51c17e9bb5918c67b3b6f23e62fa7f2fa0294e1fab00397f1d9d5e8e6fb91f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-ball-red.png",
+      "bytes": 24073,
+      "sha256": "3064a9a2028c08dcba067e9cdbfce67c56d2da00f768752f84f7d189e96599c4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-castle.png",
+      "bytes": 26251,
+      "sha256": "f4b998683192cb0d0f2d0a55590b78a8a3a5f28b5e6bf8d4e70c23a20b30cdfa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-diamond.png",
+      "bytes": 16720,
+      "sha256": "ae7dfc9a2646ea993484e49aafd8fa4b31c2b4683c01e956839a2939a60c91ae"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-flag-blue.png",
+      "bytes": 12885,
+      "sha256": "b653b5d199dd9a5ba09a3cb62dcc014c6d59a66f4b9b9e26ad0db58b63851983"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-flag-red.png",
+      "bytes": 12960,
+      "sha256": "d901341d380afb044e04d218ba3719c3af655aa76110057f3a938496e87de6f0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-gate.png",
+      "bytes": 20614,
+      "sha256": "eccbeebae0a36aea5c34c677caca952b0326a03280c4fcba8ed57f350047c4b3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-triangle.png",
+      "bytes": 17563,
+      "sha256": "bb8a712538f52ee1d918ed28e8952267e6e3b57f9d4565cb5588554e1ba4f690"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-golf-windmill.png",
+      "bytes": 23187,
+      "sha256": "3c66e9b7947e85718b9a08afd751b0fff676c53e27c597fde38e201fdc5c8901"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-hatchback-sports.png",
+      "bytes": 18955,
+      "sha256": "2a8f6c9ceb88f5f85b6924d03fcd48c8f017e7161feb6bf15b2b63b4fd92565b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-item-banana.png",
+      "bytes": 20387,
+      "sha256": "6a6742dd5cec4364e809b0f64e6d1cf9d9151fd2655cdab4c9f84ef3c086cd12"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-item-box.png",
+      "bytes": 30344,
+      "sha256": "6f2295b5ae0a905d988d64ae3480581d4911d14f72355a5d983c5300997f089f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-item-coin-gold.png",
+      "bytes": 23692,
+      "sha256": "1ea29988548ed4cb6b1479d3d8ae88ff1d9d8a18317fe30ade3e8a6ef84e26db"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-item-cone.png",
+      "bytes": 24383,
+      "sha256": "5133c626778bc73f6e2c6c0cee576bae139ee4496f7ba49db38c35ad13bd6462"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-flower-red.png",
+      "bytes": 15537,
+      "sha256": "503d2a912040b20c1ee65d1d9149685b954391b403fd3bfac48644f99a980fd8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-flower-yellow.png",
+      "bytes": 19698,
+      "sha256": "ae6b9bbf916b036903ca6dc14aa2a8ea74c55de699554ad03f6c9b692129c192"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-mushroom-red.png",
+      "bytes": 19358,
+      "sha256": "51b3cb34c5de19f4959210acf48007f9018e91264d55938d8477f6959fb62058"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-stump.png",
+      "bytes": 18549,
+      "sha256": "d575a11da75a05680f2624eb934c1181f0f4f45a82442c301bcb3a01c6174c72"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-tree-default.png",
+      "bytes": 13937,
+      "sha256": "46211deb37e72cb96e12a03131b09596b36f5859c89c964d949f28fb093492e6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-tree-detailed.png",
+      "bytes": 17149,
+      "sha256": "2632811c4797dd281ffb5e45cc2ab6c833cadd0389c6f8d96a4406c05cd49cd3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-tree-oak.png",
+      "bytes": 16521,
+      "sha256": "b979291b151538c0ec6da7f6d7acaccc25a1128a9dbb8d4c7863a8e02517dd5f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-park-tree-palm.png",
+      "bytes": 14013,
+      "sha256": "25077ace919805fb6859de802eccb0359718b16e70403f0a2f14845fa797620c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-person-a.png",
+      "bytes": 11215,
+      "sha256": "73b15f33cb110d5f2443a64dbe32f628753800486c97cfec87d238da5ac5f9d8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-person-b.png",
+      "bytes": 12220,
+      "sha256": "4ccfe3c46ad83562ddeba908f82fb8486e969351511592675b26c6b28e707eb4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-person-c.png",
+      "bytes": 11849,
+      "sha256": "d19663ed3a31a132174d91e731824a956b3de9b861ade35bd98b68a3f13f0f26"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-person-d.png",
+      "bytes": 11897,
+      "sha256": "39a1bb891ec405cb0793586d94f13e6da743dfca3935f1d092a14fff0bed11b0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-barrel.png",
+      "bytes": 25493,
+      "sha256": "bacc44237ec500d45e833b8139e92a3105f43bc2b997c7146b50e57c7d791089"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-cannon.png",
+      "bytes": 19250,
+      "sha256": "8aed1d4553ff2d23c3302f55a7f4454a2566a1cecd0f67dcebb9f7958eb510ab"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-chest.png",
+      "bytes": 26736,
+      "sha256": "b90aa2f9766d6d668bbabd20ef6eb168323aa8627e5e2eaee6b5f51c3da0123f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-crate.png",
+      "bytes": 24406,
+      "sha256": "74e82ebc1789dfc7fb8a52ce7508c7031dc22eea67b74406b93dd79ff4b44abe"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-flag.png",
+      "bytes": 12351,
+      "sha256": "065846e4b64cfeeaaef576c8de9542c2e0d86bdc78dcea6e872158fbccfc5577"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-palm-a.png",
+      "bytes": 16092,
+      "sha256": "742dfb728ddfac99f08f2a3e7bf402c1b3c53d40c8fba44eca8c42282494e140"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-palm-b.png",
+      "bytes": 17486,
+      "sha256": "e89eba3258b7364fd85a6ec11aae4a7aa5dbb41e1e666bd80b3890a3c8baa1ee"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-palm-c.png",
+      "bytes": 16961,
+      "sha256": "3d9cb21ddfff320dca89b5e5fc577233b8a9b4e457065db6d3b7d32ba3f11ce5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-rocks-a.png",
+      "bytes": 21158,
+      "sha256": "276d9547b21a4ee114723201413060a574f73ab661263a065230e15909094777"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-rocks-b.png",
+      "bytes": 23755,
+      "sha256": "c05bd1f1238fafc5994eac3b36814b7f4483569f03d6b0c216bd83cdead206a1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-ship-ghost.png",
+      "bytes": 24873,
+      "sha256": "c57d2c48045c6f5da22132a2c3c901ed0772701ef551395b1e17769e6c2a6c3d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-ship-large.png",
+      "bytes": 21630,
+      "sha256": "0f3e81dded781045492ec436e689464cc7053b1ac5a3b7847c8df9a246aa947b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-ship-medium.png",
+      "bytes": 24760,
+      "sha256": "704346ba13287ccc31dabc5957a9239ec1bd0f595f18ee0536385dc6ab0e7860"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-ship-small.png",
+      "bytes": 21537,
+      "sha256": "29035e408dc236959edc939e0a930ab94e0f47f26542f7e2c270ad7d11215d78"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-ship-wreck.png",
+      "bytes": 20895,
+      "sha256": "85c2c6c603fd9d69f18ee0846330ba395dd86e2da44d09da53c05fad5dcd0881"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-tower-large.png",
+      "bytes": 16545,
+      "sha256": "310987a0851535dc844989ce1233ad2a4396e5eb9bca11de5bf85ddaf34915b0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-pirate-tower-small.png",
+      "bytes": 20373,
+      "sha256": "66572fea08c87bdaea21eed77540af335ccdbb5c85bb45f473b2b20184dabb1d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-police.png",
+      "bytes": 18596,
+      "sha256": "87d0a2de8e0d0e3548640a68a4007214fe664c1764f6534d7984894cc9f019df"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-banner-tower-green.png",
+      "bytes": 18047,
+      "sha256": "f7e6d13e0c7d1406b2edcac21c5763497b46e52fbfec371c7386befbcfc1ec4d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-banner-tower-red.png",
+      "bytes": 18091,
+      "sha256": "4c865e28a5ff0962c8e7a81746f611b783468dc449f12e71f787950fa9d776c4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-billboard.png",
+      "bytes": 23898,
+      "sha256": "d36494dfb938b6b1877f16ba4b4329939b9976b695b4f355351e7c54a17d2eab"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-car-green.png",
+      "bytes": 17880,
+      "sha256": "0ebe3f2acd98a6c7529d39b393a60119be9ae42d24f9d810051289f968d8ac6d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-car-red.png",
+      "bytes": 17939,
+      "sha256": "607f87508059bea164e70e70cb51b8fc6ee8a642506105f8169dd221e0348c64"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-flag-checkers.png",
+      "bytes": 11983,
+      "sha256": "a43330842c0d2b07a6714d44c97d70176c3365fe07e09e2652b5057304dff7c8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-grandstand-covered.png",
+      "bytes": 27594,
+      "sha256": "067bc16501f611502062a4a39c261f8ab93e588ef6f9fc0db3d86d925eab69f0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-grandstand.png",
+      "bytes": 28777,
+      "sha256": "e071feb7b85ba520562cdc35d7ab11eb1d1b6cbd4c6468a8f38444cb5acee2b6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-lightpost.png",
+      "bytes": 12668,
+      "sha256": "5bdbabadd2b05f19bd2386e67a859b1efea00378ec49bd1592e42d5e94032f38"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-pits-garage.png",
+      "bytes": 25581,
+      "sha256": "342254eeda04eeb550fc62a95951f57ca2237a3cad76cf04fb089ec511d5eaf3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-pits-office.png",
+      "bytes": 23748,
+      "sha256": "b3f22c28ea052968f69419b7b26a5e9d2c7d84e49146efde516ab7ab510a793c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-race-pylon.png",
+      "bytes": 21176,
+      "sha256": "fc94f48195831e30b64b7e1a64d265c5ab07cffd8c6a9b8c9a0a2f7305687195"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-sedan-sports.png",
+      "bytes": 19951,
+      "sha256": "a25af0388151678b5d080716e7e6afbd323326e811bf4b3e11769d973fad4715"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-sedan.png",
+      "bytes": 20820,
+      "sha256": "9073b1478fe415a9b1aa37c35c3d6fb4c815096d836cb83cb8670144bd9c9032"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-alien.png",
+      "bytes": 17622,
+      "sha256": "e1ed72ddbbe77b2bb72bbb30fbb204b6d76ac0d7e5acd57db990cd48074d1c64"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-astronaut-a.png",
+      "bytes": 18486,
+      "sha256": "3620d50a862bc1c93d278985f4838b8e50076692c02ef61b99051554b5956459"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-astronaut-b.png",
+      "bytes": 18593,
+      "sha256": "95a901eb69f2172aed8b5fc5e2fde8d09dc3a2dfd75dfa9092a8f657ae1f8bd9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-crater-large.png",
+      "bytes": 13940,
+      "sha256": "02e9750dd28d63b3d79d63022056bf9a8bf90c3ce76f35a25b779cab99b7abd7"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-crater.png",
+      "bytes": 14202,
+      "sha256": "cc58e99e6322f9dd6479e55a34fbfa66d35b38ed199122aa3940dc4a6ec57cc9"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-crystals-a.png",
+      "bytes": 19320,
+      "sha256": "c5b541661c740fa9eb2189c702372a28f7351fcb18a1b250abb5e946a2819b51"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-crystals-b.png",
+      "bytes": 20163,
+      "sha256": "fd6da0ca0095998a6cf85539152aa85182956cb9256b91af86dbb94bab0b6bdc"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-dish.png",
+      "bytes": 19247,
+      "sha256": "48f57b5248fd75f6544144d1be3501b9fd37c6e732828e253cdb1c810e3c40ab"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-meteor-detailed.png",
+      "bytes": 21239,
+      "sha256": "f3e6a515dcd2071f9b75e0cabf30d1dc886e40a0c55ef23847fdc950f4777feb"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-meteor.png",
+      "bytes": 20109,
+      "sha256": "72f28bd2dd8d04f832cff6e020c0368069196eebafcb88896853be8681318f7e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-moon.png",
+      "bytes": 928,
+      "sha256": "c45961a5d5e802bb6aff1d7cdbc325ea227695d5d679680f069099cacf207258"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-nebula-pink.png",
+      "bytes": 1720,
+      "sha256": "48f09c26f0bbc97a0f70b8c09c6703db0ca6d2700cd7286a2f3a656a3ec68acf"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-nebula-teal.png",
+      "bytes": 1718,
+      "sha256": "e0c86ad0b960c50191598ebd1ec126d0d53bde137d310caaf0cf62899842ca95"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-planet-a.png",
+      "bytes": 935,
+      "sha256": "627ae7cae8bb069802ad23e222425855531f1b38fb0d0acd78b8f518b154d4f2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-planet-b.png",
+      "bytes": 933,
+      "sha256": "63e90093dd00b3d7a9ec2a3da0a6b290fb517f4010210f0ef71d065dd002cbca"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-planet-rings.png",
+      "bytes": 1021,
+      "sha256": "4cea9d0c27de5a450989a254e4e5c7ded97b4de45f496726fd581d4d1d359189"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-racer.png",
+      "bytes": 16606,
+      "sha256": "af4e5f031f6a55b1d8eda865c5fdfe6bd8e3a9c861dfa1f6fff842bf9eca27d1"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-speeder-a.png",
+      "bytes": 18040,
+      "sha256": "7c7d998ad9500a9d273e048c77c2e2509804a7dc3336d5929702c4bcada9c8d3"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-speeder-b.png",
+      "bytes": 19114,
+      "sha256": "b6a4a26c3a186434eb6eb9601a32a7d9fee0b9b33497414dfb0cacd112979562"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-speeder-c.png",
+      "bytes": 13819,
+      "sha256": "fdc1d157948e8d30b989fb16b93c932d1c3ed3ef77a73e3a4d0e71db56b56b03"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-space-speeder-d.png",
+      "bytes": 14905,
+      "sha256": "2a192d759c8fd353cdc2f7924bbb0fb313be3c1bdd03f30b695988e9bbadd51a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-coffin.png",
+      "bytes": 17998,
+      "sha256": "2e9d63f532f9f94471cae09c4a8eb266c118e05f8f0c443d2c53e875f6b9c8c2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-cross-wood.png",
+      "bytes": 17297,
+      "sha256": "b74ae4ae8af5048425519aa85a371c364425694ddede1cf7162385d5b01afd2d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-crypt-a.png",
+      "bytes": 19595,
+      "sha256": "6f5531b9b926851d9118867347caf024e15e5779e474bd23e5bc60b40c94d21f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-crypt.png",
+      "bytes": 24572,
+      "sha256": "0abf83db983b8d3df0cad30d15dab1428a9e04f0b176877f049573fbe25ab918"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-ghost.png",
+      "bytes": 20412,
+      "sha256": "1b91758b38a572c35eaead6585a39e8475746905b267f5db8d33377487ebb10f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-grave-bevel.png",
+      "bytes": 22012,
+      "sha256": "af412b183c7aefa9c106d6e2a4ffea98c2bae039ef415075d033c2e0869c4582"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-grave-cross.png",
+      "bytes": 17561,
+      "sha256": "b766b8e3efda384c6f5ece283e2ef17bb40ff2296399381056aac3132f7ce7a4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-grave-fancy.png",
+      "bytes": 22363,
+      "sha256": "201e388d68c57e76854752b4fe8cc0d8c57cd3d6f245a4dc094fce82a65404f5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-grave-round.png",
+      "bytes": 22531,
+      "sha256": "136b117010a9402f199822cdf66d5e73920eb84929c07ec96efa5df3f4470b98"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-grave-wide.png",
+      "bytes": 19741,
+      "sha256": "2b4f615f6a268003a39ab4787368a3c6222e412e704f1a261dee42275ec6d38f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-lantern.png",
+      "bytes": 22170,
+      "sha256": "1aff1779590f82dfd5354ca5f2f8cd7f54bfd7f81a4d66b6c62eebf7c212bf1f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-lightpost.png",
+      "bytes": 14472,
+      "sha256": "570e9f214407114c1e406c217ecb698ad1b74356ea9742a0afba126df922019d"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-pine-fall.png",
+      "bytes": 17654,
+      "sha256": "fcba9029069e414627652d30693cb2dd3e66a4b905ec2604cacbef1cc7e17414"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-pine.png",
+      "bytes": 18266,
+      "sha256": "98dece4772a24c4acd802ea125147ff03fe9f8d0d25af0c9fdb535b5c8ea5f89"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-pumpkin-tall.png",
+      "bytes": 22546,
+      "sha256": "19b383e251b38442f081276450858250d88a76aba220765478f8e10d02c0fd3b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-pumpkin.png",
+      "bytes": 22299,
+      "sha256": "a0d2a74b7e31ec1bf7b32584d18365e99e73dc7da76c363b629265769aa54d86"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-rocks.png",
+      "bytes": 20200,
+      "sha256": "47ecdbebaea34f3b2beb003d04d9fe185a852bcc81e4230d8e8f1df6884bf5f4"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-skeleton.png",
+      "bytes": 20819,
+      "sha256": "56f02a22e510d05c631eba876a33ce8491a5549087542608c21946a2cd96d245"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-vampire.png",
+      "bytes": 22648,
+      "sha256": "0f36d11e89d61a5f5255445015d4cc2b115bfaff5c35ef72eb4f18f329af829c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-spooky-zombie.png",
+      "bytes": 21436,
+      "sha256": "6f5094488ac89d4916bd7332f2e7972204abb0ebb9f2d9435c25f7a482451766"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-barrier-a.png",
+      "bytes": 15731,
+      "sha256": "1c2ca5fff5c93fea1659fa2f3002789a0c255e3f5341668ff140653cabb9758a"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-barrier-b.png",
+      "bytes": 15089,
+      "sha256": "d03f13cc46fd0a35d4b5765ece9a16e86542b61b1ab2480202a20deb0f7cdb03"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-bend.png",
+      "bytes": 14948,
+      "sha256": "fc3bd4272593076c874526d97702a4ce303d728ed589a0eb7038874578f11d98"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-cross.png",
+      "bytes": 15307,
+      "sha256": "f2b9e2bbe5f6890c6d29fbe37a5b0d791b751e4e25ba197eacfa597461423d4f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-end.png",
+      "bytes": 16005,
+      "sha256": "6df4898df27f9174a9bba501f50c7da17f64aa5a290ec14c3574fae4be87ad16"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-square.png",
+      "bytes": 16273,
+      "sha256": "9a112a99380bb797a0636bcec77ec1a6d97bff5e233ad0cea0dcaa9a2a24f403"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-straight.png",
+      "bytes": 15886,
+      "sha256": "fb8eb3fa020e76322a1a006a7e00a541034e3419b3e93663f3c12e35892f879e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-street-tee.png",
+      "bytes": 15467,
+      "sha256": "e2383a89333ae0715cb81890d9e22ef3fcf5ac6bb67e95a95d0cc89f064081b0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-suv-luxury.png",
+      "bytes": 20563,
+      "sha256": "9cf0977cc9b334f8d9ad839993613679575a220914b11c30d59111715272aa1e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-suv.png",
+      "bytes": 20536,
+      "sha256": "8c39383f691eafcb92bb88f6ce604a3a8d6bcf994b61e51c5a848da4f05b6736"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-taxi.png",
+      "bytes": 20670,
+      "sha256": "035089d90db877cf75ed878ec68156c0e6db54e562ebafb706b3e4f921bd47be"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-tractor.png",
+      "bytes": 24780,
+      "sha256": "440006dc0d489e16900a630a897ad17300abe2d077dc4b5a8a29ff99bceebd06"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-truck.png",
+      "bytes": 18855,
+      "sha256": "bd90df087cebb5ea870d9778e469ff4e7682c7a7298487e8c6406271c7ceb549"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-van.png",
+      "bytes": 20798,
+      "sha256": "7c6f15a0ca757c01fb59c8b5a544c28284cfc95c2989d36eccb7db7369d9bb15"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-cane-green.png",
+      "bytes": 16578,
+      "sha256": "b9522121623284144e714be1ae2b2a27e82b3308ad4be14f1a2f864f6552d242"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-cane-red.png",
+      "bytes": 16660,
+      "sha256": "4471042bc30569c1165b4373ee5f83f4276c7b05335ecbdd3eadebc89c180775"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-gingerbread-man.png",
+      "bytes": 20247,
+      "sha256": "813f707cbc4aae02e5894406675c9389ea4edb24d866a0ed30df00207749fc16"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-gingerbread-woman.png",
+      "bytes": 21785,
+      "sha256": "3f0f24cf130de7eceb0d592249f702d3d13805439de021ddcf8ab8662b4f4abe"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-lantern.png",
+      "bytes": 13782,
+      "sha256": "a99f8b8fb21bd0f6dee35341d6d541dcfbd3543798908974dd7de55064401cd5"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-nutcracker.png",
+      "bytes": 19265,
+      "sha256": "c39ebd02e82721d8cc65acc1354153006c46ed44b12667bce8cf7ce1d26169ce"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-present-a.png",
+      "bytes": 26277,
+      "sha256": "da3d88d5f1d4b501d542f564f9e50f854298a29cabfd6908764ef47ba5b91a86"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-present-b.png",
+      "bytes": 22592,
+      "sha256": "97945d2d633fdc096f31e570a520ef76a381df51d746112f7809535e42c0f012"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-present-c.png",
+      "bytes": 27267,
+      "sha256": "003ea980acb64c4cb63fda7cf1a19b66ea9221f5561f2c9e5653418b5e71b304"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-present-d.png",
+      "bytes": 28357,
+      "sha256": "f3b863a3a227a4c38d928af4693b720fba4cfc0b1415887f017d304ad586be24"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-reindeer.png",
+      "bytes": 23684,
+      "sha256": "d335f5c5000b1c4e281178ae90bdef88ac44e695f4d0d750301b644850507303"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-sled.png",
+      "bytes": 19465,
+      "sha256": "d3a8f2f57a24b10530c4d3c06a3b510f6f3cd5f8035d0dc596a08cc96c6eb60b"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-snow-pile.png",
+      "bytes": 14672,
+      "sha256": "8f387a24d47824178ef8489bf6e8cf15c998a92878737f6d1d535129b85081b0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-snowman-hat.png",
+      "bytes": 20079,
+      "sha256": "9eb0785c5069006ec1fb09e7a5f515fbbf3d730676100aba0638687b8c94a4d2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-snowman.png",
+      "bytes": 21699,
+      "sha256": "a684a6a4231adb522c7bf4825b02add89ab8da641cb1c8b1085a28ae6b3b43c8"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-train-loco.png",
+      "bytes": 21023,
+      "sha256": "94e8d9ce2feae1f6a4c72dcb1d59590b1d15bed434d6ded879d005eb6a3b4619"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-train-tender.png",
+      "bytes": 21259,
+      "sha256": "6f08f5fd2f2f1c949cab85ffc31a5b9b1bd20c5b8ef910af1de20a2f57daa900"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-train-wagon.png",
+      "bytes": 18588,
+      "sha256": "02e17731089cf0b4fac81fa39e47a937eb0849617db50d04d2b5c163fb19e7bd"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-tree-a.png",
+      "bytes": 19473,
+      "sha256": "1dc64490accdfd474a6c32f66a7c7fb5b5d8281ec364ff27e486a6f84e16b55f"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-tree-b.png",
+      "bytes": 19798,
+      "sha256": "464dc41fb1532123633ac9476802c075e40bc2cc3aafa1f5fea20467034a75b2"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-tree-c.png",
+      "bytes": 18054,
+      "sha256": "120bace14c4f11a65bdf659b361ca11172fdfdd5e0dfead7d49e10cdde927f32"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-tree-decorated-snow.png",
+      "bytes": 19411,
+      "sha256": "22822dfe011942cd8baa797f01c8fb2ff15e8167adec3d76ccf070410e98dca6"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/thumb-winter-tree-decorated.png",
+      "bytes": 18918,
+      "sha256": "601b8f104aa41f3f2a8273c954bedca9eb7241d255a00b616cb96e45779b815e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/tile-build-car.png",
+      "bytes": 98417,
+      "sha256": "3b3c15edb5121eb165ec8c6058ce9dd9de60a65a9669c62b7affced66d568d9c"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/tile-build-track.png",
+      "bytes": 67212,
+      "sha256": "4d6535eaf965c1855c7d34f8128d45bc6fb679e36790bb02568da35a65dc619e"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/tile-my-racers.png",
+      "bytes": 80489,
+      "sha256": "bfff36704a5bb96fb9c4e6c0e9290d884d2fc7bfb5f480eca67f38711f5fdae0"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/tile-race-robot.png",
+      "bytes": 96127,
+      "sha256": "b8ac8a51d13e848460f40f4848871aa2152326903353d0e786178841173bdcaa"
+    },
+    {
+      "path": "Hot Wheels v Human/Resources/Thumbs/tile-two-player.png",
+      "bytes": 93476,
+      "sha256": "daeecbc2b4fc88de791a818bbb199b93e14c205dd7d5cc9150e029f071dd413d"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/AIBoostPolicyTests.swift",
+      "bytes": 4845,
+      "sha256": "7df912199afaa769834595a9ff6422ffb46c07987f6d306c145a572ba0288cdf"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/ArenaEnvironmentTests.swift",
+      "bytes": 23658,
+      "sha256": "eeeb535de2f73830ff0b8c2efb678ce11946a2fc6667533547f8a5c33c88313c"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/CarDrawingSessionTests.swift",
+      "bytes": 4700,
+      "sha256": "0d78172970fcd6edeeed41743428fac80380404d63ff5c9edff00356b2a8075c"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/CharacterModelTests.swift",
+      "bytes": 28617,
+      "sha256": "82dda2cf55a7dcbd6ab86be8ec39b66f05e47cada7cb73bd8d1ff6bb4156df29"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/CustomizationGraphicsTests.swift",
+      "bytes": 12761,
+      "sha256": "507ce7ece9af5d5aa5eae4f3ed37014d8fd7e46fa74cef853f559c8071494e93"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/GameLoopTests.swift",
+      "bytes": 7028,
+      "sha256": "9b2794f3fdad4d2f022c7828017fe1ae43a37ca0fb8f65819e181d81331edfa3"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/Hot_Wheels_v_HumanTests.swift",
+      "bytes": 407,
+      "sha256": "0569b29cadb60ba70b84d8f648508da6fe6fdcc096f0a3cc18a3059c927faa7a"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/ModelTests.swift",
+      "bytes": 10732,
+      "sha256": "3481c989339b8ea9a28db07fdce0efe18d26add52d7234b1f07be0fe5166a68c"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/NetworkingTests.swift",
+      "bytes": 2813,
+      "sha256": "ca03f327aca30db5ae8374c5716965bde82ec5fe5bc1b0bfd6811562135769f4"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/RaceLifecycleTests.swift",
+      "bytes": 4592,
+      "sha256": "e0b2c16646cfc672750dd05017b8217b884f4fe2c0b14180a7b3c77d01c74c71"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/RaceTuningTests.swift",
+      "bytes": 7187,
+      "sha256": "1450d57e1c4978ac529cda85e7d53f9c392ead780a8bd2552245ae4a5e926455"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/RadioStationTests.swift",
+      "bytes": 1483,
+      "sha256": "3f836f94788ae838a8cc111d6b7ebd609f0aba50ad674c45f1374a17efd46f73"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/RailFollowerTests.swift",
+      "bytes": 15896,
+      "sha256": "ba644c4b04649777a1402df22ca27b57390209f84855c24af8da0e0a2b56c511"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/ReactionDirectorTests.swift",
+      "bytes": 2216,
+      "sha256": "b0aa00605f43c185286058baef2a3a5711c35704356ff9b8557787d858c3df0d"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/RosterColormapTests.swift",
+      "bytes": 8258,
+      "sha256": "9f19376ce410087468455c70b439f3575ab6b56438641771a40d74b72131f9e8"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/StarterPresetTests.swift",
+      "bytes": 7654,
+      "sha256": "80143e6a5557eb8f1a7b3c5f52a4b957a9415b52882dec6b64a1f8744e7ee202"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/TVTrackBuilderTests.swift",
+      "bytes": 5828,
+      "sha256": "9ee700da6ccccdbfaa134589d3b9fc3ff1c9ca52f88c4bd00c1890e7e5ac084d"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/TrackKitTests.swift",
+      "bytes": 39646,
+      "sha256": "184e08710e9ec85eff699911bfa62f9b23792c794f9bfa352cb02c3472aff8f5"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/TunnelTests.swift",
+      "bytes": 16261,
+      "sha256": "36375da557d9a1ef7d4893e8d87803f2ce1df08bc09f478e59af52f603722c8a"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/TwoPlayerCoordinationTests.swift",
+      "bytes": 10164,
+      "sha256": "73c31726a624c06fc79f9c83442213978b10f8c2ab9cd20cb268cb4c8ab315cd"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/WorkshopPersistenceTests.swift",
+      "bytes": 2265,
+      "sha256": "503a740b6c4e287db7712d28708149b3fa8b4318fa995a64732e483dba71bda7"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/ArenaCameraUITests.swift",
+      "bytes": 3232,
+      "sha256": "b10430496b2758de2f2b957f210275dbdc1792f1221530d96beda662a7a52c69"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/GameLoopUITests.swift",
+      "bytes": 8652,
+      "sha256": "6b329fccc2993a22122a17470c282cab406606f316242fb7aeb62e915262e3af"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/GarageUITests.swift",
+      "bytes": 2624,
+      "sha256": "7a146be68d6ce6d19d39bd249fe63765bb29294fe88daede11d9e5c3162d1ebd"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/GhostTrackUITests.swift",
+      "bytes": 4027,
+      "sha256": "b421fc5ef4bd27184e2a281e7f07c6614e51e6c571a52bd9b29760e267ec3735"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/Hot_Wheels_v_HumanUITests.swift",
+      "bytes": 1465,
+      "sha256": "303781901fe96af6f185d55775edc4dc8a6bc303a950098bdf282760863230da"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/Hot_Wheels_v_HumanUITestsLaunchTests.swift",
+      "bytes": 978,
+      "sha256": "67c969afbc1e6d07e3b4c2af0e3c734ff0c89a1d4fbb6663b0b73aee926163ab"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/IPadReleaseFlowUITests.swift",
+      "bytes": 2781,
+      "sha256": "295c710b410cbd52c7b786d1e0e4e21ab973767d17882bdb643e4f2737654ef1"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests.swift",
+      "bytes": 25346,
+      "sha256": "11016e46dd37c91b122f2f04bfa1150194758601b3eef07b3c75a63fd4e26c3e"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/PieceShelf.swift",
+      "bytes": 3433,
+      "sha256": "fdf134373c0bc3dd7f46d7982fe0ba6492f72c30833f3d84806f05690736bfef"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/RaceSetupUITests.swift",
+      "bytes": 3790,
+      "sha256": "76cdebacb548ed52b47f6113f1a6faad2cc69f77f6f658d7f7a72244253ec74e"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/TVRemoteUITests.swift",
+      "bytes": 34546,
+      "sha256": "2eecf281415874d0a639b4c8244c277aaf40a36014dc6698639bd72c8e998efc"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/TrackBuilder3DUITests.swift",
+      "bytes": 2473,
+      "sha256": "9b869caedd1f86a93f7c6828565b643f6ec5d15ceea389ff06e1df9c3759fd7e"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/TunnelUITests.swift",
+      "bytes": 1391,
+      "sha256": "a7f1696cbad1324d226ced65f3a400e4ff7f40b179b1ea69007445c45d68960d"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/UndergroundPortalUITests.swift",
+      "bytes": 2476,
+      "sha256": "b9f2c583a25f8da22570a81337190b00d95387441b350d0f503f8e24011ee32f"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/WorkshopLayoutUITests.swift",
+      "bytes": 2965,
+      "sha256": "f73dfefba162f638e1aabc972f4075bf4b3267cb8ef26cfa99e9ff863b64c601"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/WorkshopTryItUITests.swift",
+      "bytes": 8279,
+      "sha256": "ecb712d61d5c91fcec551aca394144478e434194bc103067fa1425047388a80d"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/WorldPickerUITests.swift",
+      "bytes": 6644,
+      "sha256": "db4ab3105e8cccab67f7a074f535a6b16b4bcd3e3959598b57a44ef8e99464af"
+    },
+    {
+      "path": "Hot Wheels v Human.xcodeproj/project.pbxproj",
+      "bytes": 26829,
+      "sha256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756"
+    },
+    {
+      "path": "Hot Wheels v Human.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "bytes": 135,
+      "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+    }
+  ],
+  "changesFromCandidate1": [
+    "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift"
+  ],
+  "changesFromCandidate2": [
+    "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+    "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+    "Hot Wheels v HumanTests/GameLoopTests.swift"
+  ],
+  "changesFromCandidate3": [
+    "Hot Wheels v Human/Core/Networking/README.md",
+    "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+    "Hot Wheels v Human/Features/Dashboard/DashboardView.swift"
+  ],
+  "changesFromCandidate4": [
+    "Hot Wheels v Human/App/HWTestSession.swift"
+  ]
+}

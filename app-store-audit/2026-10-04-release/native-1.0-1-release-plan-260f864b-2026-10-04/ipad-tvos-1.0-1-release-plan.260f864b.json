@@ -1,0 +1,281 @@
+{
+  "recordedAtUTC": "2026-10-04T11:54:08.722965+00:00",
+  "scope": "Read-only preparation with scoped audit options/plan writes only; no archive/build/export/upload/device/browser/deploy or Git push",
+  "status": "QUEUED: requires explicit root serialized jobs2 allocation and upload authorization",
+  "repository": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "version": "1.0",
+  "build": "1",
+  "inputCount": 889,
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "aggregateRecipe": "Original recorded array order path+NUL+sha256+LF",
+  "inputFreeze": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+  "inputFreezeSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+  "localCommitReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/local-native-commit.candidate11.json",
+  "localCommitReceiptSHA256": "d786c96d2559e9c67f2d383f49477750ff065099b3494b71a6f33df354363f0c",
+  "sourceCurrentlyMatches": true,
+  "indexEmpty": true,
+  "identity": {
+    "appID": "6818777508",
+    "appIDProvenance": "Existing release records and root supplied ASC page receipts; no new lookup",
+    "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+    "releaseDisplayName": "HWvH",
+    "signing": "Automatic; existing held Xcode account/team matches exact approved option bytes; no team values printed"
+  },
+  "allowedPlatforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "excludedPlatforms": [
+    "iPhone",
+    "macOS",
+    "Mac Catalyst",
+    "Mac Designed for iPad",
+    "visionOS"
+  ],
+  "scheme": {
+    "name": "Hot Wheels v Human",
+    "checkedInSharedXcschemePresent": false,
+    "localSchemeManagement": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human.xcodeproj/xcuserdata/nathan.xcuserdatad/xcschemes/xcschememanagement.plist",
+    "localSchemeManagementSHA256": "d0502a5ac81a259e097fb86cb22251c5f1960bb4a1fbccec6d8d523713ea7723",
+    "basis": "Exact existing local scheme record plus successful prior Release archive commands under unchanged project; no new scheme/source file generated",
+    "historicalArchiveCommandProofs": [
+      {
+        "platform": "ipad",
+        "path": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/ipad-archive.log",
+        "sha256": "612349a20944040b32842643131901367df68298a2a1f616b2354ca2db2189fa",
+        "provenance": "Superseded44d929c successful Release scheme command only; not current native candidate packaging"
+      },
+      {
+        "platform": "tvos",
+        "path": "/private/tmp/hwvh-tv-control-signed-final-20261003-park5brc/tvos-archive.log",
+        "sha256": "54060e38881ba1265cc378f12e25cde40ab51d0c0be6ab9ff9fd32f06cfcc4eb",
+        "provenance": "Superseded44d929c successful Release scheme command only; not current native candidate packaging"
+      }
+    ],
+    "preArchive": "Confirm actual scheme still available at allocated archive time; do not silently create source configuration."
+  },
+  "immutableArtifactRoot": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1",
+  "artifactRootExistsNow": false,
+  "jobs": 2,
+  "serialOnly": true,
+  "exportOptions": {
+    "historicalApprovedUpload": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/ExportOptions-Upload.plist",
+    "historicalSHA256": "9fd7c7660910081473a78287c3c99f46a83fbd1702fb04faf8d69aa59ae14d6c",
+    "freshExactUploadCopy": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Upload.plist",
+    "freshExactUploadCopySHA256": "9fd7c7660910081473a78287c3c99f46a83fbd1702fb04faf8d69aa59ae14d6c",
+    "localExportOptions": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Local.plist",
+    "localExportOptionsSHA256": "89d43371c1aa86303104532d17b5a27a5f238b505e338baf2cb6ba22a4149704",
+    "localOptionsDifference": "destination=export only; every other decoded key/value identical",
+    "method": "app-store-connect",
+    "manageAppVersionAndBuildNumber": false,
+    "signingStyle": "automatic",
+    "testFlightInternalTestingOnly": false,
+    "configuredTeamMatchesProject": true,
+    "credentials": "Existing authorized Xcode account only; no API-key/environment/private credential operations"
+  },
+  "steps": [
+    {
+      "platform": "ipad",
+      "SDK": "iphoneos",
+      "expectedDeviceFamilies": [
+        2
+      ],
+      "minimumOS": "26.0",
+      "archive": {
+        "argv": [
+          "xcodebuild",
+          "-project",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human.xcodeproj",
+          "-scheme",
+          "Hot Wheels v Human",
+          "-configuration",
+          "Release",
+          "-destination",
+          "generic/platform=iOS",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-1.0-1.xcarchive",
+          "-derivedDataPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/derived-ipad",
+          "-resultBundlePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-archive.xcresult",
+          "-jobs",
+          "2",
+          "-allowProvisioningUpdates",
+          "archive"
+        ],
+        "cwd": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-archive.log",
+        "expectedApp": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-1.0-1.xcarchive/Products/Applications/Hot Wheels v Human.app"
+      },
+      "localDistributionExport": {
+        "argv": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-1.0-1.xcarchive",
+          "-exportOptionsPlist",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Local.plist",
+          "-exportPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-local-export",
+          "-allowProvisioningUpdates"
+        ],
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-export-local.log",
+        "expectedIPA": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-local-export/Hot Wheels v Human.ipa",
+        "inspectionRoot": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-local-export-unpacked"
+      },
+      "uploadOnlyAfterAllChecksAndRootAllocation": {
+        "argv": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-1.0-1.xcarchive",
+          "-exportOptionsPlist",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Upload.plist",
+          "-exportPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-upload",
+          "-allowProvisioningUpdates"
+        ],
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/ipad-export-upload.log",
+        "outcomeNotYetKnown": true
+      },
+      "executionOrder": "Archive, inspect actual archived bundle, local App Store distribution export, inspect re-signed package, recheck source, then explicitly authorized upload. Entire sequence serial; never archive platforms concurrently."
+    },
+    {
+      "platform": "tvos",
+      "SDK": "appletvos",
+      "expectedDeviceFamilies": [
+        3
+      ],
+      "minimumOS": "26.0",
+      "archive": {
+        "argv": [
+          "xcodebuild",
+          "-project",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human.xcodeproj",
+          "-scheme",
+          "Hot Wheels v Human",
+          "-configuration",
+          "Release",
+          "-destination",
+          "generic/platform=tvOS",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-1.0-1.xcarchive",
+          "-derivedDataPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/derived-tvos",
+          "-resultBundlePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-archive.xcresult",
+          "-jobs",
+          "2",
+          "-allowProvisioningUpdates",
+          "archive"
+        ],
+        "cwd": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-archive.log",
+        "expectedApp": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-1.0-1.xcarchive/Products/Applications/Hot Wheels v Human.app"
+      },
+      "localDistributionExport": {
+        "argv": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-1.0-1.xcarchive",
+          "-exportOptionsPlist",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Local.plist",
+          "-exportPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-local-export",
+          "-allowProvisioningUpdates"
+        ],
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-export-local.log",
+        "expectedIPA": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-local-export/Hot Wheels v Human.ipa",
+        "inspectionRoot": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-local-export-unpacked"
+      },
+      "uploadOnlyAfterAllChecksAndRootAllocation": {
+        "argv": [
+          "xcodebuild",
+          "-exportArchive",
+          "-archivePath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-1.0-1.xcarchive",
+          "-exportOptionsPlist",
+          "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ExportOptions-Upload.plist",
+          "-exportPath",
+          "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-upload",
+          "-allowProvisioningUpdates"
+        ],
+        "stdoutStderrLog": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-04-260f864b-1.0-1/tvos-export-upload.log",
+        "outcomeNotYetKnown": true
+      },
+      "executionOrder": "Archive, inspect actual archived bundle, local App Store distribution export, inspect re-signed package, recheck source, then explicitly authorized upload. Entire sequence serial; never archive platforms concurrently."
+    }
+  ],
+  "mandatoryChecks": [
+    "Immediately before/after each archive, local export and upload: HEAD260f864b, empty index, all889 paths/bytes/hashes and recorded-order7377115b aggregate unchanged; approved40 committed blobs remain source-identical. Preserve earlier packages and all failure receipts.",
+    "Actual compiler invocation and archive build settings must be Release for the intended generic iOS/tvOS SDK, without DEBUG, ENABLE_TESTABILITY, QA launch arguments or test overrides. HWTestSession only accepts private UUID/test environments inside #if DEBUG; source Release returns nil. No runtime/device operation is part of this plan.",
+    "Archive and exported app Info.plist must be exact1.0(1), identifier com.nathanfennel.Hot-Wheels-v-Human, display HWvH, minimumOS26.0, iPad UIDeviceFamily[2]/iPhoneOS or TV UIDeviceFamily[3]/AppleTVOS, arm64. No iPhone, Mac or Vision family/capability expansion.",
+    "Run actual codesign strict verification on archived and exported app; compare embedded profile, team and application identifier; verify expiry. Archive may carry development provisioning: classify honestly. Distribution package must carry valid App Store signing/profile, get-task-allow=false, no device-list/ad-hoc profile; entitlements must fit profile. Do not infer actual entitlements from empty source entitlements file.",
+    "Inspect actual compiled ITSAppUsesNonExemptEncryption presence/value; source currently contains false. Report actual value without source/legal-answer edits. Check compiled local-network purpose and exact TCP/UDP Bonjour services; iPad camera purpose text must match source.",
+    "Verify bundled privacy manifest against frozen no-tracking/no-collected-data/UserDefaults CA92.1 source; fingerprint full archive/export resources. Compare copied model/audio/Reality Composer resources with held inputs where directly copied; classify compiled asset/shader/catalog changes accurately. Inspect compiled iPad/tvOS app icons/top-shelf availability. Unexplained omissions/differences block upload.",
+    "Archive remains byte-identical after both exports. Compare decoded complete archive/export Info.plist equality and all copied resources: distribution export may re-sign the binary, replace provisioning and reserialize semantically equal Info.plist. Preserve actual failures, never silently bypass mismatches.",
+    "Only after exact source/version/platform/signature/resource checks and explicit root allocation/upload authorization: run held existing-account upload argv, retain stdout/stderr and genuine xcodebuild exit status. No API keys, new credentials/permissions, legal answers, Git push or signing-setting changes.",
+    "Fresh root Apple processing/build selection is separate: xcodebuild Upload succeeded proves delivery, not processed TestFlight state or review submission. Root owns browser/ASC, marketing uploads, metadata and actual submission."
+  ],
+  "staticNativeEvidence": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Info.plist",
+      "sha256": "82e977ed552ec3138185acfab74e8aa05dbf814e541abd737c609dcfa7583851"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/PrivacyInfo.xcprivacy",
+      "sha256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/Hot_Wheels_v_Human.entitlements",
+      "sha256": "97704a8960b4facceef54397a08fb5d0a456247c3627359215aa2a27df22656c"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human/App/HWTestSession.swift",
+      "sha256": "0fa9b32d435e004747320e1a304fde2d237a0b34b4ed70459c7b5f260c788898"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/Hot Wheels v Human.xcodeproj/project.pbxproj",
+      "sha256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756"
+    }
+  ],
+  "sourceEncryptionValuePresent": true,
+  "sourceEncryptionValue": false,
+  "actualCompiledEncryptionValue": "NOT YET BUILT; inspect actual archive",
+  "freshRootAppleProofs": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-testflight.txt",
+      "sha256": "59827e543f92b967010ad3001ba8febb85137888a8e002ac2f36b072712c8a6c",
+      "rootObservedMarkers": [
+        "No Builds"
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-ios-distribution.txt",
+      "sha256": "83a93a579b41fe64e01c02841d2eeba478ad31e81276d334dd406f74d5acad3a",
+      "rootObservedMarkers": [
+        "1.0",
+        "Prepare for Submission"
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/before-tvos-distribution.txt",
+      "sha256": "c893c95c1fe389c97ccf9f46d470aa1175c07970b29acf6cb27f5cf37075d5c2",
+      "rootObservedMarkers": [
+        "1.0",
+        "Prepare for Submission"
+      ]
+    }
+  ],
+  "currentObservedAppleState": "No Builds; iOS and tvOS1.0 Prepare for Submission. No delivery or submission claimed.",
+  "remainingLimits": [
+    "Physical TV-to-iPad LAN discovery/permission/encrypted image handoff/reconnect remains unverified; simulator/loopback is not paired hardware proof.",
+    "Actual haptic/audio feel, all legacy workshops and every portrait/split layout remain beyond narrow retained QA.",
+    "Current-source marketing galleries and accurate privacy/support copy, live dual-site verification if web changes, exact processed builds and actual submission are root-owned release work."
+  ],
+  "nativeReleaseAWSExempt": true,
+  "productionFilesChanged": false,
+  "archiveExportUploadOrBuildPerformed": false
+}

@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-04T10:25:12.093358+00:00",
+  "sourceProof": "../native-inputs.candidate-11.json",
+  "runtimeReceipt": "../ipad-runtime-candidate11-two.json",
+  "privateFixtureOriginal": "/Users/nathan/Library/Developer/CoreSimulator/Devices/025B233C-9EE8-48DD-A4E8-BB88CF93F0DE/data/Containers/Data/Application/BD695840-F9A7-4D22-9D4E-D0CADC32B63F/tmp/HWvH-QA/D8370D06-ACAC-4E42-AF94-EAE865B8F513/FinishedRaces/Race-2E9BB8F1-D929-4972-8F53-C18DCFF0D553.png",
+  "copiedFile": "ipad-candidate11-finished-race.png",
+  "bytes": 1041913,
+  "sha256": "f66a7ce24b87ac9ba57410664c5f3e5cf06eeaee9669aee809a8e906d5108ca1",
+  "width": 1200,
+  "height": 1444,
+  "sameOriginalBytes": true,
+  "provenance": "Actual RaceShareRenderer.file output from the same real finished race used by native ShareLink in the private DEBUG UI-test session. Original bytes copied, no redrawing, crop, resampling or evidence-image editing. Collected only after exact owned Pad verified Shutdown."
+}

@@ -1,0 +1,24 @@
+{
+  "startedAtUTC": "2026-10-04T12:05:52.350199+00:00",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "approvedPlanSHA256": "96ddeef5a126025d18555216b04f0a37a5e03262d70f32b6cad6265943b9d3d6",
+  "operation": "preflight",
+  "platform": null,
+  "executorSHA256": "ca56ffb3116ba535381481d9a5069ae12fd444e12cec457c58b084b997ce6587",
+  "noProductionEdits": true,
+  "noPushDeviceBrowserOrLegalActions": true,
+  "sourceBefore": {
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "version": "1.0",
+    "build": "1",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "sourceBytesMatch": true,
+    "indexEmpty": true
+  },
+  "status": "PASS",
+  "execution": "READ-ONLY preflight; no Xcode/device/account operation",
+  "buildSlotAllocated": false,
+  "artifactRootExists": false,
+  "finishedAtUTC": "2026-10-04T12:05:52.968571+00:00"
+}

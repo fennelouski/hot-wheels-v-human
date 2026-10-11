@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-10-04T09:59:34.833121+00:00",
+  "exitCode": 0,
+  "testsExecuted": 0,
+  "sourceProof": "../native-inputs.candidate-8.json",
+  "logSHA256": "8a59de0835d8a222b42539ab863a60e36a005cd6fcf54aa1adc795ffff2d2474",
+  "all889InputsMatch": true,
+  "status": "generic tv simulator build-for-testing succeeded"
+}

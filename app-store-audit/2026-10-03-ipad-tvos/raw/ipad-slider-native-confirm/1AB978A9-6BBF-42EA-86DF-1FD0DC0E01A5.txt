@@ -1,0 +1,90 @@
+Application, 0x114943d40, pid: 40903, label: 'HWvH' <App element pid: 40903>
+  Window (Main), 0x114940140, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4373186560.4>
+    Other, 0x114940280, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4430194176.5>
+      Other, 0x1149403c0, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4431857536.6>
+        Other, 0x114940500, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4430204864.7>
+          Other, 0x114940640, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4373185536.8>
+            Other, 0x114940780, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4374574656.9>
+              Other, 0x1149408c0, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4430211584.10>
+                NavigationBar, 0x114940c80, {{0.0, 10.0}, {1376.0, 54.0}}, identifier: '_TtGC7SwiftUI32NavigationStackHosting' <AX element pid: 40903, elementOrHash.elementID: 4364022736.152>
+                  Button, 0x114940dc0, {{10.0, 10.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Back' <AX element pid: 40903, elementOrHash.elementID: 5571194688.153>
+                Other, 0x114940f00, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4430212032.11>
+                  Other, 0x114941040, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4429193536.13>
+                    Other, 0x114941cc0, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4373929856.176>
+                      Other, 0x114941b80, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 5608426112.177>
+                        TextField, 0x1149412c0, {{0.0, 80.0}, {1376.0, 42.5}}, placeholderValue: 'Car name', value: iPad Art 9A9E97C2 <AX element pid: 40903, elementOrHash.elementID: 4373276672.178>
+                        Other, 0x114941a40, {{0.0, 134.5}, {1376.0, 346.0}} <AX element pid: 40903, elementOrHash.elementID: 4373930752.179>
+                        Button, 0x114941900, {{16.0, 134.5}, {127.5, 50.5}}, label: 'Undo' <AX element pid: 40903, elementOrHash.elementID: 5603094336.180>
+                          Image, 0x1149417c0, {{36.5, 148.5}, {21.5, 22.0}}, identifier: 'arrow.uturn.backward', label: 'Undo' <AX element pid: 40903, elementOrHash.elementID: 5603093440.185>
+                          StaticText, 0x114941680, {{36.5, 146.5}, {89.0, 26.5}}, label: 'Undo' <AX element pid: 40903, elementOrHash.elementID: 5603093888.186>
+                        ScrollView, 0x114941540, {{16.0, 492.5}, {1344.0, 60.0}} <AX element pid: 40903, elementOrHash.elementID: 4429308928.181>
+                          Other, 0x114941400, {{73.0, 492.5}, {1230.0, 60.0}} <AX element pid: 40903, elementOrHash.elementID: 5570694144.187>
+                            Button, 0x114941180, {{77.0, 492.5}, {147.0, 60.0}}, identifier: 'Body', label: 'Body' <AX element pid: 40903, elementOrHash.elementID: 5603095680.193>
+                              Image, 0x114940a00, {{99.5, 509.5}, {40.0, 26.0}}, identifier: 'car.2.fill', label: 'Cars' <AX element pid: 40903, elementOrHash.elementID: 5603094784.227>
+                              StaticText, 0x114940b40, {{148.5, 509.2}, {55.5, 26.5}}, label: 'Body' <AX element pid: 40903, elementOrHash.elementID: 5603095232.228>
+                            Button, 0x1134192c0, {{234.0, 492.5}, {180.0, 60.0}}, identifier: 'Chassis', label: 'Chassis' <AX element pid: 40903, elementOrHash.elementID: 5603097024.194>
+                              Image, 0x113419040, {{256.5, 513.0}, {41.0, 19.5}}, identifier: 'car.side.fill', label: 'car.side.fill' <AX element pid: 40903, elementOrHash.elementID: 5603096128.229>
+                              StaticText, 0x11341a6c0, {{308.0, 509.2}, {86.0, 26.5}}, label: 'Chassis' <AX element pid: 40903, elementOrHash.elementID: 5603096576.230>
+                            Button, 0x11341a440, {{424.0, 492.5}, {129.0, 60.0}}, identifier: 'Tires', label: 'Tires' <AX element pid: 40903, elementOrHash.elementID: 4746342208.195>
+                              Image, 0x113418280, {{446.0, 511.0}, {23.5, 23.5}}, identifier: 'circle.circle', label: 'circle.circle' <AX element pid: 40903, elementOrHash.elementID: 5603097472.231>
+                              StaticText, 0x1134183c0, {{479.5, 509.2}, {53.5, 26.5}}, label: 'Tires' <AX element pid: 40903, elementOrHash.elementID: 5603097920.232>
+                            Button, 0x113418640, {{563.0, 492.5}, {132.5, 60.0}}, identifier: 'Paint', label: 'Paint' <AX element pid: 40903, elementOrHash.elementID: 4746341312.196>
+                              Image, 0x113418500, {{585.0, 508.5}, {25.0, 28.0}}, identifier: 'paintbrush.fill', label: 'Format' <AX element pid: 40903, elementOrHash.elementID: 4746342656.233>
+                              StaticText, 0x113419180, {{620.0, 509.2}, {55.5, 26.5}}, label: 'Paint' <AX element pid: 40903, elementOrHash.elementID: 4746345344.234>
+                            Button, 0x11341a080, {{705.5, 492.5}, {137.5, 60.0}}, identifier: 'Livery', label: 'Livery' <AX element pid: 40903, elementOrHash.elementID: 5602166528.197>
+                              Image, 0x11392c000, {{727.5, 510.0}, {19.5, 25.0}}, identifier: 'flame.fill', label: 'Flame' <AX element pid: 40903, elementOrHash.elementID: 5602167872.235>
+                              StaticText, 0x11392c140, {{757.0, 509.2}, {66.0, 26.5}}, label: 'Livery' <AX element pid: 40903, elementOrHash.elementID: 5602166976.236>
+                            Button, 0x11392c280, {{853.0, 492.5}, {164.5, 60.0}}, identifier: 'Stickers', label: 'Stickers' <AX element pid: 40903, elementOrHash.elementID: 5602168768.198>
+                              Image, 0x11392c3c0, {{875.0, 511.0}, {23.5, 23.5}}, identifier: 'star.circle.fill', label: 'Favorite' <AX element pid: 40903, elementOrHash.elementID: 5602170112.237>
+                              StaticText, 0x11392c500, {{908.5, 509.2}, {89.0, 26.5}}, label: 'Stickers' <AX element pid: 40903, elementOrHash.elementID: 5602168320.238>
+                            Button, 0x11392c640, {{1027.5, 492.5}, {124.5, 60.0}}, identifier: 'Draw', label: 'Draw', Selected <AX element pid: 40903, elementOrHash.elementID: 5602169664.199>
+                              Image, 0x11392c780, {{1049.5, 512.0}, {16.0, 21.0}}, identifier: 'pencil.tip', label: 'pencil.tip' <AX element pid: 40903, elementOrHash.elementID: 5602176384.239>
+                              StaticText, 0x11392c8c0, {{1075.5, 509.2}, {56.5, 26.5}}, label: 'Draw' <AX element pid: 40903, elementOrHash.elementID: 5602169216.240>
+                            Button, 0x11392ca00, {{1162.0, 492.5}, {137.0, 60.0}}, identifier: 'Driver', label: 'Driver' <AX element pid: 40903, elementOrHash.elementID: 5576204608.200>
+                              Image, 0x11392cb40, {{1184.5, 512.5}, {18.5, 20.0}}, identifier: 'person.fill', label: 'person.fill' <AX element pid: 40903, elementOrHash.elementID: 5576211328.241>
+                              StaticText, 0x11392cc80, {{1213.5, 509.2}, {65.5, 26.5}}, label: 'Driver' <AX element pid: 40903, elementOrHash.elementID: 5576211776.242>
+                        ScrollView, 0x11392cdc0, {{478.0, 564.5}, {276.0, 275.5}} <AX element pid: 40903, elementOrHash.elementID: 4432106496.360>
+                          Other, 0x11392cf00, {{721.0, 564.5}, {30.0, 275.5}}, label: 'Vertical scroll bar, 1 page', value: 0% <AX element pid: 40903, elementOrHash.elementID: 5602700800.366>
+                            Other, 0x11392d040, {{748.0, 830.0}, {3.0, 7.0}} <AX element pid: 40903, elementOrHash.elementID: 5608331392.377>
+                          Other, 0x11392d180, {{478.0, 807.0}, {276.0, 30.0}}, label: 'Horizontal scroll bar, 1 page', value: 0% <AX element pid: 40903, elementOrHash.elementID: 5602701824.367>
+                            Other, 0x11392d2c0, {{744.0, 834.0}, {7.0, 3.0}} <AX element pid: 40903, elementOrHash.elementID: 5608330944.378>
+                        Image, 0x11392d400, {{431.0, 522.5}, {331.6, 331.6}}, identifier: 'star.fill', label: 'Favorite' <AX element pid: 40903, elementOrHash.elementID: 5608436416.361>
+                        Other, 0x11392d540, {{1242.0, 590.0}, {108.0, 226.0}} <AX element pid: 40903, elementOrHash.elementID: 5608432384.362>
+                          Button, 0x11392d680, {{1242.0, 590.0}, {48.0, 48.0}} <AX element pid: 40903, elementOrHash.elementID: 5608435968.368>
+                          Button, 0x11392d7c0, {{1303.5, 591.5}, {45.0, 45.0}} <AX element pid: 40903, elementOrHash.elementID: 5608435520.369>
+                          Button, 0x11392d900, {{1243.5, 651.5}, {45.0, 45.0}} <AX element pid: 40903, elementOrHash.elementID: 5608435072.370>
+                          Button, 0x11392da40, {{1303.5, 651.5}, {45.0, 45.0}} <AX element pid: 40903, elementOrHash.elementID: 5608434624.371>
+                          Button, 0x11392db80, {{1243.5, 711.5}, {45.0, 45.0}} <AX element pid: 40903, elementOrHash.elementID: 5608434176.372>
+                          Button, 0x11392dcc0, {{1303.5, 711.5}, {45.0, 45.0}} <AX element pid: 40903, elementOrHash.elementID: 5608433728.373>
+                          Button, 0x11392de00, {{1242.0, 768.0}, {48.0, 48.0}}, identifier: 'eraser.fill', label: 'eraser.fill' <AX element pid: 40903, elementOrHash.elementID: 5608433280.374>
+                          Button, 0x11392df40, {{1302.0, 768.0}, {48.0, 48.0}}, identifier: 'trash.fill', label: 'Trash' <AX element pid: 40903, elementOrHash.elementID: 5608432832.375>
+                        ScrollView, 0x11392e080, {{12.0, 850.0}, {1352.0, 60.0}} <AX element pid: 40903, elementOrHash.elementID: 5608085504.363>
+                          Other, 0x11392e1c0, {{12.0, 850.0}, {1292.0, 60.0}} <AX element pid: 40903, elementOrHash.elementID: 5602703872.376>
+                            Button, 0x11392e300, {{15.5, 849.5}, {61.0, 61.0}}, identifier: 'star.fill', label: 'Favorite' <AX element pid: 40903, elementOrHash.elementID: 5608431936.379>
+                            Button, 0x11392e440, {{83.5, 849.5}, {61.0, 61.0}}, identifier: 'heart.fill', label: 'Love' <AX element pid: 40903, elementOrHash.elementID: 5608431488.380>
+                            Button, 0x11392e580, {{151.5, 849.5}, {61.0, 61.0}}, identifier: 'bolt.fill', label: 'Flash' <AX element pid: 40903, elementOrHash.elementID: 5608431040.381>
+                            Button, 0x11392e6c0, {{219.5, 849.5}, {61.0, 61.0}}, identifier: 'flame.fill', label: 'Flame' <AX element pid: 40903, elementOrHash.elementID: 5608430592.382>
+                            Button, 0x11392e800, {{287.5, 849.5}, {61.0, 61.0}}, identifier: 'eyes', label: 'eyes' <AX element pid: 40903, elementOrHash.elementID: 5608430144.383>
+                            Button, 0x11392e940, {{355.5, 849.5}, {61.0, 61.0}}, identifier: 'mouth.fill', label: 'mouth.fill' <AX element pid: 40903, elementOrHash.elementID: 5608429696.384>
+                            Button, 0x11392ea80, {{423.5, 849.5}, {61.0, 61.0}}, identifier: 'pawprint.fill', label: 'Pawprint' <AX element pid: 40903, elementOrHash.elementID: 5608427456.385>
+                            Button, 0x11392ebc0, {{491.5, 849.5}, {61.0, 61.0}}, identifier: 'rainbow', label: 'rainbow' <AX element pid: 40903, elementOrHash.elementID: 5608427904.386>
+                            Button, 0x11392ed00, {{559.5, 849.5}, {61.0, 61.0}} <AX element pid: 40903, elementOrHash.elementID: 5608325568.387>
+                              Image, 0x11392ee40, {{572.0, 862.0}, {36.0, 36.0}} <AX element pid: 40903, elementOrHash.elementID: 5608325120.398>
+                            Button, 0x11392ef80, {{627.5, 849.5}, {61.0, 61.0}}, identifier: '0.circle.fill', label: '0.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608326016.388>
+                            Button, 0x11392f0c0, {{695.5, 849.5}, {61.0, 61.0}}, identifier: '1.circle.fill', label: '1.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608326464.389>
+                            Button, 0x11392f200, {{763.5, 849.5}, {61.0, 61.0}}, identifier: '2.circle.fill', label: '2.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608326912.390>
+                            Button, 0x11392f340, {{831.5, 849.5}, {61.0, 61.0}}, identifier: '3.circle.fill', label: '3.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608327360.391>
+                            Button, 0x11392f480, {{899.5, 849.5}, {61.0, 61.0}}, identifier: '4.circle.fill', label: '4.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608327808.392>
+                            Button, 0x11392f5c0, {{967.5, 849.5}, {61.0, 61.0}}, identifier: '5.circle.fill', label: '5.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608328256.393>
+                            Button, 0x11392f700, {{1035.5, 849.5}, {61.0, 61.0}}, identifier: '6.circle.fill', label: '6.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608328704.394>
+                            Button, 0x11392f840, {{1103.5, 849.5}, {61.0, 61.0}}, identifier: '7.circle.fill', label: '7.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608329152.395>
+                            Button, 0x11392f980, {{1171.5, 849.5}, {61.0, 61.0}}, identifier: '8.circle.fill', label: '8.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608329600.396>
+                            Button, 0x11392fac0, {{1239.5, 849.5}, {61.0, 61.0}}, identifier: '9.circle.fill', label: '9.circle.fill' <AX element pid: 40903, elementOrHash.elementID: 5608330048.397>
+                        Button, 0x11392fc00, {{460.0, 922.0}, {240.0, 74.0}}, label: 'Test Drive!' <AX element pid: 40903, elementOrHash.elementID: 5608424320.183>
+                          Image, 0x11392fd40, {{499.0, 947.0}, {22.0, 24.5}}, identifier: 'play.fill', label: 'Play' <AX element pid: 40903, elementOrHash.elementID: 5608423424.189>
+                          StaticText, 0x11392fe80, {{460.0, 922.0}, {240.0, 74.0}}, label: 'Test Drive!' <AX element pid: 40903, elementOrHash.elementID: 5608423872.190>
+                        Button, 0x114984000, {{716.0, 922.0}, {200.5, 74.0}}, label: 'Saved!' <AX element pid: 40903, elementOrHash.elementID: 5608425664.184>
+                          Image, 0x114984140, {{754.5, 945.5}, {27.5, 27.5}}, identifier: 'checkmark.circle.fill', label: 'Selected', Selected <AX element pid: 40903, elementOrHash.elementID: 5608424768.191>
+                          StaticText, 0x114984280, {{716.0, 922.0}, {200.5, 74.0}}, label: 'Saved!' <AX element pid: 40903, elementOrHash.elementID: 5608425216.192>
+                Other, 0x1149843c0, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4451699200.12>
+                  Other, 0x114984500, {{0.0, 0.0}, {1376.0, 1032.0}} <AX element pid: 40903, elementOrHash.elementID: 4451701248.14>

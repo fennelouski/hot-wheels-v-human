@@ -1,0 +1,84 @@
+{
+  "recordedAt": "2026-10-04T10:23:37.352728+00:00",
+  "heldSourceProof": "native-inputs.candidate-11.json",
+  "heldAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "retainedEvidence": [
+    {
+      "scope": "5 new native logic/export/loopback methods plus 3 legacy Codec methods",
+      "executedSourceProof": "native-inputs.candidate-5.json",
+      "executedRuntimeReceipt": "tv-runtime-candidate5-round1.json",
+      "changedInputs": [
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+        "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+        "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+        "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+        "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+        "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+      ],
+      "boundedInterpretation": "The tested preference, immutable result, payload validation, codec, handoff, dashboard-model and test sources are byte-identical. Subsequent fixes cover presentation lifecycle, retry, genuine texture orientation and touch hit boundaries. The native-card renderer was not changed; its containing file did change in sheet presentation. This preserves the executed 8/8 receipt as historical bounded evidence, not an 8/8 run on final binaries."
+    },
+    {
+      "scope": "TV optional profile/workshop method",
+      "executedSourceProof": "native-inputs.candidate-5.json",
+      "executedRuntimeReceipt": "tv-runtime-candidate5-round1.json",
+      "changedInputs": [
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+        "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+        "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+        "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+        "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+        "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+      ],
+      "boundedInterpretation": "Profile creation, workshop routes and actual red-paint model/view inputs are identical. New settings and sharing repairs are outside this method. Do not relabel the two failed methods from that round as passes."
+    },
+    {
+      "scope": "TV independent saved settings/calm boost method",
+      "executedSourceProof": "native-inputs.candidate-6.json",
+      "executedRuntimeReceipt": "tv-runtime-candidate6-two.json",
+      "changedInputs": [
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+        "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+        "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+        "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+        "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+      ],
+      "boundedInterpretation": "The preference model, independent persistence, calm camera policy and live controls are identical. Later settings-label contentShape fills the visible touch hit target; it does not change the TV remote focus geometry, label, state or action. The unrelated finish-image/presentation fixes were not this method\u2019s path."
+    },
+    {
+      "scope": "TV actual launch/race/result/upright Share/rematch method",
+      "executedSourceProof": "native-inputs.candidate-9.json",
+      "executedRuntimeReceipt": "tv-runtime-candidate9-one.json",
+      "changedInputs": [
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+      ],
+      "boundedInterpretation": "All production inputs except the settings-label contentShape are byte-identical. This method does not navigate Settings; genuine render capture, result/payload, share card, handoff prompt and Rematch paths match the reviewed source. The final UI-driver additions are confined to iPad native chooser dismissal."
+    },
+    {
+      "scope": "iPad optional profile/workshop method",
+      "executedSourceProof": "native-inputs.candidate-10.json",
+      "executedRuntimeReceipt": "ipad-runtime-candidate10-three.json",
+      "changedInputs": [
+        "Hot Wheels v Human/App/GameSettingsView.swift",
+        "Hot Wheels v HumanUITests/GameLoopUITests.swift"
+      ],
+      "boundedInterpretation": "All production inputs except the settings-label touch contentShape are byte-identical. This method does not enter Settings or Share; profile and actual touch workshop routes are unchanged. Preserve both failed methods in this round separately."
+    }
+  ],
+  "status": "Final candidate11 iPad rerun passed 2/2. Retained methods keep their actual historical source/build provenance and the bounded interpretation above. No whole-build runtime equivalence or full release approval claimed.",
+  "updatedAt": "2026-10-04T10:38:30.324237+00:00",
+  "finalCandidateRuntime": {
+    "receipt": "ipad-runtime-candidate11-two.json",
+    "summary": "ipad-ui-candidate11-two-summary.json",
+    "processed": 2,
+    "passed": 2,
+    "failed": 0
+  }
+}

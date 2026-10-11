@@ -1,0 +1,620 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T11:27:51.550613+00:00",
+  "targetRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "targetBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "status": "20 genuine composed marketing JPEGs verified locally; owner independent review, live App Store gallery inspection, upload and submission remain separate",
+  "nativeInputProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-source-inputs-tv-control-final.json",
+  "nativeInputProofSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "nativeInputCanonicalSHA256": "fc4fbdb72493ee39da8a2eb82c24915d1ad319b9e9ad8920eea39f9af499d678",
+  "all864NativeInputHashesUnchangedAfterComposition": true,
+  "manifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/manifest.tv-control-final.json",
+  "manifestSHA256": "a15d25bcb41b93cd12a40c00edde3e1e339eaa45afccb365481a0875baefce7d",
+  "sourceCompatibilityProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/source-compatibility-tv-control-final.json",
+  "sourceCompatibilityProofSHA256": "0fef46c2c08e149f074b79622054457365e1de541430ef3f600e606648547a3b",
+  "productionPackageProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/signed-release-packages-tv-control-final.json",
+  "productionPackageProofSHA256": "a8dd934df41abb92dbf8b60e457c1c859a21d8d5ce2351f75e6594a6ad8a3a7f",
+  "compositorPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/tools/marketing-compose.swift",
+  "compositorSHA256": "8b6fbc518897d3f8b8d9bb39c9c93c1cf5ea2c6df86ad5f96859f965b2d1b495",
+  "compositorSelfTestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/compositor-source-compatibility-self-test.log",
+  "compositorSelfTestSHA256": "d7803a42d470dac70b1dd2eec251b2a663753b2c950fcb8b0da7cff3905fa7f0",
+  "compositionLogPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/tv-control-final-compose.log",
+  "compositionLogSHA256": "9023648a129ec0ee86c678de37c403fbbfd7da62066457c05e734c7e243ce069",
+  "provenancePath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/marketing-provenance.json",
+  "provenanceSHA256": "13873807a437028e3319fc4e82f00b0a8cda67a753695a112f24db292fd9e1d2",
+  "originalNativeCaptureCount": 23,
+  "originalNativeCaptureHashesUnchanged": true,
+  "actualCaptureRevisionsPreserved": true,
+  "retainedCompatibleCaptureCount": 20,
+  "finalSourceAffectedTVCaptureCount": 3,
+  "galleryImageCounts": {
+    "ipad-13": 10,
+    "apple-tv": 10
+  },
+  "allOutputsOpaqueRGBsRGBJPEG": true,
+  "fourBackgroundsAlternate": true,
+  "allHeadlinesCenteredWithNoClipping": true,
+  "allHeroesCenteredUprightAndDrawnLast": true,
+  "allSupportingCapturesFanOutward": true,
+  "allLayersSamePlatformAndDevice": true,
+  "reviewedFullRepresentatives": [
+    "ipad-13/03-race-creations.jpg",
+    "ipad-13/06-draw-your-way.jpg",
+    "ipad-13/08-choose-world.jpg",
+    "apple-tv/01-build-tracks.jpg",
+    "apple-tv/03-race-creations.jpg",
+    "apple-tv/06-draw-your-way.jpg",
+    "apple-tv/10-remote-boost.jpg"
+  ],
+  "contactSheets": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/review/ipad-13-contact-sheet.png",
+      "sha256": "2d74f5dabf9af73d1952a2ae97944fcab2e263e080cf09aab888fc74866c86e8"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/review/apple-tv-contact-sheet.png",
+      "sha256": "0a11f5bef8b238fa2eeb04450bd55677bfb81579767775e227bf1a5eb55971d9"
+    }
+  ],
+  "designTriage": {
+    "fixed": [
+      "Native tvOS bright-world race-control contrast and factual local Rematch hint",
+      "Marketing replaces transition/wall shots with settled native moving races; full genuine compositing with centered headlines/heroes and outward fans"
+    ],
+    "suppressed": [],
+    "leftStanding": [
+      "Actual test-authored personal car name iPad Art 791235C0 retained in unedited iPad originals; no retouching",
+      "TV24 initial unrendered transition retained outside galleries; positive bright-world proof uses later fully rendered frames",
+      "Physical iPad-to-TV pairing and full accessibility acceptance remain unclaimed"
+    ]
+  },
+  "uploadPerformed": false,
+  "submissionPerformed": false,
+  "outputs": [
+    {
+      "platform": "ipad-13",
+      "order": 1,
+      "id": "01-build-tracks",
+      "headline": "Build your own track",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/01-build-tracks.jpg",
+      "fileSHA256": "0cdd0f4a98e3d84621393e49e0c531c9cddc6219339276de88a77846ed8ffca7",
+      "decodedPixelSHA256": "f4bdb577ea3e5f25506f47634f6ea528f1c87adfb4b0f7f811a3c024a0463516",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "ipad-world",
+        "ipad-race",
+        "ipad-track"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 2,
+      "id": "02-make-your-car",
+      "headline": "Make it your car",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/02-make-your-car.jpg",
+      "fileSHA256": "8637697867bf1a9a5192205739683933ab0f78224cc1b1c6f1357108fc09b833",
+      "decodedPixelSHA256": "ce55de9f31862fff2022f0f41ebb45a1cdefa7c41279cac624b389f938983461",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "ipad-paint",
+        "ipad-stickers",
+        "ipad-car"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 3,
+      "id": "03-race-creations",
+      "headline": "Race what you create",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/03-race-creations.jpg",
+      "fileSHA256": "4b64c61ccf11da59bf1236443ab0cf75898e4954c84c62964a93c486b8e1bf40",
+      "decodedPixelSHA256": "ce562627ba59852da35302c63e0c41ac7f8b922d05fc54dad970f72ba78af157",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "orangeLaunchLanes",
+      "nativeCaptureIDs": [
+        "ipad-driver",
+        "ipad-race"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 4,
+      "id": "04-create-racer",
+      "headline": "Create your own racer",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/04-create-racer.jpg",
+      "fileSHA256": "fce8ed11e343db161ac733fef37e2d647d8b9fa05748e542f7b8e04d228755b8",
+      "decodedPixelSHA256": "b0c707d9969e9719596b930b8b09ffcf22b367619fc219c20a5874b620e05fd3",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "blueToyBlocks",
+      "nativeCaptureIDs": [
+        "ipad-car",
+        "ipad-racer"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 5,
+      "id": "05-pick-paint",
+      "headline": "Pick your paint",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/05-pick-paint.jpg",
+      "fileSHA256": "0a0cb6bdf3a48d52e1980887fc82f6bdd3cdbddb9abcc5f7398777a8b7de7b8a",
+      "decodedPixelSHA256": "0d08ba0015f5273cbdd4fe0c8d59a3ad608efc2878b078389ce7222a1742c7dc",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "ipad-paint"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 6,
+      "id": "06-draw-your-way",
+      "headline": "Draw it your way",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/06-draw-your-way.jpg",
+      "fileSHA256": "d014ce96695f7072a650cdff03464997b7f701315a223e25eeb34a5f214854bd",
+      "decodedPixelSHA256": "3bc66a4573a98fe45386aafe0c32a3c669d59794ea97d96dd11c28d123fd1056",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "ipad-car",
+        "ipad-stickers",
+        "ipad-draw"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 7,
+      "id": "07-add-stickers",
+      "headline": "Add the finishing stickers",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/07-add-stickers.jpg",
+      "fileSHA256": "fd7ab26636a6843ffd835855ef475ae6dad57d864057521feae57d5b3c3a6c99",
+      "decodedPixelSHA256": "cfc9ddcdf99ae107b8715646078a69e3db620bda5da1d240600926b2480b47d7",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "orangeLaunchLanes",
+      "nativeCaptureIDs": [
+        "ipad-paint",
+        "ipad-stickers"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 8,
+      "id": "08-choose-world",
+      "headline": "Choose your toy world",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/08-choose-world.jpg",
+      "fileSHA256": "ecbd985e13f79fe262ab6f6705dd5ec44b2241657a84034c6b9345550724d345",
+      "decodedPixelSHA256": "51d6fe75eb8eefe42ebb783deb5cc79fc2afdd4684347f3ce3834bf1e1b9393d",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "blueToyBlocks",
+      "nativeCaptureIDs": [
+        "ipad-track",
+        "ipad-world"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 9,
+      "id": "09-save-builds",
+      "headline": "Keep your favorite builds",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/09-save-builds.jpg",
+      "fileSHA256": "aede918ed8b3192e807a380b0be6fb2516bdb62b60f44bc4ab02b179a54b10a9",
+      "decodedPixelSHA256": "b9cfd5d75546df40baa241f4d26ebb65b2a2c6805643d663bf9176c2d05ff716",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "ipad-library",
+        "ipad-car",
+        "ipad-garage"
+      ]
+    },
+    {
+      "platform": "ipad-13",
+      "order": 10,
+      "id": "10-hold-boost",
+      "headline": "Hold boost. Chase the flag.",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/ipad-13/10-hold-boost.jpg",
+      "fileSHA256": "8775336fb6b9760490aab2c9ee9d5017dd156fc159864261e42d28c638568524",
+      "decodedPixelSHA256": "04337aa199c6d88dbaf009572d815200370ea1a72fd86b446da549367303478b",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "ipad-race",
+        "ipad-boost"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 1,
+      "id": "01-build-tracks",
+      "headline": "Build on the big screen",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/01-build-tracks.jpg",
+      "fileSHA256": "4ed8368b13c97a668011b434117ec044630470670e324c5287535357435ac46d",
+      "decodedPixelSHA256": "f38beeec1902ecb544485323947d69286584e159e2351fc94efc2ea2f5c12438",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "tv-world",
+        "tv-race",
+        "tv-track"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 2,
+      "id": "02-make-your-car",
+      "headline": "Make it your car",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/02-make-your-car.jpg",
+      "fileSHA256": "55e06d0a7af918065e9896122e8bca7027212a575d67fa2cea3599101c58cb3c",
+      "decodedPixelSHA256": "e57064337e254d47d8c2cddff6c400e1fab953cd77f05c7004b3932e6f66633f",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "tv-paint",
+        "tv-stickers",
+        "tv-car"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 3,
+      "id": "03-race-creations",
+      "headline": "Race what you create",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/03-race-creations.jpg",
+      "fileSHA256": "5e1918411cdc9d47d1d0e634f518c0e7aa6dd2fc5a9a7641c4938ce8a3d967aa",
+      "decodedPixelSHA256": "73095898085b0835c60e69c2c7c28d851c3d15af72562992f1b2631332020c7b",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "orangeLaunchLanes",
+      "nativeCaptureIDs": [
+        "tv-driver",
+        "tv-race"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 4,
+      "id": "04-create-racer",
+      "headline": "Create your own racer",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/04-create-racer.jpg",
+      "fileSHA256": "5d0c03c122aafe32673e82333ce09516f0c7f2a3dc6992d0f0de5a508d457617",
+      "decodedPixelSHA256": "b801ea38dabc322f7b59cd06c73128166630ccc15a9b81b6881a5b0716c4fc61",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "blueToyBlocks",
+      "nativeCaptureIDs": [
+        "tv-car",
+        "tv-racer"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 5,
+      "id": "05-pick-paint",
+      "headline": "Pick your paint",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/05-pick-paint.jpg",
+      "fileSHA256": "1409abf60258e6ab86a11168491d9d9e5a3bc42e476266b98a2421cd65812c25",
+      "decodedPixelSHA256": "43ecd62ba3bdeac943eebb2675a68123950569ea8894b3a3b27b492fd82c9c17",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "tv-paint"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 6,
+      "id": "06-draw-your-way",
+      "headline": "Draw it your way",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/06-draw-your-way.jpg",
+      "fileSHA256": "ca2f270fb11e610f101f8187e6904d67e1c30b51a9abede10b3a96c3acf9bb87",
+      "decodedPixelSHA256": "d5d057db931cda99fe3de5148bea281df41e2188f1a29e84ad87c0f1bdd1496e",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "tv-car",
+        "tv-stickers",
+        "tv-draw"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 7,
+      "id": "07-add-stickers",
+      "headline": "Add the finishing stickers",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/07-add-stickers.jpg",
+      "fileSHA256": "757da33ee4a4e17c67acb41fac3fc37eebd184726029f246577e020611ecffa1",
+      "decodedPixelSHA256": "23204c0f6c65ea6238e54a20fa323bec6baf2fbc373588b3398892ca4588125e",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "orangeLaunchLanes",
+      "nativeCaptureIDs": [
+        "tv-paint",
+        "tv-stickers"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 8,
+      "id": "08-build-worlds",
+      "headline": "Build a whole toy world",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/08-build-worlds.jpg",
+      "fileSHA256": "3c40920d22a6219e161bed072966e6eb8d3ebcb08b1b80c86c997346d054b80c",
+      "decodedPixelSHA256": "d5a6fdc214b050fedb9956d69305459c7bdd06a78b841a118dc4f93fde88bf5b",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "blueToyBlocks",
+      "nativeCaptureIDs": [
+        "tv-track",
+        "tv-world"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 9,
+      "id": "09-save-builds",
+      "headline": "Keep your favorite builds",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/09-save-builds.jpg",
+      "fileSHA256": "fa45fd9628f869a98f3c45daceb4df61c54815fae484f422d2e7a621206977b0",
+      "decodedPixelSHA256": "43d7e31d618656a14d26f050a9d92ca55c4d4d631eea33b34545ef0c9be7ae84",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "navyTrackLoops",
+      "nativeCaptureIDs": [
+        "tv-car",
+        "tv-library"
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "order": 10,
+      "id": "10-remote-boost",
+      "headline": "Boost with your remote",
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/exports/tv-control-final-01/apple-tv/10-remote-boost.jpg",
+      "fileSHA256": "9ed97d733848ba5f69a75e71a899d11e79a93142c4be36ff10f5e4d829df1b9a",
+      "decodedPixelSHA256": "929b674628d9428c2e71094bf3713f71a1fd830906191d371db3ce9dc59c885f",
+      "decodedPixelSerialization": "Pillow decoded RGB, 8 bits per channel, row-major top-to-bottom",
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "format": "JPEG",
+      "opaque": true,
+      "colorMode": "RGB",
+      "effectiveColorProfile": "sRGB IEC61966-2.1",
+      "colorSpaceVerification": "Native sips profile/space plus EXIF ColorSpace=1 or embedded ICC; compositor separately checks decoded CGImage sRGB",
+      "EXIFColorSpace": 1,
+      "embeddedICCProfilePresent": false,
+      "embeddedICCProfileSHA256": null,
+      "background": "yellowPitGrid",
+      "nativeCaptureIDs": [
+        "tv-race",
+        "tv-boost"
+      ]
+    }
+  ]
+}

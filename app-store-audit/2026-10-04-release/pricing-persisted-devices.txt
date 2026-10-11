@@ -1,0 +1,251 @@
+- banner "App Store Connect":
+  - heading "App Store Connect" [level=1]:
+    - link "App Store Connect":
+      - /url: /
+  - navigation "Global":
+    - list:
+      - link "Apps":
+        - /url: /apps
+      - link "Xcode Cloud":
+        - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/xcode-cloud
+      - link "Trends":
+        - /url: /trends
+      - link "Reports":
+        - /url: /itc/payments_and_financial_reports
+      - link "Business":
+        - /url: /business
+      - link "Users and Access":
+        - /url: /access/users
+  - button "Nathan Fennel Nathan Fennel Account name menu":
+    - generic: Nathan Fennel
+    - generic: Nathan Fennel
+- button "Apps menu, HWvH, selected":
+  - generic "HWvH":
+    - img "HWvH"
+  - generic: HWvH
+- navigation "Apps":
+  - list:
+    - link "Distribution":
+      - /url: /apps/6818777508/distribution
+    - link "Analytics":
+      - /url: /apps/6818777508/analytics
+    - link "TestFlight":
+      - /url: /teams/69a6de85-2c3b-47e3-e053-5b8c7c11a4d1/apps/6818777508/testflight
+- main:
+  - navigation "Distribution":
+    - list:
+      - heading "iOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/ios/version/inflight
+          - text: 1.0 Prepare for Submission
+      - heading "tvOS App" [level=2]
+      - list:
+        - link "1.0 Prepare for Submission":
+          - /url: /apps/6818777508/distribution/tvos/version/inflight
+          - text: 1.0 Prepare for Submission
+        - button "Delete tvOS version 1.0":
+          - generic: Delete
+      - button "Add Platform"
+      - separator
+      - heading "General" [level=2]
+      - list:
+        - link "App Information":
+          - /url: /apps/6818777508/distribution/info
+          - generic: App Information
+        - link "App Review":
+          - /url: /apps/6818777508/distribution/reviewsubmissions
+          - generic: App Review
+        - link "History":
+          - /url: /apps/6818777508/distribution/activity/ios/versions
+          - generic: History
+      - separator
+      - heading "App Store" [level=2]
+      - heading "Trust & Safety" [level=3]
+      - list:
+        - link "App Privacy":
+          - /url: /apps/6818777508/distribution/privacy
+          - generic: App Privacy
+        - link "App Accessibility":
+          - /url: /apps/6818777508/distribution/accessibility
+          - generic: App Accessibility
+        - link "Ratings and Reviews":
+          - /url: /apps/6818777508/distribution/ratings/ios
+          - generic: Ratings and Reviews
+      - heading "Growth & Marketing" [level=3]
+      - list:
+        - link "In-App Events":
+          - /url: /apps/6818777508/distribution/events
+          - generic: In-App Events
+        - link "Custom Product Pages":
+          - /url: /apps/6818777508/distribution/productpages
+          - generic: Custom Product Pages
+        - link "Product Page Optimization":
+          - /url: /apps/6818777508/distribution/optimization
+          - generic: Product Page Optimization
+        - link "Promo Codes":
+          - /url: /apps/6818777508/distribution/promo_codes/generate
+          - generic: Promo Codes
+        - link "Game Center":
+          - /url: /apps/6818777508/distribution/gamecenter
+          - generic: Game Center
+      - heading "Monetization" [level=3]
+      - list:
+        - link "Pricing and Availability":
+          - /url: /apps/6818777508/distribution/pricing
+          - generic: Pricing and Availability
+        - link "In-App Purchases":
+          - /url: /apps/6818777508/distribution/iaps
+          - generic: In-App Purchases
+        - link "Subscriptions":
+          - /url: /apps/6818777508/distribution/subscriptions
+          - generic: Subscriptions
+      - heading "Featuring" [level=3]
+      - list:
+        - link "Nominations":
+          - /url: /apps/6818777508/distribution/nominations
+          - generic: Nominations
+  - heading "Pricing and Availability" [level=2]
+  - button "Save"
+  - heading "Price Schedule" [level=3]
+  - button "Schedule a price change":
+  - link "All Prices and Currencies":
+    - /url: /apps/6818777508/distribution/pricing-matrix
+    - paragraph: All Prices and Currencies
+  - paragraph: Below is a summary of your current pricing and any upcoming changes.
+  - heading "Base Country or Region" [level=4]
+  - paragraph: Apple may automatically adjust prices from time to time in every country or region except your base to account for changes in tax or foreign exchange rates.
+  - paragraph: United States (USD)
+  - paragraph:
+    - button "Edit"
+  - heading "Prices" [level=4]
+  - button "Download":
+    - text: Download
+  - grid "Prices":
+    - rowgroup:
+      - row "Dates Countries or Regions Price Adjustment Actions":
+        - columnheader "Dates":
+          - generic: Dates
+        - columnheader "Countries or Regions":
+          - generic: Countries or Regions
+        - columnheader "Price Adjustment":
+          - generic: Price Adjustment
+        - columnheader "Actions"
+    - rowgroup:
+      - row "Current Price":
+        - rowheader "Current Price":
+          - button "Current Price"
+        - gridcell "Prices in 175 Countries or Regions":
+          - button "Prices in 175 Countries or Regions": 175 Countries or Regions
+        - gridcell
+        - gridcell
+  - heading "App Availability" [level=3]
+  - paragraph: View a summary of your app's availability status across countries or regions below.
+  - button "175 Available"
+  - button "Manage"
+  - separator
+  - heading "Tax Category" [level=3]
+  - generic: 
+  - button "Edit"
+  - generic: Category:App Store software
+  - separator
+  - heading "iPhone and iPad Apps on Apple Silicon Macs" [level=3]
+  - paragraph:
+    - text: Starting with macOS Big Sur, compatible iPhone and iPad apps can be made available on Apple silicon Macs. Apps will run natively and use the same frameworks, resources, and runtime environment as they do on iOS and iPadOS.
+    - link "Learn More":
+      - /url: https://developer.apple.com/go/?id=app-store-connect-ios-mac
+  - generic: Apple Silicon Mac Availability
+  - paragraph:
+    - text: Select the checkbox below if you want this app to be available on the Mac App Store. Apple will automatically pick the minimum macOS version required for compatibility, but you can choose a different one.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/manage-your-apps-availability/manage-availability-of-iphone-and-ipad-apps-on-macs-with-apple-silicon
+  - checkbox "Make this app available"
+  - text: Make this app available
+  - combobox [disabled]:
+    - option "Automatic (macOS 11.0)" [selected]
+    - option "macOS 26.5"
+    - option "macOS 26.4"
+    - option "macOS 26.3"
+    - option "macOS 26.2"
+    - option "macOS 26.1"
+    - option "macOS 26.0"
+    - option "macOS 15.7"
+    - option "macOS 15.6"
+    - option "macOS 15.5"
+    - option "macOS 15.4"
+    - option "macOS 15.3"
+    - option "macOS 15.2"
+    - option "macOS 15.1"
+    - option "macOS 15.0"
+    - option "macOS 14.7"
+    - option "macOS 14.6"
+    - option "macOS 14.5"
+    - option "macOS 14.4"
+    - option "macOS 14.3"
+    - option "macOS 14.2"
+    - option "macOS 14.1"
+    - option "macOS 14.0"
+    - option "macOS 13.6"
+    - option "macOS 13.5"
+    - option "macOS 13.4"
+    - option "macOS 13.3"
+    - option "macOS 13.2"
+    - option "macOS 13.1"
+    - option "macOS 13.0"
+    - option "macOS 12.5"
+    - option "macOS 12.4"
+    - option "macOS 12.3"
+    - option "macOS 12.2"
+    - option "macOS 12.1"
+    - option "macOS 12.0"
+    - option "macOS 11.5"
+    - option "macOS 11.4"
+    - option "macOS 11.3"
+    - option "macOS 11.0"
+  - separator
+  - heading "iPhone and iPad Apps on Apple Vision Pro" [level=3]
+  - paragraph:
+    - text: Compatible iPhone and iPad apps can be made available on Apple Vision Pro. Apps will run natively and use the same frameworks, resources, and runtime environment as they do on iOS.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/manage-your-apps-availability/manage-availability-of-iphone-and-ipad-apps-on-apple-vision-pro
+  - paragraph: Apple Vision Pro Availability
+  - checkbox "Make this app available on Apple Vision Pro"
+  - text: Make this app available on Apple Vision Pro
+  - generic: Compatibility
+  - list:
+    - listitem: Version 1.0 is not compatible and not available on the App Store on Apple Vision Pro
+  - separator
+  - heading "App Distribution Methods" [level=3]
+  - paragraph:
+    - text: Select how you want your app distributed to users. Once your app is approved, the distribution method cannot be changed.
+    - link "Learn More":
+      - /url: https://developer.apple.com/help/app-store-connect/manage-your-apps-availability/set-distribution-methods
+  - radio "Public — Discoverable by anyone on the App Store (default) More information Offer a reduced price on the Apple School Manager for volume purchases More information" [checked]
+  - generic: Public — Discoverable by anyone on the App Store (default)
+  - button "More information": "?"
+  - checkbox "Offer a reduced price on the Apple School Manager for volume purchases More information" [checked]
+  - generic: Offer a reduced price on the Apple School Manager for volume purchases
+  - button "More information": "?"
+  - radio "Private — Available as a custom app on Apple Business or Apple School Manager More information"
+  - generic: Private — Available as a custom app on Apple Business or Apple School Manager
+  - button "More information": "?"
+  - separator
+  - button " Last-Compatible Version Settings":
+    - text: 
+    - heading "Last-Compatible Version Settings" [level=3]
+  - separator
+  - button "Remove App From Sale"
+- contentinfo:
+  - list:
+    - link "App Store Connect":
+      - /url: /apps
+  - list:
+    - listitem: Copyright © 2026 Apple Inc. All rights reserved. |
+    - link "Terms of Service":
+      - /url: /WebObjects/iTunesConnect.woa/wa/termsOfService
+    - text: "|"
+    - link "Privacy Policy":
+      - /url: https://www.apple.com/legal/privacy
+    - text: "|"
+    - link "Contact Us":
+      - /url: /contact-us

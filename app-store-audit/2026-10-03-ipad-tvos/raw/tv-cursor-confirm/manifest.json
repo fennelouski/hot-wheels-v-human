@@ -1,0 +1,26 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4E64B674-1C2D-49C3-81B3-8781713DCC30.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV12 - Place and rotate world decorations_0_D6860F69-06C4-4203-B19E-0ECAEBCD1AA6.png",
+        "timestamp" : 1791014779.241
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+        "deviceName" : "HWvH QA TV 20261003",
+        "exportedFileName" : "4CDCEABB-98E9-452F-B90A-F96AB20679E3.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "TV13 - Position a portal exit with the remote_0_E56D8E50-441C-4662-9407-0EFAF1D8E017.png",
+        "timestamp" : 1791014767.165
+      }
+    ],
+    "testIdentifier" : "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor"
+  }
+]

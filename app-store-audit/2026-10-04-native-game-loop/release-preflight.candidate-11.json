@@ -1,0 +1,201 @@
+{
+  "recordedAt": "2026-10-04T10:38:30.324237+00:00",
+  "scope": "Read-only native release preflight. No archive, version, App Store Connect or website actions executed.",
+  "status": "Root release work required; do not upload the superseded October3 packages.",
+  "candidateSourceProof": "native-inputs.candidate-11.json",
+  "candidateAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "identity": {
+    "appID": "6818777508",
+    "appIDBasis": "Historical verified native release/audit records, not a new live Apple lookup.",
+    "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+    "team": "EJLR2RPSV2",
+    "version": "1.0",
+    "build": "1",
+    "debugDisplayName": "Hot Wheels vs Humans",
+    "releaseDisplayName": "HWvH"
+  },
+  "platforms": {
+    "iPadOS": {
+      "UIDeviceFamily": [
+        2
+      ],
+      "minimumOS": "26.0"
+    },
+    "tvOS": {
+      "UIDeviceFamily": [
+        3
+      ],
+      "minimumOS": "26.0"
+    },
+    "iPhoneEnabled": false,
+    "MacCatalystEnabled": false,
+    "MacDesignedForiPadEnabled": false,
+    "visionOSActions": "Prohibited by user; none performed."
+  },
+  "staticNativeRecords": [
+    {
+      "path": "Hot Wheels v Human/Info.plist",
+      "sha256": "82e977ed552ec3138185acfab74e8aa05dbf814e541abd737c609dcfa7583851"
+    },
+    {
+      "path": "Hot Wheels v Human/PrivacyInfo.xcprivacy",
+      "sha256": "a331d51864743ebe4e00dd22360b4a538b6b3ac26a6b3eb54094e60a36959a12"
+    },
+    {
+      "path": "Hot Wheels v Human/Hot_Wheels_v_Human.entitlements",
+      "sha256": "97704a8960b4facceef54397a08fb5d0a456247c3627359215aa2a27df22656c"
+    },
+    {
+      "path": "Hot Wheels v Human.xcodeproj/project.pbxproj",
+      "sha256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756"
+    }
+  ],
+  "infoPlist": {
+    "NSLocalNetworkUsageDescription": "Connects nearby iPads and Apple TVs so you can race together.",
+    "NSBonjourServices": [
+      "_hwvh-race._tcp",
+      "_hwvh-race._udp"
+    ],
+    "UIStatusBarHidden": true,
+    "UIViewControllerBasedStatusBarAppearance": false,
+    "ITSAppUsesNonExemptEncryption": false
+  },
+  "privacyManifest": {
+    "NSPrivacyTracking": false,
+    "NSPrivacyTrackingDomains": [],
+    "NSPrivacyCollectedDataTypes": [],
+    "NSPrivacyAccessedAPITypes": [
+      {
+        "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+        "NSPrivacyAccessedAPITypeReasons": [
+          "CA92.1"
+        ]
+      }
+    ]
+  },
+  "sourceEntitlements": {},
+  "capabilities": {
+    "iCloud": "Not enabled; user profiles/designs/settings remain local.",
+    "nearbyRacing": "Existing encrypted MultipeerConnectivity hwvh-race service, local-network purpose and TCP/UDP Bonjour declarations.",
+    "finishedRaceShare": "Frozen actual result, genuine GPU image, temporary encrypted TV host initiated from Share, existing connected result handoff, iPad native ShareLink.",
+    "camera": "Existing optional one-shot on-device driver color sampling; generated purpose string in iPad project settings.",
+    "trackingOrDeveloperBackend": "None observed in the scoped native implementation."
+  },
+  "sourceIconPNGs": [
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-appstore.png",
+      "pixelWidth": 1280,
+      "pixelHeight": 768,
+      "sha256": "1826c28b21e0942fbef556b8206886e946cc4767ae85d630ba136deafaf59319"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon - App Store.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-appstore.png",
+      "pixelWidth": 1280,
+      "pixelHeight": 768,
+      "sha256": "22c36954c66c44dc9e73f62439a436c84db328d42300ec7bd7bb0c4a9d0396cb"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf.png",
+      "pixelWidth": 1920,
+      "pixelHeight": 720,
+      "sha256": "5522a7ff6f1256588d06809d0554d5e4afaaee26c0299499f49b516f2b6c9cbf"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image.imageset/topshelf@2x.png",
+      "pixelWidth": 3840,
+      "pixelHeight": 1440,
+      "sha256": "da16f28f048cb58f3c56b5c4f0748acefcd1142bba5348ad7fd7501f8e57e881"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small.png",
+      "pixelWidth": 400,
+      "pixelHeight": 240,
+      "sha256": "86f84a18abad28e157ed1f7f687c85147cc6187bd7e88418dd499bbed4b82f9d"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 1.imagestacklayer/Content.imageset/icon-tv-small@2x.png",
+      "pixelWidth": 800,
+      "pixelHeight": 480,
+      "sha256": "97df3722510db4216d397d30eb372ecdb5aa1379a8ebb52fe8a893ff005a82f7"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small@2x.png",
+      "pixelWidth": 800,
+      "pixelHeight": 480,
+      "sha256": "55ff19ceca866bbbfe4d650ef918fe3ea2c7202a5e3d98b5a67bd53de8874021"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/App Icon.imagestack/Layer 2.imagestacklayer/Content.imageset/bg-small.png",
+      "pixelWidth": 400,
+      "pixelHeight": 240,
+      "sha256": "7c2cb94a74deb01feba7712e6843d8492b36d7df819da356830e732da11620ef"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide.png",
+      "pixelWidth": 2320,
+      "pixelHeight": 720,
+      "sha256": "b70693e3919966af1a0d0380a148cfac6eace5445065ebff568182059fde8764"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.brandassets/Top Shelf Image Wide.imageset/topshelf-wide@2x.png",
+      "pixelWidth": 4640,
+      "pixelHeight": 1440,
+      "sha256": "91394a8eb82c2c9f951eb4646429dee85f5788739df61a6d36be932e71412901"
+    },
+    {
+      "path": "Hot Wheels v Human/Assets.xcassets/AppIcon.appiconset/icon-ios-1024.png",
+      "pixelWidth": 1024,
+      "pixelHeight": 1024,
+      "sha256": "c9169cf2f8994684a40abd12883e761082bddf10fa4100cb837a8f2a862564fd"
+    }
+  ],
+  "historicalPackaging": {
+    "record": "../2026-10-03-ipad-tvos/signed-release-packages-tv-control-final.json",
+    "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+    "currentCandidateMatches": false,
+    "uploadRecorded": false,
+    "disposition": "Preserve archives/IPAs as historical; fresh matching Release archives and exports required after root commits/selects version.",
+    "exportOptionsUploadPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/ExportOptions-Upload.plist",
+    "exportOptionsUploadSHA256": "9fd7c7660910081473a78287c3c99f46a83fbd1702fb04faf8d69aa59ae14d6c",
+    "options": {
+      "destination": "upload",
+      "manageAppVersionAndBuildNumber": false,
+      "method": "app-store-connect",
+      "signingStyle": "automatic",
+      "testFlightInternalTestingOnly": false
+    }
+  },
+  "privacyAndSupport": {
+    "privacyURL": "https://nathanfennel.com/hwvh/privacy.html",
+    "supportURL": "https://nathanfennel.com/hwvh/support.html",
+    "historicalDualDeploymentRecord": "../2026-10-03-ipad-tvos/website-preparation.json",
+    "deployedRevision": "5c00d3f8ddbc48fa62f8504c527128a0ae8fa75b",
+    "historicalSameRevisionAWSVercel": true,
+    "liveVerificationPerformedNow": false,
+    "rootCopyUpdatesNeeded": [
+      "Support starts with picking a player; new first-viewport Play works before optional profile creation.",
+      "Support should explain separate saved animation/haptic switches, OS Reduce Motion and calm camera controls.",
+      "Privacy/support should describe the new actual finished-race image, optional temporary local TV sharing host, connected Get Image/Retry and system export."
+    ],
+    "unlistedHistoricalPolicy": "noindex, nofollow, noarchive; excluded from nav/search/sitemap."
+  },
+  "reviewerSteps": [
+    "On iPad or Apple TV, launch and choose Play immediately. Creating a player is optional.",
+    "Finish a race normally. Check actual result statistics, choose Rematch, and check a new race begins.",
+    "On iPad, choose Share, inspect the frozen actual image, open the native chooser and dismiss without posting.",
+    "On TV, choose Share. The actual frame/result card appears with local iPad handoff instructions. Real nearby-network handoff remains a manual check.",
+    "Create an optional player and use drawing/paint/customizer/track/scenery/controller functions. TV remote workshop routes are retained.",
+    "Open Game feel. Animation and Haptics begin On, are independently saved and retain Off across relaunch; OS Reduce Motion takes precedence."
+  ],
+  "rootReleaseGates": [
+    "Scoped root visual approval of all21 native images is recorded. Prepare current gallery compositions separately; root retains release approval.",
+    "Choose/commit final source and exact version/build after fresh Apple record inspection; retain iPad+tvOS only.",
+    "Prepare current-source marketing gallery evidence; October3 source captures/packages are not the new launch/finish version.",
+    "Refresh support/privacy copy under the website dual-deployment policy; verify current URLs.",
+    "Archive/export the final committed revision with jobs2, verify signatures/provisioning/icons/privacy/entitlements/platform families and production test guards.",
+    "Upload and verify Apple processed builds; select exact builds for both supported platforms.",
+    "Verify accurate privacy label, review contact, free price, all eligible storefronts and current listing/reviewer notes; then submit."
+  ],
+  "newArchiveUploadSubmissionPerformed": false,
+  "rootNativeApprovalReceipt": "root-native-visual-approval.candidate-11.json"
+}

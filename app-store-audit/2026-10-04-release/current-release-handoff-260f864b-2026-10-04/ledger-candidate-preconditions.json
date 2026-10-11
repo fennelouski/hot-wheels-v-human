@@ -1,0 +1,54 @@
+{
+  "recordedAtUTC": "2026-10-04T13:29:43.581789+00:00",
+  "scope": "Audit-only proposed replacement of apps[61]. Root review is required before any merge.",
+  "globalLedger": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/release-ledger.json",
+  "appsIndex": 61,
+  "expectedApp": "HWvH",
+  "expectedAppleID": "6818777508",
+  "baselineLedgerSHA256": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890",
+  "ledgerSHA256AtEnd": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890",
+  "globalLedgerBytesUnchangedDuringPreparation": true,
+  "baselineEntryCanonicalSHA256": "5eaa99ad83d8125ad79bcd3f62f684826a5c774ee561bd38f8b4faa0d96f179b",
+  "apps61UnchangedDuringPreparation": true,
+  "candidate": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/apps61-proposed-entry.json",
+    "sha256": "d16a58378f17f07430e30d674671b33017f81463e39141653fac46b9a76ff1d9"
+  },
+  "candidateEntryCanonicalSHA256": "b2a54c1aad7fb547bdd421279503ad6e70f3e86e57676568ab2532761255426e",
+  "handoff": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/hwvh-current-release-handoff.json",
+    "sha256": "be062991b7bd77dce4a56e4a8bfcc647665922a221f8767a021fcc00246ad5f3"
+  },
+  "webReview": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/pending-web-camera-copy-review.json",
+    "sha256": "4be035eb8ff9b534aa27a58d4444db6928960083ffa93568135ae95472ea3b62"
+  },
+  "historicalEntry": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/historical-apps61-44d929c.json",
+    "sha256": "eebc48573da949f01bbcd5d53ffc31976149e62da7988c0e258187803afadb1d"
+  },
+  "humanHandoff": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/HWVH-CURRENT-RELEASE-HANDOFF.md",
+    "sha256": "5b1b157aa364419f8c09be22fe07b5064ee1d090809adddd7b6e1af87cd5c307"
+  },
+  "rootPreconditionsBeforeMerge": [
+    "Read and approve this candidate.",
+    "Recheck apps[61] app ID and exact baseline entry hash. If the entry changed, reconcile the newer root work instead of overwriting it.",
+    "Preserve every other global ledger entry and field. The whole-ledger read hash is context, not permission to replace concurrent root changes.",
+    "Update the pending web revision only after a new committed receipt and actual dual-host verification.",
+    "Never infer final submission, privacy publication, content rights or all-country sale eligibility from the prepared state."
+  ],
+  "actionsPerformed": [
+    "Read-only source, git and stored receipt inspection",
+    "Audit-leaf files written"
+  ],
+  "actionsNotPerformed": [
+    "Global ledger mutation",
+    "Native tooling or runtime",
+    "Browser or network use",
+    "Web deployment",
+    "Source or version edits",
+    "Commit or push",
+    "Apple mutation or legal answers"
+  ]
+}

@@ -1,0 +1,263 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "932C1A6F-508F-47F3-A42B-1314F2169FE8.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Native share chooser accessibility_0_4FB0279F-23F6-448C-B4F6-B81BF20F353A.txt",
+        "timestamp" : 1791108865.954
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "D08ABF07-C1BE-4E13-B59D-3490C7A6660C.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04b - Native image share chooser_0_A1BC24A1-D00E-4BEF-9A2E-6B6C21974AEB.png",
+        "timestamp" : 1791108865.655
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "3FBB8D88-6B74-4050-95B9-C2C7EC875002.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"ActivityListView\" Other`_0_A65AF67D-2253-433F-B0D2-40FD2F95EEE2.txt",
+        "timestamp" : 1791108864.537
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "EF50F6B8-29EC-446F-B933-9871C9AB1C73",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Synthesized Event 2026-10-04 at 12.14.23 PM",
+        "timestamp" : 1791108863.254
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "3BD01B6A-9006-4D26-8AC3-FDCCAA725D2C.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04 - Frozen race image and result_0_CAF89E34-24D9-4E18-80D3-8C8BA045A86D.png",
+        "timestamp" : 1791108862.842
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "7854FE57-59E2-4571-8B69-8F7F5D0CFD27",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Synthesized Event 2026-10-04 at 12.13.45 PM",
+        "timestamp" : 1791108825.542
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "15A105D8-60F3-4E65-A53F-33DEE99D1FDE.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "03 - Actual finish and race statistics_0_A4B80EB1-5135-4623-B902-53C290903C7F.png",
+        "timestamp" : 1791108823.569
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "A0192684-148D-458C-BBA7-12B0CF7261CE.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_78ACDBB8-48C2-4952-9213-E90B52DA0F28.txt",
+        "timestamp" : 1791108822.328
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "29026818-1ACE-4B2F-BED8-A4055FB0D668.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_54A665FD-CECF-468F-B0A9-94141C258189.txt",
+        "timestamp" : 1791108821.338
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "DF76C706-38DA-4E28-939A-863136E832E5.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_A5EB9256-EA1B-43D9-8A38-D4BB9B2C3250.txt",
+        "timestamp" : 1791108820.338
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "6AAA6FD5-C7DF-4595-A21B-2190E149DBC5.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_156E15CD-265D-48DF-928A-B1DD7ABAC2B4.txt",
+        "timestamp" : 1791108819.355
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "472EADE2-59A4-4577-AB3D-6219E13E1170.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_FF8EC51B-3E8D-407E-B92D-F6CDCE70440F.txt",
+        "timestamp" : 1791108818.356
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "773B0F21-3092-4F70-8B0D-0A500B72272F.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_D3762E08-D8A1-47EF-9538-A2CC1E1AC3AA.txt",
+        "timestamp" : 1791108817.367
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "6D49FBA4-D88E-43F1-B899-8BAD3A6F413A.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_933F4FEA-69FE-451A-88F1-53906BFB2370.txt",
+        "timestamp" : 1791108816.36
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "29E811A5-BB0B-4DD9-9887-C8DA803AACFC.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_30D7223C-871F-4987-AA87-1D6ACC08D455.txt",
+        "timestamp" : 1791108815.36
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "9C0AEB03-42C1-4442-8926-5F5AF4A75787.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_0992FFD0-772D-4DB8-80F9-0DA4A55339EF.txt",
+        "timestamp" : 1791108814.355
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "80A8AA1C-A350-4F1C-9338-A7BC9CC5CD96.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `\"race-rematch\" Button`_0_47C54C24-A1AD-4B75-AB1C-D052B9CF05D6.txt",
+        "timestamp" : 1791108813.359
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "8F7A5F2A-B70E-4EC1-92D7-2CFD21756905.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "02 - Real standalone race_0_444DEDDB-A11F-4141-9FB4-A983F08EB70B.png",
+        "timestamp" : 1791108812.257
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "AD5D280D-3E09-4A71-8E3B-C46F3DA30B3B.txt",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Debug description for `StaticText (First Match)`_0_4FEBE71E-16EA-4946-B5F3-8A2DD6727D41.txt",
+        "timestamp" : 1791108810.896
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "210ECE33-D009-4597-A91D-17596F46CEEF",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Synthesized Event 2026-10-04 at 12.13.27 PM",
+        "timestamp" : 1791108807.293
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "17EC7922-CB3B-491B-8A9D-32EDA937F91B.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "01 - First launch with visible Play_0_FB4957CB-3A21-4200-9B15-23B4AABAF772.png",
+        "timestamp" : 1791108805.73
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "F41AFD02-E7F8-4957-AD00-6A2426914051.mp4",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Screen Recording 2026-10-04 at 12.13.20 PM.mp4",
+        "timestamp" : 1791108800.632
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "191DEE69-A436-41CB-982A-D8E3FCE01E93",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Synthesized Event 2026-10-04 at 12.14.38 PM",
+        "timestamp" : 1791108878.654
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "CC1ECDBE-C15B-4090-8513-952783ACD38E",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Synthesized Event 2026-10-04 at 12.14.35 PM",
+        "timestamp" : 1791108875.142
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "668DF6C6-0C02-4F55-8720-233825DC1240.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "06 - Largest text launch actions_0_85181301-309B-471C-AF09-0EA0D77E4FA2.png",
+        "timestamp" : 1791108873.717
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "316802B7-9087-43B1-B4BA-30303346B368.mp4",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "Screen Recording 2026-10-04 at 12.14.27 PM.mp4",
+        "timestamp" : 1791108867.681
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay"
+  },
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "025B233C-9EE8-48DD-A4E8-BB88CF93F0DE",
+        "deviceName" : "Games Finish QA Pad 20261003",
+        "exportedFileName" : "7414820E-836C-4EE8-99F9-20A635C2AFEB.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "10 - Optional player and touch workshop_0_DA10AD51-3645-4716-A399-E76E5B3DEAC3.png",
+        "timestamp" : 1791108892.233
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop"
+  }
+]

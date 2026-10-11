@@ -1,0 +1,459 @@
+{
+  "recordedAtUTC": "2026-10-04T11:17:30.810188+00:00",
+  "status": "Prepared copy only. Root review, committed-revision dual deployment and live verification are pending.",
+  "authorization": "Root explicitly assigned exactly two existing page body copy changes; no native/build/deployment actions.",
+  "siteWorktree": "/Users/nathan/Documents/GitHub/nathanfennel-app-store",
+  "unchangedBaseRevision": "1c76ff88f3ba765d5e7fc28a76f6e835b65b1668",
+  "siteInitiallyClean": true,
+  "editedPages": [
+    {
+      "path": "public/hwvh/privacy.html",
+      "oldSHA256": "cda59260c78ed872c2df2e821d97b0f4732b465c24bd074a3ba4f046f871dae3",
+      "newSHA256": "dbe5c04e91065bbd0e11e4e183847795d38b2bba2d5264aa92c96a65075b0b41",
+      "canonicalURL": "https://nathanfennel.com/hwvh/privacy.html",
+      "AWSStaticURL": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/privacy.html",
+      "headStylesheetRobotsUnchanged": true,
+      "staticMarkupPreserved": true,
+      "links": [
+        "https://nathanfennel.com/contact",
+        "https://nathanfennel.com/hwvh/support.html"
+      ],
+      "HTTPOrDeploymentVerifiedInThisTask": false
+    },
+    {
+      "path": "public/hwvh/support.html",
+      "oldSHA256": "3093b0b73ee2c8b540b94d3c6f41f8d4e29ed304eb1ce09c9c3db5a599d85288",
+      "newSHA256": "6b826d1a866f6ed374fd1096c4ff2d7c6915151e7e02553d9aee6c3b81342236",
+      "canonicalURL": "https://nathanfennel.com/hwvh/support.html",
+      "AWSStaticURL": "https://nfbucketforstuff.s3.us-west-2.amazonaws.com/app-support/hwvh/support.html",
+      "headStylesheetRobotsUnchanged": true,
+      "staticMarkupPreserved": true,
+      "links": [
+        "https://nathanfennel.com/contact",
+        "https://nathanfennel.com/hwvh/privacy.html"
+      ],
+      "HTTPOrDeploymentVerifiedInThisTask": false
+    }
+  ],
+  "changedTrackedPaths": [
+    "public/hwvh/privacy.html",
+    "public/hwvh/support.html"
+  ],
+  "otherTrackedFileCountUnchanged": 17842,
+  "otherTrackedFilesUnchanged": true,
+  "siteOtherFilesOrScriptsChanged": false,
+  "baselineReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-predeployment.candidate11.baseline.json",
+  "baselineSHA256": "47965337ca0909a8a0e96ce36ed170024347fbfc40c0e3d6e87f67f4ff15f9b2",
+  "exactDiff": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-predeployment.candidate11.patch",
+  "exactDiffSHA256": "e08704eebc8620794010cd7f428d87024a50223b6d81e867ca1be6d7bade55d6",
+  "nativeProof": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+  "nativeProofSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+  "nativeAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "all889NativeInputsUnchanged": true,
+  "sourceClaims": [
+    {
+      "claim": "Immediate PLAY before optional profiles",
+      "nativeFile": "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "sha256": "25ac596b5ce90da222d9bc104f20b293a9f8e8969a99a2b4ae9ced7a3f41cfc3",
+      "references": [
+        {
+          "exactCodeEvidence": "private var launchHeader",
+          "lines": [
+            74
+          ]
+        },
+        {
+          "exactCodeEvidence": "Label(\"PLAY!\"",
+          "lines": [
+            81
+          ]
+        },
+        {
+          "exactCodeEvidence": "Text(\"Who's playing?\")",
+          "lines": [
+            106
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Starter race and robot",
+      "nativeFile": "Hot Wheels v Human/App/RootView.swift",
+      "sha256": "62ab11622d382b8de5e97fd38c470cb4bebdf88df6c2ff12f55635281af376cf",
+      "references": [
+        {
+          "exactCodeEvidence": "struct QuickPlayView",
+          "lines": [
+            347
+          ]
+        },
+        {
+          "exactCodeEvidence": "config: MatchConfig(mode: .onePlayer, aiDifficulty: .medium)",
+          "lines": [
+            95,
+            355
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Normal immutable final results",
+      "nativeFile": "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "sha256": "5e0b1698d7e8103bdca0b2a8e7c49252a087963c8d3361863678d61e28fb5664",
+      "references": [
+        {
+          "exactCodeEvidence": "completedResult = Self.freezeResult",
+          "lines": [
+            458
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Actual arena pixels; no substitute image",
+      "nativeFile": "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "sha256": "f6711457d1b8eddc1559682f6749b317b99d926b4a7f69b8db153c3e40793bfd",
+      "references": [
+        {
+          "exactCodeEvidence": "static func jpeg",
+          "lines": [
+            24
+          ]
+        },
+        {
+          "exactCodeEvidence": "struct ArenaSnapshotEffect",
+          "lines": [
+            45
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Finish frame, stats, native Share Image and local PNG cache",
+      "nativeFile": "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "sha256": "41c34a4fbff79ef51a05b2c8a157fd415faf7527544e411d160ebebed76aeefc",
+      "references": [
+        {
+          "exactCodeEvidence": "struct RaceShareCard",
+          "lines": [
+            4
+          ]
+        },
+        {
+          "exactCodeEvidence": "let folder = root.appendingPathComponent(\"FinishedRaces\"",
+          "lines": [
+            64
+          ]
+        },
+        {
+          "exactCodeEvidence": "ShareLink(item: file",
+          "lines": [
+            109
+          ]
+        },
+        {
+          "exactCodeEvidence": "Label(\"Share Image\"",
+          "lines": [
+            112
+          ]
+        },
+        {
+          "exactCodeEvidence": "if nearbyHost { handoff.start(payload: payload) }",
+          "lines": [
+            131
+          ]
+        },
+        {
+          "exactCodeEvidence": ".onDisappear { handoff.stop() }",
+          "lines": [
+            138
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "App Store URL and payload fields",
+      "nativeFile": "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "sha256": "d8f287b3aa707411481e913d6a8f687ac5c1d6e357e2b42463d61f27d738b03d",
+      "references": [
+        {
+          "exactCodeEvidence": "let carName",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "exactCodeEvidence": "let finishTime",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "exactCodeEvidence": "let topSpeed",
+          "lines": [
+            11
+          ]
+        },
+        {
+          "exactCodeEvidence": "let crashes",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "exactCodeEvidence": "static let appURL",
+          "lines": [
+            19
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Temporary standalone-TV host lifetime",
+      "nativeFile": "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "sha256": "19beaabcbe76166993d6f66af4b56350f4430613bc8fbedd1c448483dd341a33",
+      "references": [
+        {
+          "exactCodeEvidence": "func start(payload:",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "exactCodeEvidence": "transport.start(role: .host)",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "exactCodeEvidence": "func stop()",
+          "lines": [
+            29
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Required encryption and discovery display name",
+      "nativeFile": "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "sha256": "ec7bfb03bdd365a87cb0b0b0f844740b02c259e86a014ea0110b0d519ea98695",
+      "references": [
+        {
+          "exactCodeEvidence": "MCSession(peer: myPeerID, securityIdentity: nil, encryptionPreference: .required)",
+          "lines": [
+            41
+          ]
+        },
+        {
+          "exactCodeEvidence": "private let myPeerID",
+          "lines": [
+            25
+          ]
+        },
+        {
+          "exactCodeEvidence": "func stop()",
+          "lines": [
+            68
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Existing race connection and single pending actual retry; stale cancellation",
+      "nativeFile": "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "sha256": "5db19008e59b0aa84ca7dfbdac4e5af2c8468781c11a52382687f9f89abdd8cc",
+      "references": [
+        {
+          "exactCodeEvidence": "guard !shareCapturePending, let result = session.completedResult",
+          "lines": [
+            69
+          ]
+        },
+        {
+          "exactCodeEvidence": "self.session.completedResult?.id == result.id",
+          "lines": [
+            78
+          ]
+        },
+        {
+          "exactCodeEvidence": "case .requestRaceShare:",
+          "lines": [
+            246
+          ]
+        },
+        {
+          "exactCodeEvidence": "clearShare()",
+          "lines": [
+            96,
+            161,
+            424
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Exact connected retry/share labels",
+      "nativeFile": "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "sha256": "8119becff9d350c856a219bb4dc635d36c0e509af44cb69ff338cd0e6c394ab2",
+      "references": [
+        {
+          "exactCodeEvidence": "\"Get Race Image\" : \"Share Race\"",
+          "lines": [
+            91
+          ]
+        },
+        {
+          "exactCodeEvidence": "model.requestRaceShare()",
+          "lines": [
+            89,
+            102
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Received results cleared by normal race restart and connection leave",
+      "nativeFile": "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "sha256": "ed232796f042023cbeb47affac51a55a15d49d089bb1d887f8a4335db21d731e",
+      "references": [
+        {
+          "exactCodeEvidence": "func stop()",
+          "lines": [
+            52
+          ]
+        },
+        {
+          "exactCodeEvidence": "sharedRace = nil",
+          "lines": [
+            60,
+            102,
+            154
+          ]
+        },
+        {
+          "exactCodeEvidence": "if snap.phase != .results",
+          "lines": [
+            154
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Normal REMATCH and Share actions",
+      "nativeFile": "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "sha256": "97ca24b79b03ac3387e29bd6c390dcbb8b85936f733e76faae71676c204179fd",
+      "references": [
+        {
+          "exactCodeEvidence": "Label(\"REMATCH!\"",
+          "lines": [
+            88
+          ]
+        },
+        {
+          "exactCodeEvidence": "RaceResultShareButton",
+          "lines": [
+            96
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Independent persisted defaults; read-only Reduce Motion",
+      "nativeFile": "Hot Wheels v Human/App/GamePreferences.swift",
+      "sha256": "0bf4a219aed5d436cc0b8a17b0317a9e3ee2f56f7829d9cf7d9ee84d51e285e7",
+      "references": [
+        {
+          "exactCodeEvidence": "fallback: true",
+          "lines": [
+            14,
+            15
+          ]
+        },
+        {
+          "exactCodeEvidence": "var animationsEnabled",
+          "lines": [
+            9
+          ]
+        },
+        {
+          "exactCodeEvidence": "var hapticsEnabled",
+          "lines": [
+            10
+          ]
+        },
+        {
+          "exactCodeEvidence": "systemPreference || !animationsEnabled",
+          "lines": [
+            27
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Visible Game Feel labels and supported iPad feedback",
+      "nativeFile": "Hot Wheels v Human/App/GameSettingsView.swift",
+      "sha256": "6584b1928633aabb1dc3b20922b4682933e775cf968d15b5c1422a9e4bfde147",
+      "references": [
+        {
+          "exactCodeEvidence": "setting(\"Animation\"",
+          "lines": [
+            12
+          ]
+        },
+        {
+          "exactCodeEvidence": "setting(\"Haptics\"",
+          "lines": [
+            14
+          ]
+        },
+        {
+          "exactCodeEvidence": "Tap and boost feedback on supported iPads.",
+          "lines": [
+            15
+          ]
+        },
+        {
+          "exactCodeEvidence": "Race timing and controls stay the same.",
+          "lines": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "claim": "Calm real-world cameras",
+      "nativeFile": "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "sha256": "d9c142c26b00174e8fe4c276b1a205888f938d41788ed6bde0aa5ee627d2b9f9",
+      "references": [
+        {
+          "exactCodeEvidence": "if !GameEffectsPolicy.shared.motionEnabled",
+          "lines": [
+            93
+          ]
+        }
+      ]
+    }
+  ],
+  "retainedVisualOwnerReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/root-native-visual-approval.candidate-11.json",
+  "policyFilesRead": {
+    "/Users/nathan/Documents/GitHub/deployment-audit/deployment-policy.md": "602e75d6fe760d85248e5a3eb484e01bce668be7b7d52bcddeeed2b4283551ae",
+    "/Users/nathan/Documents/GitHub/deployment-audit/parallel-deployments.json": "a86aefecf297444d318be95c78a13fdbce8963b16aeb419c02b1af32642eb2b8",
+    "/Users/nathan/Documents/GitHub/nathanfennel-app-store/AGENTS.md": "b8eb705fb878a0de85bdcea6b37c0a0fd8deead774d041027c51678c17956a6b"
+  },
+  "deploymentModeRequired": "Parallel static policy pages to Vercel and AWS from one committed revision; keep production domains on Vercel pending verified cutover. Root owns selected four-page release.",
+  "actions": {
+    "siteBodyCopyEdits": 2,
+    "nativeSourceEdits": 0,
+    "buildBootRuntime": 0,
+    "commitPushDeploy": 0,
+    "credentialOrAPIAccess": 0,
+    "browserMutation": 0
+  },
+  "claimLimits": [
+    "Physical iPad\u2194Apple TV LAN was not runtime tested; copy describes source-backed behavior, not a physical-network verification.",
+    "No automatic iCloud library, account, new provider or backend is promised.",
+    "Cache PNG lifetime is not described as immediate deletion; OS cache cleanup or removing app may clear it.",
+    "Existing Oct3 live pages are not represented as updated by these local edits.",
+    "Unlisted/noindex, stylesheet, head and contact/policy links are preserved."
+  ]
+}

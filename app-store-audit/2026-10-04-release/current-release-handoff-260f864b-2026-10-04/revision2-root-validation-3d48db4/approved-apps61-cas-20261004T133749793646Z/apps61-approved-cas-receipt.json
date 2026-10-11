@@ -1,0 +1,106 @@
+{
+  "recordedAtUTC": "2026-10-04T13:37:49.870349+00:00",
+  "status": "Approved apps[61] compare-and-swap completed and verified.",
+  "authorization": "Direct root approval of exact candidate SHA936859daf8546c71b7145c9c6520a54855fe6a91a3387a19955536a5546c82c5 and baseline target canonical SHA5eaa99ad83d8125ad79bcd3f62f684826a5c774ee561bd38f8b4faa0d96f179b.",
+  "ledger": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/release-ledger.json",
+  "appsIndex": 61,
+  "app": "HWvH",
+  "appleID": "6818777508",
+  "candidate": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/apps61-proposed-entry.json",
+  "candidateSHA256": "936859daf8546c71b7145c9c6520a54855fe6a91a3387a19955536a5546c82c5",
+  "baselineTargetCanonicalSHA256": "5eaa99ad83d8125ad79bcd3f62f684826a5c774ee561bd38f8b4faa0d96f179b",
+  "afterTargetCanonicalSHA256": "68f451420fbb8c68f71029d8ab40082fcdf52d6f2b584d015b4e7bdcc60efcac",
+  "beforeGlobalSHA256": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890",
+  "afterGlobalSHA256": "42a1c0d413383541d491c2e45b9d4de4c806ab1e5cbdb724491ccb89acfa79a3",
+  "beforeBytes": 2930255,
+  "afterBytes": 2940140,
+  "oldTargetByteRange": [
+    2882140,
+    2887824
+  ],
+  "newTargetByteRange": [
+    2882140,
+    2897709
+  ],
+  "prefixBytes": 2882140,
+  "prefixSHA256": "7a615fc8b2ac0cad7d2912b22427faeaa0b10157c5214f689614f866e1d27e7b",
+  "suffixBytes": 42431,
+  "suffixSHA256": "4cfb7624ff43a4d7483015441f3a0ac168833998b5bab2c878e3a9ec9bc1fc90",
+  "allNonTargetPrefixAndSuffixBytesIdentical": true,
+  "allOtherAppEntriesAndTopFieldsIdentical": true,
+  "appCount": 62,
+  "targetChangedTopLevelKeys": [
+    "current_release",
+    "release_ownership",
+    "remaining_blockers",
+    "required_fixes",
+    "source",
+    "submission_status",
+    "verification_evidence"
+  ],
+  "fullBefore": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/approved-apps61-cas-20261004T133749793646Z/release-ledger.full-before.json",
+    "bytes": 2930255,
+    "sha256": "cd2131c071bfc2aee444e2029af4c33510dc3902bfd9b388c647056fcfb22890"
+  },
+  "historicalTarget": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/approved-apps61-cas-20261004T133749793646Z/apps61.historical-before.json",
+    "bytes": 5165,
+    "sha256": "1b572d5fa808e3174c67815f16af7708b6b8f40d34cefbc628c4a2b887416092"
+  },
+  "approvedTargetCopy": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/approved-apps61-cas-20261004T133749793646Z/apps61.approved-after.json",
+    "bytes": 15570,
+    "sha256": "936859daf8546c71b7145c9c6520a54855fe6a91a3387a19955536a5546c82c5"
+  },
+  "targetDelta": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/approved-apps61-cas-20261004T133749793646Z/apps61.approved-target.delta.diff",
+    "bytes": 13833,
+    "sha256": "d9a599a02839b75ec135029b078739421b53566371590f63f39e204b2404d527"
+  },
+  "fullAfter": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/approved-apps61-cas-20261004T133749793646Z/release-ledger.full-after.json",
+    "bytes": 2940140,
+    "sha256": "42a1c0d413383541d491c2e45b9d4de4c806ab1e5cbdb724491ccb89acfa79a3"
+  },
+  "locking": {
+    "lockFile": "/Users/nathan/Documents/GitHub/app-store-audit/2026-09-27-release/.release-ledger.lock",
+    "exclusiveLockFileAndOriginalLedgerFlock": true,
+    "wholeFileCASImmediatelyBeforeReplace": true,
+    "stagedFileFsync": true,
+    "atomicReplace": true,
+    "ledgerDirectoryFsync": true,
+    "originalModePreserved": true
+  },
+  "currentStateRetained": {
+    "reviewState": "Prepare for Submission",
+    "bothSelectedBuildsValidated": true,
+    "finalSubmissionPerformed": false,
+    "draftSubmissionCreated": false,
+    "appleValidationMissingItems": [
+      "Privacy Policy URL",
+      "Apple TV Privacy Policy text",
+      "Content Rights Information",
+      "Published App Privacy responses"
+    ],
+    "privacyPublished": false,
+    "contentRightsAffirmationMade": false,
+    "webRevision": "3d48db495cd8a40eb0f9a29f217de81b4ee1474b",
+    "webDeployed": false
+  },
+  "rootAWSContext": {
+    "provenance": "Direct root message; no new child AWS call.",
+    "readOnlySTSAtUTC": "2026-10-04T13:32",
+    "exitCode": 255,
+    "state": "Existing session expired. No login started."
+  },
+  "notPerformed": [
+    "Native tooling or runtime",
+    "Browser or network access",
+    "Deployment",
+    "Apple mutation or submission",
+    "Source, version or website edits",
+    "Commit or push",
+    "AWS login or credentials operation"
+  ]
+}

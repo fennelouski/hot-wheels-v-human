@@ -1,0 +1,438 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "recordedAtUTC": "2026-10-03T11:20:41.908055+00:00",
+  "status": "Verified genuine native feature evidence with explicitly scoped retained-capture compatibility; independent final marketing review remains separate",
+  "sourceCompatibilityProofPath": "source-compatibility-tv-control-final.json",
+  "sourceCompatibilityProofSHA256": "0fef46c2c08e149f074b79622054457365e1de541430ef3f600e606648547a3b",
+  "nativeInputProofPath": "../native-source-inputs-tv-control-final.json",
+  "nativeInputProofSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "finalNativeBuildRecordPath": "../native-builds-tv-control-final.json",
+  "finalNativeBuildRecordSHA256": "81ef129cccc522e253050b74e5478fff4c9c0a2cc535f1f992f33741f7c414dd",
+  "retainedNativeBuildRecordPath": "../native-builds-69833ad-gallery-historical.json",
+  "retainedNativeBuildRecordSHA256": "d499a433a065850fe155f5b7653b3e392a3b0c1eb230d42ca84c0577bd2ec3da",
+  "signedProductionPackageProofPath": "../signed-release-packages-tv-control-final.json",
+  "signedProductionPackageProofSHA256": "a8dd934df41abb92dbf8b60e457c1c859a21d8d5ce2351f75e6594a6ad8a3a7f",
+  "retainedActualRun": {
+    "id": "tv-69833ad-gallery",
+    "platform": "tvOS",
+    "resultBundlePath": "/private/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/tv-gallery.xcresult",
+    "testSummaryPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-69833ad-gallery-test-summary.json",
+    "testSummarySHA256": "2b8b055c508645feea84c0debce75229c62a8b07271570d5d527ad6ccf605836",
+    "testDetailsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-69833ad-gallery-test-details.json",
+    "testDetailsSHA256": "4cf6b8a4eca3505c2b357ff4fda0bae967f91077b26f0395ae80fcf70a331cf5",
+    "testLogPath": "/private/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/tv-test.log",
+    "testLogSHA256": "405edaab052c2b8911d296a8bc9203af99f9d0726c4b925152238d1bc1d56879",
+    "commandAtExecution": [
+      "xcodebuild",
+      "-xctestrun",
+      "/private/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/derived-tv/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+      "-destination",
+      "platform=tvOS Simulator,id=BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "-resultBundlePath",
+      "/private/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/tv-gallery.xcresult",
+      "-only-testing:Hot Wheels v HumanUITests/TVRemoteUITests",
+      "-only-testing:Hot Wheels v HumanTests/TVTrackBuilderTests",
+      "-only-testing:Hot Wheels v HumanTests/WorkshopPersistenceTests",
+      "-only-testing:Hot Wheels v HumanTests/RaceLifecycleTests",
+      "-parallel-testing-enabled",
+      "NO",
+      "test-without-building"
+    ],
+    "exitCode": 65,
+    "passed": 23,
+    "failed": 1,
+    "skipped": 0,
+    "uiPassed": 9,
+    "modelPassed": 14,
+    "actualPassedTestIdentifiers": [
+      "RaceLifecycleTests/stopRejectsQueuedAndFutureControllerInputs()",
+      "RaceLifecycleTests/cancelledBuildDoesNotChangeTheSceneOrPhase()",
+      "RaceLifecycleTests/closingCountdownRemovesCarsAndCannotStartARaceLater()",
+      "TVTrackBuilderTests/blueprintIdentityDoesNotChangeWhenReadingPreview()",
+      "TVTrackBuilderTests/loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+      "TVTrackBuilderTests/selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+      "TVTrackBuilderTests/remoteRotationAndMovementPreserveRoadGridSnapping()",
+      "TVTrackBuilderTests/remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+      "TVTrackBuilderTests/portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+      "TVTrackBuilderTests/cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+      "TVTrackBuilderTests/remoteCanReachDistantExitOfLongValidTrack()",
+      "TVTrackBuilderTests/cameraZoomTiltAndResetKeepFiniteUsablePose()",
+      "WorkshopPersistenceTests/failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+      "WorkshopPersistenceTests/savingSelectedRacerCommitsLastUsedWithAppearance()",
+      "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+      "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+      "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+      "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()",
+      "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+      "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+      "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()"
+    ],
+    "actualPassedUITestIdentifiers": [
+      "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+      "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+      "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+      "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+      "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+      "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()",
+      "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+      "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+      "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()"
+    ],
+    "actualFailedTestIdentifiers": [
+      "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()"
+    ],
+    "device": {
+      "architecture": "arm64",
+      "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "deviceName": "HWvH QA TV 20261003",
+      "modelName": "Apple TV 4K (3rd generation) (at 1080p)",
+      "osBuildNumber": "23L470",
+      "osVersion": "26.5",
+      "platform": "tvOS Simulator"
+    },
+    "rawAttachmentDirectory": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/camera-contrast-69833ad-tv-historical",
+    "rawAttachmentManifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/camera-contrast-69833ad-tv-historical/manifest.json",
+    "rawAttachmentManifestSHA256": "51cb166afbf6439fe0959e089b23ad803faaa25eec2780cd162fb54a09e122df"
+  },
+  "finalActualRun": {
+    "id": "tv-control-final-targeted",
+    "platform": "tvOS",
+    "resultBundlePath": "/private/tmp/hwvh-control-final-44d929c-20261003-pa4ok_fi/tv-gallery.xcresult",
+    "testSummaryPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-control-final-targeted-test-summary.json",
+    "testSummarySHA256": "b0d115cbdfa51e584f8cd95df08aea5df799efddb5b6b7db7d95624d6cd447f3",
+    "testDetailsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-control-final-targeted-test-details.json",
+    "testDetailsSHA256": "4829d8605bec3649d6616c166e9286488523e443f16e403f9bead32d11f5e5df",
+    "testLogPath": "/private/tmp/hwvh-control-final-44d929c-20261003-pa4ok_fi/tv-test.log",
+    "testLogSHA256": "40608fdf61a9a04030e583f55c3b0c76b406c559b8d7eb03cd885f3bfc7c088c",
+    "commandAtExecution": [
+      "xcodebuild",
+      "-xctestrun",
+      "/private/tmp/hwvh-control-final-44d929c-20261003-pa4ok_fi/derived-tv/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+      "-destination",
+      "platform=tvOS Simulator,id=BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "-resultBundlePath",
+      "/private/tmp/hwvh-control-final-44d929c-20261003-pa4ok_fi/tv-gallery.xcresult",
+      "-only-testing:Hot Wheels v HumanUITests/TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus",
+      "-only-testing:Hot Wheels v HumanUITests/TVRemoteUITests/testTV10RobotResultsAndRemoteRematch",
+      "-only-testing:Hot Wheels v HumanUITests/TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus",
+      "-only-testing:Hot Wheels v HumanUITests/TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter",
+      "-only-testing:Hot Wheels v HumanTests/TVTrackBuilderTests",
+      "-only-testing:Hot Wheels v HumanTests/WorkshopPersistenceTests",
+      "-only-testing:Hot Wheels v HumanTests/RaceLifecycleTests",
+      "-parallel-testing-enabled",
+      "NO",
+      "test-without-building"
+    ],
+    "exitCode": 0,
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "uiPassed": 4,
+    "modelPassed": 14,
+    "actualPassedTestIdentifiers": [
+      "RaceLifecycleTests/stopRejectsQueuedAndFutureControllerInputs()",
+      "RaceLifecycleTests/cancelledBuildDoesNotChangeTheSceneOrPhase()",
+      "RaceLifecycleTests/closingCountdownRemovesCarsAndCannotStartARaceLater()",
+      "TVTrackBuilderTests/blueprintIdentityDoesNotChangeWhenReadingPreview()",
+      "TVTrackBuilderTests/loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+      "TVTrackBuilderTests/selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+      "TVTrackBuilderTests/remoteRotationAndMovementPreserveRoadGridSnapping()",
+      "TVTrackBuilderTests/remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+      "TVTrackBuilderTests/portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+      "TVTrackBuilderTests/cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+      "TVTrackBuilderTests/remoteCanReachDistantExitOfLongValidTrack()",
+      "TVTrackBuilderTests/cameraZoomTiltAndResetKeepFiniteUsablePose()",
+      "WorkshopPersistenceTests/failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+      "WorkshopPersistenceTests/savingSelectedRacerCommitsLastUsedWithAppearance()",
+      "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+      "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()"
+    ],
+    "actualPassedUITestIdentifiers": [
+      "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+      "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+      "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+      "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()"
+    ],
+    "device": {
+      "architecture": "arm64",
+      "deviceId": "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "deviceName": "HWvH QA TV 20261003",
+      "modelName": "Apple TV 4K (3rd generation) (at 1080p)",
+      "osBuildNumber": "23L470",
+      "osVersion": "26.5",
+      "platform": "tvOS Simulator"
+    },
+    "rawAttachmentDirectory": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted",
+    "rawAttachmentManifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-control-final-targeted/manifest.json",
+    "rawAttachmentManifestSHA256": "3675325f231fa0fc85ff425f6cda64285e1e23b479435ad8c7aec2d0aa5f4dda"
+  },
+  "features": [
+    {
+      "imageID": "01-build-tracks",
+      "featureID": "track-builder",
+      "headline": "Build on the big screen",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV09 shows six actual placed pieces including a finish and ghost straight, with genuine decoration tools and clear race context. TV03 verifies remote placement, world options, save and cold library reload.",
+      "observedCaptureIDs": [
+        "tv-track",
+        "tv-world",
+        "tv-race"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-track": "194a2bf7235da275fbf9d2a1bf452b7e91efc6d02dd4524e701940ea29aecceb",
+        "tv-world": "07c5512dc21be94f25a7a331ecbd672f10d4f2a71ff87d1de80fa4d6450820b8",
+        "tv-race": "a7a2b7c4cdb58f0dcb665d6d5a6fe3cfb6b4a867f2f816338328c81b390daa90"
+      },
+      "actualCaptureRevisions": {
+        "tv-track": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-world": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-race": "44d929c6f1d54d6063270fb18e023a25062da2f2"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "02-make-your-car",
+      "featureID": "car-workshop",
+      "headline": "Make it your car",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV05 shows actual red paint, flame livery and the native size inspector. TV02 verifies the edits, sticker placement, drawing, save and cold Garage restoration.",
+      "observedCaptureIDs": [
+        "tv-car",
+        "tv-paint",
+        "tv-stickers"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-car": "57f22bf1906fbd43bd19b677fb0c9a29060e0ae23b57a03d3d5f17f5d2d5a34b",
+        "tv-paint": "4154a0787bebb7951db810f9cfdac5f9e11d066dea390458f0a9d303797654f6",
+        "tv-stickers": "b0854528bc5801f037a2a6c64454ad459a2e20b6809d7d130335c2f0c2ecce3f"
+      },
+      "actualCaptureRevisions": {
+        "tv-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "03-race-creations",
+      "featureID": "native-race",
+      "headline": "Race what you create",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The final-source Space Chase frame shows the ordinary fixed starter track The Mega Mega Track and native demo pair; Driver shows real cockpit and readable TV controls. Final TV09 verifies moving telemetry, camera rendering, Jazz, volume and radio power; TV11 separately checks selected visibility/focus in Sunny Day. Retained TV05 independently verifies authored-track preview and return; this photo is not labeled as the six-piece editor draft.",
+      "observedCaptureIDs": [
+        "tv-race",
+        "tv-driver"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-race": "a7a2b7c4cdb58f0dcb665d6d5a6fe3cfb6b4a867f2f816338328c81b390daa90",
+        "tv-driver": "7ef785448892e5008bbf28d69f6b283e1da98979f47e1107e6d8a3c1c4608b5f"
+      },
+      "actualCaptureRevisions": {
+        "tv-race": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+        "tv-driver": "44d929c6f1d54d6063270fb18e023a25062da2f2"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()"
+      ],
+      "finalPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+        "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()"
+      ]
+    },
+    {
+      "imageID": "04-create-racer",
+      "featureID": "racer-editor",
+      "headline": "Create your own racer",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV16 shows the real racer wardrobe and changed clothing/hair/hat controls. TV06 verifies save and exact cold restoration.",
+      "observedCaptureIDs": [
+        "tv-racer",
+        "tv-car"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-car": "57f22bf1906fbd43bd19b677fb0c9a29060e0ae23b57a03d3d5f17f5d2d5a34b",
+        "tv-racer": "fbfeba5aa31657e186e6602c973f57f5b6b37c6d0696d4cda1ddba73b95f32bd"
+      },
+      "actualCaptureRevisions": {
+        "tv-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-racer": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "05-pick-paint",
+      "featureID": "part-paint",
+      "headline": "Pick your paint",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV04 shows selected red paint on the actual car with native part/finish controls. TV02 edits and saves the car through the remote.",
+      "observedCaptureIDs": [
+        "tv-paint"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-paint": "4154a0787bebb7951db810f9cfdac5f9e11d066dea390458f0a9d303797654f6"
+      },
+      "actualCaptureRevisions": {
+        "tv-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "06-draw-your-way",
+      "featureID": "drawing-tools",
+      "headline": "Draw it your way",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV07 shows genuine remote pen controls, inks and a short authored stroke beside the yellow cursor. TV02 exercises Pen Down, directional stroke input, Pen Up and saving. This is remote drawing, not touch input.",
+      "observedCaptureIDs": [
+        "tv-draw",
+        "tv-car",
+        "tv-stickers"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-car": "57f22bf1906fbd43bd19b677fb0c9a29060e0ae23b57a03d3d5f17f5d2d5a34b",
+        "tv-draw": "d19b968bc1a9fcb375e6f613da34b642ea6ee1920f66ff1c38caeca136ed4e77",
+        "tv-stickers": "b0854528bc5801f037a2a6c64454ad459a2e20b6809d7d130335c2f0c2ecce3f"
+      },
+      "actualCaptureRevisions": {
+        "tv-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-draw": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "07-add-stickers",
+      "featureID": "sticker-placement",
+      "headline": "Add the finishing stickers",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV06 shows the real placed star sticker and its native position/size inspector. TV02 checks 52 percent horizontal position and saved restoration.",
+      "observedCaptureIDs": [
+        "tv-stickers",
+        "tv-paint"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-paint": "4154a0787bebb7951db810f9cfdac5f9e11d066dea390458f0a9d303797654f6",
+        "tv-stickers": "b0854528bc5801f037a2a6c64454ad459a2e20b6809d7d130335c2f0c2ecce3f"
+      },
+      "actualCaptureRevisions": {
+        "tv-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "08-build-worlds",
+      "featureID": "world-decoration",
+      "headline": "Build a whole toy world",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV12 shows a genuinely placed decoration and native rotate/move tools. TV04 verifies directional decoration and portal placement, rotation and removal.",
+      "observedCaptureIDs": [
+        "tv-world",
+        "tv-track"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-track": "194a2bf7235da275fbf9d2a1bf452b7e91efc6d02dd4524e701940ea29aecceb",
+        "tv-world": "07c5512dc21be94f25a7a331ecbd672f10d4f2a71ff87d1de80fa4d6450820b8"
+      },
+      "actualCaptureRevisions": {
+        "tv-track": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-world": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "09-save-builds",
+      "featureID": "saved-libraries",
+      "headline": "Keep your favorite builds",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "TV14 shows actual saved personal tracks alongside starter tracks, paired with the edited car. TV03 verifies exact save/cold track reload, and TV02 verifies saved car reopening. The transitional Garage capture is unused.",
+      "observedCaptureIDs": [
+        "tv-library",
+        "tv-car"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-car": "57f22bf1906fbd43bd19b677fb0c9a29060e0ae23b57a03d3d5f17f5d2d5a34b",
+        "tv-library": "6f6d189c239b528c7bd717b9fba518bd246d429a282934b8ab83f7577b7b8298"
+      },
+      "actualCaptureRevisions": {
+        "tv-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "tv-library": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+        "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "10-remote-boost",
+      "featureID": "race-boost",
+      "headline": "Boost with your remote",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The final-source Sunny Day photo follows an actual charged remote boost hold during ordinary 75-piece starter-track racing. TV12 verifies Select starts boost, the real meter is consumed and focused Play Pause stops it. TV11 verifies all visibility selections/focus over bright clouds. No editor or transitional frame substitutes for racing.",
+      "observedCaptureIDs": [
+        "tv-boost",
+        "tv-race"
+      ],
+      "observedCaptureSHA256s": {
+        "tv-race": "a7a2b7c4cdb58f0dcb665d6d5a6fe3cfb6b4a867f2f816338328c81b390daa90",
+        "tv-boost": "754ee596804feb2e2a86e2617ff088bacd855a804e235913d4ec214744bd9896"
+      },
+      "actualCaptureRevisions": {
+        "tv-race": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+        "tv-boost": "44d929c6f1d54d6063270fb18e023a25062da2f2"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()"
+      ],
+      "finalPassedUITestIdentifiers": [
+        "TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()",
+        "TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()"
+      ]
+    }
+  ],
+  "unclaimed": [
+    "Physical iPad-to-TV multiplayer acceptance",
+    "Cloud sync",
+    "iPhone support",
+    "Full accessibility certification",
+    "VisionOS or Mac support"
+  ],
+  "scope": "Original screenshot revisions, bytes and runtime provenance are preserved. The final release did not rerun iPad or unaffected TV workshop flows; fresh final-source affected TV tests and both platform compilations are recorded separately."
+}

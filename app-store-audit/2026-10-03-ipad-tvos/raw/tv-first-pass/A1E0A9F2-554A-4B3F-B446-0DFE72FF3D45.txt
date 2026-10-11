@@ -1,0 +1,91 @@
+Application, 0x10a10dff0, pid: 7670, label: 'HWvH' <App element pid: 7670>
+  Window (Main), 0x10a10e110, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 7670, elementOrHash.elementID: 4404069856.4>
+    Other, 0x10a10e4d0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 7670, elementOrHash.elementID: 4405125216.5>
+      Other, 0x10a10e5f0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 7670, elementOrHash.elementID: 4350594496.6>
+        Other, 0x10a10e230, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 7670, elementOrHash.elementID: 4352704928.7>
+          Other, 0x10a10e350, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 7670, elementOrHash.elementID: 4405401936.8>
+            Image, 0x10a10e710, {{108.0, 94.0}, {46.0, 44.0}}, identifier: 'tvTrackBuilder', label: 'wrench.and.screwdriver.fill' <AX element pid: 7670, elementOrHash.elementID: 4353216608.9>
+            StaticText, 0x10a10e830, {{108.0, 94.0}, {298.0, 44.0}}, identifier: 'tvTrackBuilder', label: 'Track Builder' <AX element pid: 7670, elementOrHash.elementID: 4353211616.10>
+            StaticText, 0x10a10e950, {{430.0, 102.0}, {92.0, 29.0}}, identifier: 'tvTrackBuilder', label: '1 pieces' <AX element pid: 7670, elementOrHash.elementID: 4353218592.11>
+            Button, 0x10a10ea70, {{794.9, 82.9}, {183.2, 66.2}}, identifier: 'tvTrackBuilder', label: 'Pieces', Focused, Selected <AX element pid: 7670, elementOrHash.elementID: 4353301104.12>
+              Image, 0x10a10eb90, {{826.0, 102.5}, {29.0, 27.9}}, identifier: 'wrench.and.screwdriver.fill', label: 'wrench.and.screwdriver.fill' <AX element pid: 7670, elementOrHash.elementID: 4353132688.25>
+              StaticText, 0x10a10ecb0, {{794.9, 82.9}, {183.2, 66.2}}, label: 'Pieces' <AX element pid: 7670, elementOrHash.elementID: 4353133152.26>
+            Button, 0x10a10edd0, {{999.0, 84.0}, {200.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Decorate' <AX element pid: 7670, elementOrHash.elementID: 4350658160.13>
+              Image, 0x10a10eef0, {{1029.0, 102.0}, {25.0, 28.0}}, identifier: 'paintbrush.fill', label: 'Format' <AX element pid: 7670, elementOrHash.elementID: 4350853472.27>
+              StaticText, 0x10a10f010, {{999.0, 84.0}, {200.0, 64.0}}, label: 'Decorate' <AX element pid: 7670, elementOrHash.elementID: 4350653504.28>
+            Button, 0x10a10f130, {{1223.0, 84.0}, {176.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Worlds' <AX element pid: 7670, elementOrHash.elementID: 4350681728.14>
+              Image, 0x10a10f250, {{1253.0, 105.0}, {23.0, 23.0}}, identifier: 'globe.americas.fill', label: 'globe.americas.fill' <AX element pid: 7670, elementOrHash.elementID: 4350837520.29>
+              StaticText, 0x10a20c910, {{1223.0, 84.0}, {176.0, 64.0}}, label: 'Worlds' <AX element pid: 7670, elementOrHash.elementID: 4350837984.30>
+            Button, 0x10a20c4f0, {{1423.0, 84.0}, {185.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Camera' <AX element pid: 7670, elementOrHash.elementID: 4350896880.15>
+              Image, 0x10a20c0d0, {{1454.0, 105.0}, {22.0, 22.0}}, identifier: 'viewfinder', label: 'Scan' <AX element pid: 7670, elementOrHash.elementID: 4350685824.31>
+              StaticText, 0x10a20ce60, {{1423.0, 84.0}, {185.0, 64.0}}, label: 'Camera' <AX element pid: 7670, elementOrHash.elementID: 4350897552.32>
+            Button, 0x10a20cf80, {{1632.0, 84.0}, {184.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Library' <AX element pid: 7670, elementOrHash.elementID: 4350688576.16>
+              Image, 0x10a20d270, {{1663.0, 104.0}, {29.0, 25.0}}, identifier: 'books.vertical.fill', label: 'Bookshelf' <AX element pid: 7670, elementOrHash.elementID: 4350688112.33>
+              StaticText, 0x10a20d390, {{1632.0, 84.0}, {184.0, 64.0}}, label: 'Library' <AX element pid: 7670, elementOrHash.elementID: 4350689248.34>
+            Other, 0x10a20d4b0, {{104.0, 168.0}, {1013.0, 744.0}}, identifier: 'tvTrackBuilder' <AX element pid: 7670, elementOrHash.elementID: 4405205696.17>
+            Button, 0x10a20d5d0, {{849.0, 184.0}, {252.0, 156.0}}, identifier: 'tvTrackBuilder', label: 'Enlarge map' <AX element pid: 7670, elementOrHash.elementID: 4350595856.18>
+              Image, 0x10a20d6f0, {{896.0, 306.0}, {22.0, 20.0}}, identifier: 'map.fill', label: 'Show Map' <AX element pid: 7670, elementOrHash.elementID: 4350898480.35>
+              StaticText, 0x10a20d810, {{849.0, 184.0}, {252.0, 156.0}}, label: 'Enlarge map' <AX element pid: 7670, elementOrHash.elementID: 4350595392.36>
+            ScrollView, 0x10a20d930, {{1141.0, 168.0}, {675.0, 744.0}}, identifier: 'tvTrackBuilder' <AX element pid: 7670, elementOrHash.elementID: 4396644352.19>
+              Other, 0x10a10f370, {{1141.0, 168.0}, {675.0, 790.0}} <AX element pid: 7670, elementOrHash.elementID: 4350599296.37>
+                StaticText, 0x10a10f490, {{1153.0, 180.0}, {243.0, 39.0}}, label: 'Snap on a piece' <AX element pid: 7670, elementOrHash.elementID: 4350593280.49>
+                Button, 0x10a10f5b0, {{1153.0, 243.0}, {651.0, 64.0}}, identifier: 'tvTrackGhostMode', label: 'Ghost pieces: Off' <AX element pid: 7670, elementOrHash.elementID: 4350914752.50>
+                  Image, 0x10a10f6d0, {{1185.0, 264.0}, {23.0, 23.0}}, identifier: 'circle.dashed', label: 'Circular Selection' <AX element pid: 7670, elementOrHash.elementID: 4350913968.55>
+                  StaticText, 0x10a10f7f0, {{1153.0, 243.0}, {651.0, 64.0}}, label: 'Ghost pieces: Off' <AX element pid: 7670, elementOrHash.elementID: 4350915456.56>
+                Other, 0x10a10f910, {{1153.0, 331.0}, {651.0, 464.0}} <AX element pid: 7670, elementOrHash.elementID: 4350925968.51>
+                  Button, 0x10a10fa30, {{1153.0, 331.0}, {318.0, 64.0}}, identifier: 'tvTrackAppend-straight', label: 'Straight' <AX element pid: 7670, elementOrHash.elementID: 4350917872.57>
+                    Image, 0x10a10fb50, {{1186.0, 352.0}, {19.0, 23.0}}, identifier: 'arrow.up', label: 'Up' <AX element pid: 7670, elementOrHash.elementID: 4350917408.70>
+                    StaticText, 0x10a10fc70, {{1153.0, 331.0}, {318.0, 64.0}}, label: 'Straight' <AX element pid: 7670, elementOrHash.elementID: 4350918544.71>
+                  Button, 0x10a10fd90, {{1487.0, 331.0}, {317.0, 64.0}}, identifier: 'tvTrackAppend-curve90L', label: 'Left' <AX element pid: 7670, elementOrHash.elementID: 4350920960.58>
+                    Image, 0x10a10feb0, {{1520.0, 353.0}, {23.0, 20.0}}, identifier: 'arrow.turn.up.left', label: 'arrow.turn.up.left' <AX element pid: 7670, elementOrHash.elementID: 4350920496.72>
+                    StaticText, 0x10a10a240, {{1487.0, 331.0}, {317.0, 64.0}}, label: 'Left' <AX element pid: 7670, elementOrHash.elementID: 4350921632.73>
+                  Button, 0x10a10a360, {{1153.0, 411.0}, {318.0, 64.0}}, identifier: 'tvTrackAppend-curve90R', label: 'Right' <AX element pid: 7670, elementOrHash.elementID: 4350924048.59>
+                    Image, 0x10a10a480, {{1186.0, 433.0}, {23.0, 20.0}}, identifier: 'arrow.turn.up.right', label: 'arrow.turn.up.right' <AX element pid: 7670, elementOrHash.elementID: 4350923584.74>
+                    StaticText, 0x10a10a5a0, {{1153.0, 411.0}, {318.0, 64.0}}, label: 'Right' <AX element pid: 7670, elementOrHash.elementID: 4350924720.75>
+                  Button, 0x10a10a6c0, {{1487.0, 411.0}, {317.0, 64.0}}, identifier: 'tvTrackAppend-curveLarge', label: 'Sweeper' <AX element pid: 7670, elementOrHash.elementID: 4350927136.60>
+                    Image, 0x10a10a7e0, {{1520.0, 434.0}, {19.0, 19.0}}, identifier: 'arrow.up.right', label: 'arrow.up.right' <AX element pid: 7670, elementOrHash.elementID: 4350926672.76>
+                    StaticText, 0x10a10a900, {{1487.0, 411.0}, {317.0, 64.0}}, label: 'Sweeper' <AX element pid: 7670, elementOrHash.elementID: 4350927808.77>
+                  Button, 0x10a10aa20, {{1153.0, 491.0}, {318.0, 64.0}}, identifier: 'tvTrackAppend-loop', label: 'Loop' <AX element pid: 7670, elementOrHash.elementID: 4350929072.61>
+                    Image, 0x10a10ab40, {{1185.0, 511.0}, {25.0, 25.0}}, identifier: 'arrow.clockwise.circle', label: 'Refresh' <AX element pid: 7670, elementOrHash.elementID: 4350848080.78>
+                    StaticText, 0x10a10ac60, {{1153.0, 491.0}, {318.0, 64.0}}, label: 'Loop' <AX element pid: 7670, elementOrHash.elementID: 4350929744.79>
+                  Button, 0x10a10ad80, {{1487.0, 491.0}, {317.0, 64.0}}, identifier: 'tvTrackAppend-bump', label: 'Bump' <AX element pid: 7670, elementOrHash.elementID: 4350932272.62>
+                    Image, 0x10a1099e0, {{1520.0, 511.0}, {29.0, 24.0}}, identifier: 'arrow.up.arrow.down', label: 'Sort' <AX element pid: 7670, elementOrHash.elementID: 4350931808.80>
+                    StaticText, 0x10a109b00, {{1487.0, 491.0}, {317.0, 64.0}}, label: 'Bump' <AX element pid: 7670, elementOrHash.elementID: 4350932944.81>
+                  Button, 0x10a109c20, {{1153.0, 571.0}, {318.0, 64.0}}, identifier: 'tvTrackAppend-hillUp', label: 'Hill Up' <AX element pid: 7670, elementOrHash.elementID: 4350935472.63>
+                    Image, 0x10a109d40, {{1186.0, 597.0}, {22.0, 13.0}}, identifier: 'chevron.up', label: 'Go Up' <AX element pid: 7670, elementOrHash.elementID: 4350935008.82>
+                    StaticText, 0x10a109e60, {{1153.0, 571.0}, {318.0, 64.0}}, label: 'Hill Up' <AX element pid: 7670, elementOrHash.elementID: 4350936144.83>
+                  Button, 0x10a110310, {{1487.0, 571.0}, {317.0, 64.0}}, identifier: 'tvTrackAppend-hillDown', label: 'Hill Down' <AX element pid: 7670, elementOrHash.elementID: 4350938672.64>
+                    Image, 0x10a110430, {{1520.0, 597.0}, {22.0, 13.0}}, identifier: 'chevron.down', label: 'Go Down' <AX element pid: 7670, elementOrHash.elementID: 4350938208.84>
+                    StaticText, 0x10a110550, {{1487.0, 571.0}, {317.0, 64.0}}, label: 'Hill Down' <AX element pid: 7670, elementOrHash.elementID: 4350939344.85>
+                  Button, 0x10a110670, {{1153.0, 651.0}, {318.0, 64.0}}, identifier: 'tvTrackAppend-rampJump', label: 'Jump' <AX element pid: 7670, elementOrHash.elementID: 4350941872.65>
+                    Image, 0x10a110790, {{1186.0, 673.0}, {32.0, 22.0}}, identifier: 'airplane.departure', label: 'airplane.departure' <AX element pid: 7670, elementOrHash.elementID: 4350941408.86>
+                    StaticText, 0x10a1108b0, {{1153.0, 651.0}, {318.0, 64.0}}, label: 'Jump' <AX element pid: 7670, elementOrHash.elementID: 4350942544.87>
+                  Button, 0x10a1109d0, {{1487.0, 651.0}, {317.0, 64.0}}, identifier: 'tvTrackAppend-finishGate', label: 'Finish' <AX element pid: 7670, elementOrHash.elementID: 4350945072.66>
+                    Image, 0x10a110af0, {{1520.0, 671.0}, {22.0, 24.0}}, identifier: 'flag.checkered', label: 'flag.checkered' <AX element pid: 7670, elementOrHash.elementID: 4350944608.88>
+                    StaticText, 0x10a110c10, {{1487.0, 651.0}, {317.0, 64.0}}, label: 'Finish' <AX element pid: 7670, elementOrHash.elementID: 4350945744.89>
+                  Button, 0x10a110d30, {{1153.0, 731.0}, {318.0, 64.0}}, identifier: 'tvTrackAppendPortal', label: 'Portal' <AX element pid: 7670, elementOrHash.elementID: 4405403072.67>
+                    Image, 0x10a110e50, {{1185.0, 751.0}, {25.0, 25.0}}, identifier: 'circle.circle', label: 'circle.circle' <AX element pid: 7670, elementOrHash.elementID: 4405402608.90>
+                    StaticText, 0x10a110f70, {{1153.0, 731.0}, {318.0, 64.0}}, label: 'Portal' <AX element pid: 7670, elementOrHash.elementID: 4405455360.91>
+                StaticText, 0x10a111090, {{1153.0, 819.0}, {314.0, 39.0}}, label: 'Pieces on your track' <AX element pid: 7670, elementOrHash.elementID: 4404506880.52>
+                Button, 0x10a1111b0, {{1153.0, 882.0}, {651.0, 64.0}}, identifier: 'tvTrackPiece-0', label: '1. Start' <AX element pid: 7670, elementOrHash.elementID: 4404538928.53>
+                  Image, 0x10a1112d0, {{1186.0, 903.0}, {20.0, 22.0}}, identifier: 'flag.fill', label: 'Flag' <AX element pid: 7670, elementOrHash.elementID: 4404538000.68>
+                  StaticText, 0x10a1113f0, {{1220.0, 901.0}, {72.0, 27.0}}, label: '1. Start' <AX element pid: 7670, elementOrHash.elementID: 4404538464.69>
+              Other, 0x10a111510, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0% <AX element pid: 7670, elementOrHash.elementID: 4405373888.38>
+                Other, 0x10a111630, {{1810.0, 884.0}, {3.0, 25.0}} <AX element pid: 7670, elementOrHash.elementID: 4405374896.54>
+              Other, 0x10f404800, {{0.0, 0.0}, {0.0, 0.0}}, label: '0 pages', value: 0% <AX element pid: 7670, elementOrHash.elementID: 4405373888.38>
+                Other, 0x105f11670, {{1810.0, 884.0}, {3.0, 25.0}} <AX element pid: 7670, elementOrHash.elementID: 4405374896.54>
+            Button, 0x105f11bc0, {{104.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Undo', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404528448.20>
+              Image, 0x105f11ce0, {{137.0, 952.0}, {23.0, 24.0}}, identifier: 'arrow.uturn.backward', label: 'Undo', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404508560.39>
+              StaticText, 0x105f11e00, {{104.0, 932.0}, {352.0, 64.0}}, label: 'Undo', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404509024.40>
+            Button, 0x105f11f20, {{476.0, 932.0}, {353.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Clear' <AX element pid: 7670, elementOrHash.elementID: 4404531392.21>
+              Image, 0x105f12040, {{508.0, 950.0}, {24.0, 28.0}}, identifier: 'trash', label: 'Trash' <AX element pid: 7670, elementOrHash.elementID: 4404530928.41>
+              StaticText, 0x105f12160, {{476.0, 932.0}, {353.0, 64.0}}, label: 'Clear' <AX element pid: 7670, elementOrHash.elementID: 4404532064.42>
+            Button, 0x105f12280, {{849.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Shuffle' <AX element pid: 7670, elementOrHash.elementID: 4404494096.22>
+              Image, 0x105f123a0, {{882.0, 950.0}, {29.0, 29.0}}, identifier: 'dice.fill', label: 'dice.fill' <AX element pid: 7670, elementOrHash.elementID: 4404493632.43>
+              StaticText, 0x105f124c0, {{849.0, 932.0}, {352.0, 64.0}}, label: 'Shuffle' <AX element pid: 7670, elementOrHash.elementID: 4404494768.44>
+            Button, 0x105f125e0, {{1253.0, 932.0}, {352.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Save a copy', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404482352.23>
+              Image, 0x105f12700, {{1287.0, 951.0}, {18.0, 27.0}}, identifier: 'bookmark.fill', label: 'Bookmark', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404481888.45>
+              StaticText, 0x105f12820, {{1253.0, 932.0}, {352.0, 64.0}}, label: 'Save a copy', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404483024.46>
+            Button, 0x105f12940, {{1625.0, 932.0}, {191.0, 64.0}}, identifier: 'tvTrackBuilder', label: 'Race it!', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404485440.24>
+              Image, 0x105f12a60, {{1662.0, 953.0}, {20.0, 22.0}}, identifier: 'flag.checkered', label: 'flag.checkered', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404484976.47>
+              StaticText, 0x105f12b80, {{1625.0, 932.0}, {191.0, 64.0}}, label: 'Race it!', Disabled <AX element pid: 7670, elementOrHash.elementID: 4404486112.48>

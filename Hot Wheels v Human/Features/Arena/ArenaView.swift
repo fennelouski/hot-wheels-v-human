@@ -39,9 +39,11 @@ struct ArenaView: View {
     var body: some View {
         ZStack {
             RealityView { content in
+                #if !os(visionOS)
                 content.camera = .virtual
                 content.renderingEffects.dynamicRange = .standard
                 content.renderingEffects.customPostProcessing = .effect(ArenaSnapshotEffect(capture: coordinator.frameCapture))
+                #endif
 
                 let root = Entity()
                 content.add(root)
@@ -60,8 +62,15 @@ struct ArenaView: View {
                 DriveSystem.registerSystem()
                 RaceRulesSystem.registerSystem()
 
+                #if os(visionOS)
+                // This legacy chase-view is never the headset scene root. Its
+                // camera math uses an entity while SpatialRaceTable supplies
+                // the native view of the real simulation.
+                let cameraEntity = Entity()
+                #else
                 let cameraEntity = PerspectiveCamera()
                 cameraEntity.camera.near = RaceTuning.driverCamNear
+                #endif
                 content.add(cameraEntity)
 
                 let session = coordinator.session

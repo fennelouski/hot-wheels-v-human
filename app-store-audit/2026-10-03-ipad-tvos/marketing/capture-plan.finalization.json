@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "status": "held-for-root-drawing-workflow-diagnosis-and-final-production-freeze",
+  "releaseName": "HWvH",
+  "preparedOn": "2026-10-03",
+  "sourcePolicy": "Genuine final Release XCUIScreen.main attachments only. Preserve original PNGs and their export manifest; do not use the earlier cropped iPad app.screenshot export or pre-cursor-fix TV captures.",
+  "galleries": [
+    {
+      "platform": "ipad-13",
+      "outputPixels": [
+        2752,
+        2064
+      ],
+      "sourceStates": {
+        "ipad-track": "IPAD12 - Cold loaded personal track, saved world and expanded track map",
+        "ipad-car": "car-1-chassis-changed",
+        "ipad-race": "IPAD13 - Loaded moving race in Chase Cam",
+        "ipad-racer": "racer-3-pip-after-bun",
+        "ipad-paint": "ipad-reopened-red-car or forthcoming edited car reopen",
+        "ipad-draw": "PENDING IPadWorkshopReleaseUITests real authored stroke and reopen",
+        "ipad-stickers": "PENDING IPadWorkshopReleaseUITests placed and edited sticker and reopen",
+        "ipad-world": "IPAD09 - Six real track pieces and the selected Candy world",
+        "ipad-garage": "3-back-in-garage-selected or forthcoming saved personal design",
+        "ipad-boost": "IPAD15 - Active race after a real charged boost hold",
+        "ipad-driver": "IPAD14 - Active Driver View with the dashboard radio",
+        "ipad-library": "IPAD11 - Exact newly saved personal track in the library"
+      },
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build your own track",
+          "featureID": "track-builder",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-track",
+          "left": "ipad-world",
+          "right": "ipad-race",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-car",
+          "left": "ipad-paint",
+          "right": "ipad-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-race",
+          "left": null,
+          "right": "ipad-driver",
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-racer",
+          "left": "ipad-car",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-paint",
+          "left": null,
+          "right": null,
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-draw",
+          "left": "ipad-car",
+          "right": "ipad-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-stickers",
+          "left": "ipad-paint",
+          "right": null,
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "08-choose-world",
+          "headline": "Choose your toy world",
+          "featureID": "world-decoration",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-world",
+          "left": "ipad-track",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-garage",
+          "left": "ipad-library",
+          "right": "ipad-car",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "10-hold-boost",
+          "headline": "Hold boost. Chase the flag.",
+          "featureID": "race-boost",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "ipad-boost",
+          "left": null,
+          "right": "ipad-race",
+          "background": "yellowPitGrid"
+        }
+      ]
+    },
+    {
+      "platform": "apple-tv",
+      "outputPixels": [
+        1920,
+        1080
+      ],
+      "sourceStates": {
+        "tv-track": "TV09 - Build a finished track with a ghost stretch",
+        "tv-car": "TV05 - Flame livery and its inspector",
+        "tv-race": "TV20 - Chase camera and race world",
+        "tv-racer": "TV16 - Dress and save a personal racer",
+        "tv-paint": "TV04 - Paint a car with the remote",
+        "tv-draw": "TV07 - Draw on the car without touch",
+        "tv-stickers": "TV06 - Place and move a sticker",
+        "tv-world": "TV12 - Place and rotate world decorations",
+        "tv-garage": "TV08 - Saved car in the garage",
+        "tv-boost": "TV19 - Siri Remote boost during a real race",
+        "tv-driver": "TV21 - Driver view with the TV radio",
+        "tv-library": "TV14 - Saved tracks and starter tracks"
+      },
+      "images": [
+        {
+          "id": "01-build-tracks",
+          "headline": "Build on the big screen",
+          "featureID": "track-builder",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-track",
+          "left": "tv-world",
+          "right": "tv-race",
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "02-make-your-car",
+          "headline": "Make it your car",
+          "featureID": "car-workshop",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-car",
+          "left": "tv-paint",
+          "right": "tv-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "03-race-creations",
+          "headline": "Race what you create",
+          "featureID": "native-race",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-race",
+          "left": null,
+          "right": "tv-driver",
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "04-create-racer",
+          "headline": "Create your own racer",
+          "featureID": "racer-editor",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-racer",
+          "left": "tv-car",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "05-pick-paint",
+          "headline": "Pick your paint",
+          "featureID": "part-paint",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-paint",
+          "left": null,
+          "right": null,
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "06-draw-your-way",
+          "headline": "Draw it your way",
+          "featureID": "drawing-tools",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-draw",
+          "left": "tv-car",
+          "right": "tv-stickers",
+          "background": "yellowPitGrid"
+        },
+        {
+          "id": "07-add-stickers",
+          "headline": "Add the finishing stickers",
+          "featureID": "sticker-placement",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-stickers",
+          "left": "tv-paint",
+          "right": null,
+          "background": "orangeLaunchLanes"
+        },
+        {
+          "id": "08-build-worlds",
+          "headline": "Build a whole toy world",
+          "featureID": "world-decoration",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-world",
+          "left": "tv-track",
+          "right": null,
+          "background": "blueToyBlocks"
+        },
+        {
+          "id": "09-save-builds",
+          "headline": "Keep your favorite builds",
+          "featureID": "saved-libraries",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-library",
+          "left": "tv-car",
+          "right": null,
+          "background": "navyTrackLoops"
+        },
+        {
+          "id": "10-remote-boost",
+          "headline": "Boost with your remote",
+          "featureID": "race-boost",
+          "status": "pending-final-native-build-and-visual-review",
+          "hero": "tv-boost",
+          "left": null,
+          "right": "tv-race",
+          "background": "yellowPitGrid"
+        }
+      ]
+    }
+  ],
+  "unclaimedIPadCapabilities": [
+    "World decoration editing until verified by a native workflow"
+  ],
+  "additionalRuntimeEvidence": "Root is adding necessary release tests for drawing, sticker/livery, saved track/world, and race controls. Their genuine screenshots and passed assertions must be supplied before those planned images can be composed.",
+  "excludedTVSourceStates": {
+    "tv-garage": "TV08 captured during navigation transition. Use clear saved-track Library with actual car support.",
+    "unsaved-track-preview": "TV15 captured during cover transition. Use clear TV20 chase view."
+  }
+}

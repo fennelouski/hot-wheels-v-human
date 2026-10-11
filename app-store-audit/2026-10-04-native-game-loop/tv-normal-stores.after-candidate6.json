@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-04T09:48:55.002995+00:00",
+  "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+  "state": "Shutdown",
+  "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+  "matchingContainers": [
+    "A9209FC1-6995-456A-9156-DCE899809A67"
+  ],
+  "normalFiles": [],
+  "excluded": "private HWvH.QA UUID preference suites and tmp/HWvH-QA session storage"
+}

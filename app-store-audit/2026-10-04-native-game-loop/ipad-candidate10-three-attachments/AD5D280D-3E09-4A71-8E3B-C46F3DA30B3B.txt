@@ -1,0 +1,5 @@
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  ↪︎Find: Descendants matching type StaticText
+    ↪︎Find: Elements matching predicate 'label MATCHES "^[0-9]{1,3}%$"'
+      ↪︎Find: First Match

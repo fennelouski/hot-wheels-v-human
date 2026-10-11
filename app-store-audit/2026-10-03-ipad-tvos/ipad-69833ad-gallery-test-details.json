@@ -1,0 +1,376 @@
+{
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "deviceName" : "HWvH QA iPad 20261003",
+      "modelName" : "iPad Pro 13-inch (M5)",
+      "osBuildNumber" : "23F77",
+      "osVersion" : "26.5",
+      "platform" : "iOS Simulator"
+    }
+  ],
+  "testNodes" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "duration" : "0.21s",
+                  "durationInSeconds" : 0.21233105659484863,
+                  "name" : "rasterSurvivesTwoTabReentriesAndLaterPencilStroke()",
+                  "nodeIdentifier" : "CarDrawingSessionTests/rasterSurvivesTwoTabReentriesAndLaterPencilStroke()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/CarDrawingSessionTests/rasterSurvivesTwoTabReentriesAndLaterPencilStroke()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.16s",
+                  "durationInSeconds" : 0.1593029499053955,
+                  "name" : "undoSnapshotRemovesLaterStrokesAndClearDoesNotResurrectRaster()",
+                  "nodeIdentifier" : "CarDrawingSessionTests/undoSnapshotRemovesLaterStrokesAndClearDoesNotResurrectRaster()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/CarDrawingSessionTests/undoSnapshotRemovesLaterStrokesAndClearDoesNotResurrectRaster()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "CarDrawingSessionTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/CarDrawingSessionTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "0.0036s",
+                  "durationInSeconds" : 0.0036110877990722656,
+                  "name" : "stopRejectsQueuedAndFutureControllerInputs()",
+                  "nodeIdentifier" : "RaceLifecycleTests/stopRejectsQueuedAndFutureControllerInputs()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/RaceLifecycleTests/stopRejectsQueuedAndFutureControllerInputs()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.00083s",
+                  "durationInSeconds" : 0.0008289813995361328,
+                  "name" : "cancelledBuildDoesNotChangeTheSceneOrPhase()",
+                  "nodeIdentifier" : "RaceLifecycleTests/cancelledBuildDoesNotChangeTheSceneOrPhase()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/RaceLifecycleTests/cancelledBuildDoesNotChangeTheSceneOrPhase()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "4s",
+                  "durationInSeconds" : 4.147135972976685,
+                  "name" : "closingCountdownRemovesCarsAndCannotStartARaceLater()",
+                  "nodeIdentifier" : "RaceLifecycleTests/closingCountdownRemovesCarsAndCannotStartARaceLater()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/RaceLifecycleTests/closingCountdownRemovesCarsAndCannotStartARaceLater()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "RaceLifecycleTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/RaceLifecycleTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "0.023s",
+                  "durationInSeconds" : 0.02315807342529297,
+                  "name" : "blueprintIdentityDoesNotChangeWhenReadingPreview()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/blueprintIdentityDoesNotChangeWhenReadingPreview()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/blueprintIdentityDoesNotChangeWhenReadingPreview()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.056s",
+                  "durationInSeconds" : 0.056281089782714844,
+                  "name" : "loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.065s",
+                  "durationInSeconds" : 0.06522393226623535,
+                  "name" : "selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.057s",
+                  "durationInSeconds" : 0.05741119384765625,
+                  "name" : "remoteRotationAndMovementPreserveRoadGridSnapping()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/remoteRotationAndMovementPreserveRoadGridSnapping()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/remoteRotationAndMovementPreserveRoadGridSnapping()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.027s",
+                  "durationInSeconds" : 0.027020931243896484,
+                  "name" : "remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.079s",
+                  "durationInSeconds" : 0.07905316352844238,
+                  "name" : "portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.008s",
+                  "durationInSeconds" : 0.008044958114624023,
+                  "name" : "cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.00048s",
+                  "durationInSeconds" : 0.000476837158203125,
+                  "name" : "remoteCanReachDistantExitOfLongValidTrack()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/remoteCanReachDistantExitOfLongValidTrack()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/remoteCanReachDistantExitOfLongValidTrack()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.00019s",
+                  "durationInSeconds" : 0.00019311904907226562,
+                  "name" : "cameraZoomTiltAndResetKeepFiniteUsablePose()",
+                  "nodeIdentifier" : "TVTrackBuilderTests/cameraZoomTiltAndResetKeepFiniteUsablePose()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests/cameraZoomTiltAndResetKeepFiniteUsablePose()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "TVTrackBuilderTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/TVTrackBuilderTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "0.022s",
+                  "durationInSeconds" : 0.022101879119873047,
+                  "name" : "failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+                  "nodeIdentifier" : "WorkshopPersistenceTests/failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/WorkshopPersistenceTests/failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "0.015s",
+                  "durationInSeconds" : 0.01476907730102539,
+                  "name" : "savingSelectedRacerCommitsLastUsedWithAppearance()",
+                  "nodeIdentifier" : "WorkshopPersistenceTests/savingSelectedRacerCommitsLastUsedWithAppearance()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/WorkshopPersistenceTests/savingSelectedRacerCommitsLastUsedWithAppearance()",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "WorkshopPersistenceTests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests/WorkshopPersistenceTests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            }
+          ],
+          "name" : "Hot Wheels v HumanTests",
+          "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanTests",
+          "nodeType" : "Unit test bundle",
+          "result" : "Passed"
+        },
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "duration" : "9s",
+                  "durationInSeconds" : 9.070855021476746,
+                  "name" : "testStarterCarOpensItsOwnPageWithEveryAction()",
+                  "nodeIdentifier" : "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "GarageUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GarageUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "26s",
+                  "durationInSeconds" : 26.40542507171631,
+                  "name" : "testNormalEntryAndSavedCarSurviveColdLaunch()",
+                  "nodeIdentifier" : "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "IPadReleaseFlowUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadReleaseFlowUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "3m 3s",
+                  "durationInSeconds" : 183.85767006874084,
+                  "name" : "testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+                  "nodeIdentifier" : "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "48s",
+                  "durationInSeconds" : 48.31533992290497,
+                  "name" : "testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+                  "nodeIdentifier" : "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "21s",
+                  "durationInSeconds" : 21.23402202129364,
+                  "name" : "testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+                  "nodeIdentifier" : "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "23s",
+                  "durationInSeconds" : 23.464643001556396,
+                  "name" : "testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()",
+                  "nodeIdentifier" : "IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "IPadWorkshopReleaseUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "17s",
+                  "durationInSeconds" : 17.0000319480896,
+                  "name" : "testCarWorkshopTabsClearTheActionRow()",
+                  "nodeIdentifier" : "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "12s",
+                  "durationInSeconds" : 12.38640010356903,
+                  "name" : "testCharacterWorkshopTabsClearTheActionRow()",
+                  "nodeIdentifier" : "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "WorkshopLayoutUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopLayoutUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "33s",
+                  "durationInSeconds" : 33.601891040802,
+                  "name" : "testCharacterEditorPiPAndTestDrive()",
+                  "nodeIdentifier" : "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "11s",
+                  "durationInSeconds" : 11.283979058265686,
+                  "name" : "testCustomizerTestDrive()",
+                  "nodeIdentifier" : "WorkshopTryItUITests/testCustomizerTestDrive()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopTryItUITests/testCustomizerTestDrive",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "9s",
+                  "durationInSeconds" : 9.67353093624115,
+                  "name" : "testTrackBuilderRaceIt()",
+                  "nodeIdentifier" : "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopTryItUITests/testTrackBuilderRaceIt",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "WorkshopTryItUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorkshopTryItUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            },
+            {
+              "children" : [
+                {
+                  "duration" : "17s",
+                  "durationInSeconds" : 17.62011992931366,
+                  "name" : "testPickWorldsAndScreenshot()",
+                  "nodeIdentifier" : "WorldPickerUITests/testPickWorldsAndScreenshot()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorldPickerUITests/testPickWorldsAndScreenshot",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "WorldPickerUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/WorldPickerUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            }
+          ],
+          "name" : "Hot Wheels v HumanUITests",
+          "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests",
+          "nodeType" : "UI test bundle",
+          "result" : "Passed"
+        }
+      ],
+      "name" : "Hot Wheels v Human",
+      "nodeType" : "Test Plan",
+      "result" : "Passed"
+    }
+  ],
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ]
+}

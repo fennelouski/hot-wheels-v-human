@@ -1,0 +1,107 @@
+{
+  "platform": "tvOS",
+  "count": 10,
+  "exactDecodedPixelsMatches": 10,
+  "rows": [
+    {
+      "file": "01-tiny-cars-big-races.png",
+      "actualSHA256": "2990735551d747fdcab2bd4b8b513638893aa5238603bc92e226dd04ba2a076d",
+      "sourceSHA256": "153c9d80069f74dd0bd92d9409ef371956083c9580828aa32b7950eb6ef52f07",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "02-ready-set-play.png",
+      "actualSHA256": "610464aeddbfd73e9f7496f064205399cfa0a748d353352aa3a309911f815af8",
+      "sourceSHA256": "225b77c4a462ecf50d19d0ade2f4c675285e57bd1ad3815887e4cddd23c3d1af",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "03-finish-then-go-again.png",
+      "actualSHA256": "ef04de2708fad2a61e9e90a456abf7d6496f23f4c61ba5abffd986c1cc640e3a",
+      "sourceSHA256": "8a878038a861d9c8c79bbdc62090cf503286615143b2db042327396bfae26447",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "04-front-row-view.png",
+      "actualSHA256": "c8aec42e18f357b0fdcd3a31a4f8bfdad26b5831f99f40815c2f3fd1d258da2f",
+      "sourceSHA256": "179fd95602c49ed8ab221f857e41e5ec403fb3a9de42f34505d32eca45d294e3",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "05-keep-your-finish.png",
+      "actualSHA256": "9b5a566963db3cdb22dbbc5df240ed2cf27b3cd02d1462662f43ceeaca2a06bd",
+      "sourceSHA256": "5e6625b343c82a9f273a994e00b9ee120679f27a73fc078a447e41b67c0ff647",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "06-workshop.png",
+      "actualSHA256": "d51a3160401f71abe20b16f49fd8d7aebba6aacd866ef076477f8b728a32adb2",
+      "sourceSHA256": "97a036deed18f5fd476ba518d1110cfc20e04420eb7a916dafdfb4abc8df9743",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "07-rematch.png",
+      "actualSHA256": "794824a9f96e7db59d7d453609ccde7ab34542db33f54fdfea280267b2bb6455",
+      "sourceSHA256": "dd2c654ddb63c0959f4053582e5dd2fd07515fa9ba02edf724200e7d854005cc",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "08-your-kind-of-racing.png",
+      "actualSHA256": "9b3688d831164d043efd6b46ff965dd59f8889a2ada417cd96a0b250effe8376",
+      "sourceSHA256": "7e6d775044728a771f57bcf0322e52c2561a2dd837b1eb16b5b0dc0b5feff744",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "09-whole-track.png",
+      "actualSHA256": "54590debc27aa01636f1b5aa011d571c5afe1ac061a347ebbea07cf7b196696d",
+      "sourceSHA256": "04221bcd64431f80861c185a33c6c34905ff65c1610540350ce21d38774a63cf",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    },
+    {
+      "file": "10-keep-racing.png",
+      "actualSHA256": "f3087a564ca9c59a262778fd5d9a278983518fb4d71c4e76578d5e136fcdc8dd",
+      "sourceSHA256": "2ea2f26a6625ebae0e490ef3323c9e7dfe922cfa636bb054d1542a8658f97b4e",
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "decodedPixelsExact": true
+    }
+  ]
+}

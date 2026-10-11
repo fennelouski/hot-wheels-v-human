@@ -1,0 +1,59 @@
+{
+  "capturedAt": "2026-10-04T13:18:48.918114+00:00",
+  "appID": "6818777508",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "version": "1.0",
+  "build": "1",
+  "platforms": {
+    "iPadOS": {
+      "processedBuildID": "5ce69766-a2f3-455c-8812-29a21531d207",
+      "selected": true,
+      "actualBinaryState": "Validated",
+      "uploadDateLocal": "Oct 4, 2026 at 2:53 PM",
+      "minimumOS": "26.0",
+      "deviceFamily": "iPad"
+    },
+    "tvOS": {
+      "processedBuildID": "9857351b-226e-4faa-9c73-78bc34b75216",
+      "selected": true,
+      "actualBinaryState": "Validated",
+      "uploadDateLocal": "Oct 4, 2026 at 3:12 PM",
+      "minimumOS": "26.0",
+      "deviceFamily": "Apple TV"
+    }
+  },
+  "both": {
+    "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+    "architectures": [
+      "arm64"
+    ],
+    "usesNonExemptEncryption": false,
+    "debugEntitlement": false,
+    "includesSymbols": true,
+    "selectedIDsMatchGenuineContentDeliveryUUIDs": true
+  },
+  "privacy": {
+    "sourceVerifiedResponse": "Data Not Collected",
+    "actualUI": "Product Page Preview Data Not Collected; editable draft",
+    "published": false,
+    "urlAndTVText": "Pending corrected policy page live dual-deployment verification"
+  },
+  "contentRights": {
+    "affirmationMade": false,
+    "pendingFact": "Whether the 72 bundled ElevenLabs clips were generated under a paid, non-beta plan with commercial rights"
+  },
+  "actualReviewState": "Prepare for Submission",
+  "finalSubmissionPerformed": false,
+  "remainingHolds": [
+    "Owner ElevenLabs generation-plan fact",
+    "Corrected privacy/support pages same-commit Vercel+AWS live verification, then privacy URL/TV text/publication"
+  ],
+  "proofFiles": {
+    "ipad-1.0-1-build-selected.txt": "82d7efc70b25cab70881df482919ffbc30227a54fede51960bcb99549e93292f",
+    "tvos-1.0-1-build-selected.txt": "115da3c48a79488e3164a194bbaedeaade4e8a2734c8c4946c4e77107e25e847",
+    "ipad-processed-build-metadata.txt": "4aa40ee5598ff25a60186f35ac6caa61ac977c0e9ac6d902d777bca0cf17c905",
+    "tvos-processed-build-metadata.txt": "153985a0400704f35c4db2165e1e5604d8ecb957c3fc6f65b48331a6aa2e1edd",
+    "privacy-data-not-collected-draft.txt": "fa33bec5b9d431368322305f13a9f026e46e3d573dab52af72f95d851fb85377",
+    "gallery-pricing-age-root-review.json": "5848afb89fdd6c99aed87d1e099bcdf56df537569ec7482642b611c3d30fc5cd"
+  }
+}

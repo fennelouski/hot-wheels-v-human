@@ -1,0 +1,71 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "2CAEBA56-D57E-4ACA-8490-2D627419DB84.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD07 - Persisted drawing restored through the native Undo control_0_8693653D-78F2-4F69-A041-52856E36C20C.png",
+        "timestamp" : 1791017392.366
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "36DA8968-7AED-4047-B08C-F714E0D368C7.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD06 - Cold reopened strokes and sticker in the editable drawing pad_0_61EC3AAA-3106-4458-B380-FEDD7B155415.png",
+        "timestamp" : 1791017288.102
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "3420800C-059F-4E00-AD25-C0CF946F8EB7.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD05 - Saved hand drawn car with resized sticker and flame livery_0_B5BAF9B1-308F-4552-93B9-BC9D14EF780A.png",
+        "timestamp" : 1791017247.253
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "E3C68D5E-75D5-4581-BF1E-16AA0F601FE0.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD04 - Real sticker resize on the 3D car_0_88968B1A-55E1-43A1-ACAB-5BF79196EDDA.png",
+        "timestamp" : 1791017236.33
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "2BB12019-4E04-4D8B-A9CE-C7E037B196E2.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD03 - A star sticker placed with native touch input_0_EA1B5184-B12A-48F2-840D-53CCBEFA0D5D.png",
+        "timestamp" : 1791017226.332
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "916CBFFC-DD7E-42BD-A263-A4720E257181.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD02 - Actual finger strokes on the car drawing canvas_0_EBD29C22-7560-4015-BF4B-E04D44BE0E9D.png",
+        "timestamp" : 1791017218.319
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+        "deviceName" : "HWvH QA iPad 20261003",
+        "exportedFileName" : "179F6D68-6FD4-496C-90A1-32F0D6800986.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "IPAD01 - Garage before the native drawing workflow_0_2F935535-AC97-48B7-B0A7-512CACF00317.png",
+        "timestamp" : 1791017200.883
+      }
+    ],
+    "testIdentifier" : "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen"
+  }
+]

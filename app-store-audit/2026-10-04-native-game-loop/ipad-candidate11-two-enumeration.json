@@ -1,0 +1,107 @@
+{
+  "errors" : [
+
+  ],
+  "values" : [
+    {
+      "disabledTests" : [
+        {
+          "identifier" : "Hot Wheels v HumanUITests/ArenaCameraUITests/testDriverViewTogglesToChaseCam()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/ArenaRadioUITests/testRadioPresetsTuneTheDashboard()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GhostTrackUITests/testArenaTrackSwitch()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GhostTrackUITests/testGhostPiecesInTheBuilder()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GhostTrackUITests/testTapAPlacedPieceToFlipIt()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/Hot_Wheels_v_HumanUITests/testExample()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/Hot_Wheels_v_HumanUITests/testLaunchPerformance()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/Hot_Wheels_v_HumanUITestsLaunchTests/testLaunch()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/RaceSetupUITests/testTrackDraftFlow()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TrackBuilder3DUITests/testBuildAndMiniMap()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TunnelUITests/testTunnelHasAMouthAtEachEndAndLampsBetween()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/UndergroundPortalUITests/testDiggingFadesTheGround()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/UndergroundPortalUITests/testPortalPairPlaces()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorkshopTryItUITests/testCustomizerTestDrive()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorkshopTryItUITests/testTrackBuilderRaceIt()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorldPickerUITests/testDecoratePlacesAndMoves()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorldPickerUITests/testEmptyWorldAndTrain()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorldPickerUITests/testPickWorldsAndScreenshot()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/WorldPickerUITests/testPlacedCarsHeadForTheRoad()"
+        }
+      ],
+      "enabledTests" : [
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()"
+        }
+      ],
+      "testPlan" : "Hot Wheels v Human"
+    }
+  ]
+}

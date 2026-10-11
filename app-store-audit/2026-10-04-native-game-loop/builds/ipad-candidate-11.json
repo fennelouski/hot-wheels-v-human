@@ -1,0 +1,27 @@
+{
+  "startedAt": "2026-10-04T10:19:40.729502+00:00",
+  "finishedAt": "2026-10-04T10:19:48.232160+00:00",
+  "command": [
+    "xcodebuild",
+    "-project",
+    "Hot Wheels v Human.xcodeproj",
+    "-scheme",
+    "Hot Wheels v Human",
+    "-configuration",
+    "Debug",
+    "-destination",
+    "generic/platform=iOS Simulator",
+    "-derivedDataPath",
+    "/tmp/hwvh-game-loop-ipad-20261004",
+    "-jobs",
+    "2",
+    "CODE_SIGNING_ALLOWED=NO",
+    "build-for-testing"
+  ],
+  "exitCode": 0,
+  "sourceProof": "../native-inputs.candidate-11.json",
+  "sourceAggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "nativeInputsUnchanged": true,
+  "log": "ipad-candidate-11.log",
+  "logSHA256": "8bd144c5cd853c8f0759b1bc1b5f5c16b47d7717be6bb984f81b3809b16d82ed"
+}

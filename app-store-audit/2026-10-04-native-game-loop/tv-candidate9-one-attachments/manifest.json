@@ -1,0 +1,53 @@
+[
+  {
+    "attachments" : [
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "F0A1E576-CEB7-49BE-9B1E-4E29632E0346.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "05 - Rematch begins another race_0_FB8FDFF5-CDD8-425C-BFAC-6FAA7EE4EE05.png",
+        "timestamp" : 1791108611.153
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "FCC82F15-FAED-4CBF-A02A-C84FC6A2C545.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "04 - Frozen race image and result_0_7C2DCFE3-F62F-4543-A9BF-6A54733A07C0.png",
+        "timestamp" : 1791108607.897
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "87C607F5-3690-4899-A90F-6DAF20ADE878.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "03 - Actual finish and race statistics_0_C685578E-DEB1-4C8C-A6B9-1AC70F34AF62.png",
+        "timestamp" : 1791108604.556
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "8ECF8599-8B14-4060-B078-53C402194F2A.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "02 - Real standalone race_0_4A366507-833D-42BB-8541-79F0D4AFDB15.png",
+        "timestamp" : 1791108593.206
+      },
+      {
+        "configurationName" : "Test Scheme Action",
+        "deviceId" : "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+        "deviceName" : "Apple TV 4K (3rd generation)",
+        "exportedFileName" : "6C79565C-A835-4FD3-AE17-D5453293D759.png",
+        "isAssociatedWithFailure" : false,
+        "suggestedHumanReadableName" : "01 - First launch with visible Play_0_1C794DAE-1DDA-46F4-A926-E98D2BCE61A5.png",
+        "timestamp" : 1791108589.151
+      }
+    ],
+    "testIdentifier" : "GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "testIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch"
+  }
+]

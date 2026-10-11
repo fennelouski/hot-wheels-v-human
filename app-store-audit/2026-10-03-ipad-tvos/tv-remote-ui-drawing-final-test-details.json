@@ -1,0 +1,134 @@
+{
+  "devices" : [
+    {
+      "architecture" : "arm64",
+      "deviceId" : "BE8AFE83-26A8-4A93-A3EC-85F8FA79D168",
+      "deviceName" : "HWvH QA TV 20261003",
+      "modelName" : "Apple TV 4K (3rd generation) (at 1080p)",
+      "osBuildNumber" : "23L470",
+      "osVersion" : "26.5",
+      "platform" : "tvOS Simulator"
+    }
+  ],
+  "testNodes" : [
+    {
+      "children" : [
+        {
+          "children" : [
+            {
+              "children" : [
+                {
+                  "duration" : "16s",
+                  "durationInSeconds" : 16.417412996292114,
+                  "name" : "testTV01WorkshopRoutesAndLocalProfile()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "2m 2s",
+                  "durationInSeconds" : 122.48141801357269,
+                  "name" : "testTV02CarToolsSaveAndColdGarageReopen()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "1m 19s",
+                  "durationInSeconds" : 79.83739399909973,
+                  "name" : "testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "55s",
+                  "durationInSeconds" : 55.603399991989136,
+                  "name" : "testTV04PortalAndDecorationUseDirectionalCursor()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "38s",
+                  "durationInSeconds" : 38.096691966056824,
+                  "name" : "testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "1m 4s",
+                  "durationInSeconds" : 64.99546992778778,
+                  "name" : "testTV06RacerWardrobeSaveAndColdReopen()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "51s",
+                  "durationInSeconds" : 51.77581608295441,
+                  "name" : "testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "25s",
+                  "durationInSeconds" : 25.27697503566742,
+                  "name" : "testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "25s",
+                  "durationInSeconds" : 25.182419061660767,
+                  "name" : "testTV09CameraRadioAndVolumeWithRemoteFocus()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                },
+                {
+                  "duration" : "17s",
+                  "durationInSeconds" : 17.109218955039978,
+                  "name" : "testTV10RobotResultsAndRemoteRematch()",
+                  "nodeIdentifier" : "TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()",
+                  "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests/testTV10RobotResultsAndRemoteRematch",
+                  "nodeType" : "Test Case",
+                  "result" : "Passed"
+                }
+              ],
+              "name" : "TVRemoteUITests",
+              "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests/TVRemoteUITests",
+              "nodeType" : "Test Suite",
+              "result" : "Passed"
+            }
+          ],
+          "name" : "Hot Wheels v HumanUITests",
+          "nodeIdentifierURL" : "test://com.apple.xcode/Hot%20Wheels%20v%20Human/Hot%20Wheels%20v%20HumanUITests",
+          "nodeType" : "UI test bundle",
+          "result" : "Passed"
+        }
+      ],
+      "name" : "Hot Wheels v Human",
+      "nodeType" : "Test Plan",
+      "result" : "Passed"
+    }
+  ],
+  "testPlanConfigurations" : [
+    {
+      "configurationId" : "1",
+      "configurationName" : "Test Scheme Action"
+    }
+  ]
+}

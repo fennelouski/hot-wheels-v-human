@@ -1,0 +1,7 @@
+{
+  "status": "Verifier aggregate-order assertion failed before image checks",
+  "cause": "Nativefreezealgorithm label says sorted entries, but actual889 storedinput order produces approved7377115b; globalpathsort produces5768cd8d. All individual889 source hashes matched.",
+  "correction": "Reproduce authoritative stored-order aggregate and record descriptivemetadata mismatch without changing nativeproof",
+  "originalNativeMetadataPreserved": true,
+  "outputPixelsChanged": false
+}

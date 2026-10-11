@@ -1,0 +1,13 @@
+HWvH brings toy-car racing and a creative workshop to Apple TV and iPad.
+
+Choose Play with the Siri Remote to start racing against a computer-driven car. Creating a player profile is optional, so you can get straight to the track.
+
+Make a racer your own, change car colors and build tracks in the workshop. Save your designs on the device for the next race.
+
+Finish a race, check the result and choose Rematch to go again. Open Share to view a race card with the actual arena image and results before starting the next race.
+
+Choose your game feel with separate saved Animation and Haptics settings. Motion respects Reduce Motion; haptics depend on supported hardware.
+
+No account, advertising or in-app purchases. Saved designs and preferences stay on the device; there is no automatic cloud library sync.
+
+Requires tvOS 26 or later. A separate iPad version requires iPadOS 26 or later.

@@ -1,0 +1,17 @@
+{
+  "allocatedBy": "/root",
+  "serializedSlotAllocated": false,
+  "allocatedAtUTC": null,
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "releasePlanSHA256": "96ddeef5a126025d18555216b04f0a37a5e03262d70f32b6cad6265943b9d3d6",
+  "allowedOperations": [
+    "archive",
+    "local-export",
+    "upload"
+  ],
+  "allowedPlatforms": [
+    "ipad",
+    "tvos"
+  ],
+  "warning": "NOT ACTIVE. The reviewed approval is queued. Record a fresh separate receipt only after direct root serialized-slot allocation; do not enable from elapsed time or this template."
+}

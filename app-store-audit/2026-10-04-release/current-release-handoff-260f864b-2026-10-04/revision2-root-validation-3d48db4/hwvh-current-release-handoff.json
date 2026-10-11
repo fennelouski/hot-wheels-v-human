@@ -1,0 +1,313 @@
+{
+  "recordedAtUTC": "2026-10-04T13:32:12.584563+00:00",
+  "app": "HWvH",
+  "appleID": "6818777508",
+  "bundleID": "com.nathanfennel.Hot-Wheels-v-Human",
+  "version": "1.0",
+  "build": "1",
+  "source": {
+    "repository": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+    "commit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+    "inputCount": 889,
+    "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+    "aggregateRecipe": "Original recorded array order, path plus NUL plus SHA256 plus LF.",
+    "freeze": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+    "freezeSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+    "allInputsRecheckedUnchanged": true,
+    "sourceByteVerificationAtUTC": "2026-10-04T13:29:43.581789+00:00"
+  },
+  "platforms": {
+    "iPadOS": {
+      "processedBuildID": "5ce69766-a2f3-455c-8812-29a21531d207",
+      "selected": true,
+      "actualBinaryState": "Validated",
+      "uploadDateLocal": "Oct 4, 2026 at 2:53 PM",
+      "minimumOS": "26.0",
+      "deviceFamily": "iPad"
+    },
+    "tvOS": {
+      "processedBuildID": "9857351b-226e-4faa-9c73-78bc34b75216",
+      "selected": true,
+      "actualBinaryState": "Validated",
+      "uploadDateLocal": "Oct 4, 2026 at 3:12 PM",
+      "minimumOS": "26.0",
+      "deviceFamily": "Apple TV"
+    }
+  },
+  "appleReviewState": "Prepare for Submission",
+  "finalSubmissionPerformed": false,
+  "publicStorefrontAvailabilityVerified": false,
+  "archiveExportUpload": {
+    "allSixCommandsExitedZero": true,
+    "uploadReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-tvos-1.0-1-final-upload-handoff.json",
+    "uploadReceiptSHA256": "02f50d57a23b07c6101f2aa70e44c8badc421b1497c11c9ad7c476e2a0f57def",
+    "genuineDeliveryIDs": {
+      "ipad": "5ce69766-a2f3-455c-8812-29a21531d207",
+      "tvos": "9857351b-226e-4faa-9c73-78bc34b75216"
+    },
+    "selectedIDsMatchGenuineDeliveries": true,
+    "distributionGetTaskAllow": false,
+    "compiledNonExemptEncryption": false,
+    "serializedSlotReleased": true,
+    "threeVerifierAssumptionFailuresPreserved": true,
+    "duplicateUploads": 0
+  },
+  "galleries": {
+    "iPad": {
+      "count": 10,
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "persistedOrder": "01 through 10",
+      "exactDecodedPixelMatches": 10,
+      "actualCDNContactSheetsPersonallyViewed": [
+        "actual-ipad-01-05.jpg",
+        "actual-ipad-06-10.jpg"
+      ]
+    },
+    "tvOS": {
+      "count": 10,
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "persistedOrder": "01 through 10",
+      "exactDecodedPixelMatches": 10,
+      "actualCDNContactSheetsPersonallyViewed": [
+        "actual-tv-01-05.jpg",
+        "actual-tv-06-10.jpg"
+      ]
+    },
+    "visualResult": "Approved. Short centered headlines, themed racing backgrounds, native heroes and outward angled supporting images. TV image 05 is the actual preview, not proof of successful physical iPad image handoff."
+  },
+  "pricing": {
+    "persistedCurrentPriceCountryCount": 175,
+    "zeroPriceCount": 175,
+    "baseCountry": "United States",
+    "appleSiliconCompatibility": false,
+    "appleVisionCompatibility": false
+  },
+  "availability": {
+    "selectedCurrentCountries": 175,
+    "checkedControlsIncludingRegionGroupsAndFuture": 181,
+    "futureCountriesEnabled": true,
+    "actualStatus175": "Available on App Release",
+    "ageQuestionnaireWarning": "Afghanistan and Morocco will not be sold due to generated age rating. Availability page still labels all175 Available on App Release; do not interpret that as proof of actual sale eligibility."
+  },
+  "ageRating": {
+    "publishedForm": "Saved",
+    "generatedRating": "13+",
+    "override": "Not Applicable",
+    "cartoonFantasyViolence": "Frequent",
+    "contests": "Frequent",
+    "rationale": "Regular toy-car crashes and exaggerated reactions occur during normal racing. Competitive racing for wins and recorded timing is a regular game activity. No real human violence, gambling, public user content, chat, ads, unrestricted browser, sexual content or medical themes were found in the frozen release."
+  },
+  "privacy": {
+    "response": "Data Not Collected",
+    "state": "Unpublished editable draft",
+    "published": false,
+    "policyURLSaved": false,
+    "appleTVPolicyTextSaved": false,
+    "requiredWebRevision": "3d48db495cd8a40eb0f9a29f217de81b4ee1474b",
+    "liveCanonicalPolicyVerifiedForCorrectedRevision": false,
+    "liveAWSPolicyVerifiedForCorrectedRevision": false,
+    "requiredWebRevisionState": "Committed locally; dual deployment pending.",
+    "appleTVPolicyPrepared": true,
+    "preparedTextCharacters": 3542,
+    "preparedText": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-tv-privacy-policy.prepared.txt",
+      "sha256": "2577d019b441270234732e461c14832d6de23bbebeb3463051259158de0f1018"
+    },
+    "preparedTextReceipt": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-tv-privacy-policy.prepared.json",
+      "sha256": "f4b8c2a644d6b01ae2b9a7bbeef7beb907704d0c477a6523a0d169454612abae"
+    },
+    "preparedTextRootPersonallyRead": true
+  },
+  "contentRights": {
+    "affirmationMade": false,
+    "pendingFact": "Whether the 72 bundled ElevenLabs clips were generated under a paid, non-beta plan with commercial rights"
+  },
+  "releaseOwner": "Root owns Apple privacy publication, content rights, country reconciliation and final submission. This child owns audit-only reconciliation. Watch owns the native slot after the completed release.",
+  "remainingSteps": [
+    "Obtain the owner fact and evidence for whether the 72 bundled ElevenLabs WAV clips were generated under a paid, non-beta plan with commercial rights. No content-rights affirmation has been made.",
+    "Verify corrected committed web revision 3d48db495cd8a40eb0f9a29f217de81b4ee1474b on both Vercel and AWS from the same revision. No deployment is yet recorded.",
+    "After the corrected policy is live, save the Privacy Policy URL and prepared Apple TV policy text, then publish the Data Not Collected privacy draft.",
+    "Root must recheck the age-rating warning for Afghanistan and Morocco, rerun Apple validation after the four missing items are resolved and perform the actual final submission. No submission draft or final submission exists."
+  ],
+  "releaseCaveats": [
+    "Physical Apple TV to iPad local-network discovery, permission prompts, finish-image delivery and reconnect remain unverified. Individual platform QA and TV preview images do not prove a paired physical session.",
+    "Camera-based color picking is unavailable in this release. The manual character editor remains available. Camera restoration is not part of this release handoff.",
+    "Haptic output is implemented for iOS only and depends on supported iPad hardware. Saved settings do not establish TV haptic output."
+  ],
+  "evidence": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/processed-builds-selected-root-receipt.json",
+      "sha256": "ffb4759065b366d74e6ba3ecfe77211184383e52695b985fc9b15a681939b347",
+      "provenance": "Root actual Apple UI receipt."
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/gallery-pricing-age-root-review.json",
+      "sha256": "5848afb89fdd6c99aed87d1e099bcdf56df537569ec7482642b611c3d30fc5cd",
+      "provenance": "Root actual gallery, pricing, availability and age review."
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/ipad-tvos-1.0-1-final-upload-handoff.json",
+      "sha256": "02f50d57a23b07c6101f2aa70e44c8badc421b1497c11c9ad7c476e2a0f57def",
+      "provenance": "Child immutable actual archive/export/upload receipts."
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/historical-apps61-44d929c.json",
+      "sha256": "eebc48573da949f01bbcd5d53ffc31976149e62da7988c0e258187803afadb1d"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-validation-holds-root-receipt.json",
+      "sha256": "e9d7286f856aa85e1fc64efc8dbe1204c5313ac5fc2f441663bd2ccc4c899730"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-camera-correction-commit-receipt.json",
+      "sha256": "2630f4aabd8a454f239f9b18d7bfabb968151b7334118e31e639a6913b642ccc"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-tv-privacy-policy.prepared.json",
+      "sha256": "f4b8c2a644d6b01ae2b9a7bbeef7beb907704d0c477a6523a0d169454612abae"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/revision2-root-validation-3d48db4/committed-web-camera-copy-review.json",
+      "sha256": "c6586ee1b21b2b20e8577119dce2e932a4088c0082a8b384596c4ea91796e0a7"
+    }
+  ],
+  "rootProofFilesRechecked": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-1.0-1-build-selected.txt",
+      "sha256": "82d7efc70b25cab70881df482919ffbc30227a54fede51960bcb99549e93292f"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-1.0-1-build-selected.txt",
+      "sha256": "115da3c48a79488e3164a194bbaedeaade4e8a2734c8c4946c4e77107e25e847"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-processed-build-metadata.txt",
+      "sha256": "4aa40ee5598ff25a60186f35ac6caa61ac977c0e9ac6d902d777bca0cf17c905"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-processed-build-metadata.txt",
+      "sha256": "153985a0400704f35c4db2165e1e5604d8ecb957c3fc6f65b48331a6aa2e1edd"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/privacy-data-not-collected-draft.txt",
+      "sha256": "fa33bec5b9d431368322305f13a9f026e46e3d573dab52af72f95d851fb85377"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/gallery-pricing-age-root-review.json",
+      "sha256": "5848afb89fdd6c99aed87d1e099bcdf56df537569ec7482642b611c3d30fc5cd"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/actual-uploaded-ipad-pixel-verification.json",
+      "sha256": "be868318c2c667e7ceb31a9b78ab359cdb3f6c4886a11c31ba553f9f4ae3138d"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/actual-uploaded-tv-pixel-verification.json",
+      "sha256": "dffb416e912837745ba7f0aaae9de7c7db10b33d2db51ebc0f5bbc716d482ec4"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-gallery-persisted-order.txt",
+      "sha256": "4a329cd06ca0599b726b7a036bbfb09e00f6ae70402099a0fc91bd7c4b459a0b"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-gallery-persisted-order.txt",
+      "sha256": "654314b331c8e1a08ca3c7fca71fe5e8bc181e25a88b573fdc985fee7452a1c0"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/pricing-persisted-175-rows.json",
+      "sha256": "ea162998f372f6074628ecf36b2de6d1372b82c245a5a6d015a536f94c71a004"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/pricing-persisted-devices.txt",
+      "sha256": "0a02e283fbadd854095336b66cde42c24b002936e0df65be43f843f92d1e3208"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/availability-persisted-selection.txt",
+      "sha256": "5409f6d8979a5c6bf069dd7fd483725bff65d67af2ee956dc6bacd7775cada49"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/age-rating-saved.txt",
+      "sha256": "80f4ea6e8e502056420e2f22b4d834e934b401e342a03c9107495c642ec9f1ec"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-add-for-review-validation-held.txt",
+      "sha256": "ef9136e19def866635111c97ec167937d40195c39a1bdc100af6d0e35ba23bd1"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-add-for-review-validation-held.txt",
+      "sha256": "065b1a77ec59970c13eb408e31bec9cf78e5b28f557e41a0becacfb81cf7b43e"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/ipad-1.0-1-build-selected-persisted.txt",
+      "sha256": "59aff6ca0259eccbdf582f2e4dc988592e35005abdf305985c045b85e0cb6a36"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/tvos-1.0-1-build-selected-persisted.txt",
+      "sha256": "fc0890afe12171176a359eef4ef0f1950e25e28fb29bab4d032fa065898dc942"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-camera-correction-commit-receipt.json",
+      "sha256": "2630f4aabd8a454f239f9b18d7bfabb968151b7334118e31e639a6913b642ccc"
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/apple-tv-privacy-policy.prepared.txt",
+      "sha256": "2577d019b441270234732e461c14832d6de23bbebeb3463051259158de0f1018"
+    }
+  ],
+  "actionLimits": "Audit-only. No global ledger mutation, Apple mutation, native call, browser, deploy or source edit.",
+  "appleValidation": {
+    "capturedAt": "2026-10-04T13:29:29.012584+00:00",
+    "actualAppleValidation": "Unable to Add for Review",
+    "bothPlatformsMissingItems": [
+      "Privacy Policy URL",
+      "Apple TV Privacy Policy text",
+      "Content Rights Information",
+      "Published App Privacy responses"
+    ],
+    "draftSubmissionCreated": false,
+    "finalSubmissionPerformed": false,
+    "bothSelectedBuildsPersisted": true,
+    "bothSavedVersionPagesSaveButtonDisabled": true
+  },
+  "web": {
+    "correctedCommittedRevision": "3d48db495cd8a40eb0f9a29f217de81b4ee1474b",
+    "committedPageChecks": [
+      {
+        "path": "/Users/nathan/Documents/GitHub/nathanfennel-app-store/public/hwvh/privacy.html",
+        "sha256": "2b266fd42b4446007f6e5fc90d0c4e6e15a8e029168b56f831d4b41fbc6b907d",
+        "committedBlobMatches": true,
+        "workingBytesMatch": true
+      },
+      {
+        "path": "/Users/nathan/Documents/GitHub/nathanfennel-app-store/public/hwvh/support.html",
+        "sha256": "4043b09e7b88ba98639018bed633f8d6632256bccade7c74ee5acf112e7a4e30",
+        "committedBlobMatches": true,
+        "workingBytesMatch": true
+      }
+    ],
+    "commitReceipt": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-camera-correction-commit-receipt.json",
+      "sha256": "2630f4aabd8a454f239f9b18d7bfabb968151b7334118e31e639a6913b642ccc"
+    },
+    "pushed": false,
+    "deployed": false,
+    "requiredMode": "Same-commit Vercel and AWS release; canonical production remains on Vercel.",
+    "liveCorrectedCanonicalPolicyVerified": false,
+    "liveCorrectedAWSPolicyVerified": false,
+    "historicalDC897Receipt": {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/web-copy-local-commit-receipt.json",
+      "sha256": "2366d1d07246bf2d76212e2d4ea227079abd86eba4a78ef9dba3a9484d7f01c5"
+    },
+    "awsGate": "Existing AWS CLI session has expired. Root has a pending readiness question; no fresh login was invoked by this audit."
+  },
+  "supersedesAuditDraft": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/current-release-handoff-260f864b-2026-10-04/hwvh-current-release-handoff.json",
+    "sha256": "be062991b7bd77dce4a56e4a8bfcc647665922a221f8767a021fcc00246ad5f3"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "errors" : [
+
+  ],
+  "values" : [
+    {
+      "disabledTests" : [
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testIndependentSavedSettingsAndCalmPlay()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testOptionalProfileStillOpensEveryWorkshop()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV01WorkshopRoutesAndLocalProfile()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV07TwoPlayerDraftsStayIndependentAndRaceTogether()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV10RobotResultsAndRemoteRematch()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV11BrightWorldCameraAndVisibilityFocus()"
+        },
+        {
+          "identifier" : "Hot Wheels v HumanUITests/TVRemoteUITests/testTV12SunnyStarterRemoteBoostConsumesMeter()"
+        }
+      ],
+      "enabledTests" : [
+        {
+          "identifier" : "Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()"
+        }
+      ],
+      "testPlan" : "Hot Wheels v Human"
+    }
+  ]
+}

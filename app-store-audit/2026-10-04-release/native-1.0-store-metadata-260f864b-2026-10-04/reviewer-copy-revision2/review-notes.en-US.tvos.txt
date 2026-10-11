@@ -1,0 +1,10 @@
+No sign-in is needed.
+
+1. Use directional navigation and Select on the Siri Remote. Choose Play on the opening screen to race standalone against a computer-driven car. Creating a player profile is optional.
+2. Open the Workshop to style a racer, change car paint or edit a track. Save a design to keep it on this device.
+3. Let a race finish normally and inspect the result. Choose Share to view the completed race card with the actual arena image and results. Return to the result and choose Rematch to race again. This is a TV preview, not a system posting chooser.
+4. Open Settings / Game Feel. Change Animation, then relaunch to check that the choice stays saved. Animation respects the device's Reduce Motion setting.
+
+Nearby racing and TV-to-iPad image handoff require updated apps and Local Network permission on both devices. Discovery, the permission flow, image delivery and reconnect between a physical Apple TV and iPad have not yet been validated by the release owner.
+
+The optional camera-color feature is unavailable in this version; manual racer styling is available.

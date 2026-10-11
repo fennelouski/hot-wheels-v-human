@@ -1,0 +1,23 @@
+{
+  "recordedAtUTC": "2026-10-04T13:27:46.020289+00:00",
+  "baseRevision": "dc8973ec14dc4396e58b3efa81a0392169a68708",
+  "committedRevision": "3d48db495cd8a40eb0f9a29f217de81b4ee1474b",
+  "paths": [
+    "public/hwvh/privacy.html",
+    "public/hwvh/support.html"
+  ],
+  "sha256": {
+    "public/hwvh/privacy.html": "2b266fd42b4446007f6e5fc90d0c4e6e15a8e029168b56f831d4b41fbc6b907d",
+    "public/hwvh/support.html": "4043b09e7b88ba98639018bed633f8d6632256bccade7c74ee5acf112e7a4e30"
+  },
+  "reason": "The previously prepared copy still described working camera color picking. The shipping CharacterEditorView has a parked, unreachable camera entry point. Correct both pages to manual colors and unavailable camera, and remove Camera from active permission instructions.",
+  "rootReadAndApprovedExactDiff": true,
+  "independentSourceReview": "math_feedback_review independently read the exact diff and frozen source; manual-only wording matches the exhaustive Face/Hair/Clothes/Extras navigation. Compiled iPad camera purpose string remains present.",
+  "workingTreeAndIndexClean": true,
+  "pushed": false,
+  "deployed": false,
+  "requiredDeploymentMode": "Parallel static selected four pages at same committed revision",
+  "command": "npm exec --yes --package=node@22 -- python3 scripts/deploy-app-privacy.py --page smart-math-game/privacy.html --page smart-word-game/privacy.html --page hwvh/privacy.html --page hwvh/support.html",
+  "blocker": "Existing fishbowl-head AWS CLI session expired; previous login readiness question remains unanswered.",
+  "supersedesHistoricalReceipt": "web-copy-local-commit-receipt.json"
+}

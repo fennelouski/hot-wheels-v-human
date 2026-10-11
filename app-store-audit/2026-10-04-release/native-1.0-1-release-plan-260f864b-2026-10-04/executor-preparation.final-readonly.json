@@ -1,0 +1,20 @@
+{
+  "recordedAtUTC": "2026-10-04T12:05:52.973589+00:00",
+  "status": "Prepared, not allocated; zero Xcode/device/archive/export/upload actions",
+  "releaseCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "executor": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/execute-verified-release.py",
+  "executorSHA256": "ca56ffb3116ba535381481d9a5069ae12fd444e12cec457c58b084b997ce6587",
+  "matchingFinalExecutorReadOnlyPreflight": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/executor-preflight-none-a17dea8277dc4b019980bbf059d03300.json",
+  "matchingFinalExecutorReadOnlyPreflightSHA256": "7d935a6a1171778cc2c33b99933c1d38783df1c4f1c77d80e35824f272ff8806",
+  "syntaxPASS": true,
+  "preflightPASS": true,
+  "all889SourceInputsUnchanged": true,
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "indexEmpty": true,
+  "originalPreparationReceipt": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-1.0-1-release-plan-260f864b-2026-10-04/executor-preparation.queued.json",
+  "originalPreparationReceiptSHA256": "9b696f785f1ca96cda502d78dd7c277879ba07d021874f7247865f2f8ff40b48",
+  "earlierPreflightPreserved": "Initial preflight preceded allocation-lock addition; this final read-only preflight matches exact final executor hash",
+  "directRootSerializedAllocationStillRequired": true,
+  "actualXcodeExecuted": false,
+  "onlyAuditFilesWritten": true
+}

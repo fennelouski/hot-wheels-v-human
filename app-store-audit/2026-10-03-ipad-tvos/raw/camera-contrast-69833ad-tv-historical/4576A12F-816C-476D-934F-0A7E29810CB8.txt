@@ -1,0 +1,52 @@
+Application, 0x1024445b0, pid: 30675, label: 'HWvH' <App element pid: 30675>
+  Window (Main), 0x1024459e0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4367359648.5>
+    Other, 0x102445da0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4367370368.6>
+      Other, 0x102445ec0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4367373136.7>
+        Other, 0x102445b00, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4364268240.8>
+          Other, 0x102445c20, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4362818880.9>
+            Other, 0x102445fe0, {{0.0, 0.0}, {1920.0, 1080.0}} <AX element pid: 30675, elementOrHash.elementID: 4364571200.10>
+            StaticText, 0x102446100, {{820.0, 80.0}, {56.0, 29.0}}, label: 'Tank' <AX element pid: 30675, elementOrHash.elementID: 4363365024.12>
+            Image, 0x102446220, {{794.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4363366128.13>
+            Image, 0x102446340, {{817.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4363366944.14>
+            Image, 0x102446460, {{840.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4363367760.15>
+            Image, 0x102446580, {{863.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4363368576.16>
+            Image, 0x1024466a0, {{886.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4363369392.17>
+            ProgressIndicator, 0x1024467c0, {{778.0, 132.0}, {140.0, 10.0}}, value: 100% <AX element pid: 30675, elementOrHash.elementID: 4363371024.18>
+              ProgressIndicator, 0x1024468e0, {{778.0, 122.0}, {140.0, 30.0}}, value: 100% <AX element pid: 30675, elementOrHash.elementID: 4336094160.48>
+            StaticText, 0x102446a00, {{813.0, 146.0}, {70.0, 20.0}}, label: '2.2 m/s' <AX element pid: 30675, elementOrHash.elementID: 4363376432.19>
+            StaticText, 0x102446b20, {{1028.0, 80.0}, {88.0, 29.0}}, label: 'Zoomie' <AX element pid: 30675, elementOrHash.elementID: 4336043520.20>
+            Image, 0x102446c40, {{1018.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4336153440.21>
+            Image, 0x102446d60, {{1041.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4336154256.22>
+            Image, 0x102446e80, {{1064.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4336155072.23>
+            Image, 0x102446fa0, {{1087.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4336155888.24>
+            Image, 0x1024470c0, {{1110.0, 114.0}, {17.0, 13.0}}, identifier: 'car.fill', label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4336156704.25>
+            ProgressIndicator, 0x1024471e0, {{1002.0, 132.0}, {140.0, 10.0}}, value: 100% <AX element pid: 30675, elementOrHash.elementID: 4336158336.26>
+              ProgressIndicator, 0x101a5bd70, {{1002.0, 122.0}, {140.0, 30.0}}, value: 100% <AX element pid: 30675, elementOrHash.elementID: 4363120560.49>
+            StaticText, 0x101a5be90, {{1037.0, 146.0}, {70.0, 20.0}}, label: '1.8 m/s' <AX element pid: 30675, elementOrHash.elementID: 4336159616.27>
+            Image, 0x101a5bfb0, {{1369.0, 423.0}, {48.0, 52.0}}, identifier: 'trophy.fill', label: 'trophy.fill' <AX element pid: 30675, elementOrHash.elementID: 4366028720.99>
+            StaticText, 0x101a5c0d0, {{1369.0, 423.0}, {340.0, 53.0}}, label: 'TANK WINS!' <AX element pid: 30675, elementOrHash.elementID: 4366077216.100>
+            StaticText, 0x101a5c1f0, {{1367.0, 491.0}, {32.0, 23.0}}, label: 'Car' <AX element pid: 30675, elementOrHash.elementID: 4365302032.101>
+            StaticText, 0x101a5c310, {{1437.0, 491.0}, {43.0, 23.0}}, label: 'Time' <AX element pid: 30675, elementOrHash.elementID: 5589007664.102>
+            StaticText, 0x101a5c430, {{1499.0, 491.0}, {90.0, 23.0}}, label: 'Top speed' <AX element pid: 30675, elementOrHash.elementID: 5589008480.103>
+            StaticText, 0x101a5c550, {{1603.0, 491.0}, {120.0, 23.0}}, label: 'Best segment' <AX element pid: 30675, elementOrHash.elementID: 5589009296.104>
+            Image, 0x101a5c670, {{1351.0, 523.0}, {19.0, 21.0}}, identifier: 'trophy.fill', label: 'trophy.fill' <AX element pid: 30675, elementOrHash.elementID: 5589010112.105>
+            StaticText, 0x101a5c790, {{1378.0, 522.0}, {39.0, 23.0}}, label: 'Tank' <AX element pid: 30675, elementOrHash.elementID: 5589010928.106>
+            StaticText, 0x101a5c8b0, {{1431.0, 522.0}, {54.0, 23.0}}, label: '29.9 s' <AX element pid: 30675, elementOrHash.elementID: 5589011744.107>
+            StaticText, 0x101a5c9d0, {{1514.0, 522.0}, {61.0, 23.0}}, label: '4.1 m/s' <AX element pid: 30675, elementOrHash.elementID: 5589012560.108>
+            StaticText, 0x101a5cc40, {{1613.0, 522.0}, {101.0, 23.0}}, label: '#27 · 0.20 s' <AX element pid: 30675, elementOrHash.elementID: 5589013376.109>
+            StaticText, 0x101a5cd60, {{1352.0, 553.0}, {63.0, 23.0}}, label: 'Zoomie' <AX element pid: 30675, elementOrHash.elementID: 5589014192.110>
+            StaticText, 0x101a5ce80, {{1432.0, 553.0}, {53.0, 23.0}}, label: '35.2 s' <AX element pid: 30675, elementOrHash.elementID: 5589015008.111>
+            StaticText, 0x101a5cfa0, {{1512.0, 553.0}, {64.0, 23.0}}, label: '2.9 m/s' <AX element pid: 30675, elementOrHash.elementID: 5589015824.112>
+            StaticText, 0x101a5d0c0, {{1615.0, 553.0}, {97.0, 23.0}}, label: '#41 · 0.31 s' <AX element pid: 30675, elementOrHash.elementID: 5589016640.113>
+            Image, 0x101a5d1e0, {{1325.0, 590.0}, {31.0, 30.0}}, identifier: 'star.fill', label: 'Favorite' <AX element pid: 30675, elementOrHash.elementID: 5589017456.114>
+            StaticText, 0x101a5d300, {{1325.0, 590.0}, {424.0, 33.0}}, label: 'NEW TRACK RECORD! 29.9 s' <AX element pid: 30675, elementOrHash.elementID: 5589018944.115>
+            StaticText, 0x101a5d420, {{1329.0, 635.0}, {414.0, 26.0}}, label: 'Press  REMATCH on your iPad to go again!' <AX element pid: 30675, elementOrHash.elementID: 5589020080.116>
+            Button, 0x101a5d540, {{1584.0, 84.0}, {232.0, 60.0}}, identifier: 'race-camera', label: 'Driver View', value: Driver View <AX element pid: 30675, elementOrHash.elementID: 4362799040.42>
+              Image, 0x101a5d660, {{1616.0, 102.0}, {24.0, 24.0}}, identifier: 'steeringwheel', label: 'steeringwheel' <AX element pid: 30675, elementOrHash.elementID: 4362797456.62>
+              StaticText, 0x101a5d780, {{1584.0, 84.0}, {232.0, 60.0}}, label: 'Driver View' <AX element pid: 30675, elementOrHash.elementID: 4362799712.63>
+            Button, 0x101a5d8a0, {{1534.5, 154.9}, {91.1, 62.1}}, identifier: 'race-track-all', label: 'Show all track', Focused <AX element pid: 30675, elementOrHash.elementID: 4362801776.43>
+            Button, 0x101a5d9c0, {{1632.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideGhosts', label: 'Hide ghost track', Selected <AX element pid: 30675, elementOrHash.elementID: 4362809776.44>
+            Button, 0x101a5dae0, {{1728.0, 156.0}, {88.0, 60.0}}, identifier: 'race-track-hideAll', label: 'Hide all track' <AX element pid: 30675, elementOrHash.elementID: 4362814720.45>
+            Button, 0x101a5dc00, {{1496.0, 882.0}, {320.0, 114.0}}, identifier: 'race-rematch', label: 'REMATCH!' <AX element pid: 30675, elementOrHash.elementID: 4367264720.117>
+              Image, 0x101a5dd20, {{1555.0, 922.0}, {28.0, 34.0}}, identifier: 'arrow.clockwise', label: 'Refresh' <AX element pid: 30675, elementOrHash.elementID: 4367256160.118>
+              StaticText, 0x101a5de40, {{1496.0, 882.0}, {320.0, 114.0}}, label: 'REMATCH!' <AX element pid: 30675, elementOrHash.elementID: 4367235840.119>

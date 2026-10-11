@@ -1,0 +1,246 @@
+{
+  "recordedAtUTC": "2026-10-04T11:49:55.064732+00:00",
+  "repository": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+  "authorization": "Direct root approval of exact40 paths, subject and unchanged1.0(1)/889 inputs",
+  "subject": "Refine native race launch, sharing and feedback",
+  "baseRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "localCommit": "260f864b143b16f49418e5b8f8d35a6a9849c6bf",
+  "selectedPathCount": 40,
+  "version": "1.0",
+  "build": "1",
+  "platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "approvedPlan": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/native-source-review-and-commit-plan.candidate11.json",
+  "approvedPlanSHA256": "0a655510ad1643cadd0fcdb3dbb92aabce808aa31207f515e36a9bdd93bf2552",
+  "inputCount": 889,
+  "aggregateSHA256": "7377115b02eb7fc59511deeb171f4ce00128b84a6c0f8c110b3247a2bd4de519",
+  "aggregateRecipe": "Original recorded array order: path+NUL+sha256+LF",
+  "inputFreeze": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-native-game-loop/native-inputs.candidate-11.json",
+  "inputFreezeSHA256": "8b39b6e57a39afed23f42a6df2d8fcd10eac013b41dd13f1bb517716bcd23e52",
+  "newFreezeAssociation": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/native-inputs.candidate11.local-commit-association.json",
+  "newFreezeAssociationSHA256": "3ec084c1bb9bf0284b1cc38740200032a34cfe4a5e16e4e61abfc0f4125ca2fa",
+  "allNativeInputBytesUnchangedBeforeAndAfterCommit": true,
+  "projectUnchanged": true,
+  "projectSHA256": "4f4c33fb7b0586a58ad5acbeee27dae780a4cb06a376e719a1835d67f799d756",
+  "preCommitIndexEmpty": true,
+  "stagedSelectionExact": true,
+  "stagedBlobHashesMatched": true,
+  "stagedDiffCheck": "PASS",
+  "committedSelectionExact": true,
+  "committedBlobs": [
+    {
+      "path": "DESIGN.md",
+      "sha256": "93bbe86d5edfaa87f659f9ec803364345b1d48f5b225a1300cc4d9811687b0b1",
+      "gitBlob": "50b746dc8f2902ae53b40b2d37c5f81237646a00"
+    },
+    {
+      "path": "Hot Wheels v Human/App/GamePreferences.swift",
+      "sha256": "0bf4a219aed5d436cc0b8a17b0317a9e3ee2f56f7829d9cf7d9ee84d51e285e7",
+      "gitBlob": "04fdb6c61da780e3f7bc580c06e3920ebf4c78c7"
+    },
+    {
+      "path": "Hot Wheels v Human/App/GameSettingsView.swift",
+      "sha256": "6584b1928633aabb1dc3b20922b4682933e775cf968d15b5c1422a9e4bfde147",
+      "gitBlob": "5f76a4b7962428cf86e324186c72dfa7bcce64d3"
+    },
+    {
+      "path": "Hot Wheels v Human/App/HWTestSession.swift",
+      "sha256": "0fa9b32d435e004747320e1a304fde2d237a0b34b4ed70459c7b5f260c788898",
+      "gitBlob": "437d8b05cf22239ca24fc90824626dac745c56ea"
+    },
+    {
+      "path": "Hot Wheels v Human/App/Hot_Wheels_v_HumanApp.swift",
+      "sha256": "98737e583973f876ca82bc7023ba88ce71e5e52bd61319160672de8081eb22ee",
+      "gitBlob": "e589a6344cb59fc9d3b0d763b334ccd4b7e7faa0"
+    },
+    {
+      "path": "Hot Wheels v Human/App/LobbyBackground.swift",
+      "sha256": "d850988a4d21e7a1f4fbb3525458444acc600afa030aa724f0cb7792f1cc2a34",
+      "gitBlob": "7352df23771421bdb500b390c380859889870901"
+    },
+    {
+      "path": "Hot Wheels v Human/App/README.md",
+      "sha256": "3e3631fffe909537a847d712805058b5735f746691810b6a462bfb6ac8f151b6",
+      "gitBlob": "51b454d1feec31ec46d13c4e4a582696038731bd"
+    },
+    {
+      "path": "Hot Wheels v Human/App/RootView.swift",
+      "sha256": "62ab11622d382b8de5e97fd38c470cb4bebdf88df6c2ff12f55635281af376cf",
+      "gitBlob": "68bcc4862a8f3bb2d9d161e55b85078238a2abcb"
+    },
+    {
+      "path": "Hot Wheels v Human/App/SoundBank.swift",
+      "sha256": "6b65d3d98d78a5f7f80b2cd2ee35422d3e929fe6d9130cf829b0307ed203eafe",
+      "gitBlob": "0e2728bd69d301a4fa461b32743dde6f357dad3d"
+    },
+    {
+      "path": "Hot Wheels v Human/App/TVWorkshopControls.swift",
+      "sha256": "bd49b47c264ec4b546d9afd96112cf0358d5d734a12e840011439ec7e440170c",
+      "gitBlob": "4e5774296e846ef8348cc045992d3f9c97cc078c"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/GameMessage.swift",
+      "sha256": "8db3db8fffbfebccc8fc5183c1cc5881a8bd1083acacbaae07615347eabeeee1",
+      "gitBlob": "480d4391501f10b78f225b3ad1eab172ebaf20c7"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Models/RaceShareResult.swift",
+      "sha256": "d8f287b3aa707411481e913d6a8f687ac5c1d6e357e2b42463d61f27d738b03d",
+      "gitBlob": "25bad983cf9577973d7828cec5fc3727fd962663"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MessageCodec.swift",
+      "sha256": "becd6d84bc3d8c157d6d34eede8f331ce6ae086240aabadb9a21410987a12463",
+      "gitBlob": "3c3177fa118fb63349e572c19cc74541c1959bb2"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/MultipeerTransport.swift",
+      "sha256": "ec7bfb03bdd365a87cb0b0b0f844740b02c259e86a014ea0110b0d519ea98695",
+      "gitBlob": "aeb7e2c5b8e05c18ace79be12f20d3ee198b3167"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/README.md",
+      "sha256": "0733df4b7421eaa3e13ad2945079fcc2c744f3302f6a7a99b970c2e3ac83df86",
+      "gitBlob": "5b3cade478b7e1a12f4eadafaa54aab1ec52be3d"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/RaceShareHandoff.swift",
+      "sha256": "19beaabcbe76166993d6f66af4b56350f4430613bc8fbedd1c448483dd341a33",
+      "gitBlob": "1b9d390a4c20eecde7dbf7f83dbdc5baeeb52bc5"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/Networking/TVFinder.swift",
+      "sha256": "aa068228a25b0621549fbc45b9b41ef31ec6a11407e4589c6c88a02944999aa6",
+      "gitBlob": "b1191e3789fd652bc67458a1036b41eaad2f9587"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/ArenaEnvironment.swift",
+      "sha256": "48861f712bf1389c16232be03f6240f4a99db05d9f54d7c1c058b5b2364db29a",
+      "gitBlob": "5651a49fb4c3f54b7e461964756890188630f559"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/BreakdownShow.swift",
+      "sha256": "feb33a07b2809ea61c74f269dad80d8721bd2a130d46270926f68dfcc9fa18cf",
+      "gitBlob": "cfd563c9b884d55fdefeac4d67d90c8fa8f0ac4d"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/GameEffectsPolicy.swift",
+      "sha256": "b4a8e74ba197bdd5364c8b4d5c37724ac234122615aeae2b2df7b3e5bd78d0cf",
+      "gitBlob": "8ef2aa225c6b0610389fd1f4f41de2ce8824305b"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceCoordinator.swift",
+      "sha256": "5db19008e59b0aa84ca7dfbdac4e5af2c8468781c11a52382687f9f89abdd8cc",
+      "gitBlob": "4c51aba7e2faca2133fdcff78f476af23667ac2a"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/RaceCore/RaceSession.swift",
+      "sha256": "5e0b1698d7e8103bdca0b2a8e7c49252a087963c8d3361863678d61e28fb5664",
+      "gitBlob": "058bc1e181db5f05a715113598a5a05f73aefbea"
+    },
+    {
+      "path": "Hot Wheels v Human/Core/TrackKit/SceneryPlacer.swift",
+      "sha256": "32416c35e8869ed9e1f86a585800d5123582bc9bc10c29f5b8c681439b69f6d6",
+      "gitBlob": "e84bf9b7432dc31b5ce495d5069c9c6f161c5dd3"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaAudio.swift",
+      "sha256": "5df805ce34630f46f1fb9e818ebb5e2bf62586e58454f3548fb951579e4fbbd0",
+      "gitBlob": "983571a2fd604322309d52c56b689ce34f02b006"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaFrameCapture.swift",
+      "sha256": "f6711457d1b8eddc1559682f6749b317b99d926b4a7f69b8db153c3e40793bfd",
+      "gitBlob": "4296bdee6e5afc7d2447f0197c851537a7a6714a"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+      "sha256": "39ec652dfb4ad68afb364a3363d658b6fdb13b2f364dca4ae4ac3f2e16095b13",
+      "gitBlob": "1a673ba968f61ab642935bd72c933dd58b0ab971"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+      "sha256": "d9c142c26b00174e8fe4c276b1a205888f938d41788ed6bde0aa5ee627d2b9f9",
+      "gitBlob": "12813a58169994dfe526fc22892c40439c01f71c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/README.md",
+      "sha256": "bc2efc19a6522f6cc3c227657fb3eb9784e97945898f3d48cf872a9638cf6982",
+      "gitBlob": "4b8ffe699062c066ae97f87c468625dcaba7aeb8"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/RaceShareView.swift",
+      "sha256": "41c34a4fbff79ef51a05b2c8a157fd415faf7527544e411d160ebebed76aeefc",
+      "gitBlob": "41c7620246af21eacd0848c61f504765cc1856ea"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Arena/SoloArenaView.swift",
+      "sha256": "97ca24b79b03ac3387e29bd6c390dcbb8b85936f733e76faae71676c204179fd",
+      "gitBlob": "a1ca305d1a84d913c181d6d5396cb8ec0c56097e"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Customizer/CustomizerView.swift",
+      "sha256": "8ec6dd7e62bc6dacbfeb49681b06a02ba4d4c422dbb0842900d0d06f184e5d05",
+      "gitBlob": "b2ff242393d836f82d1f3d8fc22437ac69981ffa"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardModel.swift",
+      "sha256": "ed232796f042023cbeb47affac51a55a15d49d089bb1d887f8a4335db21d731e",
+      "gitBlob": "48b5c93b6ac0e3c862403e1aab2abb1bff2bbf94"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Dashboard/DashboardView.swift",
+      "sha256": "8119becff9d350c856a219bb4dc635d36c0e509af44cb69ff338cd0e6c394ab2",
+      "gitBlob": "51ba583ca13ec9011aa6538b1de8b11be89a31db"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Home/ArenaLobbyView.swift",
+      "sha256": "af7740a5448d139eefd900de26960c6c033e64c738939cd48516460604d172e4",
+      "gitBlob": "08f0ece6b48f819d4a746192641d3e609f63de5c"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/DriverPreviewView.swift",
+      "sha256": "7f6d933c375635d394a5efab0a8c9479ad5042352878267267849b8818216d21",
+      "gitBlob": "7225891e68c1080f847d000ee0b9a3bacd46ca33"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/ProfilePickerView.swift",
+      "sha256": "25ac596b5ce90da222d9bc104f20b293a9f8e8969a99a2b4ae9ced7a3f41cfc3",
+      "gitBlob": "fd6ef8d62aef7bf9bd34a4852237c7c1d4e333d5"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/Profiles/README.md",
+      "sha256": "44e6301f245320c26c37e5aa67641ac8bc175a35ba796a21c99d65f4a0a46fa4",
+      "gitBlob": "9548732fbed57dcfbd163e9ba116b1084f220fd5"
+    },
+    {
+      "path": "Hot Wheels v Human/Features/ReactionCam/ReactionCamView.swift",
+      "sha256": "add40446d12aab248ff609d3c24ba5b025dbc330172f0cf8dbe5510b4796214d",
+      "gitBlob": "b8f69ba7a8363eaa08964f35ca84c4b55517e8ec"
+    },
+    {
+      "path": "Hot Wheels v HumanTests/GameLoopTests.swift",
+      "sha256": "9b2794f3fdad4d2f022c7828017fe1ae43a37ca0fb8f65819e181d81331edfa3",
+      "gitBlob": "4fdac294bf03c5b75073603cddd22ae7bd8c99b5"
+    },
+    {
+      "path": "Hot Wheels v HumanUITests/GameLoopUITests.swift",
+      "sha256": "8e1421f9380e50a4cd70fb5b067137b00a1f4d41630804dd1f0ee282d799d3fe",
+      "gitBlob": "4b84f40d0437c1efcf5dfb4c6ee4730875501039"
+    }
+  ],
+  "postCommitIndexEmpty": true,
+  "selectedWorkingTreeClean": true,
+  "outsidePreexistingFileCount": 939,
+  "allOutsideExistingBytesUnchanged": true,
+  "outsideHashSnapshot": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/outside-selection-hashes.before-local-commit.json",
+  "outsideHashSnapshotSHA256": "1ee191879b78144657f81e63e229ce8d2c0430a9da64f7c6cf2a0dc5c69bb4e7",
+  "commitLog": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-04-release/native-candidate11-source-review-2026-10-04/native-local-commit.log",
+  "commitLogSHA256": "d372045a2fcbbbb39660fafbbcadabd1387c3ad2a6f7e20174036d056b88b719",
+  "historicalDesignNotesRetainedUnchanged": true,
+  "actualBuildRuntimeEvidence": "Previously retained candidate11 equivalence/read-only review only; localcommit does not run or broaden QA",
+  "pushBuildDeviceArchiveExportUploadBrowserOrDeploymentPerformed": false,
+  "next": "Read-only iPadOS/tvOS Release archive/export/upload plan queued pending root serialized allocation; Mac/iPhone/visionOS excluded"
+}

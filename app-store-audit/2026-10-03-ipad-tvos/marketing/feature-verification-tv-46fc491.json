@@ -1,0 +1,157 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T08:40:31.515504+00:00",
+  "platform": "apple-tv",
+  "productionRevision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+  "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+  "productionInputProof": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-production-inputs-46fc491.json",
+    "sha256": "20d91c8c7b9251bf4cad5ebf5d9dfa60ad1bad2545e2c10a4c41427e9866924e"
+  },
+  "testHarnessInputProof": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-source-inputs-final.json",
+    "sha256": "989c9a372568084bce04e604de857dc6a24bbe4c26e446c6c5ef962de2c04e1a"
+  },
+  "testHarnessRevision": "46fc491ab25e94d21780a2b45b1c156260c16190",
+  "nativeBuildRecord": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/marketing/evidence/native-builds-46fc491-20261003.json",
+    "sha256": "a7514f33c723dbcba7bb9753e33f9d220de935ffee0b93ff36ea71f7f12c22de"
+  },
+  "testResultSummary": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-final-46fc491-test-summary.json",
+    "sha256": "b2dca75e99501665ec70e3e5e2ef065ca54117a98a214523463b7fa0098f04e9"
+  },
+  "testResultDetails": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/tv-final-46fc491-test-details.json",
+    "sha256": "91d93192d3e97a2809e01df2825ee109f0eef96a461f310e3d7478c9e4b139b4"
+  },
+  "nativeAttachmentManifest": {
+    "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/tv-final-46fc491/manifest.json",
+    "sha256": "5440becbcb81e59491f513f72f848d24d9c7e3a67dba93c6f58573c032fef031"
+  },
+  "result": {
+    "totalTests": 24,
+    "passedTests": 24,
+    "failedTests": 0
+  },
+  "claims": [
+    {
+      "featureID": "track-builder",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()"
+      ],
+      "observedBehavior": "The remote appends a six-piece finishable track including a ghost stretch, saves it, relaunches, and reloads its pieces and world options.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "car-workshop",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "observedBehavior": "The remote changes red metallic paint, flame-livery size, sticker position and drawing controls, saves one personal car, then reopens its paint, livery and sticker values after termination.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "native-race",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV05UnsavedTrackPreviewReturnsToTheSameDraft()",
+        "TVRemoteUITests/testTV09CameraRadioAndVolumeWithRemoteFocus()"
+      ],
+      "observedBehavior": "A real unsaved-track preview produces live telemetry and returns to the same draft. A loaded race switches between chase and driver cameras.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "racer-editor",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV06RacerWardrobeSaveAndColdReopen()"
+      ],
+      "observedBehavior": "The remote edits a personal racer, saves it, relaunches, and reopens the chosen wardrobe values.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "part-paint",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "observedBehavior": "Red body paint and Metallic finish remain selected after a saved-car cold reopen.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "drawing-tools",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "observedBehavior": "The remote lowers the pen, moves right and down, and raises it. The genuine drawing-tool capture shows the authored stroke. This claim is about drawing controls, not a separate cold-reopened TV raster assertion.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "sticker-placement",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()"
+      ],
+      "observedBehavior": "The remote adds a star sticker, moves its across position to52 percent, saves, and confirms the placement and position after a cold reopen.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "world-decoration",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV04PortalAndDecorationUseDirectionalCursor()"
+      ],
+      "observedBehavior": "Left and down remote input keeps focus on Place here. Select places a street decoration, Rotate acts on it, and removal updates the placed list.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "saved-libraries",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV02CarToolsSaveAndColdGarageReopen()",
+        "TVRemoteUITests/testTV03GhostTrackWorldSaveAndColdLibraryLoad()"
+      ],
+      "observedBehavior": "A new personal car and complete personal track survive app termination and reload through Garage and Library. The marketing image shows the saved-track Library and actual edited car controls.",
+      "testOutcome": "Passed"
+    },
+    {
+      "featureID": "race-boost",
+      "status": "verified-native-build",
+      "sourceBuildRef": "46fc491-Release-1.0-build1-SDK26.5",
+      "testIdentifiers": [
+        "TVRemoteUITests/testTV08BoostChargesAndTogglesWithSelectAndPlayPause()"
+      ],
+      "observedBehavior": "A real race charges the boost meter to100 percent. Select starts boost, the meter decreases, and PlayPause stops it while focus remains on the control.",
+      "testOutcome": "Passed"
+    }
+  ],
+  "releaseStatus": "Final export held while root resolves the iPad drawing workflow. These claims apply only to recorded production46fc491, and become historical if shipped production changes.",
+  "excludedMarketingCaptures": [
+    {
+      "name": "TV08 - Saved car in the garage",
+      "reason": "Captured during navigation transition, with previous view superimposed. No retouching or replacement pixels."
+    },
+    {
+      "name": "TV15 - Race the unsaved track",
+      "reason": "Captured during cover transition, with previous workbench visible. Clear TV20 chase view is used instead."
+    }
+  ],
+  "claimsNotMade": [
+    "Physical iPad-to-Apple-TV multiplayer discovery or reconnect",
+    "All accessibility settings passed",
+    "App Store upload or review submission"
+  ]
+}

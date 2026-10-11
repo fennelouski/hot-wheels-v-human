@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T10:16:52.597531+00:00",
+  "status": "Targeted deterministic settled-camera native capture passed. All four full original images visually reviewed; Chase renders visible cars/track, Driver cockpit visible. This is historical 5643eca evidence before approved tvOS contrast fix.",
+  "productionRevision": "5643eca1662dfc91f39d851ca0ea2ab5a8f9ce80",
+  "productionInputsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-production-inputs-5643eca.json",
+  "productionInputsSHA256": "c87470c303fd813d39fb7cbb18ae1ba7d81cbcf643a52052e954f604cd7e1355",
+  "testHarnessInputsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-test-inputs-ipad-camera-capture.json",
+  "testHarnessInputsSHA256": "5c823f348c6c1978650bc41712e1fccd85f2179408af69c1271887ce43dd12d8",
+  "testHarnessState": "One uncommitted capture test addition; production unchanged",
+  "production828AndTestSnapshot864MatchAfterRun": true,
+  "buildConfiguration": "Release",
+  "testHostEnableTestability": "YES",
+  "productionArchiveTestabilityNotChanged": true,
+  "commands": {
+    "startedAtUTC": "2026-10-03T10:13:28.514525+00:00",
+    "repository": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+    "runDirectory": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf",
+    "buildCommand": [
+      "xcodebuild",
+      "-project",
+      "Hot Wheels v Human.xcodeproj",
+      "-scheme",
+      "Hot Wheels v Human",
+      "-configuration",
+      "Release",
+      "-destination",
+      "platform=iOS Simulator,id=C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "-derivedDataPath",
+      "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/DerivedData",
+      "-jobs",
+      "2",
+      "ENABLE_TESTABILITY=YES",
+      "CODE_SIGNING_ALLOWED=NO",
+      "build-for-testing"
+    ],
+    "buildLogPath": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/build.log",
+    "productionRevision": "5643eca1662dfc91f39d851ca0ea2ab5a8f9ce80",
+    "testHarnessProofPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/native-test-inputs-ipad-camera-capture.json",
+    "buildExitCode": 0,
+    "buildCompletedAtUTC": "2026-10-03T10:14:21.152916+00:00",
+    "testCommand": [
+      "xcodebuild",
+      "-xctestrun",
+      "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/DerivedData/Build/Products/Hot Wheels v Human_Hot Wheels v Human_iphonesimulator26.5-arm64-x86_64.xctestrun",
+      "-destination",
+      "platform=iOS Simulator,id=C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "-resultBundlePath",
+      "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/camera.xcresult",
+      "-only-testing:Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles",
+      "-parallel-testing-enabled",
+      "NO",
+      "test-without-building"
+    ],
+    "testStartedAtUTC": "2026-10-03T10:14:50.218469+00:00",
+    "xctestrunPath": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/DerivedData/Build/Products/Hot Wheels v Human_Hot Wheels v Human_iphonesimulator26.5-arm64-x86_64.xctestrun",
+    "xctestrunSHA256": "3276f4674225fadbdbc950076b8b9d0a322bf635885ef1dae1bd8fed6c523afd",
+    "testLogPath": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/test.log",
+    "testResultPath": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/camera.xcresult",
+    "all864CurrentCaptureInputsMatchedBeforeRun": true,
+    "testExitCode": 0,
+    "testCompletedAtUTC": "2026-10-03T10:15:29.540612+00:00"
+  },
+  "buildLogSHA256": "76063acf1ce925c3a9cd4110f0ae2c20a00454595d37e544dd98fc0e4e5fa510",
+  "testLogSHA256": "fb981a0f16b46e761fada803b0db10bbc0929e67e560787eea83a40f06294d8e",
+  "nativeExecutablePath": "/tmp/hwvh-ipad-settled-camera-20261003-gzrc48nf/DerivedData/Build/Products/Release-iphonesimulator/Hot Wheels v Human.app/Hot Wheels v Human",
+  "nativeExecutableSHA256": "f3f0f78f8e6f3a21d913dbd7128ff01b0f8f7ab2777f9baf4cc9e15658fea85e",
+  "nativeInfo": {
+    "CFBundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+    "CFBundleDisplayName": "HWvH",
+    "CFBundleShortVersionString": "1.0",
+    "CFBundleVersion": "1",
+    "UIDeviceFamily": [
+      2
+    ],
+    "MinimumOSVersion": "26.0",
+    "DTSDKName": "iphonesimulator26.5"
+  },
+  "summaryPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/ipad-settled-camera-5643eca-test-summary.json",
+  "summarySHA256": "f85f3a1d8601a79da2075691c307b22268b227c3f89b5e43a7317aff85f04af0",
+  "detailsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/ipad-settled-camera-5643eca-test-details.json",
+  "detailsSHA256": "7a735c776205aeec08ca52d7277ea7441cdfb37dbb9abea7df3e036eb7abdb01",
+  "attachmentsManifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-settled-camera-5643eca/manifest.json",
+  "attachmentsManifestSHA256": "f48efbca6a25fe07b84047d1723f843cb00e4688ffa181372949b9d6671b2fc9",
+  "captures": [
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-settled-camera-5643eca/0D732B72-9A1C-445E-96EC-77252E0105C0.png",
+      "sha256": "d5d2033540ea940d68845dcbd6a7420198f3a2301f9e99ea7b24ffb4928534d1",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "orientedDimensions": [
+        2752,
+        2064
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-settled-camera-5643eca/8B3347B4-AE02-456E-89CE-4B29EC8B0BFF.png",
+      "sha256": "148b5472b375838d453ceb8b27ed72e92e3e9618378aaa3d1ec512f7dbc927ce",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "orientedDimensions": [
+        2752,
+        2064
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-settled-camera-5643eca/F19E019A-672A-4E35-806E-F8A1B4605391.png",
+      "sha256": "8615b14ef5e6622fabe3438dc854f826086f31bfc9add1aba5940b1986175db7",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "orientedDimensions": [
+        2752,
+        2064
+      ]
+    },
+    {
+      "path": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/ipad-settled-camera-5643eca/F59EE7FF-74DE-42C3-B0B4-EDA21E624DF3.png",
+      "sha256": "8b95a831841fd3a1362d8e06d41cafb565c24f5ac4e012f0497220ae933febf3",
+      "encodedDimensions": [
+        2064,
+        2752
+      ],
+      "exifOrientation": 8,
+      "orientedDimensions": [
+        2752,
+        2064
+      ]
+    }
+  ],
+  "inspection": {
+    "allFourFullOriginalScreenshotsViewed": true,
+    "chaseAfterFiveSecondsShowsCarsAndLoops": true,
+    "chargedAndPostHoldFramesShowRaceWorld": true,
+    "driverAfterTwoSecondsShowsCockpit": true,
+    "cameraFramingProductionEditRequiredByThisRun": false,
+    "originalStressRaceTestUnchanged": true
+  },
+  "visionOSBuiltOrRun": false,
+  "SimulatorGUIUsed": false,
+  "signedPackageUploadPerformed": false
+}

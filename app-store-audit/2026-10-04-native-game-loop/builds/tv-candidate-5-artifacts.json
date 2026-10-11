@@ -1,0 +1,46 @@
+{
+  "sourceProof": "../native-inputs.candidate-5.json",
+  "note": "Preserved compiled binary/test proof before the bounded candidate6 incremental rebuild; asset inputs are retained in source proof. iPad5 binary was not preserved before its rebuild, so no claim is made about retained iPad5 bytes.",
+  "artifacts": [
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v Human.app/Hot Wheels v Human",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v Human.app/Hot Wheels v Human",
+      "sha256": "a567636f2ead1ba1ec69260c24817e4117ad406cc3d3e63a1fa233cdf19a6232"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v Human.app/Hot Wheels v Human.debug.dylib",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v Human.app/Hot Wheels v Human.debug.dylib",
+      "sha256": "d043588470e9af2b299196eeb709c0400a89667284da9d25a7c19d9a677acce7"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v Human.app/Info.plist",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v Human.app/Info.plist",
+      "sha256": "5c99d2df7572aea6555866480dd7aa3dfc6fa2a3197dc4798a97c867791448c2"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Hot Wheels v HumanTests",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Hot Wheels v HumanTests",
+      "sha256": "12c58724c6d1271e2a22c7ae06790167dd124c6cf3ec98e81b86e0b57d77ef30"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Info.plist",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v Human.app/PlugIns/Hot Wheels v HumanTests.xctest/Info.plist",
+      "sha256": "fe5ba8ebaad81ddc04c5877c8e29d127e0ad51818596de1b1d864ceb5ec8fa4f"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Hot Wheels v HumanUITests",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Hot Wheels v HumanUITests",
+      "sha256": "1de4df07b3dcb8c21ab7342d5933c564851a7fed77d214d67e92f44a0091d116"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Debug-appletvsimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Info.plist",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Debug-appletvsimulator/Hot Wheels v HumanUITests-Runner.app/PlugIns/Hot Wheels v HumanUITests.xctest/Info.plist",
+      "sha256": "aaa66fb2187c16881c8b69bfd8ce5756f550e4e862359544097a48bea677fdf1"
+    },
+    {
+      "originalPath": "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+      "archivedPath": "app-store-audit/2026-10-04-native-game-loop/builds/tv-candidate-5-artifacts/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+      "sha256": "6e9824992e8c4d7e31b8fb98a4654f2fb65542c3d84a02d8fefe32051cace377"
+    }
+  ]
+}

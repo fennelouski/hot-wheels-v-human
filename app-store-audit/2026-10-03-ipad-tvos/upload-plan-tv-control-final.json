@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "buildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "status": "Concrete upload plan prepared; root review/authorization gate pending. Nothing uploaded.",
+  "appStoreConnectAppID": "6818777508",
+  "bundleIdentifier": "com.nathanfennel.Hot-Wheels-v-Human",
+  "version": "1.0",
+  "build": "1",
+  "expectedFamilies": {
+    "iPadOS": [
+      2
+    ],
+    "tvOS": [
+      3
+    ]
+  },
+  "nativeRebuildRequested": false,
+  "nativeSourceProjectOrVersionMutationRequested": false,
+  "signedArchiveOrExportIPAReplacementRequested": false,
+  "authentication": "Existing signed-in Xcode account, automatic provisioning. No API keys or credential UI. Same existing bundle/team.",
+  "newAccountTermsOrManualCertificateProfileChangesAuthorized": false,
+  "executionOrder": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "exportOptionsPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/ExportOptions-Upload.plist",
+  "exportOptionsSHA256": "9fd7c7660910081473a78287c3c99f46a83fbd1702fb04faf8d69aa59ae14d6c",
+  "exportOptions": {
+    "destination": "upload",
+    "manageAppVersionAndBuildNumber": false,
+    "method": "app-store-connect",
+    "signingStyle": "automatic",
+    "testFlightInternalTestingOnly": false
+  },
+  "teamMatchesExistingVerifiedExportOptions": true,
+  "durableArtifactVerificationPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/durable-artifacts-tv-control-final.json",
+  "durableArtifactVerificationSHA256": "bada663af5c495c18653f1e01c0f6c2face167cb299460ff3e01f70c7172e558",
+  "commands": [
+    {
+      "platform": "iPadOS",
+      "command": [
+        "xcodebuild",
+        "-exportArchive",
+        "-archivePath",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/ipad.xcarchive",
+        "-exportPath",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/ipad-attempt1",
+        "-exportOptionsPlist",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/ExportOptions-Upload.plist",
+        "-allowProvisioningUpdates"
+      ],
+      "workingDirectory": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+      "uploadOutputDirectory": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/ipad-attempt1",
+      "uploadLogPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/ipad-attempt1.log",
+      "expectedVersion": "1.0",
+      "expectedBuild": "1",
+      "selectedArchiveContentsSHA256": "8357849a97c4072ba7e2c3905106b79d3d06a0a4460335fc2957d6c41f939f67",
+      "matchingVerifiedLocalIPASHA256": "2a2224f93509362b8552784bdb131d79fe8edb30b9012ab10d7c2fef0fe37328",
+      "expectedSuccessMarkers": [
+        "Upload succeeded",
+        "** EXPORT SUCCEEDED **"
+      ],
+      "serverProcessingState": "Not yet uploaded; root must verify processing/build availability live in App Store Connect"
+    },
+    {
+      "platform": "tvOS",
+      "command": [
+        "xcodebuild",
+        "-exportArchive",
+        "-archivePath",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/signed/tvos.xcarchive",
+        "-exportPath",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/tvos-attempt1",
+        "-exportOptionsPlist",
+        "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/ExportOptions-Upload.plist",
+        "-allowProvisioningUpdates"
+      ],
+      "workingDirectory": "/Users/nathan/Documents/GitHub/hot-wheels-v-human",
+      "uploadOutputDirectory": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/tvos-attempt1",
+      "uploadLogPath": "/Users/nathan/CodexReleaseArtifacts/HWvH/2026-10-03-44d929c/uploads/tvos-attempt1.log",
+      "expectedVersion": "1.0",
+      "expectedBuild": "1",
+      "selectedArchiveContentsSHA256": "c0f04d48a19e430966e64132ac58c6d823526654165f363f8f38cc7fd8f2754e",
+      "matchingVerifiedLocalIPASHA256": "6f767271c88fe537184f5005e1f0c82ec5c0798395569fb3930b99d50a9fa5f1",
+      "expectedSuccessMarkers": [
+        "Upload succeeded",
+        "** EXPORT SUCCEEDED **"
+      ],
+      "serverProcessingState": "Not yet uploaded; root must verify processing/build availability live in App Store Connect"
+    }
+  ],
+  "gates": [
+    "Root reviews this exact plan before execution",
+    "Recheck current native-input hashes, selected durable archives and export-options hashes before each upload",
+    "Preserve existing local verified IPAs/archives and original production default testability NO",
+    "Accept no new account agreements or manual security changes",
+    "Record actual command exit codes, success markers and sanitized receipts, then root verifies live Apple processing and picks the processed builds"
+  ],
+  "appReviewSubmissionIncluded": false,
+  "uploadPerformed": false
+}

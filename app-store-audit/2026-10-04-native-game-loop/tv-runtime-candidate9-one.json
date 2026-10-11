@@ -1,0 +1,49 @@
+{
+  "startedAt": "2026-10-04T10:09:19.765176+00:00",
+  "sourceProof": "native-inputs.candidate-9.json",
+  "compiledProof": "compiled-artifacts.candidate-9.json",
+  "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+  "preflightDevice": {
+    "udid": "BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+    "state": "Shutdown",
+    "name": "Apple TV 4K (3rd generation)",
+    "deviceTypeIdentifier": "com.apple.CoreSimulator.SimDeviceType.Apple-TV-4K-3rd-generation-4K",
+    "dataPath": "/Users/nathan/Library/Developer/CoreSimulator/Devices/BF090DFE-C6F6-4FF4-AB70-8870241B497E/data"
+  },
+  "appearanceBefore": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "enumeratedTests": [
+    "Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()"
+  ],
+  "command": [
+    "xcodebuild",
+    "test-without-building",
+    "-xctestrun",
+    "/tmp/hwvh-game-loop-tv-20261004/Build/Products/Hot Wheels v Human_Hot Wheels v Human_appletvsimulator26.5-arm64-x86_64.xctestrun",
+    "-destination",
+    "platform=tvOS Simulator,id=BF090DFE-C6F6-4FF4-AB70-8870241B497E",
+    "-parallel-testing-enabled",
+    "NO",
+    "-only-testing:Hot Wheels v HumanUITests/GameLoopUITests/testFirstViewportPlayActualFinishShareAndRematch()",
+    "-resultBundlePath",
+    "/tmp/hwvh-game-loop-tv-candidate9-one-20261004.xcresult"
+  ],
+  "exitCode": 0,
+  "resultBundle": "/tmp/hwvh-game-loop-tv-candidate9-one-20261004.xcresult",
+  "log": "tv-candidate9-one.log",
+  "logSHA256": "c19e3c975457e6848dc280b69e5e421df5be0842e472179ebc99b818e9a0a394",
+  "appearanceAfter": {
+    "exitCode": 0,
+    "stdout": "unsupported\n",
+    "stderr": ""
+  },
+  "shutdownExitCode": 0,
+  "finalDeviceState": "Shutdown",
+  "normalFilesUnchanged": true,
+  "nativeAndCompiledHashesUnchanged": true,
+  "appearanceUnchanged": true,
+  "finishedAt": "2026-10-04T10:10:26.169317+00:00"
+}

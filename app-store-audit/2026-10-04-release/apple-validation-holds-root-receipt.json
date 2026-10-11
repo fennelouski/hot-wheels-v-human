@@ -1,0 +1,36 @@
+{
+  "capturedAt": "2026-10-04T13:29:29.012584+00:00",
+  "appID": "6818777508",
+  "version": "1.0",
+  "build": "1",
+  "platforms": [
+    "iPadOS",
+    "tvOS"
+  ],
+  "actualAppleValidation": "Unable to Add for Review",
+  "bothPlatformsMissingItems": [
+    "Privacy Policy URL",
+    "Apple TV Privacy Policy text",
+    "Content Rights Information",
+    "Published App Privacy responses"
+  ],
+  "draftSubmissionCreated": false,
+  "finalSubmissionPerformed": false,
+  "bothSelectedBuildsPersisted": true,
+  "bothSavedVersionPagesSaveButtonDisabled": true,
+  "remainingHumanFact": "Whether the 72 bundled ElevenLabs clips were generated under a paid, non-beta plan with commercial rights",
+  "webRevisionReadyLocally": "3d48db495cd8a40eb0f9a29f217de81b4ee1474b",
+  "webDeployed": false,
+  "awsLoginReadinessQuestion": "Pending; no fresh login invoked",
+  "preparedTVPolicyTextCharacters": 3542,
+  "privacyNoDataDraftSaved": true,
+  "privacyPublished": false,
+  "proofFiles": {
+    "ipad-add-for-review-validation-held.txt": "ef9136e19def866635111c97ec167937d40195c39a1bdc100af6d0e35ba23bd1",
+    "tvos-add-for-review-validation-held.txt": "065b1a77ec59970c13eb408e31bec9cf78e5b28f557e41a0becacfb81cf7b43e",
+    "ipad-1.0-1-build-selected-persisted.txt": "59aff6ca0259eccbdf582f2e4dc988592e35005abdf305985c045b85e0cb6a36",
+    "tvos-1.0-1-build-selected-persisted.txt": "fc0890afe12171176a359eef4ef0f1950e25e28fb29bab4d032fa065898dc942",
+    "web-copy-camera-correction-commit-receipt.json": "2630f4aabd8a454f239f9b18d7bfabb968151b7334118e31e639a6913b642ccc",
+    "apple-tv-privacy-policy.prepared.txt": "2577d019b441270234732e461c14832d6de23bbebeb3463051259158de0f1018"
+  }
+}

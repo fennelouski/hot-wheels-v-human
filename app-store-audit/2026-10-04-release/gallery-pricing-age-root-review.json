@@ -1,0 +1,68 @@
+{
+  "capturedAt": "2026-10-04T13:13:33.235899+00:00",
+  "appID": "6818777508",
+  "version": "1.0",
+  "reviewer": "root",
+  "gallery": {
+    "iPad": {
+      "count": 10,
+      "dimensions": [
+        2752,
+        2064
+      ],
+      "persistedOrder": "01 through 10",
+      "exactDecodedPixelMatches": 10,
+      "actualCDNContactSheetsPersonallyViewed": [
+        "actual-ipad-01-05.jpg",
+        "actual-ipad-06-10.jpg"
+      ]
+    },
+    "tvOS": {
+      "count": 10,
+      "dimensions": [
+        3840,
+        2160
+      ],
+      "persistedOrder": "01 through 10",
+      "exactDecodedPixelMatches": 10,
+      "actualCDNContactSheetsPersonallyViewed": [
+        "actual-tv-01-05.jpg",
+        "actual-tv-06-10.jpg"
+      ]
+    },
+    "visualResult": "Approved. Short centered headlines, themed racing backgrounds, native heroes and outward angled supporting images. TV image 05 is the actual preview, not proof of successful physical iPad image handoff."
+  },
+  "pricing": {
+    "persistedCurrentPriceCountryCount": 175,
+    "zeroPriceCount": 175,
+    "baseCountry": "United States",
+    "appleSiliconCompatibility": false,
+    "appleVisionCompatibility": false
+  },
+  "availability": {
+    "selectedCurrentCountries": 175,
+    "checkedControlsIncludingRegionGroupsAndFuture": 181,
+    "futureCountriesEnabled": true,
+    "actualStatus175": "Available on App Release",
+    "ageQuestionnaireWarning": "Afghanistan and Morocco will not be sold due to generated age rating. Availability page still labels all175 Available on App Release; do not interpret that as proof of actual sale eligibility."
+  },
+  "ageRating": {
+    "publishedForm": "Saved",
+    "generatedRating": "13+",
+    "override": "Not Applicable",
+    "cartoonFantasyViolence": "Frequent",
+    "contests": "Frequent",
+    "rationale": "Regular toy-car crashes and exaggerated reactions occur during normal racing. Competitive racing for wins and recorded timing is a regular game activity. No real human violence, gambling, public user content, chat, ads, unrestricted browser, sexual content or medical themes were found in the frozen release."
+  },
+  "finalSubmission": "Held for owner ElevenLabs generation-plan fact and corrected web pages dual deployment; no content-rights affirmation or final submission performed.",
+  "proofFiles": {
+    "actual-uploaded-ipad-pixel-verification.json": "be868318c2c667e7ceb31a9b78ab359cdb3f6c4886a11c31ba553f9f4ae3138d",
+    "actual-uploaded-tv-pixel-verification.json": "dffb416e912837745ba7f0aaae9de7c7db10b33d2db51ebc0f5bbc716d482ec4",
+    "ipad-gallery-persisted-order.txt": "4a329cd06ca0599b726b7a036bbfb09e00f6ae70402099a0fc91bd7c4b459a0b",
+    "tvos-gallery-persisted-order.txt": "654314b331c8e1a08ca3c7fca71fe5e8bc181e25a88b573fdc985fee7452a1c0",
+    "pricing-persisted-175-rows.json": "ea162998f372f6074628ecf36b2de6d1372b82c245a5a6d015a536f94c71a004",
+    "pricing-persisted-devices.txt": "0a02e283fbadd854095336b66cde42c24b002936e0df65be43f843f92d1e3208",
+    "availability-persisted-selection.txt": "5409f6d8979a5c6bf069dd7fd483725bff65d67af2ee956dc6bacd7775cada49",
+    "age-rating-saved.txt": "80f4ea6e8e502056420e2f22b4d834e934b401e342a03c9107495c642ec9f1ec"
+  }
+}

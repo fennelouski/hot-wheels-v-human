@@ -1,0 +1,234 @@
+{
+  "schemaVersion": 1,
+  "status": "verified-native-source-compatibility",
+  "targetRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "targetSourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "targetNativeInputsPath": "../native-source-inputs-tv-control-final.json",
+  "targetNativeInputsSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "recordedAtUTC": "2026-10-03T11:20:41.905125+00:00",
+  "reviewAuthorization": "Parent explicitly approved narrow retention with actual original revision/buildRef/hashes, reviewed tvOS-only delta, fresh iPad build/source inspection and final-source affected TV recapture.",
+  "inspection": {
+    "schemaVersion": 1,
+    "priorRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+    "targetRevision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+    "productionInputCount": 828,
+    "unchangedProductionInputCount": 826,
+    "changedProductionInputs": [
+      {
+        "path": "Hot Wheels v Human/Features/Arena/ArenaHUDView.swift",
+        "priorSHA256": "e73658e43bfd374e39ea921aeee8dc7fa6a3bc3dbe2ec26066d8144ec1aaa4a9",
+        "targetSHA256": "f1ad705976ced9708a6369efbdd6fb57084ce2ccf615ca699ac979e7b7a4eeb1",
+        "iPadProjectionSHA256": "e73658e43bfd374e39ea921aeee8dc7fa6a3bc3dbe2ec26066d8144ec1aaa4a9",
+        "iPadProjectionIdentical": true,
+        "projectionMethod": "Remove only os(tvOS) conditional branches, retaining their else branch; other directives and content preserved."
+      },
+      {
+        "path": "Hot Wheels v Human/Features/Arena/ArenaView.swift",
+        "priorSHA256": "ad7b5637b44296a69e028cd61d178c642d63bd82a9fb8f8cff17fac389018228",
+        "targetSHA256": "718613d93db67d413841ee88d25b57b366f0bd2cf6b8c5659f8250dbecadaf7f",
+        "iPadProjectionSHA256": "635f458547f9c8ff6fcb3b1c4bbb50c3ef8181ef659b0bfa0351dd37dbc8bc35",
+        "iPadProjectionIdentical": true,
+        "projectionMethod": "Remove only os(tvOS) conditional branches, retaining their else branch; other directives and content preserved."
+      }
+    ],
+    "exactReviewedProductionDiffPath": "/var/folders/1_/rbnykrdx1xj_jn2cszll8rcm0000gn/T/hwvh-bright-final-64d8310-20261003-d3n2vf1h/production-delta.patch",
+    "exactReviewedProductionDiffSHA256": "b6ec629658419cfcc86ace7dec85abf961b893ccbc1a65ed78693c90f9416da5",
+    "iPadCodeAndProjectUnchanged": true,
+    "tvUnaffectedCaptureScope": "Workshop editor, local profile, saved track library, world editor, racer wardrobe. All race HUD, camera, visibility and results captures require final-revision native capture; no older arena screenshot allowed.",
+    "targetProductionProofPath": "../native-production-inputs-tv-control-final.json",
+    "targetProductionProofSHA256": "c200c2434d9fbfaedee13144dca5d65c04e6a5c40b50de89cc046c00319398e4",
+    "targetProductionCanonicalSHA256": "9ec9b7b19dc3ba4b76e60c335d19f57a7737a2d78c05299c5ed12ffef00655c3",
+    "freshBuildRecordPath": "../native-builds-tv-control-final.json",
+    "freshBuildRecordSHA256": "81ef129cccc522e253050b74e5478fff4c9c0a2cc535f1f992f33741f7c414dd",
+    "targetIpadExecutableSHA256": "0686b70d2b1268430e738afd5d1ff8b0c4dc1db931c3b2463c8913484b3a86c5",
+    "priorIpadExecutableSHA256": "507178ca77df5d3776d186b073dfc31d2316e17dde1e3654c8dd1b93bc6155b3",
+    "executableByteIdentityClaimed": false
+  },
+  "priorNativeInputProofPath": "../native-source-inputs-camera-contrast-final.json",
+  "priorNativeInputProofSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+  "priorNativeBuildRecordPath": "../native-builds-69833ad-gallery-historical.json",
+  "priorNativeBuildRecordSHA256": "d499a433a065850fe155f5b7653b3e392a3b0c1eb230d42ca84c0577bd2ec3da",
+  "captures": [
+    {
+      "id": "ipad-track",
+      "platform": "ipad-13",
+      "sha256": "407498ea7c99011c32df31f4927909b28005ee7d21b2969dbb7c75e7dfe386ca",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-car",
+      "platform": "ipad-13",
+      "sha256": "046ac1fc846b608989bf0888a09c9a8e6f347b1966ce7f25d5d76e39c528677e",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-race",
+      "platform": "ipad-13",
+      "sha256": "3fd1506a25dfe8c4db3a0fec3594748abbd4aa24a4279d2fe9f4c9ed4e786382",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-racer",
+      "platform": "ipad-13",
+      "sha256": "fed28b42946b0a1f797f7674a326eb97a9c95f627dfeafb3e91477a1841a6953",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-paint",
+      "platform": "ipad-13",
+      "sha256": "a182fc62b0aba0639197e8841702267048cad914ff63b16181481e28f1c7d641",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-draw",
+      "platform": "ipad-13",
+      "sha256": "0fb58b99e6d1fd08243f7db0f18d2c4bc2857b2359ebc87edf4b907a1c485fc2",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-stickers",
+      "platform": "ipad-13",
+      "sha256": "a960f604435e483930448dcc7e6eb56813cdaf1465d94acb20716c23016e10dd",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-world",
+      "platform": "ipad-13",
+      "sha256": "e5a0771d3d0e12379d4b79e91c89a67563d7c69e3e095261b97f9248ce26804e",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-garage",
+      "platform": "ipad-13",
+      "sha256": "682c1a5a393d619508d01539f5934732877539d006feac159e51df03867f6313",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-library",
+      "platform": "ipad-13",
+      "sha256": "bb75ccfb13d1bba1d57904e33ed3553e62c0f5c5ab194dfb26aee269efd8a087",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-boost",
+      "platform": "ipad-13",
+      "sha256": "ec27f9330e6bebcb4e879a07bc5fa3d3343fffd3afd3de8098f9ad10c122b777",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "ipad-driver",
+      "platform": "ipad-13",
+      "sha256": "fdb2e46926e7a1f36982dbba0a6306b21a23a0e4377c06fc42a9acde89e4b8f7",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "All iPad implementation and project inputs unchanged; the reviewed production delta is exclusively tvOS conditional code. Fresh final-source iPad Release compilation passed; no newer capture run claimed."
+    },
+    {
+      "id": "tv-track",
+      "platform": "apple-tv",
+      "sha256": "194a2bf7235da275fbf9d2a1bf452b7e91efc6d02dd4524e701940ea29aecceb",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-car",
+      "platform": "apple-tv",
+      "sha256": "57f22bf1906fbd43bd19b677fb0c9a29060e0ae23b57a03d3d5f17f5d2d5a34b",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-racer",
+      "platform": "apple-tv",
+      "sha256": "fbfeba5aa31657e186e6602c973f57f5b6b37c6d0696d4cda1ddba73b95f32bd",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-paint",
+      "platform": "apple-tv",
+      "sha256": "4154a0787bebb7951db810f9cfdac5f9e11d066dea390458f0a9d303797654f6",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-draw",
+      "platform": "apple-tv",
+      "sha256": "d19b968bc1a9fcb375e6f613da34b642ea6ee1920f66ff1c38caeca136ed4e77",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-stickers",
+      "platform": "apple-tv",
+      "sha256": "b0854528bc5801f037a2a6c64454ad459a2e20b6809d7d130335c2f0c2ecce3f",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-world",
+      "platform": "apple-tv",
+      "sha256": "07c5512dc21be94f25a7a331ecbd672f10d4f2a71ff87d1de80fa4d6450820b8",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    },
+    {
+      "id": "tv-library",
+      "platform": "apple-tv",
+      "sha256": "6f6d189c239b528c7bd717b9fba518bd246d429a282934b8ab83f7577b7b8298",
+      "sourceRevision": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+      "sourceBuildRef": "69833ad-Release-1.0-build1-SDK26.5",
+      "workingTreeInputsSHA256": "86260597fdb60781a5486836695d7e64d0441fe8a9c25040d73b076cdd555b76",
+      "reviewedScope": "Unchanged TV workshop/editor/library/wardrobe capture. Exact production delta is confined to ArenaView controls and ArenaHUDView results. No prior arena, camera, visibility, radio or results capture retained."
+    }
+  ],
+  "limitations": "Native model/UI evidence is retained as its actual historical run, not relabeled as current. Historical TV09 failure is preserved and excluded. Fresh final-source TV09/10/11/12 and 14 models pass separately. All final TV arena captures come from current source."
+}

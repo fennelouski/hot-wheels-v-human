@@ -1,0 +1,5 @@
+Query chain:
+ →Find: Target Application 'com.nathanfennel.Hot-Wheels-v-Human'
+  ↪︎Find: Descendants matching type Button
+    ↪︎Find: Elements containing elements matching predicate 'label CONTAINS "Save it!"'
+      ↪︎Find: First Match

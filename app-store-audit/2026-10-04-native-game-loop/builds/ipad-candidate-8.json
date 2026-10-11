@@ -1,0 +1,9 @@
+{
+  "recordedAt": "2026-10-04T09:59:34.801886+00:00",
+  "exitCode": 0,
+  "testsExecuted": 0,
+  "sourceProof": "../native-inputs.candidate-8.json",
+  "logSHA256": "e3a610dd051e247ac37efcf1720fb0e1e894465ca9dd132b3324a962aee9896c",
+  "all889InputsMatch": true,
+  "status": "generic ipad simulator build-for-testing succeeded"
+}

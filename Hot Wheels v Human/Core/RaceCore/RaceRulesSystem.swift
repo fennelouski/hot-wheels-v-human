@@ -108,7 +108,13 @@ struct RaceRulesSystem: System {
         // car at the start gate (seen in CLI drills as a piece-0 crash).
         let dt = min(Float(context.deltaTime), 0.1)
 
-        for entity in context.entities(matching: Self.debrisQuery, updatingSystemWhen: .rendering) {
+        #if os(visionOS)
+        _ = context.entities(matching: EntityQuery(where: .has(SpatialRaceDisplayComponent.self)), updatingSystemWhen: .rendering)
+        let debrisEntities = context.scene.performQuery(Self.debrisQuery)
+        #else
+        let debrisEntities = context.entities(matching: Self.debrisQuery, updatingSystemWhen: .rendering)
+        #endif
+        for entity in debrisEntities {
             guard var debris = entity.components[DebrisComponent.self] else { continue }
             debris.secondsLeft -= dt
             if debris.secondsLeft <= 0 {
@@ -123,7 +129,12 @@ struct RaceRulesSystem: System {
         }
 
         guard RaceEventBus.shared.raceActive else { return }
-        for entity in context.entities(matching: Self.carQuery, updatingSystemWhen: .rendering) {
+        #if os(visionOS)
+        let cars = context.scene.performQuery(Self.carQuery)
+        #else
+        let cars = context.entities(matching: Self.carQuery, updatingSystemWhen: .rendering)
+        #endif
+        for entity in cars {
             guard let car = entity as? ModelEntity,
                   var state = car.components[CarComponent.self],
                   var follow = car.components[LaneFollowComponent.self],

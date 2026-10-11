@@ -42,6 +42,7 @@ nonisolated final class ArenaFrameCapture: @unchecked Sendable {
 
 /// Identity post-processing: source pixels are passed to the display unchanged;
 /// only a pending user/result request copies one frame into CPU-readable memory.
+#if !os(visionOS)
 nonisolated struct ArenaSnapshotEffect: PostProcessEffect, @unchecked Sendable {
     let capture: ArenaFrameCapture
     private var imageContext: CIContext?
@@ -84,3 +85,4 @@ nonisolated struct ArenaSnapshotEffect: PostProcessEffect, @unchecked Sendable {
         }
     }
 }
+#endif

@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "revision": "44d929c6f1d54d6063270fb18e023a25062da2f2",
+  "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+  "recordedAtUTC": "2026-10-03T11:20:41.907137+00:00",
+  "status": "Verified genuine native feature evidence with explicitly scoped retained-capture compatibility; independent final marketing review remains separate",
+  "sourceCompatibilityProofPath": "source-compatibility-tv-control-final.json",
+  "sourceCompatibilityProofSHA256": "0fef46c2c08e149f074b79622054457365e1de541430ef3f600e606648547a3b",
+  "nativeInputProofPath": "../native-source-inputs-tv-control-final.json",
+  "nativeInputProofSHA256": "fa9c880064a94d508ebdd38d2c2c94401010691321c0e297f2c88003fca6948d",
+  "finalNativeBuildRecordPath": "../native-builds-tv-control-final.json",
+  "finalNativeBuildRecordSHA256": "81ef129cccc522e253050b74e5478fff4c9c0a2cc535f1f992f33741f7c414dd",
+  "retainedNativeBuildRecordPath": "../native-builds-69833ad-gallery-historical.json",
+  "retainedNativeBuildRecordSHA256": "d499a433a065850fe155f5b7653b3e392a3b0c1eb230d42ca84c0577bd2ec3da",
+  "signedProductionPackageProofPath": "../signed-release-packages-tv-control-final.json",
+  "signedProductionPackageProofSHA256": "a8dd934df41abb92dbf8b60e457c1c859a21d8d5ce2351f75e6594a6ad8a3a7f",
+  "retainedActualRun": {
+    "id": "ipad-69833ad-gallery",
+    "platform": "iPadOS",
+    "resultBundlePath": "/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/ipad-gallery.xcresult",
+    "testSummaryPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/ipad-69833ad-gallery-test-summary.json",
+    "testSummarySHA256": "a497f6c1be57b2cdb676434dc104f7fa39dc5c731cc84a66383bd46d5730e22f",
+    "testDetailsPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/ipad-69833ad-gallery-test-details.json",
+    "testDetailsSHA256": "ad49e59bf27fcd45a10aa105a136996332c282b3cbdfe522b150cc6eb0f5e25c",
+    "testLogPath": "/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/ipad-test.log",
+    "testLogSHA256": "c43f8f38ff148f7d7e526e83947e1ca9bf99458118a84ee7004662857fc7fee6",
+    "commandAtExecution": [
+      "xcodebuild",
+      "-xctestrun",
+      "/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/derived-ipad/Build/Products/Hot Wheels v Human_Hot Wheels v Human_iphonesimulator26.5-arm64-x86_64.xctestrun",
+      "-destination",
+      "platform=iOS Simulator,id=C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "-resultBundlePath",
+      "/tmp/hwvh-camera-final-69833ad-20261003-qxsc_937/ipad-gallery.xcresult",
+      "-only-testing:Hot Wheels v HumanUITests/WorkshopTryItUITests",
+      "-only-testing:Hot Wheels v HumanUITests/WorkshopLayoutUITests",
+      "-only-testing:Hot Wheels v HumanUITests/GarageUITests",
+      "-only-testing:Hot Wheels v HumanUITests/WorldPickerUITests/testPickWorldsAndScreenshot",
+      "-only-testing:Hot Wheels v HumanUITests/IPadReleaseFlowUITests",
+      "-only-testing:Hot Wheels v HumanUITests/IPadWorkshopReleaseUITests",
+      "-only-testing:Hot Wheels v HumanTests/TVTrackBuilderTests",
+      "-only-testing:Hot Wheels v HumanTests/WorkshopPersistenceTests",
+      "-only-testing:Hot Wheels v HumanTests/RaceLifecycleTests",
+      "-only-testing:Hot Wheels v HumanTests/CarDrawingSessionTests",
+      "-parallel-testing-enabled",
+      "NO",
+      "test-without-building"
+    ],
+    "exitCode": 0,
+    "passed": 28,
+    "failed": 0,
+    "skipped": 0,
+    "uiPassed": 12,
+    "modelPassed": 16,
+    "actualPassedTestIdentifiers": [
+      "CarDrawingSessionTests/rasterSurvivesTwoTabReentriesAndLaterPencilStroke()",
+      "CarDrawingSessionTests/undoSnapshotRemovesLaterStrokesAndClearDoesNotResurrectRaster()",
+      "RaceLifecycleTests/stopRejectsQueuedAndFutureControllerInputs()",
+      "RaceLifecycleTests/cancelledBuildDoesNotChangeTheSceneOrPhase()",
+      "RaceLifecycleTests/closingCountdownRemovesCarsAndCannotStartARaceLater()",
+      "TVTrackBuilderTests/blueprintIdentityDoesNotChangeWhenReadingPreview()",
+      "TVTrackBuilderTests/loadedTrackRestoresEmptyWorldAndClearsHeldSelection()",
+      "TVTrackBuilderTests/selectedDecorationRemovalKeepsRemainingIdentitiesAndCoordinates()",
+      "TVTrackBuilderTests/remoteRotationAndMovementPreserveRoadGridSnapping()",
+      "TVTrackBuilderTests/remotePortalRejectsNonfiniteCoordinatesWithoutLosingPendingExit()",
+      "TVTrackBuilderTests/portalCanBeAddedWhenNearDefaultWouldOverlapAnEarlierSegment()",
+      "TVTrackBuilderTests/cursorDirectionsFollowCameraAndIncludeSpaceAroundWholeTrack()",
+      "TVTrackBuilderTests/remoteCanReachDistantExitOfLongValidTrack()",
+      "TVTrackBuilderTests/cameraZoomTiltAndResetKeepFiniteUsablePose()",
+      "WorkshopPersistenceTests/failedCarEncodingPreservesSavedCarAndUnrelatedDraft()",
+      "WorkshopPersistenceTests/savingSelectedRacerCommitsLastUsedWithAppearance()",
+      "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+      "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+      "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+      "IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()",
+      "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "WorkshopTryItUITests/testCustomizerTestDrive()",
+      "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+      "WorldPickerUITests/testPickWorldsAndScreenshot()"
+    ],
+    "actualPassedUITestIdentifiers": [
+      "GarageUITests/testStarterCarOpensItsOwnPageWithEveryAction()",
+      "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()",
+      "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+      "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+      "IPadWorkshopReleaseUITests/testIPad03ActiveRaceNativeBoostHoldAndChaseToDriverCamera()",
+      "IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()",
+      "WorkshopLayoutUITests/testCarWorkshopTabsClearTheActionRow()",
+      "WorkshopLayoutUITests/testCharacterWorkshopTabsClearTheActionRow()",
+      "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()",
+      "WorkshopTryItUITests/testCustomizerTestDrive()",
+      "WorkshopTryItUITests/testTrackBuilderRaceIt()",
+      "WorldPickerUITests/testPickWorldsAndScreenshot()"
+    ],
+    "actualFailedTestIdentifiers": [],
+    "device": {
+      "architecture": "arm64",
+      "deviceId": "C8D3D5C2-0149-4D4D-8E4F-42E0FED0FAF5",
+      "deviceName": "HWvH QA iPad 20261003",
+      "modelName": "iPad Pro 13-inch (M5)",
+      "osBuildNumber": "23F77",
+      "osVersion": "26.5",
+      "platform": "iOS Simulator"
+    },
+    "rawAttachmentDirectory": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/camera-contrast-final-ipad",
+    "rawAttachmentManifestPath": "/Users/nathan/Documents/GitHub/hot-wheels-v-human/app-store-audit/2026-10-03-ipad-tvos/raw/camera-contrast-final-ipad/manifest.json",
+    "rawAttachmentManifestSHA256": "58e3c99ce430f175d08b9cb6345409a3ecb79891a11917a1d3f493480ca244c3"
+  },
+  "finalActualRun": null,
+  "features": [
+    {
+      "imageID": "01-build-tracks",
+      "featureID": "track-builder",
+      "headline": "Build your own track",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The genuine saved six-piece personal Candy track and expanded map are paired with another native toy world and clear ordinary starter-track racing. IPad02 verifies finishable placements, saved identity and cold reload.",
+      "observedCaptureIDs": [
+        "ipad-track",
+        "ipad-world",
+        "ipad-race"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-track": "407498ea7c99011c32df31f4927909b28005ee7d21b2969dbb7c75e7dfe386ca",
+        "ipad-race": "3fd1506a25dfe8c4db3a0fec3594748abbd4aa24a4279d2fe9f4c9ed4e786382",
+        "ipad-world": "e5a0771d3d0e12379d4b79e91c89a67563d7c69e3e095261b97f9248ce26804e"
+      },
+      "actualCaptureRevisions": {
+        "ipad-track": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-race": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-world": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "02-make-your-car",
+      "featureID": "car-workshop",
+      "headline": "Make it your car",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The live changed chassis preview is paired with genuine red paint and a resized placed sticker. WorkshopTryIt verifies native customization and test-drive return; IPad01 verifies authored art and saving.",
+      "observedCaptureIDs": [
+        "ipad-car",
+        "ipad-paint",
+        "ipad-stickers"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-car": "046ac1fc846b608989bf0888a09c9a8e6f347b1966ce7f25d5d76e39c528677e",
+        "ipad-paint": "a182fc62b0aba0639197e8841702267048cad914ff63b16181481e28f1c7d641",
+        "ipad-stickers": "a960f604435e483930448dcc7e6eb56813cdaf1465d94acb20716c23016e10dd"
+      },
+      "actualCaptureRevisions": {
+        "ipad-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+        "WorkshopTryItUITests/testCustomizerTestDrive()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "03-race-creations",
+      "featureID": "native-race",
+      "headline": "Race what you create",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The hero is the ordinary deterministic Library starter blueprint The Mega Mega Track with the native demo pair. IPad04 records moving telemetry and clear Chase after five seconds, plus Driver after two seconds. Separate workshop tests exercise created car/track test-drive and return. The screenshot is not claimed to be that separately authored six-piece track.",
+      "observedCaptureIDs": [
+        "ipad-race",
+        "ipad-driver"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-race": "3fd1506a25dfe8c4db3a0fec3594748abbd4aa24a4279d2fe9f4c9ed4e786382",
+        "ipad-driver": "fdb2e46926e7a1f36982dbba0a6306b21a23a0e4377c06fc42a9acde89e4b8f7"
+      },
+      "actualCaptureRevisions": {
+        "ipad-race": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-driver": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()",
+        "WorkshopTryItUITests/testCustomizerTestDrive()",
+        "WorkshopTryItUITests/testTrackBuilderRaceIt()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "04-create-racer",
+      "featureID": "racer-editor",
+      "headline": "Create your own racer",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The native personal racer wardrobe shows changed hair and its live reaction preview. WorkshopTryIt verifies the actual hair change, test-drive and return.",
+      "observedCaptureIDs": [
+        "ipad-racer",
+        "ipad-car"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-car": "046ac1fc846b608989bf0888a09c9a8e6f347b1966ce7f25d5d76e39c528677e",
+        "ipad-racer": "fed28b42946b0a1f797f7674a326eb97a9c95f627dfeafb3e91477a1841a6953"
+      },
+      "actualCaptureRevisions": {
+        "ipad-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-racer": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "WorkshopTryItUITests/testCharacterEditorPiPAndTestDrive()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "05-pick-paint",
+      "featureID": "part-paint",
+      "headline": "Pick your paint",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The genuine reopened red car and native color/finish controls are visible. IPadReleaseFlow verifies save and cold launch; no paint is added to screenshot pixels.",
+      "observedCaptureIDs": [
+        "ipad-paint"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-paint": "a182fc62b0aba0639197e8841702267048cad914ff63b16181481e28f1c7d641"
+      },
+      "actualCaptureRevisions": {
+        "ipad-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadReleaseFlowUITests/testNormalEntryAndSavedCarSurviveColdLaunch()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "06-draw-your-way",
+      "featureID": "drawing-tools",
+      "headline": "Draw it your way",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The actual native drawing canvas contains two finger strokes. IPad01 verifies authored drawing, save, cold reopen, Clear and Undo. Both CarDrawingSession model tests also pass.",
+      "observedCaptureIDs": [
+        "ipad-draw",
+        "ipad-car",
+        "ipad-stickers"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-car": "046ac1fc846b608989bf0888a09c9a8e6f347b1966ce7f25d5d76e39c528677e",
+        "ipad-draw": "0fb58b99e6d1fd08243f7db0f18d2c4bc2857b2359ebc87edf4b907a1c485fc2",
+        "ipad-stickers": "a960f604435e483930448dcc7e6eb56813cdaf1465d94acb20716c23016e10dd"
+      },
+      "actualCaptureRevisions": {
+        "ipad-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-draw": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "07-add-stickers",
+      "featureID": "sticker-placement",
+      "headline": "Add the finishing stickers",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The actual placed star sticker is resized on the native 3D car through touch. IPad01 verifies placement, scalar size change, save and cold reopen.",
+      "observedCaptureIDs": [
+        "ipad-stickers",
+        "ipad-paint"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-paint": "a182fc62b0aba0639197e8841702267048cad914ff63b16181481e28f1c7d641",
+        "ipad-stickers": "a960f604435e483930448dcc7e6eb56813cdaf1465d94acb20716c23016e10dd"
+      },
+      "actualCaptureRevisions": {
+        "ipad-paint": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-stickers": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "08-choose-world",
+      "featureID": "world-decoration",
+      "headline": "Choose your toy world",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The hero shows the actual Big City toy world selected through the native picker. WorldPicker verifies Big City and Speedway choices; IPad02 separately verifies the saved Candy world. This headline promises choosing a world, not unverified manual scenery placement.",
+      "observedCaptureIDs": [
+        "ipad-world",
+        "ipad-track"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-track": "407498ea7c99011c32df31f4927909b28005ee7d21b2969dbb7c75e7dfe386ca",
+        "ipad-world": "e5a0771d3d0e12379d4b79e91c89a67563d7c69e3e095261b97f9248ce26804e"
+      },
+      "actualCaptureRevisions": {
+        "ipad-track": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-world": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()",
+        "WorldPickerUITests/testPickWorldsAndScreenshot()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "09-save-builds",
+      "featureID": "saved-libraries",
+      "headline": "Keep your favorite builds",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The hand-drawn, stickered flame car reports Saved in the native editor, paired with the genuine saved track library. IPad01 and IPad02 independently verify exact car/track cold restoration.",
+      "observedCaptureIDs": [
+        "ipad-garage",
+        "ipad-library",
+        "ipad-car"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-car": "046ac1fc846b608989bf0888a09c9a8e6f347b1966ce7f25d5d76e39c528677e",
+        "ipad-garage": "682c1a5a393d619508d01539f5934732877539d006feac159e51df03867f6313",
+        "ipad-library": "bb75ccfb13d1bba1d57904e33ed3553e62c0f5c5ab194dfb26aee269efd8a087"
+      },
+      "actualCaptureRevisions": {
+        "ipad-car": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-garage": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-library": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad01FingerDrawingStickerLiverySaveAndColdReopen()",
+        "IPadWorkshopReleaseUITests/testIPad02PersonalFinishableTrackAndWorldSaveAndColdLibraryReload()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    },
+    {
+      "imageID": "10-hold-boost",
+      "featureID": "race-boost",
+      "headline": "Hold boost. Chase the flag.",
+      "status": "verified-native-build",
+      "sourceBuildRef": "44d929c-Release-1.0-build1-SDK26.5",
+      "summary": "The clear native Chase frame follows a real three-second touch hold on charged boost. IPad04 verifies moving telemetry, the charged meter and consumption greater than ten percentage points. The imagery contains ordinary starter-track racing, not an editor.",
+      "observedCaptureIDs": [
+        "ipad-boost",
+        "ipad-race"
+      ],
+      "observedCaptureSHA256s": {
+        "ipad-race": "3fd1506a25dfe8c4db3a0fec3594748abbd4aa24a4279d2fe9f4c9ed4e786382",
+        "ipad-boost": "ec27f9330e6bebcb4e879a07bc5fa3d3343fffd3afd3de8098f9ad10c122b777"
+      },
+      "actualCaptureRevisions": {
+        "ipad-race": "69833ad8a4f2701de3b2ced7891bf807d32b5d02",
+        "ipad-boost": "69833ad8a4f2701de3b2ced7891bf807d32b5d02"
+      },
+      "retainedPassedUITestIdentifiers": [
+        "IPadWorkshopReleaseUITests/testIPad04DeterministicPresetRaceAfterRenderedCameraSettles()"
+      ],
+      "finalPassedUITestIdentifiers": []
+    }
+  ],
+  "unclaimed": [
+    "Physical iPad-to-TV multiplayer acceptance",
+    "Cloud sync",
+    "iPhone support",
+    "Full accessibility certification",
+    "VisionOS or Mac support"
+  ],
+  "scope": "Original screenshot revisions, bytes and runtime provenance are preserved. The final release did not rerun iPad or unaffected TV workshop flows; fresh final-source affected TV tests and both platform compilations are recorded separately."
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "recordedAtUTC": "2026-10-03T08:36:12.372425+00:00",
+  "toolPath": "tools/marketing-compose.swift",
+  "toolSHA256": "ff55d38f408b6ff75198a6dd4e338dad25881477c0b1578f16d10cbf765c0727",
+  "selfTestExitCode": 0,
+  "selfTestLog": "compositor-final-integrity-self-test.log",
+  "selfTestLogSHA256": "d7803a42d470dac70b1dd2eec251b2a663753b2c950fcb8b0da7cff3905fa7f0",
+  "addedChecks": [
+    "testHarnessInputsPath/testHarnessInputsSHA256",
+    "nativeBuildRecordPath/nativeBuildRecordSHA256",
+    "testResultSummaryPath/testResultSummarySHA256",
+    "testResultDetailsPath/testResultDetailsSHA256"
+  ],
+  "checkScope": "Optional recorded proof pairs reject missing partners and changed contents. Existing production capture, source build, feature claim, accepted native landscape size and device matching guards remain unchanged.",
+  "nativeFeaturesVerifiedBySelfTest": false,
+  "nativeBuildOrSimulatorActionPerformed": false
+}
