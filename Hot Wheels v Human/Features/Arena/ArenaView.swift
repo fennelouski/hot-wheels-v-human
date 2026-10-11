@@ -38,6 +38,10 @@ struct ArenaView: View {
     /// Apple TV remote camera peek, written by swipes and eased back to the
     /// auto-cam each frame in the scene update (tvOS only; iPad has no remote).
     @State private var camNudge = CameraNudge()
+    @State private var cameraPeekEnabled = false
+    #if os(tvOS)
+    @FocusState private var cameraPeekFocused: Bool
+    #endif
 
     var body: some View {
         ZStack {
@@ -111,7 +115,7 @@ struct ArenaView: View {
                     let atTheFlag = session.phase == .results
                     if !GameEffectsPolicy.shared.motionEnabled {
                         if cameraEntity.parent !== root { root.addChild(cameraEntity) }
-                        let rect = session.trackFootprint
+                        let rect = session.trackFootprint ?? coord.lobbyFootprint
                         let center = SIMD3<Float>((rect?.minX ?? 0) + (rect?.maxX ?? 0), 0,
                                                   (rect?.minZ ?? 0) + (rect?.maxZ ?? 0)) / 2
                         let span = max((rect?.maxX ?? 2) - (rect?.minX ?? -2),
@@ -358,6 +362,9 @@ struct ArenaView: View {
                     .accessibilityIdentifier("race-camera")
                     .accessibilityValue(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam")
                     .disabled(reduceMotion)
+                    #if os(tvOS)
+                    cameraPeekControl
+                    #endif
                 }
                 TrackVisibilityPicker(selection: coordinator.trackVisibility) {
                     coordinator.trackVisibility = $0
@@ -391,21 +398,6 @@ struct ArenaView: View {
             }
         }
         .background(Color(red: 0.09, green: 0.10, blue: 0.16).ignoresSafeArea())
-        // Siri Remote camera peek — TV only; iPad's arena keeps focus for its
-        // boost buttons. .focusable() so the arena receives swipes when no
-        // control is focused.
-        #if os(tvOS)
-        .focusable()
-        .onMoveCommand { direction in
-            switch direction {
-            case .left:  camNudge.yaw += RaceTuning.camNudgeYawStep
-            case .right: camNudge.yaw -= RaceTuning.camNudgeYawStep
-            case .up:    camNudge.height += RaceTuning.camNudgeHeightStep
-            case .down:  camNudge.height -= RaceTuning.camNudgeHeightStep
-            default: break
-            }
-        }
-        #endif
         .task(id: coordinator.session.completedResult?.id) {
             guard coordinator.session.completedResult != nil else { coordinator.clearShare(); return }
             // Let the real finish camera settle; this doesn't delay race input
@@ -418,6 +410,55 @@ struct ArenaView: View {
             if !coordinator.isPresentingResultShare { coordinator.frameCapture.cancel() }
         }
     }
+
+    #if os(tvOS)
+    private var cameraPeekControl: some View {
+        let title: String = cameraPeekEnabled ? "Done looking around" : "Look around"
+        let value: String = cameraPeekEnabled ? "On" : "Off"
+        let nudge = camNudge
+        let move: ((MoveCommandDirection) -> Void)? = cameraPeekEnabled ? { direction in
+            switch direction {
+            case .left: nudge.yaw += RaceTuning.camNudgeYawStep
+            case .right: nudge.yaw -= RaceTuning.camNudgeYawStep
+            case .up: nudge.height += RaceTuning.camNudgeHeightStep
+            case .down: nudge.height -= RaceTuning.camNudgeHeightStep
+            default: break
+            }
+        } : nil
+        return Button {
+            cameraPeekEnabled.toggle()
+            if cameraPeekEnabled {
+                coordinator.driverView = false
+                cameraPeekFocused = true
+            }
+            else { camNudge.yaw = 0; camNudge.height = 0 }
+        } label: {
+            Label(title, systemImage: "move.3d")
+                .labelStyle(.iconOnly)
+                .font(.system(size: 26, weight: .bold))
+                .frame(width: 60, height: 60)
+        }
+        .accessibilityValue(Text(verbatim: value))
+        .buttonStyle(TVWorkshopButtonStyle(selected: cameraPeekEnabled))
+        .background { RoundedRectangle(cornerRadius: 16).fill(Color.black.opacity(0.65)) }
+        .accessibilityIdentifier("race-camera-peek")
+        .focused($cameraPeekFocused)
+        .onMoveCommand(perform: move)
+        .onChange(of: cameraPeekFocused) { _, focused in
+            // tvOS may also propose a native focus move for the same arrow.
+            // Select exits this explicit camera mode and restores navigation.
+            if cameraPeekEnabled && !focused { cameraPeekFocused = true }
+        }
+        .onChange(of: reduceMotion) { _, calm in
+            if calm {
+                cameraPeekEnabled = false
+                camNudge.yaw = 0
+                camNudge.height = 0
+            }
+        }
+        .disabled(reduceMotion)
+    }
+    #endif
 }
 
 /// The three-way track switch. Icon only, per the ask — and it has to read

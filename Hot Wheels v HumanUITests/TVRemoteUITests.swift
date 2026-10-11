@@ -10,6 +10,27 @@ final class TVRemoteUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    func testTVLobbyShowcaseKeepsLobbyResponsive() throws {
+        let app = launch(["-HWTestSession", UUID().uuidString])
+        _ = try enterWorkshop(app)
+        try select(app.buttons["tv-home-iPad"], in: app)
+        let guide = app.staticTexts.containing(NSPredicate(format: "label CONTAINS 'Grab an iPad'")).firstMatch
+        try expect("The empty lobby must remain usable while tracks are showcased", timeout: 15, in: app) {
+            guide.exists
+        }
+        screenshot("Scoped lobby - first showcase")
+        settle(11) // exceeds the 9-second showcase dwell
+        XCTAssertTrue(guide.exists)
+        screenshot("Scoped lobby - next showcase")
+        XCUIRemote.shared.press(.playPause)
+        XCTAssertTrue(guide.exists, "Play/pause without a player/design must leave the lobby open")
+        try returnHome(app)
+        XCTAssertTrue(app.buttons["tv-home-iPad"].exists)
+        try select(app.buttons["tv-home-iPad"], in: app)
+        try expect("Reopening must create a responsive fresh lobby", timeout: 15, in: app) { guide.exists }
+        screenshot("Scoped lobby - reopened")
+    }
+
     func testTV01WorkshopRoutesAndLocalProfile() throws {
         let app = launch()
         screenshot("TV01 - Choose a local player")
@@ -327,7 +348,7 @@ final class TVRemoteUITests: XCTestCase {
     }
 
     func testTV09CameraRadioAndVolumeWithRemoteFocus() throws {
-        let app = launch(["--preset-track", "6"])
+        let app = launch(["--preset-track", "6", "-HWTestSession", UUID().uuidString])
         let camera = app.buttons["race-camera"]
         try focus(camera, in: app)
         XCTAssertEqual(camera.value as? String, "Driver View")
@@ -340,6 +361,17 @@ final class TVRemoteUITests: XCTestCase {
             speed.exists && (Double(speed.label.prefix { $0.isNumber || $0 == "." }) ?? 0) > 0.2
         }
         screenshot("TV20 - Chase camera and race world")
+        let peek = app.buttons["race-camera-peek"]
+        try select(peek, in: app)
+        XCTAssertEqual(peek.value as? String, "On")
+        XCUIRemote.shared.press(.left)
+        XCUIRemote.shared.press(.up)
+        XCTAssertTrue(peek.hasFocus, "Peeking must keep its explicit remote control focused")
+        screenshot("Scoped camera - directional peek")
+        XCUIRemote.shared.press(.select)
+        try expect("Select must finish peeking and restore directional navigation", in: app) {
+            peek.value as? String == "Off"
+        }
         try select(camera, in: app)
         XCTAssertEqual(camera.value as? String, "Driver View")
         try select(app.buttons["race-radio-jazz"], in: app)
