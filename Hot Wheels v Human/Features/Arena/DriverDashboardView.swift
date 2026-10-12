@@ -161,8 +161,7 @@ struct DriverDashboardView: View {
             // Badge, like the one moulded into a real dash.
             Text(style.nameplate)
                 .font(.system(size: 11, weight: .black, design: .rounded))
-                .lineLimit(1)
-                .minimumScaleFactor(0.6)
+                .fixedSize(horizontal: false, vertical: true)
                 .foregroundStyle(.white.opacity(0.32))
                 .shadow(color: .white.opacity(0.18), radius: 0, y: 1)
                 .padding(.horizontal, 8)
@@ -294,12 +293,11 @@ private struct PresetKey: View {
                         .font(.system(size: 20, weight: .bold))
                     Text(preset.label)
                         .font(.system(size: 13, weight: .heavy, design: .rounded))
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.7)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
                 .padding(.horizontal, 4)
             }
-            .frame(width: 82, height: 62)
+            .frame(width: 82).frame(minHeight: 62)
             .overlay(alignment: .topTrailing) {
                 Text("\(slot)")
                     .font(.system(size: 9, weight: .black, design: .monospaced))

@@ -348,7 +348,7 @@ struct ArenaView: View {
                         Label(reduceMotion ? "Calm Cam" : coordinator.driverView ? "Driver View" : "Chase Cam",
                               systemImage: reduceMotion ? "camera.fill" : coordinator.driverView ? "steeringwheel" : "video.fill")
                             .font(.system(size: 22, weight: .heavy, design: .rounded))
-                            .lineLimit(1)
+                            .fixedSize(horizontal: false, vertical: true)
                             .padding(.horizontal, 16)
                             .frame(minHeight: 60)
                     }

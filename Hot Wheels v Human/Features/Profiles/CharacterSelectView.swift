@@ -178,7 +178,7 @@ struct CharacterSelectView: View {
                     .clipShape(Circle())
                 Text(driver.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
-                    .lineLimit(1)
+                    .fixedSize(horizontal: false, vertical: true)
                 if isSelected {
                     Text("RACING NEXT")
                         .font(.system(size: 14, weight: .black, design: .rounded))

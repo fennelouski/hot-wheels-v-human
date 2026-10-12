@@ -138,7 +138,7 @@ struct GarageView: View {
                 Text(body.name)
                     .font(.system(size: 22, weight: .heavy, design: .rounded))
                     #if !os(tvOS)
-                    .lineLimit(1)
+                    .fixedSize(horizontal: false, vertical: true)
                     #endif
             }
             .padding(20)
@@ -339,7 +339,7 @@ struct CarDetailView: View {
     private func actionLabel(_ title: String, systemImage: String) -> some View {
         Label(title, systemImage: systemImage)
             .font(.system(size: 24, weight: .heavy, design: .rounded))
-            .lineLimit(1)
+            .fixedSize(horizontal: false, vertical: true)
             .fixedSize()
             .padding(.horizontal, 20)
             .frame(minHeight: 60)

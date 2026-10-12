@@ -84,7 +84,7 @@ struct BodyPicker: View {
                             Text(body.name)
                                 .font(.system(size: 18, weight: .bold, design: .rounded))
                                 #if !os(tvOS)
-                                .lineLimit(1)
+                                .fixedSize(horizontal: false, vertical: true)
                                 #endif
                         }
                         .padding(16)

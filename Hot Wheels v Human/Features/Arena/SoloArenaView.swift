@@ -185,7 +185,7 @@ struct TryItButton: View {
                 // Never wrap. In a crowded toolbar SwiftUI would rather stack
                 // this into "Se / e it / in / 3D" than overflow, which reads as
                 // a broken button; squeezing the neighbouring Spacer is fine.
-                .lineLimit(1)
+                .fixedSize(horizontal: false, vertical: true)
                 .fixedSize()
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)
@@ -208,7 +208,7 @@ struct SaveItButton: View {
             Label(saved ? "Saved!" : "Save it!",
                   systemImage: saved ? "checkmark.circle.fill" : "square.and.arrow.down.fill")
                 .font(.system(size: 26, weight: .heavy, design: .rounded))
-                .lineLimit(1)
+                .fixedSize(horizontal: false, vertical: true)
                 .fixedSize()
                 .padding(.horizontal, 24)
                 .padding(.vertical, 12)

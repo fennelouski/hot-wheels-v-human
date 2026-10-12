@@ -204,7 +204,7 @@ struct TrackBuilderView: View {
                 Text("Empty")
                     .font(.system(size: 16, weight: .heavy, design: .rounded))
             }
-            .frame(width: 108, height: 84)
+            .frame(width: 108).frame(minHeight: 84)
             .background(model.worldEmpty ? .orange.opacity(0.45) : .black.opacity(0.45),
                         in: RoundedRectangle(cornerRadius: 14))
         }
@@ -223,10 +223,9 @@ struct TrackBuilderView: View {
                     .frame(height: 36)
                 Text(label)
                     .font(.system(size: 16, weight: .heavy, design: .rounded))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .frame(width: 108, height: 84)
+            .frame(width: 108).frame(minHeight: 84)
             .background(picked ? .yellow.opacity(0.35) : .black.opacity(0.45),
                         in: RoundedRectangle(cornerRadius: 14))
         }
@@ -299,11 +298,11 @@ struct TrackBuilderView: View {
                     }
                     Text(name)
                         .font(.system(size: 17, weight: .heavy, design: .rounded))
-                        .lineLimit(1)
+                        .fixedSize(horizontal: false, vertical: true)
                 }
             }
             .padding(.vertical, 8)
-            .frame(width: 176, height: 108)
+            .frame(width: 176).frame(minHeight: 108)
             .background(.yellow.opacity(saved ? 0.22 : 0.15),
                         in: RoundedRectangle(cornerRadius: 14))
         }
