@@ -37,6 +37,14 @@ final class RaceCoordinator {
     private var config = MatchConfig(mode: .onePlayer)
     private var arenaRoot: Entity?
     private var raceRunning = false
+    /// Lobby attract parade: cycles real starter tracks through the arena so
+    /// the TV has something to watch before any iPad joins. Torn down the
+    /// instant a real race starts. `lobbyTrackID`/`lobbyFootprint` drive the
+    /// ArenaView's sky theme and idle-camera framing for the current track.
+    private var showcaseTask: Task<Void, Never>?
+    private var showcaseTrack: Entity?
+    private(set) var lobbyTrackID: UUID?
+    private(set) var lobbyFootprint: FootprintRect?
 
     init(transport: any GameTransport) {
         self.transport = transport
@@ -49,6 +57,43 @@ final class RaceCoordinator {
     func attach(root: Entity) {
         arenaRoot = root
         startRaceIfReady()
+        startShowcase()   // no-ops if the race already started
+    }
+
+    /// Cycle real starter tracks through the arena while we wait in the lobby.
+    /// No-ops if a race is running or the parade is already going.
+    private func startShowcase() {
+        guard showcaseTask == nil, !raceRunning, let root = arenaRoot else { return }
+        let blueprints = TrackBlueprint.presets.map(\.blueprint)
+        guard !blueprints.isEmpty else { return }
+        showcaseTask = Task { @MainActor [weak self] in
+            var i = 0
+            while !Task.isCancelled {
+                let bp = blueprints[i % blueprints.count]
+                i += 1
+                let layout = TrackLayoutSolver.solve(bp)
+                guard let track = try? await TrackSpawner.spawn(layout: layout) else { continue }
+                guard let self, !Task.isCancelled else { track.removeFromParent(); return }
+                self.showcaseTrack?.removeFromParent()
+                self.showcaseTrack = track
+                let rects = layout.pieces.map(\.worldFootprint)
+                self.lobbyFootprint = FootprintRect(
+                    minX: rects.map(\.minX).min() ?? -3, minZ: rects.map(\.minZ).min() ?? -3,
+                    maxX: rects.map(\.maxX).max() ?? 3, maxZ: rects.map(\.maxZ).max() ?? 3)
+                self.lobbyTrackID = bp.trackId   // set last: drives the sky-theme swap
+                root.addChild(track)
+                try? await Task.sleep(for: .seconds(Double(RaceTuning.lobbyTrackDwell)))
+            }
+        }
+    }
+
+    private func stopShowcase() {
+        showcaseTask?.cancel()
+        showcaseTask = nil
+        showcaseTrack?.removeFromParent()
+        showcaseTrack = nil
+        lobbyTrackID = nil
+        lobbyFootprint = nil
     }
 
     func start() {
@@ -62,6 +107,7 @@ final class RaceCoordinator {
     }
 
     func stop() {
+        stopShowcase()
         transport.stop()
     }
 
@@ -216,6 +262,15 @@ final class RaceCoordinator {
         return (entries, config)
     }
 
+    /// Apple TV remote escape hatch (play/pause on the lobby): start the race
+    /// without waiting for everyone to tap READY — for a demo with no iPad in
+    /// the room, or when one racer wandered off. Marks connected players ready
+    /// and runs the normal start; no-ops if there's no one/no design/no root.
+    func forceStart() {
+        for player in players { readiness[player.id] = true }
+        startRaceIfReady()
+    }
+
     private func startRaceIfReady() {
         guard !raceRunning,
               let root = arenaRoot,
@@ -227,6 +282,7 @@ final class RaceCoordinator {
         }
         guard let blueprint = nextBlueprint() else { return }
         raceRunning = true
+        stopShowcase()   // clear the attract track before the real one spawns
 
         let (entries, effectiveConfig) = Self.raceEntries(
             players: players, designs: designs, config: config)

@@ -14,14 +14,23 @@ struct ArenaLobbyView: View {
 
     var body: some View {
         ZStack {
+            // Mount the arena immediately so ArenaView calls coordinator.attach(root:).
+            // Without a root, startRaceIfReady() can never fire and two readied
+            // players just sit in the lobby forever (SoloArenaView mounts it the
+            // same way). The lobby covers the empty arena until the race starts.
+            ArenaView(coordinator: coordinator)
             if coordinator.session.phase == .lobby {
                 lobby
-            } else {
-                ArenaView(coordinator: coordinator)
             }
         }
         .onAppear { coordinator.start() }
         .onDisappear { coordinator.stop() }
+        // Siri Remote play/pause = start now, skipping the READY wait (a racer
+        // wandered off, or you just want to watch). No-ops until an iPad has
+        // sent a car, so a stray click on an empty lobby does nothing.
+        #if os(tvOS)
+        .onPlayPauseCommand { coordinator.forceStart() }
+        #endif
         .onChange(of: coordinator.players.count) { old, new in
             if new > old { SoundBank.shared.play("player_join_horn") }
         }
@@ -69,7 +78,10 @@ struct ArenaLobbyView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(red: 0.09, green: 0.10, blue: 0.16))
+        // Translucent scrim, not an opaque fill: the ArenaView orbiting behind
+        // the lobby shows through, while the dark wash keeps the white text
+        // readable over a bright themed sky.
+        .background(.black.opacity(0.4))
         .foregroundStyle(.white)
     }
 
